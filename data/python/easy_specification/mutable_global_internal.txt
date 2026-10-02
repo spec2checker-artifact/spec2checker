@@ -1,0 +1,4 @@
+**Specification 15: Mutable global state - make internal with `_`**
+Description: If mutable global state is warranted, declare it at module level or as class attribute and make internal by prepending `_`.
+Example: `_global_counter = 0`
+Additional Notes: Explain design reasons in a comment.

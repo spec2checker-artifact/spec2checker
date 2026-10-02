@@ -1,0 +1,43 @@
+rules:
+- id: java-enum-no-methods-array-initializer
+  message: Enum class with no methods and no documentation on constants may be formatted
+    like array initializer.
+  languages:
+  - java
+  severity: WARNING
+  paths:
+    include:
+    - '*.java'
+  patterns:
+  - pattern: "enum $ENUM {\n    $CONSTANTS\n}"
+  - metavariable-type:
+      metavariable: $ENUM
+      type: type
+  - metavariable-type:
+      metavariable: $CONSTANTS
+      type: expr
+  metadata:
+    syntax_class: has_no_documentation_on_constants
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom logic to detect absence of methods and documentation
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule to check for methods and documentation
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires query to check for empty enum bodies and missing javadoc
+    original_description: Enum class with no methods and no documentation on constants
+      may be formatted like array initializer.

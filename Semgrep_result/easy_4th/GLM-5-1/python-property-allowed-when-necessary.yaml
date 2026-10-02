@@ -1,0 +1,40 @@
+rules:
+- id: python-property-allowed-when-necessary
+  message: 'Properties may be used to control getting/setting attributes that require
+    trivial computations or logic. Must match expectations: cheap, straightforward,
+    unsurprising.'
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "@property\ndef $FUNC($ARGS):\n    ..."
+  - pattern-not: "@property\ndef $FUNC($ARGS):\n    return ..."
+  - pattern-not: "@property\ndef $FUNC($ARGS):\n    \"\"\"...\"\"\"\n    return ..."
+  - pattern-not: "@property\ndef $FUNC($ARGS):\n    \"\"\"...\"\"\"\n    ..."
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot automatically verify property logic is trivial/cheap;
+          requires manual review.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect property usage but cannot automatically assess if
+          logic is trivial.
+    original_description: 'Properties may be used to control getting/setting attributes
+      that require trivial computations or logic. Must match expectations: cheap,
+      straightforward, unsurprising.'

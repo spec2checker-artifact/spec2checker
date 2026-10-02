@@ -1,0 +1,38 @@
+rules:
+- id: python-avoid-double-underscore
+  message: Discourage use of double underscore (dunder) for name mangling; prefer
+    single underscore for private attributes.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: __$NAME
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: ^[a-zA-Z_][a-zA-Z0-9_]*$
+  metadata:
+    syntax_variable: name_ends_with('__')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match legitimate dunder methods (e.g., __init__)
+          without additional context
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to exclude built-in dunder methods
+    original_description: Discourage use of double underscore (dunder) for name mangling;
+      prefer single underscore for private attributes.

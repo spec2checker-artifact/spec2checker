@@ -1,0 +1,4 @@
+**Specification 49: Comment class data members with invariants**  
+Description: The purpose of each class data member must be clear. Comment invariants not expressed by type and name.  
+Example: `// Used to bounds-check table accesses. -1 means we don't know yet.`  
+Additional Notes: None.

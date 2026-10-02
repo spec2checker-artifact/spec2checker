@@ -1,0 +1,4 @@
+Specification 104: Type variable names - single capital letter with optional numeral
+Description: Type variable can be a single capital letter optionally followed by a single numeral.
+Example: E, T, X2
+Additional Notes: None.

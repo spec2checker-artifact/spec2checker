@@ -1,0 +1,14 @@
+rules:
+- id: cpp-avoid-virtual-call-in-constructor
+  message: '[DISABLED] Constructors should never call virtual functions, because they
+    will not dispatch to subclass implementations.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Constructors should never call virtual functions, because
+      they will not dispatch to subclass implementations.

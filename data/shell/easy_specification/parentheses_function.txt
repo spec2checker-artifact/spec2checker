@@ -1,0 +1,4 @@
+**Specification 58: Parentheses required after function name**
+Description: Parentheses are required after the function name.
+Example: `my_func() { ... }`
+Additional Notes: `function` keyword optional but must be consistent.

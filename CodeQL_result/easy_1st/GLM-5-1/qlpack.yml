@@ -1,0 +1,6 @@
+name: easy_1st-glm-5-1/custom
+version: 0.0.1
+dependencies:
+  codeql/cpp-all: "7.0.1"
+  codeql/python-all: "7.0.1"
+  codeql/javascript-all: "7.0.1"

@@ -1,0 +1,40 @@
+rules:
+- id: java-type-variable-naming
+  message: Type variable names must be a single capital letter optionally followed
+    by a single numeral.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: <$TVAR extends $BOUND>
+  - metavariable-regex:
+      metavariable: $TVAR
+      regex: ^[A-Z][0-9]?$
+  - metavariable-type:
+      metavariable: $BOUND
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex matching on type variable name only
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for type variable naming; requires
+          custom rule
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for type parameter naming
+    original_description: Type variable names must be a single capital letter optionally
+      followed by a single numeral.

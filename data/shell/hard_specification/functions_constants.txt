@@ -1,0 +1,4 @@
+**Specification 66: Put all functions together below constants**
+Description: Put all functions together in the file just below constants. Don’t hide executable code between functions.
+Example: Functions at top, then `main`, then call `main`.
+Additional Notes: Only includes, `set` statements, and constants may be before functions.

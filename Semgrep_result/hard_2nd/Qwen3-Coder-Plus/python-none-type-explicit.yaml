@@ -1,0 +1,14 @@
+rules:
+- id: python-none-type-explicit
+  message: '[DISABLED] Use explicit `X | None` (or `Optional[X]`) rather than implicit
+    `a: str = None` in type annotations.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: 'Use explicit `X | None` (or `Optional[X]`) rather than
+      implicit `a: str = None` in type annotations.'

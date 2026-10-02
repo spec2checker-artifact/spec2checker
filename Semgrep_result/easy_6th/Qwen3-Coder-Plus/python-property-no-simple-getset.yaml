@@ -1,0 +1,36 @@
+rules:
+- id: python-property-no-simple-getset
+  message: Using a property to simply get and set an internal attribute is not allowed;
+    make the attribute public instead.
+  languages:
+  - python
+  severity: WARNING
+  pattern: "@property\ndef $GETTER(...):\n    ...\n@$GETTER.setter\ndef $SETTER(...):\n\
+    \    ..."
+  metadata:
+    syntax_$GETTER: body_is_return_self_attribute
+    syntax_$SETTER: body_is_assign_to_self_attribute
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires deep syntactic matching for body patterns; may have
+          false positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to analyze property body semantics
+    original_description: Using a property to simply get and set an internal attribute
+      is not allowed; make the attribute public instead.

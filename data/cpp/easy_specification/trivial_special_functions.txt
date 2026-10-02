@@ -1,0 +1,4 @@
+**Specification 37: Use `= default` for trivial special member functions**  
+Description: Use `= default` to define trivial constructors/destructors.  
+Example: `MyClass(const MyClass&) = default;`  
+Additional Notes: Concise and correct.

@@ -1,0 +1,4 @@
+**Specification 8: Exceptions - use built-in exception classes**
+Description: Make use of built-in exception classes when it makes sense, e.g., `ValueError` for programming mistakes.
+Example: `raise ValueError(f'Min. port must be at least 1024, not {minimum}.')`
+Additional Notes: None.

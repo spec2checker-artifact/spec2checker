@@ -1,0 +1,4 @@
+**Specification 9: Namespace names - snake_case**  
+Description: Namespace names are `snake_case` (all lowercase, underscores between words).  
+Example: `namespace my_project {`  
+Additional Notes: Top-level namespaces must be globally unique.

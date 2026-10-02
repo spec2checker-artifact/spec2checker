@@ -1,0 +1,562 @@
+[
+  {
+    "rule_id": "cpp-no-namespace-alias-in-header",
+    "language": "cpp",
+    "description": "Do not use namespace aliases at namespace scope in header files except in explicitly marked internal-only namespaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "namespace $ALIAS = $NAMESPACE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ALIAS": {
+          "type_hint": "expr"
+        },
+        "$NAMESPACE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "file_extension_matches('h|hpp|hh|hxx')",
+        "required": "true"
+      },
+      {
+        "target": "declaration",
+        "constraint_type": "scope",
+        "condition": "is_namespace_scope",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably detect 'internal-only' namespace markers without custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect namespace aliases and filter by file type/namespace name."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\namespace_aliases_internal.txt",
+      "section": "namespace_aliases_internal"
+    }
+  },
+  {
+    "rule_id": "cpp-const-value-parameter",
+    "language": "cpp",
+    "description": "For a function parameter passed by value, `const` has no effect on the caller, thus not recommended in function declarations.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "void $FUNC(const $TYPE $PARAM);",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$PARAM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PARAM",
+        "constraint_type": "syntactic",
+        "condition": "is_value_parameter",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm parameter is passed by value"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\parameters_recommended.txt",
+      "section": "parameters_recommended"
+    }
+  },
+  {
+    "rule_id": "cpp-namespace-termination-comment",
+    "language": "cpp",
+    "description": "Multi-line namespace definitions must be terminated with a comment indicating the namespace name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "namespace $NS {\n  ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "closing_brace",
+        "constraint_type": "syntactic",
+        "condition": "not_followed_by('// namespace $NS')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match single-line namespaces; comment detection is syntactic only."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for trailing comment content."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\multiline_namespaces.txt",
+      "section": "multiline_namespaces"
+    }
+  },
+  {
+    "rule_id": "cpp-include-guard-format",
+    "language": "cpp",
+    "description": "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "#ifndef $GUARD\n#define $GUARD\n...\n#endif",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$GUARD": {
+          "type_hint": "expr",
+          "regex": "^[A-Z][A-Z0-9_]*_H_$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$GUARD",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][A-Z0-9_]*_H_$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot enforce guard name matches full source tree path"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check guard name format"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\include_guard_format.txt",
+      "section": "include_guard_format"
+    }
+  },
+  {
+    "rule_id": "cpp-prefix-increment-decrement",
+    "language": "cpp",
+    "description": "Use prefix form (++i, --i) for increment/decrement operators unless the old value is needed, as prefix is never less efficient.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR $OP $EXPR2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OP": {
+          "type_hint": "expr",
+          "regex": "i\\+\\+|i--"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_postfix_inc_dec",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match valid postfix usage; requires manual review to confirm old value is not needed."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect unnecessary postfix usage."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\increment_decrement.txt",
+      "section": "increment_decrement"
+    }
+  },
+  {
+    "rule_id": "cpp-struct-member-no-trailing-underscore",
+    "language": "cpp",
+    "description": "Data members of structs (both static and non-static) are named like ordinary nonmember variables, without trailing underscore.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "struct $STRUCT {\n    ... $MEMBER ...;\n};",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MEMBER": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*_$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('_')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "may match non-member declarations inside structs"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect trailing underscore in struct members"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\no_trailing_underscore.txt",
+      "section": "no_trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "cpp-filename-lowercase-underscore-dash",
+    "language": "cpp",
+    "description": "Filenames should be all lowercase and can include underscores (_) or dashes (-). Follow the project's convention. If no consistent pattern, prefer _. C++ files use .cc, headers use .h. Files textually included at specific points use .inc.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires file path analysis, not a code pattern"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for file naming conventions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\lowercase_underscores.txt",
+      "section": "lowercase_underscores"
+    }
+  },
+  {
+    "rule_id": "cpp-const-placement-consistency",
+    "language": "cpp",
+    "description": "Detect inconsistent placement of the `const` qualifier in pointer declarations. While `const int*` is preferred, `int const*` is allowed, but usage must be consistent within the same context.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE const* $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect the pattern but cannot enforce consistency across a codebase without custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can query for the pattern, but consistency checking requires cross-file analysis and is complex."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\put_const_consistent.txt",
+      "section": "put_const_consistent"
+    }
+  },
+  {
+    "rule_id": "cpp-class-final-recommendation",
+    "language": "cpp",
+    "description": "Detect classes that are not declared final but could be, as they are not intended to be base classes.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... };",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('final')",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "inheritance",
+        "condition": "is_not_base_class",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Inheritance analysis across files may be limited."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires full database and type resolution to determine if a class is used as a base."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\final_classes_intended.txt",
+      "section": "final_classes_intended"
+    }
+  },
+  {
+    "rule_id": "cpp-constexpr-floating-constant",
+    "language": "cpp",
+    "description": "Use `constexpr` to define constants with floating-point expressions, not just literals.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "const $TYPE $NAME = $INIT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$NAME": {
+          "type_hint": "expr"
+        },
+        "$INIT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "type",
+        "condition": "is_floating_point_type",
+        "required": "true"
+      },
+      {
+        "target": "$INIT",
+        "constraint_type": "syntactic",
+        "condition": "is_constant_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type resolution for floating-point types may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect missing constexpr on constant floating-point definitions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\constexpr_constants.txt",
+      "section": "constexpr_constants"
+    }
+  }
+]

@@ -1,0 +1,4 @@
+**Specification 107: For loops - prefer `for-of`**
+Description: `for-of` loops should be preferred when possible. `for-in` only on dict-style objects, not arrays. Use `hasOwnProperty` with `for-in`.
+Example: `for (const item of items) {}` not `for (const i in array)`.
+Additional Notes: Prefer `for-of` and `Object.keys`.

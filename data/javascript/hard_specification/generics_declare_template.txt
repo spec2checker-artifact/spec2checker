@@ -1,0 +1,4 @@
+**Specification 101: Generics - declare with `@template`**
+Description: Declare generic functions and methods with `@template TYPE` in JSDoc.
+Example: `/** @template T */ function identity(x) { return x; }`
+Additional Notes: None.

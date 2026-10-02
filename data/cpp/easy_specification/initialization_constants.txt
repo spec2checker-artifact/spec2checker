@@ -1,0 +1,4 @@
+**Specification 48: Use braced initialization to create 64-bit constants**  
+Description: Use braced-initialization to create 64-bit constants.  
+Example: `int64_t my_value{0x123456789};`  
+Additional Notes: None.

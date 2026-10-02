@@ -1,0 +1,4 @@
+Specification 9: Imports - no line-wrapping
+Description: Imports are not line-wrapped. The column limit does not apply.
+Example: import com.google.common.collect.ImmutableList; (single line)
+Additional Notes: None.

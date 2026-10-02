@@ -1,0 +1,554 @@
+[
+  {
+    "rule_id": "javascript-no-array-constructor",
+    "language": "javascript",
+    "description": "Do not use variadic Array constructor; error-prone. Use literal instead. Explicit allocation `new Array(length)` is allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "new Array($ARGS)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARGS",
+        "constraint_type": "syntactic",
+        "condition": "not_single_numeric_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "requires pattern to exclude single numeric argument"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to distinguish single numeric argument"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\do_not_array_constructor.txt",
+      "section": "do_not_array_constructor"
+    }
+  },
+  {
+    "rule_id": "javascript-string-single-quotes",
+    "language": "javascript",
+    "description": "Ordinary string literals must be delimited with single quotes `'`, not double quotes `\"`. May not span multiple lines. Use template strings to avoid escaping single quotes.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\"$STRING\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "string",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_single_quotes.txt",
+      "section": "literals_single_quotes"
+    }
+  },
+  {
+    "rule_id": "javascript-prefer-template-literals",
+    "language": "javascript",
+    "description": "Use template literals `` `...` `` over complex string concatenation, especially with multiple literals. May span multiple lines.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$A + $B",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$A": {
+          "type_hint": "expr"
+        },
+        "$B": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$A",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      },
+      {
+        "target": "$B",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match simple concatenations that are not complex"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect complex concatenation patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_concatenation.txt",
+      "section": "literals_concatenation"
+    }
+  },
+  {
+    "rule_id": "javascript-no-nested-namespaces",
+    "language": "javascript",
+    "description": "Do not define a nested type (class, typedef, enum, interface) on another module-local name. Use top-level exports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$MODULE.$TYPE = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_type_definition",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "may match non-namespace assignments; requires manual review"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect nested namespace definitions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\define_nested_namespaces.txt",
+      "section": "define_nested_namespaces"
+    }
+  },
+  {
+    "rule_id": "javascript-enum-static-string-initialization",
+    "language": "javascript",
+    "description": "For string enums, all values must be statically initialized, not computed with arithmetic, template literals, function calls, or variable references.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$ENUM: {\n    ...\n    $KEY: $VALUE,\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ENUM": {
+          "type_hint": "expr"
+        },
+        "$KEY": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_not_static_string",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match binary expressions, template literals, function calls, and variable references within enum values"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect non-static string initializers in enum-like objects"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\statically_initialized.txt",
+      "section": "statically_initialized"
+    }
+  },
+  {
+    "rule_id": "javascript-subclass-missing-super",
+    "language": "javascript",
+    "description": "Subclass constructors must call `super()` before setting fields or accessing `this`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "class $SUBCLASS extends $PARENT {\n  constructor($ARGS) {\n    $...BODY\n  }\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$SUBCLASS": {
+          "type_hint": "class"
+        },
+        "$PARENT": {
+          "type_hint": "class"
+        },
+        "$ARGS": {
+          "type_hint": "expr"
+        },
+        "$...BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$SUBCLASS",
+        "constraint_type": "inheritance",
+        "condition": "extends_class",
+        "required": "true"
+      },
+      {
+        "target": "$...BODY",
+        "constraint_type": "syntactic",
+        "condition": "first_statement_not_super_call",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect missing super call before `this` usage"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution for inheritance chain"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\constructors_subclass.txt",
+      "section": "constructors_subclass"
+    }
+  },
+  {
+    "rule_id": "javascript-static-method-to-function",
+    "language": "javascript",
+    "description": "Prefer module-local functions over private static methods where it doesn't interfere with readability. Do not rely on dynamic dispatch; call on base class only.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "private static $RETURN $METHOD($PARAMS) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$METHOD": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "scope",
+        "condition": "is_private",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "has_modifier('static')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully assess readability or interference with class design."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule to detect private static methods that could be top-level functions."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can identify private static methods, but determining if they should be module-local functions is heuristic-based."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\functions_private_methods.txt",
+      "section": "functions_private_methods"
+    }
+  },
+  {
+    "rule_id": "javascript-no-object-constructor",
+    "language": "javascript",
+    "description": "Do not use `Object` constructor; use literal `{}` or `{a:0, b:1}`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "new Object()",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\do_not_object_constructor.txt",
+      "section": "do_not_object_constructor"
+    }
+  },
+  {
+    "rule_id": "javascript-no-getter-setter",
+    "language": "javascript",
+    "description": "Do not use JavaScript getter/setter properties. Provide ordinary methods instead. Exception for data binding frameworks or external APIs.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "get $PROP(...) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PROP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\getters_and_setters.txt",
+      "section": "getters_and_setters"
+    }
+  },
+  {
+    "rule_id": "javascript-generics-template-declaration",
+    "language": "javascript",
+    "description": "Generic functions and methods must be declared with a `@template TYPE` JSDoc comment.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC($ARGS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "missing_annotation('template')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches function declarations; annotation check requires custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for JSDoc `@template` tags."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\generics_declare_template.txt",
+      "section": "generics_declare_template"
+    }
+  }
+]

@@ -1,0 +1,37 @@
+rules:
+- id: javascript-top-level-function-export
+  message: Top-level functions may be defined directly on `exports` object, or declared
+    locally and exported.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: exports.$FUNC = $EXPR
+  - metavariable-type:
+      metavariable: $FUNC
+      type: function
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Top-level functions may be defined directly on `exports`
+      object, or declared locally and exported.

@@ -1,0 +1,16 @@
+rules:
+- id: python-naming-internal-underscore
+  message: '[DISABLED] Detect names that should be internal (private/protected) but
+    do not start with a single underscore. Internal names are those defined in a module
+    or class that are not intended for public use.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect names that should be internal (private/protected)
+      but do not start with a single underscore. Internal names are those defined
+      in a module or class that are not intended for public use.

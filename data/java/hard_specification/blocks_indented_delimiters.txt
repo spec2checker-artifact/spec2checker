@@ -1,0 +1,4 @@
+Specification 91: Text blocks - each line indented at least as much as delimiters
+Description: Each line of text in text block indented at least as much as opening and closing """. Extra indentation adds spaces to string.
+Example: Indented lines produce leading spaces.
+Additional Notes: None.

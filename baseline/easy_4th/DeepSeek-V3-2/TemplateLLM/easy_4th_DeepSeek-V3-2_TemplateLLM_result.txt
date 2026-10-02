@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: TemplateLLM
+  描述: 向LLM提供目标工具规则模板以及规范描述，由LLM直接补全规则逻辑
+  批次: easy_4th
+  模型: DeepSeek-V3-2
+  输入: UIR/easy/easy_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 24/50 = 48.0%
+  Rule_V (规则验证数): 20/50 = 40.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 24条
+  语法错误规则: 7条
+  语义偏差规则: 19条
+
+  成功规则列表 (Successful Rules):
+     1. java-empty-block-multiblock                   OK [V]  "Empty block may be {} with no characters or line break in be..."
+     2. java-no-cstyle-array-declaration              OK [V]  "Square brackets form part of type, not variable. Use String[..."
+     3. javascript-block-comment-style                OK [V]  "Block comments must be indented at the same level as surroun..."
+     4. python-generator-docstring-yields             OK [V]  "Detect generator functions that use 'Returns:' in their docs..."
+     5. javascript-horizontal-whitespace-before-curly-brace OK  "Require a space before an opening curly brace `{`, except wh..."
+     6. python-whitespace-no-space-before-punctuation OK [V]  "No whitespace before a comma, semicolon, or colon. Use space..."
+     7. python-no-bool-false-comparison               OK [V]  "Never compare a boolean variable to `False` using `==`. Use ..."
+     8. python-none-check-is                          OK [V]  "Always use `if x is None` (or `is not None`) to check for `N..."
+     9. cpp-missing-const                             OK [V]  "Use `const` in APIs (function parameters, methods, non-local..."
+    10. shell-readarray-usage                         OK [V]  "Use `readarray` builtin (bash4+) to read file into array, th..."
+    11. python-property-allowed-when-necessary        OK [V]  "Properties may be used to control getting/setting attributes..."
+    12. python-whitespace-no-trailing-whitespace      OK [V]  "Detect lines that end with whitespace characters (spaces or ..."
+    13. javascript-horizontal-whitespace-reserved-word-brace OK [V]  "Space separating reserved word (else, catch) from closing cu..."
+    14. javascript-vertical-whitespace-methods        OK  "A single blank line appears between consecutive methods in a..."
+    15. javascript-line-wrapping-comma-preceding-token OK [V]  "A comma must stay attached to the token that precedes it whe..."
+    16. cpp-constexpr-floating-constant               OK  "Use `constexpr` to define constants with floating-point expr..."
+    17. shell-braces-same-line-no-space               OK  "Braces must be on the same line as the function name and no ..."
+    18. java-one-var-per-declaration                  OK [V]  "Every variable declaration (field or local) declares only on..."
+    19. shell-single-string-command-args              OK [V]  "Using a single string for multiple command arguments should ..."
+    20. cpp-avoid-system-header-filename              OK [V]  "Do not use filenames that already exist in /usr/include, suc..."
+    21. cpp-no-inline-namespace                       OK [V]  "Do not use inline namespaces."
+    22. java-horizontal-whitespace-type-identifier    OK [V]  "Space between type and identifier in declaration."
+    23. cpp-function-names-pascalcase                 OK [V]  "Function names should follow PascalCase convention, starting..."
+    24. java-static-imports-single-group              OK [V]  "All static imports must be in a single group, and this group..."
+
+  失败规则列表 (Failed Rules):
+     1. python-default-iterator                       FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Use default iterators and operators for types that support t..."
+     2. shell-avoid-eval                              FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "The `eval` command should be avoided as it munges input and ..."
+     3. java-imports-ordering-non-static-group        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "All non-static imports must be in a single group, separated ..."
+     4. java-module-directives-ordering               FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Module directives must be ordered in the sequence: requires ..."
+     5. cpp-avoid-long-double                         FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Use `float` and `double`; assume they represent IEEE-754 bin..."
+     6. cpp-no-nonstandard-extensions                 FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Do not use nonstandard extensions like __attribute__, #pragm..."
+     7. java-test-class-naming                        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Test class name must end with 'Test'. If it covers a single ..."
+     8. cpp-override-annotation-required              FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Annotate overrides of virtual functions with `override` or `..."
+     9. javascript-import-missing-js-extension        FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "ES module import paths must include the `.js` file extension..."
+    10. javascript-horizontal-whitespace-binary-ternary FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Space on both sides of any binary or ternary operator."
+    11. shell-variable-expansion-quote                FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Variable expansions should be quoted to prevent word splitti..."
+    12. shell-no-quote-match-expr                     FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "In general, there is no need to quote match expressions in s..."
+    13. cpp-class-data-member-trailing-underscore     FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Data members of classes (both static and non-static) must be..."
+    14. shell-unnecessary-dollar-in-arithmetic        FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Inside $(( ... )) arithmetic expansion, the $ prefix for var..."
+    15. javascript-no-jsdoc-for-implementation        FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Do not use JSDoc-style comments (`/** ... */`) for implement..."
+    16. shell-todo-format-allcaps-identifier          FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "TODO comment should be in all caps, followed by a colon and ..."
+    17. python-no-spaces-around-equals                FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Never use spaces around `=` when passing keyword arguments o..."
+    18. java-continuation-indent                      FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Each continuation line must be indented at least +4 spaces f..."
+    19. javascript-goog-require-alias-match           FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "When `goog.require` is assigned to a single constant alias, ..."
+    20. java-break-before-non-assignment-operator     FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "When a line is broken at a non-assignment operator, the line..."
+    21. javascript-line-wrap-after-operator           FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "When a line is broken at an operator, the break must come af..."
+    22. python-default-arg-immutable                  FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Detect function definitions with default argument values, fo..."
+    23. shell-bash-use-arrays-for-lists               FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Bash arrays should be used to store lists of elements to avo..."
+    24. shell-case-indent-alternatives                FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Indent alternatives by 2 spaces in a case statement."
+    25. python-property-decorator-required            FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Properties should be created with the `@property` decorator...."
+    26. cpp-prefer-using-over-typedef                 FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "In new code, prefer `using` over `typedef` for type aliases,..."
+
+  按工具分布 (By Tool):
+    Semgrep    23/48 (47.9%)
+    Pmd        4/9 (44.4%)
+    Codeql     20/36 (55.6%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 6/10 (60.0%)  Rule_V: 6/10 (60.0%)
+    Java         Rule_C: 5/10 (50.0%)  Rule_V: 5/10 (50.0%)
+    C++          Rule_C: 5/10 (50.0%)  Rule_V: 4/10 (40.0%)
+    JavaScript   Rule_C: 5/10 (50.0%)  Rule_V: 3/10 (30.0%)
+    Shell        Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 220
+  真正违规 (TP): 69
+  误报 (FP): 151
+  精准度: 31.4%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 模板提供结构骨架，语法正确率显著提升
+  2. 但逻辑填充部分仍存在偏差，规则语义不够精确
+  3. 模板约束限制了规则灵活性，部分复杂场景无法覆盖
+  4. Shell规则模板较少，成功率仍低于其他语言
+  5. 模板无法表达数据流和跨文件等复杂分析需求
+
+============================================================

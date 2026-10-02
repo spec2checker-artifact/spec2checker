@@ -1,0 +1,4 @@
+**Specification 70: Use `PIPESTATUS` to check all parts of a pipe**
+Description: Bash has `PIPESTATUS` array to check return code from all parts of a pipe.
+Example: `if (( PIPESTATUS[0] != 0 || PIPESTATUS[1] != 0 )); then`
+Additional Notes: Assign to another variable immediately to avoid overwrite.

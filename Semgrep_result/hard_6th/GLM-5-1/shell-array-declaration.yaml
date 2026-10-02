@@ -1,0 +1,35 @@
+rules:
+- id: shell-array-declaration
+  message: Declare array with `declare -a` for clarity.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: declare $ARGS
+  - metavariable-type:
+      metavariable: $ARGS
+      type: expr
+  metadata:
+    syntax_$ARGS: not matches_regex('^-a\b')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for shell syntax
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Declare array with `declare -a` for clarity.

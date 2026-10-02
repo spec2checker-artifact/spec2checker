@@ -1,0 +1,4 @@
+**Specification 4: Imports - use statements for packages/modules only**
+Description: Use `import` statements for packages and modules only, not for individual types, classes, or functions.
+Example: `import sys` not `from sys import exit`
+Additional Notes: Exemptions for `typing`, `collections.abc`, `typing_extensions`, `six.moves`.

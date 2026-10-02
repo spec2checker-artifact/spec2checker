@@ -1,0 +1,35 @@
+rules:
+- id: javascript-column-limit-80
+  message: JavaScript code has a column limit of 80 characters. Exceeding lines must
+    be line-wrapped. Exceptions include goog.module, goog.require, import, export
+    from, long URLs, shell commands, and long string literals.
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: goog.module.declareLegacyNamespace();
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Formatting rule; consider using a dedicated formatter (e.g.,
+          clang-format, prettier, shfmt).
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Consider using a dedicated formatter.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: Formatting rule not suitable for CodeQL; use formatter instead.
+    original_description: JavaScript code has a column limit of 80 characters. Exceeding
+      lines must be line-wrapped. Exceptions include goog.module, goog.require, import,
+      export from, long URLs, shell commands, and long string literals.

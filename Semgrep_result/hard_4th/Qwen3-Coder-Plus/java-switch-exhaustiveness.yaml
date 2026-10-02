@@ -1,0 +1,16 @@
+rules:
+- id: java-switch-exhaustiveness
+  message: '[DISABLED] Every switch statement must be exhaustive, requiring a default
+    case even if it only contains a break statement. Switches over enums that explicitly
+    cover all known values are considered exhaustive without a default case.'
+  languages:
+  - java
+  severity: ERROR
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Every switch statement must be exhaustive, requiring a default
+      case even if it only contains a break statement. Switches over enums that explicitly
+      cover all known values are considered exhaustive without a default case.

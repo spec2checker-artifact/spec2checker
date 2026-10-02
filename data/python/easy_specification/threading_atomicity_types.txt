@@ -1,0 +1,4 @@
+**Specification 39: Threading - do not rely on atomicity of built-in types**
+Description: Do not rely on the atomicity of built-in types like dictionaries.
+Example: Use `queue.Queue` for thread communication.
+Additional Notes: Prefer `threading.Condition` over lower-level locks.

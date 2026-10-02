@@ -1,0 +1,4 @@
+**Specification 11: `goog.module.declareLegacyNamespace` - avoid when possible**
+Description: Avoid `goog.module.declareLegacyNamespace()` when possible; exists for transition.
+Example: `goog.module('my.test.helpers'); goog.module.declareLegacyNamespace();`
+Additional Notes: Has naming restrictions.

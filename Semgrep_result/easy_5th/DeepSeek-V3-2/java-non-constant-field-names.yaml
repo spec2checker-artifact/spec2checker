@@ -1,0 +1,14 @@
+rules:
+- id: java-non-constant-field-names
+  message: '[DISABLED] Non-constant field names (static or otherwise) should be written
+    in lowerCamelCase, typically nouns or noun phrases.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Non-constant field names (static or otherwise) should be
+      written in lowerCamelCase, typically nouns or noun phrases.

@@ -1,0 +1,4 @@
+Specification 49: Horizontal whitespace - between // and comment text
+Description: Space between // and comment text. Multiple spaces allowed.
+Example: // comment
+Additional Notes: None.

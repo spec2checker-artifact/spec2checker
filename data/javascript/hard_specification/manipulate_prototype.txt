@@ -1,0 +1,4 @@
+**Specification 87: Do not manipulate `prototype` directly**
+Description: Ordinary code should not manipulate `prototype` objects. Use `class` syntax. Mixins and modifying builtin prototypes forbidden.
+Example: Not `Array.prototype.foo = ...`.
+Additional Notes: Framework code exception.

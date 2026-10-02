@@ -1,0 +1,4 @@
+**Specification 55: Use only spaces, indent 2 spaces**  
+Description: Use only spaces, and indent 2 spaces at a time. Do not use tabs.  
+Example: Set editor to emit spaces.  
+Additional Notes: None.

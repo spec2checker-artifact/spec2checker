@@ -1,0 +1,40 @@
+rules:
+- id: python-default-arg-immutable
+  message: Detect function definitions with default argument values, focusing on allowing
+    immutable defaults like empty tuples.
+  languages:
+  - python
+  severity: WARNING
+  pattern-either:
+  - pattern: "def $FUNC(..., $ARG = [], ...):\n    ..."
+  - pattern: "def $FUNC(..., $ARG = {}, ...):\n    ..."
+  - pattern: "def $FUNC(..., $ARG = set(), ...):\n    ..."
+  - pattern: "def $FUNC(..., $ARG = [$...ITEMS], ...):\n    ..."
+  - pattern: "def $FUNC(..., $ARG = {$...KEY: $VAL, ...}, ...):\n    ..."
+  metadata:
+    syntax_$DEFAULT: is_mutable_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Static detection of mutability is limited; may require custom
+          logic for complex expressions.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution to accurately determine mutability of
+          default expressions.
+    original_description: Detect function definitions with default argument values,
+      focusing on allowing immutable defaults like empty tuples.

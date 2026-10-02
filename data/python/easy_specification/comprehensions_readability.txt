@@ -1,0 +1,4 @@
+**Specification 18: Comprehensions - optimize for readability**
+Description: Optimize for readability, not conciseness.
+Example: Prefer explicit loops for complex cases.
+Additional Notes: None.

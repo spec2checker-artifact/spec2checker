@@ -1,0 +1,4 @@
+**Specification 88: Statements - generally one per line**
+Description: Generally only one statement per line.
+Example: `if foo: bar(foo)` allowed only if entire statement fits on one line.
+Additional Notes: Never with `try/except` or `if/else` on same line.

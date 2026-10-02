@@ -1,0 +1,4 @@
+Specification 87: Modifiers order - class and member
+Description: Appear in order: public protected private abstract default static final sealed non-sealed transient volatile synchronized native strictfp
+Example: public static final synchronized void method() {}
+Additional Notes: As recommended by JLS.

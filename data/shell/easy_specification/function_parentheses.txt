@@ -1,0 +1,4 @@
+**Specification 59: Braces on same line as function name, no space between name and parentheses**
+Description: Braces must be on the same line as the function name and no space between function name and parenthesis.
+Example: `my_func() {` not `my_func () {`
+Additional Notes: None.

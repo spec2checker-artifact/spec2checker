@@ -1,0 +1,4 @@
+**Specification 23: Case - long alternatives split over multiple lines**
+Description: Long or multi-command alternatives should be split over multiple lines with pattern, actions, and `;;` on separate lines.
+Example: See above.
+Additional Notes: None.

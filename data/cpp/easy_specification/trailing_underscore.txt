@@ -1,0 +1,4 @@
+**Specification 5: Class data members - trailing underscore**  
+Description: Data members of classes (both static and non-static) are named like ordinary nonmember variables, but with a trailing underscore.  
+Example: `std::string table_name_;`  
+Additional Notes: Static constant class members follow constant naming rules.

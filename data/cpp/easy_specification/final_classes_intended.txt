@@ -1,0 +1,4 @@
+**Specification 42: Use `final` on classes not intended to be base**  
+Description: You may use `final` on classes when you don't intend to support using them as base classes.  
+Example: `class Foo final { ... };`  
+Additional Notes: None.

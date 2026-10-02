@@ -1,0 +1,4 @@
+**Specification 104: Template literals - prefer over complex concatenation**
+Description: Use template literals `` `...` `` over complex string concatenation, especially with multiple literals. May span multiple lines.
+Example: ``return `Here is a table: ${a} + ${b} = ${a+b}`;``
+Additional Notes: Indentation not required to follow block.

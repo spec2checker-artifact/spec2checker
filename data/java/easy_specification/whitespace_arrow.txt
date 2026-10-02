@@ -1,0 +1,4 @@
+Specification 46: Horizontal whitespace - arrow in lambda
+Description: Space around -> in lambda expression or switch rule.
+Example: (String str) -> str.length()
+Additional Notes: Not for method reference :: or dot ..

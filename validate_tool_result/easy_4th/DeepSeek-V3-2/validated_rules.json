@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-05-10 22:10:42",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_4th.json",
+  "batch": "easy_4th",
+  "model": "DeepSeek-V3.2",
+  "total_rules": 50,
+  "validated_count": 45,
+  "rules": {
+    "semgrep": [
+      "cpp-override-annotation-required",
+      "cpp-constexpr-floating-constant",
+      "cpp-class-data-member-trailing-underscore",
+      "cpp-avoid-long-double",
+      "cpp-no-inline-namespace",
+      "cpp-function-names-pascalcase",
+      "cpp-missing-const",
+      "cpp-no-nonstandard-extensions",
+      "cpp-prefer-using-over-typedef",
+      "java-empty-block-multiblock",
+      "java-test-class-naming",
+      "java-imports-ordering-non-static-group",
+      "java-one-var-per-declaration",
+      "java-no-cstyle-array-declaration",
+      "java-static-imports-single-group",
+      "java-horizontal-whitespace-type-identifier",
+      "java-break-before-non-assignment-operator",
+      "javascript-no-jsdoc-for-implementation",
+      "javascript-import-missing-js-extension",
+      "javascript-horizontal-whitespace-reserved-word-brace",
+      "javascript-goog-require-alias-match",
+      "python-default-iterator",
+      "python-no-bool-false-comparison",
+      "python-none-check-is",
+      "python-property-allowed-when-necessary",
+      "python-default-arg-immutable",
+      "python-generator-docstring-yields",
+      "python-no-spaces-around-equals",
+      "python-property-decorator-required",
+      "shell-avoid-eval",
+      "shell-todo-format-allcaps-identifier",
+      "shell-bash-use-arrays-for-lists",
+      "shell-variable-expansion-quote",
+      "shell-single-string-command-args",
+      "shell-no-quote-match-expr",
+      "shell-readarray-usage",
+      "shell-unnecessary-dollar-in-arithmetic",
+      "shell-braces-same-line-no-space"
+    ],
+    "pmd": [
+      "java-module-directives-ordering",
+      "java-continuation-indent"
+    ],
+    "codeql": [
+      "cpp-avoid-system-header-filename",
+      "javascript-line-wrapping-comma-preceding-token",
+      "javascript-block-comment-style",
+      "python-whitespace-no-trailing-whitespace",
+      "python-whitespace-no-space-before-punctuation"
+    ]
+  }
+}

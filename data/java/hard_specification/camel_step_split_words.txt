@@ -1,0 +1,4 @@
+Specification 107: Camel case - step 2: split into words
+Description: Split on spaces and remaining punctuation (typically hyphens).
+Example: "new customer ID" → ["new", "customer", "ID"]
+Additional Notes: None.

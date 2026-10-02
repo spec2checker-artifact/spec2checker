@@ -1,0 +1,14 @@
+rules:
+- id: cpp-public-alias-documentation
+  message: '[DISABLED] Public type aliases (using/typedef) must be documented with
+    intent and stability guarantee.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Public type aliases (using/typedef) must be documented with
+      intent and stability guarantee.

@@ -1,0 +1,558 @@
+[
+  {
+    "rule_id": "java-type-use-annotation-position",
+    "language": "java",
+    "description": "Type-use annotations must appear immediately before the annotated type and be meta-annotated with @Target(ElementType.TYPE_USE).",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "@$ANNOTATION $TYPE $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ANNOTATION": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ANNOTATION",
+        "constraint_type": "annotation",
+        "condition": "has_meta_annotation('java.lang.annotation.Target', 'java.lang.annotation.ElementType.TYPE_USE')",
+        "required": "true"
+      },
+      {
+        "target": "$ANNOTATION",
+        "constraint_type": "syntactic",
+        "condition": "is_immediately_before($TYPE)",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to verify @Target meta-annotation"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to verify @Target meta-annotation"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to check annotation position relative to type"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\type_annotations_position.txt",
+      "section": "type_annotations_position"
+    }
+  },
+  {
+    "rule_id": "java-grouping-parentheses-recommended",
+    "language": "java",
+    "description": "Optional grouping parentheses omitted only when author and reviewer agree no reasonable chance of misinterpretation. Example: (a + b) * c recommended over a + b * c unless obvious. Cannot assume reader memorizes operator precedence.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR1 $OP $EXPR2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR1": {
+          "type_hint": "expr"
+        },
+        "$EXPR2": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operator",
+        "required": "true"
+      },
+      {
+        "target": "$EXPR1",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_expression",
+        "required": "false"
+      },
+      {
+        "target": "$EXPR2",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_expression",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires manual configuration of operator precedence pairs; may have many false positives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific precedence grouping check; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to encode operator precedence rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\parentheses_recommended.txt",
+      "section": "parentheses_recommended"
+    }
+  },
+  {
+    "rule_id": "java-enum-line-break-after-comma",
+    "language": "java",
+    "description": "After a comma following an enum constant, a line break is optional. Additional blank lines (usually one) are allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Formatting rule not suitable for code pattern detection."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/formatting."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Formatting rule not suitable for semantic analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\classes_line_break_comma.txt",
+      "section": "classes_line_break_comma"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-underscores-adjacent-numbers",
+    "language": "java",
+    "description": "In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ID",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ID": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_$][a-zA-Z0-9_$]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ID",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*[0-9][0-9]+.*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex pattern to detect adjacent numbers, may have false positives"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check identifier naming convention"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect identifier patterns with adjacent numbers"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\underscores_adjacent.txt",
+      "section": "underscores_adjacent"
+    }
+  },
+  {
+    "rule_id": "java-module-requires-order",
+    "language": "java",
+    "description": "In a module-info.java file, the 'transitive' modifier must appear before the 'static' modifier in a requires directive.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "requires static transitive $MODULE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule implementation for Java module syntax."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for Java module syntax."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\modifiers_directives.txt",
+      "section": "modifiers_directives"
+    }
+  },
+  {
+    "rule_id": "java-vertical-whitespace-between-members",
+    "language": "java",
+    "description": "A single blank line should appear between consecutive members or initializers of a class.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule using metavariable-comparison for line numbers; may have false positives with comments."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's EmptyLineSeparator rule can be configured for this check."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query using location information."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\whitespace_consecutive.txt",
+      "section": "whitespace_consecutive"
+    }
+  },
+  {
+    "rule_id": "java-todo-comment-format",
+    "language": "java",
+    "description": "TODO comments must begin with TODO in all caps, followed by a colon, a link to a resource (preferably a bug reference), a hyphen, and an explanatory string.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "// TODO: $LINK - $TEXT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LINK": {
+          "type_hint": "expr"
+        },
+        "$TEXT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$LINK",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^[a-zA-Z0-9./-]+$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "requires pattern matching for comment syntax"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for TODO comment format; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for comment formatting"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\todo_comments_format.txt",
+      "section": "todo_comments_format"
+    }
+  },
+  {
+    "rule_id": "java-annotation-one-per-line",
+    "language": "java",
+    "description": "Annotations applying to class, package, or module must appear immediately after the documentation block, one per line, without extra indentation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** $DOC */\n@$ANN1\n@$ANN2\n$MODIFIERS class $C { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ANN1": {
+          "type_hint": "expr"
+        },
+        "$ANN2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "has_annotation",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may not capture all annotation ordering variations"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for annotation formatting"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule enforcement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\classpackagemodule.txt",
+      "section": "classpackagemodule"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-split-conventional",
+    "language": "java",
+    "description": "If a word already has conventional camel-case appearance (e.g., 'AdWords'), split into constituent parts ('ad words'). Does not apply to 'iOS'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$IDENT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IDENT": {
+          "type_hint": "expr",
+          "regex": "^(?!iOS$)[A-Z][a-z]+[A-Z][a-z]*$"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection only; may have false positives/negatives on complex identifiers"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule implementation for specific camel-case splitting logic"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to implement the specific splitting convention and 'iOS' exception"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\conventionally_cased_words.txt",
+      "section": "conventionally_cased_words"
+    }
+  },
+  {
+    "rule_id": "java-ignoring-exception-must-comment",
+    "language": "java",
+    "description": "When an exception is caught and no action is taken, a comment explaining the reason must be present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($TYPE $VAR) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "class"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "catch_block",
+        "constraint_type": "syntactic",
+        "condition": "body_is_empty_or_only_whitespace_or_comment",
+        "required": "false"
+      },
+      {
+        "target": "catch_block",
+        "constraint_type": "syntactic",
+        "condition": "contains_no_statements",
+        "required": "true"
+      },
+      {
+        "target": "catch_block",
+        "constraint_type": "syntactic",
+        "condition": "contains_no_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can detect empty catch blocks but comment detection is limited to pattern matching."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's EmptyCatchBlock rule can be configured to require comments, but it's a configurable option, not a default."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL can find empty catch blocks, but precise detection of explanatory comments requires custom query logic."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\ignoring_exception_comment.txt",
+      "section": "ignoring_exception_comment"
+    }
+  }
+]

@@ -1,0 +1,4 @@
+Specification 101: Non-constant field names - lowerCamelCase
+Description: Non-constant field names (static or otherwise) written in lowerCamelCase. Typically nouns or noun phrases.
+Example: computedValues, index
+Additional Notes: None.

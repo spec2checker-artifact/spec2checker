@@ -1,0 +1,4 @@
+**Specification 46: Class comments should describe use, not implementation**  
+Description: Every non-obvious class should have a comment describing what it is for and how to use it. Include synchronization assumptions.  
+Example: Example in guide.  
+Additional Notes: May include small code snippet.

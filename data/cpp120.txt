@@ -1,0 +1,617 @@
+### 简单类 (Easy) - 共 60 条
+
+**Specification 1: File names - lowercase with underscores or dashes**  
+Description: Filenames should be all lowercase and can include underscores (`_`) or dashes (`-`). Follow the project's convention. If no consistent pattern, prefer `_`.  
+Example: `my_useful_class.cc`, `my-useful-class.cc`, `myusefulclass.cc`  
+Additional Notes: C++ files use `.cc`, headers use `.h`. Files textually included at specific points use `.inc`.
+
+**Specification 2: Avoid filenames that already exist in `/usr/include`**  
+Description: Do not use filenames that already exist in `/usr/include`, such as `db.h`.  
+Example: Use `http_server_logs.h` instead of `logs.h`.  
+Additional Notes: Make filenames very specific.
+
+**Specification 3: Type names - PascalCase**  
+Description: Type names (classes, structs, type aliases, enums, type template parameters) start with a capital letter and have a capital letter for each new word, no underscores.  
+Example: `MyExcitingClass`, `MyExcitingEnum`  
+Additional Notes: Same for concepts.
+
+**Specification 4: Variable names - snake_case**  
+Description: Variable names (including function parameters) and data members are `snake_case` (all lowercase, underscores between words).  
+Example: `std::string table_name;`  
+Additional Notes: Class data members have trailing underscore.
+
+**Specification 5: Class data members - trailing underscore**  
+Description: Data members of classes (both static and non-static) are named like ordinary nonmember variables, but with a trailing underscore.  
+Example: `std::string table_name_;`  
+Additional Notes: Static constant class members follow constant naming rules.
+
+**Specification 6: Struct data members - no trailing underscore**  
+Description: Data members of structs (both static and non-static) are named like ordinary nonmember variables, without trailing underscore.  
+Example: `struct UrlTableProperties { std::string name; int num_entries; };`  
+Additional Notes: See Structs vs. Classes.
+
+**Specification 7: Constant names - k prefix + PascalCase**  
+Description: Variables declared `constexpr` or `const`, with value fixed for program duration, are named with leading `k` followed by mixed case. Underscores allowed rarely.  
+Example: `const int kDaysInAWeek = 7;`  
+Additional Notes: Applies to static storage duration variables.
+
+**Specification 8: Function names - PascalCase**  
+Description: Ordinarily, functions follow PascalCase: start with capital letter and capital for each new word.  
+Example: `AddTableEntry()`, `DeleteUrl()`  
+Additional Notes: Accessors and mutators may be named `snake_case` (e.g., `int count()`, `void set_count(int count)`).
+
+**Specification 9: Namespace names - snake_case**  
+Description: Namespace names are `snake_case` (all lowercase, underscores between words).  
+Example: `namespace my_project {`  
+Additional Notes: Top-level namespaces must be globally unique.
+
+**Specification 10: Enumerator names - kEnumName (constant style)**  
+Description: Enumerators (for scoped and unscoped enums) should be named like constants, not macros: `kEnumName`.  
+Example: `enum class UrlTableError { kOk = 0, kOutOfMemory };`  
+Additional Notes: Avoid `ENUM_NAME` macro style.
+
+**Specification 11: Macro names - ALL_CAPS with project prefix**  
+Description: Macros (if absolutely needed) should be named with all capitals and underscores, with a project-specific prefix.  
+Example: `#define MYPROJECT_ROUND(x) ...`  
+Additional Notes: Macros are generally discouraged.
+
+**Specification 12: Include guard format**  
+Description: Use `#define` guards with format `<PROJECT>_<PATH>_<FILE>_H_`.  
+Example: `#ifndef FOO_BAR_BAZ_H_`  
+Additional Notes: Based on full path in source tree.
+
+**Specification 13: Self-contained headers**  
+Description: Header files should be self-contained (compile on their own) and end in `.h`.  
+Example: A header should have header guards and include all headers it needs.  
+Additional Notes: Non-header files for inclusion end in `.inc` and are used sparingly.
+
+**Specification 14: No using-directives**  
+Description: Do not use using-directives (e.g., `using namespace foo;`).  
+Example: `// Forbidden -- This pollutes the namespace.`  
+Additional Notes: Using-declarations are allowed in limited contexts.
+
+**Specification 15: No inline namespaces**  
+Description: Do not use inline namespaces.  
+Example: `inline namespace inner { ... }` (not allowed).  
+Additional Notes: Inline namespaces are confusing.
+
+**Specification 16: Namespace contents not indented**  
+Description: The contents of namespaces are not indented.  
+Example:  
+```cpp
+namespace {
+void foo() { ... }
+}  // namespace
+```  
+Additional Notes: Do not add extra indentation.
+
+**Specification 17: Terminate multi-line namespaces with comments**  
+Description: Terminate multi-line namespaces with comments as shown.  
+Example: `}  // namespace mynamespace`  
+Additional Notes: None.
+
+**Specification 18: Unnamed namespace for internal linkage**  
+Description: Use unnamed namespaces for definitions that do not need to be referenced outside the `.cc` file.  
+Example: `namespace { ... }  // namespace`  
+Additional Notes: Do not use in `.h` files.
+
+**Specification 19: `static` for internal linkage in `.cc` files**  
+Description: Functions and variables can also be given internal linkage by declaring them `static` in `.cc` files.  
+Example: `static void Helper() { ... }`  
+Additional Notes: Prefer unnamed namespaces over `static`.
+
+**Specification 20: Nonmember functions in namespaces**  
+Description: Prefer placing nonmember functions in a namespace; use completely global functions rarely.  
+Example: `namespace myproject { void Helper(); }`  
+Additional Notes: Do not create classes only to group static members.
+
+**Specification 21: Local variables - declare as close to use as possible**  
+Description: Declare variables in the narrowest scope possible, as close to first use as possible. Initialize in declaration.  
+Example: `int i = f();` not `int i; i = f();`  
+Additional Notes: Use brace initialization for containers.
+
+**Specification 22: Variables needed for `if`, `while`, `for` - declare within statement**  
+Description: Variables needed for `if`, `while`, `for` statements should normally be declared within those statements.  
+Example: `while (const char* p = strchr(str, '/')) str = p + 1;`  
+Additional Notes: Confines variable to that scope.
+
+**Specification 23: Use `const` whenever meaningful**  
+Description: Use `const` in APIs (function parameters, methods, non-local variables) wherever meaningful and accurate.  
+Example: `const T&`, `const T*`  
+Additional Notes: Helps thread safety and readability.
+
+**Specification 24: `const` on function parameters passed by value not recommended**  
+Description: For a function parameter passed by value, `const` has no effect on the caller, thus not recommended in function declarations.  
+Example: `void f(int x);` not `void f(const int x);`  
+Additional Notes: See TotW #109.
+
+**Specification 25: `const` methods**  
+Description: Declare methods `const` unless they alter the logical state of the object or cannot be invoked concurrently.  
+Example: `int get_value() const { return value_; }`  
+Additional Notes: None.
+
+**Specification 26: Prefer `constexpr` for true constants**  
+Description: Use `constexpr` to define true constants or to ensure constant initialization.  
+Example: `constexpr int kDaysInWeek = 7;`  
+Additional Notes: Avoid complexifying function definitions to enable `constexpr`.
+
+**Specification 27: Use `constinit` for non-constant variables requiring constant initialization**  
+Description: Use `constinit` to ensure constant initialization for non-constant variables.  
+Example: `constinit thread_local Foo foo = ...;`  
+Additional Notes: None.
+
+**Specification 28: Prefer `int` for integers, use exact-width types when size matters**  
+Description: Of built-in integer types, only use `int`. For other sizes, use `<stdint.h>` types like `int16_t`, `int64_t`.  
+Example: `int loop_counter; int64_t large_value;`  
+Additional Notes: Assume `int` is at least 32 bits.
+
+**Specification 29: Use `int64_t` for "big" integers**  
+Description: For integers known to be "big", use `int64_t`.  
+Example: `int64_t file_offset;`  
+Additional Notes: None.
+
+**Specification 30: Avoid unsigned types except for bitfields or modular arithmetic**  
+Description: Do not use unsigned types to assert non-negativity; use assertions instead.  
+Example: `int x; assert(x >= 0);` not `unsigned int x;`  
+Additional Notes: Unsigned can cause bugs.
+
+**Specification 31: Use `float` and `double`, avoid `long double`**  
+Description: Use `float` and `double`; assume they represent IEEE-754 binary32 and binary64. Avoid `long double`.  
+Example: `float f = 1.0f; double d = 1.0;`  
+Additional Notes: `long double` is non-portable.
+
+**Specification 32: Prefer `nullptr` for pointers**  
+Description: Use `nullptr` for pointers, not `NULL` or `0`.  
+Example: `int* p = nullptr;`  
+Additional Notes: Provides type-safety.
+
+**Specification 33: Use `'\0'` for null character**  
+Description: Use `'\0'` for the null character, not `0`.  
+Example: `if (c == '\0') ...`  
+Additional Notes: Makes code more readable.
+
+**Specification 34: Prefer `sizeof(varname)` over `sizeof(type)`**  
+Description: Use `sizeof(varname)` when taking size of a particular variable.  
+Example: `memset(&data, 0, sizeof(data));`  
+Additional Notes: Updates automatically if variable type changes.
+
+**Specification 35: Use `#include` with angle brackets for system headers**  
+Description: C and C++ standard library headers, POSIX, Linux, Windows system headers use angle brackets.  
+Example: `#include <stdlib.h>`, `#include <string>`  
+Additional Notes: None.
+
+**Specification 36: Include order: related header, C system, C++ stdlib, other libraries, project headers**  
+Description: Include headers in order: related header, blank line, C system headers, blank line, C++ standard library headers, blank line, other libraries' headers, blank line, your project's headers.  
+Example: See example in guide.  
+Additional Notes: Each group separated by blank line.
+
+**Specification 37: Within each include section, sort alphabetically**  
+Description: Within each section, includes should be ordered alphabetically.  
+Example: `#include <sys/types.h>` before `#include <unistd.h>`.  
+Additional Notes: Older code may not conform; fix when convenient.
+
+**Specification 38: Avoid forward declarations where possible**  
+Description: Avoid using forward declarations; instead, include the headers you need.  
+Example: `#include "b.h"` rather than `class B;`.  
+Additional Notes: Forward declarations can hide dependencies and break APIs.
+
+**Specification 39: Define short functions in header files**  
+Description: Include function definition at its declaration in a header only if the definition is short (≤10 lines).  
+Example: `int get_x() const { return x_; }`  
+Additional Notes: Longer bodies go in `.cc` file.
+
+**Specification 40: Use `inline` for ODR-safe definitions in headers**  
+Description: Once a definition is in a header file, it must be ODR-safe by having the `inline` specifier or being implicitly inline.  
+Example: `inline int add(int a, int b) { return a + b; }`  
+Additional Notes: None.
+
+**Specification 41: Do not use `#pragma once`**  
+Description: Do not use `#pragma once`; use standard include guards.  
+Example: Use `#ifndef` guards.  
+Additional Notes: Nonstandard extension.
+
+**Specification 42: Avoid using `std::move` unnecessarily**  
+Description: Use `std::move` only when you need to transfer ownership.  
+Example: `std::unique_ptr<Foo> ptr = std::make_unique<Foo>();`  
+Additional Notes: Not covered in detail but implied.
+
+**Specification 43: Use `auto` only when it makes code clearer or safer**  
+Description: Use type deduction only if it makes code clearer to readers or safer. Do not use merely to avoid typing.  
+Example: `auto it = my_map_.find(key);`  
+Additional Notes: Not for public APIs where type is not obvious.
+
+**Specification 44: Use function template argument deduction normally**  
+Description: Function template argument deduction is almost always OK.  
+Example: `std::make_unique<Foo>(arg1, arg2)` (deduction works).  
+Additional Notes: None.
+
+**Specification 45: Use local variable type deduction to eliminate obvious boilerplate**  
+Description: For local variables, use `auto` when type information is obvious or irrelevant.  
+Example: `auto widget = std::make_unique<Widget>(arg1, arg2);`  
+Additional Notes: Not for types that are not obvious.
+
+**Specification 46: Do not use `decltype(auto)` unless necessary**  
+Description: Avoid `decltype(auto)` because it's obscure.  
+Example: Not `decltype(auto) x = ...;` unless required.  
+Additional Notes: Use simpler options.
+
+**Specification 47: Use lambda expressions where appropriate**  
+Description: Use lambda expressions where appropriate; prefer explicit captures when lambda will escape current scope.  
+Example: `std::sort(v.begin(), v.end(), [](int x, int y) { return x < y; });`  
+Additional Notes: None.
+
+**Specification 48: Prefer explicit captures for lambdas that escape**  
+Description: If lambda may escape the current scope, use explicit captures rather than default capture.  
+Example: `executor->Schedule([&foo] { Frobnicate(foo); });`  
+Additional Notes: Avoids dangling references.
+
+**Specification 49: Use default capture by reference (`[&]`) only when lifetime is shorter**  
+Description: Use default capture by reference only when the lifetime of the lambda is obviously shorter than any potential captures.  
+Example: `std::for_each(v.begin(), v.end(), [&](int x) { sum += x; });`  
+Additional Notes: None.
+
+**Specification 50: Use default capture by value (`[=]`) sparingly**  
+Description: Use default capture by value only as a means of binding a few variables for a short lambda, and not capturing `this` implicitly.  
+Example: Avoid long lambdas with `[=]`.  
+Additional Notes: Prefer explicit captures.
+
+**Specification 51: Do not use init captures to introduce new names**  
+Description: Use captures only to actually capture variables from enclosing scope. Do not use init captures to introduce new names.  
+Example: Not `[foo = std::vector<int>({1,2,3})](){...}` for new variable.  
+Additional Notes: Declare variable conventionally and capture it.
+
+**Specification 52: Use trailing return type only when necessary**  
+Description: Use trailing return type syntax (`auto func() -> type`) only when required (e.g., lambdas) or when it greatly improves readability.  
+Example: `auto Add(T t, U u) -> decltype(t + u)`  
+Additional Notes: Prefer ordinary leading return type in most cases.
+
+**Specification 53: Use `override` or `final` for overridden virtual functions**  
+Description: Annotate overrides of virtual functions with `override` or `final`. Do not use `virtual` when declaring an override.  
+Example: `void Method() override;`  
+Additional Notes: Helps catch errors.
+
+**Specification 54: Use `= default` for trivial special member functions**  
+Description: Use `= default` to define trivial constructors/destructors.  
+Example: `MyClass(const MyClass&) = default;`  
+Additional Notes: Concise and correct.
+
+**Specification 55: Use `= delete` for forbidden operations**  
+Description: Use `= delete` to explicitly delete copy/move operations.  
+Example: `MyClass(const MyClass&) = delete;`  
+Additional Notes: Makes intent clear.
+
+**Specification 56: Declare copy/move operations in `public` section**  
+Description: Every class's public interface must make clear which copy and move operations the class supports.  
+Example: Explicitly declare or delete appropriate operations in `public` section.  
+Additional Notes: See Copyable and Movable Types.
+
+**Specification 57: Use `struct` for passive objects that carry data**  
+Description: Use `struct` for passive objects that carry data, with all fields public. No invariants.  
+Example: `struct Point { int x; int y; };`  
+Additional Notes: If in doubt, use `class`.
+
+**Specification 58: Prefer `struct` over `pair`/`tuple` when elements have meaningful names**  
+Description: Use a `struct` instead of `pair` or `tuple` whenever elements can have meaningful names.  
+Example: `struct Point { int x; int y; };` not `std::pair<int,int>`.  
+Additional Notes: Field names are clearer.
+
+**Specification 59: Use `public` inheritance**  
+Description: All inheritance should be `public`. For private inheritance, include an instance as a member instead.  
+Example: `class Bar : public Foo { ... };`  
+Additional Notes: Use `final` on classes not intended as base.
+
+**Specification 60: Use `final` on classes not intended to be base**  
+Description: You may use `final` on classes when you don't intend to support using them as base classes.  
+Example: `class Foo final { ... };`  
+Additional Notes: None.
+
+---
+
+### 复杂类 (Hard) - 共 60 条
+
+**Specification 61: Include what you use**  
+Description: If a source or header file refers to a symbol defined elsewhere, directly include the header that provides that symbol. Do not rely on transitive inclusions.  
+Example: `foo.cc` should include `bar.h` if it uses a symbol from it, even if `foo.h` includes `bar.h`.  
+Additional Notes: Allows removing includes without breaking clients.
+
+**Specification 62: Avoid virtual method calls in constructors**  
+Description: Constructors should never call virtual functions, because they will not dispatch to subclass implementations.  
+Example: Do not call `virtual void Init()` inside constructor.  
+Additional Notes: Use factory functions instead.
+
+**Specification 63: Avoid initialization that can fail in constructors**  
+Description: Avoid initialization that can fail if you can't signal an error. Consider factory functions or `Init()` methods.  
+Example: `static std::unique_ptr<MyClass> Create() { ... }`  
+Additional Notes: See TotW #42.
+
+**Specification 64: Mark single-argument constructors `explicit`**  
+Description: Type conversion operators and constructors callable with a single argument must be marked `explicit`.  
+Example: `explicit MyClass(int x);`  
+Additional Notes: Copy/move constructors are exception.
+
+**Specification 65: Do not define implicit conversions**  
+Description: Do not define implicit conversions. Use `explicit` keyword.  
+Example: Not `operator bool() const;` without `explicit`.  
+Additional Notes: Exceptions for types designed to be interchangeable (waiver required).
+
+**Specification 66: Make copyable/movable types clear**  
+Description: A class's public API must make clear whether it is copyable, move-only, or neither.  
+Example: `class Copyable { public: Copyable(const Copyable&) = default; ... };`  
+Additional Notes: See rules for declaring/deleting operations.
+
+**Specification 67: Support copying/moving only if meaningful**  
+Description: Support copying and/or moving only if these operations are clear and meaningful for your type.  
+Example: `std::unique_ptr` is move-only.  
+Additional Notes: Avoid slicing by making base classes abstract.
+
+**Specification 68: Prefer composition over inheritance**  
+Description: Composition is often more appropriate than inheritance. Use inheritance only for "is-a" relationships.  
+Example: Use a member instead of inheriting.  
+Additional Notes: Limit use of `protected`.
+
+**Specification 69: Multiple inheritance is permitted but multiple implementation inheritance strongly discouraged**  
+Description: Multiple inheritance is allowed, but multiple implementation inheritance (inheriting from more than one non-abstract class) is strongly discouraged.  
+Example: Prefer single inheritance + interfaces.  
+Additional Notes: None.
+
+**Specification 70: Overload operators judiciously**  
+Description: Overload operators only if their meaning is obvious, unsurprising, and consistent with built-in operators.  
+Example: Define `operator==` for equality comparison.  
+Additional Notes: Do not overload `&&`, `||`, `,` (comma), or unary `&`.
+
+**Specification 71: Define operators on your own types, in same namespace**  
+Description: Define operators only on your own types, in the same headers, files, and namespaces as the types.  
+Example: `bool operator==(const MyType& a, const MyType& b) { ... }`  
+Additional Notes: Avoid defining as templates.
+
+**Specification 72: Prefer non-member binary operators**  
+Description: Prefer to define non-modifying binary operators as non-member functions to allow implicit conversions on both sides.  
+Example: `friend bool operator==(const T&, const T&);`  
+Additional Notes: None.
+
+**Specification 73: Do not overload `operator<<` for streaming unless for values**  
+Description: Overload `operator<<` for streaming only for types representing values, and write only the user-visible value.  
+Example: `std::ostream& operator<<(std::ostream& os, const MyValue& v);`  
+Additional Notes: Avoid exposing implementation details.
+
+**Specification 74: Use `friend` within reason**  
+Description: `friend` is allowed for specific use cases (e.g., `FooBuilder` accessing private members).  
+Example: `friend class FooBuilder;`  
+Additional Notes: Define friends in same file.
+
+**Specification 75: Do not use C++ exceptions**  
+Description: Do not use C++ exceptions (except Windows code).  
+Example: Avoid `throw`, `try`, `catch`.  
+Additional Notes: Use error codes or assertions.
+
+**Specification 76: Specify `noexcept` when useful and correct**  
+Description: Use `noexcept` when it is useful for performance (e.g., move constructors) and accurately reflects semantics.  
+Example: `MyClass(MyClass&& other) noexcept;`  
+Additional Notes: In most Google environments, exceptions are disabled.
+
+**Specification 77: Avoid RTTI**  
+Description: Avoid using run-time type information (RTTI). Use virtual methods or visitor pattern instead.  
+Example: Not `typeid(*data) == typeid(D1)`.  
+Additional Notes: Allowed in unit tests.
+
+**Specification 78: Use C++-style casts**  
+Description: Use `static_cast`, `const_cast`, `reinterpret_cast`, `std::bit_cast`. Do not use C-style casts except to `void`.  
+Example: `int y = static_cast<int>(x);`  
+Additional Notes: Brace initialization for arithmetic conversions.
+
+**Specification 79: Use `dynamic_cast` only when necessary**  
+Description: Use `dynamic_cast` only when you must query the dynamic type. See RTTI section.  
+Example: `Derived* d = dynamic_cast<Derived*>(base);`  
+Additional Notes: Prefer virtual methods.
+
+**Specification 80: Use streams where appropriate, but avoid stateful parts**  
+Description: Use streams for ad-hoc, local, human-readable output. Avoid stateful manipulators (`imbue`, `xalloc`). Use `absl::StreamFormat` for formatting.  
+Example: `std::cout << "Value: " << x << std::endl;`  
+Additional Notes: Prefer `absl::StrCat` for string formatting.
+
+**Specification 81: Use prefix increment/decrement (`++i`) unless postfix needed**  
+Description: Use prefix form (`++i`) unless you need the old value.  
+Example: `for (int i = 0; i < n; ++i)`  
+Additional Notes: Prefix is never less efficient.
+
+**Specification 82: Put `const` first, but be consistent**  
+Description: While we encourage putting `const` first (e.g., `const int*`), we do not require it. Be consistent with existing code.  
+Example: `const int* p;` (preferred) or `int const* p;` (allowed).  
+Additional Notes: None.
+
+**Specification 83: Use `constexpr` for floating-point constants**  
+Description: Use `constexpr` to define constants with floating-point expressions, not just literals.  
+Example: `constexpr double kPi = 3.1415926535;`  
+Additional Notes: Avoid complexifying definitions.
+
+**Specification 84: Do not use `long double`**  
+Description: Avoid `long double` because it gives non-portable results.  
+Example: Use `double` instead.  
+Additional Notes: None.
+
+**Specification 85: Use `uintptr_t` for memory addresses as integers**  
+Description: If you need to work with memory addresses as integers, store them in `uintptr_t`.  
+Example: `uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);`  
+Additional Notes: Not `uint32_t` or `uint64_t`.
+
+**Specification 86: Use braced initialization to create 64-bit constants**  
+Description: Use braced-initialization to create 64-bit constants.  
+Example: `int64_t my_value{0x123456789};`  
+Additional Notes: None.
+
+**Specification 87: Avoid macros, especially in headers**  
+Description: Avoid defining macros, especially in headers. Prefer inline functions, enums, and `const` variables.  
+Example: Use `constexpr int kMax = 100;` not `#define MAX 100`.  
+Additional Notes: If macro is needed, name with project prefix and `#undef` after use.
+
+**Specification 88: Do not use `using namespace std`**  
+Description: Do not declare anything in namespace `std`, including forward declarations.  
+Example: `#include <string>` not `namespace std { class string; }`.  
+Additional Notes: Undefined behavior.
+
+**Specification 89: Do not use namespace aliases in header files (except internal)**  
+Description: Do not use namespace aliases at namespace scope in header files except in explicitly marked internal-only namespaces.  
+Example: In `.cc` file: `namespace sidetable = ::pipeline_diagnostics::sidetable;`  
+Additional Notes: Aliases in headers become part of public API.
+
+**Specification 90: Use namespaces with "internal" in name for implementation details**  
+Description: Use namespaces with "internal" in the name to document parts of an API that should not be used by users.  
+Example: `namespace myproject::internal { ... }`  
+Additional Notes: Add library's filename to avoid collisions.
+
+**Specification 91: Single-line nested namespace declarations preferred**  
+Description: Single-line nested namespace declarations are preferred in new code.  
+Example: `namespace my_project::my_component { ... }`  
+Additional Notes: Not required.
+
+**Specification 92: Use `thread_local` with `constinit` for non-function variables**  
+Description: `thread_local` variables at class or namespace scope must be initialized with a true compile-time constant and annotated with `constinit`.  
+Example: `constinit thread_local Foo foo = ...;`  
+Additional Notes: Function-local `thread_local` variables have no initialization concerns.
+
+**Specification 93: Prefer `thread_local` over other thread-local mechanisms**  
+Description: `thread_local` should be preferred over other mechanisms for defining thread-local data.  
+Example: `thread_local int tls_value;`  
+Additional Notes: None.
+
+**Specification 94: Avoid `thread_local` with complex destructors**  
+Description: Prefer trivial types for `thread_local` to avoid use-after-free bugs during thread exit.  
+Example: Use `int` or pointer.  
+Additional Notes: Destructors of `thread_local` variables can cause subtle bugs.
+
+**Specification 95: Do not use C++20 modules**  
+Description: Do not use C++20 Modules.  
+Example: Avoid `import`, `module`, `export`.  
+Additional Notes: Not well-supported in Google's ecosystem.
+
+**Specification 96: Use coroutines only via approved libraries**  
+Description: Only use C++20 coroutines via libraries approved by project leads. Do not roll your own promise/awaitable types.  
+Example: Use an existing async library.  
+Additional Notes: Coroutines are complex and error-prone.
+
+**Specification 97: Use only approved Boost libraries**  
+Description: Use only approved subset of Boost libraries (listed in guide).  
+Example: `boost/call_traits.hpp`, `boost/compressed_pair.hpp`, `boost/graph`, etc.  
+Additional Notes: See list in the guide.
+
+**Specification 98: Do not use `<ratio>`**  
+Description: Do not use `<ratio>` because it encourages template-heavy style.  
+Example: Not `std::ratio<1, 3>`.  
+Additional Notes: None.
+
+**Specification 99: Do not use `<cfenv>` or `<fenv.h>`**  
+Description: Do not use `<cfenv>` or `<fenv.h>` because many compilers do not support them reliably.  
+Example: Avoid `std::fenv`.  
+Additional Notes: None.
+
+**Specification 100: Do not use `<filesystem>`**  
+Description: Do not use `<filesystem>` because it lacks sufficient testing support and has security vulnerabilities.  
+Example: Avoid `std::filesystem::path`.  
+Additional Notes: Use `absl::strings` or platform-specific APIs.
+
+**Specification 101: Do not use nonstandard extensions**  
+Description: Do not use nonstandard extensions like `__attribute__`, `#pragma`, `__COUNTER__`, `alloca()`, variable-length arrays, etc.  
+Example: Not `int arr[n];` (VLA).  
+Additional Notes: Use portable wrappers if necessary.
+
+**Specification 102: Prefer `using` over `typedef`**  
+Description: In new code, prefer `using` over `typedef`.  
+Example: `using MyAlias = std::vector<int>;`  
+Additional Notes: `using` works with templates.
+
+**Specification 103: Document public aliases**  
+Description: When defining a public alias, document the intent and whether it is guaranteed to be the same as the aliased type.  
+Example: `// Used to store field measurements. DataPoint may change from Bar* to some internal type.`  
+Additional Notes: Do not put namespace aliases in public API.
+
+**Specification 104: Switch statements must have `default` case unless on enum**  
+Description: If not conditional on an enumerated value, switch statements should always have a `default` case. If `default` should never execute, treat as error (e.g., `LOG(FATAL)`).  
+Example: `default: LOG(FATAL) << "Invalid value";`  
+Additional Notes: For enums, compiler warns if values not handled.
+
+**Specification 105: Annotate fall-through with `[[fallthrough]]`**  
+Description: Fall-through from one case label to another must be annotated using `[[fallthrough]];`. Consecutive case labels without code need no annotation.  
+Example:  
+```cpp
+case 41:
+case 43:
+  [[fallthrough]];
+case 42:
+  DoSomething();
+```  
+Additional Notes: None.
+
+**Specification 106: Use inclusive language**  
+Description: Use inclusive language and avoid offensive terms (e.g., "master/slave", "blacklist/whitelist"). Use gender-neutral language.  
+Example: Use "they/them" for unspecified gender.  
+Additional Notes: None.
+
+**Specification 107: Write comments for the next contributor**  
+Description: Write comments for your audience: the next contributor. Be generous; the next one may be you.  
+Example: Explain why, not what.  
+Additional Notes: None.
+
+**Specification 108: Use `//` or `/* */` consistently**  
+Description: Use either `//` or `/* */` syntax, as long as you are consistent. `//` is much more common.  
+Example: `// This is a comment.`  
+Additional Notes: None.
+
+**Specification 109: File comments describe the collection of abstractions**  
+Description: If a header file declares multiple user-facing abstractions, include a comment describing the collection.  
+Example: `// This file contains utilities for string manipulation.`  
+Additional Notes: Not needed for each file.
+
+**Specification 110: Every file should contain license boilerplate**  
+Description: Every file should contain license boilerplate appropriate for the project.  
+Example: Apache 2.0, BSD, LGPL, GPL header.  
+Additional Notes: New files usually should not contain copyright notice or author line.
+
+**Specification 111: Class comments should describe use, not implementation**  
+Description: Every non-obvious class should have a comment describing what it is for and how to use it. Include synchronization assumptions.  
+Example: Example in guide.  
+Additional Notes: May include small code snippet.
+
+**Specification 112: Function declaration comments describe use**  
+Description: Almost every function declaration should have comments describing what it does and how to use it. Omit only for simple obvious functions.  
+Example: `// Returns an iterator for this table...`  
+Additional Notes: Use verb phrase, e.g., "Opens the file".
+
+**Specification 113: Function definition comments describe how**  
+Description: If there is anything tricky about how a function does its job, the function definition should have an explanatory comment.  
+Example: Explain why you chose this implementation.  
+Additional Notes: Do not repeat declaration comments.
+
+**Specification 114: Comment class data members with invariants**  
+Description: The purpose of each class data member must be clear. Comment invariants not expressed by type and name.  
+Example: `// Used to bounds-check table accesses. -1 means we don't know yet.`  
+Additional Notes: None.
+
+**Specification 115: Global variables should have comments**  
+Description: All global variables should have a comment describing what they are and why they need to be global.  
+Example: `// The total number of test cases...`  
+Additional Notes: None.
+
+**Specification 116: Comment tricky code**  
+Description: In your implementation, have comments in tricky, non-obvious, interesting, or important parts of your code.  
+Example: Explain why a complex algorithm is used.  
+Additional Notes: Do not state the obvious.
+
+**Specification 117: Use named constants or options structs to clarify arguments**  
+Description: When function argument meaning is nonobvious, use named constants, change `bool` to `enum`, or create an options struct.  
+Example: `ProductOptions options; options.set_precision_decimals(7);`  
+Additional Notes: As a last resort, use comments at call site.
+
+**Specification 118: TODO comments format**  
+Description: `TODO` comments should include `TODO` in all caps, followed by bug ID, name, email, or identifier.  
+Example: `// TODO: bug 12345678 - Remove this after the 2047q4 compatibility window expires.`  
+Additional Notes: Include specific date or event.
+
+**Specification 119: Line length - 80 characters maximum**  
+Description: Each line of text in your code should be at most 80 characters long. Exceptions for comments with long URLs, string literals, include statements, header guards, using-declarations.  
+Example: Wrap lines exceeding 80.  
+Additional Notes: Use tools like Clang-Format.
+
+**Specification 120: Use only spaces, indent 2 spaces**  
+Description: Use only spaces, and indent 2 spaces at a time. Do not use tabs.  
+Example: Set editor to emit spaces.  
+Additional Notes: None.

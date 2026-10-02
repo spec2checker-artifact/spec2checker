@@ -1,0 +1,14 @@
+rules:
+- id: cpp-macro-naming-prefix
+  message: '[DISABLED] Macros should be named using all capital letters with underscores
+    and a project-specific prefix.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Macros should be named using all capital letters with underscores
+      and a project-specific prefix.

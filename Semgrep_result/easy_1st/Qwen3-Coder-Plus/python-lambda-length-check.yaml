@@ -1,0 +1,37 @@
+rules:
+- id: python-lambda-length-check
+  message: Lambda functions should be one-liners and under 80 characters. Prefer generator
+    expressions over map/filter with lambda. Use a regular nested function for multi-line
+    or long lambdas.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-regex: 'lambda\s+[^:]*:\s*\n'
+  metadata:
+    syntax_lambda: line_count > 1
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Character length check may require custom logic; pattern detects
+          multi-line lambdas.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query for line length and character count.
+    original_description: Lambda functions should be one-liners and under 80 characters.
+      Prefer generator expressions over map/filter with lambda. Use a regular nested
+      function for multi-line or long lambdas.

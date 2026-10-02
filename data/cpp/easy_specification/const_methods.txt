@@ -1,0 +1,4 @@
+**Specification 20: `const` methods**  
+Description: Declare methods `const` unless they alter the logical state of the object or cannot be invoked concurrently.  
+Example: `int get_value() const { return value_; }`  
+Additional Notes: None.

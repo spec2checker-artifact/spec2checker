@@ -1,0 +1,4 @@
+**Specification 35: Use arrays for safe quoting of lists**
+Description: Use arrays for safe quoting of lists of elements, especially command-line flags.
+Example: `FLAGS=( --foo --bar='baz' ); mybinary "${FLAGS[@]}"`
+Additional Notes: See Arrays section.

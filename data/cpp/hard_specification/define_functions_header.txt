@@ -1,0 +1,4 @@
+**Specification 9: Define short functions in header files**  
+Description: Include function definition at its declaration in a header only if the definition is short (≤10 lines).  
+Example: `int get_x() const { return x_; }`  
+Additional Notes: Longer bodies go in `.cc` file.

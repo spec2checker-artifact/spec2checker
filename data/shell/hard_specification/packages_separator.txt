@@ -1,0 +1,4 @@
+**Specification 90: Function names in packages use `::` separator**
+Description: If writing a package, separate package names with `::`.
+Example: `mypackage::my_func() { ... }`
+Additional Notes: Interactive functions may avoid colons for auto-completion.

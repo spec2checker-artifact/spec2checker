@@ -1,0 +1,41 @@
+rules:
+- id: javascript-this-usage
+  message: Use `this` only in class constructors/methods, arrow functions defined
+    within them, or functions with explicit `@this` annotation. Never for global object,
+    `eval`, event target, or unnecessary `call`/`apply`.
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: this
+  - pattern-inside: '@false
+
+      ...'
+  metadata:
+    syntax_expr: not_in_arrow_function
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: true
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires complex pattern matching for context and may have false
+          positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query for `@this` annotation and arrow function
+          context
+    original_description: Use `this` only in class constructors/methods, arrow functions
+      defined within them, or functions with explicit `@this` annotation. Never for
+      global object, `eval`, event target, or unnecessary `call`/`apply`.

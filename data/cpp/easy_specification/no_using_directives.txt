@@ -1,0 +1,4 @@
+**Specification 14: No using-directives**  
+Description: Do not use using-directives (e.g., `using namespace foo;`).  
+Example: `// Forbidden -- This pollutes the namespace.`  
+Additional Notes: Using-declarations are allowed in limited contexts.

@@ -1,0 +1,4 @@
+**Specification 85: Use `-gt`, `-lt` for numeric comparison inside `[[ ... ]]`**
+Description: Use `-gt`, `-lt` etc. for numeric comparison inside `[[ ... ]]` (not `<` or `>`).
+Example: `if [[ "${my_var}" -gt 3 ]]; then`
+Additional Notes: Or use `(( ... ))`.

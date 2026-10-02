@@ -1,0 +1,4 @@
+Specification 17: Braces - optional braces required for if/else/for/do/while
+Description: Braces are used with if, else, for, do, while statements, even when the body is empty or contains only a single statement.
+Example: if (condition) { doSomething(); }
+Additional Notes: Lambda braces remain optional.

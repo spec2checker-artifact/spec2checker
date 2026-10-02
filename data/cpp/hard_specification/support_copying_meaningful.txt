@@ -1,0 +1,4 @@
+**Specification 20: Support copying/moving only if meaningful**  
+Description: Support copying and/or moving only if these operations are clear and meaningful for your type.  
+Example: `std::unique_ptr` is move-only.  
+Additional Notes: Avoid slicing by making base classes abstract.

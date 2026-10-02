@@ -1,0 +1,4 @@
+**Specification 8: Formatting - follow existing style for modified files**
+Description: While you should follow the style that’s already there for files that you’re modifying.
+Example: Stay consistent with existing indentation.
+Additional Notes: New code must follow given rules.

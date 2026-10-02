@@ -1,0 +1,527 @@
+[
+  {
+    "rule_id": "javascript-es-module-import-naming",
+    "language": "javascript",
+    "description": "Module import names (`import * as name`) should be in lowerCamelCase, derived from the file name. Exception: 'THREE' for threejs.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import * as $NAME from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      },
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "name_not_equals('THREE')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex matching on metavariable name"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript/ES module analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for naming convention"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\import_lowercamelcase.txt",
+      "section": "import_lowercamelcase"
+    }
+  },
+  {
+    "rule_id": "javascript-source-file-structure-sections-order",
+    "language": "javascript",
+    "description": "Files must consist of sections in the following order: license/copyright (if present), `@fileoverview` JSDoc (if present), `goog.module` statement (if applicable), ES `import` statements, `goog.require`/`goog.requireType` statements, file implementation. Exactly one blank line separates sections except implementation may have 1-2 blank lines.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for file structure validation, not a simple pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for file structure and whitespace analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\source_structure_sections.txt",
+      "section": "source_structure_sections"
+    }
+  },
+  {
+    "rule_id": "javascript-special-escape-sequences",
+    "language": "javascript",
+    "description": "For characters with special escape sequences (\\', \\\", \\\\, \\b, \\f, \\n, \\r, \\t, \\v), use that sequence rather than numeric escape. Example: \\n not \\x0a. Legacy octal escapes never used.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\"$STR\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STR",
+        "constraint_type": "syntactic",
+        "condition": "contains_numeric_escape",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom metavariable-regex to detect numeric escapes"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect numeric escapes in string literals"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\special_escape_sequences.txt",
+      "section": "special_escape_sequences"
+    }
+  },
+  {
+    "rule_id": "javascript-generic-license-at-top",
+    "language": "javascript",
+    "description": "License or copyright information must be placed at the top of the file.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check first N lines for license pattern"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check file header"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not have built-in support for license header placement rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\licensecopyright.txt",
+      "section": "licensecopyright"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-before-brace",
+    "language": "javascript",
+    "description": "Require a space before an open curly brace `{`, except when the brace is part of an object literal that is the first argument to a function call or the first element in an array literal.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Formatting rules require custom metavariable patterns and are not fully expressible in a single code snippet."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not natively support whitespace formatting rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_exceptions.txt",
+      "section": "whitespace_exceptions"
+    }
+  },
+  {
+    "rule_id": "javascript-named-import-no-alias",
+    "language": "javascript",
+    "description": "Prefer keeping the same name for named imports; avoid aliasing. Use module import to fix collisions. If renaming is necessary, use components of the file name/path.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import { $IMPORT as $ALIAS } from \"$MODULE\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IMPORT": {
+          "type_hint": "expr"
+        },
+        "$ALIAS": {
+          "type_hint": "expr"
+        },
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ALIAS",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect unnecessary aliasing"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\imports_avoid_aliasing.txt",
+      "section": "imports_avoid_aliasing"
+    }
+  },
+  {
+    "rule_id": "javascript-unnecessary-parentheses",
+    "language": "javascript",
+    "description": "Do not use unnecessary parentheses around the entire expression following the keywords `delete`, `typeof`, `void`, `return`, `throw`, `case`, `in`, `of`, `yield`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$KEYWORD ($EXPR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KEYWORD": {
+          "type_hint": "expr",
+          "regex": "^(delete|typeof|void|return|throw|case|in|of|yield)$"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not distinguish required parentheses for type casts or precedence in all contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect unnecessary parentheses."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\parentheses_unnecessary.txt",
+      "section": "parentheses_unnecessary"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-require-side-effects",
+    "language": "javascript",
+    "description": "If a module is imported only for its side effects, the call must be `goog.require` (not `goog.requireType`) and the assignment must be omitted. A comment is required to explain the side-effect import.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "goog.requireType('$MODULE');",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "false"
+      },
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "has_preceding_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Comment detection may be limited to specific patterns."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce comment requirement."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\require_comment_required.txt",
+      "section": "require_comment_required"
+    }
+  },
+  {
+    "rule_id": "javascript-class-literal-format",
+    "language": "javascript",
+    "description": "Class literals must be indented as blocks. Do not add semicolons after methods or after the closing brace of a class declaration. Class expressions are still terminated with a semicolon.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n  $METHOD(...) {\n    ...\n  };\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$METHOD": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "is_class_declaration",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match class expressions incorrectly; requires distinction between declaration and expression."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect semicolons after methods in class declarations."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\indented_semicolons.txt",
+      "section": "indented_semicolons"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-module-exports",
+    "language": "javascript",
+    "description": "Classes, enums, functions, constants exported using `exports` object. Non-exported symbols not declared `@private`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "exports = { $EXPORTS };",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPORTS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "contains('goog.module')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for goog.module context"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for Closure Library patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\exports_exports_object.txt",
+      "section": "exports_exports_object"
+    }
+  }
+]

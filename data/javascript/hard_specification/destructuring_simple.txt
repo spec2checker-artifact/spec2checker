@@ -1,0 +1,4 @@
+**Specification 77: Object destructuring - allowed, keep simple**
+Description: Object destructuring patterns allowed. For function parameters, keep to single level of unquoted shorthand properties; no nested or computed. Default to `{}`.
+Example: `function destructured(ordinary, {num, str = 'some default'} = {}) {}`
+Additional Notes: JSDoc for destructured parameter may use any name.

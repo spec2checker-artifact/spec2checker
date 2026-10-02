@@ -1,0 +1,35 @@
+rules:
+- id: python-todo-comment-format
+  message: 'TODO comments must use the format `TODO: resource - explanation`. Avoid
+    old style `TODO(username):`.'
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-regex: '#\s*TODO\b'
+  - pattern-not-regex: '#\s*TODO:\s*\S+\s+-\s+\S'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match correct format but cannot enforce resource
+          link validity or fully detect old style TODOs without additional patterns.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check comment text format.
+    original_description: 'TODO comments must use the format `TODO: resource - explanation`.
+      Avoid old style `TODO(username):`.'

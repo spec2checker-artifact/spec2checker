@@ -1,0 +1,44 @@
+rules:
+- id: javascript-prefer-for-of
+  message: Prefer `for-of` loops for iterating over arrays and iterables. `for-in`
+    loops should only be used for dict-style objects and must use `hasOwnProperty`
+    check.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: for (const $VAR in $ITERABLE) { ... }
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $ITERABLE
+      type: expr
+  metadata:
+    type_constraint_$ITERABLE: is_array_type
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Type constraint for array detection may be limited without type
+          resolution.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD has a rule 'ForLoopShouldBeWhileLoop' but not a specific
+          rule for preferring for-of.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution to distinguish arrays from objects.
+    original_description: Prefer `for-of` loops for iterating over arrays and iterables.
+      `for-in` loops should only be used for dict-style objects and must use `hasOwnProperty`
+      check.

@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: hard_2nd
+  模型: DeepSeek-V4
+  输入: UIR/hard/hard_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 10/50 = 20.0%
+  Rule_V (规则验证数): 6/50 = 12.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 10条
+  语法错误规则: 32条
+  语义偏差规则: 8条
+
+  成功规则列表 (Successful Rules):
+     1. javascript-local-variable-declaration-timing  OK  "Local variables should be declared close to their first use,..."
+     2. python-names-to-avoid-type-inclusion          OK [V]  "Avoid names that needlessly include the type of the variable..."
+     3. javascript-array-trailing-comma               OK [V]  "Array literals must include a trailing comma when there is a..."
+     4. java-todo-comment-format                      OK  "TODO comments must begin with TODO in all caps, followed by ..."
+     5. cpp-fallthrough-annotation                    OK [V]  "Fall-through from one case label to another must be annotate..."
+     6. java-annotation-one-per-line                  OK [V]  "Annotations applying to class, package, or module must appea..."
+     7. javascript-empty-catch-no-comment             OK  "Empty catch blocks must contain a comment explaining why the..."
+     8. cpp-prefer-composition                        OK [V]  "Composition is often more appropriate than inheritance. Use ..."
+     9. shell-pipestatus-check                        OK  "Bash has `PIPESTATUS` array to check return code from all pa..."
+    10. python-logging-string-literal                 OK [V]  "For logging functions that expect a pattern-string, always c..."
+
+  失败规则列表 (Failed Rules):
+     1. python-comment-style                          FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Check that comments use proper punctuation, spelling, and gr..."
+     2. javascript-computed-property-symbol-only      FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Computed properties in classes should only be used when the ..."
+     3. python-multiline-string-dedent                FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Detect multi-line string literals that could benefit from us..."
+     4. cpp-default-capture-by-reference-lifetime     FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use default capture by reference ([&]) only when the lifetim..."
+     5. cpp-inclusive-language                        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Detect use of non-inclusive or offensive terms (e.g., master..."
+     6. java-type-use-annotation-position             FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Type-use annotations must appear immediately before the anno..."
+     7. javascript-throw-error-only                   FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Always throw `Error` or subclasses; never throw string liter..."
+     8. java-ignoring-exception-must-comment          FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "When an exception is caught and no action is taken, a commen..."
+     9. cpp-no-exceptions                             FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not use C++ exceptions (except Windows code). Use error c..."
+    10. shell-local-command-substitution-exit-code    FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Always separate `local` declaration and assignment when assi..."
+    11. javascript-arrow-function-body                FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Arrow function body should be a block or a single expression..."
+    12. javascript-enum-annotation                    FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Enumerations defined by adding `@enum` annotation to an obje..."
+    13. java-enum-line-break-after-comma              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "After a comma following an enum constant, a line break is op..."
+    14. shell-read-no-backslash                       FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `read -r` to prevent backslash interpretation."
+    15. java-vertical-whitespace-between-members      FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "A single blank line should appear between consecutive member..."
+    16. shell-avoid-unquoted-array-expansion          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Avoid unquoted command expansion in array assignments; won't..."
+    17. python-modules-license-boilerplate            FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Every Python file should contain a license boilerplate and a..."
+    18. javascript-prefer-template-literals           FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Use template literals `...` over complex string concatenatio..."
+    19. cpp-license-boilerplate-required              FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Every file should contain license boilerplate appropriate fo..."
+    20. java-grouping-parentheses-recommended         FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Optional grouping parentheses omitted only when author and r..."
+    21. shell-loop-local-declaration                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Inside a function, declare loop variable as `local` to avoid..."
+    22. python-getter-setter-unnecessary              FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Getter and setter functions should only be used when getting..."
+    23. java-camel-case-underscores-adjacent-numbers  FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "In rare circumstances (e.g., multipart version numbers), use..."
+    24. javascript-spread-operator-preferred          FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Function calls should use the spread operator `...` instead ..."
+    25. cpp-include-alphabetical-order                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Within each include section, includes should be ordered alph..."
+    26. shell-constant-naming                         FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Constants and environment variables should be uppercase with..."
+    27. python-type-alias-naming                      FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Type aliases must be named using CapWords. If the alias is p..."
+    28. java-camel-case-split-conventional            FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "If a word already has conventional camel-case appearance (e...."
+    29. cpp-avoid-default-capture-by-value            FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use default capture by value ([=]) sparingly. Prefer explici..."
+    30. shell-package-function-names                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Function names in packages should use '::' as a separator be..."
+    31. shell-arithmetic-expansion-in-string          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `$(( ... ))` inside strings for arithmetic expansion."
+    32. cpp-comment-style-consistency                 FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use either `//` or `/* */` comment syntax consistently withi..."
+    33. python-none-type-explicit                     FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use explicit `X | None` (or `Optional[X]`) rather than impli..."
+    34. shell-filename-lowercase-underscore           FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Source filenames should be lowercase, with underscores to se..."
+    35. shell-set-constant-readonly                   FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Detect when a variable is set (potentially at runtime or con..."
+    36. python-docstring-omit-return-none             FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "The Returns section is not required if the function only ret..."
+    37. python-comment-spacing                        FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Block and inline comments should be used for tricky, non-obv..."
+    38. java-module-requires-order                    FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "In a module-info.java file, the 'transitive' modifier must a..."
+    39. cpp-operator-overload-judicious               FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Overload operators only if their meaning is obvious, unsurpr..."
+    40. javascript-abstract-class-usage               FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Abstract classes and methods should be annotated with `@abst..."
+
+  按工具分布 (By Tool):
+    Semgrep    10/47 (21.3%)
+    Pmd        2/10 (20.0%)
+    Codeql     8/38 (21.1%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+    C++          Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    JavaScript   Rule_C: 3/10 (30.0%)  Rule_V: 1/10 (10.0%)
+    Shell        Rule_C: 1/10 (10.0%)  Rule_V: 0/10 (0.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 42
+  真正违规 (TP): 7
+  误报 (FP): 35
+  精准度: 16.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

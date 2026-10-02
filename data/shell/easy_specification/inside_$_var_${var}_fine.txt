@@ -1,0 +1,4 @@
+**Specification 55: Inside `$(( ... ))`, `var` not `${var}` is fine**
+Description: Inside `$(( ... ))`, the `$` form is not required; omitting leads to cleaner code (recommendation only).
+Example: `echo "$(( hr * 3600 + min * 60 + sec ))"`
+Additional Notes: Slightly contrary to always-using-braces rule.

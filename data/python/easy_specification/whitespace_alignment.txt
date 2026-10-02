@@ -1,0 +1,9 @@
+**Specification 59: Whitespace - no vertical alignment**
+Description: Don’t use spaces to vertically align tokens on consecutive lines; it becomes a maintenance burden.
+Example:
+```python
+foo = 1000
+long_name = 2
+```
+Not aligned.
+Additional Notes: None.

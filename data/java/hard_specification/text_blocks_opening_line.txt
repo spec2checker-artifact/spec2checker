@@ -1,0 +1,9 @@
+Specification 89: Text blocks - opening on new line
+Description: Opening """ always on a new line. May follow indentation rules or have no indentation.
+Example:
+
+java
+String text = """
+    line1
+    """;
+Additional Notes: None.

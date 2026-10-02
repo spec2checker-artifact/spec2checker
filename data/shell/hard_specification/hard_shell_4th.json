@@ -1,0 +1,553 @@
+[
+  {
+    "rule_id": "shell-avoid-unquoted-array-expansion",
+    "language": "shell",
+    "description": "Avoid unquoted command expansion in array assignments; won't work correctly if output contains special characters. Use readarray instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARRAY=($($CMD))",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARRAY": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell pattern matching may not capture all edge cases of command substitution."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\expansions_assignments.txt",
+      "section": "expansions_assignments"
+    }
+  },
+  {
+    "rule_id": "shell-arithmetic-increment",
+    "language": "shell",
+    "description": "Use `(( var += 3 ))` for incrementing variables. Do not use `$` inside the arithmetic expression `(( ))`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "(( $VAR += $NUM ))",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$NUM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell support is experimental; pattern may not match all variations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\arithmetic_var_increment.txt",
+      "section": "arithmetic_var_increment"
+    }
+  },
+  {
+    "rule_id": "shell-local-command-substitution-exit-code",
+    "language": "shell",
+    "description": "Always separate `local` declaration and assignment when assignment uses command substitution, because `local` masks exit code.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "local $VAR=$($CMD)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires correct parsing of shell command substitution"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\local_substitution.txt",
+      "section": "local_substitution"
+    }
+  },
+  {
+    "rule_id": "shell-constant-readonly",
+    "language": "shell",
+    "description": "For clarity, `readonly` or `declare -xr` is recommended for declaring constants over equivalent commands.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=$VALUE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_global_or_script_scope",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match simple assignments; may have false positives with local variables in functions."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Shell/Bash analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support Shell/Bash analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\readonly_declare_constants.txt",
+      "section": "readonly_declare_constants"
+    }
+  },
+  {
+    "rule_id": "shell-explicit-string-test",
+    "language": "shell",
+    "description": "To avoid confusion about what you're testing for, explicitly use `-z` or `-n` when testing strings in conditional expressions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if [[ $VAR ]]; then",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal_or_variable",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell support may not capture all bash-specific conditional contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\strings_explicit_confusion.txt",
+      "section": "strings_explicit_confusion"
+    }
+  },
+  {
+    "rule_id": "shell-readarray-without-t",
+    "language": "shell",
+    "description": "Detect usage of readarray without -t option, which leaves trailing newlines in array elements",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "readarray $ARGS",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARGS",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('-t')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for command arguments"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\readarray_trailing_newline.txt",
+      "section": "readarray_trailing_newline"
+    }
+  },
+  {
+    "rule_id": "shell-arithmetic-expansion-in-string",
+    "language": "shell",
+    "description": "Use `$(( ... ))` inside strings for arithmetic expansion.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\"$(( $EXPR ))\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match non-arithmetic contexts"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\arithmetic_expansion.txt",
+      "section": "arithmetic_expansion"
+    }
+  },
+  {
+    "rule_id": "shell-bash-pipestatus-check",
+    "language": "shell",
+    "description": "Bash has `PIPESTATUS` array to check return code from all parts of a pipe. Assign to another variable immediately to avoid overwrite.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD1 | $CMD2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CMD1": {
+          "type_hint": "expr"
+        },
+        "$CMD2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD1",
+        "constraint_type": "syntactic",
+        "condition": "is_command",
+        "required": "true"
+      },
+      {
+        "target": "$CMD2",
+        "constraint_type": "syntactic",
+        "condition": "is_command",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match pipe usage and context to check for missing PIPESTATUS"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell/bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell/bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\pipestatus_check_parts.txt",
+      "section": "pipestatus_check_parts"
+    }
+  },
+  {
+    "rule_id": "shell-integer-declaration",
+    "language": "shell",
+    "description": "Detect variable assignments that could be declared as integers using `declare -i` or `local -i`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_arithmetic_expansion",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_not_declared_integer",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect arithmetic expressions and variable scope"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\integer_variables_declare.txt",
+      "section": "integer_variables_declare"
+    }
+  },
+  {
+    "rule_id": "shell-readonly-flags-after-assignment",
+    "language": "shell",
+    "description": "After assigning an array variable named FLAGS, it should be declared as readonly to make it constant.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "FLAGS=(...);\n...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "FLAGS",
+        "constraint_type": "syntactic",
+        "condition": "not_followed_by('readonly FLAGS')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to check for missing 'readonly' statement after assignment"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\assignment_constants.txt",
+      "section": "assignment_constants"
+    }
+  }
+]

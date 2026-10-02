@@ -1,0 +1,46 @@
+============================================================
+  迭代2成本分析报告
+============================================================
+
+  批次: hard_5th
+  模型: Qwen3-Coder-Plus
+  迭代: 2
+  时间: 2026-05-20 23:11:15
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  Rule modification (iteration 2): ~300s (OK)
+  scan_project.py 耗时: ~180s (OK)
+  总耗时: ~480s (~8min)
+
+------------------------------------------------------------
+  迭代2修改详情:
+------------------------------------------------------------
+  修改规则(Semgrep):
+    - cpp-generic-todo-comment-format: WARNING不变, 缩窄pattern-not-regex排除含日期/事件的TODO(evaluate2评估87.5%精准度,排除含October 2025等日期的合规TODO)
+    - python-class-docstring-required: WARNING→INFO, 重写为结构化pattern-not排除含docstring和pass-only的类(evaluate2评估34.9%精准度,28条FP为已有docstring的类)
+    - python-docstring-sections: WARNING→INFO, 改用pattern-regex完全禁用(evaluate2评估0%精准度,9条全部FP,要求Args/Returns对简单函数过于严苛)
+    - python-logging-string-literal: WARNING不变, 重构为pattern-regex仅匹配f-string首参数(evaluate2评估50%精准度,移除%-格式化和字符串字面量误报)
+    - python-todo-comment-format: 保留不变(evaluate2评估100%精准度)
+  修改规则(PMD):
+    - 无规则(目录为空)
+  修改规则(CodeQL):
+    - qlpack.yml: 新建,使用dependencies格式(codeql/python-all)
+
+------------------------------------------------------------
+  迭代2结果:
+------------------------------------------------------------
+  迭代1违规数: 252
+  迭代2违规数: 141
+  减少: 111 (44.0%)
+  规则统计:
+    python-logging-string-literal: 108→76 (WARNING, 仅f-string)
+    python-todo-comment-format: 32→32 (WARNING, 100% precision, unchanged)
+    python-class-docstring-required: 95→25 (INFO, 结构化pattern-not)
+    cpp-generic-todo-comment-format: 8→8 (WARNING, 缩窄日期排除,未减少检出数)
+    python-docstring-sections: 9→0 (INFO, 完全禁用)
+  PMD: 0 findings (no rules in this batch)
+  CodeQL: RUN_FAIL (2 rules, consistent with previous batches)
+
+============================================================

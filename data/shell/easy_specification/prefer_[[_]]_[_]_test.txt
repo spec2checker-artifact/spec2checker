@@ -1,0 +1,4 @@
+**Specification 40: Prefer `[[ ... ]]` over `[ ... ]` and `test`**
+Description: `[[ ... ]]` is preferred over `[ ... ]`, `test`, and `/usr/bin/[`.
+Example: `if [[ -f "$file" ]]; then`
+Additional Notes: Reduces errors, allows pattern/regex matching.

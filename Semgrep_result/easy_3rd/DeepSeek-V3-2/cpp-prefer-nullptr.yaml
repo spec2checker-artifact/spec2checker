@@ -1,0 +1,40 @@
+rules:
+- id: cpp-prefer-nullptr
+  message: Use `nullptr` for pointers, not `NULL` or `0`, for type safety.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $X = $Y
+  - metavariable-type:
+      metavariable: $X
+      type: expr
+  - metavariable-type:
+      metavariable: $Y
+      type: expr
+  metadata:
+    syntax_$Y: matches_pattern('NULL|0')
+    type_constraint_$X: is_pointer_type
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type resolution for pointer detection may be limited
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: true
+        limitations: requires full type resolution
+    original_description: Use `nullptr` for pointers, not `NULL` or `0`, for type
+      safety.

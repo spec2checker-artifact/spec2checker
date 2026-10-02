@@ -1,0 +1,4 @@
+Specification 45: Horizontal whitespace - colon in enhanced for
+Description: Space around : in enhanced for statement.
+Example: for (String s : list)
+Additional Notes: None.

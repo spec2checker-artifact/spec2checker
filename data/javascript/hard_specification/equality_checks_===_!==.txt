@@ -1,0 +1,4 @@
+**Specification 114: Equality checks - use `===` and `!==`**
+Description: Use identity operators `===` and `!==` except as noted.
+Example: `if (x === 0)` not `if (x == 0)`.
+Additional Notes: Exception: `if (someObjectOrPrimitive == null)` catches both `null` and `undefined`.

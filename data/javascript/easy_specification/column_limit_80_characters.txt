@@ -1,0 +1,4 @@
+**Specification 39: Column limit - 80 characters**
+Description: JavaScript code has column limit of 80 characters. Exceeding lines must be line-wrapped.
+Example: Wrap lines longer than 80.
+Additional Notes: Exceptions: `goog.module`, `goog.require`, `import`, `export from`, long URLs, shell commands, long string literals.

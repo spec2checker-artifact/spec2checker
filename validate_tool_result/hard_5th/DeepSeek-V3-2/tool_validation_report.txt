@@ -1,0 +1,36 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-11 15:39:20
+Batch: hard_5th
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\hard\hard_5th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       45 |        5 |        5 |
+| PMD             |        2 |        0 |        2 |        2 |
+| CodeQL          |        4 |        2 |        2 |        2 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       47 |        3 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 47/50 rules validated (94%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 45/50
+      -> 2 passed to PMD
+  PMD:     0/2
+      -> 4 passed to CodeQL
+  CodeQL:  2/4
+      -> 3 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- java-camel-case-conversion-step1 (java) [codeql/pmd/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [pmd] PMD partial_support is false; [codeql] CodeQL partial_support is false
+- java-class-logical-order (java) [codeql/pmd/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [pmd] PMD partial_support is false; [codeql] CodeQL partial_support is false
+- shell-recommend-shellcheck (shell) [semgrep]: [semgrep] Not applicable: semgrep partial_support is false

@@ -1,0 +1,29 @@
+rules:
+- id: javascript-no-object-constructor
+  message: Do not use `Object` constructor; use literal `{}` or `{a:0, b:1}`.
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: new Object()
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Do not use `Object` constructor; use literal `{}` or `{a:0,
+      b:1}`.

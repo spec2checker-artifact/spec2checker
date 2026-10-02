@@ -1,0 +1,4 @@
+Specification 43: Horizontal whitespace - ampersand in type bounds
+Description: Space around & in <T extends Foo & Bar>.
+Example: <T extends Foo & Bar>
+Additional Notes: None.

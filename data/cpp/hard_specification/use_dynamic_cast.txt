@@ -1,0 +1,4 @@
+**Specification 32: Use `dynamic_cast` only when necessary**  
+Description: Use `dynamic_cast` only when you must query the dynamic type. See RTTI section.  
+Example: `Derived* d = dynamic_cast<Derived*>(base);`  
+Additional Notes: Prefer virtual methods.

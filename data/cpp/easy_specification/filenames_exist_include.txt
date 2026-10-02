@@ -1,0 +1,4 @@
+**Specification 2: Avoid filenames that already exist in `/usr/include`**  
+Description: Do not use filenames that already exist in `/usr/include`, such as `db.h`.  
+Example: Use `http_server_logs.h` instead of `logs.h`.  
+Additional Notes: Make filenames very specific.

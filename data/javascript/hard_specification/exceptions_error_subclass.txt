@@ -1,0 +1,4 @@
+**Specification 108: Exceptions - throw `Error` or subclass**
+Description: Always throw `Error` or subclasses; never throw string literals or other objects. Always use `new Error()`.
+Example: `throw new Error('message');`
+Additional Notes: Applies to `Promise.reject` as well.

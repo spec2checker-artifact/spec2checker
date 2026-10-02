@@ -1,0 +1,4 @@
+**Specification 76: Shorthand properties - allowed**
+Description: Shorthand properties `{foo, bar}` allowed.
+Example: `const obj = {foo, bar};`.
+Additional Notes: None.

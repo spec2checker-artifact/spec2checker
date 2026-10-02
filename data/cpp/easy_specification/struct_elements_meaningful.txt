@@ -1,0 +1,4 @@
+**Specification 40: Prefer `struct` over `pair`/`tuple` when elements have meaningful names**  
+Description: Use a `struct` instead of `pair` or `tuple` whenever elements can have meaningful names.  
+Example: `struct Point { int x; int y; };` not `std::pair<int,int>`.  
+Additional Notes: Field names are clearer.

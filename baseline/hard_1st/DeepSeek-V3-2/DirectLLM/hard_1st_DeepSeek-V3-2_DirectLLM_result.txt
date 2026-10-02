@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: hard_1st
+  模型: DeepSeek-V3-2
+  输入: UIR/hard/hard_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 6/50 = 12.0%
+  Rule_V (规则验证数): 3/50 = 6.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 6条
+  语法错误规则: 35条
+  语义偏差规则: 9条
+
+  成功规则列表 (Successful Rules):
+     1. javascript-static-method-to-function          OK  "Prefer module-local (package-private) functions over private..."
+     2. cpp-inclusive-language-avoid-offensive-terms  OK  "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+     3. python-avoid-string-concat-in-loop            OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+     4. python-multiline-string-dedent                OK [V]  "Multi-line strings should use `textwrap.dedent` to remove le..."
+     5. java-arrow-no-adjacent-break                  OK [V]  "Line never broken adjacent to arrow ->, except break may com..."
+     6. javascript-no-wrapper-new                     OK  "Never use `new Boolean`, `new Number`, `new String`, `new Sy..."
+
+  失败规则列表 (Failed Rules):
+     1. java-camel-case-step1                         FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Convert phrase to plain ASCII and remove apostrophes as a pr..."
+     2. javascript-no-nested-namespace                FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Do not define a nested type (class, typedef, enum, interface..."
+     3. python-override-docstring-optional            FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "A method that overrides a base class method does not need a ..."
+     4. cpp-avoid-failing-constructor                 FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Avoid initialization that can fail in constructors if you ca..."
+     5. shell-avoid-colon-in-function-name            FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Functions intended for interactive use may choose to avoid c..."
+     6. java-text-block-opening-newline               FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Opening triple quotes of a text block must be on a new line,..."
+     7. cpp-copy-move-meaningful                      FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Detect user-defined types that define copy or move operation..."
+     8. shell-avoid-unquoted-array-expansion          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Avoid unquoted expansion in array assignments; won't work co..."
+     9. cpp-no-implicit-conversion                    FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not define implicit conversions. Use the `explicit` keywo..."
+    10. shell-no-main-for-short-scripts               FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "For short scripts where it's just a linear flow, a main func..."
+    11. cpp-dynamic-cast-usage                        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `dynamic_cast` only when you must query the dynamic type..."
+    12. shell-read-without-r                          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `read -r` to prevent backslash interpretation."
+    13. javascript-number-literal-prefix-case         FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never ..."
+    14. python-docstring-triple-double-quote          FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Always use the three-double-quote format `"""` for docstring..."
+    15. shell-constant-readonly                       FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `readonly` or `declare -xr` for constants instead of equ..."
+    16. javascript-one-variable-per-declaration       FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Every local variable declaration declares only one variable;..."
+    17. cpp-explicit-single-argument-constructor      FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Type conversion operators and constructors callable with a s..."
+    18. javascript-generics-template-declaration      FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Generic functions and methods must be declared with a `@temp..."
+    19. cpp-nonmember-functions-in-namespace          FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Prefer placing nonmember functions in a namespace; use compl..."
+    20. java-line-wrapping-discretionary              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Even code that fits within column limit may be line-wrapped ..."
+    21. shell-arithmetic-expansion-expr               FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Always use `$(( ... ))` for arithmetic expansion instead of ..."
+    22. java-camel-case-split-conventional            FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Detects conventionally camel-cased words (e.g., 'AdWords') a..."
+    23. python-logging-string-literal                 FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "For logging functions that expect a pattern-string, always c..."
+    24. java-camel-case-lowercase-all                 FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "All words in a camel case identifier must be entirely lowerc..."
+    25. python-comments-never-describe-code           FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Detect comments that merely describe the code, assuming the ..."
+    26. javascript-nested-function-const              FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Nested function definitions should be assigned to a local co..."
+    27. python-naming-internal-underscore             FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Detect names that should be internal (private/protected) but..."
+    28. javascript-jsdoc-mixed-annotation             FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Detects mixing of inline JSDoc type annotations and block JS..."
+    29. javascript-enum-static-initialization         FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "For string enums, all values must be statically initialized,..."
+    30. cpp-coroutine-unauthorized-library            FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Only use C++20 coroutines via libraries approved by project ..."
+    31. java-finalize-override                        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Do not override Object.finalize. Finalization support is sch..."
+    32. shell-no-expr-command                         FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Never use the `expr` command as it is an external program an..."
+    33. python-error-message-precise                  FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Error messages should precisely match error condition, inter..."
+    34. java-old-style-switch                         FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Detect old-style switch statement formatting where a colon i..."
+    35. javascript-tostring-override-side-effects     FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "toString may be overridden but must always succeed and never..."
+    36. python-explicit-none-type                     FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use explicit `X | None` or `Optional[X]` for type annotation..."
+    37. cpp-comment-class-data-members                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Class data members must have a comment explaining their purp..."
+    38. cpp-default-capture-by-value                  FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use default capture by value (`[=]`) sparingly. It should on..."
+    39. shell-no-let-builtin                          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Never use the `let` builtin. Use `(( ... ))` for arithmetic ..."
+    40. java-switch-fallthrough-comment               FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Each statement group in a switch case must either terminate ..."
+    41. python-naming-conventions-class-module        FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use CapWords for class names and lower_with_under for module..."
+    42. shell-regex-rhs-no-quotes                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "When using the regex matching operator `=~` inside `[[ ... ]..."
+    43. java-switch-indentation                       FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Contents of switch block must be indented +2 relative to the..."
+    44. shell-loop-local-declaration                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Inside a function, declare loop variable as `local` to avoid..."
+
+  按工具分布 (By Tool):
+    Semgrep    6/49 (12.2%)
+    Pmd        2/11 (18.2%)
+    Codeql     6/38 (15.8%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 1/10 (10.0%)  Rule_V: 1/10 (10.0%)
+    C++          Rule_C: 1/10 (10.0%)  Rule_V: 0/10 (0.0%)
+    JavaScript   Rule_C: 2/10 (20.0%)  Rule_V: 0/10 (0.0%)
+    Shell        Rule_C: 0/10 (0.0%)  Rule_V: 0/10 (0.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 12
+  真正违规 (TP): 1
+  误报 (FP): 11
+  精准度: 8.3%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

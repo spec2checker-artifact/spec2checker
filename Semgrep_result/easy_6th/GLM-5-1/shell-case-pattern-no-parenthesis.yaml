@@ -1,0 +1,40 @@
+rules:
+- id: shell-case-pattern-no-parenthesis
+  message: Pattern expressions in a case statement should not be preceded by an open
+    parenthesis.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "case $VAR in\n    ($PATTERN)\n        ...\n    ;;\nesac"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $PATTERN
+      type: expr
+  metadata:
+    syntax_pattern: has_parenthesis_prefix
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires precise matching of case statement syntax
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Pattern expressions in a case statement should not be preceded
+      by an open parenthesis.

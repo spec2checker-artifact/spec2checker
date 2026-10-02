@@ -1,0 +1,4 @@
+**Specification 1: File names - lowercase with underscores or dashes**  
+Description: Filenames should be all lowercase and can include underscores (`_`) or dashes (`-`). Follow the project's convention. If no consistent pattern, prefer `_`.  
+Example: `my_useful_class.cc`, `my-useful-class.cc`, `myusefulclass.cc`  
+Additional Notes: C++ files use `.cc`, headers use `.h`. Files textually included at specific points use `.inc`.

@@ -1,0 +1,4 @@
+**Specification 26: Case - pattern expressions should not be preceded by open parenthesis**
+Description: Pattern expressions should not be preceded by an open parenthesis.
+Example: `a)` not `(a)`.
+Additional Notes: Avoid `;&` and `;;&`.

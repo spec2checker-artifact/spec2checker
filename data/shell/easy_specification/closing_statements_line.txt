@@ -1,0 +1,9 @@
+**Specification 19: Closing statements (`fi`, `done`) on own line**
+Description: Closing statements (`fi`, `done`) on their own line, vertically aligned with opening statement.
+Example:
+```bash
+if ...; then
+  ...
+fi
+```
+Additional Notes: None.

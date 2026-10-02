@@ -1,0 +1,15 @@
+rules:
+- id: java-import-group-spacing
+  message: '[DISABLED] If both static and non-static imports exist, a single blank
+    line must separate the two groups. No other blank lines are allowed between imports.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: If both static and non-static imports exist, a single blank
+      line must separate the two groups. No other blank lines are allowed between
+      imports.

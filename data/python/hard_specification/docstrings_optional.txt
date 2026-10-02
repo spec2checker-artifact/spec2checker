@@ -1,0 +1,4 @@
+**Specification 64: Test modules - docstrings optional**
+Description: Module-level docstrings for test files are not required; include only when additional information is needed.
+Example: Docstring explaining how to run test or update golden files.
+Additional Notes: Do not use docstrings that provide no new information.

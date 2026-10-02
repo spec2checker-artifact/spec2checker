@@ -1,0 +1,35 @@
+rules:
+- id: python-lambda-prefer-operator
+  message: For common operations like multiplication, use functions from `operator`
+    module instead of lambda.
+  languages:
+  - python
+  severity: WARNING
+  pattern: 'lambda $X, $Y: $X $OP $Y'
+  metadata:
+    syntax_$OP: in_set('+', '-', '*', '/', '//', '%', '**', '&', '|', '^', '<<', '>>',
+      '==', '!=', '<', '<=', '>', '>=', 'and', 'or')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for binary operators; may not detect
+          all equivalent lambda forms
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to map operators to `operator` module functions
+    original_description: For common operations like multiplication, use functions
+      from `operator` module instead of lambda.

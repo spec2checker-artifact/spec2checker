@@ -1,0 +1,4 @@
+**Specification 4: Local variables - declare as close to use as possible**  
+Description: Declare variables in the narrowest scope possible, as close to first use as possible. Initialize in declaration.  
+Example: `int i = f();` not `int i; i = f();`  
+Additional Notes: Use brace initialization for containers.

@@ -1,0 +1,41 @@
+rules:
+- id: python-none-check-is
+  message: Always use `if x is None` (or `is not None`) to check for `None`. Using
+    `if not x:` is incorrect when `x` could be `0` or an empty string.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "if not $X:\n    ..."
+  - pattern-not: "if not isinstance($A, $B):\n    ..."
+  - pattern-not: "if not hasattr($A, $B):\n    ..."
+  - pattern-not: "if not callable($A):\n    ..."
+  - metavariable-regex:
+      metavariable: $X
+      regex: ^None$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot guarantee $X is a variable that could be None; may produce
+          false positives.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type tracking to determine if $X could be None, 0, or
+          empty string.
+    original_description: Always use `if x is None` (or `is not None`) to check for
+      `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.

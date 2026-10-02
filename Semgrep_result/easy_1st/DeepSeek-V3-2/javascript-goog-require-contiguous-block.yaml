@@ -1,0 +1,45 @@
+rules:
+- id: javascript-goog-require-contiguous-block
+  message: '`goog.require` and `goog.requireType` statements must form a contiguous
+    block with no empty lines, following `goog.module` and separated by a single empty
+    line.'
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: 'goog.module(''$MODULE'');
+
+
+      $REQUIRES'
+  - metavariable-type:
+      metavariable: $MODULE
+      type: expr
+  - metavariable-type:
+      metavariable: $REQUIRES
+      type: expr
+  metadata:
+    syntax_$REQUIRES: no_empty_lines
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom pattern to detect empty lines within the block
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for formatting rules
+    original_description: '`goog.require` and `goog.requireType` statements must form
+      a contiguous block with no empty lines, following `goog.module` and separated
+      by a single empty line.'

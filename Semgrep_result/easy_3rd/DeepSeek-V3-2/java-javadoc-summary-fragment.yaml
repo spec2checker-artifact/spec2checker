@@ -1,0 +1,42 @@
+rules:
+- id: java-javadoc-summary-fragment
+  message: Each Javadoc block must begin with a brief summary fragment (noun or verb
+    phrase, not a complete sentence). It should be capitalized and punctuated as if
+    it were a complete sentence.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: '** $COMMENT *'
+  - metavariable-type:
+      metavariable: $COMMENT
+      type: expr
+  metadata:
+    syntax_$COMMENT: first_sentence_matches_regex('^[A-Z][^.]*\.\s+')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom regex matching on comment text; may have false
+          positives/negatives with complex formatting
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD's CommentRequired rule can enforce presence but not detailed
+          content validation for summary fragment
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to analyze Javadoc comment structure and
+          first sentence
+    original_description: Each Javadoc block must begin with a brief summary fragment
+      (noun or verb phrase, not a complete sentence). It should be capitalized and
+      punctuated as if it were a complete sentence.

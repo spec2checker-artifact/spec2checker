@@ -1,0 +1,4 @@
+**Specification 13: Exports - do not annotate `exports` as `@const`**
+Description: Do not annotate `exports` object as `@const`; it is already treated as constant.
+Example: Not `/** @const */ exports = {...}`.
+Additional Notes: None.

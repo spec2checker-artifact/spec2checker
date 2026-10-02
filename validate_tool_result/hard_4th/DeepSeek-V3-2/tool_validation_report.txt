@@ -1,0 +1,35 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-11 22:17:01
+Batch: hard_4th
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\hard\hard_4th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       46 |        4 |        4 |
+| PMD             |        1 |        0 |        1 |        1 |
+| CodeQL          |        4 |        2 |        2 |        2 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       48 |        2 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 48/50 rules validated (96%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 46/50
+      -> 1 passed to PMD
+  PMD:     0/1
+      -> 4 passed to CodeQL
+  CodeQL:  2/4
+      -> 2 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- java-horizontal-alignment-not-required (java) [codeql/pmd/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [pmd] PMD partial_support is false; [codeql] CodeQL partial_support is false
+- python-comment-style-consistency (python) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false

@@ -1,0 +1,47 @@
+============================================================
+  迭代1成本分析报告
+============================================================
+
+  批次: hard_2nd
+  模型: Qwen3-Coder-Plus
+  迭代: 1
+  时间: 2026-05-20 20:21:21
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  validate_tool_syntax.py 耗时: 0.0s (跳过，使用已修改规则)
+  scan_project.py 耗时: 223.8s (3.7min)
+  总耗时: 223.8s (3.7min)
+
+------------------------------------------------------------
+  本次迭代token消耗:
+------------------------------------------------------------
+  validate stdout: ~0 words / ~0 chars
+  scan stdout: ~820 words / ~9500 chars
+  合计: ~820 words / ~9500 chars
+
+------------------------------------------------------------
+  规则修改记录:
+------------------------------------------------------------
+  Semgrep: java-camel-case-split-conventional.yaml - 正则从^(?!iOS$)[A-Z][a-z]+[A-Z][a-z]*$改为仅匹配已知习惯性驼峰词(AdWords等)，消除25条全部误报(根据evaluate1.txt，0%精准度，标记注解和正常标识符)
+  Semgrep: java-camel-case-underscores-adjacent-numbers.yaml - 正则从^[a-zA-Z_$][a-zA-Z0-9_$]*$(匹配所有Java标识符)改为.*[0-9][0-9]+[a-zA-Z_].*(仅匹配连续数字后跟字母)，从6636降至169(根据evaluate1.txt，原检测逻辑完全错误)
+  Semgrep: python-logging-string-literal.yaml - 从$LOGGER.$METHOD($FORMAT,...)改为pattern-either仅匹配logging/logger/log的debug/info/warning/error/critical/exception方法调用，从4040降至108(根据evaluate1.txt，将非日志代码误判)
+  Semgrep: python-names-to-avoid-type-inclusion.yaml - 正则后缀从70+个类型词缩减为仅dict|list|set|tuple|int_map|str_list|bool_array|float_vec，从207降至18(根据evaluate1.txt，过于严苛)
+  PMD: JavaVerticalWhitespaceBetweenMembers.java - 从禁用改为实现基本功能(检查ASTClassOrInterfaceDeclaration中连续子节点无空行)，新增15处检测
+  PMD: JavaEnumLineBreakAfterComma.java - 从禁用改为实现基本功能(检查ASTEnumDeclaration中同一行的enum常量)，新增3处检测
+  CodeQL: python-modules-license-boilerplate.ql - 使用Module+ExprStmt+StringLiteral API替代不可用的Function API(基本逻辑实现)
+  CodeQL: cpp-include-alphabetical-order.ql - 使用IncludeDirective替代不可用的FunctionCall.hasName("unknown")(基本逻辑实现)
+  CodeQL: cpp-comment-style-consistency.ql - 使用File+ExprStmt替代不可用的FunctionCall.hasName("unknown")(基本逻辑实现)
+  CodeQL: cpp-license-boilerplate-required.ql - 使用File+ExprStmt替代不可用的FunctionCall.hasName("unknown")(基本逻辑实现)
+
+------------------------------------------------------------
+  对比结果 (修改前11210条 vs 迭代1后313条):
+------------------------------------------------------------
+  修改前总数: 11210
+  迭代1后总数: 313
+
+  移除的违规: 10897 (-97.2%)
+  新增的违规: 18 (PMD JavaVerticalWhitespaceBetweenMembers:15, JavaEnumLineBreakAfterComma:3)
+
+============================================================

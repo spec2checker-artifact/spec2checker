@@ -1,0 +1,4 @@
+**Specification 41: Use `public` inheritance**  
+Description: All inheritance should be `public`. For private inheritance, include an instance as a member instead.  
+Example: `class Bar : public Foo { ... };`  
+Additional Notes: Use `final` on classes not intended as base.

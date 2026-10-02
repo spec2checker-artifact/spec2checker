@@ -1,0 +1,14 @@
+rules:
+- id: python-generics-specify-type-parameters
+  message: '[DISABLED] Prefer to specify type parameters for generic types in type
+    annotations; otherwise they are assumed to be `Any`.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Prefer to specify type parameters for generic types in type
+      annotations; otherwise they are assumed to be `Any`.

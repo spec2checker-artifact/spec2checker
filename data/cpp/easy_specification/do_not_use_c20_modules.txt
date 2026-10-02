@@ -1,0 +1,4 @@
+**Specification 55: Do not use C++20 modules**  
+Description: Do not use C++20 Modules.  
+Example: Avoid `import`, `module`, `export`.  
+Additional Notes: Not well-supported in Google's ecosystem.

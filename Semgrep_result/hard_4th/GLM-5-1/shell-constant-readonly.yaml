@@ -1,0 +1,14 @@
+rules:
+- id: shell-constant-readonly
+  message: '[DISABLED] For clarity, `readonly` or `declare -xr` is recommended for
+    declaring constants over equivalent commands.'
+  languages:
+  - bash
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: For clarity, `readonly` or `declare -xr` is recommended
+      for declaring constants over equivalent commands.

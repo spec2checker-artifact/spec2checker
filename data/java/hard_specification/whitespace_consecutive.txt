@@ -1,0 +1,9 @@
+Specification 35: Vertical whitespace - between consecutive members
+Description: A single blank line appears between consecutive members or initializers of a class.
+Example:
+
+java
+int field;
+
+void method() {}
+Additional Notes: None.

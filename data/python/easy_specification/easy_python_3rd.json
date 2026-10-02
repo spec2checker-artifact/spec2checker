@@ -1,0 +1,546 @@
+[
+  {
+    "rule_id": "python-decorator-judicious-use",
+    "language": "python",
+    "description": "Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@$DECORATOR\ndef $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DECORATOR": {
+          "type_hint": "expr"
+        },
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DECORATOR",
+        "constraint_type": "syntactic",
+        "condition": "is_call_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot statically determine if a decorator call involves external dependencies or complex logic; rule flags all decorator calls."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to analyze decorator complexity or external imports; basic pattern matching is possible."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\decorators_judiciously.txt",
+      "section": "decorators_judiciously"
+    }
+  },
+  {
+    "rule_id": "python-integer-explicit-zero-compare",
+    "language": "python",
+    "description": "For integers, implicit false may be risky; compare explicitly to 0.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if not $EXPR:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "is_subtype_of('int')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to confirm integer type."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type tracking to identify integer expressions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_explicitly.txt",
+      "section": "truefalse_explicitly"
+    }
+  },
+  {
+    "rule_id": "python-line-continuation-no-backslash",
+    "language": "python",
+    "description": "Do not use a backslash for explicit line continuation. Use implicit joining inside parentheses, brackets, or braces. Backslash-escaped newlines within strings are allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\\",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "expr",
+        "constraint_type": "syntactic",
+        "condition": "not_inside_string",
+        "required": "true"
+      },
+      {
+        "target": "expr",
+        "constraint_type": "syntactic",
+        "condition": "followed_by_newline",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May flag backslashes inside strings or comments without proper context."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to distinguish line continuation from string escapes."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\continuation_backslash.txt",
+      "section": "continuation_backslash"
+    }
+  },
+  {
+    "rule_id": "python-suppress-pylint-warning-line-comment",
+    "language": "python",
+    "description": "Detect suppression of pylint warnings using a line-level comment, preferring the modern 'pylint: disable' syntax over the deprecated 'pylint: disable-msg'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "# pylint: disable-msg=$CODE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CODE": {
+          "type_hint": "expr",
+          "regex": "^[a-z\\-]+(?:,[a-z\\-]+)*$"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for comment pattern matching"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\suppress_warnings_comment.txt",
+      "section": "suppress_warnings_comment"
+    }
+  },
+  {
+    "rule_id": "python-type-annotations-public-apis",
+    "language": "python",
+    "description": "Public API functions and methods must have type annotations for parameters and return values.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($ARGS) -> $RET:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$ARGS": {
+          "type_hint": "expr"
+        },
+        "$RET": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "scope",
+        "condition": "is_public",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "missing_type_annotation",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect missing annotations syntactically but cannot fully verify 'public API' scope without type/import analysis."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution and custom query to define 'public API' context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\annotations_public_apis.txt",
+      "section": "annotations_public_apis"
+    }
+  },
+  {
+    "rule_id": "python-indentation-4-spaces-no-tabs",
+    "language": "python",
+    "description": "Indent code blocks with 4 spaces. Never use tabs. Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for whitespace detection; may not handle all edge cases"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\indentation_4_spaces_tabs.txt",
+      "section": "indentation_4_spaces_tabs"
+    }
+  },
+  {
+    "rule_id": "python-import-packages-only",
+    "language": "python",
+    "description": "Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for 'typing', 'collections.abc', 'typing_extensions', 'six.moves'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "from $MODULE import $NAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MODULE",
+        "constraint_type": "syntactic",
+        "condition": "not_in_list('typing', 'collections.abc', 'typing_extensions', 'six.moves')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to check module name against exemption list"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to implement exemption list"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\statements_packagesmodules.txt",
+      "section": "statements_packagesmodules"
+    }
+  },
+  {
+    "rule_id": "python-except-catch-all",
+    "language": "python",
+    "description": "Never use catch-all `except:` statements, or catch `Exception` or `StandardError`, unless re-raising or creating an isolation point. Catches everything including `sys.exit()` and `Ctrl+C`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "except $EXC:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXC": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXC",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('') OR matches_pattern('Exception') OR matches_pattern('StandardError')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match empty, 'Exception', and 'StandardError' catch clauses; may need additional logic to detect re-raising or isolation points."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect catch-all except clauses and exclude re-raising/isolation points."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\exceptions_catch_except.txt",
+      "section": "exceptions_catch_except"
+    }
+  },
+  {
+    "rule_id": "python-lambda-length-check",
+    "language": "python",
+    "description": "Lambda functions should be used only for one-liners. If a lambda spans multiple lines or exceeds 60-80 characters, a regular nested function should be used instead. Prefer generator expressions over map() or filter() with lambda.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "lambda $ARGS: $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_multiline()",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Character length heuristic may require custom logic; multiline detection is reliable."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for line/character length checks."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lambda_functions_liners.txt",
+      "section": "lambda_functions_liners"
+    }
+  },
+  {
+    "rule_id": "python-import-style",
+    "language": "python",
+    "description": "Use `from x import y` where `x` is the package prefix and `y` is the module name with no prefix. No relative names; use full package name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $MODULE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_.]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MODULE",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('^[a-zA-Z_][a-zA-Z0-9_]*\\.[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\imports_use_x_import_y.txt",
+      "section": "imports_use_x_import_y"
+    }
+  }
+]

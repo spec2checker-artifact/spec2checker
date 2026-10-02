@@ -1,0 +1,38 @@
+rules:
+- id: shell-pipestatus-check
+  message: Bash has `PIPESTATUS` array to check return code from all parts of a pipe.
+    Assign to another variable immediately to avoid overwrite.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "if (( $PIPESTATUS[$INDEX] != 0 )); then\n    ...\nfi"
+  - metavariable-type:
+      metavariable: $INDEX
+      type: expr
+  metadata:
+    syntax_expression: is_arithmetic_expansion
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep's Bash support may not fully handle all shell expansions
+          and arithmetic contexts.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: Bash has `PIPESTATUS` array to check return code from all
+      parts of a pipe. Assign to another variable immediately to avoid overwrite.

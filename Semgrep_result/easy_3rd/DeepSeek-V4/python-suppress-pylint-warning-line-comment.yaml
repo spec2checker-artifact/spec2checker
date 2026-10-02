@@ -1,0 +1,36 @@
+rules:
+- id: python-suppress-pylint-warning-line-comment
+  message: 'Detect suppression of pylint warnings using a line-level comment, preferring
+    the modern ''pylint: disable'' syntax over the deprecated ''pylint: disable-msg''.'
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: '# pylint: disable-msg=$CODE'
+  - metavariable-regex:
+      metavariable: $CODE
+      regex: ^[a-z\-]+(?:,[a-z\-]+)*$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query for comment pattern matching
+    original_description: 'Detect suppression of pylint warnings using a line-level
+      comment, preferring the modern ''pylint: disable'' syntax over the deprecated
+      ''pylint: disable-msg''.'

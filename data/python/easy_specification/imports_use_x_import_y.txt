@@ -1,0 +1,4 @@
+**Specification 5: Imports - use `from x import y`**
+Description: Use `from x import y` where `x` is the package prefix and `y` is the module name with no prefix.
+Example: `from sound.effects import echo`
+Additional Notes: No relative names; use full package name.

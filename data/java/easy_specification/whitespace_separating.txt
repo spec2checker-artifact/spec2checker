@@ -1,0 +1,4 @@
+Specification 40: Horizontal whitespace - separating keyword from closing brace
+Description: Space separating keyword (else, catch) from closing curly brace } that precedes it.
+Example: } else {
+Additional Notes: None.

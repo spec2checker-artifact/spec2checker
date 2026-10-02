@@ -1,0 +1,4 @@
+name: hard_5th/Qwen3-Coder-Plus
+version: 0.0.1
+dependencies:
+  codeql/python-all: "*"

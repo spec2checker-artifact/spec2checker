@@ -1,0 +1,511 @@
+[
+  {
+    "rule_id": "shell-for-loop-clarity",
+    "language": "shell",
+    "description": "Recommend including `in \"$@\"` in for loops for clarity, rather than omitting it.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $ARG; do\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match loops with explicit arrays or variables, not just the default positional parameters."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\recommend_including.txt",
+      "section": "recommend_including"
+    }
+  },
+  {
+    "rule_id": "shell-closing-statement-alignment",
+    "language": "shell",
+    "description": "Closing statements (`fi`, `done`) must be on their own line and vertically aligned with the opening statement.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for indentation/alignment checking"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\closing_statements_line.txt",
+      "section": "closing_statements_line"
+    }
+  },
+  {
+    "rule_id": "shell-control-flow-same-line",
+    "language": "shell",
+    "description": "Put `; then` and `; do` on the same line as `if`, `for`, `while`. The `else` keyword should be on its own line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if [[ $COND ]];\nthen\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_break_before_then",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching line breaks and may have false positives with complex multi-line conditions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Shell/Bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support Shell/Bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\control_flow_;_;_line.txt",
+      "section": "control_flow_;_;_line"
+    }
+  },
+  {
+    "rule_id": "shell-long-literal-string",
+    "language": "shell",
+    "description": "If you have literal strings longer than 80 characters, use a here document or an embedded newline.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=\"$STRING\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STRING",
+        "constraint_type": "syntactic",
+        "condition": "length > 80 AND no_newline",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise string length detection which may be approximate"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell/bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell/bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\document_embedded_newline.txt",
+      "section": "document_embedded_newline"
+    }
+  },
+  {
+    "rule_id": "shell-case-pattern-no-parenthesis",
+    "language": "shell",
+    "description": "Pattern expressions in a case statement should not be preceded by an open parenthesis.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    ($PATTERN)\n        ...\n    ;;\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "pattern",
+        "constraint_type": "syntactic",
+        "condition": "has_parenthesis_prefix",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise matching of case statement syntax"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\expressions_parenthesis.txt",
+      "section": "expressions_parenthesis"
+    }
+  },
+  {
+    "rule_id": "shell-case-indent-alternatives",
+    "language": "shell",
+    "description": "Indent alternatives by 2 spaces in a case statement.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for indentation checking"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Shell/Bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support Shell/Bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\statement_alternatives.txt",
+      "section": "statement_alternatives"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-for-command-substitution",
+    "language": "shell",
+    "description": "Avoid using `for var in $(...)` as it splits output by whitespace, not by line. Use `while read` or `readarray` instead. Only safe if the command output contains no unexpected whitespace.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $VAR in $(...); do\n    ...\ndone",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match safe uses where whitespace is controlled"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\avoid_splits_whitespace.txt",
+      "section": "avoid_splits_whitespace"
+    }
+  },
+  {
+    "rule_id": "shell-quote-integer-vars",
+    "language": "shell",
+    "description": "Optionally quote shell-internal, readonly special variables that are integers: $?, $#, $$, $!. Prefer quoting named internal integer variables (e.g., PPID) for consistency. It's ok to not quote inside (( )).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr",
+          "regex": "^(\\$[?#!$#]|\\$\\{[?#!$#]\\}|\\$PPID|\\$\\{PPID\\})$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "not_inside_arithmetic_expansion",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell parsing may not fully distinguish all arithmetic contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\optionally_variables.txt",
+      "section": "optionally_variables"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-double-brackets",
+    "language": "shell",
+    "description": "Prefer `[[ ... ]]` over `[ ... ]`, `test`, and `/usr/bin/[` for conditional tests. Reduces errors and allows pattern/regex matching.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if [ $COND ]; then ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "expr",
+        "constraint_type": "syntactic",
+        "condition": "is_shell_test_command",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires shell-specific pattern matching; may not detect all variants of `test` or `/usr/bin/[`"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\prefer_[[_]]_[_]_test.txt",
+      "section": "prefer_[[_]]_[_]_test"
+    }
+  },
+  {
+    "rule_id": "shell-single-string-args",
+    "language": "shell",
+    "description": "Using a single string for multiple command arguments should be avoided; leads to `eval` or quoting nightmares.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD $FLAGS",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FLAGS": {
+          "type_hint": "expr",
+          "regex": "^['\"].*--.*['\"]$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FLAGS",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex may not capture all multi-argument string patterns"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\multiple_command_arguments.txt",
+      "section": "multiple_command_arguments"
+    }
+  }
+]

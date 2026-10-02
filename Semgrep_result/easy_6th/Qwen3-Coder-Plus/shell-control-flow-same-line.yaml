@@ -1,0 +1,38 @@
+rules:
+- id: shell-control-flow-same-line
+  message: Put `; then` and `; do` on the same line as `if`, `for`, `while`. The `else`
+    keyword should be on its own line.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "if [[ $COND ]];\nthen\n    ..."
+  - metavariable-type:
+      metavariable: $COND
+      type: expr
+  metadata:
+    syntax_statement: line_break_before_then
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching line breaks and may have false positives
+          with complex multi-line conditions
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Shell/Bash analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support Shell/Bash analysis
+    original_description: Put `; then` and `; do` on the same line as `if`, `for`,
+      `while`. The `else` keyword should be on its own line.

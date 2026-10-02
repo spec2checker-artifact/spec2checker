@@ -1,0 +1,4 @@
+**Specification 103: Use `$(( ... ))` inside strings for arithmetic expansion**
+Description: Use `$(( ... ))` within strings for arithmetic expansion.
+Example: `echo "$(( 2 + 2 )) is 4"`
+Additional Notes: None.

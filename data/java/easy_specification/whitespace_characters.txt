@@ -1,0 +1,4 @@
+Specification 3: Whitespace characters
+Description: Aside from the line terminator sequence, the ASCII horizontal space character (0x20) is the only whitespace character that appears anywhere in a source file. Tab characters are not used for indentation.
+Example: Indentation uses spaces, not \t.
+Additional Notes: All other whitespace characters are escaped in char and string literals and in text blocks.

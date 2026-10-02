@@ -1,0 +1,31 @@
+rules:
+- id: shell-braces-same-line-no-space
+  message: Braces must be on the same line as the function name and no space between
+    function name and parenthesis.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $FUNC ( ) {
+  - metavariable-regex:
+      metavariable: $FUNC
+      regex: ^[a-zA-Z_][a-zA-Z0-9_]*$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match non-function contexts
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C analysis
+    original_description: Braces must be on the same line as the function name and
+      no space between function name and parenthesis.

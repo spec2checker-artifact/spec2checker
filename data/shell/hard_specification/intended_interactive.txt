@@ -1,0 +1,4 @@
+**Specification 106: Function names intended for interactive use may avoid colons**
+Description: Functions intended for interactive use may choose to avoid colons as it can confuse bash auto-completion.
+Example: Use `my_func` not `mypackage::my_func`.
+Additional Notes: None.

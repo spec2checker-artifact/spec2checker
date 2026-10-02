@@ -1,0 +1,537 @@
+[
+  {
+    "rule_id": "python-filename-no-dashes",
+    "language": "python",
+    "description": "Python filenames must have .py extension and must not contain dashes (-).",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom file property rule"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for file properties"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\naming_extension_dashes.txt",
+      "section": "naming_extension_dashes"
+    }
+  },
+  {
+    "rule_id": "python-imports-top-of-file",
+    "language": "python",
+    "description": "Imports must be placed at the top of the file, after module comments/docstrings and before globals. They should be grouped from most generic to least generic: __future__, standard library, third-party, sub-package.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check import ordering and placement relative to other statements"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to enforce import ordering and placement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\imports_put_at_top_of_file.txt",
+      "section": "imports_put_at_top_of_file"
+    }
+  },
+  {
+    "rule_id": "python-docstring-omit-return-none",
+    "language": "python",
+    "description": "The Returns section is not required if the function only returns None.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    \"\"\"$DOCSTRING\"\"\"\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$DOCSTRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "type",
+        "condition": "returns_type('None')",
+        "required": "true"
+      },
+      {
+        "target": "$DOCSTRING",
+        "constraint_type": "syntactic",
+        "condition": "contains_pattern('Returns:')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to confirm function returns None."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to check docstring content against return type."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\function_docstring_section.txt",
+      "section": "function_docstring_section"
+    }
+  },
+  {
+    "rule_id": "python-naming-guidelines",
+    "language": "python",
+    "description": "Check that identifiers follow Guido's naming conventions: packages `lower_with_under`, classes `CapWords`, exceptions `CapWords`, functions `lower_with_under()`, constants `CAPS_WITH_UNDER`. Internal versions prefix `_`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rules for each identifier type and scope"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for each naming pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\guidelines_recommendations.txt",
+      "section": "guidelines_recommendations"
+    }
+  },
+  {
+    "rule_id": "python-todo-comment-format",
+    "language": "python",
+    "description": "TODO comments must use the format `TODO: resource - explanation`. Avoid old style `TODO(username):`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "# TODO: $RESOURCE - $EXPLANATION",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$RESOURCE": {
+          "type_hint": "expr"
+        },
+        "$EXPLANATION": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match correct format but cannot enforce resource link validity or fully detect old style TODOs without additional patterns."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check comment text format."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\resource_explanation.txt",
+      "section": "resource_explanation"
+    }
+  },
+  {
+    "rule_id": "python-class-docstring-required",
+    "language": "python",
+    "description": "Classes should have a docstring below the class definition describing the class. Document public attributes in an `Attributes:` section.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "missing_docstring",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect missing docstrings"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check for docstring presence"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\class_docstring_required.txt",
+      "section": "class_docstring_required"
+    }
+  },
+  {
+    "rule_id": "python-logging-string-literal",
+    "language": "python",
+    "description": "For logging functions that expect a pattern-string, always call them with a string literal (not f-string) as first argument.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$LOGGER.$METHOD($ARG, ...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LOGGER": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "expr"
+        },
+        "$ARG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$METHOD",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^(debug|info|warning|error|critical|exception|log)$')",
+        "required": "true"
+      },
+      {
+        "target": "$ARG",
+        "constraint_type": "syntactic",
+        "condition": "is_not_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern to detect non-literal first arguments"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect logging calls with non-literal format strings"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\literal_placeholders.txt",
+      "section": "literal_placeholders"
+    }
+  },
+  {
+    "rule_id": "python-forward-declaration-import",
+    "language": "python",
+    "description": "Detect forward references to class names without using `from __future__ import annotations` or string literals.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASSNAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASSNAME": {
+          "type_hint": "expr",
+          "regex": "^[A-Z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASSNAME",
+        "constraint_type": "type",
+        "condition": "is_forward_reference",
+        "required": "true"
+      },
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('from __future__ import annotations')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to confirm forward reference; pattern may match many identifiers."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution and may need custom query for forward reference detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\declarations_annotations.txt",
+      "section": "declarations_annotations"
+    }
+  },
+  {
+    "rule_id": "python-docstring-sections",
+    "language": "python",
+    "description": "Function docstring must contain sections for Args, Returns (or Yields), and Raises with appropriate hanging indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    \"\"\"$DOC\"\"\"\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$DOC": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Args')",
+        "required": "true"
+      },
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Returns')",
+        "required": "true"
+      },
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Raises')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot fully validate section content and hanging indent format"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for docstring structure validation"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\docstring_sections.txt",
+      "section": "docstring_sections"
+    }
+  },
+  {
+    "rule_id": "python-imports-sort-lexicographically",
+    "language": "python",
+    "description": "Within each grouping, imports should be sorted lexicographically, ignoring case, according to full package path.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule with metavariable-comparison or external script"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to compare import order"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\imports_lexicographically.txt",
+      "section": "imports_lexicographically"
+    }
+  }
+]

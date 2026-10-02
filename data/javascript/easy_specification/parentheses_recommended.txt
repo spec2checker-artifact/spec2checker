@@ -1,0 +1,4 @@
+**Specification 57: Grouping parentheses - recommended**
+Description: Omit optional grouping parentheses only when author and reviewer agree no reasonable chance of misinterpretation.
+Example: `(a + b) * c` recommended.
+Additional Notes: Do not assume reader knows precedence.

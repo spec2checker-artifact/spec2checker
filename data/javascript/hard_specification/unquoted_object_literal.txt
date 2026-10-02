@@ -1,0 +1,4 @@
+**Specification 73: Do not mix quoted and unquoted keys in object literal**
+Description: Object literals represent either structs (unquoted keys) or dicts (quoted/computed keys). Do not mix.
+Example: Not `{width: 42, 'maxWidth': 43}`.
+Additional Notes: Also affects `hasOwnProperty`.

@@ -1,0 +1,4 @@
+**Specification 38: Decorators - limit `classmethod`**
+Description: Use `classmethod` only when writing a named constructor or class-specific routine that modifies global state.
+Example: `@classmethod def from_string(cls, s): ...`
+Additional Notes: None.

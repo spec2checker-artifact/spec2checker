@@ -1,0 +1,4 @@
+**Specification 25: Avoid unsigned types except for bitfields or modular arithmetic**  
+Description: Do not use unsigned types to assert non-negativity; use assertions instead.  
+Example: `int x; assert(x >= 0);` not `unsigned int x;`  
+Additional Notes: Unsigned can cause bugs.

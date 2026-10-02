@@ -1,0 +1,4 @@
+Specification 105: Type variable names - class-name form plus capital T
+Description: Type variable can be name in form used for classes (UpperCamelCase) followed by capital T.
+Example: RequestT, FooBarT
+Additional Notes: None.

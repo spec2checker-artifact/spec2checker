@@ -1,0 +1,37 @@
+rules:
+- id: shell-for-loop-in-array
+  message: Recommend including `in "$@"` in for loops for clarity, even though omitting
+    it is possible.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "for $VAR; do\n    ...\n    done"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_$VAR: not_contains('in')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for shell syntax
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Recommend including `in "$@"` in for loops for clarity,
+      even though omitting it is possible.

@@ -1,0 +1,35 @@
+rules:
+- id: python-multiline-string-dedent
+  message: Multi-line strings should use `textwrap.dedent` to remove leading spaces
+    when needed to avoid extra spaces.
+  languages:
+  - python
+  severity: WARNING
+  pattern: "$STRING = \"\"\"\n    ...\n    \"\"\""
+  metadata:
+    syntax_assignment: not_contains_call('textwrap.dedent')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to detect multiline strings without dedent,
+          may have false positives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect multiline strings and missing
+          dedent call
+    original_description: Multi-line strings should use `textwrap.dedent` to remove
+      leading spaces when needed to avoid extra spaces.

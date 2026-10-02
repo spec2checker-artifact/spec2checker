@@ -1,0 +1,554 @@
+[
+  {
+    "rule_id": "cpp-avoid-rtti",
+    "language": "cpp",
+    "description": "Avoid using run-time type information (RTTI) such as typeid or dynamic_cast. Use virtual methods or visitor pattern instead. Allowed in unit tests.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "typeid($EXPR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "scope",
+        "condition": "name_not_matches_regex('.*test.*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably exclude unit test files without custom configuration."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude test files."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\avoid_rtti.txt",
+      "section": "avoid_rtti"
+    }
+  },
+  {
+    "rule_id": "cpp-operator-stream-overload-value-only",
+    "language": "cpp",
+    "description": "Overload operator<< for streaming only for types representing values, and write only the user-visible value. Avoid exposing implementation details.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "std::ostream& operator<<(std::ostream& $OS, const $TYPE& $VAR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "class"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$OS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot enforce semantic 'value type' constraint, only detects the pattern"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to check for implementation detail exposure"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\operator_streaming.txt",
+      "section": "operator_streaming"
+    }
+  },
+  {
+    "rule_id": "cpp-default-capture-reference-lifetime",
+    "language": "cpp",
+    "description": "Use default capture by reference ([&]) only when the lifetime of the lambda is obviously shorter than any potential captures.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[&]",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot statically verify lambda lifetime vs capture lifetime; rule flags all [&] uses."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex lifetime analysis; may have high false positive rate."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\reference_lifetime_shorter.txt",
+      "section": "reference_lifetime_shorter"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-non-member-binary-operator",
+    "language": "cpp",
+    "description": "Prefer to define non-modifying binary operators as non-member functions to allow implicit conversions on both sides.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $RET operator$OP($PARAMS) $CONST {\n        ...\n    }\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$RET": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        },
+        "$CONST": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "operator$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operator",
+        "required": "true"
+      },
+      {
+        "target": "operator$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_non_modifying_operator",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match member operator definitions; may have false positives with modifying operators (e.g., +=)"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to identify non-modifying binary operators defined as member functions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\member_binary_operators.txt",
+      "section": "member_binary_operators"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-stateful-stream-manipulators",
+    "language": "cpp",
+    "description": "Use streams for ad-hoc, local, human-readable output. Avoid stateful manipulators (imbue, xalloc). Use absl::StreamFormat for formatting. Prefer absl::StrCat for string formatting.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STREAM.imbue(...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STREAM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches direct calls; may miss indirect usage."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect stateful manipulators."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\appropriate_stateful.txt",
+      "section": "appropriate_stateful"
+    }
+  },
+  {
+    "rule_id": "cpp-coroutine-unauthorized-library",
+    "language": "cpp",
+    "description": "Only use C++20 coroutines via libraries approved by project leads. Do not roll your own promise/awaitable types.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "co_await $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "is_coroutine",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot verify library approval status; detects coroutine usage only."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to check for approved library types."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\coroutines_libraries.txt",
+      "section": "coroutines_libraries"
+    }
+  },
+  {
+    "rule_id": "cpp-public-alias-documentation",
+    "language": "cpp",
+    "description": "Public type aliases (using/typedef) must be documented with intent and stability guarantee.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "using $ALIAS = $TYPE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ALIAS": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ALIAS",
+        "constraint_type": "scope",
+        "condition": "is_public",
+        "required": "true"
+      },
+      {
+        "target": "$ALIAS",
+        "constraint_type": "syntactic",
+        "condition": "has_no_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "comment detection is limited to adjacent lines"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for comment proximity"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\document_public_aliases.txt",
+      "section": "document_public_aliases"
+    }
+  },
+  {
+    "rule_id": "cpp-todo-comment-format",
+    "language": "cpp",
+    "description": "TODO comments should include TODO in all caps, followed by bug ID, name, email, or identifier.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "# TODO: ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom regex for identifier validation"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support C/C++ analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\todo_comments_format.txt",
+      "section": "todo_comments_format"
+    }
+  },
+  {
+    "rule_id": "cpp-no-cstyle-cast",
+    "language": "cpp",
+    "description": "Use C++-style casts (static_cast, const_cast, reinterpret_cast, std::bit_cast). Do not use C-style casts except to void. Brace initialization is allowed for arithmetic conversions.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "($TYPE) $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "not_matches('void')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not distinguish all allowed void casts or brace initialization contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude void casts and brace initialization."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\use_c_style_casts.txt",
+      "section": "use_c_style_casts"
+    }
+  },
+  {
+    "rule_id": "cpp-discourage-multiple-implementation-inheritance",
+    "language": "cpp",
+    "description": "Multiple inheritance is allowed, but multiple implementation inheritance (inheriting from more than one non-abstract class) is strongly discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS : $PUBLIC $BASE1, $PUBLIC $BASE2, ... {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$BASE1": {
+          "type_hint": "class"
+        },
+        "$BASE2": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$BASE1",
+        "constraint_type": "inheritance",
+        "condition": "is_concrete_class",
+        "required": "true"
+      },
+      {
+        "target": "$BASE2",
+        "constraint_type": "inheritance",
+        "condition": "is_concrete_class",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot reliably determine if a base class is abstract (non-concrete) without type resolution"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect multiple concrete base classes"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\implementation_discouraged.txt",
+      "section": "implementation_discouraged"
+    }
+  }
+]

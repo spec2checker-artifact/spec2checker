@@ -1,0 +1,4 @@
+**Specification 58: Whitespace - no spaces around `=` in keyword arguments**
+Description: Never use spaces around `=` when passing keyword arguments or defining default parameter values, unless type annotation present.
+Example: `def complex(real, imag=0.0):` not `def complex(real, imag = 0.0):`
+Additional Notes: With type annotation: `def complex(real, imag: float = 0.0):`.

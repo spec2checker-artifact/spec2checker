@@ -1,0 +1,8 @@
+**Specification 60: Variable names - same as function names**
+Description: Variable names: lower-case with underscores.
+Example: `zone`, `dirs_to_cleanup`.
+Additional Notes: Loop variables similarly named.
+
+---
+
+### 复杂类 (Hard) - 共 60 条

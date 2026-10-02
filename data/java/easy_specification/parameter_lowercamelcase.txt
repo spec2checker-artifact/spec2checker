@@ -1,0 +1,4 @@
+Specification 102: Parameter names - lowerCamelCase
+Description: Parameter names written in lowerCamelCase. One-character names in public methods should be avoided.
+Example: void method(String parameterName)
+Additional Notes: Avoid single-letter like a.

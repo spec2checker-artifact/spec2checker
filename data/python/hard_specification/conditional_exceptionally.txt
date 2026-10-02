@@ -1,0 +1,9 @@
+**Specification 118: Conditional imports - use `if TYPE_CHECKING:` only exceptionally**
+Description: Use conditional imports only in exceptional cases where imports needed for type checking must be avoided at runtime.
+Example:
+```python
+import typing
+if typing.TYPE_CHECKING:
+    import sketch
+```
+Additional Notes: Discouraged; prefer refactoring.

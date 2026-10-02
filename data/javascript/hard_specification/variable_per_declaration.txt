@@ -1,0 +1,4 @@
+**Specification 63: One variable per declaration**
+Description: Every local variable declaration declares only one variable; no `let a = 1, b = 2;`.
+Example: `let a = 1; let b = 2;`
+Additional Notes: None.

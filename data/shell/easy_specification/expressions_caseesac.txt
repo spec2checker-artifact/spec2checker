@@ -1,0 +1,4 @@
+**Specification 24: Case - matching expressions indented one level from `case`/`esac`**
+Description: The matching expressions are indented one level from the `case` and `esac`.
+Example: `  a)` (indented 2 spaces).
+Additional Notes: Multiline actions indented another level.

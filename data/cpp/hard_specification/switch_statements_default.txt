@@ -1,0 +1,4 @@
+**Specification 39: Switch statements must have `default` case unless on enum**  
+Description: If not conditional on an enumerated value, switch statements should always have a `default` case. If `default` should never execute, treat as error (e.g., `LOG(FATAL)`).  
+Example: `default: LOG(FATAL) << "Invalid value";`  
+Additional Notes: For enums, compiler warns if values not handled.

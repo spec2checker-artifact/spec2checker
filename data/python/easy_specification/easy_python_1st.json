@@ -1,0 +1,576 @@
+[
+  {
+    "rule_id": "python-mutable-global-state",
+    "language": "python",
+    "description": "Detect mutable global state (module-level variables that are reassigned). Module-level constants are permitted.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_module_scope",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot distinguish constants from mutable variables without type/value analysis"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to filter constants"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\mutable_global_state_avoid.txt",
+      "section": "mutable_global_state_avoid"
+    }
+  },
+  {
+    "rule_id": "python-none-check-is",
+    "language": "python",
+    "description": "Always use `if x is None` (or `is not None`) to check for `None`. Do not use `if not x:` when `x` could be `0` or `''`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if not $X:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$X",
+        "constraint_type": "type",
+        "condition": "is_subtype_of('int') or is_subtype_of('str') or is_subtype_of('list') or is_subtype_of('dict') or is_subtype_of('bool')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to filter out non-nullable types; may have false positives without type info."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type tracking to determine if variable can be None."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_check_none.txt",
+      "section": "truefalse_check_none"
+    }
+  },
+  {
+    "rule_id": "python-import-rename-as",
+    "language": "python",
+    "description": "Enforce use of 'as' for renaming imports when: imported name conflicts with another module, top-level name, common parameter, is inconveniently long, or is too generic. Also applies to standard abbreviations like 'numpy as np'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "from $MODULE import $NAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^(np|pd|plt|tf|np_|pd_|plt_|tf_|options|config|settings|data|file|path|value|key|item|list|dict|set|func|obj|cls|mod|sys|os|io|re|math|json|yaml|xml|log|logger|log_|log$|^[A-Z])')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully detect semantic conflicts (e.g., name collisions with other imports or local variables) without cross-file and scope analysis."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to implement the full heuristic logic for when renaming is appropriate."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\imports_use_renaming.txt",
+      "section": "imports_use_renaming"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-inside-parens",
+    "language": "python",
+    "description": "No whitespace inside parentheses, brackets, or braces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom regex or linter rule; not a simple AST pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_parentheses.txt",
+      "section": "whitespace_parentheses"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-binary-operator",
+    "language": "python",
+    "description": "Surround binary operators for assignment, comparisons, and Booleans with a single space on either side. Use judgment for arithmetic operators.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$LEFT $OP $RIGHT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LEFT": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        },
+        "$RIGHT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operator",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for each operator type; may have false positives in complex expressions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_operators.txt",
+      "section": "whitespace_operators"
+    }
+  },
+  {
+    "rule_id": "python-mutable-global-state-internal",
+    "language": "python",
+    "description": "Mutable global state (module-level or class attribute) must be made internal by prepending an underscore '_' to its name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME = $VALUE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "is_global_assignment",
+        "required": "true"
+      },
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "name_does_not_start_with('_')",
+        "required": "true"
+      },
+      {
+        "target": "$VALUE",
+        "constraint_type": "type",
+        "condition": "is_mutable_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to confirm mutability; pattern may match non-global assignments."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to detect mutable types and global scope."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\mutable_global_internal.txt",
+      "section": "mutable_global_internal"
+    }
+  },
+  {
+    "rule_id": "python-imports-only-packages-modules",
+    "language": "python",
+    "description": "Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "from $MODULE import $ITEM",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$ITEM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MODULE",
+        "constraint_type": "syntactic",
+        "condition": "not_in_list('typing', 'collections.abc', 'typing_extensions', 'six.moves')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "exemption list may need manual extension"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for exemption list"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\statements_packagesmodules.txt",
+      "section": "statements_packagesmodules"
+    }
+  },
+  {
+    "rule_id": "python-lambda-length-check",
+    "language": "python",
+    "description": "Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "lambda $ARGS: $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "lambda",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Character length check may require custom logic; pattern detects multi-line lambdas."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for line length and character count."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lambda_functions_liners.txt",
+      "section": "lambda_functions_liners"
+    }
+  },
+  {
+    "rule_id": "python-avoid-power-features",
+    "language": "python",
+    "description": "Avoid power features like custom metaclasses, bytecode access, and dynamic inheritance. Standard library modules using them (e.g., abc.ABC, dataclasses, enum) are acceptable.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS($METATYPE):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$METATYPE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$METATYPE",
+        "constraint_type": "type",
+        "condition": "is_subclass_of('type')",
+        "required": "true"
+      },
+      {
+        "target": "$METATYPE",
+        "constraint_type": "syntactic",
+        "condition": "not_in_list('abc.ABC', 'dataclasses.dataclass', 'enum.EnumMeta')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to exclude standard library metaclasses; may have false positives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude standard library metaclasses."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\power_features_avoid.txt",
+      "section": "power_features_avoid"
+    }
+  },
+  {
+    "rule_id": "python-limit-classmethod",
+    "language": "python",
+    "description": "Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@classmethod\ndef $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "name_not_matches_regex('^from_.*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot semantically validate if method is a named constructor or modifies global state"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check method purpose"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\decorators_classmethod.txt",
+      "section": "decorators_classmethod"
+    }
+  }
+]

@@ -1,0 +1,4 @@
+Specification 14: No static import for classes
+Description: Static import is not used for static nested classes; they are imported with normal imports.
+Example: import OuterClass.StaticNestedClass; (not import static)
+Additional Notes: None.

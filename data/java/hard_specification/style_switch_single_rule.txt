@@ -1,0 +1,4 @@
+Specification 73: New-style switch - single line rule
+Description: Switch rule can be written on single line if it follows Google style (no column overflow; if non-empty block, line break after {).
+Example: case 0, 1 -> handleZeroOrOne();
+Additional Notes: Continuation lines indent +4.

@@ -1,0 +1,4 @@
+**Specification 7: Source file structure - sections in order**
+Description: Files consist of: license/copyright (if present), `@fileoverview` JSDoc (if present), `goog.module` statement (if applicable), ES `import` statements, `goog.require`/`goog.requireType` statements, file implementation. Exactly one blank line separates sections except implementation may have 1-2 blank lines.
+Example: See example in guide.
+Additional Notes: None.

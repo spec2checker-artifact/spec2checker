@@ -1,0 +1,85 @@
+rules:
+- id: python-default-arg-immutable
+  message: Do not use mutable objects (list, dict, set) as default argument values.
+    Use None instead and initialize inside the function body.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-either:
+    - pattern: |
+        def $FUNC(..., $ARG = [], ...):
+            ...
+    - pattern: |
+        def $FUNC(..., $ARG = {}, ...):
+            ...
+    - pattern: |
+        def $FUNC(..., $ARG = set(), ...):
+            ...
+    - pattern: |
+        def $FUNC(..., $ARG = dict(), ...):
+            ...
+    - pattern: |
+        def $FUNC(..., $ARG = list(), ...):
+            ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = None, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = False, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = True, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = 0, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = "", ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = $INT, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = $STR, ...):
+          ...
+  - pattern-not: |
+      def $FUNC(..., $ARG = None, ...):
+          ...
+  - pattern-not-inside: |
+      def $FUNC(..., $ARG: bool = $VAL, ...):
+          ...
+  - pattern-not-inside: |
+      def $FUNC(..., $ARG: int = $VAL, ...):
+          ...
+  - pattern-not-inside: |
+      def $FUNC(..., $ARG: str = $VAL, ...):
+          ...
+  - pattern-not-inside: |
+      def $FUNC(..., $ARG: float = $VAL, ...):
+          ...
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+        limitations: Only detects common mutable literals ([], {}, set(), dict(), list()).
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution to accurately determine mutability of
+          default expressions.
+    original_description: Detect function definitions with default argument values,
+      focusing on allowing immutable defaults like empty tuples.

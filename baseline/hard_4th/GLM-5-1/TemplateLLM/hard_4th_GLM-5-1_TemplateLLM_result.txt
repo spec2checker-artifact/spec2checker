@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: TemplateLLM
+  描述: 向LLM提供目标工具规则模板以及规范描述，由LLM直接补全规则逻辑
+  批次: hard_4th
+  模型: GLM-5-1
+  输入: UIR/hard/hard_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 16/50 = 32.0%
+  Rule_V (规则验证数): 12/50 = 24.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 16条
+  语法错误规则: 8条
+  语义偏差规则: 26条
+
+  成功规则列表 (Successful Rules):
+     1. java-switch-exhaustiveness                    OK [V]  "Every switch statement must be exhaustive, requiring a defau..."
+     2. java-horizontal-alignment-not-required        OK  "Horizontal alignment of tokens using variable spaces is perm..."
+     3. python-comment-indentation                    OK [V]  "Block and inline comments should be used for tricky, non-obv..."
+     4. cpp-public-alias-documentation                OK [V]  "Public type aliases (using/typedef) must be documented with ..."
+     5. cpp-avoid-rtti                                OK  "Avoid using run-time type information (RTTI) such as typeid ..."
+     6. javascript-tostring-override-constraints      OK [V]  "toString method overrides must always succeed and never have..."
+     7. shell-explicit-string-test                    OK  "To avoid confusion about what you're testing for, explicitly..."
+     8. java-text-block-opening-newline               OK [V]  "Opening triple quotes of a text block must be on a new line,..."
+     9. shell-avoid-unquoted-array-expansion          OK [V]  "Avoid unquoted command expansion in array assignments; won't..."
+    10. javascript-array-destructuring-rest           OK [V]  "Array literals on left-hand side for destructuring are allow..."
+    11. java-annotation-one-per-line                  OK [V]  "Annotations applying to class, package, or module must appea..."
+    12. python-getter-setter-complexity               OK [V]  "Getter and setter functions should only be used when getting..."
+    13. cpp-operator-stream-overload-value-only       OK [V]  "Overload operator<< for streaming only for types representin..."
+    14. javascript-local-variable-declaration-timing  OK [V]  "Local variables should be declared close to their first use,..."
+    15. python-docstring-style                        OK  "Module, function, and method docstrings must use triple doub..."
+    16. javascript-no-non-numeric-array-properties    OK [V]  "Do not define or use non-numeric properties on arrays (other..."
+
+  失败规则列表 (Failed Rules):
+     1. shell-local-command-substitution-exit-code    FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Always separate `local` declaration and assignment when assi..."
+     2. cpp-default-capture-reference-lifetime        FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Use default capture by reference ([&]) only when the lifetim..."
+     3. python-imports-sort-lexicographically         FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Within each grouping, imports should be sorted lexicographic..."
+     4. javascript-no-mixed-object-keys               FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Object literals should not mix quoted and unquoted keys, as ..."
+     5. java-enum-no-methods-array-initializer        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Enum class with no methods and no documentation on constants..."
+     6. cpp-discourage-multiple-implementation-inheritance FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Multiple inheritance is allowed, but multiple implementation..."
+     7. javascript-array-trailing-comma               FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Array literals must include a trailing comma when there is a..."
+     8. cpp-coroutine-unauthorized-library            FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Only use C++20 coroutines via libraries approved by project ..."
+     9. javascript-string-single-quotes               FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Ordinary string literals must be delimited with single quote..."
+    10. java-camel-case-naming                        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Class names must use UpperCamelCase and method/variable name..."
+    11. java-finalize-override                        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Do not override Object.finalize. Finalization support is sch..."
+    12. cpp-todo-comment-format                       FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "TODO comments should include TODO in all caps, followed by b..."
+    13. java-local-variable-declaration-timing        FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Local variables should be declared close to their first use,..."
+    14. javascript-prefer-arrow-nested                FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Prefer arrow functions over `function` keyword for nested fu..."
+    15. python-comment-style-consistency              FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Check for consistent punctuation, spelling, and grammar in c..."
+    16. python-logging-string-literal-placeholders    FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "For logging functions that expect a pattern-string, always c..."
+    17. cpp-prefer-non-member-binary-operator         FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Prefer to define non-modifying binary operators as non-membe..."
+    18. java-camel-case-underscores-adjacent-numbers  FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "In rare circumstances (e.g., multipart version numbers), use..."
+    19. shell-arithmetic-expansion-in-string          FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Use `$(( ... ))` inside strings for arithmetic expansion."
+    20. python-function-length                        FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Prefer small and focused functions. Functions exceeding appr..."
+    21. shell-integer-declaration                     FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Detect variable assignments that could be declared as intege..."
+    22. python-type-alias-naming                      FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Type aliases must be named using CapWords convention. If the..."
+    23. shell-readarray-without-t                     FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Detect usage of readarray without -t option, which leaves tr..."
+    24. java-method-annotation-multiline              FAIL  (逻辑偏差：PMD规则方法体逻辑与规范描述不符) "Method and constructor annotations should each be on their o..."
+    25. javascript-no-builtin-modification            FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Detects modifications to built-in object prototypes or const..."
+    26. cpp-no-cstyle-cast                            FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Use C++-style casts (static_cast, const_cast, reinterpret_ca..."
+    27. cpp-avoid-stateful-stream-manipulators        FAIL  (逻辑偏差：CodeQL查询条件遗漏关键约束) "Use streams for ad-hoc, local, human-readable output. Avoid ..."
+    28. python-import-typing-directly                 FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Always import symbols from `typing` or `collections.abc` the..."
+    29. shell-arithmetic-increment                    FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Use `(( var += 3 ))` for incrementing variables. Do not use ..."
+    30. python-avoid-double-underscore                FAIL  (逻辑偏差：模板填充的模式匹配范围过宽或过窄) "Discourage use of double underscore (dunder) for name mangli..."
+    31. shell-bash-pipestatus-check                   FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "Bash has `PIPESTATUS` array to check return code from all pa..."
+    32. shell-readonly-flags-after-assignment         FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "After assigning an array variable named FLAGS, it should be ..."
+    33. javascript-spread-operator-preferred          FAIL  (逻辑偏差：模式匹配未能覆盖所有违规变体) "Function calls should use the spread operator `...` instead ..."
+    34. shell-constant-readonly                       FAIL  (语法错误：Shell脚本模式与模板格式不兼容) "For clarity, `readonly` or `declare -xr` is recommended for ..."
+
+  按工具分布 (By Tool):
+    Semgrep    15/48 (31.2%)
+    Pmd        4/10 (40.0%)
+    Codeql     12/35 (34.3%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    C++          Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+    JavaScript   Rule_C: 4/10 (40.0%)  Rule_V: 4/10 (40.0%)
+    Shell        Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 96
+  真正违规 (TP): 23
+  误报 (FP): 73
+  精准度: 24.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 模板提供结构骨架，语法正确率显著提升
+  2. 但逻辑填充部分仍存在偏差，规则语义不够精确
+  3. 模板约束限制了规则灵活性，部分复杂场景无法覆盖
+  4. Shell规则模板较少，成功率仍低于其他语言
+  5. 模板无法表达数据流和跨文件等复杂分析需求
+
+============================================================

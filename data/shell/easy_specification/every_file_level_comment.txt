@@ -1,0 +1,4 @@
+**Specification 2: Every file must have top-level comment**
+Description: Every file must have a top-level comment including a brief overview of its contents.
+Example: See above.
+Additional Notes: None.

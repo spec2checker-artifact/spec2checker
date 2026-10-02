@@ -1,0 +1,4 @@
+**Specification 81: Files and sockets - explicitly close when done**
+Description: Explicitly close files and sockets when done with them.
+Example: Use `with open(...) as f:` for automatic closing.
+Additional Notes: For file-like objects without `with`, use `contextlib.closing()`.

@@ -1,0 +1,21 @@
+rules:
+- id: python-conditional-import-discouraged
+  message: Use conditional imports only in exceptional cases where imports needed
+    for type checking must be avoided at runtime. Discouraged; prefer refactoring.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-either:
+    - pattern: |
+        if $COND:
+            import $MOD
+    - pattern: |
+        if $COND:
+            from $MOD import $NAME
+  - pattern-not: |
+      if TYPE_CHECKING:
+          ...
+  - pattern-not: |
+      if typing.TYPE_CHECKING:
+          ...

@@ -1,0 +1,4 @@
+**Specification 6: Struct data members - no trailing underscore**  
+Description: Data members of structs (both static and non-static) are named like ordinary nonmember variables, without trailing underscore.  
+Example: `struct UrlTableProperties { std::string name; int num_entries; };`  
+Additional Notes: See Structs vs. Classes.

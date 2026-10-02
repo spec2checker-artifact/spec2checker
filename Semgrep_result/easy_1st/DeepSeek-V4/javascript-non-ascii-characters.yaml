@@ -1,0 +1,40 @@
+rules:
+- id: javascript-non-ascii-characters
+  message: Use actual Unicode characters or hex/Unicode escapes for non-ASCII characters
+    within string literals or comments for readability. Unicode escapes outside string
+    literals or comments are discouraged.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: \u$HEX{4}
+  - metavariable-regex:
+      metavariable: $HEX
+      regex: '[0-9a-fA-F]'
+  metadata:
+    syntax_expression: not_inside_string_or_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match Unicode escapes in comments if not filtered
+          by context.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to check context.
+    original_description: Use actual Unicode characters or hex/Unicode escapes for
+      non-ASCII characters within string literals or comments for readability. Unicode
+      escapes outside string literals or comments are discouraged.

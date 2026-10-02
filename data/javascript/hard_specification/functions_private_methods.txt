@@ -1,0 +1,4 @@
+**Specification 84: Static methods - prefer module-local functions over private static methods**
+Description: Prefer module-local functions over private static methods where it doesn't interfere with readability.
+Example: Use top-level function instead of `static helper()`.
+Additional Notes: Do not rely on dynamic dispatch; call on base class only.

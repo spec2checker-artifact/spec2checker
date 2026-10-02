@@ -1,0 +1,14 @@
+rules:
+- id: cpp-discourage-multiple-implementation-inheritance
+  message: '[DISABLED] Multiple inheritance is allowed, but multiple implementation
+    inheritance (inheriting from more than one non-abstract class) is strongly discouraged.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Multiple inheritance is allowed, but multiple implementation
+      inheritance (inheriting from more than one non-abstract class) is strongly discouraged.

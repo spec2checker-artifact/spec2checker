@@ -1,0 +1,4 @@
+Specification 10: Imports ordering - static group
+Description: All static imports in a single group.
+Example: import static java.lang.Math.PI;
+Additional Notes: Group appears before non-static imports.

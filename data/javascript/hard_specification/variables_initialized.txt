@@ -1,0 +1,4 @@
+**Specification 64: Local variables - declared when needed, initialized as soon as possible**
+Description: Declare local variables close to first use, not at start of block, to minimize scope. Initialize as soon as possible.
+Example: `let result = compute();` near where used.
+Additional Notes: None.

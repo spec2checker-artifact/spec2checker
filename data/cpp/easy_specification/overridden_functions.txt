@@ -1,0 +1,4 @@
+**Specification 36: Use `override` or `final` for overridden virtual functions**  
+Description: Annotate overrides of virtual functions with `override` or `final`. Do not use `virtual` when declaring an override.  
+Example: `void Method() override;`  
+Additional Notes: Helps catch errors.

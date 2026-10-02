@@ -1,0 +1,4 @@
+**Specification 6: TODO comments - for temporary code**
+Description: Use `TODO` comments for code that is temporary, a short-term solution, or good-enough but not perfect.
+Example: `# TODO(mrmonkey): Handle the unlikely edge cases (bug ####)`
+Additional Notes: Follow C++ Guide convention.

@@ -1,0 +1,4 @@
+**Specification 26: Do not overload `operator<<` for streaming unless for values**  
+Description: Overload `operator<<` for streaming only for types representing values, and write only the user-visible value.  
+Example: `std::ostream& operator<<(std::ostream& os, const MyValue& v);`  
+Additional Notes: Avoid exposing implementation details.

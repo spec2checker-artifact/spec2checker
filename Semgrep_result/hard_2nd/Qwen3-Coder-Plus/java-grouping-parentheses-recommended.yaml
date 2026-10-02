@@ -1,0 +1,50 @@
+rules:
+- id: java-grouping-parentheses-recommended
+  message: 'Optional grouping parentheses omitted only when author and reviewer agree
+    no reasonable chance of misinterpretation. Example: (a + b) * c recommended over
+    a + b * c unless obvious. Cannot assume reader memorizes operator precedence.'
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $EXPR1 $OP $EXPR2
+  - metavariable-type:
+      metavariable: $EXPR1
+      type: expr
+  - metavariable-type:
+      metavariable: $EXPR2
+      type: expr
+  - metavariable-type:
+      metavariable: $OP
+      type: expr
+  metadata:
+    syntax_$OP: is_binary_operator
+    syntax_$EXPR1: is_binary_expression
+    syntax_$EXPR2: is_binary_expression
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires manual configuration of operator precedence pairs; may
+          have many false positives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for this specific precedence
+          grouping check; requires custom rule
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to encode operator precedence rules
+    original_description: 'Optional grouping parentheses omitted only when author
+      and reviewer agree no reasonable chance of misinterpretation. Example: (a +
+      b) * c recommended over a + b * c unless obvious. Cannot assume reader memorizes
+      operator precedence.'

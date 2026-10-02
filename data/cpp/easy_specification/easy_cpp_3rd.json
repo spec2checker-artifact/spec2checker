@@ -1,0 +1,568 @@
+[
+  {
+    "rule_id": "cpp-avoid-long-double",
+    "language": "cpp",
+    "description": "Avoid using the `long double` type because it gives non-portable results. Use `double` instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "long double $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\do_not_use_long_double.txt",
+      "section": "do_not_use_long_double"
+    }
+  },
+  {
+    "rule_id": "cpp-single-line-nested-namespace",
+    "language": "cpp",
+    "description": "Single-line nested namespace declarations are preferred in new code.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "namespace $NS1::$NS2 { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NS1": {
+          "type_hint": "expr"
+        },
+        "$NS2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern matches syntax but cannot enforce preference over multi-line style"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect and compare namespace declaration styles"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\declarations_preferred.txt",
+      "section": "declarations_preferred"
+    }
+  },
+  {
+    "rule_id": "cpp-const-placement-consistency",
+    "language": "cpp",
+    "description": "Detect inconsistent placement of the `const` qualifier in pointer declarations. While `const int*` is preferred, `int const*` is allowed, but usage must be consistent within the same context.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE const* $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "is_type_name",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot enforce consistency across a file or project without custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex query to track and compare all const placements in a scope."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\put_const_consistent.txt",
+      "section": "put_const_consistent"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-nullptr",
+    "language": "cpp",
+    "description": "Use `nullptr` for pointers, not `NULL` or `0`, for type safety.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$X = $Y",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        },
+        "$Y": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$Y",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('NULL|0')",
+        "required": "true"
+      },
+      {
+        "target": "$X",
+        "constraint_type": "type",
+        "condition": "is_pointer_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type resolution for pointer detection may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true,
+        "limitations": "requires full type resolution"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\prefer_nullptr_pointers.txt",
+      "section": "prefer_nullptr_pointers"
+    }
+  },
+  {
+    "rule_id": "cpp-auto-type-deduction",
+    "language": "cpp",
+    "description": "For local variables, use `auto` when type information is obvious or irrelevant, such as when initializing with a constructor call or factory function.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $INIT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$INIT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "is_not_auto",
+        "required": "true"
+      },
+      {
+        "target": "$INIT",
+        "constraint_type": "syntactic",
+        "condition": "is_constructor_or_factory_call",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to determine if type is 'obvious' from the initializer"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires complex type analysis to determine 'obvious' type deduction"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\eliminate_boilerplate.txt",
+      "section": "eliminate_boilerplate"
+    }
+  },
+  {
+    "rule_id": "cpp-use-int64-for-big-integers",
+    "language": "cpp",
+    "description": "For integers known to be 'big', use int64_t.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "int $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "variable",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*(offset|size|count|length|index|id|timestamp|epoch|capacity|limit|total|sum).*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "relies on naming convention; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to infer 'big' integer intent"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\use_int64_t_big_integers.txt",
+      "section": "use_int64_t_big_integers"
+    }
+  },
+  {
+    "rule_id": "cpp-type-names-pascalcase",
+    "language": "cpp",
+    "description": "Type names (classes, structs, type aliases, enums, type template parameters, concepts) must use PascalCase: start with a capital letter and have a capital letter for each new word, with no underscores.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $TYPE {...};",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires separate patterns for struct, enum, typedef, using, template, and concept declarations. Full coverage may be complex."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to check naming patterns across all type declarations."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\type_names_pascalcase.txt",
+      "section": "type_names_pascalcase"
+    }
+  },
+  {
+    "rule_id": "cpp-struct-member-no-trailing-underscore",
+    "language": "cpp",
+    "description": "Data members of structs (both static and non-static) are named like ordinary nonmember variables, without trailing underscore.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "struct $STRUCT {\n    ...\n    $TYPE $MEMBER;\n    ...\n};",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MEMBER": {
+          "type_hint": "expr",
+          "regex": ".*_$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('_')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "may match non-member variables in nested contexts"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to distinguish structs from classes"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\no_trailing_underscore.txt",
+      "section": "no_trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-struct-over-pair-tuple",
+    "language": "cpp",
+    "description": "Use a `struct` instead of `pair` or `tuple` whenever elements can have meaningful names.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "std::pair<$T1, $T2> $VAR;\nstd::tuple<$T...> $VAR2;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$T1": {
+          "type_hint": "expr"
+        },
+        "$T2": {
+          "type_hint": "expr"
+        },
+        "$T": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VAR2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot determine if a struct with meaningful names is a better alternative"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to suggest refactoring"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\struct_elements_meaningful.txt",
+      "section": "struct_elements_meaningful"
+    }
+  },
+  {
+    "rule_id": "cpp-no-namespace-alias-in-header",
+    "language": "cpp",
+    "description": "Do not use namespace aliases at namespace scope in header files except in explicitly marked internal-only namespaces. Aliases in headers become part of the public API.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "namespace $ALIAS = $NAMESPACE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ALIAS": {
+          "type_hint": "expr"
+        },
+        "$NAMESPACE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "file_extension_matches('h|hpp|hh|hxx')",
+        "required": "true"
+      },
+      {
+        "target": "declaration",
+        "constraint_type": "scope",
+        "condition": "is_namespace_scope",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably detect 'internal-only' namespace markers without custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to filter by file extension and exclude internal namespaces."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\namespace_aliases_internal.txt",
+      "section": "namespace_aliases_internal"
+    }
+  }
+]

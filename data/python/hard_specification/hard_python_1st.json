@@ -1,0 +1,608 @@
+[
+  {
+    "rule_id": "python-naming-internal-underscore",
+    "language": "python",
+    "description": "Detect names that should be internal (private/protected) but do not start with a single underscore. Internal names are those defined in a module or class that are not intended for public use.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[^_].*')",
+        "required": "true"
+      },
+      {
+        "target": "$NAME",
+        "constraint_type": "scope",
+        "condition": "is_private_or_protected",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Scope detection for 'private_or_protected' may be approximate; may not handle all cases of intended public vs internal naming."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to define 'internal' scope; naming conventions are not enforced by default."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\conventions_internal.txt",
+      "section": "conventions_internal"
+    }
+  },
+  {
+    "rule_id": "python-multiline-string-dedent",
+    "language": "python",
+    "description": "Multi-line strings should use `textwrap.dedent` to remove leading spaces when needed to avoid extra spaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STRING = \"\"\"\n    ...\n    \"\"\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "assignment",
+        "constraint_type": "syntactic",
+        "condition": "is_multiline_string",
+        "required": "true"
+      },
+      {
+        "target": "assignment",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_call('textwrap.dedent')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect multiline strings without dedent, may have false positives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect multiline strings and missing dedent call"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\strings_textwrap_leading.txt",
+      "section": "strings_textwrap_leading"
+    }
+  },
+  {
+    "rule_id": "python-logging-string-literal",
+    "language": "python",
+    "description": "For logging functions that expect a pattern-string, always call them with a string literal (not f-string) as first argument.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$LOGGER.$METHOD($ARG, ...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LOGGER": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "expr"
+        },
+        "$ARG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$METHOD",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^(debug|info|warning|error|critical|exception|log)$')",
+        "required": "true"
+      },
+      {
+        "target": "$ARG",
+        "constraint_type": "syntactic",
+        "condition": "is_not_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect f-strings and other non-literal string expressions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect logging calls with non-literal first arguments"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\literal_placeholders.txt",
+      "section": "literal_placeholders"
+    }
+  },
+  {
+    "rule_id": "python-docstring-triple-double-quote",
+    "language": "python",
+    "description": "Always use the three-double-quote format `\"\"\"` for docstrings (per PEP 257).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$DOC = \"\"\"...\"\"\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DOC": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "is_docstring",
+        "required": "true"
+      },
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not matches_regex('^\"\"\"')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match docstring nodes and check their quote style"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect docstring quote style"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\docstrings_double_format.txt",
+      "section": "docstrings_double_format"
+    }
+  },
+  {
+    "rule_id": "python-explicit-none-type",
+    "language": "python",
+    "description": "Use explicit `X | None` or `Optional[X]` for type annotations rather than implicit `a: str = None`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($PARAM: $TYPE = None, ...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PARAM": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "type",
+        "condition": "is_not_union_with_none",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to check if $TYPE is already a union with None"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query for type annotation patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\nonetype_use_explicit_none.txt",
+      "section": "nonetype_use_explicit_none"
+    }
+  },
+  {
+    "rule_id": "python-error-message-precise",
+    "language": "python",
+    "description": "Error messages should precisely match error condition, interpolated pieces clearly identifiable, and allow simple automated processing.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "raise $EXCEPTION($MSG)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION": {
+          "type_hint": "expr"
+        },
+        "$MSG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXCEPTION",
+        "constraint_type": "type",
+        "condition": "is_subclass_of('BaseException')",
+        "required": "true"
+      },
+      {
+        "target": "$MSG",
+        "constraint_type": "syntactic",
+        "condition": "is_not_fstring",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type and syntactic constraints require custom rules; f-string detection is syntactic only"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query for precise string format analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\interpolated_identifiable.txt",
+      "section": "interpolated_identifiable"
+    }
+  },
+  {
+    "rule_id": "python-comments-never-describe-code",
+    "language": "python",
+    "description": "Detect comments that merely describe the code, assuming the reader knows Python.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "# $COMMENT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COMMENT": {
+          "type_hint": "expr",
+          "regex": ".*"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$COMMENT",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('(?i)(now|go through|iterate|loop|check|verify|calculate|compute|assign|set|get|return|call|function|method|class|if|else|for|while|with|try|except|finally|def|import|from).*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives; semantic intent is difficult to capture fully."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to analyze comment text; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\comments_never_describe.txt",
+      "section": "comments_never_describe"
+    }
+  },
+  {
+    "rule_id": "python-avoid-string-concat-in-loop",
+    "language": "python",
+    "description": "Avoid using '+' and '+=' to accumulate a string in a loop; use list.append and ''.join to avoid quadratic behavior.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $VAR in $ITER:\n    $ACCUM = $ACCUM + $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$ITER": {
+          "type_hint": "expr"
+        },
+        "$ACCUM": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ACCUM",
+        "constraint_type": "syntactic",
+        "condition": "is_same_variable",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "May require multiple patterns to catch all variations (e.g., '+=')."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\strings_avoid_+_+=_loops.txt",
+      "section": "strings_avoid_+_+=_loops"
+    }
+  },
+  {
+    "rule_id": "python-naming-conventions-class-module",
+    "language": "python",
+    "description": "Use CapWords for class names and lower_with_under for module names. Old CapWords.py module names are discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class",
+          "regex": "^[A-Z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Module naming rule requires file property analysis, which is not fully supported in a single pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for file name pattern matching."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\conventions_capwords.txt",
+      "section": "conventions_capwords"
+    }
+  },
+  {
+    "rule_id": "python-override-docstring-optional",
+    "language": "python",
+    "description": "A method that overrides a base class method does not need a docstring if decorated with `@override` (from `typing` or `typing_extensions`).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "has_annotation('override')",
+        "required": "false"
+      },
+      {
+        "target": "function",
+        "constraint_type": "inheritance",
+        "condition": "overrides_method",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "missing_docstring",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm method override"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to check for missing docstring on overrides"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\overridden_docstring.txt",
+      "section": "overridden_docstring"
+    }
+  }
+]

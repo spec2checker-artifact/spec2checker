@@ -1,0 +1,585 @@
+[
+  {
+    "rule_id": "cpp-const-method-missing",
+    "language": "cpp",
+    "description": "Declare methods const unless they alter the logical state of the object or cannot be invoked concurrently.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $RET $METHOD($PARAMS) { ... }\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$METHOD": {
+          "type_hint": "function"
+        },
+        "$RET": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_member_function",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_constructor",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_destructor",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_static",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_mutable",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "does_not_modify_member",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "does_not_call_non_const_member",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": true,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires dataflow analysis to detect state modifications; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires complex dataflow and type analysis for accurate detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\const_methods.txt",
+      "section": "const_methods"
+    }
+  },
+  {
+    "rule_id": "c-include-guard-format",
+    "language": "cpp",
+    "description": "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check header guard format against file path"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to enforce naming convention based on file path"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\include_guard_format.txt",
+      "section": "include_guard_format"
+    }
+  },
+  {
+    "rule_id": "c-prefer-sizeof-varname",
+    "language": "cpp",
+    "description": "Use sizeof(varname) when taking size of a particular variable, as it updates automatically if the variable type changes.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "sizeof($TYPE)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "is_type_name",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "requires pattern to distinguish type names from variable names"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to distinguish type names from variable names"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\sizeof_varname_sizeof.txt",
+      "section": "sizeof_varname_sizeof"
+    }
+  },
+  {
+    "rule_id": "cpp-override-annotation-required",
+    "language": "cpp",
+    "description": "Annotate overrides of virtual functions with `override` or `final`. Do not use `virtual` when declaring an override.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "virtual $RETURN $FUNC($PARAMS) $SPECIFIER? { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$RETURN": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        },
+        "$SPECIFIER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "inheritance",
+        "condition": "overrides_virtual_method"
+      },
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "not has_annotation('override') and not has_annotation('final')"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm override relationship"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true,
+        "limitations": "requires full compilation database"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\overridden_functions.txt",
+      "section": "overridden_functions"
+    }
+  },
+  {
+    "rule_id": "cpp-lambda-appropriate-use",
+    "language": "cpp",
+    "description": "Use lambda expressions where appropriate; prefer explicit captures when lambda will escape current scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[$CAPTURE]($PARAMS) { $BODY }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CAPTURE": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        },
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot statically determine if lambda escapes scope to enforce explicit capture preference."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect escaping lambdas and suggest explicit captures."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\expressions_appropriate.txt",
+      "section": "expressions_appropriate"
+    }
+  },
+  {
+    "rule_id": "c-avoid-usr-include-filename",
+    "language": "cpp",
+    "description": "Do not use filenames that already exist in the system directory /usr/include, such as db.h. Use more specific names.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires external list of /usr/include filenames for comparison"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check against a known list of system headers"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\filenames_exist_include.txt",
+      "section": "filenames_exist_include"
+    }
+  },
+  {
+    "rule_id": "cpp-use-struct-for-data",
+    "language": "cpp",
+    "description": "Use `struct` for passive objects that carry data, with all fields public and no invariants. If in doubt, use `class`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_only_public_members",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_no_methods",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_no_inheritance",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to check for public members and lack of methods/inheritance"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to check for data-only classes"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\struct_passive_objects.txt",
+      "section": "struct_passive_objects"
+    }
+  },
+  {
+    "rule_id": "cpp-no-using-namespace-std",
+    "language": "cpp",
+    "description": "Do not declare anything in namespace std, including forward declarations. Use standard headers instead.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "using namespace std;",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\do_not_namespace_std.txt",
+      "section": "do_not_namespace_std"
+    }
+  },
+  {
+    "rule_id": "c-use-int64-for-big-integers",
+    "language": "cpp",
+    "description": "For integers known to be 'big', use int64_t.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "int $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*(offset|size|count|length|id|index|timestamp|epoch|handle|address|capacity|limit).*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Relies on naming convention; may have false positives/negatives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to infer 'big' integer semantics."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\use_int64_t_big_integers.txt",
+      "section": "use_int64_t_big_integers"
+    }
+  },
+  {
+    "rule_id": "cpp-auto-usage-clarity",
+    "language": "cpp",
+    "description": "Use `auto` only when it makes code clearer or safer, not merely to avoid typing. Not for public APIs where type is not obvious.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "auto $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "is_template_type",
+        "required": "false"
+      },
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "is_iterator_type",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully evaluate 'clarity' or 'safety' heuristics; pattern matches all auto declarations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to encode clarity/safety heuristics based on type complexity and usage context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\makes_code_clearer_safer.txt",
+      "section": "makes_code_clearer_safer"
+    }
+  }
+]

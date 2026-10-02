@@ -1,0 +1,34 @@
+rules:
+- id: python-string-type-usage
+  message: Use `str` for string/text data, `bytes` for binary data. Do not use `typing.Text`.
+    Use `typing.AnyStr` if all string types are the same.
+  languages:
+  - python
+  severity: WARNING
+  pattern: 'import typing
+
+    ...
+
+    $VAR: typing.Text'
+  metadata:
+    type_constraint_annotation: is_type('typing.Text')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect explicit `typing.Text` usage but may not infer correct
+          usage of `str` vs `bytes` in all contexts.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution to fully enforce `str` for text and
+          `bytes` for binary data.
+    original_description: Use `str` for string/text data, `bytes` for binary data.
+      Do not use `typing.Text`. Use `typing.AnyStr` if all string types are the same.

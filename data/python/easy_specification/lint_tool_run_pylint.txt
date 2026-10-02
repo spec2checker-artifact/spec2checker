@@ -1,0 +1,4 @@
+**Specification 1: Lint tool - run pylint**
+Description: Make sure you run `pylint` on your code.
+Example: `pylint --rcfile=pylintrc myfile.py`
+Additional Notes: Suppress warnings if inappropriate with `# pylint: disable=...`.

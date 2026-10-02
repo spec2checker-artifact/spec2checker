@@ -1,0 +1,4 @@
+**Specification 47: Use arrays to store lists of elements**
+Description: Bash arrays should be used to store lists of elements to avoid quoting complications.
+Example: `flags=(--foo --bar='baz'); mybinary "${flags[@]}"`
+Additional Notes: Not for complex data structures.

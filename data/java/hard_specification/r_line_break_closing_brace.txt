@@ -1,0 +1,4 @@
+Specification 19: K & R - line break after closing brace
+Description: Line break after closing brace only if that brace terminates a statement or method/constructor/class body. No break if followed by else or comma.
+Example: No break after } in } else {
+Additional Notes: None.

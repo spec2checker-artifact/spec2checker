@@ -1,0 +1,4 @@
+**Specification 116: Dynamic code evaluation - forbidden**
+Description: Do not use `eval` or `Function(...string)` (except code loaders). Dangerous and doesn't work in CSP environments.
+Example: Not `eval('x = 1');`.
+Additional Notes: None.

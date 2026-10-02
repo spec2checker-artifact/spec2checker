@@ -1,0 +1,4 @@
+**Specification 3: Nonmember functions in namespaces**  
+Description: Prefer placing nonmember functions in a namespace; use completely global functions rarely.  
+Example: `namespace myproject { void Helper(); }`  
+Additional Notes: Do not create classes only to group static members.

@@ -1,0 +1,4 @@
+**Specification 61: Constants and environment variables - uppercase with underscores**
+Description: Constants and anything exported to the environment should be capitalized, separated with underscores, declared at top of file.
+Example: `readonly PATH_TO_FILES='/some/path'`
+Additional Notes: Use `readonly` or `declare -xr`.

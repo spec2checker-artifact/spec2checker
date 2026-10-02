@@ -1,0 +1,4 @@
+**Specification 41: `from __future__` imports - encouraged**
+Description: Use of `from __future__ import` statements is encouraged to use modern Python features.
+Example: `from __future__ import generator_stop`
+Additional Notes: Keep them until confident code runs only on modern environments.

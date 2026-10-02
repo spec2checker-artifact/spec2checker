@@ -1,0 +1,4 @@
+**Specification 38: Semicolons required**
+Description: Every statement must be terminated with a semicolon; relying on automatic semicolon insertion forbidden.
+Example: `let x = 1;` not `let x = 1` without semicolon.
+Additional Notes: None.

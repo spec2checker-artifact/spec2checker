@@ -1,0 +1,41 @@
+rules:
+- id: javascript-non-ascii-readability
+  message: Detect use of Unicode escape sequences for non-ASCII characters where the
+    literal character would be more readable, as per the principle that programs failing
+    to handle non-ASCII are broken.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: \u$HEX{4}
+  - metavariable-regex:
+      metavariable: $HEX
+      regex: '[0-9a-fA-F]{4}'
+  metadata:
+    syntax_string: contains_unicode_escape
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern matches all 4-hex-digit Unicode escapes; requires manual
+          review to determine if literal character is more readable.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect Unicode escapes, but readability judgment is subjective
+          and not automated.
+    original_description: Detect use of Unicode escape sequences for non-ASCII characters
+      where the literal character would be more readable, as per the principle that
+      programs failing to handle non-ASCII are broken.

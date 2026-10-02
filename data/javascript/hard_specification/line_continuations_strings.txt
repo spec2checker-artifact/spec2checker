@@ -1,0 +1,4 @@
+**Specification 105: No line continuations in strings**
+Description: Do not use backslash line continuations in string literals. Use concatenation instead.
+Example: Not `'long \ string'`; use `'long ' + 'string'`.
+Additional Notes: Backslash escapes newline in strings allowed but not recommended.

@@ -1,0 +1,4 @@
+**Specification 45: Every file should contain license boilerplate**  
+Description: Every file should contain license boilerplate appropriate for the project.  
+Example: Apache 2.0, BSD, LGPL, GPL header.  
+Additional Notes: New files usually should not contain copyright notice or author line.

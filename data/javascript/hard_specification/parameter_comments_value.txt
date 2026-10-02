@@ -1,0 +1,4 @@
+**Specification 61: Parameter name comments - use `/* name= */` before value**
+Description: Use parameter name comments when value and method name don't sufficiently convey meaning. Preferred format: `/* shouldRender= */ true`.
+Example: `someFunction(obviousParam, /* shouldRender= */ true);`
+Additional Notes: May also put after value without `=` for consistency.

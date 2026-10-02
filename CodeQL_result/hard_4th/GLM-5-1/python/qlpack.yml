@@ -1,0 +1,4 @@
+name: hard-4th-glm-5-1-python/custom
+version: 0.0.1
+dependencies:
+  codeql/python-all: "^7.0.1"

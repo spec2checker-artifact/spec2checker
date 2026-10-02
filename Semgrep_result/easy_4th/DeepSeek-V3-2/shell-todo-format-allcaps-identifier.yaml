@@ -1,0 +1,40 @@
+rules:
+- id: shell-todo-format-allcaps-identifier
+  message: TODO comment should be in all caps, followed by a colon and an identifier
+    (name/email) in parentheses, then a description.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: '# TODO($ID): $DESC'
+  - metavariable-type:
+      metavariable: $ID
+      type: expr
+  - metavariable-type:
+      metavariable: $DESC
+      type: expr
+  metadata:
+    syntax_comment: text_matches_regex('^#\s*TODO\s*\([^)]+\)\s*:')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex matching on comment text may have edge cases with whitespace
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for comment pattern matching
+    original_description: TODO comment should be in all caps, followed by a colon
+      and an identifier (name/email) in parentheses, then a description.

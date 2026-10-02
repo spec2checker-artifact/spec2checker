@@ -1,0 +1,16 @@
+rules:
+- id: cpp-class-data-member-trailing-underscore
+  message: '[DISABLED] Data members of classes (both static and non-static) must be
+    named like ordinary nonmember variables but with a trailing underscore. Static
+    constant class members follow constant naming rules and are exempt.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Data members of classes (both static and non-static) must
+      be named like ordinary nonmember variables but with a trailing underscore. Static
+      constant class members follow constant naming rules and are exempt.

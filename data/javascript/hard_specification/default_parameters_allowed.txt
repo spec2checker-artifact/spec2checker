@@ -1,0 +1,4 @@
+**Specification 99: Default parameters - allowed, spaces around `=`, no `opt_` prefix**
+Description: Optional parameters allowed with `=`. Spaces around `=`. Named exactly like required (no `opt_`). Use `=` in JSDoc type. Come after required. Must have default value (even `undefined`).
+Example: `function maybeDoSomething(required, optional = '') {}`
+Additional Notes: Abstract/interface methods omit default values.

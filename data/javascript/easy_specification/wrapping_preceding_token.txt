@@ -1,0 +1,4 @@
+**Specification 42: Line-wrapping - comma stays with preceding token**
+Description: A comma stays attached to the token that precedes it.
+Example: `arg1,` then break.
+Additional Notes: None.

@@ -1,0 +1,14 @@
+rules:
+- id: cpp-prefer-composition
+  message: '[DISABLED] Composition is often more appropriate than inheritance. Use
+    inheritance only for ''is-a'' relationships. Limit use of `protected`.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Composition is often more appropriate than inheritance.
+      Use inheritance only for 'is-a' relationships. Limit use of `protected`.

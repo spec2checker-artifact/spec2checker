@@ -1,0 +1,4 @@
+**Specification 43: Line-wrapping - no break between `return` and value**
+Description: Line break never added between `return` and return value; changes meaning.
+Example: Not `return\n value;`.
+Additional Notes: None.

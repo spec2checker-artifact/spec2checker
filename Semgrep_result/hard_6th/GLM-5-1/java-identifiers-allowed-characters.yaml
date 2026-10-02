@@ -1,0 +1,14 @@
+rules:
+- id: java-identifiers-allowed-characters
+  message: '[DISABLED] Identifiers must use only ASCII letters, digits, and underscores,
+    matching the regex \w+.'
+  languages:
+  - java
+  severity: ERROR
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Identifiers must use only ASCII letters, digits, and underscores,
+      matching the regex \w+.

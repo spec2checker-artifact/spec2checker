@@ -1,0 +1,4 @@
+**Specification 114: Use `"${array[@]}"` expansion to preserve individual elements**
+Description: Use `"${array[@]}"` to expand array into individual elements, preserving quoting.
+Example: `mybinary "${FLAGS[@]}"`
+Additional Notes: None.

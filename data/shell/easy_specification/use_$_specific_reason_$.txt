@@ -1,0 +1,4 @@
+**Specification 38: Use `"$@"` unless specific reason to use `$*`**
+Description: Use `"$@"` unless you have a specific reason to use `$*`, such as simply appending the arguments to a string.
+Example: `mybinary "$@"`.
+Additional Notes: `$*` expands to one argument with spaces.

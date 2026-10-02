@@ -1,0 +1,4 @@
+**Specification 13: Long literal strings - use here document or embedded newline**
+Description: If you have literal strings longer than 80 characters, use a here document or an embedded newline.
+Example: `cat <<END ... END` or `long_string="line1\nline2"`
+Additional Notes: None.

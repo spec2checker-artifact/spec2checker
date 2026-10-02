@@ -1,0 +1,16 @@
+rules:
+- id: javascript-enum-annotation
+  message: '[DISABLED] Enumerations defined by adding `@enum` annotation to an object
+    literal. Must be module-local or on `exports`. Values must be string literals
+    or numbers. No additional properties after definition; must be constant.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Enumerations defined by adding `@enum` annotation to an
+      object literal. Must be module-local or on `exports`. Values must be string
+      literals or numbers. No additional properties after definition; must be constant.

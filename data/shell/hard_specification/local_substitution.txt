@@ -1,0 +1,9 @@
+**Specification 108: Separate declaration and assignment for `local` with command substitution to preserve exit code**
+Description: Always separate `local` declaration and assignment when assignment uses command substitution, because `local` masks exit code.
+Example:
+```bash
+local my_var
+my_var="$(my_func)"
+(( $? == 0 )) || return
+```
+Additional Notes: None.

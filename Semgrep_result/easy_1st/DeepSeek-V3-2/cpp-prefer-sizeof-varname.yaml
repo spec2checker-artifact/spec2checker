@@ -1,0 +1,38 @@
+rules:
+- id: cpp-prefer-sizeof-varname
+  message: Use sizeof(varname) when taking size of a particular variable, as it updates
+    automatically if the variable type changes.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: sizeof($TYPE)
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  metadata:
+    syntax_$TYPE: is_type_name
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+        limitations: requires pattern to distinguish type names from variable names
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires type resolution to distinguish type names from variable
+          names
+    original_description: Use sizeof(varname) when taking size of a particular variable,
+      as it updates automatically if the variable type changes.

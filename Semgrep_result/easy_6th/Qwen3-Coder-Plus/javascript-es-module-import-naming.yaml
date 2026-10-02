@@ -1,0 +1,14 @@
+rules:
+- id: javascript-es-module-import-naming
+  message: '[DISABLED] Module import names (`import * as name`) should be in lowerCamelCase,
+    derived from the file name. Exception: ''THREE'' for threejs.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: 'Module import names (`import * as name`) should be in lowerCamelCase,
+      derived from the file name. Exception: ''THREE'' for threejs.'

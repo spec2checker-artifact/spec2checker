@@ -1,0 +1,4 @@
+**Specification 44: Semicolons - do not use**
+Description: Do not terminate lines with semicolons, and do not use semicolons to put two statements on the same line.
+Example: `x = 1` not `x = 1; y = 2`
+Additional Notes: None.

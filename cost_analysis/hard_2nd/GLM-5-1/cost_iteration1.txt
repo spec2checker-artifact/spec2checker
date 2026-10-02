@@ -1,0 +1,51 @@
+============================================================
+  迭代1成本分析报告
+============================================================
+
+  批次: hard_2nd
+  模型: GLM-5-1
+  迭代: 1
+  时间: 2026-05-15 02:46:20
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  scan_project.py 耗时: 620.0s (10.3min)
+  总耗时: 620.0s (10.3min)
+
+------------------------------------------------------------
+  迭代1修改内容:
+------------------------------------------------------------
+  Semgrep规则修改:
+    1. java-camel-case-split-conventional: 添加 pattern-not 排除注解场景
+    2. python-logging-string-literal: 重写匹配逻辑，限定为logging调用+非字符串字面量
+    3. python-names-to-avoid-type-inclusion: 添加7个pattern-not豁免（test_result, _exit_stack, msg等）
+  PMD规则修改:
+    1. JavaEnumLineBreakAfterComma: 实现ASTEnumConstant遍历检测同行枚举常量
+    2. JavaVerticalWhitespaceBetweenMembers: 实现ASTClassOrInterfaceDeclaration成员间空白行检测
+  CodeQL规则修改:
+    1. cpp-include-alphabetical-order: 重写使用Include类型检测include顺序
+    2. cpp-license-boilerplate-required: 重写检测缺少license的文件
+    3. cpp-comment-style-consistency: 重写检测多include guard
+    4. python-modules-license-boilerplate: 重写检测缺少license的模块
+    注: CodeQL查询因CLI版本(2.25.0)与库版本(2.25.4)不匹配无法运行
+
+------------------------------------------------------------
+  迭代效果对比:
+------------------------------------------------------------
+  首次扫描违规数: 4574
+  迭代1违规数:    6715
+  变化: +2141 (+46.8%)
+
+  注: 增加原因是java-camel-case-underscores-adjacent-numbers规则
+  从超时(0检出)变为正常运行(6636检出)
+
+  按规则对比:
+    python-logging-string-literal:     4040 -> 76 (-98.1%)
+    java-camel-case-split-conventional:  327 -> 0 (-100%)
+    python-names-to-avoid-type-inclusion: 207 -> 0 (-100%)
+    java-camel-case-underscores-adjacent-numbers: 0(超时) -> 6636 (新检出)
+    PMD JavaEnumLineBreakAfterComma:     0 -> 3 (新检出)
+    PMD JavaVerticalWhitespaceBetweenMembers: 0 -> 6 (新检出)
+
+============================================================

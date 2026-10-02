@@ -1,0 +1,40 @@
+rules:
+- id: shell-use-readarray
+  message: Use `readarray` builtin (bash4+) to read file into array, then loop over
+    array.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "while read $VAR; do\n    ...\ndone < <($CMD)"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $CMD
+      type: expr
+  metadata:
+    syntax_pattern: matches_pattern('while read $VAR; do')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires bash-specific pattern matching
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Use `readarray` builtin (bash4+) to read file into array,
+      then loop over array.

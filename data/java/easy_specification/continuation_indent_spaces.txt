@@ -1,0 +1,8 @@
+Specification 33: Continuation line indent at least +4 spaces
+Description: Each continuation line indented at least +4 from the original line.
+Example:
+
+java
+longMethodCall(arg1, arg2,
+    arg3, arg4);
+Additional Notes: Can be more than +4 if desired.

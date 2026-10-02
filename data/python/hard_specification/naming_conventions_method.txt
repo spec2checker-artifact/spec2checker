@@ -1,0 +1,4 @@
+**Specification 99: Naming conventions - test method names**
+Description: Unit test files follow `lower_with_under` method names, e.g., `test_<method>_<state>`.
+Example: `test_pop_emptyStack_throws`
+Additional Notes: Underscores may appear to separate components.

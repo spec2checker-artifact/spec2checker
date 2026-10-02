@@ -1,0 +1,4 @@
+**Specification 105: Type annotations - familiar with type hints**
+Description: Familiarize yourself with type hints.
+Example: `def func(a: int) -> str:`
+Additional Notes: Annotating `self` or `cls` not necessary; `Self` can be used.

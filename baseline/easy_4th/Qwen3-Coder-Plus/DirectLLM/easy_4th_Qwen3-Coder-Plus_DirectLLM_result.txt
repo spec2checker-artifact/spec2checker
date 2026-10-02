@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: easy_4th
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 10/50 = 20.0%
+  Rule_V (规则验证数): 7/50 = 14.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 10条
+  语法错误规则: 31条
+  语义偏差规则: 9条
+
+  成功规则列表 (Successful Rules):
+     1. java-no-cstyle-array-declaration              OK [V]  "Square brackets form part of type, not variable. Use String[..."
+     2. python-default-arg-immutable                  OK  "Detect function definitions with default argument values, fo..."
+     3. python-no-spaces-around-equals                OK [V]  "Never use spaces around `=` when passing keyword arguments o..."
+     4. shell-single-string-command-args              OK [V]  "Using a single string for multiple command arguments should ..."
+     5. python-no-bool-false-comparison               OK  "Never compare a boolean variable to `False` using `==`. Use ..."
+     6. python-property-allowed-when-necessary        OK [V]  "Properties may be used to control getting/setting attributes..."
+     7. java-empty-block-multiblock                   OK [V]  "Empty block may be {} with no characters or line break in be..."
+     8. cpp-override-annotation-required              OK [V]  "Annotate overrides of virtual functions with `override` or `..."
+     9. javascript-vertical-whitespace-methods        OK  "A single blank line appears between consecutive methods in a..."
+    10. javascript-horizontal-whitespace-before-curly-brace OK [V]  "Require a space before an opening curly brace `{`, except wh..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-long-double                         FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `float` and `double`; assume they represent IEEE-754 bin..."
+     2. java-horizontal-whitespace-type-identifier    FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Space between type and identifier in declaration."
+     3. javascript-horizontal-whitespace-binary-ternary FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Space on both sides of any binary or ternary operator."
+     4. java-continuation-indent                      FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Each continuation line must be indented at least +4 spaces f..."
+     5. python-whitespace-no-trailing-whitespace      FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Detect lines that end with whitespace characters (spaces or ..."
+     6. java-test-class-naming                        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Test class name must end with 'Test'. If it covers a single ..."
+     7. python-generator-docstring-yields             FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Detect generator functions that use 'Returns:' in their docs..."
+     8. shell-braces-same-line-no-space               FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Braces must be on the same line as the function name and no ..."
+     9. javascript-line-wrap-after-operator           FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "When a line is broken at an operator, the break must come af..."
+    10. java-imports-ordering-non-static-group        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "All non-static imports must be in a single group, separated ..."
+    11. cpp-constexpr-floating-constant               FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `constexpr` to define constants with floating-point expr..."
+    12. cpp-prefer-using-over-typedef                 FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "In new code, prefer `using` over `typedef` for type aliases,..."
+    13. cpp-no-inline-namespace                       FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not use inline namespaces."
+    14. javascript-block-comment-style                FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Block comments must be indented at the same level as surroun..."
+    15. javascript-import-missing-js-extension        FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "ES module import paths must include the `.js` file extension..."
+    16. cpp-class-data-member-trailing-underscore     FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Data members of classes (both static and non-static) must be..."
+    17. shell-todo-format-allcaps-identifier          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "TODO comment should be in all caps, followed by a colon and ..."
+    18. cpp-no-nonstandard-extensions                 FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not use nonstandard extensions like __attribute__, #pragm..."
+    19. javascript-no-jsdoc-for-implementation        FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Do not use JSDoc-style comments (`/** ... */`) for implement..."
+    20. shell-readarray-usage                         FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `readarray` builtin (bash4+) to read file into array, th..."
+    21. java-break-before-non-assignment-operator     FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "When a line is broken at a non-assignment operator, the line..."
+    22. shell-avoid-eval                              FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "The `eval` command should be avoided as it munges input and ..."
+    23. cpp-avoid-system-header-filename              FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not use filenames that already exist in /usr/include, suc..."
+    24. shell-no-quote-match-expr                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "In general, there is no need to quote match expressions in s..."
+    25. javascript-line-wrapping-comma-preceding-token FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "A comma must stay attached to the token that precedes it whe..."
+    26. javascript-goog-require-alias-match           FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "When `goog.require` is assigned to a single constant alias, ..."
+    27. python-none-check-is                          FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Always use `if x is None` (or `is not None`) to check for `N..."
+    28. cpp-function-names-pascalcase                 FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Function names should follow PascalCase convention, starting..."
+    29. shell-bash-use-arrays-for-lists               FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Bash arrays should be used to store lists of elements to avo..."
+    30. javascript-horizontal-whitespace-reserved-word-brace FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Space separating reserved word (else, catch) from closing cu..."
+    31. java-static-imports-single-group              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "All static imports must be in a single group, and this group..."
+    32. python-property-decorator-required            FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Properties should be created with the `@property` decorator...."
+    33. python-whitespace-no-space-before-punctuation FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "No whitespace before a comma, semicolon, or colon. Use space..."
+    34. java-one-var-per-declaration                  FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Every variable declaration (field or local) declares only on..."
+    35. python-default-iterator                       FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use default iterators and operators for types that support t..."
+    36. java-module-directives-ordering               FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Module directives must be ordered in the sequence: requires ..."
+    37. shell-variable-expansion-quote                FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Variable expansions should be quoted to prevent word splitti..."
+    38. shell-case-indent-alternatives                FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Indent alternatives by 2 spaces in a case statement."
+    39. shell-unnecessary-dollar-in-arithmetic        FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Inside $(( ... )) arithmetic expansion, the $ prefix for var..."
+    40. cpp-missing-const                             FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `const` in APIs (function parameters, methods, non-local..."
+
+  按工具分布 (By Tool):
+    Semgrep    9/48 (18.8%)
+    Pmd        1/9 (11.1%)
+    Codeql     7/36 (19.4%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 4/10 (40.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    C++          Rule_C: 1/10 (10.0%)  Rule_V: 1/10 (10.0%)
+    JavaScript   Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+    Shell        Rule_C: 1/10 (10.0%)  Rule_V: 1/10 (10.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 49
+  真正违规 (TP): 8
+  误报 (FP): 41
+  精准度: 15.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

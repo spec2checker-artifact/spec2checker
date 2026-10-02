@@ -1,0 +1,4 @@
+Specification 44: Horizontal whitespace - pipe in catch block
+Description: Space around | in catch (FooException | BarException e).
+Example: catch (FooException | BarException e)
+Additional Notes: None.

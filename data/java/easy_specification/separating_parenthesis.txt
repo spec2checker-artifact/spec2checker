@@ -1,0 +1,4 @@
+Specification 39: Horizontal whitespace - separating keyword from parenthesis
+Description: Space separating keyword (if, for, catch) from open parenthesis ( that follows.
+Example: if (condition)
+Additional Notes: None.

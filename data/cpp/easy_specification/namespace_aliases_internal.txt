@@ -1,0 +1,4 @@
+**Specification 51: Do not use namespace aliases in header files (except internal)**  
+Description: Do not use namespace aliases at namespace scope in header files except in explicitly marked internal-only namespaces.  
+Example: In `.cc` file: `namespace sidetable = ::pipeline_diagnostics::sidetable;`  
+Additional Notes: Aliases in headers become part of public API.

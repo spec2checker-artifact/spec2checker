@@ -1,0 +1,4 @@
+**Specification 93: Do not define nested namespaces**
+Description: Do not define a nested type (class, typedef, enum, interface) on another module-local name. Use top-level exports.
+Example: Not `Foo.Bar = class {...}`; export `FooBar` instead.
+Additional Notes: When module name redundant, omit redundancy.

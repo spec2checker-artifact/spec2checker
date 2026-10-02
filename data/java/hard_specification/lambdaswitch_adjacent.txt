@@ -1,0 +1,7 @@
+Specification 67: Arrow in lambda/switch rule - no adjacent break
+Description: Line never broken adjacent to arrow ->, except break may come immediately after arrow if following text is a single unbraced expression.
+Example:
+
+java
+str -> longExpressionInvolving(str)  // break after ->
+Additional Notes: For block body, no break adjacent.

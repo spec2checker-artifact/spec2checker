@@ -1,0 +1,4 @@
+**Specification 45: Use `constexpr` for floating-point constants**  
+Description: Use `constexpr` to define constants with floating-point expressions, not just literals.  
+Example: `constexpr double kPi = 3.1415926535;`  
+Additional Notes: Avoid complexifying definitions.

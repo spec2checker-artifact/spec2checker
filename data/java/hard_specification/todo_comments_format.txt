@@ -1,0 +1,4 @@
+Specification 85: TODO comments - format
+Description: TODO comments begin with TODO in all caps, colon, link to resource (preferably bug reference), then explanatory string with hyphen -.
+Example: // TODO: crbug.com/12345678 - Remove this after 2047q4.
+Additional Notes: Avoid referring to individual or team.

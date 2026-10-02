@@ -1,0 +1,4 @@
+**Specification 100: Rest parameters - use instead of `arguments`**
+Description: Use rest parameter `...numbers` instead of `arguments`. Typed with `...` in JSDoc. Last parameter. No space between `...` and name. Do not name `var_args` or `arguments`.
+Example: `function variadic(array, ...numbers) {}`
+Additional Notes: None.

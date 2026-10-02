@@ -1,0 +1,8 @@
+**Specification 60: Do not use JSDoc for implementation comments**
+Description: Do not use `/** … */` for implementation comments; use `/* … */` or `//`.
+Example: `/* implementation comment */` not `/** ... */`.
+Additional Notes: JSDoc reserved for documentation.
+
+---
+
+### 复杂类 (Hard) - 共 60 条

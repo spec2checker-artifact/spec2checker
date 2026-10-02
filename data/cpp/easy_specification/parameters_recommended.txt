@@ -1,0 +1,4 @@
+**Specification 19: `const` on function parameters passed by value not recommended**  
+Description: For a function parameter passed by value, `const` has no effect on the caller, thus not recommended in function declarations.  
+Example: `void f(int x);` not `void f(const int x);`  
+Additional Notes: See TotW #109.

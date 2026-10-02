@@ -1,0 +1,4 @@
+**Specification 93: Names to avoid - double leading/trailing underscores**
+Description: Avoid `__double_leading_and_trailing_underscore__` names (reserved by Python).
+Example: Do not define `__init__` except for actual special methods.
+Additional Notes: None.

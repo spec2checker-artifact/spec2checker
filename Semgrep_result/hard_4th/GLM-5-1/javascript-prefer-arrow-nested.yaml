@@ -1,0 +1,16 @@
+rules:
+- id: javascript-prefer-arrow-nested
+  message: '[DISABLED] Prefer arrow functions over `function` keyword for nested functions
+    (except method shorthand). Also prefer arrow functions over `bind`, `goog.bind`,
+    `const self = this` patterns.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Prefer arrow functions over `function` keyword for nested
+      functions (except method shorthand). Also prefer arrow functions over `bind`,
+      `goog.bind`, `const self = this` patterns.

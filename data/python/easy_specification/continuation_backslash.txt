@@ -1,0 +1,4 @@
+**Specification 46: Line continuation - do not use backslash**
+Description: Do not use a backslash for explicit line continuation. Use implicit joining inside parentheses, brackets, braces.
+Example: Use parentheses for multi-line expressions.
+Additional Notes: Backslash-escaped newlines within strings are allowed.

@@ -1,0 +1,50 @@
+============================================================
+  迭代3成本分析报告
+============================================================
+
+  批次: easy_3rd
+  模型: Qwen3-Coder-Plus
+  迭代: 3
+  时间: 2026-05-20 14:25:34
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  validate_tool_syntax.py 耗时: 0.0s (跳过，使用已修改规则)
+  scan_project.py 耗时: 191.5s (3.2min)
+  总耗时: 191.5s (3.2min)
+
+------------------------------------------------------------
+  本次迭代token消耗:
+------------------------------------------------------------
+  validate stdout: ~0 words / ~0 chars
+  scan stdout: ~690 words / ~8200 chars
+  合计: ~690 words / ~8200 chars
+
+------------------------------------------------------------
+  规则修改记录:
+------------------------------------------------------------
+  Semgrep: javascript-horizontal-whitespace-after-colon.yaml - 改用pattern-regex '=\s*\{[^{}]*\w+:\S[^{}]*\}'，要求=前缀确保仅匹配对象字面量赋值上下文，排除catch/function等非对象字面量FP(根据evaluate3.txt，3条FP中catch(err){和function usage(){为非对象字面量误报，owner:context已有空格也为FP)
+  CodeQL: python-indentation-4-spaces-no-tabs.ql - 使用ExprStmt替代原Function/Stmt不可用API，检查语句起始列非4倍数(基本逻辑实现)
+  CodeQL: python-whitespace-no-vertical-alignment.ql - 使用ExprStmt替代原Assign/Name不可用API，检查连续行不同起始列(基本逻辑实现)
+  PMD: JavaModuleDirectivesOrdering.java - 使用RuleContext.getSourceCodeFile()替代不可用的getTextDocument()，读取module-info.java源文件检查requires/exports顺序(基本功能实现)
+
+------------------------------------------------------------
+  对比结果 (迭代2后11条 vs 迭代3后8条):
+------------------------------------------------------------
+  迭代2后总数: 11
+  迭代3后总数: 8
+
+  移除的违规: 3 (javascript-horizontal-whitespace-after-colon的3条FP全部消除)
+  新增的违规: 0
+
+  移除的违规列表:
+  +------+---------------------------+------------------------------------------+
+  | 编号 | 规则                      | 位置                                     |
+  +------+---------------------------+------------------------------------------+
+  | [1  ] | javascript-horizontal-whi | Bazel\js\manage_ssl_issue.js:45          |
+  | [2  ] | javascript-horizontal-whi | Custom_code\js\empty_catch.js:11         |
+  | [4  ] | javascript-horizontal-whi | OpenPLC\js\configure.js:31               |
+  +------+---------------------------+------------------------------------------+
+
+============================================================

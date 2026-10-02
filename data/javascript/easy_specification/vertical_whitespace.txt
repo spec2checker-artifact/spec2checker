@@ -1,0 +1,9 @@
+**Specification 45: Vertical whitespace - single blank line between methods**
+Description: A single blank line appears between consecutive methods in a class or object literal.
+Example:
+```javascript
+method1() {}
+
+method2() {}
+```
+Additional Notes: Optional between properties in object literal.

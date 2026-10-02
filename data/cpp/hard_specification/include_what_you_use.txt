@@ -1,0 +1,4 @@
+**Specification 56: Include what you use**  
+Description: If a source or header file refers to a symbol defined elsewhere, directly include the header that provides that symbol. Do not rely on transitive inclusions.  
+Example: `foo.cc` should include `bar.h` if it uses a symbol from it, even if `foo.h` includes `bar.h`.  
+Additional Notes: Allows removing includes without breaking clients.

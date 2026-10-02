@@ -1,0 +1,4 @@
+**Specification 88: Getters and setters - do not use**
+Description: Do not use JavaScript getter/setter properties. Provide ordinary methods instead.
+Example: Not `get next() { return this.nextId++; }`.
+Additional Notes: Exception for data binding frameworks or external APIs.

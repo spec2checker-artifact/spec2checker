@@ -1,0 +1,4 @@
+**Specification 17: Terminate multi-line namespaces with comments**  
+Description: Terminate multi-line namespaces with comments as shown.  
+Example: `}  // namespace mynamespace`  
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 1: Unnamed namespace for internal linkage**  
+Description: Use unnamed namespaces for definitions that do not need to be referenced outside the `.cc` file.  
+Example: `namespace { ... }  // namespace`  
+Additional Notes: Do not use in `.h` files.

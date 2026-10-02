@@ -1,0 +1,8 @@
+Specification 119: Javadoc - block tags order
+Description: Standard block tags appear in order: @param, @return, @throws, @deprecated. Never appear with empty description.
+Example:
+
+java
+ * @param name description
+ * @return result
+Additional Notes: None.

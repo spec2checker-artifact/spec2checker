@@ -1,0 +1,8 @@
+**Specification 60: Shebang line - only for executables**
+Description: Most files do not need a shebang line. Start main file with `#!/usr/bin/env python3`.
+Example: `#!/usr/bin/env python3` at top of executable script.
+Additional Notes: Ignored when importing.
+
+---
+
+### 复杂类 (Hard) - 共 60 条

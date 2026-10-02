@@ -1,0 +1,522 @@
+[
+  {
+    "rule_id": "java-numeric-literal-long-suffix-uppercase",
+    "language": "java",
+    "description": "long-valued integer literals must use uppercase L suffix, never lowercase l, to avoid confusion with digit 1.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$NUMl",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NUM": {
+          "type_hint": "expr",
+          "regex": "\\d+"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NUM",
+        "constraint_type": "syntactic",
+        "condition": "ends_with('l')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\numeric_literals_uppercase.txt",
+      "section": "numeric_literals_uppercase"
+    }
+  },
+  {
+    "rule_id": "java-module-directives-ordering",
+    "language": "java",
+    "description": "Module directives must be ordered: all requires in one block, then exports, opens, uses, provides. Each block must be separated by a single blank line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for formatting; pattern matching may be complex for blank line enforcement"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for formatting; PMD's Java module support may be limited"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rule enforcement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\module_directives_ordering.txt",
+      "section": "module_directives_ordering"
+    }
+  },
+  {
+    "rule_id": "java-javadoc-summary-fragment",
+    "language": "java",
+    "description": "Each Javadoc block must begin with a brief summary fragment (noun or verb phrase, not a complete sentence). It should be capitalized and punctuated as if it were a complete sentence.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** $COMMENT */",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COMMENT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$COMMENT",
+        "constraint_type": "syntactic",
+        "condition": "first_sentence_matches_regex('^[A-Z][^.]*\\.\\s+')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom regex matching on comment text; may have false positives/negatives with complex formatting"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's CommentRequired rule can enforce presence but not detailed content validation for summary fragment"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to analyze Javadoc comment structure and first sentence"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\javadoc_summary_fragment.txt",
+      "section": "javadoc_summary_fragment"
+    }
+  },
+  {
+    "rule_id": "java-horizontal-whitespace-keyword-parenthesis",
+    "language": "java",
+    "description": "Detect missing space between a keyword (if, for, catch, etc.) and the opening parenthesis that follows.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if($COND) ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "keyword",
+        "constraint_type": "syntactic",
+        "condition": "keyword_matches('if|for|while|switch|catch')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for each keyword; may not handle all macro expansions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific spacing check; requires custom XPath"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\separating_parenthesis.txt",
+      "section": "separating_parenthesis"
+    }
+  },
+  {
+    "rule_id": "java-import-group-spacing",
+    "language": "java",
+    "description": "If both static and non-static imports exist, a single blank line must separate the two groups. No other blank lines are allowed between imports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for whitespace analysis"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for import ordering and spacing"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not natively enforce formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\imports_blank_line_groups.txt",
+      "section": "imports_blank_line_groups"
+    }
+  },
+  {
+    "rule_id": "java-assignment-break-after-symbol",
+    "language": "java",
+    "description": "Assignment operator break - after symbol. When broken at assignment operator, break typically after the symbol, but either way acceptable. Also applies to colon in enhanced for.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Rule is about formatting preference, not a functional error. Detection of line break position relative to operator is limited."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has formatting rules (e.g., WhitespaceAfter, WhitespaceAround) but not a specific rule for break after assignment operator."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rule detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\assignment_operator_symbol.txt",
+      "section": "assignment_operator_symbol"
+    }
+  },
+  {
+    "rule_id": "java-braces-required",
+    "language": "java",
+    "description": "Braces are required with if, else, for, do, while statements, even when the body is empty or contains only a single statement. Lambda braces remain optional.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if ($COND) $STMT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COND": {
+          "type_hint": "expr"
+        },
+        "$STMT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STMT",
+        "constraint_type": "syntactic",
+        "condition": "is_not_block",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires separate patterns for else, for, do, while statements"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "PMD's Braces rule covers this requirement"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect missing braces"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\required_ifelsefordowhile.txt",
+      "section": "required_ifelsefordowhile"
+    }
+  },
+  {
+    "rule_id": "java-generic-one-statement-per-line",
+    "language": "java",
+    "description": "Each statement must be followed by a line break; multiple statements on the same line are prohibited.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STMT1; $STMT2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STMT1": {
+          "type_hint": "expr"
+        },
+        "$STMT2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_simple_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match within strings or comments; requires careful tuning"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for one-statement-per-line; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect multiple statements on one line"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\one_statement_per_line.txt",
+      "section": "one_statement_per_line"
+    }
+  },
+  {
+    "rule_id": "java-double-colon-break",
+    "language": "java",
+    "description": "Detect a line break before the double colon (::) operator used for method reference or scope resolution.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS\n::\n$METHOD(...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "::",
+        "constraint_type": "syntactic",
+        "condition": "has_preceding_newline",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match false positives in complex expressions or comments."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for double colon break detection; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\assignment_reference.txt",
+      "section": "assignment_reference"
+    }
+  },
+  {
+    "rule_id": "java-catch-pipe-spacing",
+    "language": "java",
+    "description": "Detect missing horizontal whitespace around the pipe character '|' in a multi-catch clause.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($EXCEPTION1|$EXCEPTION2 $VAR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION1": {
+          "type_hint": "expr"
+        },
+        "$EXCEPTION2": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "catch",
+        "constraint_type": "syntactic",
+        "condition": "has_multi_catch",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching on catch clause syntax"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for token spacing"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST query for catch clause formatting"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\horizontal_whitespace_pipe.txt",
+      "section": "horizontal_whitespace_pipe"
+    }
+  }
+]

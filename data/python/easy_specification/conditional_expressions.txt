@@ -1,0 +1,4 @@
+**Specification 24: Conditional expressions - okay for simple cases**
+Description: Conditional expressions (ternary operator) are okay for simple cases.
+Example: `x = 1 if cond else 2`
+Additional Notes: Each portion must fit on one line.

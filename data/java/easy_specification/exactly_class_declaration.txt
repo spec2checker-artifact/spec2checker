@@ -1,0 +1,4 @@
+Specification 15: Exactly one top-level class declaration
+Description: Each top-level class resides in its own source file.
+Example: public class MyClass { } alone in MyClass.java
+Additional Notes: None.

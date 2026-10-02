@@ -1,0 +1,596 @@
+[
+  {
+    "rule_id": "java-switch-exhaustiveness",
+    "language": "java",
+    "description": "Every switch statement must be exhaustive, requiring a default case even if it only contains a break statement. Switches over enums that explicitly cover all known values are considered exhaustive without a default case.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "switch ($EXPR) {\n    $CASES\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$CASES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "missing_default_case",
+        "required": "true"
+      },
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "is_not_enum_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Cannot reliably determine if all enum values are covered without type resolution."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "PMD's MissingSwitchDefault rule does not consider enum coverage."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce default case even when enum is fully covered."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\exhaustiveness_required.txt",
+      "section": "exhaustiveness_required"
+    }
+  },
+  {
+    "rule_id": "java-horizontal-alignment-not-required",
+    "language": "java",
+    "description": "Horizontal alignment of tokens using variable spaces is permitted but never required. Developers are not required to maintain existing alignment.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep is not designed for detecting or enforcing formatting rules like alignment."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD is not designed for detecting or enforcing formatting rules like alignment."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for detecting or enforcing formatting rules like alignment."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\horizontal_alignment.txt",
+      "section": "horizontal_alignment"
+    }
+  },
+  {
+    "rule_id": "java-enum-no-methods-array-initializer",
+    "language": "java",
+    "description": "Enum class with no methods and no documentation on constants may be formatted like array initializer.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "enum $ENUM {\n    $CONSTANTS\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ENUM": {
+          "type_hint": "class"
+        },
+        "$CONSTANTS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "has_no_methods",
+        "required": "true"
+      },
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "has_no_documentation_on_constants",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect absence of methods and documentation"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check for methods and documentation"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to check for empty enum bodies and missing javadoc"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\methodsconstant.txt",
+      "section": "methodsconstant"
+    }
+  },
+  {
+    "rule_id": "java-text-block-opening-newline",
+    "language": "java",
+    "description": "Opening triple quotes of a text block must be on a new line, following indentation rules or having no indentation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "String $VAR = \"\"\"$TEXT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$TEXT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "syntactic",
+        "constraint_type": "syntactic",
+        "condition": "opening_quotes_not_on_new_line",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of newline after opening quotes"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for text block formatting"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST analysis for text block syntax"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\text_blocks_opening_line.txt",
+      "section": "text_blocks_opening_line"
+    }
+  },
+  {
+    "rule_id": "java-annotation-one-per-line",
+    "language": "java",
+    "description": "Annotations applying to class, package, or module must appear immediately after the documentation block, one per line, without extra indentation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** $DOC */\n@$ANN1\n@$ANN2\n$MODIFIERS class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DOC": {
+          "type_hint": "expr"
+        },
+        "$ANN1": {
+          "type_hint": "expr"
+        },
+        "$ANN2": {
+          "type_hint": "expr"
+        },
+        "$MODIFIERS": {
+          "type_hint": "expr"
+        },
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "has_preceding_doc_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may not capture all annotation ordering variations"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for annotation formatting"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule enforcement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\classpackagemodule.txt",
+      "section": "classpackagemodule"
+    }
+  },
+  {
+    "rule_id": "java-finalize-override",
+    "language": "java",
+    "description": "Do not override Object.finalize. Finalization support is scheduled for removal.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "protected void finalize() throws Throwable { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "inheritance",
+        "condition": "is_subclass_of('java.lang.Object')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm inheritance from Object"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": true,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\finalizers_not_used.txt",
+      "section": "finalizers_not_used"
+    }
+  },
+  {
+    "rule_id": "java-method-annotation-multiline",
+    "language": "java",
+    "description": "Method and constructor annotations should each be on their own line by default, with an exception for a single parameterless annotation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@$ANNOT1 @$ANNOT2\n$MODIFIERS $RETURN $METHOD($PARAMS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ANNOT1": {
+          "type_hint": "expr"
+        },
+        "$ANNOT2": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "has_multiple_annotations",
+        "required": "true"
+      },
+      {
+        "target": "annotation",
+        "constraint_type": "syntactic",
+        "condition": "annotation_has_parameters",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may not correctly identify all parameterless annotations"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for annotation formatting"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\constructor_annotations.txt",
+      "section": "constructor_annotations"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-naming",
+    "language": "java",
+    "description": "Class names must use UpperCamelCase and method/variable names must use lowerCamelCase, capitalizing the first character of each word (except the first for lowerCamelCase).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_$][a-zA-Z0-9_$]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      },
+      {
+        "target": "variable",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex-based name validation; may not distinguish context perfectly without type resolution"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true,
+        "limitations": "PMD has built-in rules for naming conventions"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for naming patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\lowercamelcase.txt",
+      "section": "lowercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-local-variable-declaration-timing",
+    "language": "java",
+    "description": "Local variables should be declared close to their first use, not habitually at the start of a block, to minimize their scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "distance_to_first_use > 5",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Distance to first use requires custom logic not natively supported."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's 'LocalVariableCouldBeFinal' and 'AvoidReassigningLoopVariables' are related but not identical."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to measure distance between declaration and first use."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\variables_declared_needed.txt",
+      "section": "variables_declared_needed"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-underscores-adjacent-numbers",
+    "language": "java",
+    "description": "In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ID",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ID": {
+          "type_hint": "expr",
+          "regex": ".*[0-9][0-9]+.*"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ID",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*[0-9][0-9]+.*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex pattern for identifier naming"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for naming convention"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for identifier naming pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\underscores_adjacent.txt",
+      "section": "underscores_adjacent"
+    }
+  }
+]

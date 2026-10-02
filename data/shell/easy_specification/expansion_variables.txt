@@ -1,0 +1,4 @@
+**Specification 29: Variable expansion - quote your variables**
+Description: Quote your variables (see Quoting section).
+Example: `"${var}"`
+Additional Notes: None.

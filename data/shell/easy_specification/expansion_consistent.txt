@@ -1,0 +1,4 @@
+**Specification 28: Variable expansion - stay consistent with existing code**
+Description: In order of precedence: Stay consistent with what you find.
+Example: Follow existing style.
+Additional Notes: Strongly recommended.

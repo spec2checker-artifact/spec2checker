@@ -1,0 +1,9 @@
+Specification 18: Nonempty blocks - K & R style
+Description: No line break before opening brace, line break after opening brace, line break before closing brace.
+Example:
+
+java
+if (condition) {
+  doSomething();
+}
+Additional Notes: Exceptions for enum classes.

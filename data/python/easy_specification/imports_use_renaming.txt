@@ -1,0 +1,4 @@
+**Specification 6: Imports - use `as` for renaming**
+Description: Use `from x import y as z` when: two modules named `y`, `y` conflicts with top-level name, `y` conflicts with common parameter name, `y` is inconveniently long, or `y` is too generic.
+Example: `from storage.file_system import options as fs_options`
+Additional Notes: Also use for standard abbreviations like `import numpy as np`.

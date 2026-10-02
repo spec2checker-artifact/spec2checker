@@ -1,0 +1,4 @@
+**Specification 14: Words longer than 80 chars can stay on one line**
+Description: Words that are longer than 80 chars and can’t sensibly be split are ok.
+Example: Long file path or URL.
+Additional Notes: Put on own line or factor into variable.

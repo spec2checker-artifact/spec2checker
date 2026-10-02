@@ -1,0 +1,70 @@
+============================================================
+  迭代2成本分析报告
+============================================================
+
+  批次: easy_6th
+  模型: DeepSeek-V3-2
+  迭代: 2
+  时间: 2026-05-11 01:00:15
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  读取evaluate2.txt及4个Semgrep FP规则: 约2min
+  修改4个Semgrep FP规则: 约5min
+  修正shell-quote-integer-vars YAML转义: 约2min
+  修改PMD stub (决策2): 约2min
+  修改4个CodeQL stubs (决策2): 约3min
+  scan_project.py --iteration 2 (首轮): 约240s (4min)
+  scan_project.py --iteration 2 (修正后重跑): 约240s (4min)
+  生成iteration2_summary + cost_iteration2: 约3min
+  总耗时: 约22min
+
+------------------------------------------------------------
+  人工修改时间:
+------------------------------------------------------------
+  - 4个Semgrep YAML修改: 约5min
+  - YAML转义修正+重跑: 约6min
+  - PMD 决策2实现: 约2min
+  - CodeQL 决策2实现: 约3min
+  - 共修改9个文件
+
+------------------------------------------------------------
+  规则修改详情:
+------------------------------------------------------------
+  | 规则 | 修改类型 | 迭代1 | 迭代2 |
+  |------|----------|-------|-------|
+  | python-no-blank-line-after-class | patterns→pattern-regex | 29 | 0 |
+  | java-empty-block-multiblock | 添加pattern-not-inside | 1 | 0 |
+  | python-property-allowed-when-necessary | 添加pattern-not | 8 | 0 |
+  | shell-quote-integer-vars | pattern-either→patterns+pattern-not-regex | 6 | 0 |
+  | PMD JavaBlockIndentation2Spaces | 禁用→决策2(test命名) | 0 | 0 |
+  | CodeQL python-whitespace-inside-parens | 占位符→决策2(call空格) | 0 | 0 |
+  | CodeQL python-indentation-4-spaces-no-tabs | 占位符→决策2(tab检测) | 0 | 0 |
+  | CodeQL python-blank-lines-between-definitions | 占位符→决策2(间距检测) | 0 | 0 |
+  | CodeQL cpp-filename-lowercase-underscore-dash | 占位符→决策2(文件名检测) | 0 | 0 |
+
+------------------------------------------------------------
+  扫描运行统计:
+------------------------------------------------------------
+  Semgrep: 41条规则扫描, 1条有发现(python-avoid-staticmethod: 6)
+  PMD: 0条已验证规则(1条被过滤)
+  CodeQL: 4条规则, 全部DB_FAIL/RUN_FAIL
+  scan_project.py 输出(修正后): ~500 words / ~8000 chars
+
+------------------------------------------------------------
+  总违规数变化:
+------------------------------------------------------------
+  基线: 190
+  迭代1: 50
+  迭代2: 6
+  减少(基线→迭代2): -184 (-96.8%)
+
+------------------------------------------------------------
+  精准度变化:
+------------------------------------------------------------
+  基线: 10.0% (10 TP / 90 FP)
+  迭代1: 30.0% (15 TP / 35 FP)
+  迭代2预期: 100% (6 TP / 0 FP)
+
+============================================================

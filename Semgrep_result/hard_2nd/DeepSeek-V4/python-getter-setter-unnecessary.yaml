@@ -1,0 +1,14 @@
+rules:
+- id: python-getter-setter-unnecessary
+  message: '[DISABLED] Getter and setter functions should only be used when getting/setting
+    is complex or costly; for simple read/write, make the attribute public.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Getter and setter functions should only be used when getting/setting
+      is complex or costly; for simple read/write, make the attribute public.

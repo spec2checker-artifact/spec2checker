@@ -1,0 +1,4 @@
+**Specification 41: Use inclusive language**  
+Description: Use inclusive language and avoid offensive terms (e.g., "master/slave", "blacklist/whitelist"). Use gender-neutral language.  
+Example: Use "they/them" for unspecified gender.  
+Additional Notes: None.

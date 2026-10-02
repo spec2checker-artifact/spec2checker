@@ -1,0 +1,4 @@
+**Specification 62: Docstrings - always use triple-double-quote format**
+Description: Always use the three-double-quote format `"""` for docstrings (per PEP 257).
+Example: `"""Summary line.\n\nBody."""`
+Additional Notes: None.

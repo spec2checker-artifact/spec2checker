@@ -1,0 +1,4 @@
+Specification 110: Camel case - step 5: uppercase first character of each word (UpperCamelCase) or each except first (lowerCamelCase)
+Description: For UpperCamelCase, uppercase first character of each word; for lowerCamelCase, uppercase first character of each word except first.
+Example: "xml http request" → "XmlHttpRequest" or "xmlHttpRequest"
+Additional Notes: None.

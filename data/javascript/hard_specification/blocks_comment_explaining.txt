@@ -1,0 +1,9 @@
+**Specification 110: Empty catch blocks - must have comment explaining why**
+Description: Very rarely correct to do nothing in catch. When appropriate, comment must justify.
+Example:
+```javascript
+catch (e) {
+  // it's not numeric; that's fine, just continue
+}
+```
+Additional Notes: Not `catch (expected) {}` without comment.

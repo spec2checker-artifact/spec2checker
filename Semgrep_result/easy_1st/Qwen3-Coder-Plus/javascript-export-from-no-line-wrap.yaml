@@ -1,0 +1,43 @@
+rules:
+- id: javascript-export-from-no-line-wrap
+  message: '`export from` statements must not be line wrapped; they are an exception
+    to the 80-column limit. This applies to both flavors: `export { ... } from ''...''`
+    and `export * from ''...''`.'
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: export $EXPORTS from $SOURCE;
+  - metavariable-type:
+      metavariable: $EXPORTS
+      type: expr
+  - metavariable-type:
+      metavariable: $SOURCE
+      type: expr
+  metadata:
+    syntax_statement: has_newline_between('export', 'from')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom pattern to detect newline within the statement;
+          may have false positives with complex formatting.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to detect line breaks in export statements.
+    original_description: '`export from` statements must not be line wrapped; they
+      are an exception to the 80-column limit. This applies to both flavors: `export
+      { ... } from ''...''` and `export * from ''...''`.'

@@ -1,0 +1,569 @@
+[
+  {
+    "rule_id": "cpp-missing-noexcept",
+    "language": "cpp",
+    "description": "Detect missing `noexcept` specifier on move constructors and move assignment operators where it is useful for performance and accurately reflects semantics.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS($CLASS&& $ARG) $SPECIFIER { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$ARG": {
+          "type_hint": "expr"
+        },
+        "$SPECIFIER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "is_move_constructor",
+        "required": "true"
+      },
+      {
+        "target": "$SPECIFIER",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('noexcept')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May require additional patterns for move assignment operators and complex specifier combinations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to accurately identify move constructors/operators and their exception safety guarantees."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\specify_noexcept_correct.txt",
+      "section": "specify_noexcept_correct"
+    }
+  },
+  {
+    "rule_id": "cpp-class-comment-use-not-implementation",
+    "language": "cpp",
+    "description": "Every non-obvious class should have a comment describing what it is for and how to use it, including synchronization assumptions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "missing_javadoc_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's CommentRequired rule can check for missing class comments but cannot assess if the comment describes use vs. implementation."
+      },
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect missing comments but cannot semantically analyze comment content for 'use vs. implementation'."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can query for missing Javadoc comments but semantic analysis of comment content is complex and not fully supported."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\describe_implementation.txt",
+      "section": "describe_implementation"
+    }
+  },
+  {
+    "rule_id": "cpp-comment-class-data-members",
+    "language": "cpp",
+    "description": "Class data members must have a comment explaining their purpose and invariants not expressed by type and name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $TYPE $MEMBER;\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$MEMBER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "scope",
+        "condition": "is_class_member",
+        "required": "true"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "has_no_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can detect missing comments via pattern matching but cannot reliably parse and understand comment semantics."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for missing comments on class members; does not evaluate comment quality."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\comment_members_invariants.txt",
+      "section": "comment_members_invariants"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-failing-constructor",
+    "language": "cpp",
+    "description": "Avoid initialization that can fail in constructors if you can't signal an error. Consider factory functions or `Init()` methods.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    $CLASS(...) {\n        ...\n    }\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "constructor",
+        "constraint_type": "syntactic",
+        "condition": "contains_call('new', 'malloc', 'open', 'fopen', 'throw')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires manual pattern for specific failing calls"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect failing resource acquisition"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\initialization.txt",
+      "section": "initialization"
+    }
+  },
+  {
+    "rule_id": "cpp-include-alphabetical-order",
+    "language": "cpp",
+    "description": "Within each include section, includes should be ordered alphabetically.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for ordering detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for ordering detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\section_alphabetically.txt",
+      "section": "section_alphabetically"
+    }
+  },
+  {
+    "rule_id": "cpp-local-variable-declaration",
+    "language": "cpp",
+    "description": "Local variables should be declared in the narrowest scope possible, as close to first use as possible, and initialized in the declaration.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR;\n...\n$VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "declaration_not_initialized",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "may not detect all scoping nuances; pattern matches simple declaration-assignment sequences"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect declaration and later assignment in same scope"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\variables_declare_close.txt",
+      "section": "variables_declare_close"
+    }
+  },
+  {
+    "rule_id": "cpp-explicit-single-argument-constructor",
+    "language": "cpp",
+    "description": "Type conversion operators and constructors callable with a single argument must be marked explicit. Copy/move constructors are exception.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS::$CLASS($ARG) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$ARG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "constructor",
+        "constraint_type": "syntactic",
+        "condition": "parameter_count == 1",
+        "required": "true"
+      },
+      {
+        "target": "constructor",
+        "constraint_type": "syntactic",
+        "condition": "is_copy_constructor",
+        "required": "false"
+      },
+      {
+        "target": "constructor",
+        "constraint_type": "syntactic",
+        "condition": "is_move_constructor",
+        "required": "false"
+      },
+      {
+        "target": "constructor",
+        "constraint_type": "annotation",
+        "condition": "has_annotation('explicit')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires type resolution to fully identify copy/move constructors"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true,
+        "limitations": "requires full type resolution"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\constructors_explicit.txt",
+      "section": "constructors_explicit"
+    }
+  },
+  {
+    "rule_id": "cpp-default-capture-by-reference-lifetime",
+    "language": "cpp",
+    "description": "Use default capture by reference ([&]) only when the lifetime of the lambda is obviously shorter than any potential captures.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[&]",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect the pattern but cannot verify lifetime constraints."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex dataflow and lifetime analysis for full verification."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\reference_lifetime_shorter.txt",
+      "section": "reference_lifetime_shorter"
+    }
+  },
+  {
+    "rule_id": "cpp-header-file-collection-comment",
+    "language": "cpp",
+    "description": "If a header file declares multiple user-facing abstractions, it must include a comment describing the collection.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Rule requires analyzing file-level comments and counting abstractions, which is not a typical code pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to count user-facing abstractions (e.g., classes, structs) and check for a leading file comment."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\collection_abstractions.txt",
+      "section": "collection_abstractions"
+    }
+  },
+  {
+    "rule_id": "cpp-no-implicit-conversions",
+    "language": "cpp",
+    "description": "Do not define implicit conversions. Use the `explicit` keyword. Exceptions for types designed to be interchangeable require a waiver.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "operator $TYPE() $CV_QUALIFIER { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$CV_QUALIFIER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "missing_keyword('explicit')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not detect all forms of conversion operators or complex cv-qualifiers."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to fully verify conversion operators."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\implicit_conversions.txt",
+      "section": "implicit_conversions"
+    }
+  }
+]

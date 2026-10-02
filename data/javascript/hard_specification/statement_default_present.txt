@@ -1,0 +1,4 @@
+**Specification 112: Switch statement - `default` case must be present**
+Description: Each switch statement includes a `default` statement group, even if empty, and must be last.
+Example: `default: break;`
+Additional Notes: None.

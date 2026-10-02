@@ -1,0 +1,4 @@
+Specification 76: No fall-through in new-style switch
+Description: Fall-through does not exist in new-style switches (arrow syntax).
+Example: case 1 -> handle(); (no fall-through)
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 100: Avoid command expansions directly in array assignments**
+Description: Avoid unquoted expansion in array assignments; won’t work correctly if output contains special characters.
+Example: Don’t do `files=($(ls))`.
+Additional Notes: Use `readarray`.

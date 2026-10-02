@@ -1,0 +1,4 @@
+**Specification 54: Whitespace - no space before comma, semicolon, colon**
+Description: No whitespace before a comma, semicolon, or colon. Use space after them.
+Example: `print(x, y)` not `print(x , y)`
+Additional Notes: None.

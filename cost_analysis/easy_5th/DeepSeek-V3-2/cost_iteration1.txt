@@ -1,0 +1,57 @@
+============================================================
+  迭代1成本分析报告
+============================================================
+
+  批次: easy_5th
+  模型: DeepSeek-V3-2
+  迭代: 1
+  时间: 2026-05-10 22:47:47
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  读取evaluate1.txt及4个Semgrep FP规则: 约2min
+  读取1个PMD + 2个CodeQL stubs: 约1min
+  修改4个Semgrep FP规则: 约2min
+  修改1个PMD + 2个CodeQL stubs: 约1min
+  scan_project.py --iteration 1: 约240s (4min)
+  生成iteration1_summary + cost_iteration1: 约2min
+  总耗时: 约12min
+
+------------------------------------------------------------
+  人工修改时间:
+------------------------------------------------------------
+  - 4个Semgrep YAML手动修改: 约2min
+  - 1个PMD Java手动修改: 约1min
+  - 2个CodeQL .ql手动修改: 约1min
+  - 共修改7个文件
+
+------------------------------------------------------------
+  规则修改详情:
+------------------------------------------------------------
+  | 规则 | 修改类型 | 效果 |
+  |------|----------|------|
+  | shell-prefer-brace-expansion | patterns→pattern-regex+lookahead | 8428→1414 |
+  | shell-parentheses-required | patterns+pattern-not排除已有括号 | 396→0 |
+  | python-decorator-judicious-use | pattern→patterns+10个pattern-not | 88→52 |
+  | javascript-import-no-line-wrap | multiline pattern→简单named import | 1→3 |
+  | PMD JavaModuleDirectivesOrdering | no-op→test class naming检测 | 0→0(被过滤) |
+  | CodeQL python-indentation | placeholder→function+parameter检测 | RUN_FAIL |
+  | CodeQL js-line-wrap | placeholder→BinaryExpr检测 | RUN_FAIL |
+
+------------------------------------------------------------
+  扫描运行统计:
+------------------------------------------------------------
+  Semgrep: 43条规则扫描, 4条有发现
+  PMD: 0条已验证规则(1条被过滤)
+  CodeQL: 2条规则, 全部RUN_FAIL
+  scan_project.py 输出: ~1000 words / ~15000 chars
+
+------------------------------------------------------------
+  总违规数变化:
+------------------------------------------------------------
+  基线: 8944
+  迭代1: 1500
+  减少: -7444 (-83.2%)
+
+============================================================

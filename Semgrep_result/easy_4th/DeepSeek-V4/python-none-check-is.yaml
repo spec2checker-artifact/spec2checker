@@ -1,0 +1,97 @@
+rules:
+- id: python-none-check-is
+  message: Always use `if x is None` (or `is not None`) to check for `None`. Using
+    `if not x:` is incorrect when `x` could be `0` or an empty string.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: |
+      if not $X:
+          ...
+  - pattern-not: |
+      if not isinstance($X, ...):
+          ...
+  - pattern-not: |
+      if not $X.startswith(...):
+          ...
+  - pattern-not: |
+      if not $X.endswith(...):
+          ...
+  - pattern-not: |
+      if not len($X):
+          ...
+  - pattern-not: |
+      if not $X in ...:
+          ...
+  - pattern-not: |
+      if not $X == ...:
+          ...
+  - pattern-not: |
+      if not $X != ...:
+          ...
+  - pattern-not: |
+      if not $X.lower():
+          ...
+  - pattern-not: |
+      if not $X.upper():
+          ...
+  - pattern-not: |
+      if not $X.strip():
+          ...
+  - pattern-not: |
+      if not $X.isdigit():
+          ...
+  - pattern-not: |
+      if not $X.isalpha():
+          ...
+  - pattern-not: |
+      if not $X.isspace():
+          ...
+  - pattern-not: |
+      if not $X.isalnum():
+          ...
+  - pattern-not: |
+      if not $X.is_available:
+          ...
+  - pattern-not: |
+      if not $X.is_set:
+          ...
+  - pattern-not: |
+      if not $X.is_none:
+          ...
+  - pattern-not: |
+      if not $X.exists():
+          ...
+  - pattern-not: |
+      if not $X.is_empty:
+          ...
+  - metavariable-regex:
+      metavariable: $X
+      regex: "^(user|result|response|obj|object|node|model|item|value|data|record|entry|row|doc|document|msg|message|conn|connection|client|session|ctx|context|req|request|resp|reply|ref|ptr|handle|token|ticket|task|job|worker|thread|proc|process|sock|socket|fp|file|dir|path|db|database|cursor|cache|lock|resource|handler|manager|loader|parser|adapter|proxy|factory|builder|visitor|observer|strategy|command|state|view|controller|component|widget|element|entity|instance|stub|mock|impl|alias|option|config|setting|spec|descriptor|profile|account|identity|principal|credential|cert|secret|key|grant|claim|role|permission|policy|rule|filter|validator|converter|formatter|encoder|decoder|mapper|serializer|reducer|collector|aggregator|router|dispatcher|invoker|executor|runner|scheduler|timer|counter|log|logger|report|metric|stat|health|status|signal|notification|alert|incident|error|exception|fault|failure|warning|alarm|queue|pipe|buffer|stream|channel|transport|bridge|gateway|cluster|pool|registry|repo|repository|store|vault|archive|backup|snapshot|version|revision|commit|branch|tag|release|build|deploy|artifact|package|module|plugin|extension|addon|feature|flag|toggle|switch|param|parameter|argument|input|output|callback|hook|trigger|event|action|operation|method|function|procedure|routine|service|endpoint|api|interface|contract|protocol|schema|format|template|layout|pattern|style|theme|content|text|string|number|digit|fraction|ratio|percent|angle|coord|point|vector|matrix|tensor|array|list|dict|map|set|tuple|range|slice|index|offset|size|length|width|height|depth|volume|area|perimeter|radius|diameter|scale|factor|rate|speed|velocity|acceleration|force|weight|mass|density|pressure|temperature|energy|power|voltage|current|charge|frequency|period|duration|interval|timeout|deadline|timestamp|date|time|epoch|locale|lang|encoding|charset|type|kind|category|class|grade|level|tier|rank|score|rating|priority|severity|importance|urgency|status_code|http_code|exit_code|error_code|reason|cause|source|origin|destination|target|goal|objective|purpose|intent|motive|driver|stimulus|effect|outcome|impact|consequence|artifact|product|deliverable|payload|body|meta|header|footer|prefix|suffix|name|label|marker|bit|mask|regex|condition|constraint|limit|threshold|boundary|edge|border|margin|padding|gap|space|alignment|indent|column|line|position|location|address|url|uri|route|port|host|domain|site|page|screen|window|panel|dialog|form|field|button|link|menu|tab|section|block|slot|placeholder|utility|helper|assistant|agent|bot|daemon|server|peer|master|slave|leader|follower|coordinator|mediator|broker|connector|link|frame|packet|chunk|segment|fragment|piece|part|portion|share|quota|allocation|reservation|lease|loan|credit|debit|balance|wallet|fund|asset|material|supply|stock|inventory|catalog|directory|library|collection|bundle|box|container|holder|carrier|vehicle|platform|framework|engine|runtime|compiler|interpreter|assembler|linker|debugger|profiler|monitor|watcher|guard|protector|shield|sieve|barrier|wall|gate|door|seal|stamp|badge|pass|permit|license|certificate|password|code|pin|hash|checksum|signature|proof|evidence|witness|test|trial|experiment|observation|measurement|assessment|evaluation|review|audit|check|probe|query|search|lookup|find|match|compare|diff|merge|join|split|divide|multiply|add|subtract|aggregate|sum|count|average|mean|median|mode|min|max|deviation|variance|correlation|regression|prediction|forecast|estimate|approximation|bound|confidence|significance|statistic|sample|population|distribution|probability|likelihood|odds|chance|risk|hazard|threat|vulnerability|attack|exploit|breach|leak|exposure|disclosure|loss|damage|harm|injury|accident|crash|bug|defect|flaw|issue|problem|challenge|obstacle|restriction|limitation|frontier|horizon|perspective|viewpoint|aspect|dimension|facet|side|face|surface|layer|variant|edition|patch|update|upgrade|migration|transition|conversion|transformation|evolution|mutation|adaptation|adjustment|modification|change|alteration|correction|fix|repair|restore|recovery|remedy|cure|treatment|therapy|intervention|step|phase|stage|round|cycle|iteration|loop|repeat|retry|attempt|move|action|period|era|age|generation|wave|trend|movement|shift|progress|development|growth|expansion|advancement|improvement|enhancement|optimization|refinement|completion|finalization|delivery|deployment|launch|start|beginning|origin|creation|production|construction|building|manufacturing|assembly|integration|composition|combination|fusion|union|connection|bond|tie|attachment|association|affiliation|membership|partnership|collaboration|cooperation|coordination|communication|exchange|transfer|transmission|propagation|broadcast|distribution|dissemination|circulation|diffusion|spread|increase|rise|ascend|climb|advance|forward|beyond|past|history|legacy|heritage|tradition|custom|convention|norm|standard|guideline|principle|belief|faith|trust|assurance|guarantee|promise|commitment|dedication|loyalty|fidelity|devotion|passion|enthusiasm|zeal|spirit|soul|heart|mind|brain|intellect|wisdom|knowledge|insight|understanding|comprehension|awareness|consciousness|perception|sensation|feeling|emotion|mood|temper|attitude|stance|posture|pose|gesture|expression|manifestation|symptom|indicator|cue|hint|tip|suggestion|advice|recommendation|guidance|direction|instruction|order|mandate|directive|decree|law|regulation|statute|ordinance|specification|requirement|demand|appeal|petition|plea|assertion|declaration|statement|announcement|proclamation|notice|caution|beacon|lighthouse|guide|compass|map|chart|plan|blueprint|design|architecture|system|infrastructure|foundation|base|core|kernel|center|hub|vertex|root|stem|branch|leaf|flower|fruit|seed|sprout|shoot|bud|bloom|petal|thorn|weed|grass|tree|forest|wood|lumber|timber|board|plank|beam|pillar|post|pole|stick|rod|bar|wire|cable|cord|rope|chain|ring|circle|arc|curve|bow|corner|frame|vessel|tank|reservoir|basin|pond|lake|river|creek|brook|canal|ditch|trench|pit|crater|volcano|lava|magma|ash|smoke|cloud|fog|mist|haze|rain|snow|ice|frost|dew|steam|vapor|humidity|moisture|flood|tide|swell|surf|ripple|splash|spray|flow|flux|gravity|circumference|outline|profile|shape|form|figure|arrangement|organization|network|web|grid|sequence|series|progression|sliver|shred|gash|slash|wound|scar|stain|blot|smear|scratch|nick|dent|bump|lump|bulge|swelling|protrusion|outgrowth|appendage|fork|divergence|branching|ramification|subdivision|junction|intersection|crossing|coupling|pair|couple|duo|twin|mate|companion|partner|counterpart|opposite|inverse|reverse|mirror|reflection|shadow|echo|reverberation|resonance|vibration|oscillation|pulse|beat|rhythm|milestone|landmark|orientation|heading|course|adit|entrance|aperture|vent|skylight|chimney|flue|duct|hose|conduit|aqueduct|pipeline|adit|skylight|chimney|flue|duct|hose|conduit|aqueduct|pipeline)$"
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Uses heuristic variable naming to filter; may still produce some
+          false positives/negatives.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type tracking to determine if $X could be None, 0, or
+          empty string.
+    original_description: Always use `if x is None` (or `is not None`) to check for
+      None. Using `if not x:` is incorrect when `x` could be `0` or an empty string.

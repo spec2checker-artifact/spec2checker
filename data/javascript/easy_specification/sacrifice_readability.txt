@@ -1,0 +1,4 @@
+**Specification 6: Non-ASCII - never sacrifice readability**
+Description: Never make code less readable for fear of programs not handling non-ASCII; such programs are broken.
+Example: Use `μs` not `\u03bcs` unless necessary.
+Additional Notes: None.

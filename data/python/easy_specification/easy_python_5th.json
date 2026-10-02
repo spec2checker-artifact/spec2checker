@@ -1,0 +1,515 @@
+[
+  {
+    "rule_id": "python-decorator-judicious-use",
+    "language": "python",
+    "description": "Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@$DECORATOR\ndef $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DECORATOR": {
+          "type_hint": "expr"
+        },
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DECORATOR",
+        "constraint_type": "syntactic",
+        "condition": "contains_import_call",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully analyze decorator body for external dependencies; relies on pattern matching for import calls within the decorator expression."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect decorators with import calls; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\decorators_judiciously.txt",
+      "section": "decorators_judiciously"
+    }
+  },
+  {
+    "rule_id": "python-no-boolean-false-comparison",
+    "language": "python",
+    "description": "Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $X == False:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for precise detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_compare_boolean.txt",
+      "section": "truefalse_compare_boolean"
+    }
+  },
+  {
+    "rule_id": "python-lexical-scoping-ok",
+    "language": "python",
+    "description": "Lexical scoping (nested functions referring to enclosing variables) is okay to use. This rule is informational and does not flag violations.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $OUTER($ARGS):\n    ...\n    def $INNER($ARGS2):\n        ... $VAR ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_bound_in_outer_scope",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect nested functions and variable references, but cannot fully validate correct lexical scoping semantics."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can model lexical scoping, but this is a permissive rule, not a detection rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lexical_scoping_okay.txt",
+      "section": "lexical_scoping_okay"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-binary-operator",
+    "language": "python",
+    "description": "Surround binary operators with a single space on either side for assignment, comparisons, and Booleans. Use judgment for arithmetic operators.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$LEFT $OP $RIGHT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LEFT": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        },
+        "$RIGHT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operator",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for each operator type; may not handle all edge cases like arithmetic operators where spacing is optional."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_operators.txt",
+      "section": "whitespace_operators"
+    }
+  },
+  {
+    "rule_id": "python-implicit-false",
+    "language": "python",
+    "description": "Use implicit false evaluation for sequences, collections, and numeric zero instead of explicit comparisons to empty literals or len() checks.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $VAR != []:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires multiple patterns to cover all explicit false comparisons (e.g., != [], == 0, len() == 0)"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect all patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_evaluations.txt",
+      "section": "truefalse_evaluations"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-no-trailing-whitespace",
+    "language": "python",
+    "description": "No trailing whitespace. Lines should not end with spaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule using `pattern-regex` to match whitespace at line end, may have issues with multiline strings."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support Python analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_whitespace.txt",
+      "section": "whitespace_whitespace"
+    }
+  },
+  {
+    "rule_id": "python-indentation-4-spaces-no-tabs",
+    "language": "python",
+    "description": "Indent code blocks with 4 spaces. Never use tabs. Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace detection; may not handle all edge cases."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace analysis; not a standard query."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\indentation_4_spaces_tabs.txt",
+      "section": "indentation_4_spaces_tabs"
+    }
+  },
+  {
+    "rule_id": "python-no-spaces-around-equals",
+    "language": "python",
+    "description": "Never use spaces around `=` when passing keyword arguments or defining default parameter values, unless a type annotation is present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARG = $VAL",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARG": {
+          "type_hint": "expr"
+        },
+        "$VAL": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARG",
+        "constraint_type": "syntactic",
+        "condition": "is_keyword_argument_or_default_param",
+        "required": "true"
+      },
+      {
+        "target": "$ARG",
+        "constraint_type": "annotation",
+        "condition": "has_no_type_annotation",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match `=` with surrounding spaces and exclude cases with type annotations"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect whitespace in keyword/default arguments"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_arguments.txt",
+      "section": "whitespace_arguments"
+    }
+  },
+  {
+    "rule_id": "python-nested-function-without-closure",
+    "language": "python",
+    "description": "Detects nested local functions or classes that do not close over a local variable from the outer scope, suggesting they should be defined at module level or prefixed with '_' instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $OUTER(...):\n    ...\n    def $INNER(...):\n        ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OUTER": {
+          "type_hint": "function"
+        },
+        "$INNER": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$INNER",
+        "constraint_type": "scope",
+        "condition": "uses_variable_from_outer_scope",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": true,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Dataflow analysis for variable usage is limited; may have false positives/negatives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check variable capture."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\functionsclasse_variable.txt",
+      "section": "functionsclasse_variable"
+    }
+  },
+  {
+    "rule_id": "python-run-pylint",
+    "language": "python",
+    "description": "Ensure pylint is run on the codebase, typically via a script or command.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep analyzes code syntax, not build/script execution."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL analyzes code, not build/script execution."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lint_tool_run_pylint.txt",
+      "section": "lint_tool_run_pylint"
+    }
+  }
+]

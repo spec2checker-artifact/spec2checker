@@ -1,0 +1,4 @@
+**Specification 96: Prefer builtin `[[ ... ]]` over external `[` for regex and pattern matching**
+Description: `[[ ... ]]` allows pattern and regex matching; `[` does not.
+Example: `if [[ "filename" == f* ]]; then` works; `[ "filename" == f* ]` fails.
+Additional Notes: None.

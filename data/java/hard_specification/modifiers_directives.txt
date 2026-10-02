@@ -1,0 +1,4 @@
+Specification 88: Modifiers on module requires directives
+Description: Order: transitive static.
+Example: requires transitive static com.example.foo;
+Additional Notes: None.

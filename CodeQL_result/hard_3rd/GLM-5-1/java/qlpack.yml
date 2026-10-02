@@ -1,0 +1,4 @@
+name: hard-3rd-glm-5-1-java/custom
+version: 0.0.1
+dependencies:
+  codeql/java-all: "*"

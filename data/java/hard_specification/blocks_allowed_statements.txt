@@ -1,0 +1,9 @@
+Specification 64: Empty blocks - not allowed in multi-block statements
+Description: In if/else or try/catch/finally, concise empty block {} is not acceptable.
+Example:
+
+java
+try {
+  doSomething();
+} catch (Exception e) {} // not acceptable
+Additional Notes: Use K&R style instead.

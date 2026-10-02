@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+         name="CustomRules">
+  <description>Custom PMD rules generated from natural language specifications</description>
+  <rule name="JavaSwitchExhaustiveness" class="com.rule.pmd.JavaSwitchExhaustiveness" language="java">
+    <priority>3</priority>
+  </rule>
+  <rule name="JavaFinalizeOverride" class="com.rule.pmd.JavaFinalizeOverride" language="java">
+    <priority>3</priority>
+  </rule>
+  <rule name="JavaCamelCaseNaming" class="com.rule.pmd.JavaCamelCaseNaming" language="java">
+    <priority>3</priority>
+  </rule>
+  <rule name="JavaLocalVariableDeclarationTiming" class="com.rule.pmd.JavaLocalVariableDeclarationTiming" language="java">
+    <priority>3</priority>
+  </rule>
+</ruleset>

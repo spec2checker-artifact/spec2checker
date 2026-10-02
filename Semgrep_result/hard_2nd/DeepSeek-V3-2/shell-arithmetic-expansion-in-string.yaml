@@ -1,0 +1,35 @@
+rules:
+- id: shell-arithmetic-expansion-in-string
+  message: Use `$(( ... ))` inside strings for arithmetic expansion.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: echo "$(( $EXPR ))"
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match only simple echo statements; complex string
+          contexts may be missed.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: Use `$(( ... ))` inside strings for arithmetic expansion.

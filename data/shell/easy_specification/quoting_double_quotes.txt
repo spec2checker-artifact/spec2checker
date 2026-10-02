@@ -1,0 +1,4 @@
+**Specification 33: Braces are not quoting - must also use double quotes**
+Description: Using braces in `${var}` is not a form of quoting. “Double quotes” must be used as well.
+Example: `"${var}"`.
+Additional Notes: None.

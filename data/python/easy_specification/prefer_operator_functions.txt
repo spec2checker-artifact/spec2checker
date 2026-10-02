@@ -1,0 +1,4 @@
+**Specification 23: Lambda - prefer `operator` functions**
+Description: For common operations like multiplication, use functions from `operator` module instead of lambda.
+Example: `operator.mul` over `lambda x, y: x * y`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 50: Horizontal whitespace - before `{` except two exceptions**
+Description: Space before open curly brace `{`, except before object literal that is first argument or first element in array literal.
+Example: `if (x) {` has space; `foo({a:1})` no space before `{`.
+Additional Notes: Also no space in template expansion (invalid).

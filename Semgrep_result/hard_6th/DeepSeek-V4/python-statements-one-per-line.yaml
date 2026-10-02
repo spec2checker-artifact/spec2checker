@@ -1,0 +1,34 @@
+rules:
+- id: python-statements-one-per-line
+  message: Generally only one statement per line. Compound statements like try/except
+    or if/else are not allowed on the same line.
+  languages:
+  - python
+  severity: WARNING
+  pattern: 'try: ... except ...: ...'
+  metadata:
+    syntax_statement: is_compound_statement
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern for each compound statement type (if, try, with,
+          etc.)
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect multiple statements per line
+    original_description: Generally only one statement per line. Compound statements
+      like try/except or if/else are not allowed on the same line.

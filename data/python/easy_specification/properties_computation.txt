@@ -1,0 +1,4 @@
+**Specification 29: Properties - do not use for simple get/set without computation**
+Description: Using a property to simply get and set an internal attribute is not allowed; make the attribute public instead.
+Example: `self.x = x` directly rather than `@property` and `@x.setter`.
+Additional Notes: None.

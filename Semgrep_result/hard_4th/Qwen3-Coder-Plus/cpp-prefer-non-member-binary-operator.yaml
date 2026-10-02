@@ -1,0 +1,52 @@
+rules:
+- id: cpp-prefer-non-member-binary-operator
+  message: Prefer to define non-modifying binary operators as non-member functions
+    to allow implicit conversions on both sides.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "class $CLASS {\n    ...\n    $RET operator$OP($PARAMS) $CONST {\n  \
+      \      ...\n    }\n    ...\n}"
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  - metavariable-type:
+      metavariable: $RET
+      type: expr
+  - metavariable-type:
+      metavariable: $OP
+      type: expr
+  - metavariable-type:
+      metavariable: $PARAMS
+      type: expr
+  - metavariable-type:
+      metavariable: $CONST
+      type: expr
+  metadata:
+    syntax_operator$OP: is_non_modifying_operator
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match member operator definitions; may have
+          false positives with modifying operators (e.g., +=)
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query to identify non-modifying binary operators
+          defined as member functions
+    original_description: Prefer to define non-modifying binary operators as non-member
+      functions to allow implicit conversions on both sides.

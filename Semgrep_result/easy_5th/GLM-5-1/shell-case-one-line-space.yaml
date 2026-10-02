@@ -1,0 +1,43 @@
+rules:
+- id: shell-case-one-line-space
+  message: A one-line alternative in a case statement needs a space after the close
+    parenthesis of the pattern and before the `;;`.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "case $VAR in\n    $PATTERN) $CMD;;\n    ...\nesac"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $PATTERN
+      type: expr
+  - metavariable-type:
+      metavariable: $CMD
+      type: expr
+  metadata:
+    syntax_$CMD: is_not_preceded_by(' ')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires precise whitespace matching which may be fragile
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: A one-line alternative in a case statement needs a space
+      after the close parenthesis of the pattern and before the `;;`.

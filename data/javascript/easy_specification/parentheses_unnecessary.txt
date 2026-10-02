@@ -1,0 +1,4 @@
+**Specification 58: Parentheses unnecessary after `delete`, `typeof`, `void`, `return`, `throw`, `case`, `in`, `of`, `yield`**
+Description: Do not use unnecessary parentheses around entire expression following those keywords.
+Example: `return x;` not `return (x);`.
+Additional Notes: Parentheses required for type casts.

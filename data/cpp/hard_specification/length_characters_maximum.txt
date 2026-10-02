@@ -1,0 +1,4 @@
+**Specification 54: Line length - 80 characters maximum**  
+Description: Each line of text in your code should be at most 80 characters long. Exceptions for comments with long URLs, string literals, include statements, header guards, using-declarations.  
+Example: Wrap lines exceeding 80.  
+Additional Notes: Use tools like Clang-Format.

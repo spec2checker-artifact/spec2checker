@@ -1,0 +1,4 @@
+Specification 109: Camel case - step 4: lowercase everything
+Description: Lowercase everything including acronyms.
+Example: "XML HTTP request" → "xml http request"
+Additional Notes: None.

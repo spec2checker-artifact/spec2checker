@@ -1,0 +1,9 @@
+Specification 59: Array initializers - can be block-like
+Description: Any array initializer may optionally be formatted as if it were a block-like construct.
+Example:
+
+java
+new int[] {
+  0, 1, 2, 3
+}
+Additional Notes: Multiple valid formats.

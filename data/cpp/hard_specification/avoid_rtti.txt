@@ -1,0 +1,4 @@
+**Specification 30: Avoid RTTI**  
+Description: Avoid using run-time type information (RTTI). Use virtual methods or visitor pattern instead.  
+Example: Not `typeid(*data) == typeid(D1)`.  
+Additional Notes: Allowed in unit tests.

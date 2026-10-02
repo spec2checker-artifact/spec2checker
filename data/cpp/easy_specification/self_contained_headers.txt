@@ -1,0 +1,4 @@
+**Specification 13: Self-contained headers**  
+Description: Header files should be self-contained (compile on their own) and end in `.h`.  
+Example: A header should have header guards and include all headers it needs.  
+Additional Notes: Non-header files for inclusion end in `.inc` and are used sparingly.

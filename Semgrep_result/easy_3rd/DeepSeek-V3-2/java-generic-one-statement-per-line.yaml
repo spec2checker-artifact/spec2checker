@@ -1,0 +1,42 @@
+rules:
+- id: java-generic-one-statement-per-line
+  message: Each statement must be followed by a line break; multiple statements on
+    the same line are prohibited.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $STMT1; $STMT2
+  - metavariable-type:
+      metavariable: $STMT1
+      type: expr
+  - metavariable-type:
+      metavariable: $STMT2
+      type: expr
+  metadata:
+    syntax_statement: is_simple_statement
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match within strings or comments; requires careful
+          tuning
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for one-statement-per-line;
+          requires custom rule
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect multiple statements on one line
+    original_description: Each statement must be followed by a line break; multiple
+      statements on the same line are prohibited.

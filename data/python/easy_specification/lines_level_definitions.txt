@@ -1,0 +1,10 @@
+**Specification 51: Blank lines - two between top-level definitions**
+Description: Two blank lines between top-level definitions (functions or classes).
+Example:
+```python
+def func1(): pass
+
+
+def func2(): pass
+```
+Additional Notes: One blank line between method definitions.

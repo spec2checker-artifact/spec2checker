@@ -1,0 +1,4 @@
+**Specification 88: Never use `let` builtin**
+Description: Never use the `let` builtin.
+Example: Not `let i="2 + 2"`.
+Additional Notes: Use `(( ... ))`.

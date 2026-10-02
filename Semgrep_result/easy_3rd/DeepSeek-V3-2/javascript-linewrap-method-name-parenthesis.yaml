@@ -1,0 +1,38 @@
+rules:
+- id: javascript-linewrap-method-name-parenthesis
+  message: A method or constructor name must stay attached to the open parenthesis
+    '(' and not be broken onto a new line.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: "$MODIFIERS? $TYPE? $NAME(\n    ..."
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: ^[a-zA-Z_$][a-zA-Z0-9_$]*$
+  metadata:
+    syntax_function: newline_before_token('(')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match false positives in complex expressions or comments.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom rule using XPath to detect newline before '('
+          token.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for formatting rule detection.
+    original_description: A method or constructor name must stay attached to the open
+      parenthesis '(' and not be broken onto a new line.

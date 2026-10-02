@@ -1,0 +1,14 @@
+rules:
+- id: javascript-nested-function-const
+  message: '[DISABLED] Nested function definitions should be assigned to a local const
+    variable if they are given a name.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Nested function definitions should be assigned to a local
+      const variable if they are given a name.

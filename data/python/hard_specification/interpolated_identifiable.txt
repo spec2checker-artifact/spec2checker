@@ -1,0 +1,4 @@
+**Specification 80: Error messages - precise, interpolated pieces identifiable, grepable**
+Description: Error messages should precisely match error condition, interpolated pieces clearly identifiable, and allow simple automated processing.
+Example: `raise ValueError(f'Not a probability: {p=}')`
+Additional Notes: None.

@@ -1,0 +1,14 @@
+rules:
+- id: python-integer-compare-zero
+  message: '[DISABLED] For integers, implicit false may be risky; compare explicitly
+    to 0.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: For integers, implicit false may be risky; compare explicitly
+      to 0.

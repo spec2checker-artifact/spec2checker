@@ -1,0 +1,39 @@
+rules:
+- id: javascript-horizontal-whitespace-after-colon
+  message: Require a space after the colon in an object literal property definition.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: '{$KEY:$VALUE}'
+  - metavariable-type:
+      metavariable: $KEY
+      type: expr
+  - metavariable-type:
+      metavariable: $VALUE
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern matches missing space but may require custom message/autofix
+          for formatting.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for pure formatting/style rules.
+    original_description: Require a space after the colon in an object literal property
+      definition.

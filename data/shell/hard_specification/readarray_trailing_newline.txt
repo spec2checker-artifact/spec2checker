@@ -1,0 +1,4 @@
+**Specification 78: Use `readarray -t` to read lines into array without trailing newline**
+Description: `readarray -t lines < <(command)` reads lines into array, stripping trailing newline.
+Example: `readarray -t lines < <(your_command)`
+Additional Notes: None.

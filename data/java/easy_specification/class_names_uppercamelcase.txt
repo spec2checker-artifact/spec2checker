@@ -1,0 +1,4 @@
+Specification 95: Class names - UpperCamelCase
+Description: Class names written in UpperCamelCase. Typically nouns or noun phrases.
+Example: Character, ImmutableList
+Additional Notes: Interface names may be nouns or adjectives (Readable).

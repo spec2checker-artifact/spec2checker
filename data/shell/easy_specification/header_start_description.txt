@@ -1,0 +1,4 @@
+**Specification 1: File header - start with description**
+Description: Start each file with a description of its contents.
+Example: `#!/bin/bash` followed by `# Perform hot backups of Oracle databases.`
+Additional Notes: Copyright and author information optional.

@@ -1,0 +1,4 @@
+**Specification 10: `goog.module` hierarchy - no direct child of another module's namespace**
+Description: Module namespaces may never be named as a direct child of another module's namespace.
+Example: `goog.module('foo.bar');` then `goog.module('foo.bar.baz');` disallowed.
+Additional Notes: Directory hierarchy reflects namespace.

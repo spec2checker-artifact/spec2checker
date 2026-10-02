@@ -1,0 +1,4 @@
+**Specification 104: Arithmetic comparison in `(( ... ))` does not require `$` on variables**
+Description: Inside `(( ... ))`, variables are referenced by name without `$`.
+Example: `if (( a < b )); then`
+Additional Notes: Cleaner code.

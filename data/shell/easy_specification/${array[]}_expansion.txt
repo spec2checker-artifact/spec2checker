@@ -1,0 +1,4 @@
+**Specification 48: Use `"${array[@]}"` for quoted expansion**
+Description: Use quoted expansion `"${array[@]}"` to access arrays.
+Example: `mybinary "${flags[@]}"`
+Additional Notes: None.

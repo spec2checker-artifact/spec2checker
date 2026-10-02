@@ -1,0 +1,43 @@
+rules:
+- id: java-switch-single-line
+  message: Switch rule can be written on single line if it follows Google style (no
+    column overflow; if non-empty block, line break after {). Continuation lines indent
+    +4.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: case $LABEL -> $EXPR;
+  - metavariable-type:
+      metavariable: $LABEL
+      type: expr
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_statement: is_single_line
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot enforce column overflow or block formatting constraints.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom rule to check line length and block formatting.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query for formatting rules; line length checks
+          are not typical.
+    original_description: Switch rule can be written on single line if it follows
+      Google style (no column overflow; if non-empty block, line break after {). Continuation
+      lines indent +4.

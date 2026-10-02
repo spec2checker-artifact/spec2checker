@@ -1,0 +1,39 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-15 17:50:54
+Batch: easy_3rd
+Model: DeepSeek-V4
+Input: <PROJECT_ROOT>\UIR\easy\easy_3rd.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       41 |        9 |        9 |
+| PMD             |        1 |        1 |        0 |        0 |
+| CodeQL          |        5 |        2 |        3 |        3 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       44 |        6 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 44/50 rules validated (88%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 41/50
+      -> 1 passed to PMD
+  PMD:     1/1
+      -> 5 passed to CodeQL
+  CodeQL:  2/5
+      -> 6 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- javascript-knr-brace-style (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-switch-indentation (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- python-run-pylint (python) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- shell-case-indent-alternatives (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-formatting-follow-existing-style (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-generic-indentation-consistency (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

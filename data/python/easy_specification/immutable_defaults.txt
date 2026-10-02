@@ -1,0 +1,4 @@
+**Specification 26: Default argument values - immutable defaults allowed**
+Description: Immutable defaults like `()` (empty tuple) are okay.
+Example: `def foo(a, b: Sequence = ()): ...`
+Additional Notes: None.

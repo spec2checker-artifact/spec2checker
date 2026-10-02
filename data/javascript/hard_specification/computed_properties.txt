@@ -1,0 +1,4 @@
+**Specification 83: Classes - computed properties only for symbols**
+Description: Computed properties in classes only when property is a symbol. Dict-style properties (quoted or computed non-symbol) not allowed.
+Example: `[Symbol.iterator]() { ... }`.
+Additional Notes: Use sparingly.

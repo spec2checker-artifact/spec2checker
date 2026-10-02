@@ -1,0 +1,4 @@
+**Specification 17: Use trailing return type only when necessary**  
+Description: Use trailing return type syntax (`auto func() -> type`) only when required (e.g., lambdas) or when it greatly improves readability.  
+Example: `auto Add(T t, U u) -> decltype(t + u)`  
+Additional Notes: Prefer ordinary leading return type in most cases.

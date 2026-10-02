@@ -1,0 +1,14 @@
+rules:
+- id: javascript-no-non-numeric-array-properties
+  message: '[DISABLED] Do not define or use non-numeric properties on arrays (other
+    than `length`). Use `Map` or `Object`.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Do not define or use non-numeric properties on arrays (other
+      than `length`). Use `Map` or `Object`.

@@ -1,0 +1,4 @@
+**Specification 50: Global variables should have comments**  
+Description: All global variables should have a comment describing what they are and why they need to be global.  
+Example: `// The total number of test cases...`  
+Additional Notes: None.

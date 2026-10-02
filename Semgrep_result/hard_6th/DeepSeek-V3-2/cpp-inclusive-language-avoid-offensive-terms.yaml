@@ -1,0 +1,38 @@
+rules:
+- id: cpp-inclusive-language-avoid-offensive-terms
+  message: Detect use of non-inclusive or offensive terms (e.g., 'master', 'slave',
+    'blacklist', 'whitelist') in identifiers and string literals.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $TERM
+  - metavariable-regex:
+      metavariable: $TERM
+      regex: (?i)\b(master|slave|blacklist|whitelist)\b
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex pattern may match in comments or documentation strings;
+          requires custom pattern list for comprehensive coverage
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to match specific terms in identifiers
+          and strings
+    original_description: Detect use of non-inclusive or offensive terms (e.g., 'master',
+      'slave', 'blacklist', 'whitelist') in identifiers and string literals.

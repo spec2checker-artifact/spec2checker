@@ -1,0 +1,10 @@
+**Specification 56: Function arguments - prefer same line, else wrap with 4-space indent**
+Description: Prefer all arguments on same line as function name. If exceed 80, wrap arguments in readable way. Indentation 4 spaces.
+Example:
+```javascript
+doSomething(
+    arg1, arg2, arg3) {
+  // ...
+}
+```
+Additional Notes: Aligning to parenthesis allowed but discouraged.

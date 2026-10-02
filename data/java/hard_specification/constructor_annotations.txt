@@ -1,0 +1,9 @@
+Specification 81: Method and constructor annotations - same as class
+Description: Same rule: each annotation on its own line by default.
+Example:
+
+java
+@Deprecated
+@Override
+public String getName() { ... }
+Additional Notes: Exception for single parameterless annotation.

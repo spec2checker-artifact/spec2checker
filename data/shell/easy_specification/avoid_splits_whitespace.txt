@@ -1,0 +1,4 @@
+**Specification 52: Avoid `for var in $(...)` - splits by whitespace**
+Description: Be cautious using `for var in $(...)`; output split by whitespace, not line. Use `while read` or `readarray` instead.
+Example: Not `for f in $(ls)`.
+Additional Notes: Only safe if output contains no unexpected whitespace.

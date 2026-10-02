@@ -1,0 +1,9 @@
+**Specification 31: Block indentation - +2 spaces**
+Description: Each new block increases indent by 2 spaces. When block ends, indent returns to previous level. Applies to code and comments.
+Example:
+```javascript
+if (x) {
+  doSomething();
+}
+```
+Additional Notes: None.

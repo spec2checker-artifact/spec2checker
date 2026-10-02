@@ -1,0 +1,4 @@
+**Specification 84: TODO - include specific date or event**
+Description: If TODO is “At a future date do something”, include a very specific date or event.
+Example: `# TODO: Fix by November 2009`
+Additional Notes: Issues are ideal for tracking.

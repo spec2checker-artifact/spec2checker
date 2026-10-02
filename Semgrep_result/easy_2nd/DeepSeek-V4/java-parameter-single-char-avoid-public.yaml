@@ -1,0 +1,13 @@
+rules:
+- id: java-parameter-single-char-avoid-public
+  message: '[DISABLED] One-character parameter names should be avoided in public methods.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: One-character parameter names should be avoided in public
+      methods.

@@ -1,0 +1,39 @@
+rules:
+- id: cpp-unnamed-namespace-internal-linkage
+  message: Use unnamed namespaces for definitions that do not need to be referenced
+    outside the .cc file. Do not use in .h files.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "namespace {\n    ...\n}"
+  - pattern-not: "namespace {\n    ...\n}\nnamespace {\n    ...\n}"
+  paths:
+    include:
+    - "*.h"
+    - "*.hpp"
+    - "*.hxx"
+    - "*.hh"
+  metadata:
+    syntax_file: file_extension_matches('h|hpp|hxx|hh')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Use unnamed namespaces for definitions that do not need
+      to be referenced outside the .cc file. Do not use in .h files.

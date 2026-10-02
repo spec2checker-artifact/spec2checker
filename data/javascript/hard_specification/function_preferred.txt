@@ -1,0 +1,4 @@
+**Specification 102: Spread operator in function calls - preferred**
+Description: Function calls may use spread operator `...`. Prefer over `Function.prototype.apply`. No space after `...`.
+Example: `myFunction(...array, ...iterable);`
+Additional Notes: None.

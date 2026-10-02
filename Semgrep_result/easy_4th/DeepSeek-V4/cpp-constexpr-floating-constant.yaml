@@ -1,0 +1,44 @@
+rules:
+- id: cpp-constexpr-floating-constant
+  message: Use `constexpr` to define constants with floating-point expressions, not
+    just literals.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: const $TYPE $NAME = $INIT;
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $NAME
+      type: expr
+  - metavariable-type:
+      metavariable: $INIT
+      type: expr
+  metadata:
+    type_constraint_$TYPE: is_floating_point_type
+    syntax_$INIT: is_constant_expression
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type constraint for floating point may be approximate
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query for constant expression detection
+    original_description: Use `constexpr` to define constants with floating-point
+      expressions, not just literals.

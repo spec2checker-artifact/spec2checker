@@ -1,0 +1,44 @@
+rules:
+- id: cpp-operator-stream-overload-value-only
+  message: Overload operator<< for streaming only for types representing values, and
+    write only the user-visible value. Avoid exposing implementation details.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: std::ostream& operator<<(std::ostream& $OS, const $TYPE& $VAR)
+  - metavariable-type:
+      metavariable: $TYPE
+      type: type
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $OS
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: cannot enforce semantic 'value type' constraint, only detects
+          the pattern
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query to check for implementation detail exposure
+    original_description: Overload operator<< for streaming only for types representing
+      values, and write only the user-visible value. Avoid exposing implementation
+      details.

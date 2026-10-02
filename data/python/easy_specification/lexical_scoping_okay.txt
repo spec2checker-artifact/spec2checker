@@ -1,0 +1,4 @@
+**Specification 35: Lexical scoping - okay to use**
+Description: Lexical scoping (nested functions referring to enclosing variables) is okay to use.
+Example: `def get_adder(summand1): return lambda summand2: summand1 + summand2`
+Additional Notes: Be aware of potential confusion with loop variables.

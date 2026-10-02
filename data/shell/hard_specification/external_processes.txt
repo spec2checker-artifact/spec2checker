@@ -1,0 +1,4 @@
+**Specification 71: Prefer builtin commands over external processes**
+Description: Given the choice between invoking a shell builtin and a separate process, choose the builtin.
+Example: Use `"${string/#foo/bar}"` over `echo "$string" | sed ...`.
+Additional Notes: More efficient, robust, portable.

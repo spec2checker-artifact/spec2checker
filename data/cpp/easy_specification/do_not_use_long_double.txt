@@ -1,0 +1,4 @@
+**Specification 46: Do not use `long double`**  
+Description: Avoid `long double` because it gives non-portable results.  
+Example: Use `double` instead.  
+Additional Notes: None.

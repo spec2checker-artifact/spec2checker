@@ -1,0 +1,8 @@
+Specification 29: Non-assignment operator - pipe in catch block
+Description: | in catch block catch (FooException | BarException e) break before |.
+Example:
+
+java
+catch (FooException
+        | BarException e)
+Additional Notes: None.

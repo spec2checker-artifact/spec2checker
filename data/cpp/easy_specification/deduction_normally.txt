@@ -1,0 +1,4 @@
+**Specification 32: Use function template argument deduction normally**  
+Description: Function template argument deduction is almost always OK.  
+Example: `std::make_unique<Foo>(arg1, arg2)` (deduction works).  
+Additional Notes: None.

@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: CoTLLM
+  描述: 在DirectLLM基础上增加Chain-of-Thought提示，引导模型先分析规范语义，再逐步生成规则
+  批次: easy_5th
+  模型: GLM-5-1
+  输入: UIR/easy/easy_5th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 28/50 = 56.0%
+  Rule_V (规则验证数): 22/50 = 44.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 28条
+  语法错误规则: 5条
+  语义偏差规则: 17条
+
+  成功规则列表 (Successful Rules):
+     1. java-assignment-break-after-symbol            OK [V]  "Detect when a line break occurs before an assignment operato..."
+     2. shell-use-arrays-for-lists                    OK [V]  "Bash arrays should be used to store lists of elements to avo..."
+     3. java-horizontal-whitespace-keyword-brace      OK [V]  "Detect missing space between a closing curly brace } and the..."
+     4. shell-case-simple-commands-same-line          OK [V]  "Simple commands may be put on the same line as the pattern a..."
+     5. python-no-boolean-false-comparison            OK [V]  "Never compare a boolean variable to `False` using `==`. Use ..."
+     6. java-no-wildcard-import                       OK  "Wildcard (on-demand) imports, static or otherwise, are not u..."
+     7. python-run-pylint                             OK [V]  "Ensure pylint is run on the codebase, typically via a script..."
+     8. python-lexical-scoping-ok                     OK [V]  "Lexical scoping (nested functions referring to enclosing var..."
+     9. cpp-avoid-long-double                         OK [V]  "Use `float` and `double`; assume they represent IEEE-754 bin..."
+    10. python-implicit-false                         OK [V]  "Use implicit false evaluation for sequences, collections, an..."
+    11. java-non-constant-field-names                 OK [V]  "Non-constant field names (static or otherwise) should be wri..."
+    12. shell-prefer-quote-words                      OK [V]  "Prefer quoting strings that are words (as opposed to command..."
+    13. javascript-no-const-exports                   OK [V]  "Do not annotate `exports` object as `@const`; it is already ..."
+    14. javascript-line-wrap-after-operator           OK  "When a line is broken at an operator, the break must come af..."
+    15. python-whitespace-no-trailing-whitespace      OK [V]  "No trailing whitespace. Lines should not end with spaces."
+    16. javascript-no-circular-dependencies           OK [V]  "Do not create cycles between ES modules, even though specifi..."
+    17. javascript-horizontal-whitespace-after-colon  OK [V]  "Require a space after the colon in an object literal propert..."
+    18. cpp-const-placement-consistency               OK [V]  "Check for consistency in the placement of the `const` qualif..."
+    19. shell-wildcard-expansion-path                 OK [V]  "Use an explicit path when doing wildcard expansion of filena..."
+    20. cpp-class-data-member-trailing-underscore     OK  "Data members of classes (both static and non-static) must be..."
+    21. javascript-duplicate-import                   OK [V]  "Do not import the same file multiple times; hard to determin..."
+    22. python-indentation-4-spaces-no-tabs           OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    23. python-nested-function-without-closure        OK  "Detects nested local functions or classes that do not close ..."
+    24. javascript-linewrap-method-name-parenthesis   OK [V]  "A method or constructor name must stay attached to the open ..."
+    25. javascript-non-ascii-characters               OK [V]  "Use actual Unicode character or hex/Unicode escape; choose f..."
+    26. shell-function-header-comment                 OK  "Function header comments should describe: Description, Globa..."
+    27. cpp-no-modules                                OK [V]  "Do not use C++20 Modules (import, module, export). Not well-..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-delete-forbidden-operations               FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use `= delete` to explicitly delete copy/move operations."
+     2. shell-parentheses-required                    FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Parentheses are required after the function name."
+     3. cpp-prefer-struct-over-pair                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use a `struct` instead of `std::pair` or `std::tuple` when t..."
+     4. java-package-no-line-wrap                     FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "The package declaration must not be line-wrapped. The column..."
+     5. shell-case-one-line-space                     FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "A one-line alternative in a case statement needs a space aft..."
+     6. python-whitespace-binary-operator             FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Surround binary operators with a single space on either side..."
+     7. python-no-spaces-around-equals                FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Never use spaces around `=` when passing keyword arguments o..."
+     8. javascript-goog-require-contiguous-block      FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "goog.require and goog.requireType statements must form a con..."
+     9. java-module-directives-ordering               FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Module directives must be ordered as: all requires in one bl..."
+    10. java-local-variable-lower-camel-case          FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Local variable names must be written in lowerCamelCase, even..."
+    11. shell-prefer-brace-expansion                  FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Prefer using ${var} over $var for variable expansion to avoi..."
+    12. javascript-import-no-line-wrap                FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "ES module import statements must not be line wrapped; they a..."
+    13. javascript-goog-require-side-effects          FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "If a module is imported only for its side effects, the call ..."
+    14. shell-case-pattern-no-parenthesis             FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Pattern expressions in a case statement should not be preced..."
+    15. cpp-missing-const-method                      FAIL  (语义偏差：推理链遗漏了部分约束条件) "Declare methods const unless they alter the logical state of..."
+    16. cpp-avoid-macros-in-headers                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid defining macros, especially in header files. Prefer in..."
+    17. shell-avoid-eval                              FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "The `eval` builtin should be avoided as it munges input and ..."
+    18. python-decorator-judicious-use                FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Detect decorator usage that may indicate non-judicious appli..."
+    19. java-no-multiple-declarations-outside-for     FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Every variable declaration (field or local) declares only on..."
+    20. cpp-struct-member-naming                      FAIL  (语义偏差：推理链遗漏了部分约束条件) "Data members of structs (both static and non-static) are nam..."
+    21. java-catch-pipe-linebreak                     FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Detect line break before the pipe operator '|' in a multi-ca..."
+    22. java-type-variable-naming                     FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Type variable names must be a single capital letter optional..."
+
+  按工具分布 (By Tool):
+    Semgrep    27/49 (55.1%)
+    Pmd        4/8 (50.0%)
+    Codeql     19/35 (54.3%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 7/10 (70.0%)  Rule_V: 6/10 (60.0%)
+    Java         Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    C++          Rule_C: 5/10 (50.0%)  Rule_V: 3/10 (30.0%)
+    JavaScript   Rule_C: 7/10 (70.0%)  Rule_V: 6/10 (60.0%)
+    Shell        Rule_C: 5/10 (50.0%)  Rule_V: 4/10 (40.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 220
+  真正违规 (TP): 79
+  误报 (FP): 141
+  精准度: 35.9%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 推理链有助于理解规范语义，Rule_C相比DirectLLM有所提升
+  2. 但逐步推理仍缺乏对工具语法的精确把握
+  3. 复杂规则（涉及数据流/继承）推理链仍无法正确生成
+  4. Shell/JavaScript的CoT推理质量不稳定
+  5. 缺少迭代优化，推理链无法自我修正生成错误
+
+============================================================

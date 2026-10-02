@@ -1,0 +1,4 @@
+**Specification 107: Use `local` to avoid leaking loop variables**
+Description: Inside a function, declare loop variable as `local` to avoid leaking into global environment.
+Example: `local dir; for dir in ...; do`
+Additional Notes: None.

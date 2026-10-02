@@ -1,0 +1,8 @@
+**Specification 44: Continuation lines indent at least +4 spaces**
+Description: Each continuation line indented at least +4 from original line, unless under block indentation rules.
+Example:
+```javascript
+doSomething(
+    arg1, arg2);
+```
+Additional Notes: Deeper syntactic levels may be indented more.

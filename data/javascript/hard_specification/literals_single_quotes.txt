@@ -1,0 +1,4 @@
+**Specification 103: String literals - use single quotes**
+Description: Ordinary string literals delimited with single quotes `'`, not double `"`. May not span multiple lines.
+Example: `const s = 'hello';`
+Additional Notes: Use template string to avoid escaping single quote.

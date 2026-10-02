@@ -1,0 +1,8 @@
+**Specification 78: Enums - defined with `@enum` on object literal**
+Description: Enumerations defined by adding `@enum` annotation to an object literal. Must be module-local or on `exports`. Values must be string literals or numbers.
+Example:
+```javascript
+/** @enum {string} */
+const TemperatureScale = { CELSIUS: 'celsius' };
+```
+Additional Notes: No additional properties after definition; must be constant.

@@ -1,0 +1,4 @@
+Specification 114: @Override exception - parent method @Deprecated
+Description: May be omitted when parent method is @Deprecated.
+Example: @Deprecated public void oldMethod() { } (override may omit @Override)
+Additional Notes: None.

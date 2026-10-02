@@ -1,0 +1,42 @@
+rules:
+- id: javascript-template-literals-over-concatenation
+  message: Use template literals `` `...` `` over complex string concatenation, especially
+    with multiple literals. May span multiple lines.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $A + $B
+  - metavariable-type:
+      metavariable: $A
+      type: expr
+  - metavariable-type:
+      metavariable: $B
+      type: expr
+  metadata:
+    type_constraint_$A: is_string_type
+    type_constraint_$B: is_string_type
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match non-string addition; type resolution needed
+          for precision
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires type information to detect string concatenation
+    original_description: Use template literals `` `...` `` over complex string concatenation,
+      especially with multiple literals. May span multiple lines.

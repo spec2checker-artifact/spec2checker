@@ -1,0 +1,8 @@
+Specification 90: Text blocks - closing on new line with same indentation
+Description: Closing """ on a new line with same indentation as opening. May be followed on same line by further code.
+Example:
+
+java
+"""
+"""; // closing then semicolon on same line allowed
+Additional Notes: None.

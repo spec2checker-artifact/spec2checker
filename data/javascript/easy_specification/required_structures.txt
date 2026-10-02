@@ -1,0 +1,4 @@
+**Specification 28: Braces required for all control structures**
+Description: Braces required for all control structures (`if`, `else`, `for`, `do`, `while`, etc.), even if body contains single statement. First statement of non-empty block must begin on its own line.
+Example: `if (condition) { doSomething(); }`
+Additional Notes: Exception: simple single-line `if` without `else` may omit braces if improves readability.

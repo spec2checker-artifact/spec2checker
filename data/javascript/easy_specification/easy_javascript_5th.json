@@ -1,0 +1,498 @@
+[
+  {
+    "rule_id": "javascript-goog-require-contiguous-block",
+    "language": "javascript",
+    "description": "goog.require and goog.requireType statements must form a contiguous block with no empty lines, following goog.module and separated by a single empty line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.module('$MODULE');\n\n$REQUIRES",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$REQUIRES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$REQUIRES",
+        "constraint_type": "syntactic",
+        "condition": "is_contiguous_block_without_empty_lines",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern to enforce no empty lines within the block"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\requiregoog_requiretype.txt",
+      "section": "requiregoog_requiretype"
+    }
+  },
+  {
+    "rule_id": "javascript-duplicate-import",
+    "language": "javascript",
+    "description": "Do not import the same file multiple times; hard to determine aggregate imports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORTS1 from $PATH1;\n...\nimport $IMPORTS2 from $PATH2;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PATH1": {
+          "type_hint": "expr"
+        },
+        "$PATH2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PATH1",
+        "constraint_type": "syntactic",
+        "condition": "equals($PATH2)",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for duplicate string literals; may not detect dynamic imports or aliased paths"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect duplicate import source strings"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have built-in support for JavaScript ES module analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\modules_import_multiple.txt",
+      "section": "modules_import_multiple"
+    }
+  },
+  {
+    "rule_id": "javascript-linewrap-method-name-parenthesis",
+    "language": "javascript",
+    "description": "A method or constructor name must stay attached to the open parenthesis '(' and not be broken onto a separate line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom formatting rule; not a standard code pattern."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/line-wrapping detection."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL focuses on semantic bugs, not formatting rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_method_name_stays.txt",
+      "section": "wrapping_method_name_stays"
+    }
+  },
+  {
+    "rule_id": "javascript-line-wrap-after-operator",
+    "language": "javascript",
+    "description": "When a line is broken at an operator, the break must come after the operator symbol. The dot (.) is not considered an operator for this rule.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/line break detection, which is not a core strength of pattern matching."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for formatting rules, which is possible but not a primary use case."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_break_operator.txt",
+      "section": "wrapping_break_operator"
+    }
+  },
+  {
+    "rule_id": "javascript-non-ascii-characters",
+    "language": "javascript",
+    "description": "Use actual Unicode character or hex/Unicode escape; choose for readability. Unicode escapes outside string literals/comments discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "contains_non_ascii_escape()",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for Unicode escape detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for escape sequence analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\characters_unicode_escape.txt",
+      "section": "characters_unicode_escape"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-after-colon",
+    "language": "javascript",
+    "description": "Require a space after the colon in an object literal property definition.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "{$KEY:$VALUE}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KEY": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches missing space but may require custom message/autofix for formatting."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for pure formatting/style rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\horizontal_whitespace.txt",
+      "section": "horizontal_whitespace"
+    }
+  },
+  {
+    "rule_id": "javascript-import-no-line-wrap",
+    "language": "javascript",
+    "description": "ES module import statements must not be line wrapped; they are an exception to the 80-column limit.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORTS from $SOURCE;\n...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match multi-line import statements"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect multi-line import statements"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\modules_import_statements.txt",
+      "section": "modules_import_statements"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-require-side-effects",
+    "language": "javascript",
+    "description": "If a module is imported only for its side effects, the call must be `goog.require` (not `goog.requireType`) and the assignment must be omitted. A comment is required to explain the side-effect import.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.require($MODULE);",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "false"
+      },
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "has_preceding_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Comment detection may be limited to adjacent comments only."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce comment requirement."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\require_comment_required.txt",
+      "section": "require_comment_required"
+    }
+  },
+  {
+    "rule_id": "javascript-no-const-exports",
+    "language": "javascript",
+    "description": "Do not annotate `exports` object as `@const`; it is already treated as constant.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** @const */ exports = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires JSDoc comment parsing"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for JSDoc comment detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\exports_annotate_exports.txt",
+      "section": "exports_annotate_exports"
+    }
+  },
+  {
+    "rule_id": "javascript-no-circular-dependencies",
+    "language": "javascript",
+    "description": "Do not create cycles between ES modules, even though specification allows. Includes cycles via `import` and `export from`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$SOURCE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": true,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires cross-file analysis and dependency graph construction, which is not natively supported in pattern matching."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires building a custom query to detect cycles in the import graph."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\circular_dependencies.txt",
+      "section": "circular_dependencies"
+    }
+  }
+]

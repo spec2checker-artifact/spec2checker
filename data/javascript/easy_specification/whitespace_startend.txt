@@ -1,0 +1,4 @@
+**Specification 46: Vertical whitespace - no blank lines inside function body start/end**
+Description: Blank lines at start or end of function body not allowed.
+Example: No blank line after `{` or before `}`.
+Additional Notes: Sparingly within body for logical grouping.

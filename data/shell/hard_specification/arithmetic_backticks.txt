@@ -1,0 +1,4 @@
+**Specification 119: Use `$(( ... ))` for arithmetic expansion, not backticks with `expr`**
+Description: Always use `$(( ... ))` instead of backticks with `expr`.
+Example: `addition="$(( X + Y ))"` not `addition="$(expr "${X}" + "${Y}")"`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 27: Non-assignment operator - method reference :: **
+Description: Double colon :: break comes before it.
+Example: MyClass :: method (break before ::)
+Additional Notes: None.

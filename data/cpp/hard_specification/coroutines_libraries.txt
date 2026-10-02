@@ -1,0 +1,4 @@
+**Specification 36: Use coroutines only via approved libraries**  
+Description: Only use C++20 coroutines via libraries approved by project leads. Do not roll your own promise/awaitable types.  
+Example: Use an existing async library.  
+Additional Notes: Coroutines are complex and error-prone.

@@ -1,0 +1,4 @@
+**Specification 77: Multi-line strings - prefer `"""` for docstrings**
+Description: Prefer `"""` for multi-line strings. Projects may use `'''` for non-docstring multi-line if they use `'` for regular strings.
+Example: `long_string = """line1\nline2"""`
+Additional Notes: Docstrings must use `"""`.

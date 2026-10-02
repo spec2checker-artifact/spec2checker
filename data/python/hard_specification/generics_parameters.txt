@@ -1,0 +1,4 @@
+**Specification 120: Generics - specify type parameters**
+Description: Prefer to specify type parameters for generic types; otherwise assumed `Any`.
+Example: `def get_names(ids: Sequence[int]) -> Mapping[int, str]:`
+Additional Notes: Use `TypeVar` for relationships between parameters and return.

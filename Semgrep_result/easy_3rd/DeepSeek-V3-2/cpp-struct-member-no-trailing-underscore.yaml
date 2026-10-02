@@ -1,0 +1,37 @@
+rules:
+- id: cpp-struct-member-no-trailing-underscore
+  message: Data members of structs (both static and non-static) are named like ordinary
+    nonmember variables, without trailing underscore.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "struct $STRUCT {\n    ...\n    $TYPE $MEMBER;\n    ...\n};"
+  - metavariable-regex:
+      metavariable: $MEMBER
+      regex: .*_$
+  metadata:
+    syntax_$MEMBER: name_ends_with('_')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: may match non-member variables in nested contexts
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to distinguish structs from classes
+    original_description: Data members of structs (both static and non-static) are
+      named like ordinary nonmember variables, without trailing underscore.

@@ -1,0 +1,4 @@
+**Specification 78: Multi-line strings - use `textwrap.dedent` to remove leading spaces**
+Description: If needed to avoid extra spaces, use `textwrap.dedent()`.
+Example: `long_string = textwrap.dedent("""\n    line1\n    """)`
+Additional Notes: Backslash escapes newline.

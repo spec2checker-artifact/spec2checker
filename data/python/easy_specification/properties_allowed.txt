@@ -1,0 +1,4 @@
+**Specification 27: Properties - allowed when necessary**
+Description: Properties may be used to control getting/setting attributes that require trivial computations or logic.
+Example: `@property def x(self): return self._x`
+Additional Notes: Must match expectations: cheap, straightforward, unsurprising.

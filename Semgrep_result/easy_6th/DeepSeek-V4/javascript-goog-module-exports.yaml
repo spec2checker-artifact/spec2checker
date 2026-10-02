@@ -1,0 +1,37 @@
+rules:
+- id: javascript-goog-module-exports
+  message: Classes, enums, functions, constants exported using `exports` object. Non-exported
+    symbols not declared `@private`.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: exports = { $EXPORTS };
+  - metavariable-type:
+      metavariable: $EXPORTS
+      type: expr
+  metadata:
+    syntax_file: contains('goog.module')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern for goog.module context
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for Closure Library patterns
+    original_description: Classes, enums, functions, constants exported using `exports`
+      object. Non-exported symbols not declared `@private`.

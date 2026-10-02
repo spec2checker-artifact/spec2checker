@@ -1,0 +1,18 @@
+rules:
+- id: python-import-rename-as
+  message: '[DISABLED] Enforce use of ''as'' for renaming imports when: imported name
+    conflicts with another module, top-level name, common parameter, is inconveniently
+    long, or is too generic. Also applies to standard abbreviations like ''numpy as
+    np''.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: 'Enforce use of ''as'' for renaming imports when: imported
+      name conflicts with another module, top-level name, common parameter, is inconveniently
+      long, or is too generic. Also applies to standard abbreviations like ''numpy
+      as np''.'

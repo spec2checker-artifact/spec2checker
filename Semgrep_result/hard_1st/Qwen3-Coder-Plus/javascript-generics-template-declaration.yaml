@@ -1,0 +1,40 @@
+rules:
+- id: javascript-generics-template-declaration
+  message: Generic functions and methods must be declared with a `@template TYPE`
+    JSDoc comment.
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: function $FUNC($ARGS) { ... }
+  - metavariable-type:
+      metavariable: $FUNC
+      type: function
+  - pattern-inside: '@true
+
+      ...'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match function declarations and check for
+          preceding JSDoc comment
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check JSDoc annotations
+    original_description: Generic functions and methods must be declared with a `@template
+      TYPE` JSDoc comment.

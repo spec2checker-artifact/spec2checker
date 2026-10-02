@@ -1,0 +1,36 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-09 00:52:54
+Batch: easy_2nd
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\easy\easy_2nd.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       40 |       10 |       10 |
+| PMD             |        1 |        1 |        0 |        0 |
+| CodeQL          |        6 |        6 |        0 |        0 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       47 |        3 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 47/50 rules validated (94%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 40/50
+      -> 1 passed to PMD
+  PMD:     1/1
+      -> 6 passed to CodeQL
+  CodeQL:  6/6
+      -> 3 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- shell-case-indent-alternatives (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-generic-max-line-length (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-variable-expansion-consistency (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

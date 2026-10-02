@@ -1,0 +1,4 @@
+**Specification 43: Use `==` for equality, not `=`**
+Description: For clarity, use `==` for equality rather than `=`.
+Example: `if [[ "${my_var}" == "val" ]]; then`
+Additional Notes: `=` can be confused with assignment.

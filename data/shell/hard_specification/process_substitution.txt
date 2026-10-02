@@ -1,0 +1,4 @@
+**Specification 102: Prefer `while read` with process substitution over pipe**
+Description: Use `while read ...; done < <(command)` to avoid subshell variable propagation issues.
+Example: See earlier.
+Additional Notes: None.

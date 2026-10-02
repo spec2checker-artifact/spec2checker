@@ -1,0 +1,36 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-10 16:25:41
+Batch: easy_5th
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\easy\easy_5th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       44 |        6 |        6 |
+| PMD             |        1 |        1 |        0 |        0 |
+| CodeQL          |        5 |        2 |        3 |        3 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       47 |        3 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 47/50 rules validated (94%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 44/50
+      -> 1 passed to PMD
+  PMD:     1/1
+      -> 5 passed to CodeQL
+  CodeQL:  2/5
+      -> 3 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- javascript-linewrap-method-name-parenthesis (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- python-run-pylint (python) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- python-whitespace-no-trailing-whitespace (python) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false

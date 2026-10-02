@@ -1,0 +1,37 @@
+rules:
+- id: python-getter-setter-complexity
+  message: Getter and setter functions should only be used when getting/setting is
+    complex or costly; for simple read/write, make the attribute public.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "def get_$NAME($SELF):\n    ...\n    return $EXPR"
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: ^[a-z_][a-z0-9_]*$
+  metadata:
+    syntax_function: body_contains_only_return_attribute
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom logic to assess body complexity
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to evaluate method body complexity
+    original_description: Getter and setter functions should only be used when getting/setting
+      is complex or costly; for simple read/write, make the attribute public.

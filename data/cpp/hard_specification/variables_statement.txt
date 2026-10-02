@@ -1,0 +1,4 @@
+**Specification 5: Variables needed for `if`, `while`, `for` - declare within statement**  
+Description: Variables needed for `if`, `while`, `for` statements should normally be declared within those statements.  
+Example: `while (const char* p = strchr(str, '/')) str = p + 1;`  
+Additional Notes: Confines variable to that scope.

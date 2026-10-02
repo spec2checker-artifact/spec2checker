@@ -1,0 +1,14 @@
+rules:
+- id: java-local-variable-lower-camel-case
+  message: '[DISABLED] Local variable names must be written in lowerCamelCase, even
+    when final and immutable.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Local variable names must be written in lowerCamelCase,
+      even when final and immutable.

@@ -1,0 +1,554 @@
+[
+  {
+    "rule_id": "javascript-local-variable-declaration-timing",
+    "language": "javascript",
+    "description": "Local variables should be declared close to their first use, not at the start of a block, to minimize their scope. They should be initialized as soon as possible.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "let $VAR;\n...\n$VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "same_block",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match acceptable uses where declaration cannot be combined with initialization (e.g., variable used in multiple branches)."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect declaration far from first assignment."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\variables_initialized.txt",
+      "section": "variables_initialized"
+    }
+  },
+  {
+    "rule_id": "javascript-string-single-quotes",
+    "language": "javascript",
+    "description": "Ordinary string literals must be delimited with single quotes `'`, not double quotes `\"`. May not span multiple lines. Use template strings to avoid escaping single quotes.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\"$STRING\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STRING",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('\\n')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May flag strings where double quotes are necessary (e.g., containing single quotes without template strings)."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect string literal quotes."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_single_quotes.txt",
+      "section": "literals_single_quotes"
+    }
+  },
+  {
+    "rule_id": "javascript-array-destructuring-rest",
+    "language": "javascript",
+    "description": "Array literals on left-hand side for destructuring are allowed. A final rest element `...rest` is allowed (no space). Unused elements should be omitted.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "const [$VAR, ...$REST] = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$REST": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\destructuring_allowed.txt",
+      "section": "destructuring_allowed"
+    }
+  },
+  {
+    "rule_id": "javascript-no-builtin-modification",
+    "language": "javascript",
+    "description": "Detects modifications to built-in object prototypes or constructors, such as adding methods to Array.prototype or Object. Modifying built-in types is forbidden. JSCompiler polyfills are an allowed exception.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$BUILTIN.prototype.$PROP = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$BUILTIN": {
+          "type_hint": "expr",
+          "regex": "^(Array|Object|String|Number|Boolean|Function|Date|RegExp|Error|Map|Set|Promise)$"
+        },
+        "$PROP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not detect all built-in object names or modifications via bracket notation (e.g., Array.prototype['foo'])."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect modifications to built-in prototypes."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\modifying_forbidden.txt",
+      "section": "modifying_forbidden"
+    }
+  },
+  {
+    "rule_id": "javascript-no-mixed-object-keys",
+    "language": "javascript",
+    "description": "Object literals should not mix quoted and unquoted keys, as they represent different semantics (dicts vs structs).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "{$...KEYS}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "object",
+        "constraint_type": "syntactic",
+        "condition": "has_mixed_key_types",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to detect mixed quoted/unquoted keys within a single object"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check key types in object literals"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\unquoted_object_literal.txt",
+      "section": "unquoted_object_literal"
+    }
+  },
+  {
+    "rule_id": "javascript-no-non-numeric-array-properties",
+    "language": "javascript",
+    "description": "Do not define or use non-numeric properties on arrays (other than `length`). Use `Map` or `Object`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARR.$PROP = $VAL",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARR": {
+          "type_hint": "expr"
+        },
+        "$PROP": {
+          "type_hint": "expr"
+        },
+        "$VAL": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARR",
+        "constraint_type": "type",
+        "condition": "is_array",
+        "required": "true"
+      },
+      {
+        "target": "$PROP",
+        "constraint_type": "syntactic",
+        "condition": "is_identifier AND name_not_equals('length')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to confirm $ARR is an array; may have false positives without type info."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type tracking to identify arrays and property assignments."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\properties_forbidden.txt",
+      "section": "properties_forbidden"
+    }
+  },
+  {
+    "rule_id": "javascript-tostring-override-constraints",
+    "language": "javascript",
+    "description": "toString method overrides must always succeed and never have visible side effects. Avoid calling other methods that may throw.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "public String toString() {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "inheritance",
+        "condition": "overrides_method('java.lang.Object.toString')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully guarantee absence of side effects or thrown exceptions without dataflow analysis."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD can detect calls to methods that may throw, but full side-effect analysis is limited."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex dataflow and call-graph analysis to verify no side effects and no thrown exceptions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\overriding_tostring.txt",
+      "section": "overriding_tostring"
+    }
+  },
+  {
+    "rule_id": "javascript-array-trailing-comma",
+    "language": "javascript",
+    "description": "Array literals must include a trailing comma when there is a line break between the final element and the closing bracket.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "const $VAR = [\n    ...\n    $LAST\n];",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$LAST": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$LAST",
+        "constraint_type": "syntactic",
+        "condition": "!matches(',')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match array literals without line breaks; requires precise line break detection."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect line break before closing bracket."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_trailing_bracket.txt",
+      "section": "literals_trailing_bracket"
+    }
+  },
+  {
+    "rule_id": "javascript-prefer-arrow-nested",
+    "language": "javascript",
+    "description": "Prefer arrow functions over `function` keyword for nested functions (except method shorthand). Also prefer arrow functions over `bind`, `goog.bind`, `const self = this` patterns.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC($PARAMS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "scope",
+        "condition": "is_nested",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "not_method_shorthand",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May require additional patterns to exclude method shorthand and to match `bind`/`goog.bind`/`const self = this` alternatives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect nested `function` and alternative `this` binding patterns."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\functions_functions.txt",
+      "section": "functions_functions"
+    }
+  },
+  {
+    "rule_id": "javascript-spread-operator-preferred",
+    "language": "javascript",
+    "description": "Function calls should use the spread operator `...` instead of `Function.prototype.apply`. No space should appear after the `...`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$FUNC.apply($THIS, $ARRAY)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "expr"
+        },
+        "$THIS": {
+          "type_hint": "expr"
+        },
+        "$ARRAY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern matches direct usage; may not detect all equivalent forms"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect and suggest replacement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\function_preferred.txt",
+      "section": "function_preferred"
+    }
+  }
+]

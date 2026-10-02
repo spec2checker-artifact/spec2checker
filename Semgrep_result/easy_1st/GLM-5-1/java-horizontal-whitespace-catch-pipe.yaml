@@ -1,0 +1,43 @@
+rules:
+- id: java-horizontal-whitespace-catch-pipe
+  message: Space around | in catch (FooException | BarException e) is required.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: catch ($EXCEPTION1|$EXCEPTION2 $VAR)
+  - metavariable-type:
+      metavariable: $EXCEPTION1
+      type: expr
+  - metavariable-type:
+      metavariable: $EXCEPTION2
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep can detect the pattern but may not enforce spacing style
+          without custom regex.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD's WhitespaceAfter rule may need custom configuration for
+          this specific case.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for formatting/style rule detection.
+    original_description: Space around | in catch (FooException | BarException e)
+      is required.

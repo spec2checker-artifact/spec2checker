@@ -1,0 +1,43 @@
+rules:
+- id: cpp-missing-const
+  message: Use `const` in APIs (function parameters, methods, non-local variables)
+    wherever meaningful and accurate to improve thread safety and readability.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $VAR
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_$VAR: is_parameter
+    type_constraint_$TYPE: is_pointer_or_reference_type
+    syntax_$TYPE: not_contains('const')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type resolution for pointer/reference detection may be limited
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires complex type analysis to determine 'meaningful' const
+          usage
+    original_description: Use `const` in APIs (function parameters, methods, non-local
+      variables) wherever meaningful and accurate to improve thread safety and readability.

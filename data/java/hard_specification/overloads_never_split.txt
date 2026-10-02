@@ -1,0 +1,4 @@
+Specification 61: Overloads - never split
+Description: Methods with same name appear in a single contiguous group with no other members in between. Same for constructors. Applies even when modifiers differ.
+Example: All void foo(int a) and void foo(String b) together.
+Additional Notes: None.

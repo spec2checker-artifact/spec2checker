@@ -1,0 +1,4 @@
+**Specification 57: Function names - lower-case with underscores**
+Description: Function names: lower-case, with underscores to separate words.
+Example: `my_func()`
+Additional Notes: Separate libraries with `::`.

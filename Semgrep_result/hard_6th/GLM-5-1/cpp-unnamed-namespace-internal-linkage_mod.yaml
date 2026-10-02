@@ -1,0 +1,32 @@
+rules:
+- id: cpp-unnamed-namespace-internal-linkage-disabled
+  message: DISABLED - This rule was disabled because unnamed namespaces in .cc files are recommended C++ practice, not violations.
+  languages:
+  - cpp
+  severity: INFO
+  pattern-either:
+  - pattern: "DISABLED_RULE_NO_MATCH_XYZ_12345"
+  metadata:
+    disabled: true
+    reason: Unnamed namespaces in .cc files are standard C++ practice for internal linkage. This rule is disabled to prevent false positives.
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Use unnamed namespaces for definitions that do not need
+      to be referenced outside the .cc file. Do not use in .h files.

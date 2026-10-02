@@ -1,0 +1,4 @@
+Specification 108: Camel case - step 3: split conventionally camel-cased words
+Description: If a word already has conventional camel-case appearance (e.g., "AdWords"), split into constituent parts ("ad words"). Does not apply to "iOS".
+Example: "AdWords" → "ad words"
+Additional Notes: iOS defies convention, no split.

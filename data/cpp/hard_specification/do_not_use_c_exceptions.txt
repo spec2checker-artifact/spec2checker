@@ -1,0 +1,4 @@
+**Specification 28: Do not use C++ exceptions**  
+Description: Do not use C++ exceptions (except Windows code).  
+Example: Avoid `throw`, `try`, `catch`.  
+Additional Notes: Use error codes or assertions.

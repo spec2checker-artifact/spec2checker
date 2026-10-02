@@ -1,0 +1,4 @@
+**Specification 8: Function names - PascalCase**  
+Description: Ordinarily, functions follow PascalCase: start with capital letter and capital for each new word.  
+Example: `AddTableEntry()`, `DeleteUrl()`  
+Additional Notes: Accessors and mutators may be named `snake_case` (e.g., `int count()`, `void set_count(int count)`).

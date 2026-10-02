@@ -1,0 +1,16 @@
+rules:
+- id: javascript-static-method-to-function
+  message: '[DISABLED] Prefer module-local functions over private static methods where
+    it doesn''t interfere with readability. Do not rely on dynamic dispatch; call
+    on base class only.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Prefer module-local functions over private static methods
+      where it doesn't interfere with readability. Do not rely on dynamic dispatch;
+      call on base class only.

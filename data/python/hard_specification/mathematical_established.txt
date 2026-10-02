@@ -1,0 +1,4 @@
+**Specification 102: Mathematical notation - short names allowed when matching established notation**
+Description: For mathematically-heavy code, short variable names matching established notation are preferred.
+Example: Use `x`, `y`, `θ` as in paper.
+Additional Notes: Cite source in comment.

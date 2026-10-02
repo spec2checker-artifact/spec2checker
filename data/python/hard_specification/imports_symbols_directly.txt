@@ -1,0 +1,4 @@
+**Specification 117: Imports for typing - import symbols directly**
+Description: Always import symbols from `typing` or `collections.abc` themselves, not the module.
+Example: `from typing import Any, Generic`
+Additional Notes: Prefer abstract container types (`Sequence`) over concrete (`list`).

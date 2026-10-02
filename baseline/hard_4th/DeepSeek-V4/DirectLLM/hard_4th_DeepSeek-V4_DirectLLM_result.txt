@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: hard_4th
+  模型: DeepSeek-V4
+  输入: UIR/hard/hard_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 11/50 = 22.0%
+  Rule_V (规则验证数): 7/50 = 14.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 11条
+  语法错误规则: 31条
+  语义偏差规则: 8条
+
+  成功规则列表 (Successful Rules):
+     1. python-getter-setter-complexity               OK [V]  "Getter and setter functions should only be used when getting..."
+     2. javascript-tostring-override-constraints      OK [V]  "toString method overrides must always succeed and never have..."
+     3. javascript-no-builtin-modification            OK [V]  "Detects modifications to built-in object prototypes or const..."
+     4. python-function-length                        OK [V]  "Prefer small and focused functions. Functions exceeding appr..."
+     5. cpp-no-cstyle-cast                            OK [V]  "Use C++-style casts (static_cast, const_cast, reinterpret_ca..."
+     6. python-import-typing-directly                 OK  "Always import symbols from `typing` or `collections.abc` the..."
+     7. cpp-todo-comment-format                       OK [V]  "TODO comments should include TODO in all caps, followed by b..."
+     8. javascript-array-trailing-comma               OK  "Array literals must include a trailing comma when there is a..."
+     9. java-enum-no-methods-array-initializer        OK [V]  "Enum class with no methods and no documentation on constants..."
+    10. shell-arithmetic-increment                    OK  "Use `(( var += 3 ))` for incrementing variables. Do not use ..."
+    11. python-docstring-style                        OK  "Module, function, and method docstrings must use triple doub..."
+
+  失败规则列表 (Failed Rules):
+     1. java-text-block-opening-newline               FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Opening triple quotes of a text block must be on a new line,..."
+     2. shell-bash-pipestatus-check                   FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Bash has `PIPESTATUS` array to check return code from all pa..."
+     3. cpp-avoid-stateful-stream-manipulators        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use streams for ad-hoc, local, human-readable output. Avoid ..."
+     4. shell-local-command-substitution-exit-code    FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Always separate `local` declaration and assignment when assi..."
+     5. java-finalize-override                        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Do not override Object.finalize. Finalization support is sch..."
+     6. shell-constant-readonly                       FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "For clarity, `readonly` or `declare -xr` is recommended for ..."
+     7. shell-arithmetic-expansion-in-string          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `$(( ... ))` inside strings for arithmetic expansion."
+     8. shell-avoid-unquoted-array-expansion          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Avoid unquoted command expansion in array assignments; won't..."
+     9. cpp-default-capture-reference-lifetime        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use default capture by reference ([&]) only when the lifetim..."
+    10. java-horizontal-alignment-not-required        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Horizontal alignment of tokens using variable spaces is perm..."
+    11. python-type-alias-naming                      FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Type aliases must be named using CapWords convention. If the..."
+    12. java-local-variable-declaration-timing        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Local variables should be declared close to their first use,..."
+    13. java-switch-exhaustiveness                    FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Every switch statement must be exhaustive, requiring a defau..."
+    14. java-camel-case-underscores-adjacent-numbers  FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "In rare circumstances (e.g., multipart version numbers), use..."
+    15. cpp-operator-stream-overload-value-only       FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Overload operator<< for streaming only for types representin..."
+    16. javascript-spread-operator-preferred          FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Function calls should use the spread operator `...` instead ..."
+    17. python-comment-style-consistency              FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Check for consistent punctuation, spelling, and grammar in c..."
+    18. javascript-no-mixed-object-keys               FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Object literals should not mix quoted and unquoted keys, as ..."
+    19. cpp-coroutine-unauthorized-library            FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Only use C++20 coroutines via libraries approved by project ..."
+    20. javascript-string-single-quotes               FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Ordinary string literals must be delimited with single quote..."
+    21. python-avoid-double-underscore                FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Discourage use of double underscore (dunder) for name mangli..."
+    22. python-logging-string-literal-placeholders    FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "For logging functions that expect a pattern-string, always c..."
+    23. shell-readarray-without-t                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Detect usage of readarray without -t option, which leaves tr..."
+    24. shell-explicit-string-test                    FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "To avoid confusion about what you're testing for, explicitly..."
+    25. java-annotation-one-per-line                  FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Annotations applying to class, package, or module must appea..."
+    26. cpp-prefer-non-member-binary-operator         FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Prefer to define non-modifying binary operators as non-membe..."
+    27. javascript-no-non-numeric-array-properties    FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Do not define or use non-numeric properties on arrays (other..."
+    28. shell-integer-declaration                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Detect variable assignments that could be declared as intege..."
+    29. java-camel-case-naming                        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Class names must use UpperCamelCase and method/variable name..."
+    30. java-method-annotation-multiline              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Method and constructor annotations should each be on their o..."
+    31. javascript-local-variable-declaration-timing  FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Local variables should be declared close to their first use,..."
+    32. shell-readonly-flags-after-assignment         FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "After assigning an array variable named FLAGS, it should be ..."
+    33. python-imports-sort-lexicographically         FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Within each grouping, imports should be sorted lexicographic..."
+    34. javascript-prefer-arrow-nested                FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Prefer arrow functions over `function` keyword for nested fu..."
+    35. cpp-avoid-rtti                                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Avoid using run-time type information (RTTI) such as typeid ..."
+    36. javascript-array-destructuring-rest           FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Array literals on left-hand side for destructuring are allow..."
+    37. cpp-discourage-multiple-implementation-inheritance FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Multiple inheritance is allowed, but multiple implementation..."
+    38. cpp-public-alias-documentation                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Public type aliases (using/typedef) must be documented with ..."
+    39. python-comment-indentation                    FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Block and inline comments should be used for tricky, non-obv..."
+
+  按工具分布 (By Tool):
+    Semgrep    11/48 (22.9%)
+    Pmd        2/10 (20.0%)
+    Codeql     9/35 (25.7%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 4/10 (40.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 1/10 (10.0%)  Rule_V: 1/10 (10.0%)
+    C++          Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    JavaScript   Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+    Shell        Rule_C: 1/10 (10.0%)  Rule_V: 0/10 (0.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 49
+  真正违规 (TP): 8
+  误报 (FP): 41
+  精准度: 16.8%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

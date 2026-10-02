@@ -1,0 +1,16 @@
+rules:
+- id: python-imports-top-of-file
+  message: '[DISABLED] Imports must be placed at the top of the file, after module
+    comments/docstrings and before globals. They should be grouped from most generic
+    to least generic: __future__, standard library, third-party, sub-package.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: 'Imports must be placed at the top of the file, after module
+      comments/docstrings and before globals. They should be grouped from most generic
+      to least generic: __future__, standard library, third-party, sub-package.'

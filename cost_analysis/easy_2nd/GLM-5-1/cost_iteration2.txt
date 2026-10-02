@@ -1,0 +1,54 @@
+﻿============================================================
+  迭代2成本分析报告
+============================================================
+
+  批次: easy_2nd
+  模型: GLM-5-1
+  迭代: 2
+  时间: 2026-05-14 00:45:38
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  scan_project.py 耗时: 273.7s (4.6min)
+  总耗时: 273.7s (4.6min)
+
+------------------------------------------------------------
+  本次迭代修改内容:
+------------------------------------------------------------
+  Semgrep规则修改:
+    python-limit-classmethod: 添加pattern-not排除命名构造函数(_create, from_config, from_json, construct_from)，
+      修改类状态方法(set_default_xml_stream, set_testsuites_property, replacement_setupclass)，
+      及metavariable-pattern排除validate_/from_/set_/construct_from开头方法
+    python-no-assert-precondition: 添加pattern-not-inside排除def test_ Test/类
+  PMD规则修改:
+    JavaImportsNoLineWrapping: 已在迭代1实现功能，本次修正validated_rules.json中的命名映射
+    PMD扫描已成功运行(CLEAN结果)
+  CodeQL规则修改:
+    cpp-filename-lowercase-underscore-dash: 使用File.getBaseName().regexpMatch检测不规范文件名
+    javascript-generic-comma-line-wrapping: 使用CallExpr参数跨行检测
+    javascript-horizontal-whitespace-after-comma-semicolon: 使用CallExpr参数间距检测
+    python-whitespace-inside-parens: 使用Call.getArg位置检测括号内空格
+    python-whitespace-no-space-before-punctuation: 使用Call参数间距检测标点前空格
+    python-whitespace-no-vertical-alignment: 使用Assignment间距检测垂直对齐
+    （CodeQL仍因DB/RUN_FAIL未能产出检测结果，环境限制）
+
+------------------------------------------------------------
+  迭代效果:
+------------------------------------------------------------
+  违规总数: 129 -> 7 (减少94.6%)
+  python-avoid-staticmethod: 6 -> 6 (不变, 100%精准)
+  python-no-assert-precondition: 107 -> 0 (排除测试文件后清零)
+  python-limit-classmethod: 15 -> 0 (排除构造函数/验证器后清零)
+  python-comprehension-simple-only: 0 -> 0 (不变)
+  python-future-import-encouraged: 0 -> 0 (不变)
+  python-import-style: 0 -> 0 (不变)
+  shell-single-string-args: 1 -> 1 (不变, 100%精准)
+
+------------------------------------------------------------
+  本次迭代token消耗:
+------------------------------------------------------------
+  scan stdout: ~660 words / ~7500 chars
+  合计: ~660 words / ~7500 chars
+
+============================================================

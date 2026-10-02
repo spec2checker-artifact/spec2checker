@@ -1,0 +1,4 @@
+**Specification 79: Logging - use string literal with %-placeholders**
+Description: For logging functions that expect a pattern-string, always call them with a string literal (not f-string) as first argument.
+Example: `logger.info('Version is: %s', version)`
+Additional Notes: Prevents rendering if logger not configured.

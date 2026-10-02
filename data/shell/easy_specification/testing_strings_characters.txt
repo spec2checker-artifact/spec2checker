@@ -1,0 +1,4 @@
+**Specification 41: Testing strings - use quotes rather than filler characters**
+Description: Use quotes rather than filler characters where possible.
+Example: `if [[ "${my_var}" == "some_string" ]]; then` not `if [[ "${my_var}X" == "some_stringX" ]]; then`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 2: `static` for internal linkage in `.cc` files**  
+Description: Functions and variables can also be given internal linkage by declaring them `static` in `.cc` files.  
+Example: `static void Helper() { ... }`  
+Additional Notes: Prefer unnamed namespaces over `static`.

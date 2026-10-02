@@ -1,0 +1,4 @@
+**Specification 22: `export from` statements - no line wrap**
+Description: `export from` statements must not be line wrapped; exception to 80-column limit.
+Example: `export {specificName} from './other.js';`
+Additional Notes: Both flavors.

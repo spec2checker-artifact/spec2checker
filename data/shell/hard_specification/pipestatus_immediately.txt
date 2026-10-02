@@ -1,0 +1,4 @@
+**Specification 95: Save `PIPESTATUS` immediately after pipe command**
+Description: `PIPESTATUS` is overwritten as soon as you do any other command; assign to another variable immediately.
+Example: `return_codes=( "${PIPESTATUS[@]}" )`
+Additional Notes: None.

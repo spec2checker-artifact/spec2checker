@@ -1,0 +1,4 @@
+**Specification 61: Comments and docstrings - use right style**
+Description: Use the right style for module, function, method docstrings and inline comments.
+Example: Docstrings use `"""triple double quotes"""`.
+Additional Notes: Summary line ≤80 chars, followed by blank line if more.

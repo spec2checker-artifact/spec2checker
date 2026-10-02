@@ -1,0 +1,4 @@
+**Specification 106: Number literals - hex `0x`, octal `0o`, binary `0b` with lowercase letters**
+Description: Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never include leading zero unless followed by `x`, `o`, `b`.
+Example: `0x1f`, `0o755`, `0b1010`.
+Additional Notes: None.

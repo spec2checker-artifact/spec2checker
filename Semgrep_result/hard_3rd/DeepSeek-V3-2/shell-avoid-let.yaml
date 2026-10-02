@@ -1,0 +1,40 @@
+rules:
+- id: shell-avoid-let
+  message: Avoid using `let` for arithmetic assignments as it is subject to globbing;
+    use `(( ... ))` instead.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: let $VAR=$EXPR
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep supports shell patterns but may not distinguish all contexts
+          where `let` is used.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: Avoid using `let` for arithmetic assignments as it is subject
+      to globbing; use `(( ... ))` instead.

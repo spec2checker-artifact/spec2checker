@@ -1,0 +1,4 @@
+**Specification 19: ES module default import naming - follow identifier rules**
+Description: Default import names derived from file name, follow 6.2 identifier rules.
+Example: `import MyClass from '../my-class.js';`
+Additional Notes: Default exports banned by style guide, so this is rare.

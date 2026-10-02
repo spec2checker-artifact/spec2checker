@@ -1,0 +1,4 @@
+**Specification 19: Default iterators and operators - use them**
+Description: Use default iterators and operators for types that support them (lists, dicts, files).
+Example: `for key in adict: ...` not `for key in adict.keys(): ...`
+Additional Notes: Do not mutate container while iterating.

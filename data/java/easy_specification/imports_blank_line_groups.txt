@@ -1,0 +1,9 @@
+Specification 12: Imports - blank line between groups
+Description: If both static and non-static imports exist, a single blank line separates the two groups. No other blank lines between imports.
+Example:
+
+java
+import static java.lang.Math.PI;
+
+import java.util.List;
+Additional Notes: None.

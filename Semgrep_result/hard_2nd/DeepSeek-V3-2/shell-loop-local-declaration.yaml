@@ -1,0 +1,14 @@
+rules:
+- id: shell-loop-local-declaration
+  message: '[DISABLED] Inside a function, declare loop variable as `local` to avoid
+    leaking into global environment.'
+  languages:
+  - bash
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Inside a function, declare loop variable as `local` to avoid
+      leaking into global environment.

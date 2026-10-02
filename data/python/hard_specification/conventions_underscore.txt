@@ -1,0 +1,4 @@
+**Specification 97: Naming conventions - avoid double underscore `__`**
+Description: Discourage use of double underscore (dunder) for name mangling; prefer single underscore.
+Example: Use `_private` not `__private`.
+Additional Notes: Impacts readability and testability.

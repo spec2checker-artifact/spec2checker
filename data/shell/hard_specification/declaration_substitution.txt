@@ -1,0 +1,9 @@
+**Specification 65: Declaration and assignment separate for command substitution**
+Description: Declaration and assignment must be separate statements when assignment value is from command substitution, because `local` does not propagate exit code.
+Example:
+```bash
+local my_var
+my_var="$(my_func)"
+```
+Not `local my_var="$(my_func)"` (exit code lost).
+Additional Notes: None.

@@ -1,0 +1,46 @@
+rules:
+- id: shell-quote-integer-vars
+  message: 'Unquoted shell-internal, readonly special variables that are integers: $?, $#, $!. Already quoted variables are not violations.'
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern-either:
+    - pattern: '$?'
+    - pattern: '$#'
+    - pattern: '$!'
+  - pattern-not-inside: '"..."'
+  - pattern-not-inside: "'...'"
+  - pattern-not-inside: '(( ... ))'
+  - pattern-not: '"$?"'
+  - pattern-not: '"$!"'
+  - pattern-not: '"$#"'
+  - pattern-not: '"${?}"'
+  - pattern-not: '"${!}"'
+  - pattern-not: '"${#}"'
+  metadata:
+    syntax_$VAR: not_inside_arithmetic_expansion
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep's shell parsing may not fully distinguish all arithmetic contexts
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis.
+    original_description: 'Optionally quote shell-internal, readonly special variables
+      that are integers: $?, $#, $$, $!. Prefer quoting named internal integer variables
+      (e.g., PPID) for consistency. It''s ok to not quote inside (( )).'

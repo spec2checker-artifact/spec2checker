@@ -1,0 +1,4 @@
+**Specification 87: Never use `expr` command**
+Description: Never use the `expr` command.
+Example: Not `i=$( expr 4 + 4 )`.
+Additional Notes: External program, slower.

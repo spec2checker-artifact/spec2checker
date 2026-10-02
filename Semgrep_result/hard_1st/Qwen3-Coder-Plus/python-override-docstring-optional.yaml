@@ -1,0 +1,14 @@
+rules:
+- id: python-override-docstring-optional
+  message: '[DISABLED] A method that overrides a base class method does not need a
+    docstring if decorated with `@override` (from `typing` or `typing_extensions`).'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: A method that overrides a base class method does not need
+      a docstring if decorated with `@override` (from `typing` or `typing_extensions`).

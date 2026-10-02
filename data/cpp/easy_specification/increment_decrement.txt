@@ -1,0 +1,4 @@
+**Specification 43: Use prefix increment/decrement (`++i`) unless postfix needed**  
+Description: Use prefix form (`++i`) unless you need the old value.  
+Example: `for (int i = 0; i < n; ++i)`  
+Additional Notes: Prefix is never less efficient.

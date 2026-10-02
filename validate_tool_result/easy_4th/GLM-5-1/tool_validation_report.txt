@@ -1,0 +1,38 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-13 12:15:31
+Batch: easy_4th
+Model: GLM-5.1
+Input: <PROJECT_ROOT>\UIR\easy\easy_4th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       38 |       12 |       12 |
+| PMD             |        2 |        2 |        0 |        0 |
+| CodeQL          |        9 |        5 |        4 |        4 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       45 |        5 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 45/50 rules validated (90%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 38/50
+      -> 2 passed to PMD
+  PMD:     2/2
+      -> 9 passed to CodeQL
+  CodeQL:  5/9
+      -> 5 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- javascript-horizontal-whitespace-before-curly-brace (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-horizontal-whitespace-binary-ternary (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-line-wrap-after-operator (javascript) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- javascript-vertical-whitespace-methods (javascript) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- shell-case-indent-alternatives (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

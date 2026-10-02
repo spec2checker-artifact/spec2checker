@@ -1,0 +1,4 @@
+**Specification 48: Horizontal whitespace - separating reserved word from `(`**
+Description: Space separating reserved word (`if`, `for`, `catch`) from open parenthesis `(`.
+Example: `if (condition)`
+Additional Notes: Except `function` and `super`.

@@ -1,0 +1,4 @@
+**Specification 58: Avoid initialization that can fail in constructors**  
+Description: Avoid initialization that can fail if you can't signal an error. Consider factory functions or `Init()` methods.  
+Example: `static std::unique_ptr<MyClass> Create() { ... }`  
+Additional Notes: See TotW #42.

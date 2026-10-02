@@ -1,0 +1,47 @@
+rules:
+- id: java-old-style-switch
+  message: Detect old-style switch statement formatting where a colon in a switch
+    label is followed by a line break and the statements within the group are indented
+    further by +2 spaces.
+  languages:
+  - java
+  severity: WARNING
+  paths:
+    include:
+    - '*.java'
+  patterns:
+  - pattern: "case $LABEL:\n  $STMT;"
+  - metavariable-type:
+      metavariable: $LABEL
+      type: expr
+  - metavariable-type:
+      metavariable: $STMT
+      type: expr
+  metadata:
+    syntax_statement: is_inside_switch
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match valid new-style switch expressions with blocks;
+          requires context to differentiate.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD has a rule 'SwitchStmtsShouldHaveDefault' but not a specific
+          rule for this formatting style.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for pure formatting/style checks.
+    original_description: Detect old-style switch statement formatting where a colon
+      in a switch label is followed by a line break and the statements within the
+      group are indented further by +2 spaces.

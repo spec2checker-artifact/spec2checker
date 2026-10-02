@@ -1,0 +1,4 @@
+Specification 31: Method/constructor name stays with open parenthesis
+Description: Method, constructor, or record-class name stays attached to the open parenthesis ( that follows it.
+Example: myMethod( (no break between name and ()
+Additional Notes: None.

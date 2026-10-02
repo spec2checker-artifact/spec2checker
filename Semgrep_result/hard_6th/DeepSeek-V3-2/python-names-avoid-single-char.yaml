@@ -1,0 +1,53 @@
+rules:
+- id: python-names-avoid-single-char
+  message: Avoid single character names except for counters/iterators (i, j, k, v),
+    e for exception, f for file handle, private type variables, and established mathematical
+    notation.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-inside: |
+      def $FUNC(...):
+          ...
+  - pattern: "$NAME = ..."
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: "^[a-zA-Z]$"
+  - pattern-not-inside: |
+      for $LOOPVAR in ...:
+          ...
+  - pattern-not-inside: |
+      except ... as $NAME:
+          ...
+  - pattern-not-inside: |
+      with ... as $NAME:
+          ...
+  metadata:
+    syntax_$NAME: not name_matches_regex('^[ijvkef]$')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: May have false positives for allowed single-letter names without
+          additional context (e.g., loop counters).
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to exclude allowed cases based on usage
+          context.
+    original_description: Avoid single character names except for counters/iterators
+      (i, j, k, v), e for exception, f for file handle, private type variables, and
+      established mathematical notation.

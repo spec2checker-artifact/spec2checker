@@ -1,0 +1,4 @@
+Specification 24: Column limit - exceptions
+Description: Exceptions: lines where obeying not possible (e.g., long URL in Javadoc), package declarations, imports, text block contents, command lines in comments, very long identifiers.
+Example: package com.example.very.long.package.name; (no wrap)
+Additional Notes: For very long identifiers, google-java-format handles wrapping.

@@ -1,0 +1,4 @@
+**Specification 75: Strings - avoid `+` and `+=` in loops**
+Description: Avoid using `+` and `+=` to accumulate a string in a loop; use `list.append` and `''.join`.
+Example: `items.append(...); employee_table = ''.join(items)`
+Additional Notes: This avoids quadratic behavior.

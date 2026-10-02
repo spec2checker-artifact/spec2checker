@@ -1,0 +1,4 @@
+**Specification 57: Avoid virtual method calls in constructors**  
+Description: Constructors should never call virtual functions, because they will not dispatch to subclass implementations.  
+Example: Do not call `virtual void Init()` inside constructor.  
+Additional Notes: Use factory functions instead.

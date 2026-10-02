@@ -1,0 +1,4 @@
+Specification 120: Javadoc - summary fragment
+Description: Each Javadoc block begins with a brief summary fragment (noun or verb phrase, not complete sentence). Capitalized and punctuated as if complete sentence.
+Example: /** Returns the customer ID. */
+Additional Notes: Appears in class/method indexes.

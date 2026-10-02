@@ -1,0 +1,4 @@
+**Specification 63: Modules - every file should contain license boilerplate**
+Description: Every file should contain license boilerplate appropriate for the project.
+Example: Apache 2.0, BSD, LGPL, GPL header.
+Additional Notes: Files should start with a docstring describing contents and usage.

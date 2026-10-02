@@ -1,0 +1,46 @@
+rules:
+- id: cpp-comment-class-data-members
+  message: Class data members must have a comment explaining their purpose and invariants
+    not expressed by type and name.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "class $CLASS {\n    ...\n    $TYPE $MEMBER;\n    ...\n}"
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $MEMBER
+      type: expr
+  metadata:
+    syntax_$MEMBER: has_no_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep can detect missing comments via pattern matching but
+          cannot reliably parse and understand comment content for semantic invariants.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL can query for class members and associated comments, but
+          determining if a comment adequately explains invariants requires complex
+          natural language processing not supported.
+    original_description: Class data members must have a comment explaining their
+      purpose and invariants not expressed by type and name.

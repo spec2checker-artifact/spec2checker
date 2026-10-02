@@ -1,0 +1,9 @@
+**Specification 40: Line-wrapping - break after operator**
+Description: When line broken at operator, break comes after the symbol (different from Java style). Dot `.` not an operator.
+Example:
+```javascript
+currentEstimate =
+    calc(currentEstimate + x * currentEstimate) /
+        2.0;
+```
+Additional Notes: None.

@@ -1,0 +1,6 @@
+name: hard_6th/DeepSeek-V4
+version: 0.0.1
+libraryPathDependencies:
+  - codeql/cpp-all
+  - codeql/java-all
+  - codeql/python-all

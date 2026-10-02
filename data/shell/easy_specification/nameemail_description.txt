@@ -1,0 +1,4 @@
+**Specification 7: TODO format - all caps, name/email, colon, description**
+Description: `TODO` should include the string in all caps, followed by the name/email/identifier of the person with best context.
+Example: `# TODO(mrmonkey): ...`
+Additional Notes: Not a commitment to fix.

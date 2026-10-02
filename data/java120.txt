@@ -1,0 +1,740 @@
+易类 (Easy) - 共 60 条
+Specification 1: File name
+Description: For a source file containing classes, the file name consists of the case-sensitive name of the top-level class (of which there is exactly one), plus the extension .java.
+Example: Frozzler.java
+Additional Notes: None.
+
+Specification 2: File encoding: UTF-8
+Description: Source files are encoded in UTF-8.
+Example: All .java source files are saved in UTF-8 format.
+Additional Notes: None.
+
+Specification 3: Whitespace characters
+Description: Aside from the line terminator sequence, the ASCII horizontal space character (0x20) is the only whitespace character that appears anywhere in a source file. Tab characters are not used for indentation.
+Example: Indentation uses spaces, not \t.
+Additional Notes: All other whitespace characters are escaped in char and string literals and in text blocks.
+
+Specification 4: Special escape sequences
+Description: For any character that has a special escape sequence (\b, \t, \n, \f, \r, \", \', \\), that sequence is used rather than the corresponding octal or Unicode escape.
+Example: String s = "Hello\nWorld";
+Additional Notes: Not \012 or \u000a.
+
+Specification 5: Non-ASCII characters
+Description: For non-ASCII characters, use the actual Unicode character or equivalent Unicode escape; choose for readability. Unicode escapes outside string literals and comments are strongly discouraged.
+Example: String unitAbbrev = "μs"; (best)
+Additional Notes: Never sacrifice readability; broken tools must be fixed.
+
+Specification 6: License or copyright information
+Description: If license or copyright information belongs in a file, it belongs at the top.
+Example: // Copyright 2024 Google Inc.
+Additional Notes: None.
+
+Specification 7: Package declaration - no line-wrap
+Description: The package declaration is not line-wrapped. The column limit does not apply.
+Example: package com.example.deepspace;
+Additional Notes: None.
+
+Specification 8: No wildcard imports
+Description: Wildcard ("on-demand") imports, static or otherwise, are not used.
+Example: import java.util.*; (not allowed)
+Additional Notes: None.
+
+Specification 9: Imports - no line-wrapping
+Description: Imports are not line-wrapped. The column limit does not apply.
+Example: import com.google.common.collect.ImmutableList; (single line)
+Additional Notes: None.
+
+Specification 10: Imports ordering - static group
+Description: All static imports in a single group.
+Example: import static java.lang.Math.PI;
+Additional Notes: Group appears before non-static imports.
+
+Specification 11: Imports ordering - non-static group
+Description: All non-static imports in a single group.
+Example: import java.util.List;
+Additional Notes: Separate from static group by a blank line.
+
+Specification 12: Imports - blank line between groups
+Description: If both static and non-static imports exist, a single blank line separates the two groups. No other blank lines between imports.
+Example:
+
+java
+import static java.lang.Math.PI;
+
+import java.util.List;
+Additional Notes: None.
+
+Specification 13: Imports - ASCII sort order within group
+Description: Within each group, imported names appear in ASCII sort order. (Note: '.' sorts before ';'.)
+Example: import com.google.common... then import java.util...
+Additional Notes: Not the same as sorting the lines as strings.
+
+Specification 14: No static import for classes
+Description: Static import is not used for static nested classes; they are imported with normal imports.
+Example: import OuterClass.StaticNestedClass; (not import static)
+Additional Notes: None.
+
+Specification 15: Exactly one top-level class declaration
+Description: Each top-level class resides in its own source file.
+Example: public class MyClass { } alone in MyClass.java
+Additional Notes: None.
+
+Specification 16: Module directives ordering
+Description: Order: all requires in one block, then exports, opens, uses, provides. Each block separated by a single blank line.
+Example:
+
+java
+requires com.example.foo;
+
+exports com.example.bar;
+Additional Notes: None.
+
+Specification 17: Braces - optional braces required for if/else/for/do/while
+Description: Braces are used with if, else, for, do, while statements, even when the body is empty or contains only a single statement.
+Example: if (condition) { doSomething(); }
+Additional Notes: Lambda braces remain optional.
+
+Specification 18: Nonempty blocks - K & R style
+Description: No line break before opening brace, line break after opening brace, line break before closing brace.
+Example:
+
+java
+if (condition) {
+  doSomething();
+}
+Additional Notes: Exceptions for enum classes.
+
+Specification 19: K & R - line break after closing brace
+Description: Line break after closing brace only if that brace terminates a statement or method/constructor/class body. No break if followed by else or comma.
+Example: No break after } in } else {
+Additional Notes: None.
+
+Specification 20: Empty blocks - concise form allowed
+Description: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally).
+Example: void doNothing() {} (acceptable)
+Additional Notes: In multi-block statement, concise empty block not allowed.
+
+Specification 21: Block indentation: +2 spaces
+Description: Each new block increases indent by 2 spaces. When block ends, indent returns to previous level. Applies to code and comments.
+Example:
+
+java
+class Example {
+  void method() {
+    if (condition) {
+      doWork();
+    }
+  }
+}
+Additional Notes: None.
+
+Specification 22: One statement per line
+Description: Each statement is followed by a line break.
+Example: x = 1; then newline; y = 2;
+Additional Notes: None.
+
+Specification 23: Column limit: 100 characters
+Description: Java code has a column limit of 100 characters. Each Unicode code point counts as one character. Exceeding lines must be line-wrapped.
+Example: Lines longer than 100 chars are wrapped.
+Additional Notes: Fullwidth characters may cause earlier wrap.
+
+Specification 24: Column limit - exceptions
+Description: Exceptions: lines where obeying not possible (e.g., long URL in Javadoc), package declarations, imports, text block contents, command lines in comments, very long identifiers.
+Example: package com.example.very.long.package.name; (no wrap)
+Additional Notes: For very long identifiers, google-java-format handles wrapping.
+
+Specification 25: Break before non-assignment operator
+Description: When broken at non-assignment operator, break comes before the symbol.
+Example:
+
+java
+longName + otherLongName
+Additional Notes: Different from C++/JavaScript Google style.
+
+Specification 26: Non-assignment operator - dot separator
+Description: Dot separator (.) break comes before it.
+Example: object .method() (break before .)
+Additional Notes: None.
+
+**Specification 27: Non-assignment operator - method reference :: **
+Description: Double colon :: break comes before it.
+Example: MyClass :: method (break before ::)
+Additional Notes: None.
+
+Specification 28: Non-assignment operator - ampersand in type bound
+Description: & in type bound <T extends Foo & Bar> break before &.
+Example:
+
+java
+<T extends Foo
+     & Bar>
+Additional Notes: None.
+
+Specification 29: Non-assignment operator - pipe in catch block
+Description: | in catch block catch (FooException | BarException e) break before |.
+Example:
+
+java
+catch (FooException
+        | BarException e)
+Additional Notes: None.
+
+Specification 30: Assignment operator break - after symbol
+Description: When broken at assignment operator, break typically after the symbol, but either way acceptable.
+Example:
+
+java
+int longVariable =
+    longExpression;
+Additional Notes: Also applies to colon in enhanced for.
+
+Specification 31: Method/constructor name stays with open parenthesis
+Description: Method, constructor, or record-class name stays attached to the open parenthesis ( that follows it.
+Example: myMethod( (no break between name and ()
+Additional Notes: None.
+
+Specification 32: Comma stays with preceding token
+Description: Comma , stays attached to the token that precedes it.
+Example: arg1, then break then arg2
+Additional Notes: None.
+
+Specification 33: Continuation line indent at least +4 spaces
+Description: Each continuation line indented at least +4 from the original line.
+Example:
+
+java
+longMethodCall(arg1, arg2,
+    arg3, arg4);
+Additional Notes: Can be more than +4 if desired.
+
+Specification 34: Parallel continuation lines same indent
+Description: Two continuation lines use same indentation level iff they begin with syntactically parallel elements.
+Example: Arguments on separate lines align.
+Additional Notes: None.
+
+Specification 35: Vertical whitespace - between consecutive members
+Description: A single blank line appears between consecutive members or initializers of a class.
+Example:
+
+java
+int field;
+
+void method() {}
+Additional Notes: None.
+
+Specification 36: Vertical whitespace - optional between two fields
+Description: Blank line between two consecutive fields (no other code between) is optional; used to create logical groupings.
+Example:
+
+java
+int x;
+int y;  // no blank line
+Additional Notes: None.
+
+Specification 37: Vertical whitespace - as required by other sections
+Description: Blank lines appear as required by sections like Source file structure and Imports.
+Example: Blank line after package declaration.
+Additional Notes: None.
+
+Specification 38: Multiple consecutive blank lines
+Description: Permitted but never required or encouraged.
+Example: Two blank lines in a row (allowed but not encouraged).
+Additional Notes: None.
+
+Specification 39: Horizontal whitespace - separating keyword from parenthesis
+Description: Space separating keyword (if, for, catch) from open parenthesis ( that follows.
+Example: if (condition)
+Additional Notes: None.
+
+Specification 40: Horizontal whitespace - separating keyword from closing brace
+Description: Space separating keyword (else, catch) from closing curly brace } that precedes it.
+Example: } else {
+Additional Notes: None.
+
+Specification 41: Horizontal whitespace - before open curly brace
+Description: Space before any open curly brace {, except @SomeAnnotation({a, b}) and String[][] x = {{"foo"}};
+Example: if (condition) {
+Additional Notes: No space in the two exceptions.
+
+Specification 42: Horizontal whitespace - around binary/ternary operators
+Description: Space on both sides of any binary or ternary operator.
+Example: a + b, x ? y : z
+Additional Notes: Applies to operator-like symbols.
+
+Specification 43: Horizontal whitespace - ampersand in type bounds
+Description: Space around & in <T extends Foo & Bar>.
+Example: <T extends Foo & Bar>
+Additional Notes: None.
+
+Specification 44: Horizontal whitespace - pipe in catch block
+Description: Space around | in catch (FooException | BarException e).
+Example: catch (FooException | BarException e)
+Additional Notes: None.
+
+Specification 45: Horizontal whitespace - colon in enhanced for
+Description: Space around : in enhanced for statement.
+Example: for (String s : list)
+Additional Notes: None.
+
+Specification 46: Horizontal whitespace - arrow in lambda
+Description: Space around -> in lambda expression or switch rule.
+Example: (String str) -> str.length()
+Additional Notes: Not for method reference :: or dot ..
+
+Specification 47: Horizontal whitespace - after cast closing parenthesis
+Description: Space after ) of a cast.
+Example: (int) x
+Additional Notes: None.
+
+Specification 48: Horizontal whitespace - before double slash comment
+Description: Space between any content and // that begins a comment. Multiple spaces allowed.
+Example: x = 1; // comment
+Additional Notes: None.
+
+Specification 49: Horizontal whitespace - between // and comment text
+Description: Space between // and comment text. Multiple spaces allowed.
+Example: // comment
+Additional Notes: None.
+
+Specification 50: Horizontal whitespace - between type and identifier
+Description: Space between type and identifier in declaration.
+Example: List<String> list
+Additional Notes: None.
+
+Specification 51: Horizontal whitespace - inside array initializer braces
+Description: Optional space just inside both braces of an array initializer.
+Example: new int[] {5, 6} and new int[] { 5, 6 } both valid.
+Additional Notes: None.
+
+Specification 52: Horizontal alignment - never required
+Description: Adding variable spaces to align tokens with previous lines is permitted but never required. Not required to maintain existing alignment.
+Example:
+
+java
+private int x;      // permitted but not required
+private Color color;
+Additional Notes: Alignment can cause version history and merge conflicts; practical concerns take priority.
+
+Specification 53: Grouping parentheses - recommended
+Description: Optional grouping parentheses omitted only when author and reviewer agree no reasonable chance of misinterpretation.
+Example: (a + b) * c recommended over a + b * c unless obvious.
+Additional Notes: Cannot assume reader memorizes operator precedence.
+
+Specification 54: Enum classes - line break after comma
+Description: After comma following enum constant, line break is optional. Additional blank lines (usually one) allowed.
+Example:
+
+java
+YES,   // optional break
+NO,
+Additional Notes: None.
+
+Specification 55: Enum classes - no methods/constants formatted as array initializer
+Description: Enum class with no methods and no documentation on constants may be formatted like array initializer.
+Example: private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+Additional Notes: All other class formatting rules apply.
+
+Specification 56: Variable declarations - one per declaration
+Description: Every variable declaration (field or local) declares only one variable. No int a, b;.
+Example: int a; int b; not int a, b;
+Additional Notes: Exception: for loop header.
+
+Specification 57: For loop - multiple variable declarations allowed
+Description: Multiple variable declarations acceptable in header of a for loop.
+Example: for (int i = 0, j = 0; i < 10; i++)
+Additional Notes: None.
+
+Specification 58: No C-style array declarations
+Description: Square brackets form part of type, not variable. Use String[] args, not String args[].
+Example: int[] arr;
+Additional Notes: None.
+
+Specification 59: Array initializers - can be block-like
+Description: Any array initializer may optionally be formatted as if it were a block-like construct.
+Example:
+
+java
+new int[] {
+  0, 1, 2, 3
+}
+Additional Notes: Multiple valid formats.
+
+Specification 60: Numeric literals - long suffix uppercase L
+Description: long-valued integer literals use uppercase L suffix, never lowercase l.
+Example: 30000000000L not 30000000000l
+Additional Notes: Avoid confusion with digit 1.
+
+难类 (Hard) - 共 60 条
+Specification 61: Overloads - never split
+Description: Methods with same name appear in a single contiguous group with no other members in between. Same for constructors. Applies even when modifiers differ.
+Example: All void foo(int a) and void foo(String b) together.
+Additional Notes: None.
+
+Specification 62: Class contents - logical order
+Description: Class members and initializers should follow a logical order that the maintainer could explain. Not chronological by date added.
+Example: Do not habitually add new methods to the end.
+Additional Notes: No single correct recipe.
+
+Specification 63: K & R - exception for single-statement block
+Description: In places where a single statement (ending with ;) is allowed, a block may appear with opening brace preceded by a line break (e.g., to limit local variable scope).
+Example:
+
+java
+{
+  int x = foo();
+  frob(x);
+}
+Additional Notes: None.
+
+Specification 64: Empty blocks - not allowed in multi-block statements
+Description: In if/else or try/catch/finally, concise empty block {} is not acceptable.
+Example:
+
+java
+try {
+  doSomething();
+} catch (Exception e) {} // not acceptable
+Additional Notes: Use K&R style instead.
+
+Specification 65: Line-wrapping - discretionary
+Description: Even code that fits within column limit may be line-wrapped at author's discretion.
+Example: Wrapping for clarity even if under 100 chars.
+Additional Notes: Tip: extract method or local variable to avoid wrapping.
+
+Specification 66: Line-wrapping - break at higher syntactic level
+Description: Prefer to break at a higher syntactic level.
+Example: Break after ( rather than inside a method name.
+Additional Notes: Prime directive.
+
+Specification 67: Arrow in lambda/switch rule - no adjacent break
+Description: Line never broken adjacent to arrow ->, except break may come immediately after arrow if following text is a single unbraced expression.
+Example:
+
+java
+str -> longExpressionInvolving(str)  // break after ->
+Additional Notes: For block body, no break adjacent.
+
+Specification 68: Horizontal whitespace - between type annotation and brackets
+Description: Space between type annotation and [] or ....
+Example: @Nullable String[]
+Additional Notes: None.
+
+Specification 69: Local variables - declared when needed
+Description: Local variables not habitually declared at start of block. Declared close to first use to minimize scope. Typically have initializers or initialized immediately.
+Example:
+
+java
+int x = compute(); // near use
+Additional Notes: Not at top of method.
+
+Specification 70: Switch - two syntaxes (old-style vs new-style)
+Description: Old-style uses colon : after labels; new-style uses arrow ->.
+Example: case 1: vs case 1 ->
+Additional Notes: New-style required for switch expressions.
+
+Specification 71: Switch block - switch rules vs statement groups
+Description: New-style switch contains switch rules (label -> expression/block/throw). Old-style contains statement groups (label: then statements).
+Example: case 1 -> handle(); vs case 1: handle(); break;
+Additional Notes: Definitions match JLS §14.11.
+
+Specification 72: Switch indentation
+Description: Contents of switch block indented +2. Each switch label starts with that indentation.
+Example:
+
+java
+switch (x) {
+  case 1:
+    ...
+}
+Additional Notes: None.
+
+Specification 73: New-style switch - single line rule
+Description: Switch rule can be written on single line if it follows Google style (no column overflow; if non-empty block, line break after {).
+Example: case 0, 1 -> handleZeroOrOne();
+Additional Notes: Continuation lines indent +4.
+
+Specification 74: Old-style switch - colon followed by line break
+Description: Colon of each switch label followed by line break. Statements within group indented further +2.
+Example:
+
+java
+case 1:
+  doSomething();
+Additional Notes: None.
+
+Specification 75: Fall-through in old-style switch - must be commented
+Description: Each statement group either terminates abruptly (break/continue/return/throw) or is marked with a fall-through comment (typically // fall through).
+Example:
+
+java
+case 1:
+  prepare();
+  // fall through
+case 2:
+  handle();
+Additional Notes: No comment needed after case 1: label itself.
+
+Specification 76: No fall-through in new-style switch
+Description: Fall-through does not exist in new-style switches (arrow syntax).
+Example: case 1 -> handle(); (no fall-through)
+Additional Notes: None.
+
+Specification 77: Switch exhaustiveness - required
+Description: Google Style requires every switch to be exhaustive, even where language does not require it. May need default label even with no code.
+Example: default: break; or default -> {}
+Additional Notes: Enum switches covering all values are exhaustive without default.
+
+Specification 78: Switch expressions - must be new-style
+Description: Switch expressions must use new-style (arrow ->).
+Example:
+
+java
+return switch (x) {
+  case 0 -> "";
+  default -> "other";
+};
+Additional Notes: None.
+
+Specification 79: Type-use annotations - position
+Description: Type-use annotations appear immediately before the annotated type.
+Example: final @Nullable String name;
+Additional Notes: Annotation must be meta-annotated with @Target(ElementType.TYPE_USE).
+
+Specification 80: Class/package/module annotations - each on own line
+Description: Annotations applying to class, package, or module appear immediately after documentation block, one per line. These line breaks do not constitute line-wrapping, so no extra indent.
+Example:
+
+java
+/** Javadoc */
+@Deprecated
+@CheckReturnValue
+public final class Frozzler { ... }
+Additional Notes: None.
+
+Specification 81: Method and constructor annotations - same as class
+Description: Same rule: each annotation on its own line by default.
+Example:
+
+java
+@Deprecated
+@Override
+public String getName() { ... }
+Additional Notes: Exception for single parameterless annotation.
+
+Specification 82: Method annotation exception - single parameterless on same line
+Description: A single parameterless annotation may appear together with the first line of the signature.
+Example: @Override public int hashCode() { ... }
+Additional Notes: None.
+
+Specification 83: Field annotations - may be on same line
+Description: Annotations on field appear after documentation block, multiple annotations (possibly parameterized) may be listed on same line.
+Example: @Partial @Mock DataLoader loader;
+Additional Notes: None.
+
+Specification 84: Block comment style
+Description: Block comments indented at same level as surrounding code. May be /* ... */ or // ... style. Multi-line /* ... */ comments require subsequent lines start with * aligned with previous line.
+Example:
+
+java
+/*
+ * This is okay.
+ */
+Additional Notes: Comments not enclosed in boxes.
+
+Specification 85: TODO comments - format
+Description: TODO comments begin with TODO in all caps, colon, link to resource (preferably bug reference), then explanatory string with hyphen -.
+Example: // TODO: crbug.com/12345678 - Remove this after 2047q4.
+Additional Notes: Avoid referring to individual or team.
+
+Specification 86: TODO - include specific date or event
+Description: If TODO is "At a future date do something", include a specific date or event.
+Example: // TODO: Fix by November 2005
+Additional Notes: None.
+
+Specification 87: Modifiers order - class and member
+Description: Appear in order: public protected private abstract default static final sealed non-sealed transient volatile synchronized native strictfp
+Example: public static final synchronized void method() {}
+Additional Notes: As recommended by JLS.
+
+Specification 88: Modifiers on module requires directives
+Description: Order: transitive static.
+Example: requires transitive static com.example.foo;
+Additional Notes: None.
+
+Specification 89: Text blocks - opening on new line
+Description: Opening """ always on a new line. May follow indentation rules or have no indentation.
+Example:
+
+java
+String text = """
+    line1
+    """;
+Additional Notes: None.
+
+Specification 90: Text blocks - closing on new line with same indentation
+Description: Closing """ on a new line with same indentation as opening. May be followed on same line by further code.
+Example:
+
+java
+"""
+"""; // closing then semicolon on same line allowed
+Additional Notes: None.
+
+Specification 91: Text blocks - each line indented at least as much as delimiters
+Description: Each line of text in text block indented at least as much as opening and closing """. Extra indentation adds spaces to string.
+Example: Indented lines produce leading spaces.
+Additional Notes: None.
+
+Specification 92: Text blocks - contents may exceed column limit
+Description: Contents of a text block may exceed the column limit (exception to 4.4).
+Example: Very long line inside """ ... """
+Additional Notes: None.
+
+Specification 93: Identifiers - allowed characters
+Description: Identifiers use only ASCII letters, digits, and (rarely) underscores. Matches \w+.
+Example: name, not name_m or mName.
+Additional Notes: No special prefixes or suffixes.
+
+Specification 94: Package and module names
+Description: Lowercase letters and digits only, no underscores. Consecutive words concatenated.
+Example: com.example.deepspace, not deepSpace or deep_space.
+Additional Notes: None.
+
+Specification 95: Class names - UpperCamelCase
+Description: Class names written in UpperCamelCase. Typically nouns or noun phrases.
+Example: Character, ImmutableList
+Additional Notes: Interface names may be nouns or adjectives (Readable).
+
+Specification 96: Test class names
+Description: Test class name ends with Test. If covers a single class, name is that class plus Test.
+Example: HashIntegrationTest, HashImplTest
+Additional Notes: None.
+
+Specification 97: Method names - lowerCamelCase
+Description: Method names written in lowerCamelCase. Typically verbs or verb phrases.
+Example: sendMessage, stop
+Additional Notes: None.
+
+Specification 98: Test method names - underscores allowed
+Description: Underscores may appear in JUnit test method names to separate logical components, each component in lowerCamelCase. No single correct way.
+Example: transferMoney_deductsFromSource
+Additional Notes: None.
+
+Specification 99: Constant names - UPPER_SNAKE_CASE
+Description: Constant names use UPPER_SNAKE_CASE (all uppercase, words separated by single underscore).
+Example: MAX_COUNT
+Additional Notes: Only for static final fields with deeply immutable contents and no side-effect methods.
+
+Specification 100: Constant definition - deeply immutable
+Description: Constants are static final fields whose contents are deeply immutable and methods have no detectable side effects. Includes primitives, strings, immutable value classes, and anything set to null.
+Example: static final ImmutableList<String> NAMES = ...
+Additional Notes: Merely intending not to mutate is insufficient.
+
+Specification 101: Non-constant field names - lowerCamelCase
+Description: Non-constant field names (static or otherwise) written in lowerCamelCase. Typically nouns or noun phrases.
+Example: computedValues, index
+Additional Notes: None.
+
+Specification 102: Parameter names - lowerCamelCase
+Description: Parameter names written in lowerCamelCase. One-character names in public methods should be avoided.
+Example: void method(String parameterName)
+Additional Notes: Avoid single-letter like a.
+
+Specification 103: Local variable names - lowerCamelCase
+Description: Local variable names written in lowerCamelCase. Even when final and immutable, not styled as constants.
+Example: int count = 0;
+Additional Notes: None.
+
+Specification 104: Type variable names - single capital letter with optional numeral
+Description: Type variable can be a single capital letter optionally followed by a single numeral.
+Example: E, T, X2
+Additional Notes: None.
+
+Specification 105: Type variable names - class-name form plus capital T
+Description: Type variable can be name in form used for classes (UpperCamelCase) followed by capital T.
+Example: RequestT, FooBarT
+Additional Notes: None.
+
+Specification 106: Camel case conversion - step 1: ASCII and apostrophes
+Description: Convert phrase to plain ASCII, remove apostrophes.
+Example: "Müller's algorithm" → "Muellers algorithm"
+Additional Notes: None.
+
+Specification 107: Camel case - step 2: split into words
+Description: Split on spaces and remaining punctuation (typically hyphens).
+Example: "new customer ID" → ["new", "customer", "ID"]
+Additional Notes: None.
+
+Specification 108: Camel case - step 3: split conventionally camel-cased words
+Description: If a word already has conventional camel-case appearance (e.g., "AdWords"), split into constituent parts ("ad words"). Does not apply to "iOS".
+Example: "AdWords" → "ad words"
+Additional Notes: iOS defies convention, no split.
+
+Specification 109: Camel case - step 4: lowercase everything
+Description: Lowercase everything including acronyms.
+Example: "XML HTTP request" → "xml http request"
+Additional Notes: None.
+
+Specification 110: Camel case - step 5: uppercase first character of each word (UpperCamelCase) or each except first (lowerCamelCase)
+Description: For UpperCamelCase, uppercase first character of each word; for lowerCamelCase, uppercase first character of each word except first.
+Example: "xml http request" → "XmlHttpRequest" or "xmlHttpRequest"
+Additional Notes: None.
+
+Specification 111: Camel case - step 6: join words
+Description: Join all words into single identifier. Casing of original words almost entirely disregarded.
+Example: "new customer ID" → "newCustomerId"
+Additional Notes: None.
+
+Specification 112: Camel case - underscores for adjacent numbers
+Description: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers.
+Example: "Guava 33.4.6" → guava33_4_6 (not guava3346)
+Additional Notes: Numbers have no case variants.
+
+Specification 113: @Override - always used when legal
+Description: Mark method with @Override whenever legal, including overriding superclass method, implementing interface method, respecifying superinterface method, and record component accessor.
+Example: @Override public String toString() { ... }
+Additional Notes: None.
+
+Specification 114: @Override exception - parent method @Deprecated
+Description: May be omitted when parent method is @Deprecated.
+Example: @Deprecated public void oldMethod() { } (override may omit @Override)
+Additional Notes: None.
+
+Specification 115: Caught exceptions - not ignored
+Description: Very rarely correct to do nothing in response to caught exception. Typical responses: log, or rethrow as AssertionError.
+Example: catch (NumberFormatException e) { logger.warn(...); }
+Additional Notes: None.
+
+Specification 116: Ignoring exception - must comment
+Description: When truly no action is appropriate, reason must be explained in comment.
+Example:
+
+java
+catch (NumberFormatException ok) {
+  // it's not numeric; that's fine, just continue
+}
+Additional Notes: None.
+
+Specification 117: Static members - qualify with class name
+Description: When reference to static class member must be qualified, use class's name, not a reference or expression of that type.
+Example: Foo.aStaticMethod(); (good); aFoo.aStaticMethod(); (bad)
+Additional Notes: None.
+
+Specification 118: Finalizers - not used
+Description: Do not override Object.finalize. Finalization support scheduled for removal.
+Example: Avoid protected void finalize() throws Throwable { }
+Additional Notes: None.
+
+Specification 119: Javadoc - block tags order
+Description: Standard block tags appear in order: @param, @return, @throws, @deprecated. Never appear with empty description.
+Example:
+
+java
+ * @param name description
+ * @return result
+Additional Notes: None.
+
+Specification 120: Javadoc - summary fragment
+Description: Each Javadoc block begins with a brief summary fragment (noun or verb phrase, not complete sentence). Capitalized and punctuated as if complete sentence.
+Example: /** Returns the customer ID. */
+Additional Notes: Appears in class/method indexes.

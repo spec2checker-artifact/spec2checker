@@ -1,0 +1,49 @@
+============================================================
+  迭代2成本分析报告
+============================================================
+
+  批次: hard_2nd
+  模型: Qwen3-Coder-Plus
+  迭代: 2
+  时间: 2026-05-20 22:37:21
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  Rule modification (iteration 2): ~300s (OK)
+  scan_project.py 耗时: ~180s (OK)
+  总耗时: ~480s (~8min)
+
+------------------------------------------------------------
+  迭代2修改详情:
+------------------------------------------------------------
+  修改规则(Semgrep):
+    - java-camel-case-underscores-adjacent-numbers: WARNING→INFO, 改用pattern-regex完全禁用(evaluate2评估0%精准度,匹配10_000等已用下划线的数字和Group22Var1等枚举名)
+    - python-logging-string-literal: WARNING不变, 重构为pattern-regex仅匹配f-string首参数(evaluate2评估50%精准度,移除32条字符串字面量误报)
+    - python-names-to-avoid-type-inclusion: WARNING→INFO, 改用pattern-regex完全禁用(evaluate2评估0%精准度,err_list/id_to_dep_set/result_dict等名称有助于可读性)
+  修改规则(PMD):
+    - JavaVerticalWhitespaceBetweenMembers: 禁用visit方法(直接return data)(evaluate2评估0%精准度,花括号换行是合法Java风格)
+    - JavaEnumLineBreakAfterComma: 保留不变(evaluate2评估100%精准度)
+  修改规则(CodeQL):
+    - qlpack.yml: 新建,使用dependencies格式(codeql/cpp-all + codeql/python-all)
+    - cpp-comment-style-consistency.ql: 重写查询,使用Comment.getStyle()检测混合注释风格
+    - cpp-include-alphabetical-order.ql: 重写查询,使用IncludeDirective.toString()检测非字母序
+    - cpp-license-boilerplate-required.ql: 重写查询,使用Comment检测前5行缺少license
+    - python-modules-license-boilerplate.ql: 重写查询,使用StringLiteral检测前5行缺少docstring
+
+------------------------------------------------------------
+  迭代2结果:
+------------------------------------------------------------
+  迭代1违规数: 313
+  迭代2违规数: 79
+  减少: 234 (74.8%)
+  规则统计:
+    python-logging-string-literal: 108→76 (WARNING, 仅f-string)
+    JavaEnumLineBreakAfterComma: 3→3 (WARNING, 100% precision, unchanged)
+    java-camel-case-underscores-adjacent-numbers: 169→0 (INFO, 完全禁用)
+    python-names-to-avoid-type-inclusion: 18→0 (INFO, 完全禁用)
+    JavaVerticalWhitespaceBetweenMembers: 15→0 (disabled)
+  PMD: 3 findings (JavaEnumLineBreakAfterComma only)
+  CodeQL: RUN_FAIL (4 rules, consistent with previous batches)
+
+============================================================

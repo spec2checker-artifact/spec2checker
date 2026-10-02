@@ -1,0 +1,4 @@
+**Specification 35: Function expressions - body indented +2 relative to preceding depth**
+Description: When declaring anonymous function in argument list, function body indented two spaces more than preceding indentation depth.
+Example: See guide example.
+Additional Notes: None.

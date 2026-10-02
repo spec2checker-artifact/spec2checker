@@ -1,0 +1,40 @@
+rules:
+- id: java-test-method-name-underscore
+  message: JUnit test method names may contain underscores to separate logical components,
+    each component in lowerCamelCase.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: "@Test\npublic void $METHOD(...) {\n    ...\n}"
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: ^[a-z][a-zA-Z0-9]*_[a-z][a-zA-Z0-9]*$
+  - pattern-inside: '@true
+
+      ...'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based detection may not capture all valid lowerCamelCase
+          components
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule for naming pattern with underscores
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for naming convention
+    original_description: JUnit test method names may contain underscores to separate
+      logical components, each component in lowerCamelCase.

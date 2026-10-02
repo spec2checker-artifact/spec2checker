@@ -1,0 +1,4 @@
+**Specification 28: Use '\0' for null character**  
+Description: Use `'\0'` for the null character, not `0`.  
+Example: `if (c == '\0') ...`  
+Additional Notes: Makes code more readable.

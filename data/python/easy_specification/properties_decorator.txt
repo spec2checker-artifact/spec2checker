@@ -1,0 +1,4 @@
+**Specification 28: Properties - create with `@property` decorator**
+Description: Properties should be created with the `@property` decorator.
+Example: `@property def value(self): return self._value`
+Additional Notes: Manually implementing property descriptor is a power feature.

@@ -1,0 +1,11 @@
+Specification 75: Fall-through in old-style switch - must be commented
+Description: Each statement group either terminates abruptly (break/continue/return/throw) or is marked with a fall-through comment (typically // fall through).
+Example:
+
+java
+case 1:
+  prepare();
+  // fall through
+case 2:
+  handle();
+Additional Notes: No comment needed after case 1: label itself.

@@ -1,0 +1,721 @@
+### 简单类 (Easy) - 共 60 条
+
+**Specification 1: File name - lowercase with underscores or dashes**
+Description: File names must be all lowercase and may include underscores (`_`) or dashes (`-`), but no additional punctuation. Filename extension must be `.js`.
+Example: `my_file.js`, `my-file.js`
+Additional Notes: Follow project convention.
+
+**Specification 2: File encoding - UTF-8**
+Description: Source files are encoded in UTF-8.
+Example: All `.js` files saved as UTF-8.
+Additional Notes: None.
+
+**Specification 3: Whitespace characters - only ASCII space**
+Description: Aside from line terminator, the ASCII horizontal space (0x20) is the only whitespace character that appears. Tab characters not used for indentation.
+Example: Use spaces, not tabs.
+Additional Notes: All other whitespace in string literals escaped.
+
+**Specification 4: Special escape sequences - use them**
+Description: For characters with special escape sequences (`\'`, `\"`, `\\`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`), use that sequence rather than numeric escape.
+Example: `\n` not `\x0a`.
+Additional Notes: Legacy octal escapes never used.
+
+**Specification 5: Non-ASCII characters - use actual Unicode or escape**
+Description: Use actual Unicode character or hex/Unicode escape; choose for readability. Unicode escapes outside string literals/comments discouraged.
+Example: `const units = 'μs';` (best)
+Additional Notes: Explain with comment if needed.
+
+**Specification 6: Non-ASCII - never sacrifice readability**
+Description: Never make code less readable for fear of programs not handling non-ASCII; such programs are broken.
+Example: Use `μs` not `\u03bcs` unless necessary.
+Additional Notes: None.
+
+**Specification 7: Source file structure - sections in order**
+Description: Files consist of: license/copyright (if present), `@fileoverview` JSDoc (if present), `goog.module` statement (if applicable), ES `import` statements, `goog.require`/`goog.requireType` statements, file implementation. Exactly one blank line separates sections except implementation may have 1-2 blank lines.
+Example: See example in guide.
+Additional Notes: None.
+
+**Specification 8: License/copyright information - at top**
+Description: If license or copyright belongs in file, it belongs at the top.
+Example: `// Copyright 2024 Google Inc.`
+Additional Notes: None.
+
+**Specification 9: `goog.module` statement - single line, no wrap**
+Description: `goog.module` statement must be on a single line, not wrapped; exception to 80-column limit.
+Example: `goog.module('search.urlHistory.urlHistoryService');`
+Additional Notes: Argument defines namespace.
+
+**Specification 10: `goog.module` hierarchy - no direct child of another module's namespace**
+Description: Module namespaces may never be named as a direct child of another module's namespace.
+Example: `goog.module('foo.bar');` then `goog.module('foo.bar.baz');` disallowed.
+Additional Notes: Directory hierarchy reflects namespace.
+
+**Specification 11: `goog.module.declareLegacyNamespace` - avoid when possible**
+Description: Avoid `goog.module.declareLegacyNamespace()` when possible; exists for transition.
+Example: `goog.module('my.test.helpers'); goog.module.declareLegacyNamespace();`
+Additional Notes: Has naming restrictions.
+
+**Specification 12: Exports in `goog.module` - use `exports` object**
+Description: Classes, enums, functions, constants exported using `exports` object. Non-exported symbols not declared `@private`.
+Example: `exports = {exportedArray, exportedFunction};`
+Additional Notes: No prescribed ordering.
+
+**Specification 13: Exports - do not annotate `exports` as `@const`**
+Description: Do not annotate `exports` object as `@const`; it is already treated as constant.
+Example: Not `/** @const */ exports = {...}`.
+Additional Notes: None.
+
+**Specification 14: Exports - do not use default exports**
+Description: Do not use default exports; they don't translate easily to ES module semantics.
+Example: Not `exports = FancyClass;`.
+Additional Notes: None.
+
+**Specification 15: ES modules - `import` statements no line wrap**
+Description: Import statements must not be line wrapped; exception to 80-column limit.
+Example: `import {name} from './sibling.js';`
+Additional Notes: None.
+
+**Specification 16: ES module import paths - must include `.js` extension**
+Description: File extension `.js` is not optional in import paths and must always be included.
+Example: `import '../directory/file.js';` not `import '../directory/file';`
+Additional Notes: None.
+
+**Specification 17: ES modules - do not import same file multiple times**
+Description: Do not import the same file multiple times; hard to determine aggregate imports.
+Example: Avoid two imports from same path.
+Additional Notes: None.
+
+**Specification 18: ES module import naming - module import names `lowerCamelCase`**
+Description: Module import names (`import * as name`) are derived from file name and use `lowerCamelCase`.
+Example: `import * as fileOne from '../file-one.js';`
+Additional Notes: Exception: `THREE` for threejs.
+
+**Specification 19: ES module default import naming - follow identifier rules**
+Description: Default import names derived from file name, follow 6.2 identifier rules.
+Example: `import MyClass from '../my-class.js';`
+Additional Notes: Default exports banned by style guide, so this is rare.
+
+**Specification 20: Named imports - keep same name, avoid aliasing**
+Description: Prefer keeping same name; avoid aliasing. Use module import (`import *`) to fix collisions.
+Example: `import {Cat}` not `import {Cat as BigCat}` unless necessary.
+Additional Notes: If renaming needed, use components of file name/path.
+
+**Specification 21: ES module exports - named exports only**
+Description: Use named exports in all code. Do not use default exports.
+Example: `export class Foo { ... }` not `export default class Foo { ... }`.
+Additional Notes: May use `export {Foo}`.
+
+**Specification 22: `export from` statements - no line wrap**
+Description: `export from` statements must not be line wrapped; exception to 80-column limit.
+Example: `export {specificName} from './other.js';`
+Additional Notes: Both flavors.
+
+**Specification 23: ES modules - do not create circular dependencies**
+Description: Do not create cycles between ES modules, even though specification allows.
+Example: `a.js` imports `b.js` and `b.js` imports `a.js` (disallowed).
+Additional Notes: `export from` can also cause cycles.
+
+**Specification 24: `goog.require`/`goog.requireType` - contiguous block, no empty lines**
+Description: These statements form a contiguous block with no empty lines, following `goog.module` separated by single empty line.
+Example: See example in guide.
+Additional Notes: May not appear elsewhere.
+
+**Specification 25: `goog.require` alias must match final component**
+Description: When `goog.require` assigned to single constant alias, it must match final dot-separated component of namespace.
+Example: `const asserts = goog.require('goog.asserts');`
+Additional Notes: Longer aliases allowed to disambiguate or prevent masking native types.
+
+**Specification 26: `goog.require` side effects - must be `goog.require`, comment required**
+Description: If module imported only for side effects, call must be `goog.require` (not `goog.requireType`) and assignment omitted; comment required to explain.
+Example: `/** @suppress {extraRequire} Initializes MyFramework. */ goog.require('my.framework.initialization');`
+Additional Notes: None.
+
+**Specification 27: `goog.require` lines - exception to 80-column limit**
+Description: Long alias or module name may cause line to exceed 80 columns; require lines are exception and must not be wrapped.
+Example: `const SomeDataStructure = goog.require('proto.identical.package.identifiers.SomeDataStructure');`
+Additional Notes: None.
+
+**Specification 28: Braces required for all control structures**
+Description: Braces required for all control structures (`if`, `else`, `for`, `do`, `while`, etc.), even if body contains single statement. First statement of non-empty block must begin on its own line.
+Example: `if (condition) { doSomething(); }`
+Additional Notes: Exception: simple single-line `if` without `else` may omit braces if improves readability.
+
+**Specification 29: Nonempty blocks - K&R style (Egyptian brackets)**
+Description: No line break before opening brace; line break after opening brace; line break before closing brace; line break after closing brace if terminates statement/function/class.
+Example:
+```javascript
+if (condition) {
+  doSomething();
+}
+```
+Additional Notes: No break after brace if followed by `else`, `catch`, `while`, comma, semicolon, or right parenthesis.
+
+**Specification 30: Empty blocks - may be concise `{}`**
+Description: Empty block may be closed immediately with no characters/space/line break (`{}`), unless part of multi-block statement (`if/else`, `try/catch/finally`).
+Example: `function doNothing() {}`
+Additional Notes: In multi-block, disallowed.
+
+**Specification 31: Block indentation - +2 spaces**
+Description: Each new block increases indent by 2 spaces. When block ends, indent returns to previous level. Applies to code and comments.
+Example:
+```javascript
+if (x) {
+  doSomething();
+}
+```
+Additional Notes: None.
+
+**Specification 32: Array literals - optionally block-like**
+Description: Any array literal may optionally be formatted as a “block-like construct” (indented like a block).
+Example:
+```javascript
+const a = [
+  0,
+  1,
+  2,
+];
+```
+Additional Notes: Other combinations allowed.
+
+**Specification 33: Object literals - optionally block-like**
+Description: Any object literal may optionally be formatted as a block-like construct.
+Example:
+```javascript
+const a = {
+  a: 0,
+  b: 1,
+};
+```
+Additional Notes: Same as arrays.
+
+**Specification 34: Class literals - indented as blocks, no semicolons after methods**
+Description: Class literals indented as blocks. Do not add semicolons after methods or after closing brace of class declaration.
+Example:
+```javascript
+class MyClass {
+  method() {
+    // ...
+  }
+}
+```
+Additional Notes: Class expressions still terminated with semicolon.
+
+**Specification 35: Function expressions - body indented +2 relative to preceding depth**
+Description: When declaring anonymous function in argument list, function body indented two spaces more than preceding indentation depth.
+Example: See guide example.
+Additional Notes: None.
+
+**Specification 36: Switch statements - contents indented +2, labels increase +2**
+Description: Switch block contents indented +2. After a switch label, newline and indent increased +2, as if block opened. Following label returns to previous indent.
+Example:
+```javascript
+switch (animal) {
+  case BANDERSNATCH:
+    handle();
+    break;
+}
+```
+Additional Notes: Blank line optional between `break` and next `case`.
+
+**Specification 37: One statement per line**
+Description: Each statement followed by line break.
+Example: `x = 1;` then newline.
+Additional Notes: None.
+
+**Specification 38: Semicolons required**
+Description: Every statement must be terminated with a semicolon; relying on automatic semicolon insertion forbidden.
+Example: `let x = 1;` not `let x = 1` without semicolon.
+Additional Notes: None.
+
+**Specification 39: Column limit - 80 characters**
+Description: JavaScript code has column limit of 80 characters. Exceeding lines must be line-wrapped.
+Example: Wrap lines longer than 80.
+Additional Notes: Exceptions: `goog.module`, `goog.require`, `import`, `export from`, long URLs, shell commands, long string literals.
+
+**Specification 40: Line-wrapping - break after operator**
+Description: When line broken at operator, break comes after the symbol (different from Java style). Dot `.` not an operator.
+Example:
+```javascript
+currentEstimate =
+    calc(currentEstimate + x * currentEstimate) /
+        2.0;
+```
+Additional Notes: None.
+
+**Specification 41: Line-wrapping - method name stays with `(`**
+Description: A method or constructor name stays attached to open parenthesis `(`.
+Example: `doSomething(` not broken.
+Additional Notes: None.
+
+**Specification 42: Line-wrapping - comma stays with preceding token**
+Description: A comma stays attached to the token that precedes it.
+Example: `arg1,` then break.
+Additional Notes: None.
+
+**Specification 43: Line-wrapping - no break between `return` and value**
+Description: Line break never added between `return` and return value; changes meaning.
+Example: Not `return\n value;`.
+Additional Notes: None.
+
+**Specification 44: Continuation lines indent at least +4 spaces**
+Description: Each continuation line indented at least +4 from original line, unless under block indentation rules.
+Example:
+```javascript
+doSomething(
+    arg1, arg2);
+```
+Additional Notes: Deeper syntactic levels may be indented more.
+
+**Specification 45: Vertical whitespace - single blank line between methods**
+Description: A single blank line appears between consecutive methods in a class or object literal.
+Example:
+```javascript
+method1() {}
+
+method2() {}
+```
+Additional Notes: Optional between properties in object literal.
+
+**Specification 46: Vertical whitespace - no blank lines inside function body start/end**
+Description: Blank lines at start or end of function body not allowed.
+Example: No blank line after `{` or before `}`.
+Additional Notes: Sparingly within body for logical grouping.
+
+**Specification 47: Horizontal whitespace - trailing whitespace forbidden**
+Description: Trailing whitespace is forbidden.
+Example: No spaces at end of line.
+Additional Notes: None.
+
+**Specification 48: Horizontal whitespace - separating reserved word from `(`**
+Description: Space separating reserved word (`if`, `for`, `catch`) from open parenthesis `(`.
+Example: `if (condition)`
+Additional Notes: Except `function` and `super`.
+
+**Specification 49: Horizontal whitespace - separating reserved word from `}`**
+Description: Space separating reserved word (`else`, `catch`) from closing curly brace `}`.
+Example: `} else {`
+Additional Notes: None.
+
+**Specification 50: Horizontal whitespace - before `{` except two exceptions**
+Description: Space before open curly brace `{`, except before object literal that is first argument or first element in array literal.
+Example: `if (x) {` has space; `foo({a:1})` no space before `{`.
+Additional Notes: Also no space in template expansion (invalid).
+
+**Specification 51: Horizontal whitespace - around binary/ternary operators**
+Description: Space on both sides of any binary or ternary operator.
+Example: `a + b`, `x ? y : z`.
+Additional Notes: None.
+
+**Specification 52: Horizontal whitespace - after comma and semicolon**
+Description: Space after comma (`,`) and semicolon (`;`); never before.
+Example: `foo(a, b)` not `foo(a ,b)`.
+Additional Notes: None.
+
+**Specification 53: Horizontal whitespace - after colon in object literal**
+Description: Space after colon in object literal.
+Example: `{key: value}`.
+Additional Notes: None.
+
+**Specification 54: Horizontal whitespace - around `//` comment**
+Description: Space on both sides of `//` that begins end-of-line comment. Multiple spaces allowed.
+Example: `x = 1;  // comment`.
+Additional Notes: None.
+
+**Specification 55: Horizontal alignment - discouraged**
+Description: Horizontal alignment (adding variable spaces to align tokens) is permitted but generally discouraged. Not required to maintain.
+Example:
+```javascript
+{
+  tiny: 42,
+  longer: 435,
+}
+```
+Not aligned.
+Additional Notes: Causes maintenance problems.
+
+**Specification 56: Function arguments - prefer same line, else wrap with 4-space indent**
+Description: Prefer all arguments on same line as function name. If exceed 80, wrap arguments in readable way. Indentation 4 spaces.
+Example:
+```javascript
+doSomething(
+    arg1, arg2, arg3) {
+  // ...
+}
+```
+Additional Notes: Aligning to parenthesis allowed but discouraged.
+
+**Specification 57: Grouping parentheses - recommended**
+Description: Omit optional grouping parentheses only when author and reviewer agree no reasonable chance of misinterpretation.
+Example: `(a + b) * c` recommended.
+Additional Notes: Do not assume reader knows precedence.
+
+**Specification 58: Parentheses unnecessary after `delete`, `typeof`, `void`, `return`, `throw`, `case`, `in`, `of`, `yield`**
+Description: Do not use unnecessary parentheses around entire expression following those keywords.
+Example: `return x;` not `return (x);`.
+Additional Notes: Parentheses required for type casts.
+
+**Specification 59: Block comment style - indented same as code**
+Description: Block comments indented at same level as surrounding code. May be `/* … */` or `// …`. For multi-line, subsequent lines start with `*` aligned.
+Example:
+```javascript
+/*
+ * This is okay.
+ */
+```
+Additional Notes: Comments not enclosed in boxes.
+
+**Specification 60: Do not use JSDoc for implementation comments**
+Description: Do not use `/** … */` for implementation comments; use `/* … */` or `//`.
+Example: `/* implementation comment */` not `/** ... */`.
+Additional Notes: JSDoc reserved for documentation.
+
+---
+
+### 复杂类 (Hard) - 共 60 条
+
+**Specification 61: Parameter name comments - use `/* name= */` before value**
+Description: Use parameter name comments when value and method name don't sufficiently convey meaning. Preferred format: `/* shouldRender= */ true`.
+Example: `someFunction(obviousParam, /* shouldRender= */ true);`
+Additional Notes: May also put after value without `=` for consistency.
+
+**Specification 62: Local variable declarations - use `const` and `let`**
+Description: Declare all local variables with `const` or `let`. Use `const` by default unless variable needs reassignment. `var` must not be used.
+Example: `const x = 1; let y = 2;`
+Additional Notes: None.
+
+**Specification 63: One variable per declaration**
+Description: Every local variable declaration declares only one variable; no `let a = 1, b = 2;`.
+Example: `let a = 1; let b = 2;`
+Additional Notes: None.
+
+**Specification 64: Local variables - declared when needed, initialized as soon as possible**
+Description: Declare local variables close to first use, not at start of block, to minimize scope. Initialize as soon as possible.
+Example: `let result = compute();` near where used.
+Additional Notes: None.
+
+**Specification 65: JSDoc type annotations - may be inline or above**
+Description: Type annotations may be on line above or inline before variable name if no other JSDoc.
+Example: `const /** !Array<number> */ data = [];`
+Additional Notes: Mixing inline and block JSDoc not allowed.
+
+**Specification 66: Array literals - use trailing commas when line break between final element and bracket**
+Description: Include trailing comma whenever there is line break between final element and closing bracket.
+Example:
+```javascript
+const values = [
+  'first',
+  'second',
+];
+```
+Additional Notes: None.
+
+**Specification 67: Do not use `Array` constructor**
+Description: Do not use variadic `Array` constructor; error-prone. Use literal instead.
+Example: `const a = [x1, x2, x3];` not `new Array(x1, x2, x3);`
+Additional Notes: Explicit allocation `new Array(length)` allowed.
+
+**Specification 68: Non-numeric properties on arrays - forbidden**
+Description: Do not define or use non-numeric properties on arrays (other than `length`). Use `Map` or `Object`.
+Example: Not `arr.foo = 'bar';`.
+Additional Notes: None.
+
+**Specification 69: Array destructuring - allowed, rest element allowed**
+Description: Array literals on left-hand side for destructuring. Final rest element `...rest` allowed (no space). Omit unused elements.
+Example: `const [a, b, ...rest] = generateResults();`
+Additional Notes: For function parameters, default to `[]`.
+
+**Specification 70: Spread operator in array literals - preferred**
+Description: Use spread operator `...` to flatten iterables. Prefer over `Array.prototype.slice` or `concat`. No space after `...`.
+Example: `[...foo, ...bar]`.
+Additional Notes: None.
+
+**Specification 71: Object literals - use trailing commas when line break**
+Description: Include trailing comma whenever line break between final property and closing brace.
+Example:
+```javascript
+const a = {
+  a: 0,
+  b: 1,
+};
+```
+Additional Notes: None.
+
+**Specification 72: Do not use `Object` constructor**
+Description: Do not use `Object` constructor; use literal `{}` or `{a:0, b:1}`.
+Example: `const obj = {};` not `new Object();`.
+Additional Notes: Consistency.
+
+**Specification 73: Do not mix quoted and unquoted keys in object literal**
+Description: Object literals represent either structs (unquoted keys) or dicts (quoted/computed keys). Do not mix.
+Example: Not `{width: 42, 'maxWidth': 43}`.
+Additional Notes: Also affects `hasOwnProperty`.
+
+**Specification 74: Computed property names - allowed, treated as dict-style**
+Description: Computed property names allowed and considered dict-style (quoted) keys, unless computed property is a symbol.
+Example: `{['key' + foo()]: 42}`.
+Additional Notes: Enum values for computed keys but not mixed with non-enum.
+
+**Specification 75: Method shorthand - allowed**
+Description: Methods can be defined using method shorthand `{ method() { ... } }` instead of colon and function.
+Example:
+```javascript
+return {
+  method() { return this.stuff; },
+};
+```
+Additional Notes: `this` in method shorthand refers to object literal.
+
+**Specification 76: Shorthand properties - allowed**
+Description: Shorthand properties `{foo, bar}` allowed.
+Example: `const obj = {foo, bar};`.
+Additional Notes: None.
+
+**Specification 77: Object destructuring - allowed, keep simple**
+Description: Object destructuring patterns allowed. For function parameters, keep to single level of unquoted shorthand properties; no nested or computed. Default to `{}`.
+Example: `function destructured(ordinary, {num, str = 'some default'} = {}) {}`
+Additional Notes: JSDoc for destructured parameter may use any name.
+
+**Specification 78: Enums - defined with `@enum` on object literal**
+Description: Enumerations defined by adding `@enum` annotation to an object literal. Must be module-local or on `exports`. Values must be string literals or numbers.
+Example:
+```javascript
+/** @enum {string} */
+const TemperatureScale = { CELSIUS: 'celsius' };
+```
+Additional Notes: No additional properties after definition; must be constant.
+
+**Specification 79: Enums - string values must be statically initialized**
+Description: For string enums, all values must be statically initialized, not computed with arithmetic, template literals, function calls, or variable references.
+Example: Not `ZERO_FAHRENHEIT: 0 + '°F'`.
+Additional Notes: For complex values, use const object without `@enum`.
+
+**Specification 80: Classes - constructors optional, subclass must call `super()`**
+Description: Constructors optional. Subclass constructors must call `super()` before setting fields or accessing `this`. Interfaces declare non-method properties in constructor.
+Example: `constructor() { super(); this.foo = 1; }`
+Additional Notes: None.
+
+**Specification 81: Classes - define all fields in constructor**
+Description: Define all of a concrete object's fields in the constructor. Annotate never-reassigned fields with `@const`. Non-public fields with `@private`, `@protected`, `@package`. Private fields may end with underscore.
+Example:
+```javascript
+constructor() {
+  /** @private @const {!Bar} */
+  this.bar_ = computeBar();
+}
+```
+Additional Notes: Fields not defined on `prototype`.
+
+**Specification 82: Classes - do not add/remove properties after constructor**
+Description: Properties should never be added or removed after constructor finishes (hinders optimization). If initialized later, set to `undefined` in constructor.
+Example: `this.laterField = undefined;` in constructor.
+Additional Notes: Use `@struct` to enforce.
+
+**Specification 83: Classes - computed properties only for symbols**
+Description: Computed properties in classes only when property is a symbol. Dict-style properties (quoted or computed non-symbol) not allowed.
+Example: `[Symbol.iterator]() { ... }`.
+Additional Notes: Use sparingly.
+
+**Specification 84: Static methods - prefer module-local functions over private static methods**
+Description: Prefer module-local functions over private static methods where it doesn't interfere with readability.
+Example: Use top-level function instead of `static helper()`.
+Additional Notes: Do not rely on dynamic dispatch; call on base class only.
+
+**Specification 85: Static methods - do not access `this` in static methods**
+Description: Do not access `this` in static methods.
+Example: Not `static foo() { return this.staticField; }`.
+Additional Notes: Use class name instead.
+
+**Specification 86: Old-style class declarations - `goog.defineClass` or traditional**
+Description: When ES6 classes not feasible, use `goog.defineClass` or traditional constructor + `goog.inherits`.
+Example: `let C = goog.defineClass(S, { constructor() {...} });`
+Additional Notes: Methods on prototype.
+
+**Specification 87: Do not manipulate `prototype` directly**
+Description: Ordinary code should not manipulate `prototype` objects. Use `class` syntax. Mixins and modifying builtin prototypes forbidden.
+Example: Not `Array.prototype.foo = ...`.
+Additional Notes: Framework code exception.
+
+**Specification 88: Getters and setters - do not use**
+Description: Do not use JavaScript getter/setter properties. Provide ordinary methods instead.
+Example: Not `get next() { return this.nextId++; }`.
+Additional Notes: Exception for data binding frameworks or external APIs.
+
+**Specification 89: Overriding `toString` - must succeed, no side effects**
+Description: `toString` may be overridden but must always succeed and never have visible side effects.
+Example: Avoid calling other methods that may throw.
+Additional Notes: None.
+
+**Specification 90: Interfaces - declared with `@interface` or `@record`**
+Description: Interfaces may be declared with `@interface` or `@record`. Methods non-static, bodies empty. Fields declared uninitialized in constructor.
+Example:
+```javascript
+/** @record */
+class Frobnicator {
+  constructor() { /** @type {number} */ this.attempts; }
+  frobnicate(strategy) {}
+}
+```
+Additional Notes: `@record` allows implicit implementation.
+
+**Specification 91: Abstract classes - use `@abstract`**
+Description: Use abstract classes when appropriate. Abstract classes and methods annotated with `@abstract`. Do not use `goog.abstractMethod`.
+Example: `/** @abstract */ method() {}`.
+Additional Notes: None.
+
+**Specification 92: Do not create static container classes**
+Description: Do not use container classes with only static methods/properties for namespacing. Export individual constants and functions.
+Example: Not `class Container { static bar() {...} }`; instead `export function bar() {...}`.
+Additional Notes: None.
+
+**Specification 93: Do not define nested namespaces**
+Description: Do not define a nested type (class, typedef, enum, interface) on another module-local name. Use top-level exports.
+Example: Not `Foo.Bar = class {...}`; export `FooBar` instead.
+Additional Notes: When module name redundant, omit redundancy.
+
+**Specification 94: Top-level functions - defined on `exports` or locally**
+Description: Top-level functions may be defined directly on `exports` object, or declared locally and exported.
+Example: `exports.processString = (str) => {...};`
+Additional Notes: None.
+
+**Specification 95: Nested functions - allowed, assign name to `const` if useful**
+Description: Functions may contain nested function definitions. If useful to give name, assign to local `const`.
+Example: `const helper = () => {...};`.
+Additional Notes: None.
+
+**Specification 96: Arrow functions - prefer over `function` for nested functions**
+Description: Prefer arrow functions over `function` keyword for nested functions (except method shorthand). Prefer over `bind`, `goog.bind`, `const self = this`.
+Example: `getValue((result) => void alert(result));`
+Additional Notes: Parentheses optional for single parameter, but always using them avoids errors.
+
+**Specification 97: Arrow function body - block or single expression with `void` if no return needed**
+Description: Body defaults to block. Single expression allowed if logic requires return value, or `void` precedes single function call (ensures `undefined` returned).
+Example: `(numParam, strParam) => numParam + Number(strParam)` (return value). `(result) => void alert(result)` (no return).
+Additional Notes: Single expression preferred for readability.
+
+**Specification 98: Generators - attach `*` to `function` or `yield` with space**
+Description: When defining generator functions, attach `*` to `function` keyword, separate with space from name. For delegating yields, attach `*` to `yield`.
+Example: `function* gen1() { yield 42; }`, `yield* gen1();`.
+Additional Notes: None.
+
+**Specification 99: Default parameters - allowed, spaces around `=`, no `opt_` prefix**
+Description: Optional parameters allowed with `=`. Spaces around `=`. Named exactly like required (no `opt_`). Use `=` in JSDoc type. Come after required. Must have default value (even `undefined`).
+Example: `function maybeDoSomething(required, optional = '') {}`
+Additional Notes: Abstract/interface methods omit default values.
+
+**Specification 100: Rest parameters - use instead of `arguments`**
+Description: Use rest parameter `...numbers` instead of `arguments`. Typed with `...` in JSDoc. Last parameter. No space between `...` and name. Do not name `var_args` or `arguments`.
+Example: `function variadic(array, ...numbers) {}`
+Additional Notes: None.
+
+**Specification 101: Generics - declare with `@template`**
+Description: Declare generic functions and methods with `@template TYPE` in JSDoc.
+Example: `/** @template T */ function identity(x) { return x; }`
+Additional Notes: None.
+
+**Specification 102: Spread operator in function calls - preferred**
+Description: Function calls may use spread operator `...`. Prefer over `Function.prototype.apply`. No space after `...`.
+Example: `myFunction(...array, ...iterable);`
+Additional Notes: None.
+
+**Specification 103: String literals - use single quotes**
+Description: Ordinary string literals delimited with single quotes `'`, not double `"`. May not span multiple lines.
+Example: `const s = 'hello';`
+Additional Notes: Use template string to avoid escaping single quote.
+
+**Specification 104: Template literals - prefer over complex concatenation**
+Description: Use template literals `` `...` `` over complex string concatenation, especially with multiple literals. May span multiple lines.
+Example: ``return `Here is a table: ${a} + ${b} = ${a+b}`;``
+Additional Notes: Indentation not required to follow block.
+
+**Specification 105: No line continuations in strings**
+Description: Do not use backslash line continuations in string literals. Use concatenation instead.
+Example: Not `'long \ string'`; use `'long ' + 'string'`.
+Additional Notes: Backslash escapes newline in strings allowed but not recommended.
+
+**Specification 106: Number literals - hex `0x`, octal `0o`, binary `0b` with lowercase letters**
+Description: Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never include leading zero unless followed by `x`, `o`, `b`.
+Example: `0x1f`, `0o755`, `0b1010`.
+Additional Notes: None.
+
+**Specification 107: For loops - prefer `for-of`**
+Description: `for-of` loops should be preferred when possible. `for-in` only on dict-style objects, not arrays. Use `hasOwnProperty` with `for-in`.
+Example: `for (const item of items) {}` not `for (const i in array)`.
+Additional Notes: Prefer `for-of` and `Object.keys`.
+
+**Specification 108: Exceptions - throw `Error` or subclass**
+Description: Always throw `Error` or subclasses; never throw string literals or other objects. Always use `new Error()`.
+Example: `throw new Error('message');`
+Additional Notes: Applies to `Promise.reject` as well.
+
+**Specification 109: Custom exceptions - define when `Error` insufficient**
+Description: Custom exceptions provide additional error information; define and use wherever native `Error` insufficient.
+Example: `class MyError extends Error { ... }`.
+Additional Notes: Prefer throwing exceptions over ad-hoc error handling.
+
+**Specification 110: Empty catch blocks - must have comment explaining why**
+Description: Very rarely correct to do nothing in catch. When appropriate, comment must justify.
+Example:
+```javascript
+catch (e) {
+  // it's not numeric; that's fine, just continue
+}
+```
+Additional Notes: Not `catch (expected) {}` without comment.
+
+**Specification 111: Switch statement - fall-through must be commented**
+Description: Each statement group either terminates abruptly or marked with fall-through comment (typically `// fall through`). Last group no comment needed.
+Example:
+```javascript
+case 1:
+  prepare();
+  // fall through
+case 2:
+  handle();
+  break;
+```
+Additional Notes: None.
+
+**Specification 112: Switch statement - `default` case must be present**
+Description: Each switch statement includes a `default` statement group, even if empty, and must be last.
+Example: `default: break;`
+Additional Notes: None.
+
+**Specification 113: `this` - only in class constructors/methods, arrow functions, or `@this` annotated functions**
+Description: Use `this` only in class constructors/methods, arrow functions defined within them, or functions with explicit `@this`. Never for global object, `eval`, event target, or unnecessary `call`/`apply`.
+Example: `class C { method() { this.foo = 1; } }`
+Additional Notes: None.
+
+**Specification 114: Equality checks - use `===` and `!==`**
+Description: Use identity operators `===` and `!==` except as noted.
+Example: `if (x === 0)` not `if (x == 0)`.
+Additional Notes: Exception: `if (someObjectOrPrimitive == null)` catches both `null` and `undefined`.
+
+**Specification 115: `with` - forbidden**
+Description: Do not use `with` keyword.
+Example: Not `with (obj) { ... }`.
+Additional Notes: Banned in strict mode.
+
+**Specification 116: Dynamic code evaluation - forbidden**
+Description: Do not use `eval` or `Function(...string)` (except code loaders). Dangerous and doesn't work in CSP environments.
+Example: Not `eval('x = 1');`.
+Additional Notes: None.
+
+**Specification 117: Non-standard features - forbidden**
+Description: Do not use non-standard features (removed, not yet standardized, proprietary). Use only current ECMA-262 or WHATWG standards.
+Example: Not `WeakMap.clear` (removed).
+Additional Notes: Project-specific APIs (Chrome extensions, Node.js) allowed.
+
+**Specification 118: Wrapper objects for primitives - never use `new`**
+Description: Never use `new Boolean`, `new Number`, `new String`, `new Symbol`. Use coercion functions instead.
+Example: `const x = Boolean(0);` not `new Boolean(false);`.
+Additional Notes: Do not include in type annotations.
+
+**Specification 119: Modifying builtin objects - forbidden**
+Description: Never modify builtin types (adding methods to constructors or prototypes). Avoid libraries that do. Do not add symbols to global object unless absolutely necessary.
+Example: Not `Array.prototype.foo = ...`.
+Additional Notes: JSCompiler polyfills are allowed.
+
+**Specification 120: Omitting parentheses when invoking constructor with `new` - forbidden**
+Description: Never invoke constructor without parentheses `new Foo();` not `new Foo;`.
+Example: `new Foo();` not `new Foo;`.
+Additional Notes: Omitting parentheses leads to subtle mistakes.

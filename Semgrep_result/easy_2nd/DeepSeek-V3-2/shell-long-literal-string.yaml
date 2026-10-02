@@ -1,0 +1,37 @@
+rules:
+- id: shell-long-literal-string
+  message: If you have literal strings longer than 80 characters, use a here document
+    or an embedded newline.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $VAR="$STRING"
+  - metavariable-regex:
+      metavariable: $STRING
+      regex: ^.{81,}$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based length detection may have false positives with escaped
+          characters
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: If you have literal strings longer than 80 characters, use
+      a here document or an embedded newline.

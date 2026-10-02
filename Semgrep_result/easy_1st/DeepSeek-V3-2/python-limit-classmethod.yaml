@@ -1,0 +1,38 @@
+rules:
+- id: python-limit-classmethod
+  message: Use @classmethod only when writing a named constructor or class-specific
+    routine that modifies class state. Framework methods (unittest setUpClass, Pydantic
+    validators, state-modifying set_* methods) are exempted.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "@classmethod\ndef $FUNC(...):\n    ..."
+  - metavariable-regex:
+      metavariable: $FUNC
+      regex: "^(?!from_|construct_|_create|setUpClass|setUp|replacement_setupclass|validate_|set_).*$"
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: cannot semantically validate if method is a named constructor
+          or modifies global state
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check method purpose
+    original_description: Use @classmethod only when writing a named constructor or
+      class-specific routine that modifies global state.

@@ -1,0 +1,4 @@
+**Specification 98: Generators - attach `*` to `function` or `yield` with space**
+Description: When defining generator functions, attach `*` to `function` keyword, separate with space from name. For delegating yields, attach `*` to `yield`.
+Example: `function* gen1() { yield 42; }`, `yield* gen1();`.
+Additional Notes: None.

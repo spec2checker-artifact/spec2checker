@@ -1,0 +1,53 @@
+rules:
+- id: python-logging-string-literal-placeholders
+  message: For logging functions that expect a pattern-string, always call them with
+    a string literal (not f-string) as first argument.
+  languages:
+  - python
+  severity: WARNING
+  pattern-either:
+  - patterns:
+    - pattern: logging.$METHOD($ARG, ...)
+    - metavariable-regex:
+        metavariable: $METHOD
+        regex: ^(debug|info|warning|error|critical|exception|log|warn)$
+    - pattern-not: logging.$METHOD("...", ...)
+    - pattern-not: logging.$METHOD('...', ...)
+  - patterns:
+    - pattern: $LOGGER.$METHOD($ARG, ...)
+    - metavariable-regex:
+        metavariable: $LOGGER
+        regex: ^(_{0,2}log(ger)?|LOG(GER)?)$
+    - metavariable-regex:
+        metavariable: $METHOD
+        regex: ^(debug|info|warning|error|critical|exception|log|warn)$
+    - pattern-not: $LOGGER.$METHOD("...", ...)
+    - pattern-not: $LOGGER.$METHOD('...', ...)
+  metadata:
+    syntax_$METHOD: name_matches_regex('^(debug|info|warning|error|critical|exception|log)$')
+    syntax_$ARG: is_not_string_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to detect non-literal first arguments; may have
+          false positives with complex expressions
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect logging calls with non-literal
+          format strings
+    original_description: For logging functions that expect a pattern-string, always
+      call them with a string literal (not f-string) as first argument.

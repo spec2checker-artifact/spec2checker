@@ -1,0 +1,14 @@
+rules:
+- id: javascript-custom-exception-required
+  message: '[DISABLED] Detect usage of the native Error constructor where a custom
+    exception class extending Error should be defined and used instead.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect usage of the native Error constructor where a custom
+      exception class extending Error should be defined and used instead.

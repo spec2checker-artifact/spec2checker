@@ -1,0 +1,9 @@
+**Specification 103: Main - put main functionality in `main()`**
+Description: If file is meant as executable, its main functionality should be in a `main()` function.
+Example:
+```python
+def main(): ...
+if __name__ == '__main__':
+    main()
+```
+Additional Notes: When using `absl`, use `app.run(main)`.

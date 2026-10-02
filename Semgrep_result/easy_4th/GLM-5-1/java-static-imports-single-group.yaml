@@ -1,0 +1,14 @@
+rules:
+- id: java-static-imports-single-group
+  message: '[DISABLED] All static imports must be in a single group, and this group
+    must appear before any non-static imports.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: All static imports must be in a single group, and this group
+      must appear before any non-static imports.

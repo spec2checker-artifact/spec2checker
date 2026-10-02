@@ -1,0 +1,550 @@
+[
+  {
+    "rule_id": "java-new-style-switch-single-line",
+    "language": "java",
+    "description": "New-style switch rule can be written on a single line if it follows Google style (no column overflow; if non-empty block, line break after {). Continuation lines indent +4.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $LABEL -> $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LABEL": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch_expression",
+        "constraint_type": "syntactic",
+        "condition": "is_new_style_switch",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "formatting rules (line length, indentation) require custom checks beyond AST matching"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for line length and block formatting"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "formatting rules are not a primary focus of CodeQL"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\style_switch_single_rule.txt",
+      "section": "style_switch_single_rule"
+    }
+  },
+  {
+    "rule_id": "java-test-method-name-underscore",
+    "language": "java",
+    "description": "JUnit test method names may contain underscores to separate logical components, each component in lowerCamelCase.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@Test\npublic void $METHOD(...) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$METHOD": {
+          "type_hint": "function",
+          "regex": "^[a-z][a-zA-Z0-9]*_[a-z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "has_annotation('Test')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may not capture all valid lowerCamelCase components"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for naming pattern with underscores"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for naming convention"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\method_underscores_allowed.txt",
+      "section": "method_underscores_allowed"
+    }
+  },
+  {
+    "rule_id": "java-local-variable-declaration-timing",
+    "language": "java",
+    "description": "Local variables should be declared close to their first use, not habitually at the start of a block, to minimize their scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "distance_from_block_start > 5",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Distance heuristic is approximate; may have false positives/negatives."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's LocalVariableCouldBeFinal rule is related but not identical. Requires custom rule for distance check."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can compute variable use distances but requires custom query for this specific style rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\variables_declared_needed.txt",
+      "section": "variables_declared_needed"
+    }
+  },
+  {
+    "rule_id": "java-class-logical-order",
+    "language": "java",
+    "description": "Class members and initializers should follow a logical order that the maintainer could explain, not chronological by date added. Do not habitually add new methods to the end.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep cannot enforce logical ordering of class members."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for logical class member ordering; requires custom rule."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL cannot enforce logical ordering of class members."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\contents_logical_order.txt",
+      "section": "contents_logical_order"
+    }
+  },
+  {
+    "rule_id": "java-overloads-never-split",
+    "language": "java",
+    "description": "Methods with the same name must appear in a single contiguous group with no other members in between. Same for constructors. Applies even when modifiers differ.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $MODIFIERS $RETURN $NAME($PARAMS) { ... }\n    ...\n    $MODIFIERS2 $RETURN2 $NAME($PARAMS2) { ... }\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$NAME": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "same_name_methods_not_contiguous",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect non-contiguous groups of same-name methods"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule implementation"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to check ordering of class members"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\overloads_never_split.txt",
+      "section": "overloads_never_split"
+    }
+  },
+  {
+    "rule_id": "java-switch-old-style-syntax",
+    "language": "java",
+    "description": "Detect use of old-style colon syntax in switch statements where new-style arrow syntax is required (e.g., in switch expressions).",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "case $LABEL:",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LABEL": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "is_switch_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of switch expression context"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has rules for switch syntax but may not distinguish expression context"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect colon in switch expressions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_syntaxes_style.txt",
+      "section": "switch_syntaxes_style"
+    }
+  },
+  {
+    "rule_id": "java-switch-block-style-mix",
+    "language": "java",
+    "description": "Detect mixing of new-style switch rules (label ->) and old-style statement groups (label:) within the same switch block.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "switch ($EXPR) {\n    $...BODY\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$...BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$...BODY",
+        "constraint_type": "syntactic",
+        "condition": "contains_pattern('case $L ->')",
+        "required": "true"
+      },
+      {
+        "target": "$...BODY",
+        "constraint_type": "syntactic",
+        "condition": "contains_pattern('case $L:')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for both switch rule and statement group syntax"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD may have existing rules for switch style but not specifically for mixing"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST query to differentiate switch case types"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_statement_groups.txt",
+      "section": "switch_statement_groups"
+    }
+  },
+  {
+    "rule_id": "java-kr-single-statement-block",
+    "language": "java",
+    "description": "Detects a block used where a single statement is allowed, which is permitted by K&R style to limit local variable scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "{\n  $...;\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "block",
+        "constraint_type": "syntactic",
+        "condition": "parent_is_single_statement_context",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of single-statement contexts (e.g., after if, for, while)"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's rule 'UnnecessaryBlock' flags the opposite case; custom rule needed for this exception."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to identify blocks in single-statement contexts"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\exception_single_statement.txt",
+      "section": "exception_single_statement"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-conversion-step1",
+    "language": "java",
+    "description": "Convert phrase to plain ASCII and remove apostrophes. Example: 'Müller's algorithm' → 'Muellers algorithm'",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep is not designed for text normalization or encoding transformations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD is not designed for text normalization or encoding transformations."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for text normalization or encoding transformations."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\conversion_apostrophes.txt",
+      "section": "conversion_apostrophes"
+    }
+  },
+  {
+    "rule_id": "java-type-use-annotation-position",
+    "language": "java",
+    "description": "Type-use annotations must appear immediately before the annotated type and be meta-annotated with @Target(ElementType.TYPE_USE).",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$TYPE_USE_ANNOTATION $TYPE $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE_USE_ANNOTATION": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE_USE_ANNOTATION",
+        "constraint_type": "annotation",
+        "condition": "has_meta_annotation('java.lang.annotation.Target', 'java.lang.annotation.ElementType.TYPE_USE')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to verify @Target meta-annotation"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom rule to check annotation target"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires query to check annotation position and meta-annotation"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\type_annotations_position.txt",
+      "section": "type_annotations_position"
+    }
+  }
+]

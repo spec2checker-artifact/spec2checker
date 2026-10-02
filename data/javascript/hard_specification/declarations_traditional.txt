@@ -1,0 +1,4 @@
+**Specification 86: Old-style class declarations - `goog.defineClass` or traditional**
+Description: When ES6 classes not feasible, use `goog.defineClass` or traditional constructor + `goog.inherits`.
+Example: `let C = goog.defineClass(S, { constructor() {...} });`
+Additional Notes: Methods on prototype.

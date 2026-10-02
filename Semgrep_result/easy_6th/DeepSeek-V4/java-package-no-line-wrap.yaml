@@ -1,0 +1,37 @@
+rules:
+- id: java-package-no-line-wrap
+  message: The package declaration must not be line-wrapped. The column limit does
+    not apply to package declarations.
+  languages:
+  - java
+  severity: ERROR
+  patterns:
+  - pattern: package $PKG;
+  - metavariable-type:
+      metavariable: $PKG
+      type: expr
+  metadata:
+    syntax_statement: line_count > 1
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires line-based matching which may be approximate
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule to check line breaks in package statement
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires querying for multi-line package declarations
+    original_description: The package declaration must not be line-wrapped. The column
+      limit does not apply to package declarations.

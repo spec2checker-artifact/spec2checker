@@ -1,0 +1,4 @@
+Specification 98: Test method names - underscores allowed
+Description: Underscores may appear in JUnit test method names to separate logical components, each component in lowerCamelCase. No single correct way.
+Example: transferMoney_deductsFromSource
+Additional Notes: None.

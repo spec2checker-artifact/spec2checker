@@ -1,0 +1,4 @@
+**Specification 7: Constant names - k prefix + PascalCase**  
+Description: Variables declared `constexpr` or `const`, with value fixed for program duration, are named with leading `k` followed by mixed case. Underscores allowed rarely.  
+Example: `const int kDaysInAWeek = 7;`  
+Additional Notes: Applies to static storage duration variables.

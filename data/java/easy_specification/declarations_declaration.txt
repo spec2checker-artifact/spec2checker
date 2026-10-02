@@ -1,0 +1,4 @@
+Specification 56: Variable declarations - one per declaration
+Description: Every variable declaration (field or local) declares only one variable. No int a, b;.
+Example: int a; int b; not int a, b;
+Additional Notes: Exception: for loop header.

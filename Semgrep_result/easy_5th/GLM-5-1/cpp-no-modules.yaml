@@ -1,0 +1,38 @@
+rules:
+- id: cpp-no-modules
+  message: Do not use C++20 Modules (import, module, export). Not well-supported in
+    Google's ecosystem.
+  languages:
+  - cpp
+  severity: ERROR
+  patterns:
+  - pattern: import $MODULE;
+  - metavariable-type:
+      metavariable: $MODULE
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep supports C++ but may not fully parse all module syntax
+          variations.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL supports C++ but detection of module usage may require
+          specific query adaptations.
+    original_description: Do not use C++20 Modules (import, module, export). Not well-supported
+      in Google's ecosystem.

@@ -1,0 +1,4 @@
+**Specification 69: Always check return values**
+Description: Always check return values and give informative return values.
+Example: `if ! mv ...; then echo ...; exit 1; fi`
+Additional Notes: Use `$?` or `if` statement.

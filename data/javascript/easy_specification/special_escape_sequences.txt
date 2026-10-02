@@ -1,0 +1,4 @@
+**Specification 4: Special escape sequences - use them**
+Description: For characters with special escape sequences (`\'`, `\"`, `\\`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`), use that sequence rather than numeric escape.
+Example: `\n` not `\x0a`.
+Additional Notes: Legacy octal escapes never used.

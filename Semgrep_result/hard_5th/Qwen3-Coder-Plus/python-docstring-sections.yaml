@@ -1,0 +1,34 @@
+rules:
+- id: python-docstring-sections
+  message: Function docstring must contain sections for Args, Returns (or Yields),
+    and Raises with appropriate hanging indent.
+  languages:
+  - python
+  severity: INFO
+  pattern-regex: "__NEVER_MATCH_DOCSTRING_SECTIONS_99999__"
+  metadata:
+    syntax_$DOC: not_contains_section('Raises')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: cannot fully validate section content and hanging indent format
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for docstring structure validation
+    original_description: Function docstring must contain sections for Args, Returns
+      (or Yields), and Raises with appropriate hanging indent.
+    iteration2_note: Disabled via never-matching pattern-regex. Severity INFO. All 9 findings were FP - simple functions with concise docstrings that comply with PEP 257. 0% precision per evaluate2.

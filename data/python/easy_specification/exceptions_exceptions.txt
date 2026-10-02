@@ -1,0 +1,4 @@
+**Specification 10: Exceptions - custom exceptions inherit from existing class**
+Description: Libraries may define their own exceptions; they must inherit from an existing exception class.
+Example: `class MyError(ValueError): pass`
+Additional Notes: Exception names should end in `Error` and avoid repetition (e.g., `foo.FooError` not `foo.Error`).

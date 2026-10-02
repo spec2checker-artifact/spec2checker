@@ -1,0 +1,4 @@
+**Specification 22: Case - one-line alternative needs space after `)` and before `;;`**
+Description: A one-line alternative needs a space after the close parenthesis of the pattern and before the `;;`.
+Example: `a) command ;;`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 31: Use C++-style casts**  
+Description: Use `static_cast`, `const_cast`, `reinterpret_cast`, `std::bit_cast`. Do not use C-style casts except to `void`.  
+Example: `int y = static_cast<int>(x);`  
+Additional Notes: Brace initialization for arithmetic conversions.

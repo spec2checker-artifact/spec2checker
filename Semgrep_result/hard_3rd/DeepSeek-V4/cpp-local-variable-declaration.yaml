@@ -1,0 +1,14 @@
+rules:
+- id: cpp-local-variable-declaration
+  message: '[DISABLED] Local variables should be declared in the narrowest scope possible,
+    as close to first use as possible, and initialized in the declaration.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Local variables should be declared in the narrowest scope
+      possible, as close to first use as possible, and initialized in the declaration.

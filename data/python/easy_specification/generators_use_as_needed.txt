@@ -1,0 +1,4 @@
+**Specification 20: Generators - use as needed**
+Description: Use generators as needed.
+Example: `def gen(): yield 1`
+Additional Notes: Use “Yields:” rather than “Returns:” in docstring.

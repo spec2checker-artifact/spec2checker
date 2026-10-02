@@ -1,0 +1,4 @@
+Specification 96: Test class names
+Description: Test class name ends with Test. If covers a single class, name is that class plus Test.
+Example: HashIntegrationTest, HashImplTest
+Additional Notes: None.

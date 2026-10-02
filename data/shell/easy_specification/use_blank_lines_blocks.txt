@@ -1,0 +1,4 @@
+**Specification 10: Use blank lines between blocks**
+Description: Use blank lines between blocks to improve readability.
+Example: Separate logical sections with blank lines.
+Additional Notes: None.

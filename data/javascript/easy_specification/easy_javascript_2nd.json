@@ -1,0 +1,532 @@
+[
+  {
+    "rule_id": "javascript-horizontal-whitespace-around-comment",
+    "language": "javascript",
+    "description": "Space on both sides of `//` that begins end-of-line comment. Multiple spaces allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR; // $COMMENT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$COMMENT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "comment",
+        "constraint_type": "syntactic",
+        "condition": "preceded_by_whitespace",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for whitespace before comment"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for comment formatting"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_around_comment.txt",
+      "section": "whitespace_around_comment"
+    }
+  },
+  {
+    "rule_id": "javascript-vertical-whitespace-function",
+    "language": "javascript",
+    "description": "Blank lines at start or end of function body are not allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$RET $FUNC($ARGS) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function_body",
+        "constraint_type": "syntactic",
+        "condition": "first_statement_not_blank_line",
+        "required": "true"
+      },
+      {
+        "target": "function_body",
+        "constraint_type": "syntactic",
+        "condition": "last_statement_not_blank_line",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom metavariable analysis for body content"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST query for statement positions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_startend.txt",
+      "section": "whitespace_startend"
+    }
+  },
+  {
+    "rule_id": "javascript-import-extension-required",
+    "language": "javascript",
+    "description": "ES module import paths must include the `.js` file extension.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT from \"$PATH\";",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PATH": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PATH",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^(?!.*\\.js$).*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex pattern for path validation"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for import path string analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\import_include_extension.txt",
+      "section": "import_include_extension"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-before-brace",
+    "language": "javascript",
+    "description": "Require a space before an open curly brace `{`, except when the brace is part of an object literal that is the first argument to a function call or the first element in an array literal.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$PREV $BRACE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PREV": {
+          "type_hint": "expr"
+        },
+        "$BRACE": {
+          "type_hint": "expr",
+          "regex": "\\{"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$BRACE",
+        "constraint_type": "syntactic",
+        "condition": "is_object_literal",
+        "required": "true"
+      },
+      {
+        "target": "$BRACE",
+        "constraint_type": "syntactic",
+        "condition": "not_first_function_argument",
+        "required": "true"
+      },
+      {
+        "target": "$BRACE",
+        "constraint_type": "syntactic",
+        "condition": "not_first_array_element",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise syntactic context detection for exceptions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_exceptions.txt",
+      "section": "whitespace_exceptions"
+    }
+  },
+  {
+    "rule_id": "javascript-non-ascii-readability",
+    "language": "javascript",
+    "description": "Detect use of Unicode escape sequences for non-ASCII characters where the literal character would be more readable, as per the principle that programs failing to handle non-ASCII are broken.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\\u$HEX{4}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$HEX": {
+          "type_hint": "expr",
+          "regex": "[0-9a-fA-F]{4}"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "string",
+        "constraint_type": "syntactic",
+        "condition": "contains_unicode_escape",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches all 4-hex-digit Unicode escapes; requires manual review to determine if literal character is more readable."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect Unicode escapes, but readability judgment is subjective and not automated."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\sacrifice_readability.txt",
+      "section": "sacrifice_readability"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-after-comma-semicolon",
+    "language": "javascript",
+    "description": "Space after comma (`,`) and semicolon (`;`); never before.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace checking, not a pure syntax pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for formatting, not a core security/semantic rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_comma_semicolon.txt",
+      "section": "whitespace_comma_semicolon"
+    }
+  },
+  {
+    "rule_id": "javascript-grouping-parentheses-recommended",
+    "language": "javascript",
+    "description": "Omit optional grouping parentheses only when author and reviewer agree no reasonable chance of misinterpretation. Do not assume reader knows precedence.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operation",
+        "required": "true"
+      },
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "has_parentheses",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect ambiguous precedence and lack of parentheses"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect ambiguous precedence scenarios"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\parentheses_recommended.txt",
+      "section": "parentheses_recommended"
+    }
+  },
+  {
+    "rule_id": "javascript-no-jsdoc-for-implementation",
+    "language": "javascript",
+    "description": "Do not use `/** … */` for implementation comments; use `/* … */` or `//`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** ... */",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires distinguishing JSDoc from regular block comments based on content, which is not purely syntactic"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check comment content"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires querying comment nodes and their text"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\implementation_comments.txt",
+      "section": "implementation_comments"
+    }
+  },
+  {
+    "rule_id": "javascript-generic-comma-line-wrapping",
+    "language": "javascript",
+    "description": "A comma must stay attached to the token that precedes it when line-wrapping.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/comma placement; not a standard AST pattern."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/comma placement; not a standard AST pattern."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace/comma placement; not a standard AST pattern."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_preceding_token.txt",
+      "section": "wrapping_preceding_token"
+    }
+  },
+  {
+    "rule_id": "javascript-no-default-export",
+    "language": "javascript",
+    "description": "Use named exports in all code. Do not use default exports.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "export default $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript/ES module analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\module_exports_exports.txt",
+      "section": "module_exports_exports"
+    }
+  }
+]

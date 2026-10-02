@@ -1,0 +1,14 @@
+rules:
+- id: python-mutable-global-state-internal
+  message: '[DISABLED] Mutable global state (module-level or class attribute) must
+    be made internal by prepending an underscore ''_'' to its name.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Mutable global state (module-level or class attribute) must
+      be made internal by prepending an underscore '_' to its name.

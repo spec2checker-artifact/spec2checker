@@ -1,0 +1,32 @@
+rules:
+- id: javascript-no-jsdoc-for-implementation
+  message: Do not use `/** … */` for implementation comments; use `/* … */` or `//`.
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: '** ... *'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires distinguishing JSDoc from regular block comments based
+          on content, which is not purely syntactic
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule to check comment content
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires querying comment nodes and their text
+    original_description: Do not use `/** … */` for implementation comments; use `/*
+      … */` or `//`.

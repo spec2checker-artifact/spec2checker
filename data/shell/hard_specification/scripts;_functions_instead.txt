@@ -1,0 +1,4 @@
+**Specification 105: Avoid using `alias` in scripts; use functions instead**
+Description: Aliases are cumbersome; functions provide superset of functionality and should always be preferred.
+Example: Use `random_name() { ... }` not `alias`.
+Additional Notes: None.

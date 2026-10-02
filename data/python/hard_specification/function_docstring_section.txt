@@ -1,0 +1,4 @@
+**Specification 67: Function docstring - omit return section if only None**
+Description: The Returns section is not required if the function only returns `None`.
+Example: `"""Does something."""` without `Returns:`.
+Additional Notes: Also may be omitted if docstring starts with “Return”, “Returns”, etc.

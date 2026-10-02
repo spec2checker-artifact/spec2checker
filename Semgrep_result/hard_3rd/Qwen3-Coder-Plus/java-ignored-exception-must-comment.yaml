@@ -1,0 +1,42 @@
+rules:
+- id: java-ignored-exception-must-comment
+  message: When an exception is caught and ignored, a comment explaining the reason
+    must be present.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: "catch ($EXCEPTION_TYPE $EXCEPTION_VAR) {\n    ...\n}"
+  - metavariable-type:
+      metavariable: $EXCEPTION_TYPE
+      type: type
+  - metavariable-type:
+      metavariable: $EXCEPTION_VAR
+      type: expr
+  metadata:
+    syntax_catch_block: contains_no_statements_except_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match empty catch block and check for comment
+          presence
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD's EmptyCatchBlock rule can be configured to require comments
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect empty catch blocks without explanatory
+          comments
+    original_description: When an exception is caught and ignored, a comment explaining
+      the reason must be present.

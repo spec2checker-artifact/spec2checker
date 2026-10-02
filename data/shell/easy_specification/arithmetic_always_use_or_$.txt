@@ -1,0 +1,4 @@
+**Specification 53: Arithmetic - always use `(( ... ))` or `$(( ... ))`**
+Description: Always use `(( ... ))` or `$(( ... ))` rather than `let`, `$[...]`, or `expr`.
+Example: `(( i = 10 * j + 400 ))`, `echo "$(( 2 + 2 ))"`
+Additional Notes: Never use `$[...]`, `expr`, `let`.

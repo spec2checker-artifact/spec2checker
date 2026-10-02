@@ -1,0 +1,4 @@
+**Specification 34: True/False - integers compare explicitly to 0**
+Description: For integers, implicit false may be risky; compare explicitly to 0.
+Example: `if i % 10 == 0:` not `if not i % 10:`
+Additional Notes: None.

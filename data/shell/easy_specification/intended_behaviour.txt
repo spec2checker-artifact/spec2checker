@@ -1,0 +1,4 @@
+**Specification 4: Function header comment - describe intended API behaviour**
+Description: Function header comments should describe: Description, Globals, Arguments, Outputs, Returns.
+Example: See `cleanup()` example.
+Additional Notes: None.

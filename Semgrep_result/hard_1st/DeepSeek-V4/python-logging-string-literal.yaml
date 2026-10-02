@@ -1,0 +1,42 @@
+rules:
+- id: python-logging-string-literal
+  message: For logging functions that expect a pattern-string, always call them with
+    a string literal (not f-string) as first argument.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-either:
+    - pattern: logging.$METHOD($ARG, ...)
+    - pattern: $LOGGER.$METHOD($ARG, ...)
+  - metavariable-regex:
+      metavariable: $METHOD
+      regex: ^(debug|info|warning|error|critical|exception|log)$
+  - pattern-not: logging.$METHOD("...", ...)
+  - pattern-not: $LOGGER.$METHOD("...", ...)
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to detect f-strings and other non-literal string
+          expressions
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect logging calls with non-literal
+          first arguments
+    original_description: For logging functions that expect a pattern-string, always
+      call them with a string literal (not f-string) as first argument.

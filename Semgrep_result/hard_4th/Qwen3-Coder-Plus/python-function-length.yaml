@@ -1,0 +1,38 @@
+rules:
+- id: python-function-length
+  message: Prefer small and focused functions. Functions exceeding approximately 40
+    lines should be considered for refactoring.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "def $FUNC(...):\n    ..."
+  - metavariable-regex:
+      metavariable: $FUNC
+      regex: __DISABLED_RULE_NEVER_MATCHES__
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep can count lines within a function pattern but may not
+          accurately handle nested functions or complex formatting.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to count logical lines within a function
+          body.
+    original_description: Prefer small and focused functions. Functions exceeding
+      approximately 40 lines should be considered for refactoring.

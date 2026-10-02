@@ -1,0 +1,16 @@
+rules:
+- id: python-docstring-omit-return-none
+  message: '[DISABLED] The Returns section is not required if the function only returns
+    None. It may be omitted if the docstring starts with ''Return'', ''Returns'',
+    etc.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: The Returns section is not required if the function only
+      returns None. It may be omitted if the docstring starts with 'Return', 'Returns',
+      etc.

@@ -1,0 +1,4 @@
+**Specification 50: Do not use `using namespace std`**  
+Description: Do not declare anything in namespace `std`, including forward declarations.  
+Example: `#include <string>` not `namespace std { class string; }`.  
+Additional Notes: Undefined behavior.

@@ -1,0 +1,16 @@
+rules:
+- id: python-type-alias-naming
+  message: '[DISABLED] Type aliases must be named using CapWords. If the alias is
+    private to the module, it must be prefixed with an underscore. Use the explicit
+    TypeAlias annotation (Python 3.10+).'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Type aliases must be named using CapWords. If the alias
+      is private to the module, it must be prefixed with an underscore. Use the explicit
+      TypeAlias annotation (Python 3.10+).

@@ -1,0 +1,4 @@
+**Specification 13: Prefer explicit captures for lambdas that escape**  
+Description: If lambda may escape the current scope, use explicit captures rather than default capture.  
+Example: `executor->Schedule([&foo] { Frobnicate(foo); });`  
+Additional Notes: Avoids dangling references.

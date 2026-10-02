@@ -1,0 +1,40 @@
+rules:
+- id: shell-local-command-substitution-exit-code
+  message: Always separate `local` declaration and assignment when assignment uses
+    command substitution, because `local` masks exit code.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: local $VAR=$($CMD)
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $CMD
+      type: expr
+  metadata:
+    syntax_$VAR: is_assignment_target
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires correct parsing of shell command substitution
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Always separate `local` declaration and assignment when
+      assignment uses command substitution, because `local` masks exit code.

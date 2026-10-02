@@ -1,0 +1,14 @@
+rules:
+- id: cpp-class-final-recommendation
+  message: '[DISABLED] Detect classes that are not declared final but could be, as
+    they are not intended to be base classes.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect classes that are not declared final but could be,
+      as they are not intended to be base classes.

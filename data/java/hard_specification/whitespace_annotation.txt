@@ -1,0 +1,4 @@
+Specification 68: Horizontal whitespace - between type annotation and brackets
+Description: Space between type annotation and [] or ....
+Example: @Nullable String[]
+Additional Notes: None.

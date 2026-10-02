@@ -1,0 +1,605 @@
+[
+  {
+    "rule_id": "cpp-meaningful-copy-move",
+    "language": "cpp",
+    "description": "Support copying and/or moving only if these operations are clear and meaningful for your type. Avoid slicing by making base classes abstract.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_copy_constructor",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_copy_assignment",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_move_constructor",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "has_move_assignment",
+        "required": "true"
+      },
+      {
+        "target": "$CLASS",
+        "constraint_type": "inheritance",
+        "condition": "has_base_class",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to check inheritance and special member functions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to check for meaningful copy/move semantics"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\support_copying_meaningful.txt",
+      "section": "support_copying_meaningful"
+    }
+  },
+  {
+    "rule_id": "cpp-local-variable-scope",
+    "language": "cpp",
+    "description": "Local variables should be declared in the narrowest scope possible, as close to first use as possible, and initialized in the declaration.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR;\n...\n$VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_uninitialized_declaration",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not detect all cases where assignment is far from declaration."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect distance between declaration and first use."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\variables_declare_close.txt",
+      "section": "variables_declare_close"
+    }
+  },
+  {
+    "rule_id": "cpp-default-capture-by-value",
+    "language": "cpp",
+    "description": "Use default capture by value ([=]) sparingly. Prefer explicit captures. Avoid long lambdas with [=] and do not capture 'this' implicitly.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[=]",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect the pattern but cannot reliably assess lambda length or implicit 'this' capture context."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect default capture but requires custom query for assessing 'sparing use' and lambda length."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\default_capture_sparingly.txt",
+      "section": "default_capture_sparingly"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-non-member-binary-operator",
+    "language": "cpp",
+    "description": "Prefer to define non-modifying binary operators as non-member functions to allow implicit conversions on both sides.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "bool operator$OP(const $CLASS& $LHS, const $CLASS& $RHS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OP": {
+          "type_hint": "expr"
+        },
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$LHS": {
+          "type_hint": "expr"
+        },
+        "$RHS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "is_member_function",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "is_friend_declaration",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to distinguish member vs non-member operators"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm operator modifies state"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\member_binary_operators.txt",
+      "section": "member_binary_operators"
+    }
+  },
+  {
+    "rule_id": "cpp-comment-tricky-code",
+    "language": "cpp",
+    "description": "Detect complex or non-obvious code sections that lack explanatory comments.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$RET $FUNC(...) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function",
+          "regex": "^[a-z_][a-z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "complexity_above_threshold",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "no_leading_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Complexity detection and comment association require custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to correlate complexity metrics with comment presence."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\comment_tricky_code.txt",
+      "section": "comment_tricky_code"
+    }
+  },
+  {
+    "rule_id": "cpp-boost-library-approval",
+    "language": "cpp",
+    "description": "Use only approved subset of Boost libraries (listed in guide).",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "#include <boost/$LIBRARY.hpp>",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LIBRARY": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z0-9_/]+$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$LIBRARY",
+        "constraint_type": "syntactic",
+        "condition": "not_in_approved_list('boost_approved_libs.txt')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires external list of approved libraries for condition"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query with external data source for approved list"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\approved_boost_libraries.txt",
+      "section": "approved_boost_libraries"
+    }
+  },
+  {
+    "rule_id": "cpp-no-cstyle-cast",
+    "language": "cpp",
+    "description": "Use C++-style casts (static_cast, const_cast, reinterpret_cast, std::bit_cast). Do not use C-style casts except to void. Brace initialization is allowed for arithmetic conversions.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "($TYPE) $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "not_matches('void')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May match false positives in macro expansions or complex type expressions."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude casts to void and brace initialization."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\use_c_style_casts.txt",
+      "section": "use_c_style_casts"
+    }
+  },
+  {
+    "rule_id": "cpp-generic-todo-comment-format",
+    "language": "cpp",
+    "description": "TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "// TODO: ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches only simple '// TODO:' prefix; complex format validation (identifier, date) requires custom logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce specific comment content format."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\todo_comments_format.txt",
+      "section": "todo_comments_format"
+    }
+  },
+  {
+    "rule_id": "cpp-explicit-single-argument-constructor",
+    "language": "cpp",
+    "description": "Type conversion operators and constructors callable with a single argument must be marked explicit. Copy/move constructors are exceptions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS::$CLASS($ARG) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$ARG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "constructor",
+        "constraint_type": "syntactic",
+        "condition": "parameter_count == 1",
+        "required": "true"
+      },
+      {
+        "target": "constructor",
+        "constraint_type": "type",
+        "condition": "is_copy_or_move_constructor == false",
+        "required": "true"
+      },
+      {
+        "target": "constructor",
+        "constraint_type": "annotation",
+        "condition": "has_annotation('explicit')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires type resolution to identify copy/move constructors and to confirm single-argument callability"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect missing explicit and exclude copy/move constructors"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\constructors_explicit.txt",
+      "section": "constructors_explicit"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-virtual-call-in-constructor",
+    "language": "cpp",
+    "description": "Constructors should never call virtual functions, because they will not dispatch to subclass implementations.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS::$CLASS(...) {\n    ...\n    $VIRTUAL(...);\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$VIRTUAL": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VIRTUAL",
+        "constraint_type": "type",
+        "condition": "is_virtual_method",
+        "required": "true"
+      },
+      {
+        "target": "$VIRTUAL",
+        "constraint_type": "scope",
+        "condition": "is_member_of_class",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm virtual method"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\virtual_constructors.txt",
+      "section": "virtual_constructors"
+    }
+  }
+]

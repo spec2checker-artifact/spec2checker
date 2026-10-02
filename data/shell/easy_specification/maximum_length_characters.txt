@@ -1,0 +1,4 @@
+**Specification 12: Maximum line length - 80 characters**
+Description: Maximum line length is 80 characters.
+Example: Wrap lines longer than 80.
+Additional Notes: None.

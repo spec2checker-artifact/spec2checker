@@ -1,0 +1,4 @@
+Specification 62: Class contents - logical order
+Description: Class members and initializers should follow a logical order that the maintainer could explain. Not chronological by date added.
+Example: Do not habitually add new methods to the end.
+Additional Notes: No single correct recipe.

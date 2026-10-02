@@ -1,0 +1,4 @@
+**Specification 79: Enums - string values must be statically initialized**
+Description: For string enums, all values must be statically initialized, not computed with arithmetic, template literals, function calls, or variable references.
+Example: Not `ZERO_FAHRENHEIT: 0 + '°F'`.
+Additional Notes: For complex values, use const object without `@enum`.

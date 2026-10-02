@@ -1,0 +1,4 @@
+**Specification 23: ES modules - do not create circular dependencies**
+Description: Do not create cycles between ES modules, even though specification allows.
+Example: `a.js` imports `b.js` and `b.js` imports `a.js` (disallowed).
+Additional Notes: `export from` can also cause cycles.

@@ -1,0 +1,43 @@
+rules:
+- id: python-conditional-import-discouraged
+  message: Conditional imports based on runtime conditions should be avoided; prefer
+    refactoring. TYPE_CHECKING, performance optimization, and cross-platform imports
+    are exempt.
+  languages:
+  - python
+  severity: INFO
+  patterns:
+  - pattern-either:
+    - pattern: |
+        if $COND:
+            import $MODULE
+    - pattern: |
+        if $COND:
+            from $PKG import $NAME
+  - metavariable-regex:
+      metavariable: $COND
+      regex: "^((?!TYPE_CHECKING|os\\.name|sys\\.platform|platform\\.|FLAGS|use_cprofile|hasattr\\().).)*$"
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for discouragement policy
+    original_description: Use conditional imports only in exceptional cases where
+      imports needed for type checking must be avoided at runtime. Discouraged; prefer
+      refactoring.

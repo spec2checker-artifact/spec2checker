@@ -1,0 +1,14 @@
+rules:
+- id: shell-function-naming-lowercase-underscore
+  message: '[DISABLED] Function names should be lower-case, with underscores to separate
+    words.'
+  languages:
+  - bash
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Function names should be lower-case, with underscores to
+      separate words.

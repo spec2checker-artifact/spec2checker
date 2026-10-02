@@ -1,0 +1,37 @@
+rules:
+- id: cpp-avoid-decltype-auto
+  message: Avoid using `decltype(auto)` unless it is necessary, as it can be obscure.
+    Prefer simpler, explicit type declarations.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: decltype(auto) $VAR = ...;
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern matches all uses; cannot determine if use is 'necessary'.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Can detect the pattern, but determining necessity requires complex
+          type analysis.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C++ analysis.
+    original_description: Avoid using `decltype(auto)` unless it is necessary, as
+      it can be obscure. Prefer simpler, explicit type declarations.

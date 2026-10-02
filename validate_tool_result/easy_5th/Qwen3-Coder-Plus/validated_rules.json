@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-05-17 18:58:35",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_5th.json",
+  "batch": "easy_5th",
+  "model": "Qwen3-Coder-Plus",
+  "total_rules": 50,
+  "validated_count": 47,
+  "rules": {
+    "semgrep": [
+      "cpp-struct-member-naming",
+      "cpp-const-placement-consistency",
+      "cpp-delete-forbidden-operations",
+      "cpp-avoid-long-double",
+      "cpp-no-modules",
+      "cpp-missing-const-method",
+      "cpp-avoid-macros-in-headers",
+      "cpp-class-data-member-trailing-underscore",
+      "cpp-prefer-struct-over-pair",
+      "cpp-class-data-member-trailing-underscore",
+      "java-non-constant-field-names",
+      "java-package-no-line-wrap",
+      "java-no-multiple-declarations-outside-for",
+      "java-type-variable-naming",
+      "java-no-wildcard-import",
+      "java-catch-pipe-linebreak",
+      "java-local-variable-lower-camel-case",
+      "java-assignment-break-after-symbol",
+      "java-horizontal-whitespace-keyword-brace",
+      "javascript-goog-require-contiguous-block",
+      "javascript-duplicate-import",
+      "javascript-non-ascii-characters",
+      "javascript-horizontal-whitespace-after-colon",
+      "javascript-import-no-line-wrap",
+      "javascript-goog-require-side-effects",
+      "javascript-no-const-exports",
+      "javascript-no-circular-dependencies",
+      "python-decorator-judicious-use",
+      "python-no-boolean-false-comparison",
+      "python-lexical-scoping-ok",
+      "python-whitespace-binary-operator",
+      "python-implicit-false",
+      "python-no-spaces-around-equals",
+      "python-nested-function-without-closure",
+      "shell-case-pattern-no-parenthesis",
+      "shell-avoid-eval",
+      "shell-function-header-comment",
+      "shell-wildcard-expansion-path",
+      "shell-parentheses-required",
+      "shell-use-arrays-for-lists",
+      "shell-prefer-quote-words",
+      "shell-case-one-line-space",
+      "shell-prefer-brace-expansion",
+      "shell-case-simple-commands-same-line"
+    ],
+    "pmd": [
+      "java-module-directives-ordering"
+    ],
+    "codeql": [
+      "javascript-line-wrap-after-operator",
+      "python-indentation-4-spaces-no-tabs"
+    ]
+  }
+}

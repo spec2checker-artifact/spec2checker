@@ -1,0 +1,41 @@
+rules:
+- id: javascript-array-trailing-comma
+  message: Array literals must include a trailing comma when there is a line break
+    between the final element and the closing bracket.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: "const $VAR = [\n    ...\n    $LAST\n];"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $LAST
+      type: expr
+  metadata:
+    syntax_$LAST: '!matches('','')'
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match array literals without line breaks; requires
+          precise line break detection.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to detect line break before closing bracket.
+    original_description: Array literals must include a trailing comma when there
+      is a line break between the final element and the closing bracket.

@@ -1,0 +1,4 @@
+**Specification 119: Modifying builtin objects - forbidden**
+Description: Never modify builtin types (adding methods to constructors or prototypes). Avoid libraries that do. Do not add symbols to global object unless absolutely necessary.
+Example: Not `Array.prototype.foo = ...`.
+Additional Notes: JSCompiler polyfills are allowed.

@@ -1,0 +1,4 @@
+**Specification 31: Don’t brace-delimit single-character shell specials unless necessary**
+Description: Don’t brace-delimit single character shell specials / positional parameters, unless strictly necessary.
+Example: `$1`, `$?`, `$$` without braces.
+Additional Notes: Use braces for `${10}`.

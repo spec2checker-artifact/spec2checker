@@ -1,0 +1,4 @@
+**Specification 10: Enumerator names - kEnumName (constant style)**  
+Description: Enumerators (for scoped and unscoped enums) should be named like constants, not macros: `kEnumName`.  
+Example: `enum class UrlTableError { kOk = 0, kOutOfMemory };`  
+Additional Notes: Avoid `ENUM_NAME` macro style.

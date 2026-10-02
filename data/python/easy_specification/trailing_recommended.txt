@@ -1,0 +1,4 @@
+**Specification 50: Trailing commas - recommended when closing bracket on new line**
+Description: Trailing commas are recommended when the closing container token does not appear on the same line as the final element, and for single-element tuples.
+Example: `golomb4 = [0, 1, 4, 6,]` (with trailing comma).
+Additional Notes: Also hints auto-formatter to put one item per line.

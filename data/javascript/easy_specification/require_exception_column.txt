@@ -1,0 +1,4 @@
+**Specification 27: `goog.require` lines - exception to 80-column limit**
+Description: Long alias or module name may cause line to exceed 80 columns; require lines are exception and must not be wrapped.
+Example: `const SomeDataStructure = goog.require('proto.identical.package.identifiers.SomeDataStructure');`
+Additional Notes: None.

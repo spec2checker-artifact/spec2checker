@@ -1,0 +1,4 @@
+**Specification 75: Arrays - assign with parentheses, append with `+=()`**
+Description: Array assigned using parentheses, can be appended with `+=()`.
+Example: `flags=(--foo); flags+=(--bar)`
+Additional Notes: None.

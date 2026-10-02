@@ -1,0 +1,522 @@
+[
+  {
+    "rule_id": "python-naming-descriptive-avoid-abbreviations",
+    "language": "python",
+    "description": "Names should be descriptive. Avoid abbreviations that are ambiguous or unfamiliar.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Rule is based on semantic naming conventions, not syntactic patterns."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to define 'ambiguous abbreviation' heuristics."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\descriptive_abbreviations.txt",
+      "section": "descriptive_abbreviations"
+    }
+  },
+  {
+    "rule_id": "python-string-quote-consistency",
+    "language": "python",
+    "description": "Be consistent with string quote character within a file. Pick ' or \" and stick with it. Use the other quote to avoid escaping.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule to analyze all string literals in a file and check for consistency."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check all string literals in a file."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\consistent_character.txt",
+      "section": "consistent_character"
+    }
+  },
+  {
+    "rule_id": "python-statements-one-per-line",
+    "language": "python",
+    "description": "Generally only one statement per line. Exception allowed only if the entire statement (e.g., simple if) fits on one line. Never allowed for try/except or if/else on the same line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom logic to detect multi-statement lines and allowed exceptions."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to analyze line-level statement count and specific syntactic exceptions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\statements_generally_line.txt",
+      "section": "statements_generally_line"
+    }
+  },
+  {
+    "rule_id": "python-conditional-import-discouraged",
+    "language": "python",
+    "description": "Use conditional imports only in exceptional cases where imports needed for type checking must be avoided at runtime. Discouraged; prefer refactoring.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $MODULE.TYPE_CHECKING:\n    $IMPORT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$IMPORT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MODULE",
+        "constraint_type": "syntactic",
+        "condition": "name_matches('typing')",
+        "required": "true"
+      },
+      {
+        "target": "$IMPORT",
+        "constraint_type": "syntactic",
+        "condition": "is_import_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for discouragement policy"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\conditional_exceptionally.txt",
+      "section": "conditional_exceptionally"
+    }
+  },
+  {
+    "rule_id": "python-offensive-terms",
+    "language": "python",
+    "description": "Detect the use of offensive or non-inclusive terms in identifiers (function, class, variable names).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr",
+          "regex": "(?i)\\b(master|slave|blacklist|whitelist|dummy|retard|retarded|gimp|gimped|spaz|spazzed|madman|crazy|insane|lunatic|psycho|psychotic|idiot|moron|imbecile|stupid|dumb|retard|retarded|gimp|gimped|spaz|spazzed|madman|crazy|insane|lunatic|psycho|psychotic|idiot|moron|imbecile|stupid|dumb)\\b"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "is_identifier",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives; list of terms is not exhaustive."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query with regex matching on identifier names."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\avoid_offensive_terms.txt",
+      "section": "avoid_offensive_terms"
+    }
+  },
+  {
+    "rule_id": "python-main-in-main",
+    "language": "python",
+    "description": "If file is meant as executable, its main functionality should be in a `main()` function.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if __name__ == '__main__':\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "defines_function('main')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to check for presence of main function"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check function call in __main__ guard"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\main_put_functionality.txt",
+      "section": "main_put_functionality"
+    }
+  },
+  {
+    "rule_id": "python-type-alias-naming",
+    "language": "python",
+    "description": "Type aliases must be named using CapWords. If the alias is private to the module, it must be prefixed with an underscore. The alias must be declared using the TypeAlias annotation (Python 3.10+).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ALIAS: TypeAlias = $TYPE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ALIAS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ALIAS",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably detect if alias is used only in the module to enforce underscore prefix."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution for the $TYPE expression and cross-file analysis for module-private detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\aliases_capworded_private.txt",
+      "section": "aliases_capworded_private"
+    }
+  },
+  {
+    "rule_id": "python-modules-license-boilerplate",
+    "language": "python",
+    "description": "Every file should contain license boilerplate appropriate for the project and start with a docstring describing contents and usage.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom regex or pattern matching for specific license text and docstring at file start."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for specific string patterns at file beginning."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\license_boilerplate.txt",
+      "section": "license_boilerplate"
+    }
+  },
+  {
+    "rule_id": "python-explicit-close-files-sockets",
+    "language": "python",
+    "description": "Detect file or socket objects that are not closed explicitly or used within a context manager.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$OBJ = $OPEN_FUNC(...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OBJ": {
+          "type_hint": "expr"
+        },
+        "$OPEN_FUNC": {
+          "type_hint": "function",
+          "regex": "^(open|socket\\.socket)$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OBJ",
+        "constraint_type": "scope",
+        "condition": "not_in_with_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May have false positives if object is passed to a context manager or closing function elsewhere in the same function scope."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to track object usage and identify missing close calls."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\sockets_explicitly_close.txt",
+      "section": "sockets_explicitly_close"
+    }
+  },
+  {
+    "rule_id": "python-docstring-sections",
+    "language": "python",
+    "description": "Function docstring must contain sections: Args, Returns (or Yields), and Raises with proper hanging indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    \"\"\"$DOC\"\"\"\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$DOC": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Args')",
+        "required": "true"
+      },
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Returns') and not_contains_section('Yields')",
+        "required": "true"
+      },
+      {
+        "target": "$DOC",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_section('Raises')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom regex for section detection and indentation validation"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for docstring structure"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\docstring_sections.txt",
+      "section": "docstring_sections"
+    }
+  }
+]

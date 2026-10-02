@@ -1,0 +1,4 @@
+**Specification 52: Use named constants or options structs to clarify arguments**  
+Description: When function argument meaning is nonobvious, use named constants, change `bool` to `enum`, or create an options struct.  
+Example: `ProductOptions options; options.set_precision_decimals(7);`  
+Additional Notes: As a last resort, use comments at call site.

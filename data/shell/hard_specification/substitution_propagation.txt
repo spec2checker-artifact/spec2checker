@@ -1,0 +1,4 @@
+**Specification 77: Process substitution creates subshell but allows variable propagation**
+Description: Process substitution `<(command)` also creates subshell, but allows redirecting from subshell to `while` without putting `while` in subshell.
+Example: `while read line; do ...; done < <(your_command)`
+Additional Notes: Variables modified inside loop propagate.

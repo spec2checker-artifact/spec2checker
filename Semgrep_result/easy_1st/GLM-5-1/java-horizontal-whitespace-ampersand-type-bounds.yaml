@@ -1,0 +1,42 @@
+rules:
+- id: java-horizontal-whitespace-ampersand-type-bounds
+  message: Space around & in type bounds (e.g., <T extends Foo & Bar>) must be present.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: <$T extends $BASE&$BOUND>
+  - metavariable-type:
+      metavariable: $T
+      type: expr
+  - metavariable-type:
+      metavariable: $BASE
+      type: expr
+  - metavariable-type:
+      metavariable: $BOUND
+      type: expr
+  metadata:
+    syntax_code_snippet: missing_whitespace_around('&')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires precise whitespace matching in pattern
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule for whitespace checking
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for formatting/whitespace rules
+    original_description: Space around & in type bounds (e.g., <T extends Foo & Bar>)
+      must be present.

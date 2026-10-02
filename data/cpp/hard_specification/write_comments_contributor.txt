@@ -1,0 +1,4 @@
+**Specification 42: Write comments for the next contributor**  
+Description: Write comments for your audience: the next contributor. Be generous; the next one may be you.  
+Example: Explain why, not what.  
+Additional Notes: None.

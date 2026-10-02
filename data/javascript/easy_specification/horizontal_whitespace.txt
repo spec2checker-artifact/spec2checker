@@ -1,0 +1,4 @@
+**Specification 53: Horizontal whitespace - after colon in object literal**
+Description: Space after colon in object literal.
+Example: `{key: value}`.
+Additional Notes: None.

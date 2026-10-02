@@ -1,0 +1,4 @@
+**Specification 2: Suppress pylint warnings with line comment**
+Description: To suppress warnings, set a line-level comment like `# pylint: disable=invalid-name`.
+Example: `def do_PUT(self):  # WSGI name, so pylint: disable=invalid-name`
+Additional Notes: Prefer `pylint: disable` over deprecated `pylint: disable-msg`.

@@ -1,0 +1,4 @@
+**Specification 11: Do not use `#pragma once`**  
+Description: Do not use `#pragma once`; use standard include guards.  
+Example: Use `#ifndef` guards.  
+Additional Notes: Nonstandard extension.

@@ -1,0 +1,39 @@
+rules:
+- id: cpp-operator-overload-judicious
+  message: Overload operators only if their meaning is obvious, unsurprising, and
+    consistent with built-in operators. Do not overload &&, ||, , (comma), or unary
+    &.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: operator $OP($ARGS)
+  - metavariable-regex:
+      metavariable: $OP
+      regex: ^(&&|\|\||,|&)$
+  metadata:
+    syntax_$OP: is_overloaded_operator
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern for specific operator tokens
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query to detect discouraged operators
+    original_description: Overload operators only if their meaning is obvious, unsurprising,
+      and consistent with built-in operators. Do not overload &&, ||, , (comma), or
+      unary &.

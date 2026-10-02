@@ -1,0 +1,16 @@
+rules:
+- id: cpp-copy-move-meaningful
+  message: '[DISABLED] Detect user-defined types that define copy or move operations
+    but may not have clear semantics for these operations, or base classes that are
+    not abstract and risk slicing.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect user-defined types that define copy or move operations
+      but may not have clear semantics for these operations, or base classes that
+      are not abstract and risk slicing.

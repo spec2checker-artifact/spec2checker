@@ -1,0 +1,38 @@
+rules:
+- id: shell-prefer-double-bracket
+  message: Prefer builtin `[[ ... ]]` over external `[` for regex and pattern matching,
+    as `[[ ... ]]` supports pattern and regex matching while `[` does not.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: '[ $EXPR ]'
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_$EXPR: contains_pattern_matching_or_regex
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching detection in condition
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Prefer builtin `[[ ... ]]` over external `[` for regex and
+      pattern matching, as `[[ ... ]]` supports pattern and regex matching while `[`
+      does not.

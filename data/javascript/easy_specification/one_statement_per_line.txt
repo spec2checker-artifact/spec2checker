@@ -1,0 +1,4 @@
+**Specification 37: One statement per line**
+Description: Each statement followed by line break.
+Example: `x = 1;` then newline.
+Additional Notes: None.

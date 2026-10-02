@@ -1,0 +1,6 @@
+name: easy-4th-qwen3-coder-plus-codeql
+version: 1.0.0
+dependencies:
+  codeql/python-all: "*"
+  codeql/cpp-all: "*"
+  codeql/javascript-all: "*"

@@ -1,0 +1,4 @@
+**Specification 74: Strings - use f-string, `%`, or `format`**
+Description: Use f-string, `%` operator, or `format` method for string formatting.
+Example: `x = f'name: {name}'` or `x = '%s' % name`
+Additional Notes: Avoid `+` for formatting.

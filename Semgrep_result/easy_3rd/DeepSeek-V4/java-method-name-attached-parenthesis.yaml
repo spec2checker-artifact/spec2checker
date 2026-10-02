@@ -1,0 +1,47 @@
+rules:
+- id: java-method-name-attached-parenthesis
+  message: Method, constructor, or record-class name must stay attached to the open
+    parenthesis that follows it, with no whitespace or line break between the name
+    and '('.
+  languages:
+  - java
+  severity: WARNING
+  paths:
+    include:
+    - '*.java'
+  patterns:
+  - pattern: $NAME $PAREN(...)
+  - metavariable-type:
+      metavariable: $NAME
+      type: expr
+  - metavariable-regex:
+      metavariable: $PAREN
+      regex: ^\s*\(
+  metadata:
+    syntax_$NAME: is_method_or_constructor_name
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match non-method identifiers; requires precise syntactic
+          context.
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD supports whitespace checks via XPath rules, but detection
+          of method/constructor/record context may require custom rule.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for pure formatting/whitespace rules.
+    original_description: Method, constructor, or record-class name must stay attached
+      to the open parenthesis that follows it, with no whitespace or line break between
+      the name and '('.

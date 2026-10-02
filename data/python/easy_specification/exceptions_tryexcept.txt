@@ -1,0 +1,4 @@
+**Specification 12: Exceptions - minimize code in `try/except` blocks**
+Description: Minimize the amount of code in a `try/except` block to avoid hiding unexpected exceptions.
+Example: Keep only the code that might raise the expected exception inside `try`.
+Additional Notes: None.

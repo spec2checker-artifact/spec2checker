@@ -1,0 +1,8 @@
+Specification 28: Non-assignment operator - ampersand in type bound
+Description: & in type bound <T extends Foo & Bar> break before &.
+Example:
+
+java
+<T extends Foo
+     & Bar>
+Additional Notes: None.

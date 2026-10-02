@@ -1,0 +1,4 @@
+**Specification 18: Control flow - put `; then` and `; do` on same line**
+Description: Put `; then` and `; do` on the same line as `if`, `for`, `while`.
+Example: `if [[ condition ]]; then`
+Additional Notes: `else` on its own line.

@@ -1,0 +1,39 @@
+rules:
+- id: python-error-message-precise
+  message: Error messages should precisely match error condition, interpolated pieces
+    clearly identifiable, and allow simple automated processing.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: raise $EXCEPTION($MSG)
+  - metavariable-regex:
+      metavariable: $MSG
+      regex: ^(error|Error|fail|Fail|invalid|Invalid|bad|Bad|wrong|Wrong|no|No|unknown|Unknown|unexpected|Unexpected)$
+  metadata:
+    type_constraint_$EXCEPTION: is_subclass_of('BaseException')
+    syntax_$MSG: is_not_fstring
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: true
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type and syntactic constraints require custom rules; f-string
+          detection is syntactic only
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires custom query for precise string format analysis
+    original_description: Error messages should precisely match error condition, interpolated
+      pieces clearly identifiable, and allow simple automated processing.

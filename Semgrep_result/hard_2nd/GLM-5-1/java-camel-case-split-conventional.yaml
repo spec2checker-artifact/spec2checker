@@ -1,0 +1,41 @@
+rules:
+- id: java-camel-case-split-conventional
+  message: If a word already has conventional camel-case appearance (e.g., 'AdWords'),
+    split into constituent parts ('ad words'). Does not apply to 'iOS'.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $IDENT
+  - metavariable-regex:
+      metavariable: $IDENT
+      regex: ^(?!iOS$)[A-Z][a-z]+[A-Z][a-z]*$
+  - pattern-not: "@$ANNOT ..."
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based detection only; may have false positives/negatives
+          on complex identifiers
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule implementation for specific camel-case splitting
+          logic
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to implement the specific splitting convention
+          and 'iOS' exception
+    original_description: If a word already has conventional camel-case appearance
+      (e.g., 'AdWords'), split into constituent parts ('ad words'). Does not apply
+      to 'iOS'.

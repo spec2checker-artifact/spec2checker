@@ -1,0 +1,4 @@
+**Specification 98: Use `./*` to avoid issues with filenames starting with dash**
+Description: Using `./*` prevents filenames beginning with `-` being interpreted as options.
+Example: `rm -v ./*`
+Additional Notes: None.

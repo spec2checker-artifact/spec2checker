@@ -1,0 +1,4 @@
+Specification 4: Special escape sequences
+Description: For any character that has a special escape sequence (\b, \t, \n, \f, \r, \", \', \\), that sequence is used rather than the corresponding octal or Unicode escape.
+Example: String s = "Hello\nWorld";
+Additional Notes: Not \012 or \u000a.

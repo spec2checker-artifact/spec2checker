@@ -1,0 +1,4 @@
+**Specification 112: Use `declare -a` for array declaration**
+Description: Declare array with `declare -a` for clarity.
+Example: `declare -a flags`
+Additional Notes: Optional but recommended.

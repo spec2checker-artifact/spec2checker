@@ -1,0 +1,37 @@
+rules:
+- id: cpp-no-using-namespace-std
+  message: Do not declare anything in namespace std, including forward declarations.
+    Use standard headers instead.
+  languages:
+  - cpp
+  severity: ERROR
+  patterns:
+  - pattern: namespace std { $BODY }
+  - metavariable-type:
+      metavariable: $BODY
+      type: expr
+  metadata:
+    syntax_namespace: name_matches('std')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match nested or qualified namespaces
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect namespace declarations
+    original_description: Do not declare anything in namespace std, including forward
+      declarations. Use standard headers instead.

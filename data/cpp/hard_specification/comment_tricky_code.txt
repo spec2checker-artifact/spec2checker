@@ -1,0 +1,4 @@
+**Specification 51: Comment tricky code**  
+Description: In your implementation, have comments in tricky, non-obvious, interesting, or important parts of your code.  
+Example: Explain why a complex algorithm is used.  
+Additional Notes: Do not state the obvious.

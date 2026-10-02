@@ -1,0 +1,570 @@
+[
+  {
+    "rule_id": "shell-case-pattern-no-parenthesis",
+    "language": "shell",
+    "description": "Pattern expressions in a case statement should not be preceded by an open parenthesis.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    ($PATTERN)\n        ...\n    ;;\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell parsing may not correctly flag all parenthesized pattern cases."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\expressions_parenthesis.txt",
+      "section": "expressions_parenthesis"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-eval",
+    "language": "shell",
+    "description": "The `eval` builtin should be avoided as it munges input and can set variables unpredictably.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "eval $...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match safe uses of eval with static arguments."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\avoid_eval.txt",
+      "section": "avoid_eval"
+    }
+  },
+  {
+    "rule_id": "shell-function-header-comment",
+    "language": "shell",
+    "description": "Function header comments should describe: Description, Globals, Arguments, Outputs, Returns.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "missing_docstring",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "can detect missing docstring but cannot validate content structure"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "can detect missing docstring but content validation requires custom query"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\intended_behaviour.txt",
+      "section": "intended_behaviour"
+    }
+  },
+  {
+    "rule_id": "shell-wildcard-expansion-path",
+    "language": "shell",
+    "description": "Use an explicit path when doing wildcard expansion of filenames (e.g., `./*` instead of `*`) to prevent issues with filenames starting with `-`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD *",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_command_name",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match false positives in non-shell contexts or complex command substitutions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\expansion_explicit.txt",
+      "section": "expansion_explicit"
+    }
+  },
+  {
+    "rule_id": "shell-parentheses-required",
+    "language": "shell",
+    "description": "Parentheses are required after the function name.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FUNC",
+        "constraint_type": "syntactic",
+        "condition": "missing_parentheses",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for shell function definitions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\parentheses_function.txt",
+      "section": "parentheses_function"
+    }
+  },
+  {
+    "rule_id": "shell-use-arrays-for-lists",
+    "language": "shell",
+    "description": "Bash arrays should be used to store lists of elements to avoid quoting complications.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=($ELEMENTS); $CMD $ARGS",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$ELEMENTS": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        },
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARGS",
+        "constraint_type": "syntactic",
+        "condition": "not_matches_pattern('\\$\\{\\w+\\[@\\]\\}')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match false positives; requires careful tuning of context constraints"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell/bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell/bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\arrays_lists_elements.txt",
+      "section": "arrays_lists_elements"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-quote-words",
+    "language": "shell",
+    "description": "Prefer quoting strings that are words (as opposed to command options or path names).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=$VALUE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      },
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_unquoted",
+        "required": "true"
+      },
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to distinguish words from options/paths; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\command_options.txt",
+      "section": "command_options"
+    }
+  },
+  {
+    "rule_id": "shell-case-one-line-space",
+    "language": "shell",
+    "description": "A one-line alternative in a case statement needs a space after the close parenthesis of the pattern and before the `;;`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    $PATTERN) $CMD;;\n    ...\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_on_same_line_as('$PATTERN)')",
+        "required": "true"
+      },
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_immediately_followed_by(';;')",
+        "required": "true"
+      },
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_not_preceded_by(' ')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise whitespace matching which may be fragile"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\alternative_needs_space.txt",
+      "section": "alternative_needs_space"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-brace-expansion",
+    "language": "shell",
+    "description": "Prefer using ${var} over $var for variable expansion to avoid ambiguity.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "not_preceded_by('{')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires careful pattern to avoid false positives in complex expansions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\variable_expansion_${var}.txt",
+      "section": "variable_expansion_${var}"
+    }
+  },
+  {
+    "rule_id": "shell-case-simple-commands-same-line",
+    "language": "shell",
+    "description": "Simple commands may be put on the same line as the pattern and `;;` as long as readable. Use space after `)` and before `;;`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    $PATTERN) $CMD ;;\n    ...\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_simple_command",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires correct parsing of shell case statement structure"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\simple_commands_pattern.txt",
+      "section": "simple_commands_pattern"
+    }
+  }
+]

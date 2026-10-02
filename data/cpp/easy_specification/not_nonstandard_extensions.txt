@@ -1,0 +1,4 @@
+**Specification 59: Do not use nonstandard extensions**  
+Description: Do not use nonstandard extensions like `__attribute__`, `#pragma`, `__COUNTER__`, `alloca()`, variable-length arrays, etc.  
+Example: Not `int arr[n];` (VLA).  
+Additional Notes: Use portable wrappers if necessary.

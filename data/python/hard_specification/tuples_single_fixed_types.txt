@@ -1,0 +1,4 @@
+**Specification 114: Tuples vs Lists - list for single type, tuple for fixed types**
+Description: Typed lists contain objects of a single type. Typed tuples can have repeated type or fixed set of different types.
+Example: `a: list[int] = [1,2,3]; b: tuple[int, str] = (1, "2")`
+Additional Notes: None.

@@ -1,0 +1,9 @@
+Specification 16: Module directives ordering
+Description: Order: all requires in one block, then exports, opens, uses, provides. Each block separated by a single blank line.
+Example:
+
+java
+requires com.example.foo;
+
+exports com.example.bar;
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 26: Use `float` and `double`, avoid `long double`**  
+Description: Use `float` and `double`; assume they represent IEEE-754 binary32 and binary64. Avoid `long double`.  
+Example: `float f = 1.0f; double d = 1.0;`  
+Additional Notes: `long double` is non-portable.

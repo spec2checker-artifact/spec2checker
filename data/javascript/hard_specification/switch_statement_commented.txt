@@ -1,0 +1,12 @@
+**Specification 111: Switch statement - fall-through must be commented**
+Description: Each statement group either terminates abruptly or marked with fall-through comment (typically `// fall through`). Last group no comment needed.
+Example:
+```javascript
+case 1:
+  prepare();
+  // fall through
+case 2:
+  handle();
+  break;
+```
+Additional Notes: None.

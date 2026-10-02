@@ -1,0 +1,16 @@
+rules:
+- id: cpp-avoid-rtti
+  message: '[DISABLED] Avoid using run-time type information (RTTI) such as typeid
+    or dynamic_cast. Use virtual methods or visitor pattern instead. Allowed in unit
+    tests.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Avoid using run-time type information (RTTI) such as typeid
+      or dynamic_cast. Use virtual methods or visitor pattern instead. Allowed in
+      unit tests.

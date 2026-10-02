@@ -1,0 +1,4 @@
+Specification 8: No wildcard imports
+Description: Wildcard ("on-demand") imports, static or otherwise, are not used.
+Example: import java.util.*; (not allowed)
+Additional Notes: None.

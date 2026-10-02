@@ -1,0 +1,24 @@
+============================================================
+  实验成本分析报告
+============================================================
+
+  批次: easy_5th
+  模型: Qwen3-Coder-Plus
+  时间: 2026-05-17 19:16:32
+  Python: python
+
+------------------------------------------------------------
+  各步骤耗时:
+------------------------------------------------------------
+  Step 1: Rule generation + validation: ~20s (OK, 47/50 validated)
+  Step 2: Project scanning: ~600s (OK, ran twice; first attempt timed out, second succeeded)
+
+  总耗时: ~620s (~10.3min)
+
+------------------------------------------------------------
+  各步骤输出规模 (近似token数 = words):
+------------------------------------------------------------
+  Step 1: Rule generation + validation: stdout=~600 words / ~9000 chars, stderr=0 words / 0 chars
+  Step 2: Project scanning: stdout=~800 words / ~9000 chars, stderr=0 words / 0 chars
+
+============================================================

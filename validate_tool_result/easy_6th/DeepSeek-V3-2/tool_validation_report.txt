@@ -1,0 +1,37 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-10 18:09:25
+Batch: easy_6th
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\easy\easy_6th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       41 |        9 |        9 |
+| PMD             |        1 |        1 |        0 |        0 |
+| CodeQL          |        6 |        4 |        2 |        2 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       46 |        4 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 46/50 rules validated (92%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 41/50
+      -> 1 passed to PMD
+  PMD:     1/1
+      -> 6 passed to CodeQL
+  CodeQL:  4/6
+      -> 4 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- javascript-generic-license-at-top (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-horizontal-whitespace-before-brace (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- shell-case-indent-alternatives (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-closing-statement-alignment (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

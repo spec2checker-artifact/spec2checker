@@ -1,0 +1,137 @@
+rules:
+- id: python-function-length
+  message: Prefer small and focused functions. Functions exceeding approximately 40
+    lines should be considered for refactoring. This rule detects functions with
+    deep nesting (2+ levels of control flow), which correlates with long function
+    bodies.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern-either:
+    - patterns:
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern-inside: |
+          def $FUNC(...):
+              if ...:
+                  ...
+              ...
+              if ...:
+                  ...
+              ...
+      - pattern-not: |
+          def $FUNC(...):
+              return ...
+      - pattern-not: |
+          def __hash__($SELF):
+              ...
+      - pattern-not: |
+          def __eq__($SELF, ...):
+              ...
+      - pattern-not: |
+          def __bool__($SELF):
+              ...
+      - pattern-not: |
+          def __str__($SELF):
+              ...
+      - pattern-not: |
+          def __repr__($SELF):
+              ...
+      - pattern-not: |
+          def __len__($SELF):
+              ...
+      - pattern-not: |
+          def __lt__($SELF, ...):
+              ...
+    - patterns:
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern-inside: |
+          def $FUNC(...):
+              for ...:
+                  ...
+                  if ...:
+                      ...
+              ...
+      - pattern-not: |
+          def $FUNC(...):
+              return ...
+    - patterns:
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern-inside: |
+          def $FUNC(...):
+              try:
+                  ...
+              except ...:
+                  ...
+                  try:
+                      ...
+                  except ...:
+                      ...
+              ...
+      - pattern-not: |
+          def $FUNC(...):
+              return ...
+    - patterns:
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern-inside: |
+          def $FUNC(...):
+              while ...:
+                  ...
+                  if ...:
+                      ...
+              ...
+      - pattern-not: |
+          def $FUNC(...):
+              return ...
+    - patterns:
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern-inside: |
+          def $FUNC(...):
+              if ...:
+                  for ...:
+                      ...
+              ...
+              if ...:
+                  for ...:
+                      ...
+              ...
+      - pattern-not: |
+          def $FUNC(...):
+              return ...
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Rewritten to use deep nesting heuristics instead of matching
+          all function definitions; requires 2+ levels of control flow nesting to
+          correlate with long function bodies
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to count logical lines within a function
+          body.
+    original_description: Prefer small and focused functions. Functions exceeding
+      approximately 40 lines should be considered for refactoring.

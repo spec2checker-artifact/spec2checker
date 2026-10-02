@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-05-13 12:16:08",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_6th.json",
+  "batch": "easy_6th",
+  "model": "GLM-5.1",
+  "total_rules": 50,
+  "validated_count": 46,
+  "rules": {
+    "semgrep": [
+      "cpp-no-namespace-alias-in-header",
+      "cpp-const-value-parameter",
+      "cpp-namespace-termination-comment",
+      "cpp-include-guard-format",
+      "cpp-prefix-increment-decrement",
+      "cpp-struct-member-no-trailing-underscore",
+      "cpp-const-placement-consistency",
+      "cpp-class-final-recommendation",
+      "cpp-constexpr-floating-constant",
+      "java-package-no-line-wrap",
+      "java-classname-uppercamelcase",
+      "java-dot-separator-break",
+      "java-test-class-name",
+      "java-no-static-import-for-classes",
+      "java-single-top-level-class",
+      "java-constant-naming-uppercase-snake",
+      "java-no-wildcard-import",
+      "javascript-es-module-import-naming",
+      "javascript-source-file-structure-sections-order",
+      "javascript-special-escape-sequences",
+      "javascript-named-import-no-alias",
+      "javascript-unnecessary-parentheses",
+      "javascript-goog-require-side-effects",
+      "javascript-class-literal-format",
+      "javascript-goog-module-exports",
+      "python-lambda-prefer-operator",
+      "python-avoid-staticmethod",
+      "python-property-no-simple-getset",
+      "python-avoid-power-features",
+      "python-type-annotation-encouraged",
+      "shell-for-loop-clarity",
+      "shell-control-flow-same-line",
+      "shell-long-literal-string",
+      "shell-case-pattern-no-parenthesis",
+      "shell-avoid-for-command-substitution",
+      "shell-quote-integer-vars",
+      "shell-prefer-double-brackets",
+      "shell-use-readarray"
+    ],
+    "pmd": [
+      "JavaBlockIndentation2Spaces"
+    ],
+    "codeql": [
+      "cpp-filename-lowercase-underscore-dash",
+      "python-indentation-4-spaces-no-tabs",
+      "python-whitespace-inside-parens",
+      "python-blank-lines-between-definitions"
+    ]
+  }
+}

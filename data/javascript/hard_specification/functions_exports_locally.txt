@@ -1,0 +1,4 @@
+**Specification 94: Top-level functions - defined on `exports` or locally**
+Description: Top-level functions may be defined directly on `exports` object, or declared locally and exported.
+Example: `exports.processString = (str) => {...};`
+Additional Notes: None.

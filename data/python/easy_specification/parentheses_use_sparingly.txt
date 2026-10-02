@@ -1,0 +1,4 @@
+**Specification 48: Parentheses - use sparingly**
+Description: Use parentheses sparingly. Do not use them in return or conditional statements unless for line continuation or tuple.
+Example: `return foo` not `return (foo)` unless tuple.
+Additional Notes: For a 1-item tuple, parentheses are fine: `onesie = (foo,)`.

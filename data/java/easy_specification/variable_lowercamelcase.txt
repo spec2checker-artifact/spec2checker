@@ -1,0 +1,4 @@
+Specification 103: Local variable names - lowerCamelCase
+Description: Local variable names written in lowerCamelCase. Even when final and immutable, not styled as constants.
+Example: int count = 0;
+Additional Notes: None.

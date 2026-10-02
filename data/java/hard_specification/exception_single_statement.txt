@@ -1,0 +1,10 @@
+Specification 63: K & R - exception for single-statement block
+Description: In places where a single statement (ending with ;) is allowed, a block may appear with opening brace preceded by a line break (e.g., to limit local variable scope).
+Example:
+
+java
+{
+  int x = foo();
+  frob(x);
+}
+Additional Notes: None.

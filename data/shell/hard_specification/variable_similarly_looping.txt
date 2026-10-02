@@ -1,0 +1,4 @@
+**Specification 92: Loop variable names should be similarly named for what you’re looping through**
+Description: Variables names for loops should be similarly named for any variable you’re looping through.
+Example: `for zone in "${zones[@]}"; do`
+Additional Notes: None.

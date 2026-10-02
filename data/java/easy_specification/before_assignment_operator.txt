@@ -1,0 +1,7 @@
+Specification 25: Break before non-assignment operator
+Description: When broken at non-assignment operator, break comes before the symbol.
+Example:
+
+java
+longName + otherLongName
+Additional Notes: Different from C++/JavaScript Google style.

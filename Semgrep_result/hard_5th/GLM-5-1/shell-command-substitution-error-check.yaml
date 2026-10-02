@@ -1,0 +1,41 @@
+rules:
+- id: shell-command-substitution-error-check
+  message: After a command substitution like `my_var="$(my_func)"`, check `$?` because
+    `local` would have swallowed it. Use `(( $? == 0 )) || return`.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $VAR="$($CMD)"
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $CMD
+      type: expr
+  metadata:
+    syntax_$VAR: is_assignment_target
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern matches assignment but cannot enforce presence of subsequent
+          error check.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: After a command substitution like `my_var="$(my_func)"`,
+      check `$?` because `local` would have swallowed it. Use `(( $? == 0 )) || return`.

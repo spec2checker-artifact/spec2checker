@@ -1,0 +1,41 @@
+rules:
+- id: javascript-static-this-access
+  message: Do not access `this` in static methods. Use the class name instead.
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: static $METHOD(...) { ... $THIS ... }
+  - metavariable-type:
+      metavariable: $METHOD
+      type: function
+  - metavariable-regex:
+      metavariable: $THIS
+      regex: ^this(\.|\[|$)
+  metadata:
+    syntax_function: has_modifier('static')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for `this` keyword in static method
+          body
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for static method detection and `this`
+          access
+    original_description: Do not access `this` in static methods. Use the class name
+      instead.

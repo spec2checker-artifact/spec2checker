@@ -1,0 +1,5 @@
+name: easy-6th-qwen3-coder-plus-codeql
+version: 1.0.0
+dependencies:
+  codeql/cpp-all: "*"
+  codeql/python-all: "*"

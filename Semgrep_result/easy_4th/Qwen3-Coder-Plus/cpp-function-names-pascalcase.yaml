@@ -1,0 +1,16 @@
+rules:
+- id: cpp-function-names-pascalcase
+  message: '[DISABLED] Function names should follow PascalCase convention, starting
+    with a capital letter and capitalizing each new word. Accessors and mutators (e.g.,
+    getters/setters) may be named using snake_case.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Function names should follow PascalCase convention, starting
+      with a capital letter and capitalizing each new word. Accessors and mutators
+      (e.g., getters/setters) may be named using snake_case.

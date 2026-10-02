@@ -1,0 +1,4 @@
+**Specification 49: Horizontal whitespace - separating reserved word from `}`**
+Description: Space separating reserved word (`else`, `catch`) from closing curly brace `}`.
+Example: `} else {`
+Additional Notes: None.

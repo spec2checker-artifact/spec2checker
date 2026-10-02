@@ -1,0 +1,4 @@
+**Specification 72: Do not use `Object` constructor**
+Description: Do not use `Object` constructor; use literal `{}` or `{a:0, b:1}`.
+Example: `const obj = {};` not `new Object();`.
+Additional Notes: Consistency.

@@ -1,0 +1,4 @@
+**Specification 14: Mutable global state - avoid**
+Description: Avoid mutable global state.
+Example: Do not use module-level variables that change.
+Additional Notes: Module-level constants are permitted and encouraged.

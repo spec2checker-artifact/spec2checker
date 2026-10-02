@@ -1,0 +1,4 @@
+Specification 77: Switch exhaustiveness - required
+Description: Google Style requires every switch to be exhaustive, even where language does not require it. May need default label even with no code.
+Example: default: break; or default -> {}
+Additional Notes: Enum switches covering all values are exhaustive without default.

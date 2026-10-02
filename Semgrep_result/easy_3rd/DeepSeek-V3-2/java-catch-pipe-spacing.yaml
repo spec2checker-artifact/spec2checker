@@ -1,0 +1,46 @@
+rules:
+- id: java-catch-pipe-spacing
+  message: Detect missing horizontal whitespace around the pipe character '|' in a
+    multi-catch clause.
+  languages:
+  - java
+  severity: WARNING
+  paths:
+    include:
+    - '*.java'
+  patterns:
+  - pattern: catch ($EXCEPTION1|$EXCEPTION2 $VAR)
+  - metavariable-type:
+      metavariable: $EXCEPTION1
+      type: expr
+  - metavariable-type:
+      metavariable: $EXCEPTION2
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_catch: has_multi_catch
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching on catch clause syntax
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule for token spacing
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires AST query for catch clause formatting
+    original_description: Detect missing horizontal whitespace around the pipe character
+      '|' in a multi-catch clause.

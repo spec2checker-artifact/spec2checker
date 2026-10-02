@@ -1,0 +1,10 @@
+Specification 80: Class/package/module annotations - each on own line
+Description: Annotations applying to class, package, or module appear immediately after documentation block, one per line. These line breaks do not constitute line-wrapping, so no extra indent.
+Example:
+
+java
+/** Javadoc */
+@Deprecated
+@CheckReturnValue
+public final class Frozzler { ... }
+Additional Notes: None.

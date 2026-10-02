@@ -1,0 +1,4 @@
+**Specification 37: Use only approved Boost libraries**  
+Description: Use only approved subset of Boost libraries (listed in guide).  
+Example: `boost/call_traits.hpp`, `boost/compressed_pair.hpp`, `boost/graph`, etc.  
+Additional Notes: See list in the guide.

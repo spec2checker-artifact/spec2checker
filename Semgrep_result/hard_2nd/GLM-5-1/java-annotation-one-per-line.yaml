@@ -1,0 +1,46 @@
+rules:
+- id: java-annotation-one-per-line
+  message: Annotations applying to class, package, or module must appear immediately
+    after the documentation block, one per line, without extra indentation.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: '/** $DOC */
+
+      @$ANN1
+
+      @$ANN2
+
+      $MODIFIERS class $C { ... }'
+  - metavariable-type:
+      metavariable: $ANN1
+      type: expr
+  - metavariable-type:
+      metavariable: $ANN2
+      type: expr
+  metadata:
+    syntax_class: has_annotation
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may not capture all annotation ordering variations
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule for annotation formatting
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for formatting rule enforcement
+    original_description: Annotations applying to class, package, or module must appear
+      immediately after the documentation block, one per line, without extra indentation.

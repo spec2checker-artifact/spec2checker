@@ -1,0 +1,4 @@
+**Specification 21: ES module exports - named exports only**
+Description: Use named exports in all code. Do not use default exports.
+Example: `export class Foo { ... }` not `export default class Foo { ... }`.
+Additional Notes: May use `export {Foo}`.

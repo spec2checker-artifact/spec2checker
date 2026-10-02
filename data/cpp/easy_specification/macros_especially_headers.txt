@@ -1,0 +1,4 @@
+**Specification 49: Avoid macros, especially in headers**  
+Description: Avoid defining macros, especially in headers. Prefer inline functions, enums, and `const` variables.  
+Example: Use `constexpr int kMax = 100;` not `#define MAX 100`.  
+Additional Notes: If macro is needed, name with project prefix and `#undef` after use.

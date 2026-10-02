@@ -1,0 +1,4 @@
+**Specification 4: Variable names - snake_case**  
+Description: Variable names (including function parameters) and data members are `snake_case` (all lowercase, underscores between words).  
+Example: `std::string table_name;`  
+Additional Notes: Class data members have trailing underscore.

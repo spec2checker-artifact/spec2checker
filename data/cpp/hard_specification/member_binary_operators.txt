@@ -1,0 +1,4 @@
+**Specification 25: Prefer non-member binary operators**  
+Description: Prefer to define non-modifying binary operators as non-member functions to allow implicit conversions on both sides.  
+Example: `friend bool operator==(const T&, const T&);`  
+Additional Notes: None.

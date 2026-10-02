@@ -1,0 +1,9 @@
+Specification 84: Block comment style
+Description: Block comments indented at same level as surrounding code. May be /* ... */ or // ... style. Multi-line /* ... */ comments require subsequent lines start with * aligned with previous line.
+Example:
+
+java
+/*
+ * This is okay.
+ */
+Additional Notes: Comments not enclosed in boxes.

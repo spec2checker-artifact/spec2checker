@@ -1,0 +1,38 @@
+rules:
+- id: cpp-coroutine-unauthorized-library
+  message: Only use C++20 coroutines via libraries approved by project leads. Do not
+    roll your own promise/awaitable types.
+  languages:
+  - cpp
+  severity: ERROR
+  patterns:
+  - pattern: co_await $EXPR;
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_function: is_coroutine
+    capabilities_required:
+      cross_file: true
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot verify if coroutine library is approved; only detects
+          coroutine usage.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires custom query to check for approved library types.
+    original_description: Only use C++20 coroutines via libraries approved by project
+      leads. Do not roll your own promise/awaitable types.

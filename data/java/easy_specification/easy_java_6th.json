@@ -1,0 +1,526 @@
+[
+  {
+    "rule_id": "java-package-no-line-wrap",
+    "language": "java",
+    "description": "The package declaration must not be line-wrapped. The column limit does not apply to package declarations.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "package $PKG;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PKG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires line-based matching which may be approximate"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check line breaks in package statement"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires querying for multi-line package declarations"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\package_declaration_wrap.txt",
+      "section": "package_declaration_wrap"
+    }
+  },
+  {
+    "rule_id": "java-classname-uppercamelcase",
+    "language": "java",
+    "description": "Class names must be written in UpperCamelCase, typically nouns or noun phrases. Interface names may be nouns or adjectives.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class",
+          "regex": "^[A-Z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based matching may not handle all edge cases"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule configuration"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for naming conventions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\class_names_uppercamelcase.txt",
+      "section": "class_names_uppercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-dot-separator-break",
+    "language": "java",
+    "description": "Detect dot separator (.) with a line break before it, as in 'object .method()'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$OBJ\n.$METHOD(...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OBJ": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific dot-separator line break; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\assignment_separator.txt",
+      "section": "assignment_separator"
+    }
+  },
+  {
+    "rule_id": "java-block-indentation-2-spaces",
+    "language": "java",
+    "description": "Each new block increases indent by 2 spaces. When block ends, indent returns to previous level. Applies to code and comments.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule with pattern-where-python for indentation analysis"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's Indentation rule can be configured for 2 spaces"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not have built-in support for indentation checking"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\block_indentation_spaces.txt",
+      "section": "block_indentation_spaces"
+    }
+  },
+  {
+    "rule_id": "java-test-class-name",
+    "language": "java",
+    "description": "Test class name must end with 'Test'. If it covers a single class, the name should be that class plus 'Test'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('Test')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot enforce the 'single class plus Test' naming convention without cross-file analysis."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule to check class name suffix."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check naming pattern; the 'single class plus Test' convention is semantic and not fully enforceable."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\test_class_names.txt",
+      "section": "test_class_names"
+    }
+  },
+  {
+    "rule_id": "java-no-static-import-for-classes",
+    "language": "java",
+    "description": "Static import is not used for static nested classes; they are imported with normal imports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import static $OUTER.$INNER;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OUTER": {
+          "type_hint": "class"
+        },
+        "$INNER": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$INNER",
+        "constraint_type": "type",
+        "condition": "is_static_nested_class_of($OUTER)",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm $INNER is a static nested class of $OUTER"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to confirm $INNER is a static nested class of $OUTER"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\no_static_import_classes.txt",
+      "section": "no_static_import_classes"
+    }
+  },
+  {
+    "rule_id": "java-single-top-level-class",
+    "language": "java",
+    "description": "Each source file must contain exactly one top-level class declaration.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "scope",
+        "condition": "is_top_level",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires counting class declarations in a file"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to count top-level classes"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to count top-level class declarations"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\exactly_class_declaration.txt",
+      "section": "exactly_class_declaration"
+    }
+  },
+  {
+    "rule_id": "java-import-no-line-wrap",
+    "language": "java",
+    "description": "Imports must not be line-wrapped. The column limit does not apply to import statements.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IMPORT": {
+          "type_hint": "expr",
+          "regex": "^[\\w\\.\\*]+$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "import",
+        "constraint_type": "syntactic",
+        "condition": "is_single_line",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match single-line imports only"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to detect line-wrapped imports"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\imports_no_line_wrapping.txt",
+      "section": "imports_no_line_wrapping"
+    }
+  },
+  {
+    "rule_id": "java-constant-naming-uppercase-snake",
+    "language": "java",
+    "description": "Constant names must use UPPER_SNAKE_CASE (all uppercase, words separated by single underscore). Applies only to static final fields with deeply immutable contents and no side-effect methods.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$MODIFIERS $TYPE $NAME = $INIT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "field",
+        "constraint_type": "syntactic",
+        "condition": "has_modifiers('static', 'final')",
+        "required": "true"
+      },
+      {
+        "target": "field",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's FieldNamingConventions rule can check static final fields but may not fully validate 'deeply immutable contents'."
+      },
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can enforce naming pattern but cannot verify deep immutability or absence of side-effect methods."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Can enforce naming and static final modifiers, but verifying deep immutability requires complex dataflow and type analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\constant_names_upper_snake.txt",
+      "section": "constant_names_upper_snake"
+    }
+  },
+  {
+    "rule_id": "java-no-wildcard-import",
+    "language": "java",
+    "description": "Wildcard ('on-demand') imports, static or otherwise, are not used.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $PACKAGE.*;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PACKAGE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\no_wildcard_imports.txt",
+      "section": "no_wildcard_imports"
+    }
+  }
+]

@@ -1,0 +1,4 @@
+**Specification 69: Array destructuring - allowed, rest element allowed**
+Description: Array literals on left-hand side for destructuring. Final rest element `...rest` allowed (no space). Omit unused elements.
+Example: `const [a, b, ...rest] = generateResults();`
+Additional Notes: For function parameters, default to `[]`.

@@ -1,0 +1,37 @@
+rules:
+- id: cpp-inclusive-language
+  message: Detect use of non-inclusive or offensive terms (e.g., master/slave, blacklist/whitelist)
+    and encourage gender-neutral language.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $TERM
+  - metavariable-regex:
+      metavariable: $TERM
+      regex: (?i)\b(master|slave|blacklist|whitelist|grandfathered|manpower|sanity\s*check|dummy|he\b|she\b|him\b|her\b|his\b|hers\b)\b
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based matching may have false positives/negatives; does
+          not understand semantic context.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query using string matching; not a built-in rule.
+    original_description: Detect use of non-inclusive or offensive terms (e.g., master/slave,
+      blacklist/whitelist) and encourage gender-neutral language.

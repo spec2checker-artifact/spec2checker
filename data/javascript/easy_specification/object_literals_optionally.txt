@@ -1,0 +1,10 @@
+**Specification 33: Object literals - optionally block-like**
+Description: Any object literal may optionally be formatted as a block-like construct.
+Example:
+```javascript
+const a = {
+  a: 0,
+  b: 1,
+};
+```
+Additional Notes: Same as arrays.

@@ -1,0 +1,4 @@
+**Specification 115: `with` - forbidden**
+Description: Do not use `with` keyword.
+Example: Not `with (obj) { ... }`.
+Additional Notes: Banned in strict mode.

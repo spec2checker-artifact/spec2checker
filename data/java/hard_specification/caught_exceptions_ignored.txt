@@ -1,0 +1,4 @@
+Specification 115: Caught exceptions - not ignored
+Description: Very rarely correct to do nothing in response to caught exception. Typical responses: log, or rethrow as AssertionError.
+Example: catch (NumberFormatException e) { logger.warn(...); }
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 97: Arrow function body - block or single expression with `void` if no return needed**
+Description: Body defaults to block. Single expression allowed if logic requires return value, or `void` precedes single function call (ensures `undefined` returned).
+Example: `(numParam, strParam) => numParam + Number(strParam)` (return value). `(result) => void alert(result)` (no return).
+Additional Notes: Single expression preferred for readability.

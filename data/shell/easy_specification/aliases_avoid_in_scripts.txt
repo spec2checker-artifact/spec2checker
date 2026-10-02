@@ -1,0 +1,4 @@
+**Specification 56: Aliases - avoid in scripts**
+Description: Aliases should be avoided in scripts; functions are preferred.
+Example: Use `random_name() { echo "some_prefix_${RANDOM}"; }` not `alias random_name=...`
+Additional Notes: As per Bash manual.

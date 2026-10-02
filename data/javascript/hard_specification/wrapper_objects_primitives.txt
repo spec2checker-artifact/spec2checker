@@ -1,0 +1,4 @@
+**Specification 118: Wrapper objects for primitives - never use `new`**
+Description: Never use `new Boolean`, `new Number`, `new String`, `new Symbol`. Use coercion functions instead.
+Example: `const x = Boolean(0);` not `new Boolean(false);`.
+Additional Notes: Do not include in type annotations.

@@ -1,0 +1,4 @@
+**Specification 18: Declare copy/move operations in `public` section**  
+Description: Every class's public interface must make clear which copy and move operations the class supports.  
+Example: Explicitly declare or delete appropriate operations in `public` section.  
+Additional Notes: See Copyable and Movable Types.

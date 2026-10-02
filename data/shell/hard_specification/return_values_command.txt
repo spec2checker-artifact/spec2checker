@@ -1,0 +1,4 @@
+**Specification 94: Check return values with `if ! command` or `if (( $? != 0 ))`**
+Description: For unpiped commands, use `if ! command` or check directly via `$?` with `if` statement.
+Example: `if ! mv ...; then ...; fi`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 73: Use `=~` operator for regex matching in `[[ ... ]]`**
+Description: `[[ ... ]]` allows regex matching with `=~`.
+Example: `if [[ "$string" =~ foo:(\d+) ]]; then extraction="${BASH_REMATCH[1]}"; fi`
+Additional Notes: RHS should not be quoted.

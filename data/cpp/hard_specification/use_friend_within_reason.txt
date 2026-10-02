@@ -1,0 +1,4 @@
+**Specification 27: Use `friend` within reason**  
+Description: `friend` is allowed for specific use cases (e.g., `FooBuilder` accessing private members).  
+Example: `friend class FooBuilder;`  
+Additional Notes: Define friends in same file.

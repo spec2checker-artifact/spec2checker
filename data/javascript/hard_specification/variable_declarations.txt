@@ -1,0 +1,4 @@
+**Specification 62: Local variable declarations - use `const` and `let`**
+Description: Declare all local variables with `const` or `let`. Use `const` by default unless variable needs reassignment. `var` must not be used.
+Example: `const x = 1; let y = 2;`
+Additional Notes: None.

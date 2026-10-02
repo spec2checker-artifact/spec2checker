@@ -1,0 +1,4 @@
+**Specification 115: Type variables - use descriptive names unless private and unconstrained**
+Description: Type variable must have descriptive name unless not externally visible and not constrained.
+Example: `_T = TypeVar("_T")`, `AddableType = TypeVar("AddableType", int, float, str)`
+Additional Notes: Not `T = TypeVar("T")` for visible constrained variables.

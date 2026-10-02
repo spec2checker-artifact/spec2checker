@@ -1,0 +1,525 @@
+[
+  {
+    "rule_id": "java-finalize-override",
+    "language": "java",
+    "description": "Do not override Object.finalize. Finalization support is scheduled for removal.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "protected void finalize() throws Throwable { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "inheritance",
+        "condition": "overrides_method('java.lang.Object', 'finalize')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires Java-specific pattern matching for method signatures"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires Java-specific rule configuration"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true,
+        "limitations": "requires Java language pack"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\finalizers_not_used.txt",
+      "section": "finalizers_not_used"
+    }
+  },
+  {
+    "rule_id": "java-old-style-switch",
+    "language": "java",
+    "description": "Detect old-style switch statement formatting where a colon in a switch label is followed by a line break and the statements within the group are indented further by +2 spaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $LABEL:\n  $STMT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LABEL": {
+          "type_hint": "expr"
+        },
+        "$STMT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_inside_switch",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match valid new-style switch expressions with blocks; requires context to differentiate."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has a rule 'SwitchStmtsShouldHaveDefault' but not a specific rule for this formatting style."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for pure formatting/style checks."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_followed_break.txt",
+      "section": "switch_followed_break"
+    }
+  },
+  {
+    "rule_id": "java-switch-indentation",
+    "language": "java",
+    "description": "Contents of switch block must be indented +2 relative to the switch statement. Each switch label (case, default) must start at that indentation level.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for indentation checking of switch statements and labels."
+      },
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep patterns cannot reliably enforce indentation levels across arbitrary code blocks."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not natively support formatting/indentation rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_indentation.txt",
+      "section": "switch_indentation"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-lowercase-all",
+    "language": "java",
+    "description": "All words in a camel case identifier must be entirely lowercase, including acronyms.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ID",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ID": {
+          "type_hint": "expr",
+          "regex": "^[A-Z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ID",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('.*[A-Z]{2,}.*')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives on complex identifiers"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule using XPath or regex"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query using regex matching"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\camel_lowercase_everything.txt",
+      "section": "camel_lowercase_everything"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-step1",
+    "language": "java",
+    "description": "Convert phrase to plain ASCII and remove apostrophes as a preprocessing step for camel case conversion.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep is not designed for text normalization or encoding transformations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD is not designed for text normalization preprocessing."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for text normalization preprocessing."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\conversion_apostrophes.txt",
+      "section": "conversion_apostrophes"
+    }
+  },
+  {
+    "rule_id": "java-camel-case-split-conventional",
+    "language": "java",
+    "description": "Detects conventionally camel-cased words (e.g., 'AdWords') and flags them for splitting into constituent parts (e.g., 'ad words'), with an exception for 'iOS'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\"$WORD\"",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$WORD": {
+          "type_hint": "expr",
+          "regex": "^(?!iOS$)[A-Z][a-z]+[A-Z][a-z]+.*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$WORD",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives for complex camel-case patterns"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule implementation for string literal content analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to analyze string literal patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\conventionally_cased_words.txt",
+      "section": "conventionally_cased_words"
+    }
+  },
+  {
+    "rule_id": "java-text-block-opening-newline",
+    "language": "java",
+    "description": "Opening triple quotes of a text block must be on a new line, optionally following indentation rules.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "String $VAR = \"\"\"$TEXT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$TEXT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "TEXT",
+        "constraint_type": "syntactic",
+        "condition": "not_starts_with_newline",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of newline after opening quotes"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for text block formatting"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST analysis of string literal structure"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\text_blocks_opening_line.txt",
+      "section": "text_blocks_opening_line"
+    }
+  },
+  {
+    "rule_id": "java-line-wrapping-discretionary",
+    "language": "java",
+    "description": "Even code that fits within column limit may be line-wrapped at author's discretion. Tip: extract method or local variable to avoid wrapping.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can detect line length via custom rules, but discretionary wrapping is a style suggestion."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD can enforce line length but not discretionary wrapping suggestions."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for discretionary style suggestions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\wrapping_discretionary.txt",
+      "section": "wrapping_discretionary"
+    }
+  },
+  {
+    "rule_id": "java-arrow-no-adjacent-break",
+    "language": "java",
+    "description": "Line never broken adjacent to arrow ->, except break may come immediately after arrow if following text is a single unbraced expression. For block body, no break adjacent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR -> $BODY",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$BODY",
+        "constraint_type": "syntactic",
+        "condition": "is_block",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of line breaks relative to tokens"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for line break adjacency"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rule"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\lambdaswitch_adjacent.txt",
+      "section": "lambdaswitch_adjacent"
+    }
+  },
+  {
+    "rule_id": "java-switch-fallthrough-comment",
+    "language": "java",
+    "description": "Each statement group in a switch case must either terminate abruptly (break/continue/return/throw) or be marked with a fall-through comment (e.g., // fall through).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $CASE:\n    $BODY",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CASE": {
+          "type_hint": "expr"
+        },
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$BODY",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_break_continue_return_throw",
+        "required": "true"
+      },
+      {
+        "target": "$BODY",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_fallthrough_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to detect abrupt termination and specific comment patterns"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's existing rule may need configuration for comment format"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check for comment presence"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\through_switch_commented.txt",
+      "section": "through_switch_commented"
+    }
+  }
+]

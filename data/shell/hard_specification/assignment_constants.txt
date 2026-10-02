@@ -1,0 +1,4 @@
+**Specification 113: Use `readonly FLAGS` after array assignment for constants**
+Description: After assigning array, use `readonly FLAGS` to make it constant.
+Example: `FLAGS=( --foo ); readonly FLAGS`
+Additional Notes: None.

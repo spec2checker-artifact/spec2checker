@@ -1,0 +1,4 @@
+**Specification 76: Arrays - avoid unquoted expansion in array assignments**
+Description: Avoid unquoted expansion in array assignments; won’t work correctly if output contains special characters or whitespace.
+Example: Don’t do `files=($(ls /directory))`.
+Additional Notes: Use `readarray` instead.

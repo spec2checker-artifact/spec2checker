@@ -1,0 +1,4 @@
+**Specification 18: ES module import naming - module import names `lowerCamelCase`**
+Description: Module import names (`import * as name`) are derived from file name and use `lowerCamelCase`.
+Example: `import * as fileOne from '../file-one.js';`
+Additional Notes: Exception: `THREE` for threejs.

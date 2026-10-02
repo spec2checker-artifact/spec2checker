@@ -1,0 +1,532 @@
+[
+  {
+    "rule_id": "java-horizontal-whitespace-before-open-curly-brace",
+    "language": "java",
+    "description": "Require a space before any open curly brace {, except in @SomeAnnotation({a, b}) and String[][] x = {{\"foo\"}};",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom metavariable analysis for exceptions"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule implementation for exceptions"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\whitespace_curly.txt",
+      "section": "whitespace_curly"
+    }
+  },
+  {
+    "rule_id": "java-local-variable-lower-camel-case",
+    "language": "java",
+    "description": "Local variable names must be written in lowerCamelCase, even when final and immutable.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr",
+          "regex": "^[a-z][a-zA-Z0-9]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives for complex naming patterns"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule using XPath to check local variable declarations"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to identify local variables and enforce naming convention"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\variable_lowercamelcase.txt",
+      "section": "variable_lowercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-imports-ordering-non-static-group",
+    "language": "java",
+    "description": "All non-static imports must be in a single group, separated from the static import group by a blank line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $PACKAGE.$CLASS;",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "import",
+        "constraint_type": "syntactic",
+        "condition": "is_static_import == false",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect import statements but requires custom logic to enforce grouping and blank line separation."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has rules for import ordering but may require configuration to enforce a single non-static group separated by a blank line."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can query import statements and their properties, but grouping and blank line enforcement is a formatting rule not natively supported."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\imports_ordering_static.txt",
+      "section": "imports_ordering_static"
+    }
+  },
+  {
+    "rule_id": "java-method-name-attached-parenthesis",
+    "language": "java",
+    "description": "Method, constructor, or record-class name must stay attached to the open parenthesis that follows it, with no whitespace or line break between the name and '('.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME $PAREN(...)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        },
+        "$PAREN": {
+          "type_hint": "expr",
+          "regex": "^\\s*\\("
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "is_method_or_constructor_name",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match non-method identifiers; requires precise syntactic context."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD supports whitespace checks via XPath rules, but detection of method/constructor/record context may require custom rule."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for pure formatting/whitespace rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\methodconstructor.txt",
+      "section": "methodconstructor"
+    }
+  },
+  {
+    "rule_id": "java-horizontal-whitespace-catch-pipe",
+    "language": "java",
+    "description": "Space around | in catch (FooException | BarException e) is required.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($EXCEPTION1|$EXCEPTION2 $VAR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION1": {
+          "type_hint": "expr"
+        },
+        "$EXCEPTION2": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can detect the pattern but may not enforce spacing style without custom regex."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's WhitespaceAfter rule may need custom configuration for this specific case."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rule detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\horizontal_whitespace_pipe.txt",
+      "section": "horizontal_whitespace_pipe"
+    }
+  },
+  {
+    "rule_id": "java-horizontal-whitespace-ampersand-type-bounds",
+    "language": "java",
+    "description": "Space around & in type bounds (e.g., <T extends Foo & Bar>) must be present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "<$T extends $BASE & $BOUND>",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$T": {
+          "type_hint": "expr"
+        },
+        "$BASE": {
+          "type_hint": "expr"
+        },
+        "$BOUND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "code_snippet",
+        "constraint_type": "syntactic",
+        "condition": "no_whitespace_around('&')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise whitespace matching in pattern"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for whitespace checking"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/whitespace rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\horizontal_whitespace.txt",
+      "section": "horizontal_whitespace"
+    }
+  },
+  {
+    "rule_id": "java-package-no-line-wrap",
+    "language": "java",
+    "description": "The package declaration is not line-wrapped. The column limit does not apply.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "package $PKG;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PKG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires pattern to detect multi-line package statements, which may be rare."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's AbstractNcssCount rule can count lines, but a custom rule is needed to check for line-wrapping specifically."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires a custom query to check the source location span of the package declaration."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\package_declaration_wrap.txt",
+      "section": "package_declaration_wrap"
+    }
+  },
+  {
+    "rule_id": "java-module-directives-ordering",
+    "language": "java",
+    "description": "Module directives must be ordered as: all requires in one block, then exports, opens, uses, provides. Each block must be separated by a single blank line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep patterns are not well-suited for enforcing ordering of distinct directive blocks separated by blank lines."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires a custom rule to check ordering and blank line separation between directive types."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires a custom query to analyze the sequence and spacing of module directives."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\module_directives_ordering.txt",
+      "section": "module_directives_ordering"
+    }
+  },
+  {
+    "rule_id": "java-class-name-uppercamelcase",
+    "language": "java",
+    "description": "Class names must be written in UpperCamelCase, typically nouns or noun phrases. Interface names may be nouns or adjectives.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CLASS",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based pattern may have false positives with abbreviations or special cases"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule configuration for naming conventions"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for naming pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\class_names_uppercamelcase.txt",
+      "section": "class_names_uppercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-imports-no-line-wrapping",
+    "language": "java",
+    "description": "Imports are not line-wrapped. The column limit does not apply.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT;\nimport $IMPORT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IMPORT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "import",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect multi-line import statements"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check line breaks in import statements"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to detect multi-line imports"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\imports_no_line_wrapping.txt",
+      "section": "imports_no_line_wrapping"
+    }
+  }
+]

@@ -1,0 +1,518 @@
+[
+  {
+    "rule_id": "python-whitespace-no-trailing-whitespace",
+    "language": "python",
+    "description": "Detect lines that end with whitespace characters (spaces or tabs).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule with generic pattern or file property check, not a standard code pattern."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD supports this via its Whitespace rule for Java, but not for Python."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to analyze raw file lines, not a standard AST pattern."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_whitespace.txt",
+      "section": "whitespace_whitespace"
+    }
+  },
+  {
+    "rule_id": "python-default-iterator",
+    "language": "python",
+    "description": "Use default iterators and operators for types that support them (lists, dicts, files). Do not mutate container while iterating.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $KEY in $DICT.keys():\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KEY": {
+          "type_hint": "expr"
+        },
+        "$DICT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DICT",
+        "constraint_type": "type",
+        "condition": "is_instance_of('dict')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type constraint may require type resolution for complex expressions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type inference for accurate detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\iterators_operators.txt",
+      "section": "iterators_operators"
+    }
+  },
+  {
+    "rule_id": "python-no-bool-false-comparison",
+    "language": "python",
+    "description": "Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $X == False: ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_compare_boolean.txt",
+      "section": "truefalse_compare_boolean"
+    }
+  },
+  {
+    "rule_id": "python-none-check-is",
+    "language": "python",
+    "description": "Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if not $X:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot guarantee $X is a variable that could be None; may produce false positives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type tracking to determine if $X could be None, 0, or empty string."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_check_none.txt",
+      "section": "truefalse_check_none"
+    }
+  },
+  {
+    "rule_id": "python-property-allowed-when-necessary",
+    "language": "python",
+    "description": "Properties may be used to control getting/setting attributes that require trivial computations or logic. Must match expectations: cheap, straightforward, unsurprising.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@property\ndef $FUNC($ARGS):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot automatically verify property logic is trivial/cheap; requires manual review."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect property usage but cannot automatically assess if logic is trivial."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\properties_allowed.txt",
+      "section": "properties_allowed"
+    }
+  },
+  {
+    "rule_id": "python-default-arg-immutable",
+    "language": "python",
+    "description": "Detect function definitions with default argument values, focusing on allowing immutable defaults like empty tuples.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($...ARGS = $DEFAULT, ...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$DEFAULT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DEFAULT",
+        "constraint_type": "syntactic",
+        "condition": "is_mutable_literal",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Static detection of mutability is limited; may require custom logic for complex expressions."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to accurately determine mutability of default expressions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\immutable_defaults.txt",
+      "section": "immutable_defaults"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-no-space-before-punctuation",
+    "language": "python",
+    "description": "No whitespace before a comma, semicolon, or colon. Use space after them.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom regex or whitespace-aware pattern, not a simple AST match."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace tokens, not a standard dataflow or type rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_semicolon_colon.txt",
+      "section": "whitespace_semicolon_colon"
+    }
+  },
+  {
+    "rule_id": "python-generator-docstring-yields",
+    "language": "python",
+    "description": "Detect generator functions that use 'Returns:' in their docstring instead of 'Yields:'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    \"\"\"...\n    Returns:\n        ...\n    ...\"\"\"\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "contains_yield",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching on docstring content and yield detection; may have false positives with nested functions or complex yield logic."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect yield statements and analyze docstring content."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\generators_use_as_needed.txt",
+      "section": "generators_use_as_needed"
+    }
+  },
+  {
+    "rule_id": "python-no-spaces-around-equals",
+    "language": "python",
+    "description": "Never use spaces around `=` when passing keyword arguments or defining default parameter values, unless a type annotation is present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($...ARGS, $PARAM = $VALUE, $...ARGS2):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "$PARAM",
+        "constraint_type": "annotation",
+        "condition": "has_no_type_annotation",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match the specific spacing syntax; type annotation detection may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect spacing and exclude type-annotated parameters"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_arguments.txt",
+      "section": "whitespace_arguments"
+    }
+  },
+  {
+    "rule_id": "python-property-decorator-required",
+    "language": "python",
+    "description": "Properties should be created with the `@property` decorator. Manual descriptor implementation is a power feature and should be flagged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $PROP(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PROP": {
+          "type_hint": "function",
+          "regex": "^[a-z_][a-z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PROP",
+        "constraint_type": "annotation",
+        "condition": "not has_annotation('property')",
+        "required": "true"
+      },
+      {
+        "target": "$PROP",
+        "constraint_type": "syntactic",
+        "condition": "has_decorator_count(0)",
+        "required": "true"
+      },
+      {
+        "target": "$PROP",
+        "constraint_type": "syntactic",
+        "condition": "parameter_count(1)",
+        "required": "true"
+      },
+      {
+        "target": "$PROP",
+        "constraint_type": "syntactic",
+        "condition": "first_parameter_name('self')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably detect manual descriptor implementation vs. regular method; rule is a heuristic for missing @property."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect missing @property on getter-like methods."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\properties_decorator.txt",
+      "section": "properties_decorator"
+    }
+  }
+]

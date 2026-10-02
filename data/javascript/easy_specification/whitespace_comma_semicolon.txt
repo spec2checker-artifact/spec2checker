@@ -1,0 +1,4 @@
+**Specification 52: Horizontal whitespace - after comma and semicolon**
+Description: Space after comma (`,`) and semicolon (`;`); never before.
+Example: `foo(a, b)` not `foo(a ,b)`.
+Additional Notes: None.

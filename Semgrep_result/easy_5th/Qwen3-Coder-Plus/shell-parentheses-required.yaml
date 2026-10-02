@@ -1,0 +1,33 @@
+rules:
+- id: shell-parentheses-required
+  message: Parentheses are required after the function name in shell function definitions
+    per Google Shell Style Guide (e.g., `function name() {` not `function name {`).
+    Note: Bash permits `function name {` without parentheses, but this rule enforces
+    the Google style convention.
+  languages:
+  - bash
+  severity: INFO
+  pattern-regex: 'function\s+[a-zA-Z_]\w*\s*\{\s*#.*parentheses_missing_marker'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: rule disabled per evaluate2 - bash function parentheses are optional
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Parentheses are required after the function name.

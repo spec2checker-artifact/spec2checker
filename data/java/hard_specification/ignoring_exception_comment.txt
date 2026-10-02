@@ -1,0 +1,9 @@
+Specification 116: Ignoring exception - must comment
+Description: When truly no action is appropriate, reason must be explained in comment.
+Example:
+
+java
+catch (NumberFormatException ok) {
+  // it's not numeric; that's fine, just continue
+}
+Additional Notes: None.

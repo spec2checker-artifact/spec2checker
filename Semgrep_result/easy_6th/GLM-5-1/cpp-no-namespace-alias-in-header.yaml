@@ -1,0 +1,14 @@
+rules:
+- id: cpp-no-namespace-alias-in-header
+  message: '[DISABLED] Do not use namespace aliases at namespace scope in header files
+    except in explicitly marked internal-only namespaces.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Do not use namespace aliases at namespace scope in header
+      files except in explicitly marked internal-only namespaces.

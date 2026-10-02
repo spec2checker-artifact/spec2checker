@@ -1,0 +1,4 @@
+**Specification 14: Exports - do not use default exports**
+Description: Do not use default exports; they don't translate easily to ES module semantics.
+Example: Not `exports = FancyClass;`.
+Additional Notes: None.

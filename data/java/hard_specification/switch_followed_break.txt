@@ -1,0 +1,8 @@
+Specification 74: Old-style switch - colon followed by line break
+Description: Colon of each switch label followed by line break. Statements within group indented further +2.
+Example:
+
+java
+case 1:
+  doSomething();
+Additional Notes: None.

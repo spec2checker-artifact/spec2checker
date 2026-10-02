@@ -1,0 +1,4 @@
+**Specification 91: Names to avoid - single character names (except allowed cases)**
+Description: Avoid single character names except for counters/iterators (`i`, `j`, `k`, `v`), `e` for exception, `f` for file handle, private type variables, and established mathematical notation.
+Example: `for i in range(10):` okay.
+Additional Notes: Descriptiveness proportional to scope.

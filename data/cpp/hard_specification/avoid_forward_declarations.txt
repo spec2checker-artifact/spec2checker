@@ -1,0 +1,4 @@
+**Specification 8: Avoid forward declarations where possible**  
+Description: Avoid using forward declarations; instead, include the headers you need.  
+Example: `#include "b.h"` rather than `class B;`.  
+Additional Notes: Forward declarations can hide dependencies and break APIs.

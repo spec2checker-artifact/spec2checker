@@ -1,0 +1,521 @@
+[
+  {
+    "rule_id": "shell-read-without-r",
+    "language": "shell",
+    "description": "Use `read -r` to prevent backslash interpretation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "read $VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "read",
+        "constraint_type": "syntactic",
+        "condition": "not_contains_option('-r')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match 'read' without '-r' flag"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\backslash_interpretation.txt",
+      "section": "backslash_interpretation"
+    }
+  },
+  {
+    "rule_id": "shell-loop-local-declaration",
+    "language": "shell",
+    "description": "Inside a function, declare loop variable as `local` to avoid leaking into global environment.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $VAR in $ITER; do\n    ...\ndone",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "inside_function",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "not_preceded_by_local",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell support is limited; may not correctly identify function scope in all cases."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\avoid_leaking_variables.txt",
+      "section": "avoid_leaking_variables"
+    }
+  },
+  {
+    "rule_id": "shell-constant-readonly",
+    "language": "shell",
+    "description": "Use `readonly` or `declare -xr` for constants instead of equivalent commands for clarity.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "export $VAR=$VAL",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VAL": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "not_preceded_by('readonly')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for export without preceding readonly"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\readonly_declare_constants.txt",
+      "section": "readonly_declare_constants"
+    }
+  },
+  {
+    "rule_id": "shell-no-let-builtin",
+    "language": "shell",
+    "description": "Never use the `let` builtin. Use `(( ... ))` for arithmetic evaluation.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "let $VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Simple pattern matching; may not understand all shell contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\never_use_let_builtin.txt",
+      "section": "never_use_let_builtin"
+    }
+  },
+  {
+    "rule_id": "shell-no-expr-command",
+    "language": "shell",
+    "description": "Never use the `expr` command as it is an external program and slower than built-in shell arithmetic.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "expr $...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match in comments or strings"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\never_use_expr_command.txt",
+      "section": "never_use_expr_command"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-unquoted-array-expansion",
+    "language": "shell",
+    "description": "Avoid unquoted expansion in array assignments; won't work correctly if output contains special characters or whitespace. Use `readarray` instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARRAY=($($CMD))",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARRAY": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match legitimate uses of command substitution not in array context"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\expansion_assignments.txt",
+      "section": "expansion_assignments"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-colon-in-function-name",
+    "language": "shell",
+    "description": "Functions intended for interactive use may choose to avoid colons as it can confuse bash auto-completion.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC(...) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function",
+          "regex": ".*::.*"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell pattern matching may have limited support for complex function name regex validation."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\intended_interactive.txt",
+      "section": "intended_interactive"
+    }
+  },
+  {
+    "rule_id": "shell-regex-rhs-no-quotes",
+    "language": "shell",
+    "description": "When using the regex matching operator `=~` inside `[[ ... ]]`, the right-hand side (RHS) should not be quoted, as quoting would cause it to be treated as a literal string instead of a regular expression.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[[ $LHS =~ $RHS ]]",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LHS": {
+          "type_hint": "expr"
+        },
+        "$RHS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$RHS",
+        "constraint_type": "syntactic",
+        "condition": "is_quoted_string",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's Bash/Shell support may not fully resolve variable expansions to determine if the RHS is a quoted literal."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Shell/Bash analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL's Bash/Shell support is experimental; detecting quoted strings in this context may be limited."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\when_using_=~_quote_rhs.txt",
+      "section": "when_using_=~_quote_rhs"
+    }
+  },
+  {
+    "rule_id": "shell-arithmetic-expansion-expr",
+    "language": "shell",
+    "description": "Always use `$(( ... ))` for arithmetic expansion instead of backticks with `expr`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "`expr $EXPR`",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match non-arithmetic uses of expr"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\arithmetic_backticks.txt",
+      "section": "arithmetic_backticks"
+    }
+  },
+  {
+    "rule_id": "shell-no-main-for-short-scripts",
+    "language": "shell",
+    "description": "For short scripts where it's just a linear flow, a main function is overkill and not required.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "main() {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "line_count <= 10",
+        "required": "true"
+      },
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "function_count == 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "line and function count constraints require custom logic"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for line/function count heuristics"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\scripts_linear_required.txt",
+      "section": "scripts_linear_required"
+    }
+  }
+]

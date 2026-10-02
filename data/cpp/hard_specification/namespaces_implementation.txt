@@ -1,0 +1,4 @@
+**Specification 34: Use namespaces with "internal" in name for implementation details**  
+Description: Use namespaces with "internal" in the name to document parts of an API that should not be used by users.  
+Example: `namespace myproject::internal { ... }`  
+Additional Notes: Add library's filename to avoid collisions.

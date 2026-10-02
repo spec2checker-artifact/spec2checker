@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编码规范统计总览（基于真实数据）</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: #f5f7fb;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 24px 20px;
+            color: #1e2a3a;
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.25rem; background: linear-gradient(135deg, #1f2b3c, #2c3e4e); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .subtitle { color: #4b6a8b; border-left: 4px solid #3b82f6; padding-left: 16px; margin: 16px 0 24px 0; }
+        .insight-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            padding: 20px 24px;
+            margin-bottom: 32px;
+        }
+        .insight-card h3 { font-weight: 600; font-size: 1.35rem; margin-top: 0; margin-bottom: 12px; }
+        .stats-table-wrapper { overflow-x: auto; margin: 20px 0; }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .stats-table th {
+            background: #f1f5f9;
+            padding: 12px 8px;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .stats-table td { padding: 10px 6px; border-bottom: 1px solid #eef2ff; text-align: center; }
+        .stats-table tr:hover td { background: #fafcff; }
+        .double-chart-row { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 20px 0; }
+        .chart-col { flex: 1; min-width: 280px; text-align: center; }
+        canvas { max-height: 300px; max-width: 100%; margin: 0 auto; }
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+            gap: 28px;
+            margin-top: 20px;
+        }
+        .lang-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .lang-header {
+            padding: 16px 20px 8px 20px;
+            border-bottom: 2px solid #eef2ff;
+        }
+        .lang-name { font-size: 1.7rem; font-weight: 700; background: linear-gradient(120deg, #1f2f3e, #2c4c6c); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .chart-pair { display: flex; flex-wrap: wrap; gap: 16px; padding: 20px 16px; justify-content: space-around; }
+        .chart-box { flex: 1; min-width: 170px; text-align: center; }
+        .chart-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; display: inline-block; background: #f1f5f9; padding: 4px 12px; border-radius: 30px; }
+        .chart-title.easy { background: #e0f2fe; color: #0369a1; }
+        .chart-title.hard { background: #ffe4e6; color: #be123c; }
+        .chart-note { font-size: 0.7rem; color: #6c86a3; margin-top: 10px; }
+        footer { text-align: center; margin-top: 40px; padding: 24px; border-top: 1px solid #e2e8f0; font-size: 0.85rem; color: #54708f; }
+        @media (max-width: 760px) { .lang-grid { grid-template-columns: 1fr; } }
+        .legend-color { display: inline-block; width: 14px; height: 14px; border-radius: 14px; margin-right: 6px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📊 编码规范真实统计 · 五语言600条规范全景</h1>
+    <div class="subtitle">基于 JavaScript, Java, C++, Python, Shell 规范文档逐条分类 | 简单/复杂规范主题分布</div>
+
+    <div id="loading" style="text-align:center; padding:40px;">正在加载统计数据...</div>
+
+    <div id="content" style="display:none;">
+        <!-- 总图区域 -->
+        <div class="insight-card">
+            <h3>📈 600条规范综合主题分布（饼图 + 横向条形图）</h3>
+            <div class="double-chart-row">
+                <div class="chart-col">
+                    <div class="chart-title">🍩 主题占比饼图</div>
+                    <canvas id="totalPieChart" width="400" height="400"></canvas>
+                </div>
+                <div class="chart-col">
+                    <div class="chart-title">📊 横向条形图 (数量与占比)</div>
+                    <canvas id="totalBarChart" width="500" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计表1：主题汇总 -->
+        <div class="insight-card">
+            <h3>📋 表1：按主题分类统计 (简单/复杂及合计)</h3>
+            <div class="stats-table-wrapper" id="themeTable"></div>
+        </div>
+
+        <!-- 统计表2：语言汇总 -->
+        <div class="insight-card">
+            <h3>📋 表2：各语言规范统计</h3>
+            <div class="stats-table-wrapper" id="langTable"></div>
+        </div>
+
+        <!-- 各语言详细饼图 -->
+        <div class="lang-grid" id="langCards"></div>
+    </div>
+    <footer>数据来源：对五份规范文档逐条分类汇总，12个主题，真实统计无模拟。</footer>
+</div>
+
+<script>
+    let statsData = null;
+    const categoriesOrder = [
+        "命名","格式/空白","注释/文档","导入/模块","控制结构","函数/方法",
+        "变量/常量","类/对象","错误/异常","类型/泛型","并发/线程","其他"
+    ];
+    const categoryColors = {
+        "命名": "#3b82f6", "格式/空白": "#10b981", "注释/文档": "#f59e0b", "导入/模块": "#8b5cf6",
+        "控制结构": "#ec489a", "函数/方法": "#14b8a6", "变量/常量": "#ef4444", "类/对象": "#6366f1",
+        "错误/异常": "#f97316", "类型/泛型": "#a855f7", "并发/线程": "#06b6d4", "其他": "#94a3b8"
+    };
+
+    // 计算总计分布 (easy+hard)
+    function computeTotalDist(data) {
+        const total = {};
+        for (let cat of categoriesOrder) total[cat] = 0;
+        for (let lang in data) {
+            let langData = data[lang];
+            for (let cat of categoriesOrder) {
+                total[cat] += (langData.easy[cat] || 0) + (langData.hard[cat] || 0);
+            }
+        }
+        return total;
+    }
+
+    // 计算主题简单/复杂总计
+    function computeThemeTotals(data) {
+        let easyTotal = {}, hardTotal = {};
+        for (let cat of categoriesOrder) { easyTotal[cat]=0; hardTotal[cat]=0; }
+        for (let lang in data) {
+            for (let cat of categoriesOrder) {
+                easyTotal[cat] += data[lang].easy[cat] || 0;
+                hardTotal[cat] += data[lang].hard[cat] || 0;
+            }
+        }
+        return { easyTotal, hardTotal };
+    }
+
+    // 渲染主题表
+    function renderThemeTable(data) {
+        const { easyTotal, hardTotal } = computeThemeTotals(data);
+        const grandTotal = 600;
+        let html = `<table class="stats-table"><thead><tr><th>主题</th><th>简单规范</th><th>复杂规范</th><th>合计</th><th>占比</th></tr></thead><tbody>`;
+        for (let cat of categoriesOrder) {
+            let easy = easyTotal[cat] || 0;
+            let hard = hardTotal[cat] || 0;
+            let sum = easy + hard;
+            let percent = ((sum / grandTotal)*100).toFixed(1);
+            html += `<tr><td style="text-align:left;"><span class="legend-color" style="background:${categoryColors[cat]}"></span> ${cat}</td><td>${easy}</td><td>${hard}</td><td><strong>${sum}</strong></td><td>${percent}%</td></tr>`;
+        }
+        html += `<tr style="background:#f8fafc; font-weight:bold;"><td style="text-align:left;">总计</td><td>300</td><td>300</td><td>600</td><td>100%</td></tr>`;
+        html += `</tbody></table>`;
+        document.getElementById('themeTable').innerHTML = html;
+    }
+
+    // 渲染语言汇总表
+    function renderLangTable(data) {
+        let html = `<table class="stats-table"><thead><tr><th>语言</th><th>简单规范数</th><th>复杂规范数</th><th>总计</th></tr></thead><tbody>`;
+        for (let lang in data) {
+            let easySum = Object.values(data[lang].easy).reduce((a,b)=>a+b,0);
+            let hardSum = Object.values(data[lang].hard).reduce((a,b)=>a+b,0);
+            html += `<tr><td style="text-align:left;">${lang}</td><td>${easySum}</td><td>${hardSum}</td><td>${easySum+hardSum}</td></tr>`;
+        }
+        html += `<tr style="background:#f1f5f9; font-weight:bold;"><td>合计</td><td>300</td><td>300</td><td>600</td></tr>`;
+        html += `</tbody></table>`;
+        document.getElementById('langTable').innerHTML = html;
+    }
+
+    // 总饼图
+    let totalPieChart, totalBarChart;
+    function renderTotalCharts(data) {
+        const totalDist = computeTotalDist(data);
+        let labels = [], counts = [], bgColors = [];
+        for (let cat of categoriesOrder) {
+            let val = totalDist[cat];
+            if (val > 0) {
+                labels.push(cat);
+                counts.push(val);
+                bgColors.push(categoryColors[cat]);
+            }
+        }
+        const ctxPie = document.getElementById('totalPieChart').getContext('2d');
+        if (totalPieChart) totalPieChart.destroy();
+        totalPieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: { labels: labels, datasets: [{ data: counts, backgroundColor: bgColors, borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'right', labels: { boxWidth: 12 } }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} 条 (${((ctx.raw/600)*100).toFixed(1)}%)` } } } }
+        });
+        // 横向条形图 (水平)
+        const sorted = labels.map((l,i) => ({ label: l, count: counts[i] })).sort((a,b)=>b.count - a.count);
+        const barLabels = sorted.map(s => s.label);
+        const barData = sorted.map(s => s.count);
+        const barColors = sorted.map(s => categoryColors[s.label]);
+        const ctxBar = document.getElementById('totalBarChart').getContext('2d');
+        if (totalBarChart) totalBarChart.destroy();
+        totalBarChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: { labels: barLabels, datasets: [{ label: '规范数量', data: barData, backgroundColor: barColors, borderRadius: 6 }] },
+            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { tooltip: { callbacks: { label: (ctx) => `${ctx.raw} 条 (${((ctx.raw/600)*100).toFixed(1)}%)` } } }, scales: { x: { title: { display: true, text: '数量 (条)' } }, y: { ticks: { font: { size: 10 } } } } }
+        });
+    }
+
+    // 渲染各语言卡片饼图
+    let langCharts = {};
+    function renderLangCards(data) {
+        const container = document.getElementById('langCards');
+        container.innerHTML = '';
+        for (let lang in data) {
+            const easyCounts = data[lang].easy;
+            const hardCounts = data[lang].hard;
+            const easyDs = getDataset(easyCounts);
+            const hardDs = getDataset(hardCounts);
+            const card = document.createElement('div');
+            card.className = 'lang-card';
+            card.innerHTML = `
+                <div class="lang-header">
+                    <div class="lang-name">${lang}</div>
+                    <div class="lang-sub">简单60条 · 复杂60条</div>
+                </div>
+                <div class="chart-pair">
+                    <div class="chart-box">
+                        <div class="chart-title easy">✨ 简单规范</div>
+                        <canvas id="easy-${lang.replace(/\s/g, '')}" width="250" height="180"></canvas>
+                        <div class="chart-note">基础格式/命名/注释/导入</div>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-title hard">⚙️ 复杂规范</div>
+                        <canvas id="hard-${lang.replace(/\s/g, '')}" width="250" height="180"></canvas>
+                        <div class="chart-note">类型/异常/并发/高级设计</div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+            const easyCtx = document.getElementById(`easy-${lang.replace(/\s/g, '')}`)?.getContext('2d');
+            const hardCtx = document.getElementById(`hard-${lang.replace(/\s/g, '')}`)?.getContext('2d');
+            if (easyCtx) {
+                if (langCharts[`easy-${lang}`]) langCharts[`easy-${lang}`].destroy();
+                langCharts[`easy-${lang}`] = new Chart(easyCtx, {
+                    type: 'pie',
+                    data: { labels: easyDs.labels, datasets: [{ data: easyDs.data, backgroundColor: easyDs.colors, borderWidth: 0 }] },
+                    options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} 条 (${((ctx.raw/60)*100).toFixed(1)}%)` } } } }
+                });
+            }
+            if (hardCtx) {
+                if (langCharts[`hard-${lang}`]) langCharts[`hard-${lang}`].destroy();
+                langCharts[`hard-${lang}`] = new Chart(hardCtx, {
+                    type: 'pie',
+                    data: { labels: hardDs.labels, datasets: [{ data: hardDs.data, backgroundColor: hardDs.colors, borderWidth: 0 }] },
+                    options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } }, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} 条 (${((ctx.raw/60)*100).toFixed(1)}%)` } } } }
+                });
+            }
+        }
+    }
+    function getDataset(catCounts) {
+        let labels = [], data = [], colors = [];
+        for (let cat of categoriesOrder) {
+            let val = catCounts[cat] || 0;
+            if (val > 0) {
+                labels.push(cat);
+                data.push(val);
+                colors.push(categoryColors[cat]);
+            }
+        }
+        return { labels, data, colors };
+    }
+
+    // 启动
+    fetch('spec_stats.json')
+        .then(res => res.json())
+        .then(data => {
+            statsData = data;
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            renderThemeTable(data);
+            renderLangTable(data);
+            renderTotalCharts(data);
+            renderLangCards(data);
+        })
+        .catch(err => {
+            document.getElementById('loading').innerHTML = `<p style="color:red;">加载失败: ${err.message}<br>请确保 spec_stats.json 存在并运行了 Python 统计脚本。</p>`;
+        });
+</script>
+</body>
+</html>

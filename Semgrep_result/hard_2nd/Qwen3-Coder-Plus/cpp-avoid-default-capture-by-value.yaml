@@ -1,0 +1,33 @@
+rules:
+- id: cpp-avoid-default-capture-by-value
+  message: Use default capture by value ([=]) sparingly. Prefer explicit captures
+    and avoid long lambdas with [=] that may implicitly capture 'this'.
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: '[=] $LAMBDA_ARGS { $BODY }'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot reliably detect 'long' lambdas or implicit 'this' capture
+          without custom metrics.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to assess lambda length and capture context.
+    original_description: Use default capture by value ([=]) sparingly. Prefer explicit
+      captures and avoid long lambdas with [=] that may implicitly capture 'this'.

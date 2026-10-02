@@ -1,0 +1,4 @@
+**Specification 9: Exceptions - do not use `assert` for preconditions**
+Description: Do not use `assert` statements in place of conditionals or validating preconditions; they are not guaranteed to be evaluated.
+Example: Use `if minimum < 1024: raise ValueError(...)` instead of `assert minimum >= 1024`.
+Additional Notes: For pytest tests, `assert` is okay.

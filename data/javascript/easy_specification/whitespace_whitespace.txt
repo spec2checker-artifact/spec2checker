@@ -1,0 +1,4 @@
+**Specification 47: Horizontal whitespace - trailing whitespace forbidden**
+Description: Trailing whitespace is forbidden.
+Example: No spaces at end of line.
+Additional Notes: None.

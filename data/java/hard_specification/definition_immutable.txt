@@ -1,0 +1,4 @@
+Specification 100: Constant definition - deeply immutable
+Description: Constants are static final fields whose contents are deeply immutable and methods have no detectable side effects. Includes primitives, strings, immutable value classes, and anything set to null.
+Example: static final ImmutableList<String> NAMES = ...
+Additional Notes: Merely intending not to mutate is insufficient.

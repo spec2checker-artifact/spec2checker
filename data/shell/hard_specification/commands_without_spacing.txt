@@ -1,0 +1,4 @@
+**Specification 118: Avoid `(( ... ))` on same line as other commands without proper spacing**
+Description: Put a space after `((` and before `))` for readability.
+Example: `(( i += 3 ))` not `((i+=3))`.
+Additional Notes: None.

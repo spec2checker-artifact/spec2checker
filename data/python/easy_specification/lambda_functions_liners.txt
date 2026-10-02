@@ -1,0 +1,4 @@
+**Specification 22: Lambda functions - okay for one-liners**
+Description: Lambdas are okay for one-liners. Prefer generator expressions over `map()` or `filter()` with `lambda`.
+Example: `lambda x, y: x * y`
+Additional Notes: If lambda spans multiple lines or >60-80 chars, use regular nested function.

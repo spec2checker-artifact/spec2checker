@@ -1,0 +1,4 @@
+**Specification 24: Define operators on your own types, in same namespace**  
+Description: Define operators only on your own types, in the same headers, files, and namespaces as the types.  
+Example: `bool operator==(const MyType& a, const MyType& b) { ... }`  
+Additional Notes: Avoid defining as templates.

@@ -1,0 +1,4 @@
+**Specification 73: Punctuation, spelling, grammar - pay attention**
+Description: Pay attention to punctuation, spelling, and grammar in comments.
+Example: Use complete sentences with proper capitalization.
+Additional Notes: Consistent style.

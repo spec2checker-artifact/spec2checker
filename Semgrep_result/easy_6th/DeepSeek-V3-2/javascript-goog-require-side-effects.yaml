@@ -1,0 +1,34 @@
+rules:
+- id: javascript-goog-require-side-effects
+  message: If a module is imported only for its side effects, the call must be `goog.require`
+    (not `goog.requireType`) and the assignment must be omitted. A comment is required
+    to explain the side-effect import.
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: goog.requireType('$MODULE');
+  - metavariable-type:
+      metavariable: $MODULE
+      type: expr
+  metadata:
+    syntax_statement: has_preceding_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Comment detection may be limited to specific patterns.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to enforce comment requirement.
+    original_description: If a module is imported only for its side effects, the call
+      must be `goog.require` (not `goog.requireType`) and the assignment must be omitted.
+      A comment is required to explain the side-effect import.

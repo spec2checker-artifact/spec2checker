@@ -1,0 +1,4 @@
+**Specification 101: Naming guidelines table - follow Guido’s recommendations**
+Description: Follow table: packages `lower_with_under`, classes `CapWords`, exceptions `CapWords`, functions `lower_with_under()`, constants `CAPS_WITH_UNDER`, etc.
+Example: `GLOBAL_CONSTANT = 42`
+Additional Notes: Internal versions prefix `_`.

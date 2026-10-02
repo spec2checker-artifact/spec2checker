@@ -1,0 +1,11 @@
+**Specification 32: Array literals - optionally block-like**
+Description: Any array literal may optionally be formatted as a “block-like construct” (indented like a block).
+Example:
+```javascript
+const a = [
+  0,
+  1,
+  2,
+];
+```
+Additional Notes: Other combinations allowed.

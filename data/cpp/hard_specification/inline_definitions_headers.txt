@@ -1,0 +1,4 @@
+**Specification 10: Use `inline` for ODR-safe definitions in headers**  
+Description: Once a definition is in a header file, it must be ODR-safe by having the `inline` specifier or being implicitly inline.  
+Example: `inline int add(int a, int b) { return a + b; }`  
+Additional Notes: None.

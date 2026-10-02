@@ -1,0 +1,4 @@
+**Specification 21: Generators - clean up expensive resources**
+Description: If generator manages an expensive resource, force cleanup (e.g., wrap with context manager).
+Example: Use `contextlib.closing` or PEP-0533.
+Additional Notes: None.

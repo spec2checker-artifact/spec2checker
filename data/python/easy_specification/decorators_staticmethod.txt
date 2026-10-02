@@ -1,0 +1,4 @@
+**Specification 37: Decorators - avoid `staticmethod`**
+Description: Never use `staticmethod` unless forced. Write a module-level function instead.
+Example: Use regular function rather than `@staticmethod`.
+Additional Notes: None.

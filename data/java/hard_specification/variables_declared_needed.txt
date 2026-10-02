@@ -1,0 +1,7 @@
+Specification 69: Local variables - declared when needed
+Description: Local variables not habitually declared at start of block. Declared close to first use to minimize scope. Typically have initializers or initialized immediately.
+Example:
+
+java
+int x = compute(); // near use
+Additional Notes: Not at top of method.

@@ -1,0 +1,4 @@
+**Specification 110: For short scripts with linear flow, `main` is not required**
+Description: For short scripts where it’s just a linear flow, `main` is overkill and not required.
+Example: Simple 10-line script without functions.
+Additional Notes: None.

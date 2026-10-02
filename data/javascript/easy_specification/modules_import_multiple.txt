@@ -1,0 +1,4 @@
+**Specification 17: ES modules - do not import same file multiple times**
+Description: Do not import the same file multiple times; hard to determine aggregate imports.
+Example: Avoid two imports from same path.
+Additional Notes: None.

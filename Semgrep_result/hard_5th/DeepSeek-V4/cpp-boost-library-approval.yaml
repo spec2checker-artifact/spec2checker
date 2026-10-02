@@ -1,0 +1,36 @@
+rules:
+- id: cpp-boost-library-approval
+  message: Use only approved subset of Boost libraries (listed in guide).
+  languages:
+  - cpp
+  severity: ERROR
+  patterns:
+  - pattern: '#include <boost/$LIBRARY.hpp>'
+  - metavariable-regex:
+      metavariable: $LIBRARY
+      regex: ^[a-zA-Z0-9_/]+$
+  metadata:
+    syntax_$LIBRARY: not_in_approved_list('boost_approved_libs.txt')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires external list of approved libraries for condition
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query with external data source for approved
+          list
+    original_description: Use only approved subset of Boost libraries (listed in guide).

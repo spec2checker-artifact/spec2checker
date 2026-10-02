@@ -1,0 +1,4 @@
+**Specification 120: Omitting parentheses when invoking constructor with `new` - forbidden**
+Description: Never invoke constructor without parentheses `new Foo();` not `new Foo;`.
+Example: `new Foo();` not `new Foo;`.
+Additional Notes: Omitting parentheses leads to subtle mistakes.

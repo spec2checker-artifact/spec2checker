@@ -1,0 +1,14 @@
+rules:
+- id: java-no-static-import-for-classes
+  message: '[DISABLED] Static import is not used for static nested classes; they are
+    imported with normal imports.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Static import is not used for static nested classes; they
+      are imported with normal imports.

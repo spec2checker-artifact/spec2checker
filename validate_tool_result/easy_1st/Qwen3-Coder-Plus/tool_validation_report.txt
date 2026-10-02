@@ -1,0 +1,36 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-17 18:56:04
+Batch: easy_1st
+Model: Qwen3-Coder-Plus
+Input: <PROJECT_ROOT>\UIR\easy\easy_1st.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       40 |       10 |       10 |
+| PMD             |        2 |        2 |        0 |        0 |
+| CodeQL          |        5 |        5 |        0 |        0 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       47 |        3 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 47/50 rules validated (94%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 40/50
+      -> 2 passed to PMD
+  PMD:     2/2
+      -> 5 passed to CodeQL
+  CodeQL:  5/5
+      -> 3 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- shell-file-must-have-top-level-comment (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-indentation-2-spaces-no-tabs (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter
+- shell-pipe-newline-indent (shell) [semgrep]: [semgrep] Not applicable: semgrep partial_support is false

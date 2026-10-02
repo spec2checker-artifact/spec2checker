@@ -1,0 +1,4 @@
+**Specification 87: Imports - sort lexicographically within groups**
+Description: Within each grouping, imports should be sorted lexicographically, ignoring case, according to full package path.
+Example: `import collections` then `import queue`.
+Additional Notes: Optional blank line between sections.

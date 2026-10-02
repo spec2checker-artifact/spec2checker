@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: easy_2nd
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 9/50 = 18.0%
+  Rule_V (规则验证数): 6/50 = 12.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 9条
+  语法错误规则: 32条
+  语义偏差规则: 9条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-macro-naming-prefix                       OK [V]  "Macros should be named using all capital letters with unders..."
+     2. java-classname-uppercamelcase                 OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+     3. python-future-import-encouraged               OK  "Use of `from __future__ import` statements is encouraged to ..."
+     4. python-avoid-staticmethod                     OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+     5. python-import-style                           OK  "Enforce use of 'from x import y' syntax where x is the packa..."
+     6. java-parameter-naming-lowercamelcase          OK [V]  "Parameter names should be written in lowerCamelCase."
+     7. javascript-no-jsdoc-for-implementation        OK [V]  "Do not use `/** … */` for implementation comments; use `/* …..."
+     8. javascript-horizontal-whitespace-around-comment OK  "Space on both sides of `//` that begins end-of-line comment...."
+     9. java-parameter-single-char-avoid-public       OK [V]  "One-character parameter names should be avoided in public me..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-macros-in-headers                   FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Avoid defining macros, especially in header files. Prefer in..."
+     2. java-keyword-parenthesis-spacing              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Space separating keyword (if, for, catch) from open parenthe..."
+     3. javascript-generic-comma-line-wrapping        FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "A comma must stay attached to the token that precedes it whe..."
+     4. python-no-assert-precondition                 FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Do not use `assert` statements in place of conditionals or v..."
+     5. java-assignment-break-after-symbol            FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Detect when an assignment operator or colon in an enhanced f..."
+     6. cpp-thread-local-constinit                    FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "thread_local variables at class or namespace scope must be i..."
+     7. java-break-before-non-assignment-operator     FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "When a line is broken at a non-assignment operator, the line..."
+     8. cpp-auto-usage-clarity                        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `auto` only when it makes code clearer or safer. Do not ..."
+     9. java-single-variable-declaration              FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Every variable declaration (field or local) declares only on..."
+    10. shell-single-string-args                      FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Using a single string for multiple command arguments should ..."
+    11. cpp-avoid-decltype-auto                       FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Avoid using `decltype(auto)` unless it is necessary, as it c..."
+    12. shell-variable-expansion-consistency          FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Variable expansion style (e.g., $VAR vs ${VAR}) must be cons..."
+    13. javascript-import-extension-required          FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "ES module import paths must include the `.js` file extension..."
+    14. java-imports-no-line-wrapping                 FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Imports are not line-wrapped. The column limit does not appl..."
+    15. shell-case-indent-alternatives                FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Indent alternatives by 2 spaces in a case statement."
+    16. cpp-filename-lowercase-underscore-dash        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Filenames should be all lowercase and can include underscore..."
+    17. python-whitespace-no-space-before-punctuation FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "No whitespace before a comma, semicolon, or colon. Use space..."
+    18. java-method-name-attached-parenthesis         FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Method, constructor, or record-class name must stay attached..."
+    19. javascript-no-default-export                  FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Use named exports in all code. Do not use default exports."
+    20. shell-long-literal-string                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "If you have literal strings longer than 80 characters, use a..."
+    21. python-comprehension-simple-only              FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Comprehensions are allowed only for simple cases with a sing..."
+    22. cpp-no-using-namespace-std                    FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not declare anything in namespace std, including forward ..."
+    23. javascript-horizontal-whitespace-after-comma-semicolon FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Space after comma (`,`) and semicolon (`;`); never before."
+    24. python-limit-classmethod                      FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use `classmethod` only when writing a named constructor or c..."
+    25. shell-for-loop-in-array                       FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Recommend including `in "$@"` in for loops for clarity, even..."
+    26. javascript-non-ascii-readability              FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Detect use of Unicode escape sequences for non-ASCII charact..."
+    27. python-whitespace-no-vertical-alignment       FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Don’t use spaces to vertically align tokens on consecutive l..."
+    28. python-integer-compare-zero                   FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "For integers, implicit false may be risky; compare explicitl..."
+    29. java-type-variable-naming                     FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Type variable names must be in UpperCamelCase followed by a ..."
+    30. cpp-const-placement-consistency               FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Detect inconsistent placement of `const` qualifier in pointe..."
+    31. shell-use-readarray                           FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use `readarray` builtin (bash4+) to read file into array, th..."
+    32. javascript-grouping-parentheses-recommended   FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Omit optional grouping parentheses only when author and revi..."
+    33. shell-function-naming-lowercase-underscore    FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Function names should be lower-case, with underscores to sep..."
+    34. shell-generic-max-line-length                 FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Maximum line length is 80 characters."
+    35. cpp-auto-type-deduction                       FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "For local variables, use `auto` when type information is obv..."
+    36. javascript-horizontal-whitespace-before-brace FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Require a space before an open curly brace `{`, except when ..."
+    37. javascript-vertical-whitespace-function       FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Blank lines at start or end of function body are not allowed..."
+    38. python-whitespace-inside-parens               FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "No whitespace inside parentheses, brackets, or braces."
+    39. shell-control-flow-same-line                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+    40. cpp-braced-initialization-64bit               FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use braced-initialization to create 64-bit constants."
+    41. shell-quoted-array-expansion                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use quoted expansion "${array[@]}" to access arrays."
+
+  按工具分布 (By Tool):
+    Semgrep    9/50 (18.0%)
+    Pmd        4/10 (40.0%)
+    Codeql     9/40 (22.5%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 3/10 (30.0%)  Rule_V: 1/10 (10.0%)
+    Java         Rule_C: 3/10 (30.0%)  Rule_V: 3/10 (30.0%)
+    C++          Rule_C: 1/10 (10.0%)  Rule_V: 1/10 (10.0%)
+    JavaScript   Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+    Shell        Rule_C: 0/10 (0.0%)  Rule_V: 0/10 (0.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 36
+  真正违规 (TP): 5
+  误报 (FP): 31
+  精准度: 13.9%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

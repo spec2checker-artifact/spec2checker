@@ -1,0 +1,4 @@
+**Specification 55: Whitespace - no space before open paren for argument list**
+Description: No whitespace before the open parenthesis that starts an argument list, indexing, or slicing.
+Example: `spam(1)` not `spam (1)`
+Additional Notes: None.

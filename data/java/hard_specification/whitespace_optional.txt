@@ -1,0 +1,8 @@
+Specification 36: Vertical whitespace - optional between two fields
+Description: Blank line between two consecutive fields (no other code between) is optional; used to create logical groupings.
+Example:
+
+java
+int x;
+int y;  // no blank line
+Additional Notes: None.

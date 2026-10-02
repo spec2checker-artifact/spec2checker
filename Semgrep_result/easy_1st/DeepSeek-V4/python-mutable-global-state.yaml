@@ -1,0 +1,14 @@
+rules:
+- id: python-mutable-global-state
+  message: '[DISABLED] Detect mutable global state (module-level variables that are
+    reassigned). Module-level constants are permitted.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect mutable global state (module-level variables that
+      are reassigned). Module-level constants are permitted.

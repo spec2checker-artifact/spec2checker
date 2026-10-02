@@ -1,0 +1,4 @@
+**Specification 74: Computed property names - allowed, treated as dict-style**
+Description: Computed property names allowed and considered dict-style (quoted) keys, unless computed property is a symbol.
+Example: `{['key' + foo()]: 42}`.
+Additional Notes: Enum values for computed keys but not mixed with non-enum.

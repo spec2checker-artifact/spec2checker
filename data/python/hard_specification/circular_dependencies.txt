@@ -1,0 +1,4 @@
+**Specification 119: Circular dependencies - replace with `Any`**
+Description: Replace modules that create circular dependency imports with `Any`.
+Example: `some_mod = Any` then use `"some_mod.SomeType"`.
+Additional Notes: Circular dependencies due to typing are code smells.

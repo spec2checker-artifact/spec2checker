@@ -1,0 +1,4 @@
+**Specification 34: Do not use `decltype(auto)` unless necessary**  
+Description: Avoid `decltype(auto)` because it's obscure.  
+Example: Not `decltype(auto) x = ...;` unless required.  
+Additional Notes: Use simpler options.

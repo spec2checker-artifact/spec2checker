@@ -1,0 +1,49 @@
+============================================================
+  实验成本分析报告 - 迭代1
+============================================================
+
+  批次: easy_5th
+  模型: Qwen3-Coder-Plus
+  时间: 2026-05-18 00:36:15
+  Python: python
+
+------------------------------------------------------------
+  各步骤耗时:
+------------------------------------------------------------
+  Step 1: Rule modification (iteration 1): ~300s (OK)
+  Step 2: Project scanning (iteration 1): ~600s (OK)
+
+  总耗时: ~900s (~15min)
+
+------------------------------------------------------------
+  迭代1修改详情:
+------------------------------------------------------------
+  修改规则:
+    - shell-prefer-brace-expansion: WARNING→INFO, metavariable regex narrowed to 10+ char names
+    - shell-parentheses-required: ERROR→INFO, pattern-regex fixed to only flag function definitions without ()
+    - python-decorator-judicious-use: WARNING→INFO, narrowed to non-constructor @classmethod
+    - javascript-import-no-line-wrap: ERROR→INFO, pattern-regex fixed for actual line-wrapped imports
+  保留规则:
+    - python-no-boolean-false-comparison: unchanged (100% precision)
+  PMD修复:
+    - JavaModuleDirectivesOrdering: 实现基本功能（module directive排序检查）
+  CodeQL修复:
+    - javascript-line-wrap-after-operator: 实现基本逻辑（BinaryExpr行断检测）
+    - python-indentation-4-spaces-no-tabs: 实现基本逻辑（tab缩进检测）
+
+------------------------------------------------------------
+  迭代1结果:
+------------------------------------------------------------
+  原始违规数: 8944
+  迭代1违规数: 1709
+  减少: 7235 (80.9%)
+  规则统计:
+    shell-prefer-brace-expansion: 8428→1631 (INFO)
+    shell-parentheses-required: 396→36 (INFO)
+    python-decorator-judicious-use: 88→11 (INFO)
+    python-no-boolean-false-comparison: 31→31 (WARNING, unchanged)
+    javascript-import-no-line-wrap: 1→0 (INFO, CLEAN)
+  PMD: CLEAN (0 findings)
+  CodeQL: RUN_FAIL (2 rules, consistent with previous batches)
+
+============================================================

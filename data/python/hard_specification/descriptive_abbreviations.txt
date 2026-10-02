@@ -1,0 +1,4 @@
+**Specification 90: Naming - descriptive names, avoid abbreviations**
+Description: Names should be descriptive. Avoid abbreviations that are ambiguous or unfamiliar.
+Example: `error_count` not `err_cnt`.
+Additional Notes: Always use `.py` extension, no dashes.

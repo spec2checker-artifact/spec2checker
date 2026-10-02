@@ -1,0 +1,42 @@
+rules:
+- id: javascript-horizontal-whitespace-before-brace
+  message: Require a space before an open curly brace `{`, except when the brace is
+    part of an object literal that is the first argument to a function call or the
+    first element in an array literal.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $PREV $BRACE
+  - metavariable-type:
+      metavariable: $PREV
+      type: expr
+  - metavariable-regex:
+      metavariable: $BRACE
+      regex: \{
+  metadata:
+    syntax_$BRACE: not_first_array_element
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires precise syntactic context detection for exceptions
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for formatting rules
+    original_description: Require a space before an open curly brace `{`, except when
+      the brace is part of an object literal that is the first argument to a function
+      call or the first element in an array literal.

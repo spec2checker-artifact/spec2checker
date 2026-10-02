@@ -1,0 +1,4 @@
+Specification 23: Column limit: 100 characters
+Description: Java code has a column limit of 100 characters. Each Unicode code point counts as one character. Exceeding lines must be line-wrapped.
+Example: Lines longer than 100 chars are wrapped.
+Additional Notes: Fullwidth characters may cause earlier wrap.

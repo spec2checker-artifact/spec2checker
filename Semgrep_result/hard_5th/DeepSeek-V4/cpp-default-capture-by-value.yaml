@@ -1,0 +1,34 @@
+rules:
+- id: cpp-default-capture-by-value
+  message: Use default capture by value ([=]) sparingly. Prefer explicit captures.
+    Avoid long lambdas with [=] and do not capture 'this' implicitly.
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: '[=]'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect the pattern but cannot reliably assess lambda length
+          or implicit 'this' capture context.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect default capture but requires custom query for assessing
+          'sparing use' and lambda length.
+    original_description: Use default capture by value ([=]) sparingly. Prefer explicit
+      captures. Avoid long lambdas with [=] and do not capture 'this' implicitly.

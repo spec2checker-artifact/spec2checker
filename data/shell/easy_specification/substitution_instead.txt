@@ -1,0 +1,4 @@
+**Specification 50: Use process substitution instead of piping to `while`**
+Description: Use process substitution or `readarray` in preference to piping to `while`.
+Example: `while read line; do ...; done < <(your_command)`
+Additional Notes: Pipes create subshell, variables don’t propagate.

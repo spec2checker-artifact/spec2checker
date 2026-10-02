@@ -1,0 +1,4 @@
+Specification 32: Comma stays with preceding token
+Description: Comma , stays attached to the token that precedes it.
+Example: arg1, then break then arg2
+Additional Notes: None.

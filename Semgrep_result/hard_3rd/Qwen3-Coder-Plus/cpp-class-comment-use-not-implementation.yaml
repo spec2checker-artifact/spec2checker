@@ -1,0 +1,40 @@
+rules:
+- id: cpp-class-comment-use-not-implementation
+  message: Every non-obvious class should have a comment describing what it is for
+    and how to use it, including synchronization assumptions.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: class $CLASS { ... }
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  metadata:
+    syntax_class: missing_javadoc_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD's CommentRequired rule can check for missing class comments
+          but cannot assess if the comment describes use vs. implementation.
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect missing comments but cannot semantically analyze comment
+          content for 'use vs. implementation'.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can query for missing Javadoc comments but semantic analysis
+          of comment content is complex and not fully supported.
+    original_description: Every non-obvious class should have a comment describing
+      what it is for and how to use it, including synchronization assumptions.

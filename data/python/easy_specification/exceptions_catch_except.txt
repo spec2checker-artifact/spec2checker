@@ -1,0 +1,4 @@
+**Specification 11: Exceptions - never use catch-all `except:`**
+Description: Never use catch-all `except:` statements, or catch `Exception` or `StandardError`, unless re-raising or creating an isolation point.
+Example: `except Exception:` is generally disallowed.
+Additional Notes: `except:` catches everything including `sys.exit()` and `Ctrl+C`.

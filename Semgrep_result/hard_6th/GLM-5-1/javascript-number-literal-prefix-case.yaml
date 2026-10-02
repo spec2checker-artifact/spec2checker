@@ -1,0 +1,39 @@
+rules:
+- id: javascript-number-literal-prefix-case
+  message: Number literals must use lowercase letters in hex (0x), octal (0o), and
+    binary (0b) prefixes. Leading zeros are prohibited unless followed by x, o, or
+    b.
+  languages:
+  - javascript
+  severity: ERROR
+  patterns:
+  - pattern: $NUM
+  - metavariable-type:
+      metavariable: $NUM
+      type: expr
+  metadata:
+    syntax_$NUM: not matches_regex('^0[xob][0-9a-fA-F_]+$')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires regex matching on numeric literal tokens
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for literal token text
+    original_description: Number literals must use lowercase letters in hex (0x),
+      octal (0o), and binary (0b) prefixes. Leading zeros are prohibited unless followed
+      by x, o, or b.

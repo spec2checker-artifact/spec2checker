@@ -1,0 +1,4 @@
+**Specification 45: Wildcard expansion - use explicit path `./*`**
+Description: Use an explicit path when doing wildcard expansion of filenames (e.g., `./*` instead of `*`).
+Example: `rm -v ./*` not `rm -v *`
+Additional Notes: Prevents issues with filenames starting with `-`.

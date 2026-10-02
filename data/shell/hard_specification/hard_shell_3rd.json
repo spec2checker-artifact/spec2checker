@@ -1,0 +1,551 @@
+[
+  {
+    "rule_id": "shell-avoid-alias-use-function",
+    "language": "shell",
+    "description": "Detect usage of alias in scripts; functions should be used instead as they provide a superset of functionality.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "alias $NAME=$VALUE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match alias definitions in interactive shell contexts where rule is not applicable"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\scripts;_functions_instead.txt",
+      "section": "scripts;_functions_instead"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-builtin-over-process",
+    "language": "shell",
+    "description": "Given the choice between invoking a shell builtin and a separate process, choose the builtin for efficiency, robustness, and portability.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "echo $VAR | sed $PATTERN",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match other uses of echo and sed; requires manual review for false positives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\external_processes.txt",
+      "section": "external_processes"
+    }
+  },
+  {
+    "rule_id": "shell-main-bottom-most",
+    "language": "shell",
+    "description": "The main program should be in a function called `main` defined as the bottom-most function.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "main() {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "name_matches('main')",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "is_not_bottom_most",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to check relative position of function definition in file"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check function definition order"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\put_main_bottom_function.txt",
+      "section": "put_main_bottom_function"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-let",
+    "language": "shell",
+    "description": "Avoid using `let` for arithmetic assignments as it is subject to globbing; use `(( ... ))` instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "let $VAR=$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep supports shell patterns but may not distinguish all contexts where `let` is used."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\assignments_globbing.txt",
+      "section": "assignments_globbing"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-double-bracket",
+    "language": "shell",
+    "description": "Prefer builtin `[[ ... ]]` over external `[` for regex and pattern matching, as `[[ ... ]]` supports pattern and regex matching while `[` does not.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[ $EXPR ]",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "contains_pattern_matching_or_regex",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching detection in condition"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\external_pattern_matching.txt",
+      "section": "external_pattern_matching"
+    }
+  },
+  {
+    "rule_id": "shell-check-return-value",
+    "language": "shell",
+    "description": "Always check return values and give informative return values. Use $? or if statement.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_command_call",
+        "required": "true"
+      },
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "not_followed_by_if_or_chain_or_status_check",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect missing error handling after command calls"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\always_check_return_values.txt",
+      "section": "always_check_return_values"
+    }
+  },
+  {
+    "rule_id": "shell-arithmetic-increment",
+    "language": "shell",
+    "description": "Use `(( var += 3 ))` for incrementing variables. No `$` inside the arithmetic expansion `(( ))`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "(( $VAR = $VAR + $NUM ))",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$NUM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "expression",
+        "constraint_type": "syntactic",
+        "condition": "is_arithmetic_expansion",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell support is experimental; pattern may not match all variations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\arithmetic_var_increment.txt",
+      "section": "arithmetic_var_increment"
+    }
+  },
+  {
+    "rule_id": "shell-recommend-shellcheck",
+    "language": "shell",
+    "description": "Recommend using ShellCheck to identify common bugs and warnings in shell scripts.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep cannot enforce the use of an external tool like ShellCheck."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\shellcheck_recommended.txt",
+      "section": "shellcheck_recommended"
+    }
+  },
+  {
+    "rule_id": "shell-array-expansion-quoting",
+    "language": "shell",
+    "description": "Use \"${array[@]}\" expansion to preserve individual elements and quoting.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD $ARRAY",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CMD": {
+          "type_hint": "expr"
+        },
+        "$ARRAY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARRAY",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^\\$[A-Za-z_][A-Za-z0-9_]*$')",
+        "required": "true"
+      },
+      {
+        "target": "$ARRAY",
+        "constraint_type": "syntactic",
+        "condition": "not name_matches_regex('^\\$\\{[A-Za-z_][A-Za-z0-9_]*\\[@\\]\\}$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires shell pattern matching; may have false positives with complex variable expansions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\${array[]}_individual.txt",
+      "section": "${array[]}_individual"
+    }
+  },
+  {
+    "rule_id": "shell-arithmetic-comparison-no-dollar",
+    "language": "shell",
+    "description": "Inside arithmetic comparison `(( ... ))`, variables should be referenced by name without the `$` prefix.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if (( $${VAR} $OP $${VAR2} )); then",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VAR2": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^\\$[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "true"
+      },
+      {
+        "target": "$VAR2",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^\\$[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires matching variable patterns with leading $"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\hard_specification\\arithmetic_comparison.txt",
+      "section": "arithmetic_comparison"
+    }
+  }
+]

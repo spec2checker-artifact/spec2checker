@@ -1,0 +1,4 @@
+**Specification 44: Put `const` first, but be consistent**  
+Description: While we encourage putting `const` first (e.g., `const int*`), we do not require it. Be consistent with existing code.  
+Example: `const int* p;` (preferred) or `int const* p;` (allowed).  
+Additional Notes: None.

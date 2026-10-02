@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: DirectLLM
+  描述: 直接将自然语言规范输入LLM生成目标工具规则，不引入统一中间表示，也不进行后续优化
+  批次: easy_1st
+  模型: GLM-5-1
+  输入: UIR/easy/easy_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 15/50 = 30.0%
+  Rule_V (规则验证数): 9/50 = 18.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 15条
+  语法错误规则: 26条
+  语义偏差规则: 9条
+
+  成功规则列表 (Successful Rules):
+     1. javascript-one-statement-per-line             OK [V]  "Detect multiple statements on a single line separated by sem..."
+     2. python-imports-only-packages-modules          OK  "Use import statements for packages and modules only, not for..."
+     3. javascript-non-ascii-characters               OK  "Use actual Unicode characters or hex/Unicode escapes for non..."
+     4. python-mutable-global-state                   OK [V]  "Detect mutable global state (module-level variables that are..."
+     5. shell-no-quote-match-expr                     OK [V]  "In general, there is no need to quote match expressions in a..."
+     6. python-mutable-global-state-internal          OK [V]  "Mutable global state (module-level or class attribute) must ..."
+     7. cpp-include-guard-format                      OK  "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ ba..."
+     8. java-method-name-attached-parenthesis         OK [V]  "Method, constructor, or record-class name must stay attached..."
+     9. python-whitespace-binary-operator             OK [V]  "Surround binary operators for assignment, comparisons, and B..."
+    10. shell-indentation-2-spaces-no-tabs            OK  "Indent using 2 spaces per level. Tabs are not allowed. Excep..."
+    11. java-class-name-uppercamelcase                OK  "Class names must be written in UpperCamelCase, typically nou..."
+    12. javascript-import-extension-required          OK  "ES module import paths must include the `.js` file extension..."
+    13. java-local-variable-lower-camel-case          OK [V]  "Local variable names must be written in lowerCamelCase, even..."
+    14. javascript-block-comment-indentation          OK [V]  "Block comments must be indented at the same level as the sur..."
+    15. java-horizontal-whitespace-ampersand-type-bounds OK [V]  "Space around & in type bounds (e.g., <T extends Foo & Bar>) ..."
+
+  失败规则列表 (Failed Rules):
+     1. javascript-goog-require-contiguous-block      FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "`goog.require` and `goog.requireType` statements must form a..."
+     2. javascript-horizontal-whitespace-around-comment FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Space on both sides of `//` that begins end-of-line comment...."
+     3. cpp-auto-usage-clarity                        FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `auto` only when it makes code clearer or safer, not mer..."
+     4. shell-pipe-newline-indent                     FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "When splitting a pipeline across multiple lines, the pipe op..."
+     5. python-limit-classmethod                      FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Use @classmethod only when writing a named constructor or cl..."
+     6. javascript-export-from-no-line-wrap           FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "`export from` statements must not be line wrapped; they are ..."
+     7. shell-file-must-have-top-level-comment        FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Every file must have a top-level comment including a brief o..."
+     8. shell-control-flow-same-line                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+     9. shell-braces-same-line-no-space               FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Braces must be on the same line as the function name and no ..."
+    10. java-horizontal-whitespace-catch-pipe         FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Space around | in catch (FooException | BarException e) is r..."
+    11. python-import-rename-as                       FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Enforce use of 'as' for renaming imports when: imported name..."
+    12. python-avoid-power-features                   FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Avoid power features like custom metaclasses, bytecode acces..."
+    13. cpp-use-struct-for-data                       FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use `struct` for passive objects that carry data, with all f..."
+    14. python-whitespace-inside-parens               FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "No whitespace inside parentheses, brackets, or braces."
+    15. cpp-prefer-sizeof-varname                     FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use sizeof(varname) when taking size of a particular variabl..."
+    16. javascript-avoid-goog-module-declarelegacynamespace FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Avoid `goog.module.declareLegacyNamespace()` when possible; ..."
+    17. javascript-column-limit-80                    FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "JavaScript code has a column limit of 80 characters. Exceedi..."
+    18. cpp-no-using-namespace-std                    FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not declare anything in namespace std, including forward ..."
+    19. cpp-override-annotation-required              FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Annotate overrides of virtual functions with `override` or `..."
+    20. shell-avoid-single-string-args                FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Using a single string for multiple command arguments should ..."
+    21. java-package-no-line-wrap                     FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "The package declaration is not line-wrapped. The column limi..."
+    22. python-lambda-length-check                    FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Lambda functions should be one-liners and under 80 character..."
+    23. cpp-lambda-appropriate-use                    FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Use lambda expressions where appropriate; prefer explicit ca..."
+    24. cpp-avoid-usr-include-filename                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Do not use filenames that already exist in the system direct..."
+    25. shell-use-arrays-for-quoting                  FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use arrays for safe quoting of lists of elements, especially..."
+    26. shell-variable-expansion-quote                FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Variable expansions should be quoted to prevent word splitti..."
+    27. java-imports-ordering-non-static-group        FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "All non-static imports must be in a single group, separated ..."
+    28. shell-use-dollar-paren-instead-of-backticks   FAIL  (语法错误：Shell规则模式无法被Semgrep正确解析) "Use $(command) instead of backticks for command substitution..."
+    29. java-imports-no-line-wrapping                 FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Imports are not line-wrapped. The column limit does not appl..."
+    30. python-none-check-is                          FAIL  (语法错误：生成的YAML模式与Semgrep语法不兼容) "Always use `if x is None` (or `is not None`) to check for `N..."
+    31. cpp-const-method-missing                      FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "Declare methods const unless they alter the logical state of..."
+    32. java-horizontal-whitespace-before-open-curly-brace FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Require a space before any open curly brace {, except in @So..."
+    33. javascript-generic-trailing-whitespace        FAIL  (语法错误：Semgrep模式缺少必要的 metavariables) "Trailing whitespace at the end of a line is forbidden."
+    34. cpp-use-int64-for-big-integers                FAIL  (语义偏差：CodeQL查询逻辑与规范意图不一致) "For integers known to be 'big', use int64_t."
+    35. java-module-directives-ordering               FAIL  (语法错误：PMD规则类结构不符合AST访问器规范) "Module directives must be ordered as: all requires in one bl..."
+
+  按工具分布 (By Tool):
+    Semgrep    15/48 (31.2%)
+    Pmd        4/12 (33.3%)
+    Codeql     11/36 (30.6%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    Java         Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    C++          Rule_C: 1/10 (10.0%)  Rule_V: 0/10 (0.0%)
+    JavaScript   Rule_C: 4/10 (40.0%)  Rule_V: 2/10 (20.0%)
+    Shell        Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 63
+  真正违规 (TP): 12
+  误报 (FP): 51
+  精准度: 19.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 无结构化中间表示引导，LLM难以生成语法正确的工具规则
+  2. 生成的规则模式匹配过于宽泛或过于狭窄，误报率极高
+  3. Shell规则成功率最低，缺乏领域约束导致语法错误频发
+  4. 不同语言间差异显著，Python/Java略好于C++/Shell
+  5. 缺少迭代优化机制，无法修正生成错误
+
+============================================================

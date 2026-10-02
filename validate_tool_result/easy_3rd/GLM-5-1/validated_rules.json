@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-05-13 17:35:48",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_3rd.json",
+  "batch": "easy_3rd",
+  "model": "GLM-5.1",
+  "total_rules": 50,
+  "validated_count": 44,
+  "rules": {
+    "semgrep": [
+      "cpp-avoid-long-double",
+      "cpp-single-line-nested-namespace",
+      "cpp-const-placement-consistency",
+      "cpp-prefer-nullptr",
+      "cpp-auto-type-deduction",
+      "cpp-use-int64-for-big-integers",
+      "cpp-type-names-pascalcase",
+      "cpp-struct-member-no-trailing-underscore",
+      "cpp-prefer-struct-over-pair-tuple",
+      "cpp-no-namespace-alias-in-header",
+      "java-numeric-literal-long-suffix-uppercase",
+      "java-javadoc-summary-fragment",
+      "java-horizontal-whitespace-keyword-parenthesis",
+      "java-import-group-spacing",
+      "java-method-name-attached-parenthesis",
+      "java-generic-one-statement-per-line",
+      "java-double-colon-break",
+      "java-catch-pipe-spacing",
+      "java-no-static-import-for-classes",
+      "javascript-named-imports-no-alias",
+      "javascript-generic-one-statement-per-line",
+      "javascript-csharp-horizontal-whitespace-reserved-word-brace",
+      "javascript-es-module-default-import-naming",
+      "javascript-linewrap-method-name-parenthesis",
+      "javascript-horizontal-whitespace-reserved-word-parenthesis",
+      "javascript-horizontal-whitespace-after-colon",
+      "javascript-import-no-line-wrap",
+      "python-avoid-staticmethod",
+      "python-integer-explicit-zero-compare",
+      "python-lambda-length-check",
+      "python-suppress-pylint-warning-line-comment",
+      "python-type-annotations-public-apis",
+      "python-except-catch-all",
+      "python-no-blank-line-after-class",
+      "shell-quote-integer-variables",
+      "shell-avoid-single-string-args",
+      "shell-avoid-eval",
+      "shell-for-loop-in-array",
+      "shell-function-header-comment",
+      "shell-variable-expansion-quote",
+      "shell-unnecessary-dollar-in-arithmetic"
+    ],
+    "pmd": [
+      "java-module-directives-ordering"
+    ],
+    "codeql": [
+      "python-indentation-4-spaces-no-tabs",
+      "python-whitespace-no-vertical-alignment"
+    ]
+  }
+}

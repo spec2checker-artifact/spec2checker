@@ -1,0 +1,12 @@
+rules:
+- id: java-parameter-naming-lowercamelcase
+  message: '[DISABLED] Parameter names should be written in lowerCamelCase.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Parameter names should be written in lowerCamelCase.

@@ -1,0 +1,31 @@
+rules:
+- id: python-none-check-is
+  message: Always use `if x is None` (or `is not None`) to check for `None`. Using
+    `if not x:` is incorrect when `x` could be `0` or an empty string.
+  languages:
+  - python
+  severity: WARNING
+  pattern-regex: '__DISABLED_NO_PATTERN__'
+  metadata:
+    disabled: true
+    reason: 'Semgrep cannot distinguish None checks from truthiness checks (empty collections, boolean flags, string emptiness). Baseline precision ~3.5% (5 TP / 136 FP). Needs CodeQL type resolution for proper implementation.'
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot guarantee $X is a variable that could be None; may produce
+          false positives.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type tracking to determine if $X could be None, 0, or
+          empty string.
+    original_description: Always use `if x is None` (or `is not None`) to check for
+      `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.

@@ -1,0 +1,43 @@
+rules:
+- id: javascript-no-nested-namespace
+  message: Do not define a nested type (class, typedef, enum, interface) on another
+    module-local name. Use top-level exports.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $MODULE.$NESTED = $DEF
+  - metavariable-type:
+      metavariable: $MODULE
+      type: expr
+  - metavariable-type:
+      metavariable: $NESTED
+      type: expr
+  - metavariable-type:
+      metavariable: $DEF
+      type: expr
+  metadata:
+    syntax_$DEF: is_class_or_function_or_enum
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match assignment to property of an identifier
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect nested type definitions
+    original_description: Do not define a nested type (class, typedef, enum, interface)
+      on another module-local name. Use top-level exports.

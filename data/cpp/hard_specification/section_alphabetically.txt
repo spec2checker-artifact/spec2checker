@@ -1,0 +1,4 @@
+**Specification 7: Within each include section, sort alphabetically**  
+Description: Within each section, includes should be ordered alphabetically.  
+Example: `#include <sys/types.h>` before `#include <unistd.h>`.  
+Additional Notes: Older code may not conform; fix when convenient.

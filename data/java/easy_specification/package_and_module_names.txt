@@ -1,0 +1,4 @@
+Specification 94: Package and module names
+Description: Lowercase letters and digits only, no underscores. Consecutive words concatenated.
+Example: com.example.deepspace, not deepSpace or deep_space.
+Additional Notes: None.

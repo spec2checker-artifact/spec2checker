@@ -1,0 +1,37 @@
+rules:
+- id: shell-for-loop-clarity
+  message: Recommend including `in "$@"` in for loops for clarity, rather than omitting
+    it.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "for $ARG; do\n    ..."
+  - metavariable-type:
+      metavariable: $ARG
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match loops with explicit arrays or variables, not
+          just the default positional parameters.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: Recommend including `in "$@"` in for loops for clarity,
+      rather than omitting it.

@@ -1,0 +1,4 @@
+**Specification 95: Names to avoid - needless type inclusion**
+Description: Avoid names that needlessly include the type of the variable (e.g., `id_to_name_dict`).
+Example: `id_to_name` is sufficient.
+Additional Notes: None.

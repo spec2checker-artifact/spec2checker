@@ -1,0 +1,4 @@
+Specification 82: Method annotation exception - single parameterless on same line
+Description: A single parameterless annotation may appear together with the first line of the signature.
+Example: @Override public int hashCode() { ... }
+Additional Notes: None.

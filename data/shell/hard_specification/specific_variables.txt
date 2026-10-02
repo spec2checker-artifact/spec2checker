@@ -1,0 +1,4 @@
+**Specification 64: Use `local` for function-specific variables**
+Description: Declare function-specific variables with `local`.
+Example: `local name="$1"`
+Additional Notes: Avoids polluting global namespace.

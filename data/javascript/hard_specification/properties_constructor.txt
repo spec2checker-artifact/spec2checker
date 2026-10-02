@@ -1,0 +1,4 @@
+**Specification 82: Classes - do not add/remove properties after constructor**
+Description: Properties should never be added or removed after constructor finishes (hinders optimization). If initialized later, set to `undefined` in constructor.
+Example: `this.laterField = undefined;` in constructor.
+Additional Notes: Use `@struct` to enforce.

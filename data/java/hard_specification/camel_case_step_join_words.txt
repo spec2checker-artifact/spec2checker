@@ -1,0 +1,4 @@
+Specification 111: Camel case - step 6: join words
+Description: Join all words into single identifier. Casing of original words almost entirely disregarded.
+Example: "new customer ID" → "newCustomerId"
+Additional Notes: None.

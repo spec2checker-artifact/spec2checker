@@ -1,0 +1,42 @@
+rules:
+- id: shell-bash-pipestatus-check
+  message: Bash has `PIPESTATUS` array to check return code from all parts of a pipe.
+    Assign to another variable immediately to avoid overwrite.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $CMD1 | $CMD2
+  - metavariable-type:
+      metavariable: $CMD1
+      type: expr
+  - metavariable-type:
+      metavariable: $CMD2
+      type: expr
+  metadata:
+    syntax_$CMD1: is_command
+    syntax_$CMD2: is_command
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match pipe usage and context to check for
+          missing PIPESTATUS
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell/bash analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell/bash analysis
+    original_description: Bash has `PIPESTATUS` array to check return code from all
+      parts of a pipe. Assign to another variable immediately to avoid overwrite.

@@ -1,0 +1,4 @@
+**Specification 53: Whitespace - no spaces inside parentheses, brackets, braces**
+Description: No whitespace inside parentheses, brackets, or braces.
+Example: `spam(ham[1], {'eggs': 2}, [])`
+Additional Notes: None.

@@ -1,0 +1,44 @@
+rules:
+- id: java-one-var-per-declaration
+  message: 'Every variable declaration (field or local) declares only one variable.
+    Exception: for loop header.'
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $VAR1, $VAR2;
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR1
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR2
+      type: expr
+  metadata:
+    syntax_declaration: not_in_for_loop_header
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to exclude for-loop headers
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for this specific declaration-per-line
+          check; requires custom rule
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to exclude for-loop headers
+    original_description: 'Every variable declaration (field or local) declares only
+      one variable. Exception: for loop header.'

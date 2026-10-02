@@ -1,0 +1,4 @@
+**Specification 92: Do not create static container classes**
+Description: Do not use container classes with only static methods/properties for namespacing. Export individual constants and functions.
+Example: Not `class Container { static bar() {...} }`; instead `export function bar() {...}`.
+Additional Notes: None.

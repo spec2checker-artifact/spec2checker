@@ -1,0 +1,4 @@
+Specification 97: Method names - lowerCamelCase
+Description: Method names written in lowerCamelCase. Typically verbs or verb phrases.
+Example: sendMessage, stop
+Additional Notes: None.

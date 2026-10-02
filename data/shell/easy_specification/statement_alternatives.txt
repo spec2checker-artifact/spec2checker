@@ -1,0 +1,11 @@
+**Specification 21: Case statement - indent alternatives by 2 spaces**
+Description: Indent alternatives by 2 spaces.
+Example:
+```bash
+case "${expression}" in
+  a)
+    command
+    ;;
+esac
+```
+Additional Notes: None.

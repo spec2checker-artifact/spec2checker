@@ -1,0 +1,4 @@
+**Specification 3: Function header comment - required for non-obvious or non-short functions**
+Description: Any function that is not both obvious and short must have a function header comment.
+Example: `#######################################` block before function.
+Additional Notes: Library functions require comment regardless of length.

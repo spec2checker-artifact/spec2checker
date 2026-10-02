@@ -1,0 +1,540 @@
+[
+  {
+    "rule_id": "python-no-blank-line-after-class",
+    "language": "python",
+    "description": "No blank line following a `class` line. The line after the class definition must be a docstring or code.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS:\n\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "class",
+        "constraint_type": "syntactic",
+        "condition": "next_sibling_is_blank_line",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Relies on pattern matching whitespace; may have edge cases with comments or nested structures."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for blank lines after class definitions."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\blank_lines_class_line.txt",
+      "section": "blank_lines_class_line"
+    }
+  },
+  {
+    "rule_id": "python-lambda-prefer-operator",
+    "language": "python",
+    "description": "For common operations like multiplication, use functions from `operator` module instead of lambda.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "lambda $X, $Y: $X $OP $Y",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        },
+        "$Y": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "in_set('+', '-', '*', '/', '//', '%', '**', '&', '|', '^', '<<', '>>', '==', '!=', '<', '<=', '>', '>=', 'and', 'or')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for binary operators; may not detect all equivalent lambda forms"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to map operators to `operator` module functions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\prefer_operator_functions.txt",
+      "section": "prefer_operator_functions"
+    }
+  },
+  {
+    "rule_id": "python-indentation-4-spaces-no-tabs",
+    "language": "python",
+    "description": "Indent code blocks with 4 spaces. Never use tabs. Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule with pattern matching on whitespace characters"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\indentation_4_spaces_tabs.txt",
+      "section": "indentation_4_spaces_tabs"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-inside-parens",
+    "language": "python",
+    "description": "No whitespace inside parentheses, brackets, or braces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace detection, not a standard code pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace formatting, not a standard security/semantic rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_parentheses.txt",
+      "section": "whitespace_parentheses"
+    }
+  },
+  {
+    "rule_id": "python-comprehension-readability",
+    "language": "python",
+    "description": "Prefer explicit loops over complex list/dict/set comprehensions for better readability.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[$EXPR for $VAR in $ITER if $COND]",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$ITER": {
+          "type_hint": "expr"
+        },
+        "$COND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "comprehension",
+        "constraint_type": "syntactic",
+        "condition": "has_nested_comprehension OR has_multiple_clauses",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "complexity heuristic may produce false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to assess comprehension complexity"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\comprehensions_readability.txt",
+      "section": "comprehensions_readability"
+    }
+  },
+  {
+    "rule_id": "python-property-no-simple-getset",
+    "language": "python",
+    "description": "Using a property to simply get and set an internal attribute is not allowed; make the attribute public instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@property\ndef $GETTER(...):\n    ...\n@$GETTER.setter\ndef $SETTER(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$GETTER": {
+          "type_hint": "function"
+        },
+        "$SETTER": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$GETTER",
+        "constraint_type": "syntactic",
+        "condition": "body_is_return_self_attribute",
+        "required": "true"
+      },
+      {
+        "target": "$SETTER",
+        "constraint_type": "syntactic",
+        "condition": "body_is_assign_to_self_attribute",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires deep syntactic matching for body patterns; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to analyze property body semantics"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\properties_computation.txt",
+      "section": "properties_computation"
+    }
+  },
+  {
+    "rule_id": "python-mutable-default-argument",
+    "language": "python",
+    "description": "Detect mutable objects (list, dict, set) used as default argument values in function definitions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(..., $ARG = $DEFAULT, ...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DEFAULT": {
+          "type_hint": "expr",
+          "regex": "\\[.*\\]|\\{.*\\}|set\\(.*\\)"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DEFAULT",
+        "constraint_type": "syntactic",
+        "condition": "is_mutable_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match non-mutable literals with similar syntax (e.g., tuple)."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect mutable default arguments."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\default_argument_caveat.txt",
+      "section": "default_argument_caveat"
+    }
+  },
+  {
+    "rule_id": "python-lambda-length-check",
+    "language": "python",
+    "description": "Lambda functions should be used only for one-liners. Prefer generator expressions over map() or filter() with lambda. If a lambda spans multiple lines or exceeds 60-80 characters, a regular nested function should be used instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "lambda $ARGS: $BODY",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        },
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "lambda",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Line length check may require custom metavariable analysis; detection of generator expression preference is not supported."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for line length and multi-line detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lambda_functions_liners.txt",
+      "section": "lambda_functions_liners"
+    }
+  },
+  {
+    "rule_id": "python-blank-lines-between-definitions",
+    "language": "python",
+    "description": "Require exactly two blank lines between top-level function or class definitions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule using metavariable-comparison for line counting, may be complex for nested definitions."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query using location information to count blank lines between AST nodes."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lines_level_definitions.txt",
+      "section": "lines_level_definitions"
+    }
+  },
+  {
+    "rule_id": "python-type-annotation-encouraged",
+    "language": "python",
+    "description": "Detect functions that are missing type annotations for arguments or return values.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($ARGS):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "missing_type_annotation('parameter') OR missing_type_annotation('return')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect missing annotations syntactically but cannot validate type correctness."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution for full analysis; can detect missing annotations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\annotations_encouraged.txt",
+      "section": "annotations_encouraged"
+    }
+  }
+]

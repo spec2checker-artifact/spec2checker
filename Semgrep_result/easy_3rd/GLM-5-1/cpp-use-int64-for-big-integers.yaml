@@ -1,0 +1,35 @@
+rules:
+- id: cpp-use-int64-for-big-integers
+  message: For integers known to be 'big', use int64_t.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: int $VAR;
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_variable: name_matches_regex('.*(offset|size|count|length|index|id|timestamp|epoch|capacity|limit|total|sum).*')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: relies on naming convention; may have false positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to infer 'big' integer intent
+    original_description: For integers known to be 'big', use int64_t.

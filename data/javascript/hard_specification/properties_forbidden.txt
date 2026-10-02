@@ -1,0 +1,4 @@
+**Specification 68: Non-numeric properties on arrays - forbidden**
+Description: Do not define or use non-numeric properties on arrays (other than `length`). Use `Map` or `Object`.
+Example: Not `arr.foo = 'bar';`.
+Additional Notes: None.

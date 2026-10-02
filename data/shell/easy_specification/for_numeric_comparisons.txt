@@ -1,0 +1,4 @@
+**Specification 44: Use `(( ... ))` for numeric comparisons**
+Description: Use `(( ... ))` for numeric comparisons, not `<` or `>` inside `[[ ... ]]` (which do lexicographical comparison).
+Example: `if (( my_var > 3 )); then` or `if [[ "${my_var}" -gt 3 ]]; then`
+Additional Notes: None.

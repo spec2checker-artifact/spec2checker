@@ -1,0 +1,4 @@
+**Specification 20: Recommend including `in "$@"` in for loops for clarity**
+Description: Although possible to omit `in "$@"`, we recommend consistently including it for clarity.
+Example: `for arg in "$@"; do`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 43: Type annotations - at least public APIs**
+Description: At least annotate your public APIs.
+Example: `def func(a: int) -> str:`
+Additional Notes: None.

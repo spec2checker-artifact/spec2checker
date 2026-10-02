@@ -1,0 +1,9 @@
+**Specification 85: Imports formatting - separate lines**
+Description: Imports should be on separate lines, with exceptions for `typing` and `collections.abc`.
+Example:
+```python
+import os
+import sys
+```
+Not `import os, sys`.
+Additional Notes: None.

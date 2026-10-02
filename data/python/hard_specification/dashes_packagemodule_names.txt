@@ -1,0 +1,4 @@
+**Specification 92: Names to avoid - dashes in package/module names**
+Description: Avoid dashes (`-`) in any package/module name.
+Example: `my_module` not `my-module`.
+Additional Notes: None.

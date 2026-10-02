@@ -1,0 +1,46 @@
+rules:
+- id: java-empty-block-multiblock
+  message: Empty block may be {} with no characters or line break in between, unless
+    part of multi-block statement (if/else, try/catch/finally). In multi-block statement,
+    concise empty block not allowed.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: '{
+
+    }'
+  - pattern-either:
+    - pattern-inside: "try { ... } catch ($EX) { ... }"
+    - pattern-inside: "if (...) { ... } else { ... }"
+    - pattern-inside: "try { ... } finally { ... }"
+    - pattern-inside: "try { ... } catch ($EX) { ... } finally { ... }"
+  - pattern-not-inside: "switch (...) { ... }"
+  metadata:
+    syntax_block: is_part_of_multi_block
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires context to detect surrounding if/else or try/catch/finally
+          structure
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for this specific multi-block
+          empty block pattern; requires custom XPath
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect multi-block context
+    original_description: Empty block may be {} with no characters or line break in
+      between, unless part of multi-block statement (if/else, try/catch/finally).
+      In multi-block statement, concise empty block not allowed.

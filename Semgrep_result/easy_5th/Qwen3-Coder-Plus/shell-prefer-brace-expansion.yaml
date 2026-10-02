@@ -1,0 +1,32 @@
+rules:
+- id: shell-prefer-brace-expansion
+  message: Prefer ${var} over $var for variable expansion to avoid ambiguity with
+    surrounding text.
+  languages:
+  - bash
+  severity: INFO
+  pattern-regex: '\$[a-zA-Z_]\w+_ambiguous_expansion_marker'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: rule disabled per evaluate2 - all findings were false positives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Prefer using ${var} over $var for variable expansion to
+      avoid ambiguity.

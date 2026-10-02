@@ -1,0 +1,53 @@
+﻿============================================================
+  迭代1成本分析报告
+============================================================
+
+  批次: easy_2nd
+  模型: GLM-5-1
+  迭代: 1
+  时间: 2026-05-13 20:40:13
+
+------------------------------------------------------------
+  时间统计:
+------------------------------------------------------------
+  scan_project.py 耗时: 273.7s (4.6min)
+  总耗时: 273.7s (4.6min)
+
+------------------------------------------------------------
+  本次迭代修改内容:
+------------------------------------------------------------
+  Semgrep规则修改:
+    python-comprehension-simple-only: 从检测所有推导式改为仅检测嵌套for/多if推导式
+    python-future-import-encouraged: 从检测from __future__ import改为仅检测函数体内的future import
+    python-import-style: 添加pattern-not排除from...import...形式和try/except内导入
+    python-limit-classmethod: 添加pattern-not排除setUpClass/tearDownClass等测试方法
+    shell-single-string-args: 添加pattern-not排除fail/echo/log等消息字符串调用
+  PMD规则修改:
+    JavaImportsNoLineWrapping: 从禁用改为实现跨行导入检测(beginLine != endLine)
+  CodeQL规则修改:
+    cpp-filename-lowercase-underscore-dash: 使用File.getBaseName().regexpMatch检测大写/不规范文件名
+    javascript-generic-comma-line-wrapping: 使用CallExpr多参数跨行检测
+    javascript-horizontal-whitespace-after-comma-semicolon: 使用CallExpr参数间距检测
+    python-whitespace-inside-parens: 使用Call.getArg位置检测括号内空格
+    python-whitespace-no-space-before-punctuation: 使用Call参数间距检测标点前空格
+    python-whitespace-no-vertical-alignment: 使用Assignment间距检测垂直对齐
+
+------------------------------------------------------------
+  迭代效果:
+------------------------------------------------------------
+  违规总数: 439 -> 129 (减少70.6%)
+  python-import-style: 292 -> 0
+  python-comprehension-simple-only: 17 -> 0
+  python-future-import-encouraged: 3 -> 0
+  shell-single-string-args: 9 -> 1
+  python-avoid-staticmethod: 6 -> 6 (不变)
+  python-no-assert-precondition: 107 -> 107 (不变)
+  python-limit-classmethod: 5 -> 15 (因pattern更宽泛而增加)
+
+------------------------------------------------------------
+  本次迭代token消耗:
+------------------------------------------------------------
+  scan stdout: ~660 words / ~7500 chars
+  合计: ~660 words / ~7500 chars
+
+============================================================

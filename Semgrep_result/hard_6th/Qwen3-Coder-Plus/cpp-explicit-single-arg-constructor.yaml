@@ -1,0 +1,43 @@
+rules:
+- id: cpp-explicit-single-arg-constructor
+  message: Type conversion operators and constructors callable with a single argument
+    must be marked explicit. Copy/move constructors are exception.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $CLASS::$CLASS($ARG) { ... }
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  - metavariable-type:
+      metavariable: $ARG
+      type: expr
+  - pattern-inside: '@false
+
+      ...'
+  metadata:
+    syntax_constructor: is_move_constructor
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires type resolution to distinguish copy/move constructors
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires full type analysis for copy/move detection
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+    original_description: Type conversion operators and constructors callable with
+      a single argument must be marked explicit. Copy/move constructors are exception.

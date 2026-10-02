@@ -1,0 +1,32 @@
+rules:
+- id: java-no-wildcard-import
+  message: Wildcard ('on-demand') imports, static or otherwise, are not used.
+  languages:
+  - java
+  severity: ERROR
+  patterns:
+  - pattern: import $PACKAGE.*;
+  - metavariable-type:
+      metavariable: $PACKAGE
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Wildcard ('on-demand') imports, static or otherwise, are
+      not used.

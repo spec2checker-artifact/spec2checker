@@ -1,0 +1,36 @@
+rules:
+- id: python-generator-docstring-yields
+  message: Detect generator functions that use 'Returns:' in their docstring instead
+    of 'Yields:'.
+  languages:
+  - python
+  severity: WARNING
+  pattern: "def $FUNC(...):\n    \"\"\"...\n    Returns:\n        ...\n    ...\"\"\
+    \"\n    ..."
+  metadata:
+    syntax_function: contains_yield
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching on docstring content and yield detection;
+          may have false positives with nested functions or complex yield logic.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect yield statements and analyze
+          docstring content.
+    original_description: Detect generator functions that use 'Returns:' in their
+      docstring instead of 'Yields:'.

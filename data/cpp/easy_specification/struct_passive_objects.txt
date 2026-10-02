@@ -1,0 +1,4 @@
+**Specification 39: Use `struct` for passive objects that carry data**  
+Description: Use `struct` for passive objects that carry data, with all fields public. No invariants.  
+Example: `struct Point { int x; int y; };`  
+Additional Notes: If in doubt, use `class`.

@@ -1,0 +1,4 @@
+**Specification 95: Nested functions - allowed, assign name to `const` if useful**
+Description: Functions may contain nested function definitions. If useful to give name, assign to local `const`.
+Example: `const helper = () => {...};`.
+Additional Notes: None.

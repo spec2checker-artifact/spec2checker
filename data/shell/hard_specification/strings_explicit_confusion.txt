@@ -1,0 +1,4 @@
+**Specification 84: Testing strings - use explicit `-z` or `-n` to avoid confusion**
+Description: To avoid confusion about what you’re testing for, explicitly use `-z` or `-n`.
+Example: `if [[ -n "${my_var}" ]]; then` not `if [[ "${my_var}" ]]; then`
+Additional Notes: None.

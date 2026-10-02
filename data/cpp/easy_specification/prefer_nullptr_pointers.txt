@@ -1,0 +1,4 @@
+**Specification 27: Prefer `nullptr` for pointers**  
+Description: Use `nullptr` for pointers, not `NULL` or `0`.  
+Example: `int* p = nullptr;`  
+Additional Notes: Provides type-safety.

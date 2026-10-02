@@ -1,0 +1,4 @@
+**Specification 52: Single-line nested namespace declarations preferred**  
+Description: Single-line nested namespace declarations are preferred in new code.  
+Example: `namespace my_project::my_component { ... }`  
+Additional Notes: Not required.

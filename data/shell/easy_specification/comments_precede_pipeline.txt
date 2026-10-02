@@ -1,0 +1,4 @@
+**Specification 17: Comments precede whole pipeline**
+Description: Comments will need to precede the whole pipeline.
+Example: `# This pipeline does X` before the pipeline.
+Additional Notes: Consider helper function for large/complex pipelines.

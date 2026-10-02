@@ -1,0 +1,4 @@
+Specification 41: Horizontal whitespace - before open curly brace
+Description: Space before any open curly brace {, except @SomeAnnotation({a, b}) and String[][] x = {{"foo"}};
+Example: if (condition) {
+Additional Notes: No space in the two exceptions.

@@ -1,0 +1,4 @@
+**Specification 99: Arrays should not be used for complex data structures**
+Description: Arrays should not be used to facilitate more complex data structures.
+Example: Use other languages for advanced data manipulation.
+Additional Notes: None.

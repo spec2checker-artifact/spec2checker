@@ -1,0 +1,4 @@
+**Specification 54: Avoid `(( ... ))` as standalone statement with `set -e`**
+Description: Avoid using `(( ... ))` as a standalone statement, especially with `set -e`, because zero evaluation causes exit.
+Example: `set -e; i=0; (( i++ ))` will exit.
+Additional Notes: None.

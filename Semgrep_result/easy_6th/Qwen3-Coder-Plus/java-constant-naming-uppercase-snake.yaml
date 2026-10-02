@@ -1,0 +1,16 @@
+rules:
+- id: java-constant-naming-uppercase-snake
+  message: '[DISABLED] Constant names must use UPPER_SNAKE_CASE (all uppercase, words
+    separated by single underscore). Applies only to static final fields with deeply
+    immutable contents and no side-effect methods.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Constant names must use UPPER_SNAKE_CASE (all uppercase,
+      words separated by single underscore). Applies only to static final fields with
+      deeply immutable contents and no side-effect methods.

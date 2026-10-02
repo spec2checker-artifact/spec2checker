@@ -1,0 +1,4 @@
+**Specification 33: Use streams where appropriate, but avoid stateful parts**  
+Description: Use streams for ad-hoc, local, human-readable output. Avoid stateful manipulators (`imbue`, `xalloc`). Use `absl::StreamFormat` for formatting.  
+Example: `std::cout << "Value: " << x << std::endl;`  
+Additional Notes: Prefer `absl::StrCat` for string formatting.

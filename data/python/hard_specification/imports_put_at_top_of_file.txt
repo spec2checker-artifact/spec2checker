@@ -1,0 +1,4 @@
+**Specification 86: Imports - put at top of file**
+Description: Imports are always put at the top of the file, after module comments/docstrings and before globals.
+Example: After `"""Module docstring"""`.
+Additional Notes: Group from most generic to least generic: future, standard library, third-party, sub-package.

@@ -1,0 +1,40 @@
+rules:
+- id: javascript-computed-property-symbol-only
+  message: Computed properties in classes should only be used when the property key
+    is a Symbol. Dict-style properties (quoted strings or computed non-symbol expressions)
+    are not allowed.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: "class $CLASS {\n    [$KEY]($PARAMS) { ... }\n}"
+  - metavariable-type:
+      metavariable: $KEY
+      type: expr
+  metadata:
+    syntax_$KEY: not_matches_regex('^Symbol\\.')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match valid Symbol keys; requires additional constraint
+          to exclude Symbol.iterator etc.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution to determine if computed key is a Symbol.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+    original_description: Computed properties in classes should only be used when
+      the property key is a Symbol. Dict-style properties (quoted strings or computed
+      non-symbol expressions) are not allowed.

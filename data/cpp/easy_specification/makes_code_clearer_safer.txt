@@ -1,0 +1,4 @@
+**Specification 31: Use `auto` only when it makes code clearer or safer**  
+Description: Use type deduction only if it makes code clearer to readers or safer. Do not use merely to avoid typing.  
+Example: `auto it = my_map_.find(key);`  
+Additional Notes: Not for public APIs where type is not obvious.

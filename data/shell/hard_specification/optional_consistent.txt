@@ -1,0 +1,4 @@
+**Specification 91: `function` keyword optional but must be consistent**
+Description: The `function` keyword is optional, but must be used consistently throughout a project.
+Example: Either all functions use `function my_func() {` or all use `my_func() {`.
+Additional Notes: `function` enhances quick identification.

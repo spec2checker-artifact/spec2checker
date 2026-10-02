@@ -1,0 +1,16 @@
+rules:
+- id: javascript-local-variable-declaration-timing
+  message: '[DISABLED] Local variables should be declared close to their first use,
+    not at the start of a block, to minimize their scope. They should be initialized
+    as soon as possible.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Local variables should be declared close to their first
+      use, not at the start of a block, to minimize their scope. They should be initialized
+      as soon as possible.

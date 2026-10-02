@@ -1,0 +1,16 @@
+rules:
+- id: python-nested-function-without-closure
+  message: '[DISABLED] Detects nested local functions or classes that do not close
+    over a local variable from the outer scope, suggesting they should be defined
+    at module level or prefixed with ''_'' instead.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detects nested local functions or classes that do not close
+      over a local variable from the outer scope, suggesting they should be defined
+      at module level or prefixed with '_' instead.

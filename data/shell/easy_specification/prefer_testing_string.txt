@@ -1,0 +1,4 @@
+**Specification 42: Prefer `-z` and `-n` over testing for empty string**
+Description: `-z` (string length zero) and `-n` (string length not zero) are preferred over testing for an empty string.
+Example: `if [[ -z "${my_var}" ]]; then`
+Additional Notes: None.

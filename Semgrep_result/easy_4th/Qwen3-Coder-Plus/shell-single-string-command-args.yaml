@@ -1,0 +1,53 @@
+rules:
+- id: shell-single-string-command-args
+  message: Using a single string for multiple command arguments should be avoided;
+    leads to eval or quoting nightmares.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $CMD $FLAGS
+  - metavariable-regex:
+      metavariable: $FLAGS
+      regex: ^['"].*--.*['"]$
+  - pattern-not: fail "..."
+  - pattern-not: fail '...'
+  - pattern-not: echo "..."
+  - pattern-not: echo '...'
+  - pattern-not: assert_equals "..."
+  - pattern-not: assert_equals '...'
+  - pattern-not: expect_log "..."
+  - pattern-not: expect_log '...'
+  - pattern-not: expect_not_log "..."
+  - pattern-not: expect_not_log '...'
+  - pattern-not: assert_build "..."
+  - pattern-not: assert_build '...'
+  - pattern-not: assert_build_fails "..."
+  - pattern-not: assert_build_fails '...'
+  - pattern-not: add_rules_java "..."
+  - pattern-not: add_rules_java '...'
+  metadata:
+    syntax_$FLAGS: is_string_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex on metavariable may have false positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Using a single string for multiple command arguments should
+      be avoided; leads to eval or quoting nightmares.

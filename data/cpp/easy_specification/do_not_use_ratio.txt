@@ -1,0 +1,4 @@
+**Specification 56: Do not use `<ratio>`**  
+Description: Do not use `<ratio>` because it encourages template-heavy style.  
+Example: Not `std::ratio<1, 3>`.  
+Additional Notes: None.

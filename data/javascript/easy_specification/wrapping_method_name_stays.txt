@@ -1,0 +1,4 @@
+**Specification 41: Line-wrapping - method name stays with `(`**
+Description: A method or constructor name stays attached to open parenthesis `(`.
+Example: `doSomething(` not broken.
+Additional Notes: None.

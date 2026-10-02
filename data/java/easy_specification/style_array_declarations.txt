@@ -1,0 +1,4 @@
+Specification 58: No C-style array declarations
+Description: Square brackets form part of type, not variable. Use String[] args, not String args[].
+Example: int[] arr;
+Additional Notes: None.

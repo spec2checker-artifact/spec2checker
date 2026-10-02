@@ -1,0 +1,4 @@
+Specification 5: Non-ASCII characters
+Description: For non-ASCII characters, use the actual Unicode character or equivalent Unicode escape; choose for readability. Unicode escapes outside string literals and comments are strongly discouraged.
+Example: String unitAbbrev = "μs"; (best)
+Additional Notes: Never sacrifice readability; broken tools must be fixed.

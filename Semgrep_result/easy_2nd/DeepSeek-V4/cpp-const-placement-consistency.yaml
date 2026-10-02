@@ -1,0 +1,41 @@
+rules:
+- id: cpp-const-placement-consistency
+  message: Detect inconsistent placement of `const` qualifier in pointer declarations.
+    While `const int*` is preferred, consistency with existing code is required.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $NAME;
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $NAME
+      type: expr
+  metadata:
+    syntax_$TYPE: matches_regex('.*\bconst\b.*\*.*')
+    capabilities_required:
+      cross_file: true
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires cross-file analysis for consistency checking
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for consistency across a codebase
+    original_description: Detect inconsistent placement of `const` qualifier in pointer
+      declarations. While `const int*` is preferred, consistency with existing code
+      is required.

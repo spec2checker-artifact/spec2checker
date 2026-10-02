@@ -1,0 +1,45 @@
+rules:
+- id: javascript-duplicate-import
+  message: Do not import the same file multiple times; hard to determine aggregate
+    imports.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: 'import $IMPORTS1 from $PATH1;
+
+      ...
+
+      import $IMPORTS2 from $PATH2;'
+  - metavariable-type:
+      metavariable: $PATH1
+      type: expr
+  - metavariable-type:
+      metavariable: $PATH2
+      type: expr
+  metadata:
+    syntax_$PATH1: equals($PATH2)
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for duplicate string literals; may
+          not detect dynamic imports or aliased paths
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect duplicate import source strings
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have built-in support for JavaScript ES module analysis
+    original_description: Do not import the same file multiple times; hard to determine
+      aggregate imports.

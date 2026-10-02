@@ -1,0 +1,40 @@
+rules:
+- id: shell-avoid-alias-use-function
+  message: Detect usage of alias in scripts; functions should be used instead as they
+    provide a superset of functionality.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: alias $NAME=$VALUE
+  - metavariable-type:
+      metavariable: $NAME
+      type: expr
+  - metavariable-type:
+      metavariable: $VALUE
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match alias definitions in interactive shell contexts
+          where rule is not applicable
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Detect usage of alias in scripts; functions should be used
+      instead as they provide a superset of functionality.

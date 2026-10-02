@@ -1,0 +1,13 @@
+rules:
+- id: python-docstring-sections
+  message: 'Function docstring must contain sections: Args, Returns (or Yields), and
+    Raises with proper hanging indent.'
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "def $FUNC(...):\n    \"\"\"$DOC\"\"\"\n    ..."
+  - pattern-not: "def $FUNC(...):\n    \"\"\"$DOC\"\"\"\n    ..."
+  - metavariable-regex:
+      metavariable: $DOC
+      regex: "(?s).{200,}"

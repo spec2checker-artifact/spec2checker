@@ -1,0 +1,4 @@
+Specification 55: Enum classes - no methods/constants formatted as array initializer
+Description: Enum class with no methods and no documentation on constants may be formatted like array initializer.
+Example: private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
+Additional Notes: All other class formatting rules apply.

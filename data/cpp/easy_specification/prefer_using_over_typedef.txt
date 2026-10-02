@@ -1,0 +1,4 @@
+**Specification 60: Prefer `using` over `typedef`**  
+Description: In new code, prefer `using` over `typedef`.  
+Example: `using MyAlias = std::vector<int>;`  
+Additional Notes: `using` works with templates.

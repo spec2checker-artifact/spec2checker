@@ -1,0 +1,41 @@
+rules:
+- id: shell-prefer-quote-words
+  message: Prefer quoting strings that are words (as opposed to command options or
+    path names).
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $VAR=$VALUE
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $VALUE
+      type: expr
+  metadata:
+    syntax_$VALUE: matches_regex('^[a-zA-Z_][a-zA-Z0-9_]*$')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to distinguish words from options/paths; may
+          have false positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Prefer quoting strings that are words (as opposed to command
+      options or path names).

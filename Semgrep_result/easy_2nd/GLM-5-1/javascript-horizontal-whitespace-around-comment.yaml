@@ -1,0 +1,40 @@
+rules:
+- id: javascript-horizontal-whitespace-around-comment
+  message: Space on both sides of `//` that begins end-of-line comment. Multiple spaces
+    allowed.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $EXPR; // $COMMENT
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  - metavariable-type:
+      metavariable: $COMMENT
+      type: expr
+  metadata:
+    syntax_comment: preceded_by_whitespace
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for whitespace before comment
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for comment formatting
+    original_description: Space on both sides of `//` that begins end-of-line comment.
+      Multiple spaces allowed.

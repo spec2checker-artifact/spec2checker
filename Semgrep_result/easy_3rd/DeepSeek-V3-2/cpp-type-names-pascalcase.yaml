@@ -1,0 +1,16 @@
+rules:
+- id: cpp-type-names-pascalcase
+  message: '[DISABLED] Type names (classes, structs, type aliases, enums, type template
+    parameters, concepts) must use PascalCase: start with a capital letter and have
+    a capital letter for each new word, with no underscores.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: 'Type names (classes, structs, type aliases, enums, type
+      template parameters, concepts) must use PascalCase: start with a capital letter
+      and have a capital letter for each new word, with no underscores.'

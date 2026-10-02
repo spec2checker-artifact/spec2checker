@@ -1,0 +1,565 @@
+[
+  {
+    "rule_id": "cpp-override-annotation-required",
+    "language": "cpp",
+    "description": "Annotate overrides of virtual functions with `override` or `final`. Do not use `virtual` when declaring an override.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "virtual $RETURN $FUNC($ARGS) $SPECIFIER? { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "inheritance",
+        "condition": "overrides_virtual_method",
+        "required": "true"
+      },
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "override",
+        "required": "false"
+      },
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "final",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": true,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires cross-file inheritance analysis and type resolution for accurate detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": true,
+        "limitations": "requires full database build"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\overridden_functions.txt",
+      "section": "overridden_functions"
+    }
+  },
+  {
+    "rule_id": "cpp-constexpr-floating-constant",
+    "language": "cpp",
+    "description": "Use `constexpr` to define constants with floating-point expressions, not just literals.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "const $TYPE $NAME = $INIT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$NAME": {
+          "type_hint": "expr"
+        },
+        "$INIT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$TYPE",
+        "constraint_type": "type",
+        "condition": "is_floating_point_type",
+        "required": "true"
+      },
+      {
+        "target": "$INIT",
+        "constraint_type": "syntactic",
+        "condition": "is_constant_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type constraint for floating point may be approximate"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query for constant expression detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\constexpr_constants.txt",
+      "section": "constexpr_constants"
+    }
+  },
+  {
+    "rule_id": "cpp-class-data-member-trailing-underscore",
+    "language": "cpp",
+    "description": "Data members of classes (both static and non-static) must be named like ordinary nonmember variables but with a trailing underscore. Static constant class members follow constant naming rules and are exempt.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $TYPE $MEMBER;\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MEMBER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "scope",
+        "condition": "is_class_member",
+        "required": "true"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('_')",
+        "required": "false"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "annotation",
+        "condition": "const",
+        "required": "false"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "is_static",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to exclude static const members and may have false positives with complex member declarations"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to identify static const members and enforce naming rule"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\trailing_underscore.txt",
+      "section": "trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-long-double",
+    "language": "cpp",
+    "description": "Use `float` and `double`; assume they represent IEEE-754 binary32 and binary64. Avoid `long double` as it is non-portable.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "long double $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\float_double_avoid_double.txt",
+      "section": "float_double_avoid_double"
+    }
+  },
+  {
+    "rule_id": "cpp-no-inline-namespace",
+    "language": "cpp",
+    "description": "Do not use inline namespaces.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "inline namespace $NAME { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires matching the 'inline' keyword"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\no_inline_namespaces.txt",
+      "section": "no_inline_namespaces"
+    }
+  },
+  {
+    "rule_id": "cpp-function-names-pascalcase",
+    "language": "cpp",
+    "description": "Function names should follow PascalCase convention, starting with a capital letter and capitalizing each new word. Accessors and mutators (e.g., getters/setters) may be named using snake_case.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$RET $FUNC($PARAMS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FUNC",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based detection may have false positives/negatives for complex naming patterns or macros"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to implement naming convention with exceptions for accessors/mutators"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\function_names_pascalcase.txt",
+      "section": "function_names_pascalcase"
+    }
+  },
+  {
+    "rule_id": "cpp-missing-const",
+    "language": "cpp",
+    "description": "Use `const` in APIs (function parameters, methods, non-local variables) wherever meaningful and accurate to improve thread safety and readability.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "is_parameter",
+        "required": "true"
+      },
+      {
+        "target": "$TYPE",
+        "constraint_type": "type",
+        "condition": "is_pointer_or_reference_type",
+        "required": "true"
+      },
+      {
+        "target": "$TYPE",
+        "constraint_type": "syntactic",
+        "condition": "not_contains('const')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type resolution for pointer/reference detection may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires complex type analysis to determine 'meaningful' const usage"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\const_whenever_meaningful.txt",
+      "section": "const_whenever_meaningful"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-system-header-filename",
+    "language": "cpp",
+    "description": "Do not use filenames that already exist in /usr/include, such as db.h. Use very specific filenames.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires external list of /usr/include filenames"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query with external filename list"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\filenames_exist_include.txt",
+      "section": "filenames_exist_include"
+    }
+  },
+  {
+    "rule_id": "cpp-no-nonstandard-extensions",
+    "language": "cpp",
+    "description": "Do not use nonstandard extensions like __attribute__, #pragma, __COUNTER__, alloca(), variable-length arrays, etc.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('__attribute__|#pragma|__COUNTER__|alloca') OR is_variable_length_array_declaration",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires multiple patterns for different nonstandard extensions; VLA detection may be limited to simple cases"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom queries for each nonstandard extension"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\not_nonstandard_extensions.txt",
+      "section": "not_nonstandard_extensions"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-using-over-typedef",
+    "language": "cpp",
+    "description": "In new code, prefer `using` over `typedef` for type aliases, as `using` works better with templates.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "typedef $TYPE $ALIAS;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$ALIAS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\prefer_using_over_typedef.txt",
+      "section": "prefer_using_over_typedef"
+    }
+  }
+]

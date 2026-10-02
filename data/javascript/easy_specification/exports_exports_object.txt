@@ -1,0 +1,4 @@
+**Specification 12: Exports in `goog.module` - use `exports` object**
+Description: Classes, enums, functions, constants exported using `exports` object. Non-exported symbols not declared `@private`.
+Example: `exports = {exportedArray, exportedFunction};`
+Additional Notes: No prescribed ordering.

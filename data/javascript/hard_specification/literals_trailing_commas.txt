@@ -1,0 +1,10 @@
+**Specification 71: Object literals - use trailing commas when line break**
+Description: Include trailing comma whenever line break between final property and closing brace.
+Example:
+```javascript
+const a = {
+  a: 0,
+  b: 1,
+};
+```
+Additional Notes: None.

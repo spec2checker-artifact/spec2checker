@@ -1,0 +1,4 @@
+**Specification 109: Default values with type annotations - spaces around `=`**
+Description: Use spaces around `=` only for arguments that have both a type annotation and a default value.
+Example: `def func(a: int = 0) -> int:`
+Additional Notes: Not `def func(a:int=0)`.

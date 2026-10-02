@@ -1,0 +1,51 @@
+rules:
+- id: cpp-comment-tricky-code
+  message: Detect complex or non-obvious code sections that lack explanatory comments.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern-inside: |
+      class $CLASS {
+        ...
+      }
+  - pattern: |
+      $RET $FUNC(...) {
+        $STMT1;
+        ...
+        $STMT2;
+        ...
+        $STMT3;
+        ...
+      }
+  - metavariable-regex:
+      metavariable: $FUNC
+      regex: ^[a-z_][a-z0-9_]*$
+  - pattern-not-regex: '//\s'
+  - pattern-not-regex: '/\*'
+  metadata:
+    syntax_function: no_leading_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Complexity detection and comment association require custom logic.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to correlate complexity metrics with comment
+          presence.
+    original_description: Detect complex or non-obvious code sections that lack explanatory
+      comments.

@@ -1,0 +1,45 @@
+rules:
+- id: java-double-colon-break
+  message: Detect a line break before the double colon (::) operator used for method
+    reference or scope resolution.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: '$CLASS
+
+      ::
+
+      $METHOD(...)'
+  - metavariable-type:
+      metavariable: $CLASS
+      type: expr
+  - metavariable-type:
+      metavariable: $METHOD
+      type: expr
+  metadata:
+    'syntax_::': has_preceding_newline
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match false positives in complex expressions or comments.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not have a built-in rule for double colon break detection;
+          requires custom rule
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query for whitespace detection.
+    original_description: Detect a line break before the double colon (::) operator
+      used for method reference or scope resolution.

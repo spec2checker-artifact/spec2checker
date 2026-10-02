@@ -1,0 +1,4 @@
+**Specification 35: Avoid `thread_local` with complex destructors**  
+Description: Prefer trivial types for `thread_local` to avoid use-after-free bugs during thread exit.  
+Example: Use `int` or pointer.  
+Additional Notes: Destructors of `thread_local` variables can cause subtle bugs.

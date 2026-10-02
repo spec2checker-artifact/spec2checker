@@ -1,0 +1,4 @@
+**Specification 115: Avoid using `$*` for argument passing**
+Description: `$*` expands to one argument with all args joined by spaces, often not desired.
+Example: Not `mybinary $*`.
+Additional Notes: Use `"$@"`.

@@ -1,0 +1,4 @@
+**Specification 26: `goog.require` side effects - must be `goog.require`, comment required**
+Description: If module imported only for side effects, call must be `goog.require` (not `goog.requireType`) and assignment omitted; comment required to explain.
+Example: `/** @suppress {extraRequire} Initializes MyFramework. */ goog.require('my.framework.initialization');`
+Additional Notes: None.

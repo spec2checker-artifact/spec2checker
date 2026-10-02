@@ -1,0 +1,4 @@
+**Specification 21: Prefer `constexpr` for true constants**  
+Description: Use `constexpr` to define true constants or to ensure constant initialization.  
+Example: `constexpr int kDaysInWeek = 7;`  
+Additional Notes: Avoid complexifying function definitions to enable `constexpr`.

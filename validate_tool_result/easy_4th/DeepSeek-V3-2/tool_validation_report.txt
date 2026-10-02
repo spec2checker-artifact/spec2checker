@@ -1,0 +1,38 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-10 22:10:42
+Batch: easy_4th
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\easy\easy_4th.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       38 |       12 |       12 |
+| PMD             |        3 |        3 |        0 |        0 |
+| CodeQL          |        9 |        6 |        3 |        3 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       47 |        3 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 47/50 rules validated (94%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 38/50
+      -> 3 passed to PMD
+  PMD:     3/3
+      -> 9 passed to CodeQL
+  CodeQL:  6/9
+      -> 6 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- javascript-horizontal-whitespace-before-curly-brace (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-horizontal-whitespace-binary-ternary (javascript) [codeql/semgrep]: [semgrep] Rule not applicable / disabled by adapter; [codeql] CodeQL partial_support is false
+- javascript-line-wrap-after-operator (javascript) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- javascript-vertical-whitespace-methods (javascript) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- shell-case-indent-alternatives (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

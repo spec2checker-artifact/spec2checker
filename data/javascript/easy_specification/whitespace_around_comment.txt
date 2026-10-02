@@ -1,0 +1,4 @@
+**Specification 54: Horizontal whitespace - around `//` comment**
+Description: Space on both sides of `//` that begins end-of-line comment. Multiple spaces allowed.
+Example: `x = 1;  // comment`.
+Additional Notes: None.

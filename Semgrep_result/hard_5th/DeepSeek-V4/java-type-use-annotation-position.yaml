@@ -1,0 +1,14 @@
+rules:
+- id: java-type-use-annotation-position
+  message: '[DISABLED] Type-use annotations must appear immediately before the annotated
+    type and be meta-annotated with @Target(ElementType.TYPE_USE).'
+  languages:
+  - java
+  severity: ERROR
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Type-use annotations must appear immediately before the
+      annotated type and be meta-annotated with @Target(ElementType.TYPE_USE).

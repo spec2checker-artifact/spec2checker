@@ -1,0 +1,4 @@
+**Specification 18: Use `const` whenever meaningful**  
+Description: Use `const` in APIs (function parameters, methods, non-local variables) wherever meaningful and accurate.  
+Example: `const T&`, `const T*`  
+Additional Notes: Helps thread safety and readability.

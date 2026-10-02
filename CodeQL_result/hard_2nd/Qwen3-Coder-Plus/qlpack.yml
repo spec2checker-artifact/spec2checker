@@ -1,0 +1,5 @@
+name: hard_2nd/Qwen3-Coder-Plus
+version: 0.0.1
+dependencies:
+  codeql/cpp-all: "*"
+  codeql/python-all: "*"

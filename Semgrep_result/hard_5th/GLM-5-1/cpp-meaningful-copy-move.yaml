@@ -1,0 +1,14 @@
+rules:
+- id: cpp-meaningful-copy-move
+  message: '[DISABLED] Support copying and/or moving only if these operations are
+    clear and meaningful for your type. Avoid slicing by making base classes abstract.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Support copying and/or moving only if these operations are
+      clear and meaningful for your type. Avoid slicing by making base classes abstract.

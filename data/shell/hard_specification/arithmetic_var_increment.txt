@@ -1,0 +1,4 @@
+**Specification 79: Arithmetic - use `(( var += 3 ))` for increment**
+Description: Use `(( i += 3 ))` to increment variable.
+Example: `(( i += 3 ))`
+Additional Notes: No `$` inside `(( ))`.

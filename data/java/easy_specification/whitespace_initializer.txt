@@ -1,0 +1,4 @@
+Specification 51: Horizontal whitespace - inside array initializer braces
+Description: Optional space just inside both braces of an array initializer.
+Example: new int[] {5, 6} and new int[] { 5, 6 } both valid.
+Additional Notes: None.

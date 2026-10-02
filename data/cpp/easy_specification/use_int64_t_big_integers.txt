@@ -1,0 +1,4 @@
+**Specification 24: Use `int64_t` for "big" integers**  
+Description: For integers known to be "big", use `int64_t`.  
+Example: `int64_t file_offset;`  
+Additional Notes: None.

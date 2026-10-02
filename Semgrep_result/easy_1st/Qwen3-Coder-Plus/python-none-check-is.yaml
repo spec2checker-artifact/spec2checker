@@ -1,0 +1,14 @@
+rules:
+- id: python-none-check-is
+  message: '[DISABLED] Always use `if x is None` (or `is not None`) to check for `None`.
+    Do not use `if not x:` when `x` could be `0` or `''''`.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Always use `if x is None` (or `is not None`) to check for
+      `None`. Do not use `if not x:` when `x` could be `0` or `''`.

@@ -1,0 +1,4 @@
+**Specification 24: `goog.require`/`goog.requireType` - contiguous block, no empty lines**
+Description: These statements form a contiguous block with no empty lines, following `goog.module` separated by single empty line.
+Example: See example in guide.
+Additional Notes: May not appear elsewhere.

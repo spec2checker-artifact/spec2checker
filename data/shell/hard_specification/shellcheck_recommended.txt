@@ -1,0 +1,4 @@
+**Specification 74: ShellCheck recommended for all scripts**
+Description: The ShellCheck project identifies common bugs and warnings; recommended for all scripts, large or small.
+Example: Run `shellcheck myscript.sh`.
+Additional Notes: None.

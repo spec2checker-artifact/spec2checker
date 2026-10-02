@@ -1,0 +1,4 @@
+**Specification 57: Do not use `<cfenv>` or `<fenv.h>`**  
+Description: Do not use `<cfenv>` or `<fenv.h>` because many compilers do not support them reliably.  
+Example: Avoid `std::fenv`.  
+Additional Notes: None.

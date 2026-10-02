@@ -1,0 +1,42 @@
+rules:
+- id: shell-regex-match-operator
+  message: Use the `=~` operator for regex matching within `[[ ... ]]` conditional
+    constructs. The right-hand side of the operator should not be quoted.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: '[[ $EXPR =~ $RHS ]]'
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  - metavariable-type:
+      metavariable: $RHS
+      type: expr
+  metadata:
+    syntax_$RHS: is_not_quoted
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep's Bash/Shell support is limited; pattern may not correctly
+          enforce the RHS quoting constraint in all cases.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Shell/Bash analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support Shell/Bash analysis.
+    original_description: Use the `=~` operator for regex matching within `[[ ...
+      ]]` conditional constructs. The right-hand side of the operator should not be
+      quoted.

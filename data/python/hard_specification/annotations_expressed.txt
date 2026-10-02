@@ -1,0 +1,4 @@
+**Specification 106: Type annotations - use `Any` when type cannot be expressed**
+Description: If any variable or returned type should not be expressed, use `Any`.
+Example: `x: Any = some_func()`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 11: Macro names - ALL_CAPS with project prefix**  
+Description: Macros (if absolutely needed) should be named with all capitals and underscores, with a project-specific prefix.  
+Example: `#define MYPROJECT_ROUND(x) ...`  
+Additional Notes: Macros are generally discouraged.

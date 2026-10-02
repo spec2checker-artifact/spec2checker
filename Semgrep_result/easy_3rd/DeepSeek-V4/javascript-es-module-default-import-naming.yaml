@@ -1,0 +1,14 @@
+rules:
+- id: javascript-es-module-default-import-naming
+  message: '[DISABLED] Default import names derived from file name must follow identifier
+    naming rules (e.g., camelCase).'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Default import names derived from file name must follow
+      identifier naming rules (e.g., camelCase).

@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-05-15 17:47:27",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_2nd.json",
+  "batch": "easy_2nd",
+  "model": "DeepSeek-V4",
+  "total_rules": 50,
+  "validated_count": 47,
+  "rules": {
+    "semgrep": [
+      "cpp-thread-local-constinit",
+      "cpp-auto-usage-clarity",
+      "cpp-const-placement-consistency",
+      "cpp-avoid-macros-in-headers",
+      "cpp-braced-initialization-64bit",
+      "cpp-avoid-decltype-auto",
+      "cpp-no-using-namespace-std",
+      "cpp-auto-type-deduction",
+      "cpp-macro-naming-prefix",
+      "java-assignment-break-after-symbol",
+      "java-single-variable-declaration",
+      "java-break-before-non-assignment-operator",
+      "java-type-variable-naming",
+      "java-parameter-naming-lowercamelcase",
+      "java-parameter-single-char-avoid-public",
+      "java-method-name-attached-parenthesis",
+      "java-keyword-parenthesis-spacing",
+      "java-classname-uppercamelcase",
+      "javascript-horizontal-whitespace-around-comment",
+      "javascript-vertical-whitespace-function",
+      "javascript-import-extension-required",
+      "javascript-horizontal-whitespace-before-brace",
+      "javascript-non-ascii-readability",
+      "javascript-grouping-parentheses-recommended",
+      "javascript-no-jsdoc-for-implementation",
+      "javascript-no-default-export",
+      "python-limit-classmethod",
+      "python-avoid-staticmethod",
+      "python-future-import-encouraged",
+      "python-import-style",
+      "python-integer-compare-zero",
+      "python-no-assert-precondition",
+      "python-comprehension-simple-only",
+      "shell-long-literal-string",
+      "shell-quoted-array-expansion",
+      "shell-control-flow-same-line",
+      "shell-function-naming-lowercase-underscore",
+      "shell-for-loop-in-array",
+      "shell-single-string-args",
+      "shell-use-readarray"
+    ],
+    "pmd": [
+      "java-imports-no-line-wrapping"
+    ],
+    "codeql": [
+      "cpp-filename-lowercase-underscore-dash",
+      "javascript-horizontal-whitespace-after-comma-semicolon",
+      "javascript-generic-comma-line-wrapping",
+      "python-whitespace-no-vertical-alignment",
+      "python-whitespace-no-space-before-punctuation",
+      "python-whitespace-inside-parens"
+    ]
+  }
+}

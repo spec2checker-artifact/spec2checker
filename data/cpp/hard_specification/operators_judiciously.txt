@@ -1,0 +1,4 @@
+**Specification 23: Overload operators judiciously**  
+Description: Overload operators only if their meaning is obvious, unsurprising, and consistent with built-in operators.  
+Example: Define `operator==` for equality comparison.  
+Additional Notes: Do not overload `&&`, `||`, `,` (comma), or unary `&`.

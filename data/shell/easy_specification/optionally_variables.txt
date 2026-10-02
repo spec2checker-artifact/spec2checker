@@ -1,0 +1,4 @@
+**Specification 36: Optionally quote shell-internal integer special variables**
+Description: Optionally quote shell-internal, readonly special variables that are integers: `$?`, `$#`, `$$`, `$!`. Prefer quoting named internal integer variables (e.g., `PPID`) for consistency.
+Example: `echo "ppid=${PPID}"` (quoted).
+Additional Notes: It’s ok to not quote inside `(( ))`.

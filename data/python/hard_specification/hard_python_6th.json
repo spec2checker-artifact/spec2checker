@@ -1,0 +1,508 @@
+[
+  {
+    "rule_id": "python-avoid-todo-individual-context",
+    "language": "python",
+    "description": "Avoid adding TODO comments that refer to an individual or team as the context. Use an issue tracker instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "# TODO: $PREFIX$USER$SUFFIX",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$USER": {
+          "type_hint": "expr",
+          "regex": "@?[a-zA-Z0-9_-]+"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "comment",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('TODO.*@')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex matching on comments may have false positives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for comment pattern matching"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\avoid_individual_context.txt",
+      "section": "avoid_individual_context"
+    }
+  },
+  {
+    "rule_id": "python-statements-one-per-line",
+    "language": "python",
+    "description": "Generally only one statement per line. Compound statements like try/except or if/else are not allowed on the same line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "try: ... except ...: ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_compound_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for each compound statement type (if, try, with, etc.)"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect multiple statements per line"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\statements_generally_line.txt",
+      "section": "statements_generally_line"
+    }
+  },
+  {
+    "rule_id": "python-function-length-excessive",
+    "language": "python",
+    "description": "Prefer small and focused functions. Functions exceeding approximately 40 lines should be considered for refactoring.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can detect function definitions but requires custom logic to count lines accurately."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to compute function body line count."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\function_focused_functions.txt",
+      "section": "function_focused_functions"
+    }
+  },
+  {
+    "rule_id": "python-generics-specify-type-parameters",
+    "language": "python",
+    "description": "Prefer to specify type parameters for generic types in type annotations; otherwise they are assumed to be `Any`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC($ARGS) -> $RET:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$RET": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$RET",
+        "constraint_type": "type",
+        "condition": "is_generic_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to identify generic types and their parameters"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires Python type analysis library"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\generics_parameters.txt",
+      "section": "generics_parameters"
+    }
+  },
+  {
+    "rule_id": "python-multiline-string-docstring",
+    "language": "python",
+    "description": "Prefer `\"\"\"` for multi-line strings. Docstrings must use `\"\"\"`. Projects may use `'''` for non-docstring multi-line strings if they use `'` for regular strings.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STRING = '''$CONTENT'''",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRING": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "string",
+        "constraint_type": "scope",
+        "condition": "is_docstring",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably distinguish docstrings from regular multi-line strings in all contexts without deeper AST analysis."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce project-specific conventions for non-docstring strings."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\strings_prefer_docstrings.txt",
+      "section": "strings_prefer_docstrings"
+    }
+  },
+  {
+    "rule_id": "python-naming-guidelines",
+    "language": "python",
+    "description": "Enforce naming conventions for Python identifiers: packages `lower_with_under`, classes `CapWords`, exceptions `CapWords`, functions `lower_with_under()`, constants `CAPS_WITH_UNDER`. Internal versions prefix `_`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rules for each identifier type and cannot enforce conventions across entire file/project without multiple patterns"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires writing custom query for each naming pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\guidelines_recommendations.txt",
+      "section": "guidelines_recommendations"
+    }
+  },
+  {
+    "rule_id": "python-imports-sort-lexicographically",
+    "language": "python",
+    "description": "Within each grouping, imports should be sorted lexicographically, ignoring case, according to full package path.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for import ordering analysis"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for import ordering"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\imports_lexicographically.txt",
+      "section": "imports_lexicographically"
+    }
+  },
+  {
+    "rule_id": "python-string-type-usage",
+    "language": "python",
+    "description": "Use `str` for string/text data, `bytes` for binary data. Do not use `typing.Text`. Use `typing.AnyStr` if all string types are the same.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import typing\n...\n$VAR: typing.Text",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "annotation",
+        "constraint_type": "type",
+        "condition": "is_type('typing.Text')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect explicit `typing.Text` usage but may not infer correct usage of `str` vs `bytes` in all contexts."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to fully enforce `str` for text and `bytes` for binary data."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\string_types_bytes_binary.txt",
+      "section": "string_types_bytes_binary"
+    }
+  },
+  {
+    "rule_id": "python-avoid-string-concat-in-loops",
+    "language": "python",
+    "description": "Avoid using '+' and '+=' to accumulate a string in a loop; use list.append and ''.join to avoid quadratic behavior.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for $VAR in $ITER:\n    $ACCUM = $ACCUM + $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ACCUM": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ACCUM",
+        "constraint_type": "syntactic",
+        "condition": "is_same_variable",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May not detect all accumulator patterns or nested loops."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect string concatenation in loops."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\strings_avoid_+_+=_loops.txt",
+      "section": "strings_avoid_+_+=_loops"
+    }
+  },
+  {
+    "rule_id": "python-names-avoid-single-char",
+    "language": "python",
+    "description": "Avoid single character names except for counters/iterators (i, j, k, v), e for exception, f for file handle, private type variables, and established mathematical notation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NAME",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z]$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "is_identifier",
+        "required": "true"
+      },
+      {
+        "target": "$NAME",
+        "constraint_type": "syntactic",
+        "condition": "not name_matches_regex('^[ijvkef]$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "May have false positives for allowed single-letter names without additional context (e.g., loop counters)."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude allowed cases based on usage context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\hard_specification\\character_except_allowed.txt",
+      "section": "character_except_allowed"
+    }
+  }
+]

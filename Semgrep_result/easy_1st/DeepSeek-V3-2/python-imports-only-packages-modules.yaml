@@ -1,0 +1,35 @@
+rules:
+- id: python-imports-only-packages-modules
+  message: "[DISABLED] This rule has been disabled due to 0% precision (216/216 false
+    positives). All `from ... import ...` is valid Python per PEP 8."
+  languages:
+  - python
+  severity: INFO
+  patterns:
+  - pattern: from $MODULE import $ITEM
+  - pattern-not: from $MODULE import $ITEM
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: exemption list may need manual extension
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for exemption list
+    original_description: Use import statements for packages and modules only, not
+      for individual types, classes, or functions. Exemptions for typing, collections.abc,
+      typing_extensions, six.moves.

@@ -1,0 +1,11 @@
+**Specification 68: Overridden methods - docstring optional with `@override`**
+Description: A method that overrides a base class method does not need a docstring if decorated with `@override` (from `typing` or `typing_extensions`).
+Example:
+```python
+from typing_extensions import override
+class Child(Parent):
+    @override
+    def do_something(self):
+        pass
+```
+Additional Notes: If behavior refines contract, provide docstring with differences.

@@ -1,0 +1,4 @@
+**Specification 60: Do not define implicit conversions**  
+Description: Do not define implicit conversions. Use `explicit` keyword.  
+Example: Not `operator bool() const;` without `explicit`.  
+Additional Notes: Exceptions for types designed to be interchangeable (waiver required).

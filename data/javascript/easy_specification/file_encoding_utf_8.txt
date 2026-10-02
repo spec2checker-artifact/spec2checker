@@ -1,0 +1,4 @@
+**Specification 2: File encoding - UTF-8**
+Description: Source files are encoded in UTF-8.
+Example: All `.js` files saved as UTF-8.
+Additional Notes: None.

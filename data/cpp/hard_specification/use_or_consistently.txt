@@ -1,0 +1,4 @@
+**Specification 43: Use `//` or `/* */` consistently**  
+Description: Use either `//` or `/* */` syntax, as long as you are consistent. `//` is much more common.  
+Example: `// This is a comment.`  
+Additional Notes: None.

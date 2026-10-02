@@ -1,0 +1,4 @@
+**Specification 25: Case - no need to quote match expressions generally**
+Description: In general, there is no need to quote match expressions.
+Example: `a)` not `'a')`.
+Additional Notes: None.

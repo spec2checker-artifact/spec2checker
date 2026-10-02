@@ -1,0 +1,4 @@
+**Specification 49: Indentation - 4 spaces, no tabs**
+Description: Indent code blocks with 4 spaces. Never use tabs.
+Example: Use 4 spaces per level.
+Additional Notes: Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.

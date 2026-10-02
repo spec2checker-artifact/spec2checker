@@ -1,0 +1,4 @@
+**Specification 14: Use default capture by reference (`[&]`) only when lifetime is shorter**  
+Description: Use default capture by reference only when the lifetime of the lambda is obviously shorter than any potential captures.  
+Example: `std::for_each(v.begin(), v.end(), [&](int x) { sum += x; });`  
+Additional Notes: None.

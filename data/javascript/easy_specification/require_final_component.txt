@@ -1,0 +1,4 @@
+**Specification 25: `goog.require` alias must match final component**
+Description: When `goog.require` assigned to single constant alias, it must match final dot-separated component of namespace.
+Example: `const asserts = goog.require('goog.asserts');`
+Additional Notes: Longer aliases allowed to disambiguate or prevent masking native types.

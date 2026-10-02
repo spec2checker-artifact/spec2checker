@@ -1,0 +1,4 @@
+**Specification 120: Consistency - when in doubt, be consistent**
+Description: Using one style consistently through codebase lets us focus on other issues. Consistency should not justify old style without considering benefits of new style.
+Example: Follow local style, but new code may adopt modern practices.
+Additional Notes: Limits to consistency.

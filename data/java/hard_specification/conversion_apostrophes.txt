@@ -1,0 +1,4 @@
+Specification 106: Camel case conversion - step 1: ASCII and apostrophes
+Description: Convert phrase to plain ASCII, remove apostrophes.
+Example: "Müller's algorithm" → "Muellers algorithm"
+Additional Notes: None.

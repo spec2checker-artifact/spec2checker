@@ -1,0 +1,566 @@
+[
+  {
+    "rule_id": "javascript-prefer-for-of",
+    "language": "javascript",
+    "description": "Prefer `for-of` loops for iterating over arrays and iterables. `for-in` loops should only be used for dict-style objects and must use `hasOwnProperty` check.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "for (const $VAR in $ITERABLE) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$ITERABLE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ITERABLE",
+        "constraint_type": "type",
+        "condition": "is_array_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Type constraint for array detection may be limited without type resolution."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has a rule 'ForLoopShouldBeWhileLoop' but not a specific rule for preferring for-of."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to distinguish arrays from objects."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\for_loops_prefer_for_of.txt",
+      "section": "for_loops_prefer_for_of"
+    }
+  },
+  {
+    "rule_id": "javascript-custom-exception-required",
+    "language": "javascript",
+    "description": "Detect usage of the native Error constructor where a custom exception class extending Error should be defined and used instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "throw new Error($MSG);",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MSG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "throw",
+        "constraint_type": "inheritance",
+        "condition": "not_extends('Error')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Inheritance check for custom exceptions may be limited without deeper type analysis."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to check if a thrown Error is an instance of a user-defined subclass."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\exceptions_insufficient.txt",
+      "section": "exceptions_insufficient"
+    }
+  },
+  {
+    "rule_id": "javascript-spread-operator-preferred",
+    "language": "javascript",
+    "description": "Use spread operator `...` to flatten iterables. Prefer over `Array.prototype.slice` or `concat`. No space after `...`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARRAY.slice($START, $END)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARRAY": {
+          "type_hint": "expr"
+        },
+        "$START": {
+          "type_hint": "expr"
+        },
+        "$END": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot enforce preference; only detects slice usage."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect slice/concat usage and suggest spread."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_preferred.txt",
+      "section": "literals_preferred"
+    }
+  },
+  {
+    "rule_id": "javascript-no-array-constructor",
+    "language": "javascript",
+    "description": "Do not use variadic `Array` constructor; error-prone. Use literal instead. Explicit allocation `new Array(length)` is allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "new Array($ARGS)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARGS",
+        "constraint_type": "syntactic",
+        "condition": "not_single_numeric_literal",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\do_not_array_constructor.txt",
+      "section": "do_not_array_constructor"
+    }
+  },
+  {
+    "rule_id": "javascript-static-this-access",
+    "language": "javascript",
+    "description": "Do not access `this` in static methods. Use the class name instead.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "static $METHOD(...) { ... $THIS ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$METHOD": {
+          "type_hint": "function"
+        },
+        "$THIS": {
+          "type_hint": "expr",
+          "regex": "^this(\\.|\\[|$)"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "has_modifier('static')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for `this` keyword in static method body"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for static method detection and `this` access"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\methods_static_methods.txt",
+      "section": "methods_static_methods"
+    }
+  },
+  {
+    "rule_id": "javascript-this-usage",
+    "language": "javascript",
+    "description": "Use `this` only in class constructors/methods, arrow functions defined within them, or functions with explicit `@this` annotation. Never for global object, `eval`, event target, or unnecessary `call`/`apply`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "this",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "expr",
+        "constraint_type": "syntactic",
+        "condition": "not_in_class_method",
+        "required": "false"
+      },
+      {
+        "target": "expr",
+        "constraint_type": "syntactic",
+        "condition": "not_in_arrow_function",
+        "required": "false"
+      },
+      {
+        "target": "expr",
+        "constraint_type": "annotation",
+        "condition": "not_has_annotation('this')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires complex pattern matching for context and may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query for `@this` annotation and arrow function context"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\constructorsmet_functions.txt",
+      "section": "constructorsmet_functions"
+    }
+  },
+  {
+    "rule_id": "javascript-top-level-function-export",
+    "language": "javascript",
+    "description": "Top-level functions may be defined directly on `exports` object, or declared locally and exported.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "exports.$FUNC = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\functions_exports_locally.txt",
+      "section": "functions_exports_locally"
+    }
+  },
+  {
+    "rule_id": "javascript-enum-annotation-object-literal",
+    "language": "javascript",
+    "description": "Detects enumerations defined by adding a JSDoc `@enum` annotation to an object literal. The object must be module-local or on `exports`, its values must be string literals or numbers, and no additional properties should be added after its definition.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** @enum {$TYPE} */\nconst $NAME = $OBJ;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$NAME": {
+          "type_hint": "expr"
+        },
+        "$OBJ": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OBJ",
+        "constraint_type": "syntactic",
+        "condition": "is_object_literal",
+        "required": "true"
+      },
+      {
+        "target": "$OBJ",
+        "constraint_type": "syntactic",
+        "condition": "all_property_values_are_literals",
+        "required": "true"
+      },
+      {
+        "target": "$NAME",
+        "constraint_type": "scope",
+        "condition": "is_constant",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can match the pattern but may not fully validate all property values are literals or the constant scope."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check for @enum annotation and object literal properties."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\defined_object_literal.txt",
+      "section": "defined_object_literal"
+    }
+  },
+  {
+    "rule_id": "javascript-local-var-declaration",
+    "language": "javascript",
+    "description": "Declare all local variables with `const` or `let`. Use `const` by default unless variable needs reassignment. `var` must not be used.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "var $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\variable_declarations.txt",
+      "section": "variable_declarations"
+    }
+  },
+  {
+    "rule_id": "javascript-prefer-template-literals",
+    "language": "javascript",
+    "description": "Use template literals `` `...` `` over complex string concatenation, especially with multiple literals. May span multiple lines.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$A + $B",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$A": {
+          "type_hint": "expr"
+        },
+        "$B": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$A",
+        "constraint_type": "type",
+        "condition": "is_string_type",
+        "required": "true"
+      },
+      {
+        "target": "$B",
+        "constraint_type": "type",
+        "condition": "is_string_type",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "type resolution for string detection may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type inference for string operands"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_concatenation.txt",
+      "section": "literals_concatenation"
+    }
+  }
+]

@@ -1,0 +1,4 @@
+**Specification 36: Function and method decorators - use judiciously**
+Description: Use decorators judiciously when there is a clear advantage.
+Example: `@property`, `@classmethod`
+Additional Notes: Avoid external dependencies in decorator itself.

@@ -1,0 +1,4 @@
+**Specification 117: Use `(( ... ))` for arithmetic in `if` statements**
+Description: Use `(( a < b ))` directly in `if` statements.
+Example: `if (( a < b )); then`
+Additional Notes: None.

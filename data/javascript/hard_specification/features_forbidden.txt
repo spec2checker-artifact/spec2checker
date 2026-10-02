@@ -1,0 +1,4 @@
+**Specification 117: Non-standard features - forbidden**
+Description: Do not use non-standard features (removed, not yet standardized, proprietary). Use only current ECMA-262 or WHATWG standards.
+Example: Not `WeakMap.clear` (removed).
+Additional Notes: Project-specific APIs (Chrome extensions, Node.js) allowed.

@@ -1,0 +1,4 @@
+**Specification 81: Avoid `expr` - external program slower than builtin arithmetic**
+Description: Avoid `expr`; built-in arithmetic is many times faster.
+Example: Not `i=$( expr 4 + 4 )`.
+Additional Notes: None.

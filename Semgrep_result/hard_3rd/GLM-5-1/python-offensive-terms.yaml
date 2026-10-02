@@ -1,0 +1,38 @@
+rules:
+- id: python-offensive-terms
+  message: Detect the use of offensive or non-inclusive terms in identifiers (function,
+    class, variable names).
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: $NAME
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: (?i)\b(master|slave|blacklist|whitelist|dummy|retard|retarded|gimp|gimped|spaz|spazzed|madman|crazy|insane|lunatic|psycho|psychotic|idiot|moron|imbecile|stupid|dumb|retard|retarded|gimp|gimped|spaz|spazzed|madman|crazy|insane|lunatic|psycho|psychotic|idiot|moron|imbecile|stupid|dumb)\b
+  metadata:
+    syntax_$NAME: is_identifier
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based detection may have false positives/negatives; list
+          of terms is not exhaustive.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query with regex matching on identifier names.
+    original_description: Detect the use of offensive or non-inclusive terms in identifiers
+      (function, class, variable names).

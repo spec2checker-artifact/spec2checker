@@ -1,0 +1,42 @@
+rules:
+- id: python-class-docstring-required
+  message: Classes should have a docstring below the class definition describing the
+    class.
+  languages:
+  - python
+  severity: INFO
+  patterns:
+  - pattern-either:
+    - pattern: "class $CLASS(...):\n    ..."
+    - pattern: "class $CLASS:\n    ..."
+  - pattern-not: "class $CLASS(...):\n    \"\"\"$DOC\"\"\"\n    ..."
+  - pattern-not: "class $CLASS:\n    \"\"\"$DOC\"\"\"\n    ..."
+  - pattern-not: "class $CLASS(...):\n    '''$DOC'''\n    ..."
+  - pattern-not: "class $CLASS:\n    '''$DOC'''\n    ..."
+  - pattern-not: "class $CLASS($BASE):\n    pass"
+  - pattern-not: "class $CLASS:\n    pass"
+  metadata:
+    syntax_class: missing_docstring
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom logic to detect missing docstrings
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check for docstring presence
+    original_description: "Classes should have a docstring below the class definition describing the class. Document public attributes in an Attributes: section."
+    iteration2_note: "Downgraded to INFO severity. Removed Attributes requirement per evaluate2. Rewrote using structural pattern-not for docstrings and pass-only classes instead of pattern-not-regex. 34.9% precision per evaluate2 (28 FP from classes that already had docstrings)."

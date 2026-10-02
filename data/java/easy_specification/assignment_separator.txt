@@ -1,0 +1,4 @@
+Specification 26: Non-assignment operator - dot separator
+Description: Dot separator (.) break comes before it.
+Example: object .method() (break before .)
+Additional Notes: None.

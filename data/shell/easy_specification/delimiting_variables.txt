@@ -1,0 +1,4 @@
+**Specification 32: Prefer brace-delimiting all other variables**
+Description: Prefer brace-delimiting all other variables.
+Example: `${PATH}`, `${some_var}`.
+Additional Notes: None.

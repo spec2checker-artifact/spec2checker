@@ -1,0 +1,4 @@
+**Specification 19: Make copyable/movable types clear**  
+Description: A class's public API must make clear whether it is copyable, move-only, or neither.  
+Example: `class Copyable { public: Copyable(const Copyable&) = default; ... };`  
+Additional Notes: See rules for declaring/deleting operations.

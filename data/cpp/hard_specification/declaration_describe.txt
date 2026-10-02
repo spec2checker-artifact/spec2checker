@@ -1,0 +1,4 @@
+**Specification 47: Function declaration comments describe use**  
+Description: Almost every function declaration should have comments describing what it does and how to use it. Omit only for simple obvious functions.  
+Example: `// Returns an iterator for this table...`  
+Additional Notes: Use verb phrase, e.g., "Opens the file".

@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-05-13 12:10:32",
+  "input_file": "D:\\Sepc2Checker\\UIR\\easy\\easy_1st.json",
+  "batch": "easy_1st",
+  "model": "GLM-5.1",
+  "total_rules": 50,
+  "validated_count": 47,
+  "rules": {
+    "semgrep": [
+      "cpp-const-method-missing",
+      "cpp-prefer-sizeof-varname",
+      "cpp-override-annotation-required",
+      "cpp-lambda-appropriate-use",
+      "cpp-use-struct-for-data",
+      "cpp-no-using-namespace-std",
+      "cpp-use-int64-for-big-integers",
+      "cpp-auto-usage-clarity",
+      "java-local-variable-lower-camel-case",
+      "java-imports-ordering-non-static-group",
+      "java-method-name-attached-parenthesis",
+      "java-horizontal-whitespace-catch-pipe",
+      "java-horizontal-whitespace-ampersand-type-bounds",
+      "java-package-no-line-wrap",
+      "java-class-name-uppercamelcase",
+      "java-imports-no-line-wrapping",
+      "javascript-avoid-goog-module-declarelegacynamespace",
+      "javascript-non-ascii-characters",
+      "javascript-goog-require-contiguous-block",
+      "javascript-column-limit-80",
+      "javascript-export-from-no-line-wrap",
+      "javascript-horizontal-whitespace-around-comment",
+      "javascript-one-statement-per-line",
+      "javascript-import-extension-required",
+      "python-mutable-global-state",
+      "python-none-check-is",
+      "python-import-rename-as",
+      "python-whitespace-binary-operator",
+      "python-mutable-global-state-internal",
+      "python-imports-only-packages-modules",
+      "python-lambda-length-check",
+      "python-avoid-power-features",
+      "python-limit-classmethod",
+      "shell-control-flow-same-line",
+      "shell-no-quote-match-expr",
+      "shell-use-dollar-paren-instead-of-backticks",
+      "shell-avoid-single-string-args",
+      "shell-use-arrays-for-quoting",
+      "shell-variable-expansion-quote",
+      "shell-braces-same-line-no-space"
+    ],
+    "pmd": [
+      "JavaHorizontalWhitespaceBeforeOpenCurlyBrace",
+      "JavaModuleDirectivesOrdering"
+    ],
+    "codeql": [
+      "cpp-include-guard-format",
+      "cpp-avoid-usr-include-filename",
+      "javascript-block-comment-indentation",
+      "javascript-generic-trailing-whitespace",
+      "python-whitespace-inside-parens"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+**Specification 46: Avoid `eval`**
+Description: `eval` should be avoided.
+Example: Do not use `eval $(set_my_variables)`.
+Additional Notes: Munges input, can set variables unpredictably.

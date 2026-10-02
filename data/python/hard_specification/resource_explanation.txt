@@ -1,0 +1,4 @@
+**Specification 82: TODO comments - format with `TODO: resource - explanation`**
+Description: Use `TODO` comments with `TODO:` followed by a link (preferably bug reference) and hyphen-explanation.
+Example: `# TODO: crbug.com/192795 - Investigate cpufreq optimizations.`
+Additional Notes: Avoid old style `TODO(username):`.

@@ -1,0 +1,34 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-15 01:41:29
+Batch: hard_3rd
+Model: GLM-5.1
+Input: <PROJECT_ROOT>\UIR\hard\hard_3rd.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       41 |        9 |        9 |
+| PMD             |        2 |        1 |        1 |        1 |
+| CodeQL          |        7 |        7 |        0 |        0 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       49 |        1 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 49/50 rules validated (98%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 41/50
+      -> 2 passed to PMD
+  PMD:     1/2
+      -> 7 passed to CodeQL
+  CodeQL:  7/7
+      -> 1 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- shell-recommend-shellcheck (shell) [semgrep]: [semgrep] Not applicable: semgrep partial_support is false

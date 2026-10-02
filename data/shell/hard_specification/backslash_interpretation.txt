@@ -1,0 +1,4 @@
+**Specification 116: Use `read -r` to prevent backslash interpretation**
+Description: Use `read -r` to prevent backslash interpretation.
+Example: `while read -r line; do`
+Additional Notes: None.

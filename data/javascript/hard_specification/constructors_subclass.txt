@@ -1,0 +1,4 @@
+**Specification 80: Classes - constructors optional, subclass must call `super()`**
+Description: Constructors optional. Subclass constructors must call `super()` before setting fields or accessing `this`. Interfaces declare non-method properties in constructor.
+Example: `constructor() { super(); this.foo = 1; }`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 5: Implementation comments - comment tricky parts**
+Description: Comment tricky, non-obvious, interesting or important parts of your code.
+Example: `# We use a weighted dictionary search...`
+Additional Notes: Don’t comment everything.

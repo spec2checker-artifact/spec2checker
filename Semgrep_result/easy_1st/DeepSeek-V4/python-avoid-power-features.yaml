@@ -1,0 +1,16 @@
+rules:
+- id: python-avoid-power-features
+  message: '[DISABLED] Avoid power features like custom metaclasses, bytecode access,
+    and dynamic inheritance. Standard library modules using them (e.g., abc.ABC, dataclasses,
+    enum) are acceptable.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Avoid power features like custom metaclasses, bytecode access,
+      and dynamic inheritance. Standard library modules using them (e.g., abc.ABC,
+      dataclasses, enum) are acceptable.

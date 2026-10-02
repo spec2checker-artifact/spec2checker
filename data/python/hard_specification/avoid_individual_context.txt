@@ -1,0 +1,4 @@
+**Specification 83: TODO - avoid individual or team as context**
+Description: Avoid adding TODOs that refer to an individual or team as the context.
+Example: `# TODO: @yourusername - ...` (discouraged)
+Additional Notes: Use issue tracker instead.

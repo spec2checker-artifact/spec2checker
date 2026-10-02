@@ -1,0 +1,8 @@
+**Specification 67: Use `main` function for scripts with at least one other function**
+Description: A function called `main` is required for scripts long enough to contain at least one other function.
+Example:
+```bash
+main() { ... }
+main "$@"
+```
+Additional Notes: `main` as bottom-most function.

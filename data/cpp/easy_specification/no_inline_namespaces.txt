@@ -1,0 +1,4 @@
+**Specification 15: No inline namespaces**  
+Description: Do not use inline namespaces.  
+Example: `inline namespace inner { ... }` (not allowed).  
+Additional Notes: Inline namespaces are confusing.

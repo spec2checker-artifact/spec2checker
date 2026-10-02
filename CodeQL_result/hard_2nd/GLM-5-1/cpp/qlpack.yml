@@ -1,0 +1,4 @@
+name: hard-2nd-glm-5-1-cpp/custom
+version: 0.0.1
+dependencies:
+  codeql/cpp-all: "^10.1.0"

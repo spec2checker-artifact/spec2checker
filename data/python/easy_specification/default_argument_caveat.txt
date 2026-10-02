@@ -1,0 +1,4 @@
+**Specification 25: Default argument values - okay with caveat**
+Description: Default argument values are okay, but do not use mutable objects as default values.
+Example: `def foo(a, b=None): if b is None: b = []`
+Additional Notes: Use `None` and then create mutable inside.

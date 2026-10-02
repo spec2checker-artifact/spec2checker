@@ -1,0 +1,4 @@
+Specification 113: @Override - always used when legal
+Description: Mark method with @Override whenever legal, including overriding superclass method, implementing interface method, respecifying superinterface method, and record component accessor.
+Example: @Override public String toString() { ... }
+Additional Notes: None.

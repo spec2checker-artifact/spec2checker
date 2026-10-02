@@ -1,0 +1,4 @@
+**Specification 59: Mark single-argument constructors `explicit`**  
+Description: Type conversion operators and constructors callable with a single argument must be marked `explicit`.  
+Example: `explicit MyClass(int x);`  
+Additional Notes: Copy/move constructors are exception.

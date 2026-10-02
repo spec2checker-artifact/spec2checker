@@ -1,0 +1,4 @@
+Specification 99: Constant names - UPPER_SNAKE_CASE
+Description: Constant names use UPPER_SNAKE_CASE (all uppercase, words separated by single underscore).
+Example: MAX_COUNT
+Additional Notes: Only for static final fields with deeply immutable contents and no side-effect methods.

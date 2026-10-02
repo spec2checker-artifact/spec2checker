@@ -1,0 +1,4 @@
+**Specification 49: Avoid using a single string for multiple command arguments**
+Description: Using a single string for multiple command arguments should be avoided; leads to `eval` or quoting nightmares.
+Example: Don’t do `flags='--foo --bar=baz'`.
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 15: ES modules - `import` statements no line wrap**
+Description: Import statements must not be line wrapped; exception to 80-column limit.
+Example: `import {name} from './sibling.js';`
+Additional Notes: None.

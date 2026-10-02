@@ -1,0 +1,14 @@
+rules:
+- id: java-caught-exception-not-ignored
+  message: '[DISABLED] Detect catch blocks that do nothing in response to a caught
+    exception, which is rarely correct. Typical responses include logging or rethrowing.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect catch blocks that do nothing in response to a caught
+      exception, which is rarely correct. Typical responses include logging or rethrowing.

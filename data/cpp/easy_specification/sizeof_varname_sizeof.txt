@@ -1,0 +1,4 @@
+**Specification 29: Prefer `sizeof(varname)` over `sizeof(type)`**  
+Description: Use `sizeof(varname)` when taking size of a particular variable.  
+Example: `memset(&data, 0, sizeof(data));`  
+Additional Notes: Updates automatically if variable type changes.

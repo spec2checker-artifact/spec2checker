@@ -1,0 +1,4 @@
+Specification 11: Imports ordering - non-static group
+Description: All non-static imports in a single group.
+Example: import java.util.List;
+Additional Notes: Separate from static group by a blank line.

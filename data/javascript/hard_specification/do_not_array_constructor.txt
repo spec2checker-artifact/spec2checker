@@ -1,0 +1,4 @@
+**Specification 67: Do not use `Array` constructor**
+Description: Do not use variadic `Array` constructor; error-prone. Use literal instead.
+Example: `const a = [x1, x2, x3];` not `new Array(x1, x2, x3);`
+Additional Notes: Explicit allocation `new Array(length)` allowed.

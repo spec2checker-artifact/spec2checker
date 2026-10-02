@@ -1,0 +1,4 @@
+**Specification 116: String types - use `str` for text, `bytes` for binary**
+Description: Use `str` for string/text data, `bytes` for binary data. Do not use `typing.Text`.
+Example: `def f(x: str) -> str:`
+Additional Notes: Use `AnyStr` if all string types are the same.

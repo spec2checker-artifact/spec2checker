@@ -1,0 +1,37 @@
+rules:
+- id: javascript-import-no-line-wrap
+  message: ES module import statements must not be line wrapped; each import should
+    be on a single line.
+  languages:
+  - javascript
+  - typescript
+  severity: ERROR
+  patterns:
+  - pattern-regex: 'import\s*\{[^}]*\n[^;]*\}\s*from\s+[\'"][^\'"]+[\'"]\s*;'
+  - pattern-not-regex: 'import\s*\{\s*\w+\s*\}\s*from'
+  metadata:
+    syntax_statement: line_count_greater_than_1_with_actual_newline_in_braces
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Only matches multi-line import statements with newline inside
+          braces
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect multi-line import statements
+    original_description: ES module import statements must not be line wrapped; they
+      are an exception to the 80-column limit.

@@ -1,0 +1,37 @@
+rules:
+- id: cpp-prefer-using-over-typedef
+  message: In new code, prefer `using` over `typedef` for type aliases, as `using`
+    works better with templates.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: typedef $TYPE $ALIAS;
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $ALIAS
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: In new code, prefer `using` over `typedef` for type aliases,
+      as `using` works better with templates.

@@ -1,0 +1,4 @@
+**Specification 53: TODO comments format**  
+Description: `TODO` comments should include `TODO` in all caps, followed by bug ID, name, email, or identifier.  
+Example: `// TODO: bug 12345678 - Remove this after the 2047q4 compatibility window expires.`  
+Additional Notes: Include specific date or event.

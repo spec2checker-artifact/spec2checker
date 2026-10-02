@@ -1,0 +1,4 @@
+**Specification 82: Declare integer variables with `declare -i` or `local -i` when possible**
+Description: Remember to declare variables as integers when possible, and prefer local variables over globals.
+Example: `local -i hundred="$(( 10 * 10 ))"`
+Additional Notes: None.

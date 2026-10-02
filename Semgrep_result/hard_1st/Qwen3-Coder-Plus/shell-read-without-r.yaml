@@ -1,0 +1,35 @@
+rules:
+- id: shell-read-without-r
+  message: Use `read -r` to prevent backslash interpretation.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: read $VAR
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_read: not_contains_option('-r')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to match 'read' without '-r' flag
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Use `read -r` to prevent backslash interpretation.

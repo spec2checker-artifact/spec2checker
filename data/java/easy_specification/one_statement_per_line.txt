@@ -1,0 +1,4 @@
+Specification 22: One statement per line
+Description: Each statement is followed by a line break.
+Example: x = 1; then newline; y = 2;
+Additional Notes: None.

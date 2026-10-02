@@ -1,0 +1,11 @@
+**Specification 36: Switch statements - contents indented +2, labels increase +2**
+Description: Switch block contents indented +2. After a switch label, newline and indent increased +2, as if block opened. Following label returns to previous indent.
+Example:
+```javascript
+switch (animal) {
+  case BANDERSNATCH:
+    handle();
+    break;
+}
+```
+Additional Notes: Blank line optional between `break` and next `case`.

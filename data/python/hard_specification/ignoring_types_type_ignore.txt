@@ -1,0 +1,4 @@
+**Specification 112: Ignoring types - use `# type: ignore`**
+Description: Disable type checking on a line with `# type: ignore`.
+Example: `x = some_func()  # type: ignore`
+Additional Notes: pytype has disable option for specific errors.

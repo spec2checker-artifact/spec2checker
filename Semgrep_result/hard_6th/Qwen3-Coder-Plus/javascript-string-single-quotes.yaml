@@ -1,0 +1,41 @@
+rules:
+- id: javascript-string-single-quotes
+  message: Ordinary string literals must be delimited with single quotes `'`, not
+    double quotes `"`. May not span multiple lines. Use template strings to avoid
+    escaping single quotes.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: '"$STRING"'
+  - metavariable-type:
+      metavariable: $STRING
+      type: expr
+  metadata:
+    syntax_string: is_string_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: may flag strings containing single quotes that should be template
+          strings
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to distinguish ordinary from required double
+          quotes
+    original_description: Ordinary string literals must be delimited with single quotes
+      `'`, not double quotes `"`. May not span multiple lines. Use template strings
+      to avoid escaping single quotes.

@@ -1,0 +1,41 @@
+rules:
+- id: java-camel-case-split-conventional
+  message: Detects conventionally camel-cased words (e.g., 'AdWords') and flags them
+    for splitting into constituent parts (e.g., 'ad words'), with an exception for
+    'iOS'.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $NAME = ...
+  - metavariable-regex:
+      metavariable: $NAME
+      regex: ^(?!iOS$)[A-Z][a-z]+[A-Z][a-z]+.*$
+  metadata:
+    syntax_$WORD: is_string_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based detection may have false positives/negatives for
+          complex camel-case patterns
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule implementation for string literal content
+          analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to analyze string literal patterns
+    original_description: Detects conventionally camel-cased words (e.g., 'AdWords')
+      and flags them for splitting into constituent parts (e.g., 'ad words'), with
+      an exception for 'iOS'.

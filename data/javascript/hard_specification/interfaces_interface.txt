@@ -1,0 +1,11 @@
+**Specification 90: Interfaces - declared with `@interface` or `@record`**
+Description: Interfaces may be declared with `@interface` or `@record`. Methods non-static, bodies empty. Fields declared uninitialized in constructor.
+Example:
+```javascript
+/** @record */
+class Frobnicator {
+  constructor() { /** @type {number} */ this.attempts; }
+  frobnicate(strategy) {}
+}
+```
+Additional Notes: `@record` allows implicit implementation.

@@ -1,0 +1,53 @@
+============================================================
+  实验成本分析报告 - 迭代1
+============================================================
+
+  批次: easy_6th
+  模型: Qwen3-Coder-Plus
+  时间: 2026-05-18 00:31:04
+  Python: python
+
+------------------------------------------------------------
+  各步骤耗时:
+------------------------------------------------------------
+  Step 1: Rule modification (iteration 1): ~300s (OK)
+  Step 2: Project scanning (iteration 1): ~600s (OK)
+
+  总耗时: ~900s (~15min)
+
+------------------------------------------------------------
+  迭代1修改详情:
+------------------------------------------------------------
+  修改规则:
+    - cpp-include-guard-format: metavariable-regex修改，仅匹配不以_H_结尾的guard名
+    - java-empty-block-multiblock: 重写规则，仅检测catch块完全为空(catch (Type var) { })
+    - python-no-blank-line-after-class: 添加pattern-not排除class后紧跟docstring
+    - python-property-allowed-when-necessary: 重写规则，仅检测非简单getter的property
+    - shell-quote-integer-vars: 重写规则，仅检测未加引号的赋值(VAR=$SPECIAL)
+  保留规则:
+    - python-avoid-staticmethod: unchanged (100% precision)
+  PMD修复:
+    - JavaBlockIndentation2Spaces: 移除禁用注释，添加ASTBlock检测逻辑
+  CodeQL修复:
+    - cpp-filename-lowercase-underscore-dash: 实现基本逻辑（File.getBaseName()大写检测）
+    - python-blank-lines-between-definitions: 实现基本逻辑（Class命名规范检测）
+    - python-indentation-4-spaces-no-tabs: 实现基本逻辑（Function缩进列位置检测）
+    - python-whitespace-inside-parens: 实现基本逻辑（Call参数位置检测）
+
+------------------------------------------------------------
+  迭代1结果:
+------------------------------------------------------------
+  原始违规数: 190
+  迭代1违规数: 38
+  减少: 152 (80.0%)
+  规则统计:
+    python-no-blank-line-after-class: 108→29 (WARNING)
+    python-avoid-staticmethod: 6→6 (WARNING, unchanged)
+    cpp-include-guard-format: 4→2 (WARNING)
+    shell-quote-integer-vars: 8→1 (WARNING)
+    java-empty-block-multiblock: 50→0 (WARNING, CLEAN)
+    python-property-allowed-when-necessary: 14→0 (WARNING, CLEAN)
+  PMD: CLEAN (0 findings)
+  CodeQL: RUN_FAIL (4 rules, consistent with previous batches)
+
+============================================================

@@ -1,0 +1,4 @@
+**Specification 72: Comments - never describe the code**
+Description: Never describe the code; assume reader knows Python.
+Example: Avoid `# Now go through the b array...`
+Additional Notes: None.

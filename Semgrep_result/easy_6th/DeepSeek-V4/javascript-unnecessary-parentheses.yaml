@@ -1,0 +1,43 @@
+rules:
+- id: javascript-unnecessary-parentheses
+  message: Do not use unnecessary parentheses around the entire expression following
+    the keywords `delete`, `typeof`, `void`, `return`, `throw`, `case`, `in`, `of`,
+    `yield`.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $KEYWORD ($EXPR)
+  - metavariable-regex:
+      metavariable: $KEYWORD
+      regex: ^(delete|typeof|void|return|throw|case|in|of|yield)$
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_$EXPR: is_expression
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: May not distinguish required parentheses for type casts or precedence
+          in all contexts.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to detect unnecessary parentheses.
+    original_description: Do not use unnecessary parentheses around the entire expression
+      following the keywords `delete`, `typeof`, `void`, `return`, `throw`, `case`,
+      `in`, `of`, `yield`.

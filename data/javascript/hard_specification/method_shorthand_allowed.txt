@@ -1,0 +1,9 @@
+**Specification 75: Method shorthand - allowed**
+Description: Methods can be defined using method shorthand `{ method() { ... } }` instead of colon and function.
+Example:
+```javascript
+return {
+  method() { return this.stuff; },
+};
+```
+Additional Notes: `this` in method shorthand refers to object literal.

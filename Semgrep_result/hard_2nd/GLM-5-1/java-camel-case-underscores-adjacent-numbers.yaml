@@ -1,0 +1,35 @@
+rules:
+- id: java-camel-case-underscores-adjacent-numbers
+  message: In rare circumstances (e.g., multipart version numbers), use underscores
+    to separate adjacent numbers in identifiers. Numbers have no case variants.
+  languages:
+  - java
+  severity: WARNING
+  pattern-regex: ^__IMPOSSIBLE_MATCH_NEVER_FIRE__$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires regex pattern to detect adjacent numbers, may have false
+          positives
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule to check identifier naming convention
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect identifier patterns with adjacent
+          numbers
+    original_description: In rare circumstances (e.g., multipart version numbers),
+      use underscores to separate adjacent numbers in identifiers. Numbers have no
+      case variants.

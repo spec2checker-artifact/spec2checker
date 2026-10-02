@@ -1,0 +1,10 @@
+**Specification 81: Classes - define all fields in constructor**
+Description: Define all of a concrete object's fields in the constructor. Annotate never-reassigned fields with `@const`. Non-public fields with `@private`, `@protected`, `@package`. Private fields may end with underscore.
+Example:
+```javascript
+constructor() {
+  /** @private @const {!Bar} */
+  this.bar_ = computeBar();
+}
+```
+Additional Notes: Fields not defined on `prototype`.

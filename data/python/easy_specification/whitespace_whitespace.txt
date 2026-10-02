@@ -1,0 +1,4 @@
+**Specification 56: Whitespace - no trailing whitespace**
+Description: No trailing whitespace.
+Example: Lines should not end with spaces.
+Additional Notes: None.

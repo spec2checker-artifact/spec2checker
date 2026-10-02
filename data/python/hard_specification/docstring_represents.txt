@@ -1,0 +1,4 @@
+**Specification 70: Exception class docstring - describe what it represents**
+Description: Subclasses of `Exception` should describe what the exception represents, not the context.
+Example: `"""No more cheese is available."""` not `"""Raised when no more cheese is available."""`
+Additional Notes: None.

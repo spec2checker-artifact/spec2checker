@@ -1,0 +1,4 @@
+**Specification 17: Comprehensions - allowed for simple cases**
+Description: Comprehensions are allowed for simple cases.
+Example: `result = [mapping_expr for value in iterable if filter_expr]`
+Additional Notes: Multiple `for` clauses or filter expressions are not permitted.

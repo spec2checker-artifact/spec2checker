@@ -1,0 +1,4 @@
+**Specification 109: Put `main` as bottom-most function**
+Description: Put the main program in a function called `main` as the bottom-most function.
+Example: Define `main` last, then call it.
+Additional Notes: Allows defining more variables as `local`.

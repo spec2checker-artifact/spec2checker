@@ -1,0 +1,4 @@
+**Specification 12: Include guard format**  
+Description: Use `#define` guards with format `<PROJECT>_<PATH>_<FILE>_H_`.  
+Example: `#ifndef FOO_BAR_BAZ_H_`  
+Additional Notes: Based on full path in source tree.

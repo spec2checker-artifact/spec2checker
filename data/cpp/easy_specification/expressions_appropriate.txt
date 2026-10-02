@@ -1,0 +1,4 @@
+**Specification 35: Use lambda expressions where appropriate**  
+Description: Use lambda expressions where appropriate; prefer explicit captures when lambda will escape current scope.  
+Example: `std::sort(v.begin(), v.end(), [](int x, int y) { return x < y; });`  
+Additional Notes: None.

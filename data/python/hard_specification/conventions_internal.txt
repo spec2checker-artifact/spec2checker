@@ -1,0 +1,4 @@
+**Specification 96: Naming conventions - internal names start with `_`**
+Description: “Internal” means internal to a module or protected/private within a class. Prepending a single underscore `_` has support for protecting.
+Example: `_internal_var`
+Additional Notes: Unit tests may access protected constants.

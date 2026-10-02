@@ -1,0 +1,4 @@
+**Specification 22: Use `constinit` for non-constant variables requiring constant initialization**  
+Description: Use `constinit` to ensure constant initialization for non-constant variables.  
+Example: `constinit thread_local Foo foo = ...;`  
+Additional Notes: None.

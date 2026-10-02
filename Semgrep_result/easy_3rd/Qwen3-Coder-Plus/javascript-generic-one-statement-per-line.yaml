@@ -1,0 +1,42 @@
+rules:
+- id: javascript-generic-one-statement-per-line
+  message: Each statement must be followed by a line break; multiple statements on
+    the same line are prohibited.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $STMT1; $STMT2
+  - metavariable-type:
+      metavariable: $STMT1
+      type: expr
+  - metavariable-type:
+      metavariable: $STMT2
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern may match within strings or comments; requires careful
+          tuning for each language's statement syntax
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD has language-specific rules (e.g., 'OneStatementPerLine'
+          for Java) but not universal coverage
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires writing a custom query per language to detect multiple
+          statements on one line
+    original_description: Each statement must be followed by a line break; multiple
+      statements on the same line are prohibited.

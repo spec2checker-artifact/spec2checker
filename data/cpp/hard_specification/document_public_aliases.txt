@@ -1,0 +1,4 @@
+**Specification 38: Document public aliases**  
+Description: When defining a public alias, document the intent and whether it is guaranteed to be the same as the aliased type.  
+Example: `// Used to store field measurements. DataPoint may change from Bar* to some internal type.`  
+Additional Notes: Do not put namespace aliases in public API.

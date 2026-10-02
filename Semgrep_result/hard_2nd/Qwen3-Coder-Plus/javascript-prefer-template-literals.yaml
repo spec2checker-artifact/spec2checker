@@ -1,0 +1,42 @@
+rules:
+- id: javascript-prefer-template-literals
+  message: Use template literals `...` over complex string concatenation, especially
+    with multiple literals. May span multiple lines.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: $A + $B
+  - metavariable-type:
+      metavariable: $A
+      type: expr
+  - metavariable-type:
+      metavariable: $B
+      type: expr
+  metadata:
+    type_constraint_$A: is_string_type
+    type_constraint_$B: is_string_type
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type resolution for string detection may be limited
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD has a rule for string concatenation but may not detect all
+          complex cases
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires type information for precise detection
+    original_description: Use template literals `...` over complex string concatenation,
+      especially with multiple literals. May span multiple lines.

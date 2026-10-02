@@ -1,0 +1,4 @@
+**Specification 38: Use `= delete` for forbidden operations**  
+Description: Use `= delete` to explicitly delete copy/move operations.  
+Example: `MyClass(const MyClass&) = delete;`  
+Additional Notes: Makes intent clear.

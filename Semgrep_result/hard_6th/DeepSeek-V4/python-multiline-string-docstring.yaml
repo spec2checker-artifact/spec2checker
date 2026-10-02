@@ -1,0 +1,16 @@
+rules:
+- id: python-multiline-string-docstring
+  message: '[DISABLED] Prefer `"""` for multi-line strings. Docstrings must use `"""`.
+    Projects may use `''''''` for non-docstring multi-line strings if they use `''`
+    for regular strings.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Prefer `"""` for multi-line strings. Docstrings must use
+      `"""`. Projects may use `'''` for non-docstring multi-line strings if they use
+      `'` for regular strings.

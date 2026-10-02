@@ -1,0 +1,4 @@
+**Specification 12: Avoid using `std::move` unnecessarily**  
+Description: Use `std::move` only when you need to transfer ownership.  
+Example: `std::unique_ptr<Foo> ptr = std::make_unique<Foo>();`  
+Additional Notes: Not covered in detail but implied.

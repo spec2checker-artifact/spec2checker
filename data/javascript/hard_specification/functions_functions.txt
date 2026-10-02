@@ -1,0 +1,4 @@
+**Specification 96: Arrow functions - prefer over `function` for nested functions**
+Description: Prefer arrow functions over `function` keyword for nested functions (except method shorthand). Prefer over `bind`, `goog.bind`, `const self = this`.
+Example: `getValue((result) => void alert(result));`
+Additional Notes: Parentheses optional for single parameter, but always using them avoids errors.

@@ -1,0 +1,10 @@
+**Specification 66: Array literals - use trailing commas when line break between final element and bracket**
+Description: Include trailing comma whenever there is line break between final element and closing bracket.
+Example:
+```javascript
+const values = [
+  'first',
+  'second',
+];
+```
+Additional Notes: None.

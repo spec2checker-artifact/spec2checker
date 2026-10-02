@@ -1,0 +1,4 @@
+**Specification 109: Custom exceptions - define when `Error` insufficient**
+Description: Custom exceptions provide additional error information; define and use wherever native `Error` insufficient.
+Example: `class MyError extends Error { ... }`.
+Additional Notes: Prefer throwing exceptions over ad-hoc error handling.

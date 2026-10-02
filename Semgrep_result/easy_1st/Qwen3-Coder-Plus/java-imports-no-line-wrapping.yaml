@@ -1,0 +1,38 @@
+rules:
+- id: java-imports-no-line-wrapping
+  message: Imports are not line-wrapped. The column limit does not apply.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: 'import $IMPORT;
+
+      import $IMPORT;'
+  - metavariable-type:
+      metavariable: $IMPORT
+      type: expr
+  metadata:
+    syntax_import: line_count > 1
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to detect multi-line import statements
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule to check line breaks in import statements
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires query to detect multi-line imports
+    original_description: Imports are not line-wrapped. The column limit does not
+      apply.

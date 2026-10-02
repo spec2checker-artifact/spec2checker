@@ -1,0 +1,34 @@
+rules:
+- id: python-no-blank-line-after-class
+  message: No blank line following a `class` line. The line after the class definition
+    must be a docstring or code.
+  languages:
+  - python
+  severity: WARNING
+  pattern-regex: '^class\s+\w+.*:\s*\n\s*\n\s*def\s+'
+  metadata:
+    syntax_class: next_sibling_is_blank_line
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Relies on pattern matching whitespace; may have edge cases with
+          comments or nested structures.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to check for blank lines after class definitions.
+    original_description: No blank line following a `class` line. The line after the
+      class definition must be a docstring or code.

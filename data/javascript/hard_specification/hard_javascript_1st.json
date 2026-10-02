@@ -1,0 +1,570 @@
+[
+  {
+    "rule_id": "javascript-no-nested-namespace",
+    "language": "javascript",
+    "description": "Do not define a nested type (class, typedef, enum, interface) on another module-local name. Use top-level exports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$MODULE.$NESTED = $DEF",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$NESTED": {
+          "type_hint": "expr"
+        },
+        "$DEF": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DEF",
+        "constraint_type": "syntactic",
+        "condition": "is_class_or_function_or_enum",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match assignment to property of an identifier"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect nested type definitions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\define_nested_namespaces.txt",
+      "section": "define_nested_namespaces"
+    }
+  },
+  {
+    "rule_id": "javascript-enum-static-initialization",
+    "language": "javascript",
+    "description": "For string enums, all values must be statically initialized, not computed with arithmetic, template literals, function calls, or variable references.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$ENUM: {\n    ...\n    $KEY: $VALUE,\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KEY": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_not_static_initializer",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match non-static initializers (e.g., binary expressions, template literals, calls)"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect non-static enum values"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\statically_initialized.txt",
+      "section": "statically_initialized"
+    }
+  },
+  {
+    "rule_id": "javascript-tostring-override-side-effects",
+    "language": "javascript",
+    "description": "toString may be overridden but must always succeed and never have visible side effects. Avoid calling other methods that may throw.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "public String toString() {\n    $BODY\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "inheritance",
+        "condition": "overrides_method('java.lang.Object.toString')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully verify absence of side effects or success guarantee; pattern matches all toString overrides."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has rules for Law of Demeter and exception handling, but not a specific rule for side effects in toString."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Can detect calls to methods that may throw, but full side-effect analysis is complex."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\overriding_tostring.txt",
+      "section": "overriding_tostring"
+    }
+  },
+  {
+    "rule_id": "javascript-number-literal-prefix-case",
+    "language": "javascript",
+    "description": "Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never include leading zero unless followed by `x`, `o`, `b`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$NUM",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NUM": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NUM",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^0[0-9]+')",
+        "required": "true"
+      },
+      {
+        "target": "$NUM",
+        "constraint_type": "syntactic",
+        "condition": "not matches_regex('^0[xob][0-9a-fA-F_]+$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires regex matching on numeric literals"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for numeric literal patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\literals_lowercase_letters.txt",
+      "section": "literals_lowercase_letters"
+    }
+  },
+  {
+    "rule_id": "javascript-generics-template-declaration",
+    "language": "javascript",
+    "description": "Generic functions and methods must be declared with a `@template TYPE` JSDoc comment.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC($ARGS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "annotation",
+        "condition": "missing_annotation('template')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match function declarations and check for preceding JSDoc comment"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check JSDoc annotations"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\generics_declare_template.txt",
+      "section": "generics_declare_template"
+    }
+  },
+  {
+    "rule_id": "javascript-one-variable-per-declaration",
+    "language": "javascript",
+    "description": "Every local variable declaration declares only one variable; no `let a = 1, b = 2;`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "let $VAR1 = $EXPR1, $VAR2 = $EXPR2;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR1": {
+          "type_hint": "expr"
+        },
+        "$VAR2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\variable_per_declaration.txt",
+      "section": "variable_per_declaration"
+    }
+  },
+  {
+    "rule_id": "javascript-nested-function-const",
+    "language": "javascript",
+    "description": "Nested function definitions should be assigned to a local const variable if they are given a name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC(...) {\n    function $NESTED(...) { ... }\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        },
+        "$NESTED": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$NESTED",
+        "constraint_type": "syntactic",
+        "condition": "is_named_function",
+        "required": "true"
+      },
+      {
+        "target": "$NESTED",
+        "constraint_type": "scope",
+        "condition": "is_not_assigned_to_const",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect assignment to const"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for assignment pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\functions_allowed_useful.txt",
+      "section": "functions_allowed_useful"
+    }
+  },
+  {
+    "rule_id": "javascript-jsdoc-mixed-annotation",
+    "language": "javascript",
+    "description": "Detects mixing of inline JSDoc type annotations and block JSDoc comments on the same variable declaration.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "const /** $TYPE */ $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "has_leading_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match valid inline annotations; requires additional logic to detect preceding block JSDoc."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect mixed annotation styles."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\jsdoc_annotations_inline.txt",
+      "section": "jsdoc_annotations_inline"
+    }
+  },
+  {
+    "rule_id": "javascript-static-method-to-function",
+    "language": "javascript",
+    "description": "Prefer module-local (package-private) functions over private static methods where it doesn't interfere with readability and dynamic dispatch is not needed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "private static $RETURN $METHOD($PARAMS) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$METHOD": {
+          "type_hint": "function"
+        },
+        "$RETURN": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "scope",
+        "condition": "is_private",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "has_modifier('static')",
+        "required": "true"
+      },
+      {
+        "target": "class",
+        "constraint_type": "inheritance",
+        "condition": "no_overriding_methods",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Inheritance analysis for 'no_overriding_methods' may be limited."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD can detect private static methods but may not fully analyze inheritance constraints."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex query to ensure method is not overridden and is only called on base class."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\functions_private_methods.txt",
+      "section": "functions_private_methods"
+    }
+  },
+  {
+    "rule_id": "javascript-no-wrapper-new",
+    "language": "javascript",
+    "description": "Never use `new Boolean`, `new Number`, `new String`, `new Symbol`. Use coercion functions instead.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "new $WRAPPER($ARG)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$WRAPPER": {
+          "type_hint": "expr",
+          "regex": "^(Boolean|Number|String|Symbol)$"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\hard_specification\\wrapper_objects_primitives.txt",
+      "section": "wrapper_objects_primitives"
+    }
+  }
+]

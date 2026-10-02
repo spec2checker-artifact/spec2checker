@@ -1,0 +1,50 @@
+rules:
+- id: python-names-to-avoid-type-inclusion
+  message: Avoid names that needlessly include the type of the variable (e.g., 'id_to_name_dict').
+    Use 'id_to_name' instead.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: $VAR = ...
+  - metavariable-regex:
+      metavariable: $VAR
+      regex: .*_(dict|list|set|tuple|int|str|bool|float|array|map|hash|queue|vector|deque|string|number|object|class|func|method|fn|callback|handler|manager|driver|adapter|factory|builder|iterator|generator|observable|publisher|subscriber|controller|view|model|service|repository|dao|dto|entity|bean|config|settings|options|kwargs|prop|attribute|field|member|var|val|ref|ptr|handle|descriptor|registry|cache|pool|allocator|deallocator|mutex|lock|semaphore|barrier|event|packet|frame|cell|node|edge|vertex|graph|tree|leaf|root|branch|trunk)$
+  - pattern-not: test_result = ...
+  - pattern-not: test_result$ = ...
+  - pattern-not: self.test_result = ...
+  - pattern-not: _exit_stack = ...
+  - pattern-not: self._exit_stack = ...
+  - pattern-not: self._cls_exit_stack = ...
+  - pattern-not: exit_status = ...
+  - pattern-not: self.exit_status = ...
+  - pattern-not: self.main_registry = ...
+  - pattern-not: self.registry_root = ...
+  - pattern-not: msg = ...
+  - pattern-not: self.msg = ...
+  metadata:
+    syntax_$VAR: name_matches_regex('.*_(dict|list|set|tuple|int|str|bool|float|array|map|hash|queue|stack|vector|deque|string|number|object|class|func|method|fn|callback|handler|manager|driver|adapter|factory|builder|iterator|generator|observable|publisher|subscriber|controller|view|model|service|repository|dao|dto|entity|bean|config|settings|options|params|args|kwargs|prop|attribute|field|member|var|val|ref|ptr|handle|descriptor|registry|cache|buffer|pool|allocator|deallocator|mutex|lock|semaphore|barrier|flag|state|status|result|error|exception|event|msg|packet|frame|cell|node|edge|vertex|graph|tree|leaf|root|branch|trunk)$')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex-based matching may have false positives/negatives; does
+          not understand semantic type of variable
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query using regex matching on identifier names
+    original_description: Avoid names that needlessly include the type of the variable
+      (e.g., 'id_to_name_dict'). Use 'id_to_name' instead.

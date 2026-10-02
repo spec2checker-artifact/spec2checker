@@ -1,0 +1,4 @@
+**Specification 21: Prefer composition over inheritance**  
+Description: Composition is often more appropriate than inheritance. Use inheritance only for "is-a" relationships.  
+Example: Use a member instead of inheriting.  
+Additional Notes: Limit use of `protected`.

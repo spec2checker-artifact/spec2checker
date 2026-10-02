@@ -1,0 +1,14 @@
+rules:
+- id: java-imports-ordering-non-static-group
+  message: '[DISABLED] All non-static imports must be in a single group, separated
+    from the static import group by a blank line.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: All non-static imports must be in a single group, separated
+      from the static import group by a blank line.

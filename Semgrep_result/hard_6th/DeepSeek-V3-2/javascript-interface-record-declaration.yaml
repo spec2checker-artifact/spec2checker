@@ -1,0 +1,45 @@
+rules:
+- id: javascript-interface-record-declaration
+  message: Interfaces declared with `@interface` or `@record` must have non-static
+    methods with empty bodies and fields declared uninitialized in the constructor.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: "/** @record */\nclass $CLASS {\n  constructor() { ... }\n  $METHOD($PARAMS)\
+      \ { ... }\n}"
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  - metavariable-type:
+      metavariable: $METHOD
+      type: function
+  - pattern-inside: '@true
+
+      ...'
+  metadata:
+    syntax_method: body_is_empty
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: JSDoc annotation matching may be imprecise
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for JSDoc patterns
+    original_description: Interfaces declared with `@interface` or `@record` must
+      have non-static methods with empty bodies and fields declared uninitialized
+      in the constructor.

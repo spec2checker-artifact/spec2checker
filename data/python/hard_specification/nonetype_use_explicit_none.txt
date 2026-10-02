@@ -1,0 +1,4 @@
+**Specification 110: `NoneType` - use explicit `X | None`**
+Description: Use explicit `X | None` (or `Optional[X]`) rather than implicit `a: str = None`.
+Example: `def f(a: str | None = None) -> str:`
+Additional Notes: `Optional[X]` is older style.

@@ -1,0 +1,491 @@
+[
+  {
+    "rule_id": "javascript-named-imports-no-alias",
+    "language": "javascript",
+    "description": "Prefer keeping the same name for named imports; avoid aliasing. Use module import to fix collisions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import { $IMPORT as $ALIAS } from $MODULE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IMPORT": {
+          "type_hint": "expr"
+        },
+        "$ALIAS": {
+          "type_hint": "expr"
+        },
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect unnecessary aliasing"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\imports_avoid_aliasing.txt",
+      "section": "imports_avoid_aliasing"
+    }
+  },
+  {
+    "rule_id": "javascript-knr-brace-style",
+    "language": "javascript",
+    "description": "Enforce K&R (Egyptian) brace style: no line break before opening brace; line break after opening brace; line break before closing brace; line break after closing brace if it terminates a statement, function, or class. No break after brace if followed by `else`, `catch`, `while`, comma, semicolon, or right parenthesis.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom metavariable matching and whitespace analysis"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD supports brace style rules for Java, not JavaScript"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule enforcement"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\nonempty_egyptian_brackets.txt",
+      "section": "nonempty_egyptian_brackets"
+    }
+  },
+  {
+    "rule_id": "javascript-generic-one-statement-per-line",
+    "language": "javascript",
+    "description": "Each statement must be followed by a line break; multiple statements on the same line are prohibited.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STMT1; $STMT2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STMT1": {
+          "type_hint": "expr"
+        },
+        "$STMT2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match within strings or comments; requires careful tuning for each language's statement syntax"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has language-specific rules (e.g., 'OneStatementPerLine' for Java) but not universal coverage"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires writing a custom query per language to detect multiple statements on one line"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\one_statement_per_line.txt",
+      "section": "one_statement_per_line"
+    }
+  },
+  {
+    "rule_id": "javascript-switch-indentation",
+    "language": "javascript",
+    "description": "Switch block contents must be indented +2 relative to the switch statement. After a switch label, indent increases +2. Following label returns to previous indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom formatting rule not natively supported by pattern matching"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD supports JavaScript indentation rules via custom XPath or scripting"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not natively enforce formatting/indentation rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\statements_increase.txt",
+      "section": "statements_increase"
+    }
+  },
+  {
+    "rule_id": "javascript-csharp-horizontal-whitespace-reserved-word-brace",
+    "language": "javascript",
+    "description": "Space separating reserved word (else, catch) from closing curly brace }.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "} $KW {",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KW": {
+          "type_hint": "expr",
+          "regex": "^(else|catch)$"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires correct parsing of JavaScript syntax"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace formatting"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_brace.txt",
+      "section": "whitespace_brace"
+    }
+  },
+  {
+    "rule_id": "javascript-es-module-default-import-naming",
+    "language": "javascript",
+    "description": "Default import names derived from file name must follow identifier naming rules (e.g., camelCase).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$IMPORT": {
+          "type_hint": "expr"
+        },
+        "$SOURCE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$IMPORT",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-zA-Z_$][a-zA-Z0-9_$]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot enforce naming based on source file name derivation"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for identifier naming rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\default_follow_identifier.txt",
+      "section": "default_follow_identifier"
+    }
+  },
+  {
+    "rule_id": "javascript-linewrap-method-name-parenthesis",
+    "language": "javascript",
+    "description": "A method or constructor name must stay attached to the open parenthesis '(' and not be broken onto a new line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$MODIFIERS? $TYPE? $NAME(\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$NAME": {
+          "type_hint": "function",
+          "regex": "^[a-zA-Z_$][a-zA-Z0-9_$]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "newline_before_token('(')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match false positives in complex expressions or comments."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule using XPath to detect newline before '(' token."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting rule detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_method_name_stays.txt",
+      "section": "wrapping_method_name_stays"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-reserved-word-parenthesis",
+    "language": "javascript",
+    "description": "Space separating reserved word (if, for, catch) from open parenthesis (.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if ( $COND )",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$COND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "keyword",
+        "constraint_type": "syntactic",
+        "condition": "is_reserved_word",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for each reserved word; may not handle all edge cases like nested parentheses"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_separating.txt",
+      "section": "whitespace_separating"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-after-colon",
+    "language": "javascript",
+    "description": "Require a space after the colon in an object literal key-value pair.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "{$KEY:$VALUE}",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match nested objects or edge cases where spacing is part of a string literal."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace checking; not a standard security query."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\horizontal_whitespace.txt",
+      "section": "horizontal_whitespace"
+    }
+  },
+  {
+    "rule_id": "javascript-import-no-line-wrap",
+    "language": "javascript",
+    "description": "ES module import statements must not be line wrapped; they are an exception to the 80-column limit.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORTS from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to detect multi-line import statements"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for line-wrapping detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\modules_import_statements.txt",
+      "section": "modules_import_statements"
+    }
+  }
+]

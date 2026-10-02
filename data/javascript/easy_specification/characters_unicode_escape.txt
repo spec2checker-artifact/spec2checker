@@ -1,0 +1,4 @@
+**Specification 5: Non-ASCII characters - use actual Unicode or escape**
+Description: Use actual Unicode character or hex/Unicode escape; choose for readability. Unicode escapes outside string literals/comments discouraged.
+Example: `const units = 'μs';` (best)
+Additional Notes: Explain with comment if needed.

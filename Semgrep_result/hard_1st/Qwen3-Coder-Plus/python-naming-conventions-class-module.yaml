@@ -1,0 +1,14 @@
+rules:
+- id: python-naming-conventions-class-module
+  message: '[DISABLED] Use CapWords for class names and lower_with_under for module
+    names. Old CapWords.py module names are discouraged.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Use CapWords for class names and lower_with_under for module
+      names. Old CapWords.py module names are discouraged.

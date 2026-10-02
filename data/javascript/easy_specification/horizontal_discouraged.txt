@@ -1,0 +1,11 @@
+**Specification 55: Horizontal alignment - discouraged**
+Description: Horizontal alignment (adding variable spaces to align tokens) is permitted but generally discouraged. Not required to maintain.
+Example:
+```javascript
+{
+  tiny: 42,
+  longer: 435,
+}
+```
+Not aligned.
+Additional Notes: Causes maintenance problems.

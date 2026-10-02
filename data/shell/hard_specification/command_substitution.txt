@@ -1,0 +1,4 @@
+**Specification 111: Use `(( $? == 0 )) || return` after command substitution**
+Description: After `my_var="$(my_func)"`, check `$?` because `local` would have swallowed it.
+Example: `(( $? == 0 )) || return`
+Additional Notes: None.

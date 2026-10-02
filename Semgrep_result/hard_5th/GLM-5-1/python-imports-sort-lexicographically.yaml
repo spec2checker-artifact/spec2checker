@@ -1,0 +1,14 @@
+rules:
+- id: python-imports-sort-lexicographically
+  message: '[DISABLED] Within each grouping, imports should be sorted lexicographically,
+    ignoring case, according to full package path.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Within each grouping, imports should be sorted lexicographically,
+      ignoring case, according to full package path.

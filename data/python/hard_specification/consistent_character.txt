@@ -1,0 +1,4 @@
+**Specification 76: Strings - be consistent with quote character**
+Description: Be consistent with string quote character within a file. Pick `'` or `"` and stick with it.
+Example: Use `'single quotes'` everywhere, or double quotes.
+Additional Notes: Use other quote to avoid escaping.

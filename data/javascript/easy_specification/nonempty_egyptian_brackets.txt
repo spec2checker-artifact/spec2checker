@@ -1,0 +1,9 @@
+**Specification 29: Nonempty blocks - K&R style (Egyptian brackets)**
+Description: No line break before opening brace; line break after opening brace; line break before closing brace; line break after closing brace if terminates statement/function/class.
+Example:
+```javascript
+if (condition) {
+  doSomething();
+}
+```
+Additional Notes: No break after brace if followed by `else`, `catch`, `while`, comma, semicolon, or right parenthesis.

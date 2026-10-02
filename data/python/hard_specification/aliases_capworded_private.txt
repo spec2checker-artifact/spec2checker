@@ -1,0 +1,4 @@
+**Specification 111: Type aliases - CapWorded, private with `_`**
+Description: Declare aliases of complex types. Name should be CapWorded. If used only in this module, prefix `_`.
+Example: `_LossAndGradient: TypeAlias = tuple[tf.Tensor, tf.Tensor]`
+Additional Notes: Use `: TypeAlias` annotation (Python 3.10+).

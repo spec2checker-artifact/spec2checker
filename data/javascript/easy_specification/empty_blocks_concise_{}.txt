@@ -1,0 +1,4 @@
+**Specification 30: Empty blocks - may be concise `{}`**
+Description: Empty block may be closed immediately with no characters/space/line break (`{}`), unless part of multi-block statement (`if/else`, `try/catch/finally`).
+Example: `function doNothing() {}`
+Additional Notes: In multi-block, disallowed.

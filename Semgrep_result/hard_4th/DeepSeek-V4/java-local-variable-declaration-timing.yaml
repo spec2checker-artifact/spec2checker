@@ -1,0 +1,14 @@
+rules:
+- id: java-local-variable-declaration-timing
+  message: '[DISABLED] Local variables should be declared close to their first use,
+    not habitually at the start of a block, to minimize their scope.'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Local variables should be declared close to their first
+      use, not habitually at the start of a block, to minimize their scope.

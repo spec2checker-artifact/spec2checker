@@ -1,0 +1,523 @@
+[
+  {
+    "rule_id": "javascript-avoid-goog-module-declarelegacynamespace",
+    "language": "javascript",
+    "description": "Avoid `goog.module.declareLegacyNamespace()` when possible; exists for transition. Has naming restrictions.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.module.declareLegacyNamespace();",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires specific library modeling for Closure Library"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\declarelegacynamespace.txt",
+      "section": "declarelegacynamespace"
+    }
+  },
+  {
+    "rule_id": "javascript-non-ascii-characters",
+    "language": "javascript",
+    "description": "Use actual Unicode characters or hex/Unicode escapes for non-ASCII characters within string literals or comments for readability. Unicode escapes outside string literals or comments are discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\\u$HEX{4}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$HEX": {
+          "type_hint": "expr",
+          "regex": "[0-9a-fA-F]"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "expression",
+        "constraint_type": "syntactic",
+        "condition": "not_inside_string_or_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match Unicode escapes in comments if not filtered by context."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\characters_unicode_escape.txt",
+      "section": "characters_unicode_escape"
+    }
+  },
+  {
+    "rule_id": "javascript-block-comment-indentation",
+    "language": "javascript",
+    "description": "Block comments must be indented at the same level as the surrounding code. Multi-line block comments must have subsequent lines start with '*' aligned.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for comment indentation analysis, which is not a core strength."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for comment formatting, not a standard query type."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\comment_style_indented.txt",
+      "section": "comment_style_indented"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-require-contiguous-block",
+    "language": "javascript",
+    "description": "`goog.require` and `goog.requireType` statements must form a contiguous block with no empty lines, following `goog.module` and separated by a single empty line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.module('$MODULE');\n\n$REQUIRES",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$REQUIRES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$REQUIRES",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('goog.require(\\'...\\')')",
+        "required": "true"
+      },
+      {
+        "target": "$REQUIRES",
+        "constraint_type": "syntactic",
+        "condition": "no_empty_lines",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern to detect empty lines within the block"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\requiregoog_requiretype.txt",
+      "section": "requiregoog_requiretype"
+    }
+  },
+  {
+    "rule_id": "javascript-column-limit-80",
+    "language": "javascript",
+    "description": "JavaScript code has a column limit of 80 characters. Exceeding lines must be line-wrapped. Exceptions include goog.module, goog.require, import, export from, long URLs, shell commands, and long string literals.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for line length checking with exception handling"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's ExcessiveLineLength rule exists but may not handle all specified exceptions"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not have built-in support for line length formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\column_limit_80_characters.txt",
+      "section": "column_limit_80_characters"
+    }
+  },
+  {
+    "rule_id": "javascript-export-from-no-line-wrap",
+    "language": "javascript",
+    "description": "`export from` statements must not be line wrapped; they are an exception to the 80-column limit. This applies to both flavors: `export { ... } from '...'` and `export * from '...'`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "export $EXPORTS from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPORTS": {
+          "type_hint": "expr"
+        },
+        "$SOURCE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "has_newline_between('export', 'from')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom pattern to detect newline within the statement; may have false positives with complex formatting."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect line breaks in export statements."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\export_statements_wrap.txt",
+      "section": "export_statements_wrap"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-around-comment",
+    "language": "javascript",
+    "description": "Space on both sides of `//` that begins end-of-line comment. Multiple spaces allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR;  // $COMMENT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$COMMENT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "is_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match non-comment uses of '//'"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace formatting"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_around_comment.txt",
+      "section": "whitespace_around_comment"
+    }
+  },
+  {
+    "rule_id": "javascript-one-statement-per-line",
+    "language": "javascript",
+    "description": "Detect multiple statements on a single line separated by semicolons",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STMT1; $STMT2",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STMT1": {
+          "type_hint": "expr"
+        },
+        "$STMT2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STMT1",
+        "constraint_type": "syntactic",
+        "condition": "is_statement",
+        "required": "true"
+      },
+      {
+        "target": "$STMT2",
+        "constraint_type": "syntactic",
+        "condition": "is_statement",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "may match within strings or comments; requires precise statement detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for statement separation"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\one_statement_per_line.txt",
+      "section": "one_statement_per_line"
+    }
+  },
+  {
+    "rule_id": "javascript-generic-trailing-whitespace",
+    "language": "javascript",
+    "description": "Trailing whitespace at the end of a line is forbidden.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule with regex pattern for whitespace detection, not a standard AST pattern."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires language-specific plugin (e.g., PMD for JavaScript) and custom rule."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to analyze raw text lines, not a standard AST query."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\whitespace_whitespace.txt",
+      "section": "whitespace_whitespace"
+    }
+  },
+  {
+    "rule_id": "javascript-import-extension-required",
+    "language": "javascript",
+    "description": "ES module import paths must include the `.js` file extension.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT from \"$PATH\";",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PATH": {
+          "type_hint": "expr",
+          "regex": "^(?!.*\\.js$).*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PATH",
+        "constraint_type": "syntactic",
+        "condition": "is_import_specifier",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex pattern may have edge cases with complex path strings"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check import path strings"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\import_include_extension.txt",
+      "section": "import_include_extension"
+    }
+  }
+]

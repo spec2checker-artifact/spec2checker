@@ -1,0 +1,4 @@
+**Specification 101: Use `readarray` for reading command output into array**
+Description: Use `readarray` builtin (bash4+) to read file/command output into array.
+Example: `readarray -t lines < <(your_command)`
+Additional Notes: Avoids whitespace splitting issues.

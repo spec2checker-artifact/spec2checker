@@ -1,0 +1,4 @@
+**Specification 51: Horizontal whitespace - around binary/ternary operators**
+Description: Space on both sides of any binary or ternary operator.
+Example: `a + b`, `x ? y : z`.
+Additional Notes: None.

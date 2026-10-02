@@ -1,0 +1,4 @@
+**Specification 23: Prefer `int` for integers, use exact-width types when size matters**  
+Description: Of built-in integer types, only use `int`. For other sizes, use `<stdint.h>` types like `int16_t`, `int64_t`.  
+Example: `int loop_counter; int64_t large_value;`  
+Additional Notes: Assume `int` is at least 32 bits.

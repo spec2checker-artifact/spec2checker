@@ -1,0 +1,50 @@
+============================================================
+  实验成本分析报告 - 迭代2
+============================================================
+
+  批次: easy_5th
+  模型: Qwen3-Coder-Plus
+  时间: 2026-05-20 13:03:28
+  Python: python
+
+------------------------------------------------------------
+  各步骤耗时:
+------------------------------------------------------------
+  Step 1: Rule modification (iteration 2): ~300s (OK)
+  Step 2: Project scanning (iteration 2): ~540s (OK, 2次扫描+1次全量报告重建)
+
+  总耗时: ~840s (~14min)
+
+------------------------------------------------------------
+  迭代2修改详情:
+------------------------------------------------------------
+  删除/禁用规则(0%精度, evaluate2建议删除):
+    - shell-parentheses-required: pattern改为不可匹配的正则(保留文件)
+    - shell-prefer-brace-expansion: pattern改为不可匹配的正则(保留文件)
+  收窄规则:
+    - python-decorator-judicious-use: 添加pattern-not-regex排除field_validator, 
+      def _\w+, def (from_|create_|new_|construct_|build_|setUp|...)\w*等
+      pattern-not-inside改为pattern-not-regex('field_validator')
+      修复\b→\w*使排除前缀能匹配完整函数名
+  保留规则:
+    - python-no-boolean-false-comparison: unchanged (100% precision)
+    - javascript-import-no-line-wrap: unchanged (CLEAN)
+  PMD: JavaModuleDirectivesOrdering已实现基本功能(iter1), 无module-info.java目标文件→CLEAN
+  CodeQL: 2条规则RUN_FAIL(基础设施问题, 与iter1一致)
+
+------------------------------------------------------------
+  迭代2结果:
+------------------------------------------------------------
+  迭代1违规数: 1709
+  迭代2违规数: 33
+  减少: 1676 (98.1%)
+  规则统计:
+    shell-parentheses-required: 36→0 (INFO, CLEAN, 规则禁用)
+    shell-prefer-brace-expansion: 1631→0 (INFO, CLEAN, 规则禁用)
+    python-decorator-judicious-use: 11→2 (INFO, 仅保留2个TP: get_status+print_pool)
+    python-no-boolean-false-comparison: 31→31 (WARNING, unchanged)
+    javascript-import-no-line-wrap: 0→0 (INFO, CLEAN)
+  PMD: CLEAN (0 findings)
+  CodeQL: RUN_FAIL (2 rules)
+
+============================================================

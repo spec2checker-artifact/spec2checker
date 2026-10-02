@@ -1,0 +1,4 @@
+**Specification 6: Include order: related header, C system, C++ stdlib, other libraries, project headers**  
+Description: Include headers in order: related header, blank line, C system headers, blank line, C++ standard library headers, blank line, other libraries' headers, blank line, your project's headers.  
+Example: See example in guide.  
+Additional Notes: Each group separated by blank line.

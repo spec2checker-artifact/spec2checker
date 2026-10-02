@@ -1,0 +1,4 @@
+**Specification 16: Nested functions/classes - allowed when closing over local variable**
+Description: Nested local functions or classes are fine when used to close over a local variable.
+Example: `def outer(): x = 1; def inner(): return x; return inner`
+Additional Notes: Avoid nesting just to hide from users; use `_` prefix instead.

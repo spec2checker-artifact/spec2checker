@@ -1,0 +1,4 @@
+**Specification 29: Specify `noexcept` when useful and correct**  
+Description: Use `noexcept` when it is useful for performance (e.g., move constructors) and accurately reflects semantics.  
+Example: `MyClass(MyClass&& other) noexcept;`  
+Additional Notes: In most Google environments, exceptions are disabled.

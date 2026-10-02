@@ -1,0 +1,14 @@
+rules:
+- id: python-forward-declaration-import
+  message: '[DISABLED] Detect forward references to class names without using `from
+    __future__ import annotations` or string literals.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect forward references to class names without using `from
+      __future__ import annotations` or string literals.

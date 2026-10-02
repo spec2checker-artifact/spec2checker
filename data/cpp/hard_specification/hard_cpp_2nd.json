@@ -1,0 +1,496 @@
+[
+  {
+    "rule_id": "cpp-default-capture-by-reference-lifetime",
+    "language": "cpp",
+    "description": "Use default capture by reference ([&]) only when the lifetime of the lambda is obviously shorter than any potential captures.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[&] $LAMBDA_ARGS { $BODY }",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot statically verify lifetime relationships; rule flags all default capture by reference."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires complex lifetime analysis; may have high false positive rate."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\reference_lifetime_shorter.txt",
+      "section": "reference_lifetime_shorter"
+    }
+  },
+  {
+    "rule_id": "cpp-operator-overload-judicious",
+    "language": "cpp",
+    "description": "Overload operators only if their meaning is obvious, unsurprising, and consistent with built-in operators. Do not overload &&, ||, , (comma), or unary &.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "operator $OP($ARGS)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OP": {
+          "type_hint": "expr",
+          "regex": "^(&&|\\|\\||,|&)$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_overloaded_operator",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for specific operator tokens"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect discouraged operators"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\operators_judiciously.txt",
+      "section": "operators_judiciously"
+    }
+  },
+  {
+    "rule_id": "cpp-license-boilerplate-required",
+    "language": "cpp",
+    "description": "Every file should contain license boilerplate appropriate for the project. New files usually should not contain copyright notice or author line.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule with file content matching; not a standard code pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule with header detection; language-specific support varies."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check file content; not a standard dataflow or AST rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\license_boilerplate.txt",
+      "section": "license_boilerplate"
+    }
+  },
+  {
+    "rule_id": "cpp-fallthrough-annotation",
+    "language": "cpp",
+    "description": "Fall-through from one case label to another must be annotated using `[[fallthrough]];`. Consecutive case labels without code need no annotation.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $CASE1:\n    ...\n    $STMT\n    ...\n    case $CASE2:",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CASE1": {
+          "type_hint": "expr"
+        },
+        "$CASE2": {
+          "type_hint": "expr"
+        },
+        "$STMT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$STMT",
+        "constraint_type": "syntactic",
+        "condition": "not_matches('[[fallthrough]];')",
+        "required": "true"
+      },
+      {
+        "target": "$STMT",
+        "constraint_type": "syntactic",
+        "condition": "not_empty",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise detection of non-empty statements between case labels"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect missing fallthrough annotation"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\annotate_fall_fallthrough.txt",
+      "section": "annotate_fall_fallthrough"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-composition",
+    "language": "cpp",
+    "description": "Composition is often more appropriate than inheritance. Use inheritance only for 'is-a' relationships. Limit use of `protected`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS extends $PARENT {\n    protected $TYPE $FIELD;\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$PARENT": {
+          "type_hint": "class"
+        },
+        "$FIELD": {
+          "type_hint": "expr"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PARENT",
+        "constraint_type": "inheritance",
+        "condition": "is_not_interface",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot fully analyze 'is-a' relationship semantics"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for protected field detection"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires complex query to assess appropriateness of inheritance"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\composition_inheritance.txt",
+      "section": "composition_inheritance"
+    }
+  },
+  {
+    "rule_id": "cpp-inclusive-language",
+    "language": "cpp",
+    "description": "Detect use of non-inclusive or offensive terms (e.g., master/slave, blacklist/whitelist) and encourage gender-neutral language.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TERM",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TERM": {
+          "type_hint": "expr",
+          "regex": "(?i)\\b(master|slave|blacklist|whitelist|grandfathered|manpower|sanity\\s*check|dummy|he\\b|she\\b|him\\b|her\\b|his\\b|hers\\b)\\b"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex-based matching may have false positives/negatives; does not understand semantic context."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query using string matching; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\use_inclusive_language.txt",
+      "section": "use_inclusive_language"
+    }
+  },
+  {
+    "rule_id": "cpp-comment-style-consistency",
+    "language": "cpp",
+    "description": "Use either `//` or `/* */` comment syntax consistently within the file. `//` is much more common.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to detect mixed comment styles across a file"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check comment style consistency"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\use_or_consistently.txt",
+      "section": "use_or_consistently"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-default-capture-by-value",
+    "language": "cpp",
+    "description": "Use default capture by value ([=]) sparingly. Prefer explicit captures and avoid long lambdas with [=] that may implicitly capture 'this'.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "[=] $LAMBDA_ARGS { $BODY }",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot reliably detect 'long' lambdas or implicit 'this' capture without custom metrics."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to assess lambda length and capture context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\default_capture_sparingly.txt",
+      "section": "default_capture_sparingly"
+    }
+  },
+  {
+    "rule_id": "cpp-include-alphabetical-order",
+    "language": "cpp",
+    "description": "Within each include section, includes should be ordered alphabetically.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep does not natively support ordering checks across multiple lines."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check ordering of includes within a section."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\section_alphabetically.txt",
+      "section": "section_alphabetically"
+    }
+  },
+  {
+    "rule_id": "cpp-no-exceptions",
+    "language": "cpp",
+    "description": "Do not use C++ exceptions (except Windows code). Use error codes or assertions instead.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "throw $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot detect Windows-specific exceptions without additional context."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to exclude Windows-specific code."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\hard_specification\\do_not_use_c_exceptions.txt",
+      "section": "do_not_use_c_exceptions"
+    }
+  }
+]

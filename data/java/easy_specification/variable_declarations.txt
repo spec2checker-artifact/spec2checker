@@ -1,0 +1,4 @@
+Specification 57: For loop - multiple variable declarations allowed
+Description: Multiple variable declarations acceptable in header of a for loop.
+Example: for (int i = 0, j = 0; i < 10; i++)
+Additional Notes: None.

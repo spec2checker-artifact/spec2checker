@@ -1,0 +1,4 @@
+**Specification 40: Power features - avoid**
+Description: Avoid power features like custom metaclasses, bytecode access, dynamic inheritance, etc.
+Example: Do not define custom metaclasses unless absolutely necessary.
+Additional Notes: Standard library modules using them are okay (e.g., `abc.ABC`, `dataclasses`, `enum`).

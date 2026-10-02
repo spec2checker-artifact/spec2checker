@@ -1,0 +1,4 @@
+**Specification 97: When using `=~`, do not quote RHS**
+Description: When using `=~` in `[[ ... ]]`, the RHS should not be quoted.
+Example: `if [[ "filename" =~ ^[[:alnum:]]+name ]]; then`
+Additional Notes: Quoting would treat as literal string.

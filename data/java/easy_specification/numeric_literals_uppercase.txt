@@ -1,0 +1,6 @@
+Specification 60: Numeric literals - long suffix uppercase L
+Description: long-valued integer literals use uppercase L suffix, never lowercase l.
+Example: 30000000000L not 30000000000l
+Additional Notes: Avoid confusion with digit 1.
+
+难类 (Hard) - 共 60 条

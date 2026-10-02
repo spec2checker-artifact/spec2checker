@@ -1,0 +1,38 @@
+rules:
+- id: shell-prefer-double-brackets
+  message: Prefer `[[ ... ]]` over `[ ... ]`, `test`, and `/usr/bin/[` for conditional
+    tests. Reduces errors and allows pattern/regex matching.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: if [ $COND ]; then ...
+  - metavariable-type:
+      metavariable: $COND
+      type: expr
+  metadata:
+    syntax_expr: is_shell_test_command
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires shell-specific pattern matching; may not detect all
+          variants of `test` or `/usr/bin/[`
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Prefer `[[ ... ]]` over `[ ... ]`, `test`, and `/usr/bin/[`
+      for conditional tests. Reduces errors and allows pattern/regex matching.

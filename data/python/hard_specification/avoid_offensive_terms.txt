@@ -1,0 +1,4 @@
+**Specification 94: Names to avoid - offensive terms**
+Description: Avoid offensive terms.
+Example: Use inclusive language.
+Additional Notes: None.

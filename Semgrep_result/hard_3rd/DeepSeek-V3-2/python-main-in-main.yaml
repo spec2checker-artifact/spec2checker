@@ -1,0 +1,36 @@
+rules:
+- id: python-main-in-main
+  message: 'If file is meant as executable, its main functionality should be in a `main()` function. Test framework entry points (absltest.main, unittest.main, pytest.main) and app.run(main) are exempt.'
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "if __name__ == '__main__':\n    ..."
+  - pattern-not: "if __name__ == '__main__':\n    absltest.main()"
+  - pattern-not: "if __name__ == '__main__':\n    unittest.main()"
+  - pattern-not: "if __name__ == '__main__':\n    pytest.main(...)"
+  - pattern-not: "if __name__ == '__main__':\n    app.run(main)"
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to check for presence of main function
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check function call in __main__ guard
+    original_description: If file is meant as executable, its main functionality should
+      be in a `main()` function.

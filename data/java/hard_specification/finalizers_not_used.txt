@@ -1,0 +1,4 @@
+Specification 118: Finalizers - not used
+Description: Do not override Object.finalize. Finalization support scheduled for removal.
+Example: Avoid protected void finalize() throws Throwable { }
+Additional Notes: None.

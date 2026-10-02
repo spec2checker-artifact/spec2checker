@@ -1,0 +1,38 @@
+rules:
+- id: shell-avoid-arithmetic-zero-exit
+  message: Avoid using `(( ... ))` as a standalone statement when `set -e` is enabled,
+    as an arithmetic expression evaluating to zero will cause the shell to exit.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: (( $EXPR ))
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_file: contains_pattern('set -e')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Context constraint for 'set -e' may require cross-statement analysis.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: Avoid using `(( ... ))` as a standalone statement when `set
+      -e` is enabled, as an arithmetic expression evaluating to zero will cause the
+      shell to exit.

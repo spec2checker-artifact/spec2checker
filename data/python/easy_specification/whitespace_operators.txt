@@ -1,0 +1,4 @@
+**Specification 57: Whitespace - spaces around binary operators**
+Description: Surround binary operators with a single space on either side for assignment, comparisons, and Booleans.
+Example: `x == 1` not `x<1`
+Additional Notes: Use judgment for arithmetic operators.

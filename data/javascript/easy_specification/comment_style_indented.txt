@@ -1,0 +1,9 @@
+**Specification 59: Block comment style - indented same as code**
+Description: Block comments indented at same level as surrounding code. May be `/* … */` or `// …`. For multi-line, subsequent lines start with `*` aligned.
+Example:
+```javascript
+/*
+ * This is okay.
+ */
+```
+Additional Notes: Comments not enclosed in boxes.

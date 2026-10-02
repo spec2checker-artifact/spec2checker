@@ -1,0 +1,652 @@
+### 简单类 (Easy) - 共 60 条
+
+**Specification 1: Lint tool - run pylint**
+Description: Make sure you run `pylint` on your code.
+Example: `pylint --rcfile=pylintrc myfile.py`
+Additional Notes: Suppress warnings if inappropriate with `# pylint: disable=...`.
+
+**Specification 2: Suppress pylint warnings with line comment**
+Description: To suppress warnings, set a line-level comment like `# pylint: disable=invalid-name`.
+Example: `def do_PUT(self):  # WSGI name, so pylint: disable=invalid-name`
+Additional Notes: Prefer `pylint: disable` over deprecated `pylint: disable-msg`.
+
+**Specification 3: Unused argument suppression - delete variables**
+Description: Unused argument warnings can be suppressed by deleting the variables at the beginning of the function with a comment.
+Example: `del beans, eggs  # Unused by vikings.`
+Additional Notes: Other forms (e.g., prefix `_`) are allowed but no longer encouraged.
+
+**Specification 4: Imports - use statements for packages/modules only**
+Description: Use `import` statements for packages and modules only, not for individual types, classes, or functions.
+Example: `import sys` not `from sys import exit`
+Additional Notes: Exemptions for `typing`, `collections.abc`, `typing_extensions`, `six.moves`.
+
+**Specification 5: Imports - use `from x import y`**
+Description: Use `from x import y` where `x` is the package prefix and `y` is the module name with no prefix.
+Example: `from sound.effects import echo`
+Additional Notes: No relative names; use full package name.
+
+**Specification 6: Imports - use `as` for renaming**
+Description: Use `from x import y as z` when: two modules named `y`, `y` conflicts with top-level name, `y` conflicts with common parameter name, `y` is inconveniently long, or `y` is too generic.
+Example: `from storage.file_system import options as fs_options`
+Additional Notes: Also use for standard abbreviations like `import numpy as np`.
+
+**Specification 7: Packages - import using full pathname**
+Description: Import each module using the full pathname location of the module.
+Example: `import absl.flags` or `from absl import flags`
+Additional Notes: Do not assume the directory of main binary is in `sys.path`.
+
+**Specification 8: Exceptions - use built-in exception classes**
+Description: Make use of built-in exception classes when it makes sense, e.g., `ValueError` for programming mistakes.
+Example: `raise ValueError(f'Min. port must be at least 1024, not {minimum}.')`
+Additional Notes: None.
+
+**Specification 9: Exceptions - do not use `assert` for preconditions**
+Description: Do not use `assert` statements in place of conditionals or validating preconditions; they are not guaranteed to be evaluated.
+Example: Use `if minimum < 1024: raise ValueError(...)` instead of `assert minimum >= 1024`.
+Additional Notes: For pytest tests, `assert` is okay.
+
+**Specification 10: Exceptions - custom exceptions inherit from existing class**
+Description: Libraries may define their own exceptions; they must inherit from an existing exception class.
+Example: `class MyError(ValueError): pass`
+Additional Notes: Exception names should end in `Error` and avoid repetition (e.g., `foo.FooError` not `foo.Error`).
+
+**Specification 11: Exceptions - never use catch-all `except:`**
+Description: Never use catch-all `except:` statements, or catch `Exception` or `StandardError`, unless re-raising or creating an isolation point.
+Example: `except Exception:` is generally disallowed.
+Additional Notes: `except:` catches everything including `sys.exit()` and `Ctrl+C`.
+
+**Specification 12: Exceptions - minimize code in `try/except` blocks**
+Description: Minimize the amount of code in a `try/except` block to avoid hiding unexpected exceptions.
+Example: Keep only the code that might raise the expected exception inside `try`.
+Additional Notes: None.
+
+**Specification 13: Exceptions - use `finally` for cleanup**
+Description: Use the `finally` clause to execute code whether or not an exception is raised, useful for cleanup.
+Example: `try: f = open(...); ... finally: f.close()`
+Additional Notes: None.
+
+**Specification 14: Mutable global state - avoid**
+Description: Avoid mutable global state.
+Example: Do not use module-level variables that change.
+Additional Notes: Module-level constants are permitted and encouraged.
+
+**Specification 15: Mutable global state - make internal with `_`**
+Description: If mutable global state is warranted, declare it at module level or as class attribute and make internal by prepending `_`.
+Example: `_global_counter = 0`
+Additional Notes: Explain design reasons in a comment.
+
+**Specification 16: Nested functions/classes - allowed when closing over local variable**
+Description: Nested local functions or classes are fine when used to close over a local variable.
+Example: `def outer(): x = 1; def inner(): return x; return inner`
+Additional Notes: Avoid nesting just to hide from users; use `_` prefix instead.
+
+**Specification 17: Comprehensions - allowed for simple cases**
+Description: Comprehensions are allowed for simple cases.
+Example: `result = [mapping_expr for value in iterable if filter_expr]`
+Additional Notes: Multiple `for` clauses or filter expressions are not permitted.
+
+**Specification 18: Comprehensions - optimize for readability**
+Description: Optimize for readability, not conciseness.
+Example: Prefer explicit loops for complex cases.
+Additional Notes: None.
+
+**Specification 19: Default iterators and operators - use them**
+Description: Use default iterators and operators for types that support them (lists, dicts, files).
+Example: `for key in adict: ...` not `for key in adict.keys(): ...`
+Additional Notes: Do not mutate container while iterating.
+
+**Specification 20: Generators - use as needed**
+Description: Use generators as needed.
+Example: `def gen(): yield 1`
+Additional Notes: Use “Yields:” rather than “Returns:” in docstring.
+
+**Specification 21: Generators - clean up expensive resources**
+Description: If generator manages an expensive resource, force cleanup (e.g., wrap with context manager).
+Example: Use `contextlib.closing` or PEP-0533.
+Additional Notes: None.
+
+**Specification 22: Lambda functions - okay for one-liners**
+Description: Lambdas are okay for one-liners. Prefer generator expressions over `map()` or `filter()` with `lambda`.
+Example: `lambda x, y: x * y`
+Additional Notes: If lambda spans multiple lines or >60-80 chars, use regular nested function.
+
+**Specification 23: Lambda - prefer `operator` functions**
+Description: For common operations like multiplication, use functions from `operator` module instead of lambda.
+Example: `operator.mul` over `lambda x, y: x * y`
+Additional Notes: None.
+
+**Specification 24: Conditional expressions - okay for simple cases**
+Description: Conditional expressions (ternary operator) are okay for simple cases.
+Example: `x = 1 if cond else 2`
+Additional Notes: Each portion must fit on one line.
+
+**Specification 25: Default argument values - okay with caveat**
+Description: Default argument values are okay, but do not use mutable objects as default values.
+Example: `def foo(a, b=None): if b is None: b = []`
+Additional Notes: Use `None` and then create mutable inside.
+
+**Specification 26: Default argument values - immutable defaults allowed**
+Description: Immutable defaults like `()` (empty tuple) are okay.
+Example: `def foo(a, b: Sequence = ()): ...`
+Additional Notes: None.
+
+**Specification 27: Properties - allowed when necessary**
+Description: Properties may be used to control getting/setting attributes that require trivial computations or logic.
+Example: `@property def x(self): return self._x`
+Additional Notes: Must match expectations: cheap, straightforward, unsurprising.
+
+**Specification 28: Properties - create with `@property` decorator**
+Description: Properties should be created with the `@property` decorator.
+Example: `@property def value(self): return self._value`
+Additional Notes: Manually implementing property descriptor is a power feature.
+
+**Specification 29: Properties - do not use for simple get/set without computation**
+Description: Using a property to simply get and set an internal attribute is not allowed; make the attribute public instead.
+Example: `self.x = x` directly rather than `@property` and `@x.setter`.
+Additional Notes: None.
+
+**Specification 30: True/False evaluations - use implicit false**
+Description: Use the “implicit” false if possible, e.g., `if foo:` rather than `if foo != []:`.
+Example: `if not users:` instead of `if len(users) == 0:`
+Additional Notes: Note that `'0'` (string) evaluates to true.
+
+**Specification 31: True/False - check for `None` with `is`**
+Description: Always use `if x is None` (or `is not None`) to check for `None`.
+Example: `if x is None:` not `if not x:` when `x` could be `0` or `''`.
+Additional Notes: None.
+
+**Specification 32: True/False - do not compare boolean to `False`**
+Description: Never compare a boolean variable to `False` using `==`. Use `if not x` instead.
+Example: `if not x:` not `if x == False:`
+Additional Notes: To distinguish `False` from `None`, chain: `if not x and x is not None`.
+
+**Specification 33: True/False - for sequences, use emptiness**
+Description: For sequences, use `if seq:` and `if not seq:` rather than `if len(seq):`.
+Example: `if not users:` over `if len(users) == 0:`
+Additional Notes: None.
+
+**Specification 34: True/False - integers compare explicitly to 0**
+Description: For integers, implicit false may be risky; compare explicitly to 0.
+Example: `if i % 10 == 0:` not `if not i % 10:`
+Additional Notes: None.
+
+**Specification 35: Lexical scoping - okay to use**
+Description: Lexical scoping (nested functions referring to enclosing variables) is okay to use.
+Example: `def get_adder(summand1): return lambda summand2: summand1 + summand2`
+Additional Notes: Be aware of potential confusion with loop variables.
+
+**Specification 36: Function and method decorators - use judiciously**
+Description: Use decorators judiciously when there is a clear advantage.
+Example: `@property`, `@classmethod`
+Additional Notes: Avoid external dependencies in decorator itself.
+
+**Specification 37: Decorators - avoid `staticmethod`**
+Description: Never use `staticmethod` unless forced. Write a module-level function instead.
+Example: Use regular function rather than `@staticmethod`.
+Additional Notes: None.
+
+**Specification 38: Decorators - limit `classmethod`**
+Description: Use `classmethod` only when writing a named constructor or class-specific routine that modifies global state.
+Example: `@classmethod def from_string(cls, s): ...`
+Additional Notes: None.
+
+**Specification 39: Threading - do not rely on atomicity of built-in types**
+Description: Do not rely on the atomicity of built-in types like dictionaries.
+Example: Use `queue.Queue` for thread communication.
+Additional Notes: Prefer `threading.Condition` over lower-level locks.
+
+**Specification 40: Power features - avoid**
+Description: Avoid power features like custom metaclasses, bytecode access, dynamic inheritance, etc.
+Example: Do not define custom metaclasses unless absolutely necessary.
+Additional Notes: Standard library modules using them are okay (e.g., `abc.ABC`, `dataclasses`, `enum`).
+
+**Specification 41: `from __future__` imports - encouraged**
+Description: Use of `from __future__ import` statements is encouraged to use modern Python features.
+Example: `from __future__ import generator_stop`
+Additional Notes: Keep them until confident code runs only on modern environments.
+
+**Specification 42: Type annotations - strongly encouraged**
+Description: You are strongly encouraged to enable Python type analysis when updating code.
+Example: Add type annotations to function arguments and return values.
+Additional Notes: Use `pytype` for checking.
+
+**Specification 43: Type annotations - at least public APIs**
+Description: At least annotate your public APIs.
+Example: `def func(a: int) -> str:`
+Additional Notes: None.
+
+**Specification 44: Semicolons - do not use**
+Description: Do not terminate lines with semicolons, and do not use semicolons to put two statements on the same line.
+Example: `x = 1` not `x = 1; y = 2`
+Additional Notes: None.
+
+**Specification 45: Line length - maximum 80 characters**
+Description: Maximum line length is 80 characters.
+Example: Lines longer than 80 must be wrapped.
+Additional Notes: Exceptions: long imports, URLs, pathnames, pylint disable comments.
+
+**Specification 46: Line continuation - do not use backslash**
+Description: Do not use a backslash for explicit line continuation. Use implicit joining inside parentheses, brackets, braces.
+Example: Use parentheses for multi-line expressions.
+Additional Notes: Backslash-escaped newlines within strings are allowed.
+
+**Specification 47: Line wrapping - break at highest syntactic level**
+Description: Prefer to break lines at the highest possible syntactic level.
+Example: Break after `(` rather than inside a function name.
+Additional Notes: None.
+
+**Specification 48: Parentheses - use sparingly**
+Description: Use parentheses sparingly. Do not use them in return or conditional statements unless for line continuation or tuple.
+Example: `return foo` not `return (foo)` unless tuple.
+Additional Notes: For a 1-item tuple, parentheses are fine: `onesie = (foo,)`.
+
+**Specification 49: Indentation - 4 spaces, no tabs**
+Description: Indent code blocks with 4 spaces. Never use tabs.
+Example: Use 4 spaces per level.
+Additional Notes: Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.
+
+**Specification 50: Trailing commas - recommended when closing bracket on new line**
+Description: Trailing commas are recommended when the closing container token does not appear on the same line as the final element, and for single-element tuples.
+Example: `golomb4 = [0, 1, 4, 6,]` (with trailing comma).
+Additional Notes: Also hints auto-formatter to put one item per line.
+
+**Specification 51: Blank lines - two between top-level definitions**
+Description: Two blank lines between top-level definitions (functions or classes).
+Example:
+```python
+def func1(): pass
+
+
+def func2(): pass
+```
+Additional Notes: One blank line between method definitions.
+
+**Specification 52: Blank lines - none after `class` line**
+Description: No blank line following a `class` line.
+Example: `class MyClass:` then immediately docstring or code.
+Additional Notes: None.
+
+**Specification 53: Whitespace - no spaces inside parentheses, brackets, braces**
+Description: No whitespace inside parentheses, brackets, or braces.
+Example: `spam(ham[1], {'eggs': 2}, [])`
+Additional Notes: None.
+
+**Specification 54: Whitespace - no space before comma, semicolon, colon**
+Description: No whitespace before a comma, semicolon, or colon. Use space after them.
+Example: `print(x, y)` not `print(x , y)`
+Additional Notes: None.
+
+**Specification 55: Whitespace - no space before open paren for argument list**
+Description: No whitespace before the open parenthesis that starts an argument list, indexing, or slicing.
+Example: `spam(1)` not `spam (1)`
+Additional Notes: None.
+
+**Specification 56: Whitespace - no trailing whitespace**
+Description: No trailing whitespace.
+Example: Lines should not end with spaces.
+Additional Notes: None.
+
+**Specification 57: Whitespace - spaces around binary operators**
+Description: Surround binary operators with a single space on either side for assignment, comparisons, and Booleans.
+Example: `x == 1` not `x<1`
+Additional Notes: Use judgment for arithmetic operators.
+
+**Specification 58: Whitespace - no spaces around `=` in keyword arguments**
+Description: Never use spaces around `=` when passing keyword arguments or defining default parameter values, unless type annotation present.
+Example: `def complex(real, imag=0.0):` not `def complex(real, imag = 0.0):`
+Additional Notes: With type annotation: `def complex(real, imag: float = 0.0):`.
+
+**Specification 59: Whitespace - no vertical alignment**
+Description: Don’t use spaces to vertically align tokens on consecutive lines; it becomes a maintenance burden.
+Example:
+```python
+foo = 1000
+long_name = 2
+```
+Not aligned.
+Additional Notes: None.
+
+**Specification 60: Shebang line - only for executables**
+Description: Most files do not need a shebang line. Start main file with `#!/usr/bin/env python3`.
+Example: `#!/usr/bin/env python3` at top of executable script.
+Additional Notes: Ignored when importing.
+
+---
+
+### 复杂类 (Hard) - 共 60 条
+
+**Specification 61: Comments and docstrings - use right style**
+Description: Use the right style for module, function, method docstrings and inline comments.
+Example: Docstrings use `"""triple double quotes"""`.
+Additional Notes: Summary line ≤80 chars, followed by blank line if more.
+
+**Specification 62: Docstrings - always use triple-double-quote format**
+Description: Always use the three-double-quote format `"""` for docstrings (per PEP 257).
+Example: `"""Summary line.\n\nBody."""`
+Additional Notes: None.
+
+**Specification 63: Modules - every file should contain license boilerplate**
+Description: Every file should contain license boilerplate appropriate for the project.
+Example: Apache 2.0, BSD, LGPL, GPL header.
+Additional Notes: Files should start with a docstring describing contents and usage.
+
+**Specification 64: Test modules - docstrings optional**
+Description: Module-level docstrings for test files are not required; include only when additional information is needed.
+Example: Docstring explaining how to run test or update golden files.
+Additional Notes: Do not use docstrings that provide no new information.
+
+**Specification 65: Function docstring - mandatory for public API, nontrivial, or non-obvious logic**
+Description: A docstring is mandatory for every function that is part of public API, nontrivial size, or non-obvious logic.
+Example: Provide enough info to write a call without reading code.
+Additional Notes: May be descriptive or imperative, but consistent within file.
+
+**Specification 66: Function docstring - sections: Args, Returns, Raises**
+Description: Document Args (each parameter), Returns (or Yields), and Raises (exceptions relevant to interface).
+Example:
+```
+Args:
+    param: Description.
+Returns:
+    Description.
+Raises:
+    ValueError: If something.
+```
+Additional Notes: Hanging indent 2 or 4 spaces.
+
+**Specification 67: Function docstring - omit return section if only None**
+Description: The Returns section is not required if the function only returns `None`.
+Example: `"""Does something."""` without `Returns:`.
+Additional Notes: Also may be omitted if docstring starts with “Return”, “Returns”, etc.
+
+**Specification 68: Overridden methods - docstring optional with `@override`**
+Description: A method that overrides a base class method does not need a docstring if decorated with `@override` (from `typing` or `typing_extensions`).
+Example:
+```python
+from typing_extensions import override
+class Child(Parent):
+    @override
+    def do_something(self):
+        pass
+```
+Additional Notes: If behavior refines contract, provide docstring with differences.
+
+**Specification 69: Class docstring - required**
+Description: Classes should have a docstring below the class definition describing the class.
+Example: `"""Summary of class here.\n\nAttributes:\n    likes_spam: bool\n"""`
+Additional Notes: Document public attributes in `Attributes:` section.
+
+**Specification 70: Exception class docstring - describe what it represents**
+Description: Subclasses of `Exception` should describe what the exception represents, not the context.
+Example: `"""No more cheese is available."""` not `"""Raised when no more cheese is available."""`
+Additional Notes: None.
+
+**Specification 71: Block and inline comments - use for tricky parts**
+Description: Use comments for tricky, non-obvious, interesting or important parts of code.
+Example: `# We use a weighted dictionary search...`
+Additional Notes: Comments should start at least 2 spaces from code.
+
+**Specification 72: Comments - never describe the code**
+Description: Never describe the code; assume reader knows Python.
+Example: Avoid `# Now go through the b array...`
+Additional Notes: None.
+
+**Specification 73: Punctuation, spelling, grammar - pay attention**
+Description: Pay attention to punctuation, spelling, and grammar in comments.
+Example: Use complete sentences with proper capitalization.
+Additional Notes: Consistent style.
+
+**Specification 74: Strings - use f-string, `%`, or `format`**
+Description: Use f-string, `%` operator, or `format` method for string formatting.
+Example: `x = f'name: {name}'` or `x = '%s' % name`
+Additional Notes: Avoid `+` for formatting.
+
+**Specification 75: Strings - avoid `+` and `+=` in loops**
+Description: Avoid using `+` and `+=` to accumulate a string in a loop; use `list.append` and `''.join`.
+Example: `items.append(...); employee_table = ''.join(items)`
+Additional Notes: This avoids quadratic behavior.
+
+**Specification 76: Strings - be consistent with quote character**
+Description: Be consistent with string quote character within a file. Pick `'` or `"` and stick with it.
+Example: Use `'single quotes'` everywhere, or double quotes.
+Additional Notes: Use other quote to avoid escaping.
+
+**Specification 77: Multi-line strings - prefer `"""` for docstrings**
+Description: Prefer `"""` for multi-line strings. Projects may use `'''` for non-docstring multi-line if they use `'` for regular strings.
+Example: `long_string = """line1\nline2"""`
+Additional Notes: Docstrings must use `"""`.
+
+**Specification 78: Multi-line strings - use `textwrap.dedent` to remove leading spaces**
+Description: If needed to avoid extra spaces, use `textwrap.dedent()`.
+Example: `long_string = textwrap.dedent("""\n    line1\n    """)`
+Additional Notes: Backslash escapes newline.
+
+**Specification 79: Logging - use string literal with %-placeholders**
+Description: For logging functions that expect a pattern-string, always call them with a string literal (not f-string) as first argument.
+Example: `logger.info('Version is: %s', version)`
+Additional Notes: Prevents rendering if logger not configured.
+
+**Specification 80: Error messages - precise, interpolated pieces identifiable, grepable**
+Description: Error messages should precisely match error condition, interpolated pieces clearly identifiable, and allow simple automated processing.
+Example: `raise ValueError(f'Not a probability: {p=}')`
+Additional Notes: None.
+
+**Specification 81: Files and sockets - explicitly close when done**
+Description: Explicitly close files and sockets when done with them.
+Example: Use `with open(...) as f:` for automatic closing.
+Additional Notes: For file-like objects without `with`, use `contextlib.closing()`.
+
+**Specification 82: TODO comments - format with `TODO: resource - explanation`**
+Description: Use `TODO` comments with `TODO:` followed by a link (preferably bug reference) and hyphen-explanation.
+Example: `# TODO: crbug.com/192795 - Investigate cpufreq optimizations.`
+Additional Notes: Avoid old style `TODO(username):`.
+
+**Specification 83: TODO - avoid individual or team as context**
+Description: Avoid adding TODOs that refer to an individual or team as the context.
+Example: `# TODO: @yourusername - ...` (discouraged)
+Additional Notes: Use issue tracker instead.
+
+**Specification 84: TODO - include specific date or event**
+Description: If TODO is “At a future date do something”, include a very specific date or event.
+Example: `# TODO: Fix by November 2009`
+Additional Notes: Issues are ideal for tracking.
+
+**Specification 85: Imports formatting - separate lines**
+Description: Imports should be on separate lines, with exceptions for `typing` and `collections.abc`.
+Example:
+```python
+import os
+import sys
+```
+Not `import os, sys`.
+Additional Notes: None.
+
+**Specification 86: Imports - put at top of file**
+Description: Imports are always put at the top of the file, after module comments/docstrings and before globals.
+Example: After `"""Module docstring"""`.
+Additional Notes: Group from most generic to least generic: future, standard library, third-party, sub-package.
+
+**Specification 87: Imports - sort lexicographically within groups**
+Description: Within each grouping, imports should be sorted lexicographically, ignoring case, according to full package path.
+Example: `import collections` then `import queue`.
+Additional Notes: Optional blank line between sections.
+
+**Specification 88: Statements - generally one per line**
+Description: Generally only one statement per line.
+Example: `if foo: bar(foo)` allowed only if entire statement fits on one line.
+Additional Notes: Never with `try/except` or `if/else` on same line.
+
+**Specification 89: Getters and setters - use when meaningful**
+Description: Getter and setter functions should be used when getting/setting is complex or costly.
+Example: `def get_foo(self): return self._foo`
+Additional Notes: For simple read/write, make attribute public.
+
+**Specification 90: Naming - descriptive names, avoid abbreviations**
+Description: Names should be descriptive. Avoid abbreviations that are ambiguous or unfamiliar.
+Example: `error_count` not `err_cnt`.
+Additional Notes: Always use `.py` extension, no dashes.
+
+**Specification 91: Names to avoid - single character names (except allowed cases)**
+Description: Avoid single character names except for counters/iterators (`i`, `j`, `k`, `v`), `e` for exception, `f` for file handle, private type variables, and established mathematical notation.
+Example: `for i in range(10):` okay.
+Additional Notes: Descriptiveness proportional to scope.
+
+**Specification 92: Names to avoid - dashes in package/module names**
+Description: Avoid dashes (`-`) in any package/module name.
+Example: `my_module` not `my-module`.
+Additional Notes: None.
+
+**Specification 93: Names to avoid - double leading/trailing underscores**
+Description: Avoid `__double_leading_and_trailing_underscore__` names (reserved by Python).
+Example: Do not define `__init__` except for actual special methods.
+Additional Notes: None.
+
+**Specification 94: Names to avoid - offensive terms**
+Description: Avoid offensive terms.
+Example: Use inclusive language.
+Additional Notes: None.
+
+**Specification 95: Names to avoid - needless type inclusion**
+Description: Avoid names that needlessly include the type of the variable (e.g., `id_to_name_dict`).
+Example: `id_to_name` is sufficient.
+Additional Notes: None.
+
+**Specification 96: Naming conventions - internal names start with `_`**
+Description: “Internal” means internal to a module or protected/private within a class. Prepending a single underscore `_` has support for protecting.
+Example: `_internal_var`
+Additional Notes: Unit tests may access protected constants.
+
+**Specification 97: Naming conventions - avoid double underscore `__`**
+Description: Discourage use of double underscore (dunder) for name mangling; prefer single underscore.
+Example: Use `_private` not `__private`.
+Additional Notes: Impacts readability and testability.
+
+**Specification 98: Naming conventions - classes CapWords, modules lower_with_under**
+Description: Use `CapWords` for class names, `lower_with_under.py` for module names.
+Example: `class MyClass:`, file `my_module.py`
+Additional Notes: Old `CapWords.py` module names discouraged.
+
+**Specification 99: Naming conventions - test method names**
+Description: Unit test files follow `lower_with_under` method names, e.g., `test_<method>_<state>`.
+Example: `test_pop_emptyStack_throws`
+Additional Notes: Underscores may appear to separate components.
+
+**Specification 100: File naming - `.py` extension, no dashes**
+Description: Python filenames must have `.py` extension and must not contain dashes (`-`).
+Example: `my_file.py` not `my-file.py`
+Additional Notes: Allows importing and unittested.
+
+**Specification 101: Naming guidelines table - follow Guido’s recommendations**
+Description: Follow table: packages `lower_with_under`, classes `CapWords`, exceptions `CapWords`, functions `lower_with_under()`, constants `CAPS_WITH_UNDER`, etc.
+Example: `GLOBAL_CONSTANT = 42`
+Additional Notes: Internal versions prefix `_`.
+
+**Specification 102: Mathematical notation - short names allowed when matching established notation**
+Description: For mathematically-heavy code, short variable names matching established notation are preferred.
+Example: Use `x`, `y`, `θ` as in paper.
+Additional Notes: Cite source in comment.
+
+**Specification 103: Main - put main functionality in `main()`**
+Description: If file is meant as executable, its main functionality should be in a `main()` function.
+Example:
+```python
+def main(): ...
+if __name__ == '__main__':
+    main()
+```
+Additional Notes: When using `absl`, use `app.run(main)`.
+
+**Specification 104: Function length - prefer small and focused functions**
+Description: Prefer small and focused functions. No hard limit, but if exceeds about 40 lines, consider breaking up.
+Example: Refactor long functions.
+Additional Notes: Short functions are easier to read and modify.
+
+**Specification 105: Type annotations - familiar with type hints**
+Description: Familiarize yourself with type hints.
+Example: `def func(a: int) -> str:`
+Additional Notes: Annotating `self` or `cls` not necessary; `Self` can be used.
+
+**Specification 106: Type annotations - use `Any` when type cannot be expressed**
+Description: If any variable or returned type should not be expressed, use `Any`.
+Example: `x: Any = some_func()`
+Additional Notes: None.
+
+**Specification 107: Type annotations line breaking - one parameter per line**
+Description: After annotating, many function signatures become “one parameter per line”. Place comma after last parameter to give return type its own line.
+Example:
+```python
+def my_method(
+    self,
+    first_var: int,
+) -> int:
+```
+Additional Notes: Prefer breaking between variables, not between name and type.
+
+**Specification 108: Forward declarations - use `from __future__ import annotations`**
+Description: If you need to use a class name not yet defined, use `from __future__ import annotations` or use string for class name.
+Example: `stack: Sequence['MyClass']`
+Additional Notes: None.
+
+**Specification 109: Default values with type annotations - spaces around `=`**
+Description: Use spaces around `=` only for arguments that have both a type annotation and a default value.
+Example: `def func(a: int = 0) -> int:`
+Additional Notes: Not `def func(a:int=0)`.
+
+**Specification 110: `NoneType` - use explicit `X | None`**
+Description: Use explicit `X | None` (or `Optional[X]`) rather than implicit `a: str = None`.
+Example: `def f(a: str | None = None) -> str:`
+Additional Notes: `Optional[X]` is older style.
+
+**Specification 111: Type aliases - CapWorded, private with `_`**
+Description: Declare aliases of complex types. Name should be CapWorded. If used only in this module, prefix `_`.
+Example: `_LossAndGradient: TypeAlias = tuple[tf.Tensor, tf.Tensor]`
+Additional Notes: Use `: TypeAlias` annotation (Python 3.10+).
+
+**Specification 112: Ignoring types - use `# type: ignore`**
+Description: Disable type checking on a line with `# type: ignore`.
+Example: `x = some_func()  # type: ignore`
+Additional Notes: pytype has disable option for specific errors.
+
+**Specification 113: Typing variables - annotated assignment**
+Description: Specify type with annotated assignment using colon and type between variable name and value.
+Example: `a: Foo = SomeUndecoratedFunction()`
+Additional Notes: Do not use `# type: comment` style in new code.
+
+**Specification 114: Tuples vs Lists - list for single type, tuple for fixed types**
+Description: Typed lists contain objects of a single type. Typed tuples can have repeated type or fixed set of different types.
+Example: `a: list[int] = [1,2,3]; b: tuple[int, str] = (1, "2")`
+Additional Notes: None.
+
+**Specification 115: Type variables - use descriptive names unless private and unconstrained**
+Description: Type variable must have descriptive name unless not externally visible and not constrained.
+Example: `_T = TypeVar("_T")`, `AddableType = TypeVar("AddableType", int, float, str)`
+Additional Notes: Not `T = TypeVar("T")` for visible constrained variables.
+
+**Specification 116: String types - use `str` for text, `bytes` for binary**
+Description: Use `str` for string/text data, `bytes` for binary data. Do not use `typing.Text`.
+Example: `def f(x: str) -> str:`
+Additional Notes: Use `AnyStr` if all string types are the same.
+
+**Specification 117: Imports for typing - import symbols directly**
+Description: Always import symbols from `typing` or `collections.abc` themselves, not the module.
+Example: `from typing import Any, Generic`
+Additional Notes: Prefer abstract container types (`Sequence`) over concrete (`list`).
+
+**Specification 118: Conditional imports - use `if TYPE_CHECKING:` only exceptionally**
+Description: Use conditional imports only in exceptional cases where imports needed for type checking must be avoided at runtime.
+Example:
+```python
+import typing
+if typing.TYPE_CHECKING:
+    import sketch
+```
+Additional Notes: Discouraged; prefer refactoring.
+
+**Specification 119: Circular dependencies - replace with `Any`**
+Description: Replace modules that create circular dependency imports with `Any`.
+Example: `some_mod = Any` then use `"some_mod.SomeType"`.
+Additional Notes: Circular dependencies due to typing are code smells.
+
+**Specification 120: Generics - specify type parameters**
+Description: Prefer to specify type parameters for generic types; otherwise assumed `Any`.
+Example: `def get_names(ids: Sequence[int]) -> Mapping[int, str]:`
+Additional Notes: Use `TypeVar` for relationships between parameters and return.

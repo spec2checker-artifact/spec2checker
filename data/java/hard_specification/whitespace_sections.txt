@@ -1,0 +1,4 @@
+Specification 37: Vertical whitespace - as required by other sections
+Description: Blank lines appear as required by sections like Source file structure and Imports.
+Example: Blank line after package declaration.
+Additional Notes: None.

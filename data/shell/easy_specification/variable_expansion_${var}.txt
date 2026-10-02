@@ -1,0 +1,4 @@
+**Specification 30: Variable expansion - prefer `"${var}"` over `"$var"`**
+Description: Prefer `"${var}"` over `"$var"`.
+Example: `echo "PATH=${PATH}"`
+Additional Notes: None.

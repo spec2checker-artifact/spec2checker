@@ -1,0 +1,40 @@
+rules:
+- id: cpp-auto-usage-clarity
+  message: Use `auto` only when it makes code clearer or safer. Do not use merely
+    to avoid typing. Not for public APIs where type is not obvious.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: auto $VAR = $EXPR;
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot fully assess code clarity or safety; pattern matches all
+          auto declarations.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires custom query to assess clarity/safety heuristics.
+    original_description: Use `auto` only when it makes code clearer or safer. Do
+      not use merely to avoid typing. Not for public APIs where type is not obvious.

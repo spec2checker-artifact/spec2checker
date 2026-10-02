@@ -1,0 +1,4 @@
+**Specification 33: Use local variable type deduction to eliminate obvious boilerplate**  
+Description: For local variables, use `auto` when type information is obvious or irrelevant.  
+Example: `auto widget = std::make_unique<Widget>(arg1, arg2);`  
+Additional Notes: Not for types that are not obvious.

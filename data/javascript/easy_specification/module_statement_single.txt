@@ -1,0 +1,4 @@
+**Specification 9: `goog.module` statement - single line, no wrap**
+Description: `goog.module` statement must be on a single line, not wrapped; exception to 80-column limit.
+Example: `goog.module('search.urlHistory.urlHistoryService');`
+Additional Notes: Argument defines namespace.

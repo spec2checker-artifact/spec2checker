@@ -1,0 +1,8 @@
+Specification 52: Horizontal alignment - never required
+Description: Adding variable spaces to align tokens with previous lines is permitted but never required. Not required to maintain existing alignment.
+Example:
+
+java
+private int x;      // permitted but not required
+private Color color;
+Additional Notes: Alignment can cause version history and merge conflicts; practical concerns take priority.

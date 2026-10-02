@@ -1,0 +1,38 @@
+rules:
+- id: python-type-annotation-encouraged
+  message: Detect functions that are missing type annotations for arguments or return
+    values.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: "def $FUNC($ARGS):\n    ..."
+  - pattern-inside: '@true
+
+      ...'
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect missing annotations syntactically but cannot validate
+          type correctness.
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: Requires type resolution for full analysis; can detect missing
+          annotations.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+    original_description: Detect functions that are missing type annotations for arguments
+      or return values.

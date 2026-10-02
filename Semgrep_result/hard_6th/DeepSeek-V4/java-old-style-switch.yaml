@@ -1,0 +1,41 @@
+rules:
+- id: java-old-style-switch
+  message: Switch label colon must be followed by a line break, and statements within
+    the case group must be indented further by +2 spaces.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: "case $LABEL:\n  $STMT;"
+  - metavariable-type:
+      metavariable: $LABEL
+      type: expr
+  - metavariable-type:
+      metavariable: $STMT
+      type: expr
+  metadata:
+    syntax_switch: is_switch_case
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: pattern matches basic case but may not validate all indentation
+          levels or multi-statement blocks
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom rule for indentation check
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for formatting rule
+    original_description: Switch label colon must be followed by a line break, and
+      statements within the case group must be indented further by +2 spaces.

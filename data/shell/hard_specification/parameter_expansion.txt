@@ -1,0 +1,4 @@
+**Specification 72: Use parameter expansion instead of `sed` where possible**
+Description: Prefer parameter expansion functionality provided by bash.
+Example: `substitution="${string/#foo/bar}"`
+Additional Notes: None.

@@ -1,0 +1,640 @@
+### 简单类 (Easy) - 共 60 条
+
+**Specification 1: File header - start with description**
+Description: Start each file with a description of its contents.
+Example: `#!/bin/bash` followed by `# Perform hot backups of Oracle databases.`
+Additional Notes: Copyright and author information optional.
+
+**Specification 2: Every file must have top-level comment**
+Description: Every file must have a top-level comment including a brief overview of its contents.
+Example: See above.
+Additional Notes: None.
+
+**Specification 3: Function header comment - required for non-obvious or non-short functions**
+Description: Any function that is not both obvious and short must have a function header comment.
+Example: `#######################################` block before function.
+Additional Notes: Library functions require comment regardless of length.
+
+**Specification 4: Function header comment - describe intended API behaviour**
+Description: Function header comments should describe: Description, Globals, Arguments, Outputs, Returns.
+Example: See `cleanup()` example.
+Additional Notes: None.
+
+**Specification 5: Implementation comments - comment tricky parts**
+Description: Comment tricky, non-obvious, interesting or important parts of your code.
+Example: `# We use a weighted dictionary search...`
+Additional Notes: Don’t comment everything.
+
+**Specification 6: TODO comments - for temporary code**
+Description: Use `TODO` comments for code that is temporary, a short-term solution, or good-enough but not perfect.
+Example: `# TODO(mrmonkey): Handle the unlikely edge cases (bug ####)`
+Additional Notes: Follow C++ Guide convention.
+
+**Specification 7: TODO format - all caps, name/email, colon, description**
+Description: `TODO` should include the string in all caps, followed by the name/email/identifier of the person with best context.
+Example: `# TODO(mrmonkey): ...`
+Additional Notes: Not a commitment to fix.
+
+**Specification 8: Formatting - follow existing style for modified files**
+Description: While you should follow the style that’s already there for files that you’re modifying.
+Example: Stay consistent with existing indentation.
+Additional Notes: New code must follow given rules.
+
+**Specification 9: Indentation - 2 spaces, no tabs**
+Description: Indent 2 spaces. No tabs.
+Example: Use two spaces per level.
+Additional Notes: Exception: body of `<<-` here-document may use tabs.
+
+**Specification 10: Use blank lines between blocks**
+Description: Use blank lines between blocks to improve readability.
+Example: Separate logical sections with blank lines.
+Additional Notes: None.
+
+**Specification 11: For existing files, stay faithful to existing indentation**
+Description: For existing files, stay faithful to the existing indentation.
+Example: If file uses 4 spaces, continue using 4 spaces.
+Additional Notes: None.
+
+**Specification 12: Maximum line length - 80 characters**
+Description: Maximum line length is 80 characters.
+Example: Wrap lines longer than 80.
+Additional Notes: None.
+
+**Specification 13: Long literal strings - use here document or embedded newline**
+Description: If you have literal strings longer than 80 characters, use a here document or an embedded newline.
+Example: `cat <<END ... END` or `long_string="line1\nline2"`
+Additional Notes: None.
+
+**Specification 14: Words longer than 80 chars can stay on one line**
+Description: Words that are longer than 80 chars and can’t sensibly be split are ok.
+Example: Long file path or URL.
+Additional Notes: Put on own line or factor into variable.
+
+**Specification 15: Pipelines - split one per line if not all fit**
+Description: Pipelines should be split one per line if they don’t all fit on one line.
+Example:
+```bash
+command1 \
+  | command2 \
+  | command3
+```
+Additional Notes: If fits on one line, keep on one line.
+
+**Specification 16: Pipe on newline with 2 space indent**
+Description: When splitting pipeline, put pipe on newline and indent next section 2 spaces. Use `\` consistently.
+Example: See above.
+Additional Notes: Applies to `|`, `||`, `&&`.
+
+**Specification 17: Comments precede whole pipeline**
+Description: Comments will need to precede the whole pipeline.
+Example: `# This pipeline does X` before the pipeline.
+Additional Notes: Consider helper function for large/complex pipelines.
+
+**Specification 18: Control flow - put `; then` and `; do` on same line**
+Description: Put `; then` and `; do` on the same line as `if`, `for`, `while`.
+Example: `if [[ condition ]]; then`
+Additional Notes: `else` on its own line.
+
+**Specification 19: Closing statements (`fi`, `done`) on own line**
+Description: Closing statements (`fi`, `done`) on their own line, vertically aligned with opening statement.
+Example:
+```bash
+if ...; then
+  ...
+fi
+```
+Additional Notes: None.
+
+**Specification 20: Recommend including `in "$@"` in for loops for clarity**
+Description: Although possible to omit `in "$@"`, we recommend consistently including it for clarity.
+Example: `for arg in "$@"; do`
+Additional Notes: None.
+
+**Specification 21: Case statement - indent alternatives by 2 spaces**
+Description: Indent alternatives by 2 spaces.
+Example:
+```bash
+case "${expression}" in
+  a)
+    command
+    ;;
+esac
+```
+Additional Notes: None.
+
+**Specification 22: Case - one-line alternative needs space after `)` and before `;;`**
+Description: A one-line alternative needs a space after the close parenthesis of the pattern and before the `;;`.
+Example: `a) command ;;`
+Additional Notes: None.
+
+**Specification 23: Case - long alternatives split over multiple lines**
+Description: Long or multi-command alternatives should be split over multiple lines with pattern, actions, and `;;` on separate lines.
+Example: See above.
+Additional Notes: None.
+
+**Specification 24: Case - matching expressions indented one level from `case`/`esac`**
+Description: The matching expressions are indented one level from the `case` and `esac`.
+Example: `  a)` (indented 2 spaces).
+Additional Notes: Multiline actions indented another level.
+
+**Specification 25: Case - no need to quote match expressions generally**
+Description: In general, there is no need to quote match expressions.
+Example: `a)` not `'a')`.
+Additional Notes: None.
+
+**Specification 26: Case - pattern expressions should not be preceded by open parenthesis**
+Description: Pattern expressions should not be preceded by an open parenthesis.
+Example: `a)` not `(a)`.
+Additional Notes: Avoid `;&` and `;;&`.
+
+**Specification 27: Case - simple commands may be on same line as pattern**
+Description: Simple commands may be put on the same line as the pattern and `;;` as long as readable.
+Example: `a) aflag='true' ;;`
+Additional Notes: Use space after `)` and before `;;`.
+
+**Specification 28: Variable expansion - stay consistent with existing code**
+Description: In order of precedence: Stay consistent with what you find.
+Example: Follow existing style.
+Additional Notes: Strongly recommended.
+
+**Specification 29: Variable expansion - quote your variables**
+Description: Quote your variables (see Quoting section).
+Example: `"${var}"`
+Additional Notes: None.
+
+**Specification 30: Variable expansion - prefer `"${var}"` over `"$var"`**
+Description: Prefer `"${var}"` over `"$var"`.
+Example: `echo "PATH=${PATH}"`
+Additional Notes: None.
+
+**Specification 31: Don’t brace-delimit single-character shell specials unless necessary**
+Description: Don’t brace-delimit single character shell specials / positional parameters, unless strictly necessary.
+Example: `$1`, `$?`, `$$` without braces.
+Additional Notes: Use braces for `${10}`.
+
+**Specification 32: Prefer brace-delimiting all other variables**
+Description: Prefer brace-delimiting all other variables.
+Example: `${PATH}`, `${some_var}`.
+Additional Notes: None.
+
+**Specification 33: Braces are not quoting - must also use double quotes**
+Description: Using braces in `${var}` is not a form of quoting. “Double quotes” must be used as well.
+Example: `"${var}"`.
+Additional Notes: None.
+
+**Specification 34: Quoting - always quote strings containing variables, command substitutions, spaces or shell meta characters**
+Description: Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required or it’s a shell-internal integer.
+Example: `"${flag}"`, `"$(command)"`.
+Additional Notes: None.
+
+**Specification 35: Use arrays for safe quoting of lists**
+Description: Use arrays for safe quoting of lists of elements, especially command-line flags.
+Example: `FLAGS=( --foo --bar='baz' ); mybinary "${FLAGS[@]}"`
+Additional Notes: See Arrays section.
+
+**Specification 36: Optionally quote shell-internal integer special variables**
+Description: Optionally quote shell-internal, readonly special variables that are integers: `$?`, `$#`, `$$`, `$!`. Prefer quoting named internal integer variables (e.g., `PPID`) for consistency.
+Example: `echo "ppid=${PPID}"` (quoted).
+Additional Notes: It’s ok to not quote inside `(( ))`.
+
+**Specification 37: Prefer quoting “words” (not command options or path names)**
+Description: Prefer quoting strings that are “words” (as opposed to command options or path names).
+Example: `readonly USE_INTEGER='true'`.
+Additional Notes: Not compulsory.
+
+**Specification 38: Use `"$@"` unless specific reason to use `$*`**
+Description: Use `"$@"` unless you have a specific reason to use `$*`, such as simply appending the arguments to a string.
+Example: `mybinary "$@"`.
+Additional Notes: `$*` expands to one argument with spaces.
+
+**Specification 39: Use `$(command)` instead of backticks**
+Description: Use `$(command)` instead of backticks.
+Example: `var="$(command "$(command1)")"`
+Additional Notes: Nested backticks require escaping; `$( )` is easier.
+
+**Specification 40: Prefer `[[ ... ]]` over `[ ... ]` and `test`**
+Description: `[[ ... ]]` is preferred over `[ ... ]`, `test`, and `/usr/bin/[`.
+Example: `if [[ -f "$file" ]]; then`
+Additional Notes: Reduces errors, allows pattern/regex matching.
+
+**Specification 41: Testing strings - use quotes rather than filler characters**
+Description: Use quotes rather than filler characters where possible.
+Example: `if [[ "${my_var}" == "some_string" ]]; then` not `if [[ "${my_var}X" == "some_stringX" ]]; then`
+Additional Notes: None.
+
+**Specification 42: Prefer `-z` and `-n` over testing for empty string**
+Description: `-z` (string length zero) and `-n` (string length not zero) are preferred over testing for an empty string.
+Example: `if [[ -z "${my_var}" ]]; then`
+Additional Notes: None.
+
+**Specification 43: Use `==` for equality, not `=`**
+Description: For clarity, use `==` for equality rather than `=`.
+Example: `if [[ "${my_var}" == "val" ]]; then`
+Additional Notes: `=` can be confused with assignment.
+
+**Specification 44: Use `(( ... ))` for numeric comparisons**
+Description: Use `(( ... ))` for numeric comparisons, not `<` or `>` inside `[[ ... ]]` (which do lexicographical comparison).
+Example: `if (( my_var > 3 )); then` or `if [[ "${my_var}" -gt 3 ]]; then`
+Additional Notes: None.
+
+**Specification 45: Wildcard expansion - use explicit path `./*`**
+Description: Use an explicit path when doing wildcard expansion of filenames (e.g., `./*` instead of `*`).
+Example: `rm -v ./*` not `rm -v *`
+Additional Notes: Prevents issues with filenames starting with `-`.
+
+**Specification 46: Avoid `eval`**
+Description: `eval` should be avoided.
+Example: Do not use `eval $(set_my_variables)`.
+Additional Notes: Munges input, can set variables unpredictably.
+
+**Specification 47: Use arrays to store lists of elements**
+Description: Bash arrays should be used to store lists of elements to avoid quoting complications.
+Example: `flags=(--foo --bar='baz'); mybinary "${flags[@]}"`
+Additional Notes: Not for complex data structures.
+
+**Specification 48: Use `"${array[@]}"` for quoted expansion**
+Description: Use quoted expansion `"${array[@]}"` to access arrays.
+Example: `mybinary "${flags[@]}"`
+Additional Notes: None.
+
+**Specification 49: Avoid using a single string for multiple command arguments**
+Description: Using a single string for multiple command arguments should be avoided; leads to `eval` or quoting nightmares.
+Example: Don’t do `flags='--foo --bar=baz'`.
+Additional Notes: None.
+
+**Specification 50: Use process substitution instead of piping to `while`**
+Description: Use process substitution or `readarray` in preference to piping to `while`.
+Example: `while read line; do ...; done < <(your_command)`
+Additional Notes: Pipes create subshell, variables don’t propagate.
+
+**Specification 51: Use `readarray` to read file into array**
+Description: Use `readarray` builtin (bash4+) to read file into array, then loop over array.
+Example: `readarray -t lines < <(your_command); for line in "${lines[@]}"; do ...`
+Additional Notes: None.
+
+**Specification 52: Avoid `for var in $(...)` - splits by whitespace**
+Description: Be cautious using `for var in $(...)`; output split by whitespace, not line. Use `while read` or `readarray` instead.
+Example: Not `for f in $(ls)`.
+Additional Notes: Only safe if output contains no unexpected whitespace.
+
+**Specification 53: Arithmetic - always use `(( ... ))` or `$(( ... ))`**
+Description: Always use `(( ... ))` or `$(( ... ))` rather than `let`, `$[...]`, or `expr`.
+Example: `(( i = 10 * j + 400 ))`, `echo "$(( 2 + 2 ))"`
+Additional Notes: Never use `$[...]`, `expr`, `let`.
+
+**Specification 54: Avoid `(( ... ))` as standalone statement with `set -e`**
+Description: Avoid using `(( ... ))` as a standalone statement, especially with `set -e`, because zero evaluation causes exit.
+Example: `set -e; i=0; (( i++ ))` will exit.
+Additional Notes: None.
+
+**Specification 55: Inside `$(( ... ))`, `var` not `${var}` is fine**
+Description: Inside `$(( ... ))`, the `$` form is not required; omitting leads to cleaner code (recommendation only).
+Example: `echo "$(( hr * 3600 + min * 60 + sec ))"`
+Additional Notes: Slightly contrary to always-using-braces rule.
+
+**Specification 56: Aliases - avoid in scripts**
+Description: Aliases should be avoided in scripts; functions are preferred.
+Example: Use `random_name() { echo "some_prefix_${RANDOM}"; }` not `alias random_name=...`
+Additional Notes: As per Bash manual.
+
+**Specification 57: Function names - lower-case with underscores**
+Description: Function names: lower-case, with underscores to separate words.
+Example: `my_func()`
+Additional Notes: Separate libraries with `::`.
+
+**Specification 58: Parentheses required after function name**
+Description: Parentheses are required after the function name.
+Example: `my_func() { ... }`
+Additional Notes: `function` keyword optional but must be consistent.
+
+**Specification 59: Braces on same line as function name, no space between name and parentheses**
+Description: Braces must be on the same line as the function name and no space between function name and parenthesis.
+Example: `my_func() {` not `my_func () {`
+Additional Notes: None.
+
+**Specification 60: Variable names - same as function names**
+Description: Variable names: lower-case with underscores.
+Example: `zone`, `dirs_to_cleanup`.
+Additional Notes: Loop variables similarly named.
+
+---
+
+### 复杂类 (Hard) - 共 60 条
+
+**Specification 61: Constants and environment variables - uppercase with underscores**
+Description: Constants and anything exported to the environment should be capitalized, separated with underscores, declared at top of file.
+Example: `readonly PATH_TO_FILES='/some/path'`
+Additional Notes: Use `readonly` or `declare -xr`.
+
+**Specification 62: Set constant at runtime then make readonly immediately**
+Description: It’s OK to set a constant at runtime or in a conditional, but make it readonly immediately afterwards.
+Example:
+```bash
+ZIP_VERSION="$(dpkg ...)"
+readonly ZIP_VERSION
+```
+Additional Notes: None.
+
+**Specification 63: Source filenames - lowercase with underscores**
+Description: Source filenames: lowercase, with underscores to separate words if desired.
+Example: `make_template` not `make-template`.
+Additional Notes: Consistency with Google code styles.
+
+**Specification 64: Use `local` for function-specific variables**
+Description: Declare function-specific variables with `local`.
+Example: `local name="$1"`
+Additional Notes: Avoids polluting global namespace.
+
+**Specification 65: Declaration and assignment separate for command substitution**
+Description: Declaration and assignment must be separate statements when assignment value is from command substitution, because `local` does not propagate exit code.
+Example:
+```bash
+local my_var
+my_var="$(my_func)"
+```
+Not `local my_var="$(my_func)"` (exit code lost).
+Additional Notes: None.
+
+**Specification 66: Put all functions together below constants**
+Description: Put all functions together in the file just below constants. Don’t hide executable code between functions.
+Example: Functions at top, then `main`, then call `main`.
+Additional Notes: Only includes, `set` statements, and constants may be before functions.
+
+**Specification 67: Use `main` function for scripts with at least one other function**
+Description: A function called `main` is required for scripts long enough to contain at least one other function.
+Example:
+```bash
+main() { ... }
+main "$@"
+```
+Additional Notes: `main` as bottom-most function.
+
+**Specification 68: Last non-comment line should be `main "$@"`**
+Description: The last non-comment line in the file should be a call to `main "$@"`.
+Example: `main "$@"`
+Additional Notes: For short scripts, `main` is not required.
+
+**Specification 69: Always check return values**
+Description: Always check return values and give informative return values.
+Example: `if ! mv ...; then echo ...; exit 1; fi`
+Additional Notes: Use `$?` or `if` statement.
+
+**Specification 70: Use `PIPESTATUS` to check all parts of a pipe**
+Description: Bash has `PIPESTATUS` array to check return code from all parts of a pipe.
+Example: `if (( PIPESTATUS[0] != 0 || PIPESTATUS[1] != 0 )); then`
+Additional Notes: Assign to another variable immediately to avoid overwrite.
+
+**Specification 71: Prefer builtin commands over external processes**
+Description: Given the choice between invoking a shell builtin and a separate process, choose the builtin.
+Example: Use `"${string/#foo/bar}"` over `echo "$string" | sed ...`.
+Additional Notes: More efficient, robust, portable.
+
+**Specification 72: Use parameter expansion instead of `sed` where possible**
+Description: Prefer parameter expansion functionality provided by bash.
+Example: `substitution="${string/#foo/bar}"`
+Additional Notes: None.
+
+**Specification 73: Use `=~` operator for regex matching in `[[ ... ]]`**
+Description: `[[ ... ]]` allows regex matching with `=~`.
+Example: `if [[ "$string" =~ foo:(\d+) ]]; then extraction="${BASH_REMATCH[1]}"; fi`
+Additional Notes: RHS should not be quoted.
+
+**Specification 74: ShellCheck recommended for all scripts**
+Description: The ShellCheck project identifies common bugs and warnings; recommended for all scripts, large or small.
+Example: Run `shellcheck myscript.sh`.
+Additional Notes: None.
+
+**Specification 75: Arrays - assign with parentheses, append with `+=()`**
+Description: Array assigned using parentheses, can be appended with `+=()`.
+Example: `flags=(--foo); flags+=(--bar)`
+Additional Notes: None.
+
+**Specification 76: Arrays - avoid unquoted expansion in array assignments**
+Description: Avoid unquoted expansion in array assignments; won’t work correctly if output contains special characters or whitespace.
+Example: Don’t do `files=($(ls /directory))`.
+Additional Notes: Use `readarray` instead.
+
+**Specification 77: Process substitution creates subshell but allows variable propagation**
+Description: Process substitution `<(command)` also creates subshell, but allows redirecting from subshell to `while` without putting `while` in subshell.
+Example: `while read line; do ...; done < <(your_command)`
+Additional Notes: Variables modified inside loop propagate.
+
+**Specification 78: Use `readarray -t` to read lines into array without trailing newline**
+Description: `readarray -t lines < <(command)` reads lines into array, stripping trailing newline.
+Example: `readarray -t lines < <(your_command)`
+Additional Notes: None.
+
+**Specification 79: Arithmetic - use `(( var += 3 ))` for increment**
+Description: Use `(( i += 3 ))` to increment variable.
+Example: `(( i += 3 ))`
+Additional Notes: No `$` inside `(( ))`.
+
+**Specification 80: Avoid `let` because unquoted assignments subject to globbing**
+Description: Avoid `let`; use `(( ... ))` instead.
+Example: Not `let i="2 + 2"`.
+Additional Notes: `let` isn’t declarative keyword.
+
+**Specification 81: Avoid `expr` - external program slower than builtin arithmetic**
+Description: Avoid `expr`; built-in arithmetic is many times faster.
+Example: Not `i=$( expr 4 + 4 )`.
+Additional Notes: None.
+
+**Specification 82: Declare integer variables with `declare -i` or `local -i` when possible**
+Description: Remember to declare variables as integers when possible, and prefer local variables over globals.
+Example: `local -i hundred="$(( 10 * 10 ))"`
+Additional Notes: None.
+
+**Specification 83: For passing arguments, `"$@"` is right almost every time**
+Description: `"$@"` retains arguments as-is; no args results in no args passed on. This is what you want in most cases.
+Example: `mybinary "$@"`
+Additional Notes: `$*` is wrong almost every time.
+
+**Specification 84: Testing strings - use explicit `-z` or `-n` to avoid confusion**
+Description: To avoid confusion about what you’re testing for, explicitly use `-z` or `-n`.
+Example: `if [[ -n "${my_var}" ]]; then` not `if [[ "${my_var}" ]]; then`
+Additional Notes: None.
+
+**Specification 85: Use `-gt`, `-lt` for numeric comparison inside `[[ ... ]]`**
+Description: Use `-gt`, `-lt` etc. for numeric comparison inside `[[ ... ]]` (not `<` or `>`).
+Example: `if [[ "${my_var}" -gt 3 ]]; then`
+Additional Notes: Or use `(( ... ))`.
+
+**Specification 86: Never use `$[...]` syntax**
+Description: Never use the `$[...]` syntax.
+Example: Not `i=$[2 * 10]`.
+Additional Notes: Deprecated and non-portable.
+
+**Specification 87: Never use `expr` command**
+Description: Never use the `expr` command.
+Example: Not `i=$( expr 4 + 4 )`.
+Additional Notes: External program, slower.
+
+**Specification 88: Never use `let` builtin**
+Description: Never use the `let` builtin.
+Example: Not `let i="2 + 2"`.
+Additional Notes: Use `(( ... ))`.
+
+**Specification 89: Avoid using `(( ... ))` as standalone statement with `set -e` due to zero exit**
+Description: Avoid `(( ... ))` as standalone statement when `set -e` is enabled; expression evaluating to zero causes shell exit.
+Example: `set -e; i=0; (( i++ ))` exits.
+Additional Notes: None.
+
+**Specification 90: Function names in packages use `::` separator**
+Description: If writing a package, separate package names with `::`.
+Example: `mypackage::my_func() { ... }`
+Additional Notes: Interactive functions may avoid colons for auto-completion.
+
+**Specification 91: `function` keyword optional but must be consistent**
+Description: The `function` keyword is optional, but must be used consistently throughout a project.
+Example: Either all functions use `function my_func() {` or all use `my_func() {`.
+Additional Notes: `function` enhances quick identification.
+
+**Specification 92: Loop variable names should be similarly named for what you’re looping through**
+Description: Variables names for loops should be similarly named for any variable you’re looping through.
+Example: `for zone in "${zones[@]}"; do`
+Additional Notes: None.
+
+**Specification 93: Use `readonly` or `declare -xr` for constants**
+Description: For clarity, `readonly` or `declare -xr` is recommended vs. equivalent commands.
+Example: `readonly PATH_TO_FILES='/some/path'` or `declare -xr ORACLE_SID='PROD'`
+Additional Notes: Can do `readonly` then `export`.
+
+**Specification 94: Check return values with `if ! command` or `if (( $? != 0 ))`**
+Description: For unpiped commands, use `if ! command` or check directly via `$?` with `if` statement.
+Example: `if ! mv ...; then ...; fi`
+Additional Notes: None.
+
+**Specification 95: Save `PIPESTATUS` immediately after pipe command**
+Description: `PIPESTATUS` is overwritten as soon as you do any other command; assign to another variable immediately.
+Example: `return_codes=( "${PIPESTATUS[@]}" )`
+Additional Notes: None.
+
+**Specification 96: Prefer builtin `[[ ... ]]` over external `[` for regex and pattern matching**
+Description: `[[ ... ]]` allows pattern and regex matching; `[` does not.
+Example: `if [[ "filename" == f* ]]; then` works; `[ "filename" == f* ]` fails.
+Additional Notes: None.
+
+**Specification 97: When using `=~`, do not quote RHS**
+Description: When using `=~` in `[[ ... ]]`, the RHS should not be quoted.
+Example: `if [[ "filename" =~ ^[[:alnum:]]+name ]]; then`
+Additional Notes: Quoting would treat as literal string.
+
+**Specification 98: Use `./*` to avoid issues with filenames starting with dash**
+Description: Using `./*` prevents filenames beginning with `-` being interpreted as options.
+Example: `rm -v ./*`
+Additional Notes: None.
+
+**Specification 99: Arrays should not be used for complex data structures**
+Description: Arrays should not be used to facilitate more complex data structures.
+Example: Use other languages for advanced data manipulation.
+Additional Notes: None.
+
+**Specification 100: Avoid command expansions directly in array assignments**
+Description: Avoid unquoted expansion in array assignments; won’t work correctly if output contains special characters.
+Example: Don’t do `files=($(ls))`.
+Additional Notes: Use `readarray`.
+
+**Specification 101: Use `readarray` for reading command output into array**
+Description: Use `readarray` builtin (bash4+) to read file/command output into array.
+Example: `readarray -t lines < <(your_command)`
+Additional Notes: Avoids whitespace splitting issues.
+
+**Specification 102: Prefer `while read` with process substitution over pipe**
+Description: Use `while read ...; done < <(command)` to avoid subshell variable propagation issues.
+Example: See earlier.
+Additional Notes: None.
+
+**Specification 103: Use `$(( ... ))` inside strings for arithmetic expansion**
+Description: Use `$(( ... ))` within strings for arithmetic expansion.
+Example: `echo "$(( 2 + 2 )) is 4"`
+Additional Notes: None.
+
+**Specification 104: Arithmetic comparison in `(( ... ))` does not require `$` on variables**
+Description: Inside `(( ... ))`, variables are referenced by name without `$`.
+Example: `if (( a < b )); then`
+Additional Notes: Cleaner code.
+
+**Specification 105: Avoid using `alias` in scripts; use functions instead**
+Description: Aliases are cumbersome; functions provide superset of functionality and should always be preferred.
+Example: Use `random_name() { ... }` not `alias`.
+Additional Notes: None.
+
+**Specification 106: Function names intended for interactive use may avoid colons**
+Description: Functions intended for interactive use may choose to avoid colons as it can confuse bash auto-completion.
+Example: Use `my_func` not `mypackage::my_func`.
+Additional Notes: None.
+
+**Specification 107: Use `local` to avoid leaking loop variables**
+Description: Inside a function, declare loop variable as `local` to avoid leaking into global environment.
+Example: `local dir; for dir in ...; do`
+Additional Notes: None.
+
+**Specification 108: Separate declaration and assignment for `local` with command substitution to preserve exit code**
+Description: Always separate `local` declaration and assignment when assignment uses command substitution, because `local` masks exit code.
+Example:
+```bash
+local my_var
+my_var="$(my_func)"
+(( $? == 0 )) || return
+```
+Additional Notes: None.
+
+**Specification 109: Put `main` as bottom-most function**
+Description: Put the main program in a function called `main` as the bottom-most function.
+Example: Define `main` last, then call it.
+Additional Notes: Allows defining more variables as `local`.
+
+**Specification 110: For short scripts with linear flow, `main` is not required**
+Description: For short scripts where it’s just a linear flow, `main` is overkill and not required.
+Example: Simple 10-line script without functions.
+Additional Notes: None.
+
+**Specification 111: Use `(( $? == 0 )) || return` after command substitution**
+Description: After `my_var="$(my_func)"`, check `$?` because `local` would have swallowed it.
+Example: `(( $? == 0 )) || return`
+Additional Notes: None.
+
+**Specification 112: Use `declare -a` for array declaration**
+Description: Declare array with `declare -a` for clarity.
+Example: `declare -a flags`
+Additional Notes: Optional but recommended.
+
+**Specification 113: Use `readonly FLAGS` after array assignment for constants**
+Description: After assigning array, use `readonly FLAGS` to make it constant.
+Example: `FLAGS=( --foo ); readonly FLAGS`
+Additional Notes: None.
+
+**Specification 114: Use `"${array[@]}"` expansion to preserve individual elements**
+Description: Use `"${array[@]}"` to expand array into individual elements, preserving quoting.
+Example: `mybinary "${FLAGS[@]}"`
+Additional Notes: None.
+
+**Specification 115: Avoid using `$*` for argument passing**
+Description: `$*` expands to one argument with all args joined by spaces, often not desired.
+Example: Not `mybinary $*`.
+Additional Notes: Use `"$@"`.
+
+**Specification 116: Use `read -r` to prevent backslash interpretation**
+Description: Use `read -r` to prevent backslash interpretation.
+Example: `while read -r line; do`
+Additional Notes: None.
+
+**Specification 117: Use `(( ... ))` for arithmetic in `if` statements**
+Description: Use `(( a < b ))` directly in `if` statements.
+Example: `if (( a < b )); then`
+Additional Notes: None.
+
+**Specification 118: Avoid `(( ... ))` on same line as other commands without proper spacing**
+Description: Put a space after `((` and before `))` for readability.
+Example: `(( i += 3 ))` not `((i+=3))`.
+Additional Notes: None.
+
+**Specification 119: Use `$(( ... ))` for arithmetic expansion, not backticks with `expr`**
+Description: Always use `$(( ... ))` instead of backticks with `expr`.
+Example: `addition="$(( X + Y ))"` not `addition="$(expr "${X}" + "${Y}")"`
+Additional Notes: None.
+
+**Specification 120: Consistency - when in doubt, be consistent**
+Description: Using one style consistently through codebase lets us focus on other issues. Consistency should not justify old style without considering benefits of new style.
+Example: Follow local style, but new code may adopt modern practices.
+Additional Notes: Limits to consistency.

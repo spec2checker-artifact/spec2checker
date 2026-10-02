@@ -1,0 +1,4 @@
+**Specification 42: Type annotations - strongly encouraged**
+Description: You are strongly encouraged to enable Python type analysis when updating code.
+Example: Add type annotations to function arguments and return values.
+Additional Notes: Use `pytype` for checking.

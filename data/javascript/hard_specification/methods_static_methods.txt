@@ -1,0 +1,4 @@
+**Specification 85: Static methods - do not access `this` in static methods**
+Description: Do not access `this` in static methods.
+Example: Not `static foo() { return this.staticField; }`.
+Additional Notes: Use class name instead.

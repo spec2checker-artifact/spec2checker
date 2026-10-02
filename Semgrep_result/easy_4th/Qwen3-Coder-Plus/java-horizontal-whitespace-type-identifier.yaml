@@ -1,0 +1,36 @@
+rules:
+- id: java-horizontal-whitespace-type-identifier
+  message: Space between type and identifier in declaration.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $ID;
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $ID
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom rule for whitespace checking
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query for formatting rules
+    original_description: Space between type and identifier in declaration.

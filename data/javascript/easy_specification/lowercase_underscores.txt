@@ -1,0 +1,4 @@
+**Specification 1: File name - lowercase with underscores or dashes**
+Description: File names must be all lowercase and may include underscores (`_`) or dashes (`-`), but no additional punctuation. Filename extension must be `.js`.
+Example: `my_file.js`, `my-file.js`
+Additional Notes: Follow project convention.

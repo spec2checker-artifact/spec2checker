@@ -1,0 +1,4 @@
+**Specification 58: Do not use `<filesystem>`**  
+Description: Do not use `<filesystem>` because it lacks sufficient testing support and has security vulnerabilities.  
+Example: Avoid `std::filesystem::path`.  
+Additional Notes: Use `absl::strings` or platform-specific APIs.

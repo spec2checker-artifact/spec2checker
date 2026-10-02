@@ -1,0 +1,4 @@
+Specification 93: Identifiers - allowed characters
+Description: Identifiers use only ASCII letters, digits, and (rarely) underscores. Matches \w+.
+Example: name, not name_m or mName.
+Additional Notes: No special prefixes or suffixes.

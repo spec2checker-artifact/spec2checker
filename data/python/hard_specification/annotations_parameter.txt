@@ -1,0 +1,10 @@
+**Specification 107: Type annotations line breaking - one parameter per line**
+Description: After annotating, many function signatures become “one parameter per line”. Place comma after last parameter to give return type its own line.
+Example:
+```python
+def my_method(
+    self,
+    first_var: int,
+) -> int:
+```
+Additional Notes: Prefer breaking between variables, not between name and type.

@@ -1,0 +1,4 @@
+Specification 117: Static members - qualify with class name
+Description: When reference to static class member must be qualified, use class's name, not a reference or expression of that type.
+Example: Foo.aStaticMethod(); (good); aFoo.aStaticMethod(); (bad)
+Additional Notes: None.

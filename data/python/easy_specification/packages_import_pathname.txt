@@ -1,0 +1,4 @@
+**Specification 7: Packages - import using full pathname**
+Description: Import each module using the full pathname location of the module.
+Example: `import absl.flags` or `from absl import flags`
+Additional Notes: Do not assume the directory of main binary is in `sys.path`.

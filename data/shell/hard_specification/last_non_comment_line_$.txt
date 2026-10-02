@@ -1,0 +1,4 @@
+**Specification 68: Last non-comment line should be `main "$@"`**
+Description: The last non-comment line in the file should be a call to `main "$@"`.
+Example: `main "$@"`
+Additional Notes: For short scripts, `main` is not required.

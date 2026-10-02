@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: CoTLLM
+  描述: 在DirectLLM基础上增加Chain-of-Thought提示，引导模型先分析规范语义，再逐步生成规则
+  批次: easy_2nd
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 20/50 = 40.0%
+  Rule_V (规则验证数): 17/50 = 34.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 20条
+  语法错误规则: 6条
+  语义偏差规则: 24条
+
+  成功规则列表 (Successful Rules):
+     1. shell-case-indent-alternatives                OK [V]  "Indent alternatives by 2 spaces in a case statement."
+     2. javascript-grouping-parentheses-recommended   OK [V]  "Omit optional grouping parentheses only when author and revi..."
+     3. java-break-before-non-assignment-operator     OK [V]  "When a line is broken at a non-assignment operator, the line..."
+     4. javascript-no-default-export                  OK [V]  "Use named exports in all code. Do not use default exports."
+     5. python-integer-compare-zero                   OK [V]  "For integers, implicit false may be risky; compare explicitl..."
+     6. shell-quoted-array-expansion                  OK [V]  "Use quoted expansion "${array[@]}" to access arrays."
+     7. cpp-no-using-namespace-std                    OK [V]  "Do not declare anything in namespace std, including forward ..."
+     8. javascript-horizontal-whitespace-before-brace OK  "Require a space before an open curly brace `{`, except when ..."
+     9. shell-function-naming-lowercase-underscore    OK [V]  "Function names should be lower-case, with underscores to sep..."
+    10. java-type-variable-naming                     OK [V]  "Type variable names must be in UpperCamelCase followed by a ..."
+    11. python-whitespace-no-space-before-punctuation OK [V]  "No whitespace before a comma, semicolon, or colon. Use space..."
+    12. java-classname-uppercamelcase                 OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+    13. shell-for-loop-in-array                       OK [V]  "Recommend including `in "$@"` in for loops for clarity, even..."
+    14. cpp-auto-type-deduction                       OK [V]  "For local variables, use `auto` when type information is obv..."
+    15. cpp-auto-usage-clarity                        OK  "Use `auto` only when it makes code clearer or safer. Do not ..."
+    16. java-imports-no-line-wrapping                 OK  "Imports are not line-wrapped. The column limit does not appl..."
+    17. cpp-filename-lowercase-underscore-dash        OK [V]  "Filenames should be all lowercase and can include underscore..."
+    18. python-whitespace-inside-parens               OK [V]  "No whitespace inside parentheses, brackets, or braces."
+    19. javascript-non-ascii-readability              OK [V]  "Detect use of Unicode escape sequences for non-ASCII charact..."
+    20. python-no-assert-precondition                 OK [V]  "Do not use `assert` statements in place of conditionals or v..."
+
+  失败规则列表 (Failed Rules):
+     1. java-parameter-single-char-avoid-public       FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "One-character parameter names should be avoided in public me..."
+     2. java-method-name-attached-parenthesis         FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Method, constructor, or record-class name must stay attached..."
+     3. java-parameter-naming-lowercamelcase          FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Parameter names should be written in lowerCamelCase."
+     4. javascript-generic-comma-line-wrapping        FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "A comma must stay attached to the token that precedes it whe..."
+     5. java-single-variable-declaration              FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Every variable declaration (field or local) declares only on..."
+     6. cpp-macro-naming-prefix                       FAIL  (语义偏差：推理链遗漏了部分约束条件) "Macros should be named using all capital letters with unders..."
+     7. python-avoid-staticmethod                     FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Never use `staticmethod` unless forced. Write a module-level..."
+     8. python-limit-classmethod                      FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Use `classmethod` only when writing a named constructor or c..."
+     9. shell-use-readarray                           FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Use `readarray` builtin (bash4+) to read file into array, th..."
+    10. cpp-avoid-macros-in-headers                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid defining macros, especially in header files. Prefer in..."
+    11. javascript-horizontal-whitespace-around-comment FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Space on both sides of `//` that begins end-of-line comment...."
+    12. cpp-avoid-decltype-auto                       FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid using `decltype(auto)` unless it is necessary, as it c..."
+    13. javascript-horizontal-whitespace-after-comma-semicolon FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Space after comma (`,`) and semicolon (`;`); never before."
+    14. java-keyword-parenthesis-spacing              FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Space separating keyword (if, for, catch) from open parenthe..."
+    15. cpp-const-placement-consistency               FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect inconsistent placement of `const` qualifier in pointe..."
+    16. shell-generic-max-line-length                 FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Maximum line length is 80 characters."
+    17. python-import-style                           FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Enforce use of 'from x import y' syntax where x is the packa..."
+    18. cpp-braced-initialization-64bit               FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use braced-initialization to create 64-bit constants."
+    19. shell-variable-expansion-consistency          FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Variable expansion style (e.g., $VAR vs ${VAR}) must be cons..."
+    20. python-future-import-encouraged               FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Use of `from __future__ import` statements is encouraged to ..."
+    21. shell-single-string-args                      FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Using a single string for multiple command arguments should ..."
+    22. shell-long-literal-string                     FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "If you have literal strings longer than 80 characters, use a..."
+    23. shell-control-flow-same-line                  FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+    24. java-assignment-break-after-symbol            FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Detect when an assignment operator or colon in an enhanced f..."
+    25. python-whitespace-no-vertical-alignment       FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Don’t use spaces to vertically align tokens on consecutive l..."
+    26. javascript-no-jsdoc-for-implementation        FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Do not use `/** … */` for implementation comments; use `/* …..."
+    27. cpp-thread-local-constinit                    FAIL  (语义偏差：推理链遗漏了部分约束条件) "thread_local variables at class or namespace scope must be i..."
+    28. javascript-vertical-whitespace-function       FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Blank lines at start or end of function body are not allowed..."
+    29. javascript-import-extension-required          FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "ES module import paths must include the `.js` file extension..."
+    30. python-comprehension-simple-only              FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Comprehensions are allowed only for simple cases with a sing..."
+
+  按工具分布 (By Tool):
+    Semgrep    20/50 (40.0%)
+    Pmd        3/10 (30.0%)
+    Codeql     16/40 (40.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 4/10 (40.0%)  Rule_V: 4/10 (40.0%)
+    Java         Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    C++          Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    JavaScript   Rule_C: 4/10 (40.0%)  Rule_V: 3/10 (30.0%)
+    Shell        Rule_C: 4/10 (40.0%)  Rule_V: 4/10 (40.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 153
+  真正违规 (TP): 48
+  误报 (FP): 105
+  精准度: 31.4%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 推理链有助于理解规范语义，Rule_C相比DirectLLM有所提升
+  2. 但逐步推理仍缺乏对工具语法的精确把握
+  3. 复杂规则（涉及数据流/继承）推理链仍无法正确生成
+  4. Shell/JavaScript的CoT推理质量不稳定
+  5. 缺少迭代优化，推理链无法自我修正生成错误
+
+============================================================

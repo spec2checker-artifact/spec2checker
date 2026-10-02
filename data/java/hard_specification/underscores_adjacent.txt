@@ -1,0 +1,4 @@
+Specification 112: Camel case - underscores for adjacent numbers
+Description: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers.
+Example: "Guava 33.4.6" → guava33_4_6 (not guava3346)
+Additional Notes: Numbers have no case variants.

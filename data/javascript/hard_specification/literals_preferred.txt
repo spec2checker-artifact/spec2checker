@@ -1,0 +1,4 @@
+**Specification 70: Spread operator in array literals - preferred**
+Description: Use spread operator `...` to flatten iterables. Prefer over `Array.prototype.slice` or `concat`. No space after `...`.
+Example: `[...foo, ...bar]`.
+Additional Notes: None.

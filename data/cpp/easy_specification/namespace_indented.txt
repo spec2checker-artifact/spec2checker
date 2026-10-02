@@ -1,0 +1,9 @@
+**Specification 16: Namespace contents not indented**  
+Description: The contents of namespaces are not indented.  
+Example:  
+```cpp
+namespace {
+void foo() { ... }
+}  // namespace
+```  
+Additional Notes: Do not add extra indentation.

@@ -1,0 +1,4 @@
+**Specification 65: JSDoc type annotations - may be inline or above**
+Description: Type annotations may be on line above or inline before variable name if no other JSDoc.
+Example: `const /** !Array<number> */ data = [];`
+Additional Notes: Mixing inline and block JSDoc not allowed.

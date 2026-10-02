@@ -1,0 +1,4 @@
+**Specification 65: Function docstring - mandatory for public API, nontrivial, or non-obvious logic**
+Description: A docstring is mandatory for every function that is part of public API, nontrivial size, or non-obvious logic.
+Example: Provide enough info to write a call without reading code.
+Additional Notes: May be descriptive or imperative, but consistent within file.

@@ -1,0 +1,35 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-12 00:47:32
+Batch: hard_2nd
+Model: DeepSeek-V3.2
+Input: <PROJECT_ROOT>\UIR\hard\hard_2nd.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       42 |        8 |        8 |
+| PMD             |        2 |        2 |        0 |        0 |
+| CodeQL          |        5 |        4 |        1 |        1 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       48 |        2 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 48/50 rules validated (96%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 42/50
+      -> 2 passed to PMD
+  PMD:     2/2
+      -> 5 passed to CodeQL
+  CodeQL:  4/5
+      -> 2 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- python-comment-style (python) [codeql/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [codeql] CodeQL partial_support is false
+- shell-filename-lowercase-underscore (shell) [semgrep]: [semgrep] Rule not applicable / disabled by adapter

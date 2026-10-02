@@ -1,0 +1,36 @@
+rules:
+- id: python-decorator-judicious-use
+  message: This rule has been disabled due to 0% precision in iteration evaluation. All 22 detections were false positives on standard/framework decorators.
+  languages:
+  - python
+  severity: INFO
+  patterns:
+  - pattern: "@$DECORATOR\ndef $FUNC(...):\n    ..."
+  - pattern-not: "@$DECORATOR\ndef $FUNC(...):\n    ..."
+  metadata:
+    syntax_$DECORATOR: contains_import_call
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot fully analyze decorator body for external dependencies;
+          relies on pattern matching for import calls within the decorator expression.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to detect decorators with import calls;
+          not a built-in rule.
+    original_description: Detect decorator usage that may indicate non-judicious application,
+      such as decorators with external dependencies or complex logic.

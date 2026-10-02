@@ -1,0 +1,9 @@
+**Specification 15: Pipelines - split one per line if not all fit**
+Description: Pipelines should be split one per line if they don’t all fit on one line.
+Example:
+```bash
+command1 \
+  | command2 \
+  | command3
+```
+Additional Notes: If fits on one line, keep on one line.

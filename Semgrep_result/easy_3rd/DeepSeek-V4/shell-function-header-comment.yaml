@@ -1,0 +1,39 @@
+rules:
+- id: shell-function-header-comment
+  message: 'Function header comments should describe: Description, Globals, Arguments,
+    Outputs, Returns.'
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: "def $FUNC($ARGS):\n    ..."
+  - metavariable-type:
+      metavariable: $FUNC
+      type: function
+  metadata:
+    syntax_function: has_docstring
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect missing docstring but cannot validate content structure
+          (Description, Globals, Arguments, Outputs, Returns).
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Can detect missing docstring and potentially analyze content
+          with custom queries, but not out-of-the-box.
+    original_description: 'Function header comments should describe: Description,
+      Globals, Arguments, Outputs, Returns.'

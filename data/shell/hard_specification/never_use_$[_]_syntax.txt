@@ -1,0 +1,4 @@
+**Specification 86: Never use `$[...]` syntax**
+Description: Never use the `$[...]` syntax.
+Example: Not `i=$[2 * 10]`.
+Additional Notes: Deprecated and non-portable.

@@ -1,0 +1,4 @@
+Specification 7: Package declaration - no line-wrap
+Description: The package declaration is not line-wrapped. The column limit does not apply.
+Example: package com.example.deepspace;
+Additional Notes: None.

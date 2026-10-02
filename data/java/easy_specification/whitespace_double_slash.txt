@@ -1,0 +1,4 @@
+Specification 48: Horizontal whitespace - before double slash comment
+Description: Space between any content and // that begins a comment. Multiple spaces allowed.
+Example: x = 1; // comment
+Additional Notes: None.

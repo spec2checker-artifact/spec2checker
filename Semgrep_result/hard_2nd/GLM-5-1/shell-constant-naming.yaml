@@ -1,0 +1,41 @@
+rules:
+- id: shell-constant-naming
+  message: Constants and environment variables should be uppercase with underscores,
+    declared at top of file using readonly or declare -xr.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: $VAR=$VALUE
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $VALUE
+      type: expr
+  metadata:
+    syntax_$VAR: name_matches_regex('^[a-z][a-z0-9_]*$')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to check for missing 'readonly' or 'declare
+          -xr' and uppercase naming
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Constants and environment variables should be uppercase
+      with underscores, declared at top of file using readonly or declare -xr.

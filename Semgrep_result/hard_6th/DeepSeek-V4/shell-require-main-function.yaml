@@ -1,0 +1,34 @@
+rules:
+- id: shell-require-main-function
+  message: A function called `main` is required for scripts that contain at least
+    one other function. The `main` function should be the bottom-most function.
+  languages:
+  - bash
+  severity: WARNING
+  pattern: "main() {\n    ...\n}\nmain \"$@\""
+  metadata:
+    syntax_file: function_count > 1
+    syntax_function: is_last_function
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: function count and position constraints require custom logic
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: A function called `main` is required for scripts that contain
+      at least one other function. The `main` function should be the bottom-most function.

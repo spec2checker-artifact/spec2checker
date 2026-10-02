@@ -1,0 +1,16 @@
+rules:
+- id: java-camel-case-naming
+  message: '[DISABLED] Class names must use UpperCamelCase and method/variable names
+    must use lowerCamelCase, capitalizing the first character of each word (except
+    the first for lowerCamelCase).'
+  languages:
+  - java
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Class names must use UpperCamelCase and method/variable
+      names must use lowerCamelCase, capitalizing the first character of each word
+      (except the first for lowerCamelCase).

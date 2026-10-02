@@ -1,0 +1,4 @@
+**Specification 15: Use default capture by value (`[=]`) sparingly**  
+Description: Use default capture by value only as a means of binding a few variables for a short lambda, and not capturing `this` implicitly.  
+Example: Avoid long lambdas with `[=]`.  
+Additional Notes: Prefer explicit captures.

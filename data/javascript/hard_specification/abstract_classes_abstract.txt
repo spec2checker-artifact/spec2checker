@@ -1,0 +1,4 @@
+**Specification 91: Abstract classes - use `@abstract`**
+Description: Use abstract classes when appropriate. Abstract classes and methods annotated with `@abstract`. Do not use `goog.abstractMethod`.
+Example: `/** @abstract */ method() {}`.
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 71: Block and inline comments - use for tricky parts**
+Description: Use comments for tricky, non-obvious, interesting or important parts of code.
+Example: `# We use a weighted dictionary search...`
+Additional Notes: Comments should start at least 2 spaces from code.

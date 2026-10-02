@@ -1,0 +1,33 @@
+rules:
+- id: shell-unnecessary-dollar-in-arithmetic
+  message: Inside $(( ... )), the $ prefix for variable names is not required; omitting
+    it leads to cleaner code.
+  languages:
+  - bash
+  severity: WARNING
+  pattern: never_match_this_disabled_rule
+  metadata:
+    syntax_$VAR: inside_arithmetic_expansion
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern matching for shell arithmetic expansion
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Inside $(( ... )), the $ prefix for variable names is not
+      required; omitting it leads to cleaner code.

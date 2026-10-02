@@ -1,0 +1,524 @@
+[
+  {
+    "rule_id": "java-parallel-continuation-indent",
+    "language": "java",
+    "description": "Two continuation lines must use the same indentation level if they begin with syntactically parallel elements, such as arguments on separate lines aligning.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic for indentation and syntactic parallelism detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for parallel continuation indentation; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for indentation and syntactic structure"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\parallel_continuation.txt",
+      "section": "parallel_continuation"
+    }
+  },
+  {
+    "rule_id": "java-non-ascii-unicode-escape",
+    "language": "java",
+    "description": "Non-ASCII characters should use the actual Unicode character or equivalent Unicode escape for readability. Unicode escapes outside string literals and comments are strongly discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "\\\\u$HEX{4}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$HEX": {
+          "type_hint": "expr",
+          "regex": "[0-9a-fA-F]{4}"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "expression",
+        "constraint_type": "syntactic",
+        "condition": "not_inside_string_literal",
+        "required": "true"
+      },
+      {
+        "target": "expression",
+        "constraint_type": "syntactic",
+        "condition": "not_inside_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match Unicode escapes outside strings/comments; may have false positives in complex nested structures"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to detect Unicode escapes outside string literals and comments"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires query to locate Unicode escape sequences and check their syntactic context"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\non_ascii_characters.txt",
+      "section": "non_ascii_characters"
+    }
+  },
+  {
+    "rule_id": "java-old-style-switch",
+    "language": "java",
+    "description": "Switch label colon must be followed by a line break, and statements within the case group must be indented further by +2 spaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $LABEL:\n  $STMT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LABEL": {
+          "type_hint": "expr"
+        },
+        "$STMT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "is_switch_case",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern matches basic case but may not validate all indentation levels or multi-statement blocks"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for indentation check"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rule"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_followed_break.txt",
+      "section": "switch_followed_break"
+    }
+  },
+  {
+    "rule_id": "java-identifiers-allowed-characters",
+    "language": "java",
+    "description": "Identifiers must use only ASCII letters, digits, and underscores, matching the regex \\w+.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "$ID",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ID": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ID",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex matching may not capture all identifier contexts (e.g., within f-strings)"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific identifier character check; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to check identifier naming pattern"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\identifiers_characters.txt",
+      "section": "identifiers_characters"
+    }
+  },
+  {
+    "rule_id": "java-todo-comment-format",
+    "language": "java",
+    "description": "TODO comments must begin with TODO in all caps, followed by a colon, a link to a resource (preferably a bug reference), a hyphen, and an explanatory string.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "// TODO: $LINK - $DESC",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LINK": {
+          "type_hint": "expr"
+        },
+        "$DESC": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$LINK",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^[a-zA-Z0-9./-]+$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex validation on metavariables may be limited"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for TODO comment format; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for comment format"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\todo_comments_format.txt",
+      "section": "todo_comments_format"
+    }
+  },
+  {
+    "rule_id": "java-line-wrapping-higher-level",
+    "language": "java",
+    "description": "Prefer to break lines at a higher syntactic level (e.g., after '(') rather than inside a lower-level construct like a method name.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep patterns are not well-suited for detecting preferred line break positions in formatting rules."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for line-wrapping at higher syntactic levels; requires custom formatting rule."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL queries are not designed for stylistic line-wrapping preferences."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\wrapping_higher_syntactic.txt",
+      "section": "wrapping_higher_syntactic"
+    }
+  },
+  {
+    "rule_id": "java-switch-exhaustiveness",
+    "language": "java",
+    "description": "Google Style requires every switch statement to be exhaustive, even where the language does not require it. A default label is required even if it contains no code. Enum switches covering all known values are considered exhaustive without a default.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "switch ($EXPR) {\n    $CASES\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$CASES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "missing_default_clause",
+        "required": "true"
+      },
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "type_is_not_enum",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Type resolution needed to determine if switch expression is an enum and if all cases are covered."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires type resolution to check for enum exhaustiveness."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Can detect missing default, but exhaustiveness check for enums requires custom query."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\exhaustiveness_required.txt",
+      "section": "exhaustiveness_required"
+    }
+  },
+  {
+    "rule_id": "java-switch-single-line",
+    "language": "java",
+    "description": "Switch rule can be written on single line if it follows Google style (no column overflow; if non-empty block, line break after {). Continuation lines indent +4.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $LABEL -> $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LABEL": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_single_line",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot enforce column overflow or block formatting constraints."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule to check line length and block formatting."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for formatting rules; line length checks are not typical."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\style_switch_single_rule.txt",
+      "section": "style_switch_single_rule"
+    }
+  },
+  {
+    "rule_id": "java-multiple-consecutive-blank-lines",
+    "language": "java",
+    "description": "Detect multiple consecutive blank lines. Permitted but never required or encouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule with pattern-either for different line counts"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for multiple consecutive blank lines; requires custom rule."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for whitespace analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\multiple_consecutive_lines.txt",
+      "section": "multiple_consecutive_lines"
+    }
+  },
+  {
+    "rule_id": "java-enum-line-break-after-comma",
+    "language": "java",
+    "description": "After a comma following an enum constant, a line break is optional. Additional blank lines (usually one) are allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Formatting rule not suitable for code pattern detection."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/formatting."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Formatting rule not suitable for semantic analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\classes_line_break_comma.txt",
+      "section": "classes_line_break_comma"
+    }
+  }
+]

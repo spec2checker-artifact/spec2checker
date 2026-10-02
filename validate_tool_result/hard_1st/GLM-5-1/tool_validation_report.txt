@@ -1,0 +1,34 @@
+TOOL SYNTAX VALIDATION REPORT
+============================================================
+Date: 2026-05-14 23:33:37
+Batch: hard_1st
+Model: GLM-5.1
+Input: <PROJECT_ROOT>\UIR\hard\hard_1st.json
+Total rules: 50
+
+VALIDATION SUMMARY
+------------------------------------------------------------
++-----------------+----------+----------+----------+----------+
+| Tool            |   Denom. |  Success |   Failed | Remaining |
++-----------------+----------+----------+----------+----------+
+| Semgrep         |       50 |       47 |        3 |        3 |
+| PMD             |        3 |        2 |        1 |        1 |
+| CodeQL          |        1 |        0 |        1 |        1 |
++-----------------+----------+----------+----------+----------+
+| TOTAL           |       50 |       49 |        1 |          |
++-----------------+----------+----------+----------+----------+
+
+  Final Result: 49/50 rules validated (98%)
+
+CASCADING VALIDATION FLOW
+------------------------------------------------------------
+  Semgrep: 47/50
+      -> 3 passed to PMD
+  PMD:     2/3
+      -> 1 passed to CodeQL
+  CodeQL:  0/1
+      -> 1 could not be validated by any tool
+
+FAILED RULES
+------------------------------------------------------------
+- java-camel-case-step1 (java) [codeql/pmd/semgrep]: [semgrep] Not applicable: semgrep partial_support is false; [pmd] PMD partial_support is false; [codeql] CodeQL partial_support is false

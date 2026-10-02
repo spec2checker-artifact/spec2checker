@@ -1,0 +1,36 @@
+rules:
+- id: java-no-cstyle-array-declaration
+  message: Square brackets form part of type, not variable. Use String[] args, not
+    String args[].
+  languages:
+  - java
+  severity: ERROR
+  patterns:
+  - pattern: $TYPE $VAR[]
+  - metavariable-type:
+      metavariable: $TYPE
+      type: expr
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      pmd:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: true
+    original_description: Square brackets form part of type, not variable. Use String[]
+      args, not String args[].

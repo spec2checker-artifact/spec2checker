@@ -1,0 +1,4 @@
+**Specification 3: Type names - PascalCase**  
+Description: Type names (classes, structs, type aliases, enums, type template parameters) start with a capital letter and have a capital letter for each new word, no underscores.  
+Example: `MyExcitingClass`, `MyExcitingEnum`  
+Additional Notes: Same for concepts.

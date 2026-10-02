@@ -1,0 +1,41 @@
+rules:
+- id: cpp-braced-initialization-64bit
+  message: Use braced-initialization to create 64-bit constants.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: $TYPE $VAR = $EXPR;
+  - metavariable-regex:
+      metavariable: $TYPE
+      regex: int64_t|uint64_t|long\s+long|unsigned\s+long\s+long
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    syntax_$EXPR: is_constant
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: true
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: type resolution for aliases may be limited
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires type resolution for full accuracy
+    original_description: Use braced-initialization to create 64-bit constants.

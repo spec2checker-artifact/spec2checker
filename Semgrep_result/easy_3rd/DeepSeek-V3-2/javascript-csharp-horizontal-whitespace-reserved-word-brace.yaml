@@ -1,0 +1,35 @@
+rules:
+- id: javascript-csharp-horizontal-whitespace-reserved-word-brace
+  message: Space separating reserved word (else, catch) from closing curly brace }.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: '} $KW {'
+  - metavariable-regex:
+      metavariable: $KW
+      regex: ^(else|catch)$
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires correct parsing of JavaScript syntax
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query for whitespace formatting
+    original_description: Space separating reserved word (else, catch) from closing
+      curly brace }.

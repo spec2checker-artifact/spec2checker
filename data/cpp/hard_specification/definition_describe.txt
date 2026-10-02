@@ -1,0 +1,4 @@
+**Specification 48: Function definition comments describe how**  
+Description: If there is anything tricky about how a function does its job, the function definition should have an explanatory comment.  
+Example: Explain why you chose this implementation.  
+Additional Notes: Do not repeat declaration comments.

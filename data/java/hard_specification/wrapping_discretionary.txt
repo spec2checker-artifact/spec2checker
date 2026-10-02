@@ -1,0 +1,4 @@
+Specification 65: Line-wrapping - discretionary
+Description: Even code that fits within column limit may be line-wrapped at author's discretion.
+Example: Wrapping for clarity even if under 100 chars.
+Additional Notes: Tip: extract method or local variable to avoid wrapping.

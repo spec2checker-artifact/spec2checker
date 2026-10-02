@@ -1,0 +1,4 @@
+**Specification 20: Named imports - keep same name, avoid aliasing**
+Description: Prefer keeping same name; avoid aliasing. Use module import (`import *`) to fix collisions.
+Example: `import {Cat}` not `import {Cat as BigCat}` unless necessary.
+Additional Notes: If renaming needed, use components of file name/path.

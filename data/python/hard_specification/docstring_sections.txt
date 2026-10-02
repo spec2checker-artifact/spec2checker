@@ -1,0 +1,12 @@
+**Specification 66: Function docstring - sections: Args, Returns, Raises**
+Description: Document Args (each parameter), Returns (or Yields), and Raises (exceptions relevant to interface).
+Example:
+```
+Args:
+    param: Description.
+Returns:
+    Description.
+Raises:
+    ValueError: If something.
+```
+Additional Notes: Hanging indent 2 or 4 spaces.

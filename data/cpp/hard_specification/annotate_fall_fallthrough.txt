@@ -1,0 +1,11 @@
+**Specification 40: Annotate fall-through with `[[fallthrough]]`**  
+Description: Fall-through from one case label to another must be annotated using `[[fallthrough]];`. Consecutive case labels without code need no annotation.  
+Example:  
+```cpp
+case 41:
+case 43:
+  [[fallthrough]];
+case 42:
+  DoSomething();
+```  
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 39: Use `$(command)` instead of backticks**
+Description: Use `$(command)` instead of backticks.
+Example: `var="$(command "$(command1)")"`
+Additional Notes: Nested backticks require escaping; `$( )` is easier.

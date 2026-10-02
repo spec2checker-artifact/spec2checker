@@ -1,0 +1,8 @@
+Specification 30: Assignment operator break - after symbol
+Description: When broken at assignment operator, break typically after the symbol, but either way acceptable.
+Example:
+
+java
+int longVariable =
+    longExpression;
+Additional Notes: Also applies to colon in enhanced for.

@@ -1,0 +1,4 @@
+**Specification 69: Class docstring - required**
+Description: Classes should have a docstring below the class definition describing the class.
+Example: `"""Summary of class here.\n\nAttributes:\n    likes_spam: bool\n"""`
+Additional Notes: Document public attributes in `Attributes:` section.

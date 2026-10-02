@@ -1,0 +1,41 @@
+rules:
+- id: javascript-empty-catch-no-comment
+  message: Empty catch blocks must contain a comment explaining why the exception
+    is ignored. Doing nothing in a catch block is rarely correct.
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: catch ($E) { $BODY }
+  - metavariable-type:
+      metavariable: $E
+      type: expr
+  - metavariable-type:
+      metavariable: $BODY
+      type: expr
+  metadata:
+    syntax_$BODY: has_no_comment
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Comment detection may be limited to simple patterns; may not
+          detect all comment styles.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to check for comments within empty blocks.
+    original_description: Empty catch blocks must contain a comment explaining why
+      the exception is ignored. Doing nothing in a catch block is rarely correct.

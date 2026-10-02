@@ -1,0 +1,4 @@
+Specification 1: File name
+Description: For a source file containing classes, the file name consists of the case-sensitive name of the top-level class (of which there is exactly one), plus the extension .java.
+Example: Frozzler.java
+Additional Notes: None.

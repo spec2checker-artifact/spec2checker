@@ -1,0 +1,51 @@
+rules:
+- id: python-class-docstring-required
+  message: Classes should have a docstring below the class definition describing the
+    class. Document public attributes in an `Attributes:` section.
+  languages:
+  - python
+  severity: WARNING
+  patterns:
+  - pattern: |
+      class $CLASS($PARENT):
+          ...
+  - metavariable-regex:
+      metavariable: $CLASS
+      regex: ^(?!Base)(?!.*Config$)(?!.*Test$)(?!.*Mixin$)[A-Z][a-zA-Z0-9]*$
+  - pattern-not-regex: '"""'
+  - pattern-not-regex: "'''"
+  - pattern-not-regex: '\bEnum\b'
+  - pattern-not-regex: '\bException\b'
+  - pattern-not-regex: '\bError\b'
+  - pattern-not-regex: '@dataclass'
+  - pattern-not-regex: '\btype\b'
+  - pattern-not-regex: '\bABC\b'
+  - pattern-not-regex: '\bdict\b'
+  - pattern-not-regex: '\bdb\.Model\b'
+  - pattern-not-regex: '\bUserMixin\b'
+  - pattern-not-regex: '\bobject\b'
+  metadata:
+    syntax_class: missing_docstring
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom logic to detect missing docstrings
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Python analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to check for docstring presence
+    original_description: Classes should have a docstring below the class definition
+      describing the class. Document public attributes in an `Attributes:` section.

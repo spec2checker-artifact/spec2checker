@@ -1,0 +1,4 @@
+**Specification 89: Getters and setters - use when meaningful**
+Description: Getter and setter functions should be used when getting/setting is complex or costly.
+Example: `def get_foo(self): return self._foo`
+Additional Notes: For simple read/write, make attribute public.

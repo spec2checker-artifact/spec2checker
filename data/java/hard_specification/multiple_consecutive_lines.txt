@@ -1,0 +1,4 @@
+Specification 38: Multiple consecutive blank lines
+Description: Permitted but never required or encouraged.
+Example: Two blank lines in a row (allowed but not encouraged).
+Additional Notes: None.

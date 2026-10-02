@@ -1,0 +1,52 @@
+rules:
+- id: shell-single-string-command-args
+  message: Using a single string for multiple command arguments should be avoided;
+    leads to eval or quoting nightmares.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: |
+      $CMD "$ARG1 $ARG2"
+  - metavariable-regex:
+      metavariable: $CMD
+      regex: "^(bazel|assert_build|assert_build_fails|assert_test|assert_test_fails|run|test|grep|awk|sed|curl|wget|ssh|scp|rsync|docker|kubectl|npm|pip|git|make|cmake|cargo|go|javac|gcc|python|python3|java|ruby|node)$"
+  - pattern-not: |
+      fail "$ARG1 $ARG2"
+  - pattern-not: |
+      echo "$ARG1 $ARG2"
+  - pattern-not: |
+      log "$ARG1 $ARG2"
+  - pattern-not: |
+      print "$ARG1 $ARG2"
+  - pattern-not: |
+      printf "$ARG1 $ARG2"
+  - pattern-not: |
+      assert_test_fails "$ARG1 $ARG2"
+  - pattern-not: |
+      assert_test "$ARG1 $ARG2"
+  metadata:
+    syntax_$FLAGS: is_string_literal
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: regex on metavariable may have false positives/negatives
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell analysis
+    original_description: Using a single string for multiple command arguments should
+      be avoided; leads to eval or quoting nightmares.

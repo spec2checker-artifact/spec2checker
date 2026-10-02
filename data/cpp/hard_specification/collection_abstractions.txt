@@ -1,0 +1,4 @@
+**Specification 44: File comments describe the collection of abstractions**  
+Description: If a header file declares multiple user-facing abstractions, include a comment describing the collection.  
+Example: `// This file contains utilities for string manipulation.`  
+Additional Notes: Not needed for each file.

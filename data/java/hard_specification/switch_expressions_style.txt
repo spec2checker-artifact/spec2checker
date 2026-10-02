@@ -1,0 +1,10 @@
+Specification 78: Switch expressions - must be new-style
+Description: Switch expressions must use new-style (arrow ->).
+Example:
+
+java
+return switch (x) {
+  case 0 -> "";
+  default -> "other";
+};
+Additional Notes: None.

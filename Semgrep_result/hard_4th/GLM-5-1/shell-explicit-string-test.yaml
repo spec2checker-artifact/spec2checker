@@ -1,0 +1,38 @@
+rules:
+- id: shell-explicit-string-test
+  message: To avoid confusion about what you're testing for, explicitly use `-z` or
+    `-n` when testing strings in conditional expressions.
+  languages:
+  - bash
+  severity: WARNING
+  patterns:
+  - pattern: if [[ $VAR ]]; then
+  - metavariable-type:
+      metavariable: $VAR
+      type: expr
+  metadata:
+    syntax_$VAR: is_string_literal_or_variable
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Semgrep's shell support may not capture all bash-specific conditional
+          contexts.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis.
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis.
+    original_description: To avoid confusion about what you're testing for, explicitly
+      use `-z` or `-n` when testing strings in conditional expressions.

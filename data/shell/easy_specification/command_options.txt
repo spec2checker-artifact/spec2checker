@@ -1,0 +1,4 @@
+**Specification 37: Prefer quoting “words” (not command options or path names)**
+Description: Prefer quoting strings that are “words” (as opposed to command options or path names).
+Example: `readonly USE_INTEGER='true'`.
+Additional Notes: Not compulsory.

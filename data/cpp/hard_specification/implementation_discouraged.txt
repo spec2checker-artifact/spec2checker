@@ -1,0 +1,4 @@
+**Specification 22: Multiple inheritance is permitted but multiple implementation inheritance strongly discouraged**  
+Description: Multiple inheritance is allowed, but multiple implementation inheritance (inheriting from more than one non-abstract class) is strongly discouraged.  
+Example: Prefer single inheritance + interfaces.  
+Additional Notes: None.

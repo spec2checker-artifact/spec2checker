@@ -1,0 +1,4 @@
+**Specification 16: Pipe on newline with 2 space indent**
+Description: When splitting pipeline, put pipe on newline and indent next section 2 spaces. Use `\` consistently.
+Example: See above.
+Additional Notes: Applies to `|`, `||`, `&&`.

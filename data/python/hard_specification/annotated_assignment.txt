@@ -1,0 +1,4 @@
+**Specification 113: Typing variables - annotated assignment**
+Description: Specify type with annotated assignment using colon and type between variable name and value.
+Example: `a: Foo = SomeUndecoratedFunction()`
+Additional Notes: Do not use `# type: comment` style in new code.

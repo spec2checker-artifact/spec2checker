@@ -1,0 +1,4 @@
+**Specification 8: License/copyright information - at top**
+Description: If license or copyright belongs in file, it belongs at the top.
+Example: `// Copyright 2024 Google Inc.`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+Specification 47: Horizontal whitespace - after cast closing parenthesis
+Description: Space after ) of a cast.
+Example: (int) x
+Additional Notes: None.

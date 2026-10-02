@@ -1,0 +1,4 @@
+Specification 66: Line-wrapping - break at higher syntactic level
+Description: Prefer to break at a higher syntactic level.
+Example: Break after ( rather than inside a method name.
+Additional Notes: Prime directive.

@@ -1,0 +1,8 @@
+**Specification 62: Set constant at runtime then make readonly immediately**
+Description: It’s OK to set a constant at runtime or in a conditional, but make it readonly immediately afterwards.
+Example:
+```bash
+ZIP_VERSION="$(dpkg ...)"
+readonly ZIP_VERSION
+```
+Additional Notes: None.

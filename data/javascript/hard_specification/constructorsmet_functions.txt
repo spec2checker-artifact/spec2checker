@@ -1,0 +1,4 @@
+**Specification 113: `this` - only in class constructors/methods, arrow functions, or `@this` annotated functions**
+Description: Use `this` only in class constructors/methods, arrow functions defined within them, or functions with explicit `@this`. Never for global object, `eval`, event target, or unnecessary `call`/`apply`.
+Example: `class C { method() { this.foo = 1; } }`
+Additional Notes: None.

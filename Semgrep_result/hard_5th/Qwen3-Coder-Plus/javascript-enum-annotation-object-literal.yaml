@@ -1,0 +1,18 @@
+rules:
+- id: javascript-enum-annotation-object-literal
+  message: '[DISABLED] Detects enumerations defined by adding a JSDoc `@enum` annotation
+    to an object literal. The object must be module-local or on `exports`, its values
+    must be string literals or numbers, and no additional properties should be added
+    after its definition.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detects enumerations defined by adding a JSDoc `@enum` annotation
+      to an object literal. The object must be module-local or on `exports`, its values
+      must be string literals or numbers, and no additional properties should be added
+      after its definition.

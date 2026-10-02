@@ -1,0 +1,4 @@
+Specification 92: Text blocks - contents may exceed column limit
+Description: Contents of a text block may exceed the column limit (exception to 4.4).
+Example: Very long line inside """ ... """
+Additional Notes: None.

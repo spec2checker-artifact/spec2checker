@@ -1,0 +1,4 @@
+**Specification 31: True/False - check for `None` with `is`**
+Description: Always use `if x is None` (or `is not None`) to check for `None`.
+Example: `if x is None:` not `if not x:` when `x` could be `0` or `''`.
+Additional Notes: None.

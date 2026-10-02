@@ -1,0 +1,4 @@
+**Specification 3: Whitespace characters - only ASCII space**
+Description: Aside from line terminator, the ASCII horizontal space (0x20) is the only whitespace character that appears. Tab characters not used for indentation.
+Example: Use spaces, not tabs.
+Additional Notes: All other whitespace in string literals escaped.

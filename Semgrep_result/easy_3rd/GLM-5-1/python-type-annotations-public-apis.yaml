@@ -1,0 +1,14 @@
+rules:
+- id: python-type-annotations-public-apis
+  message: '[DISABLED] Public API functions and methods must have type annotations
+    for parameters and return values.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Public API functions and methods must have type annotations
+      for parameters and return values.

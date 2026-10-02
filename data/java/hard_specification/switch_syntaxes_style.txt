@@ -1,0 +1,4 @@
+Specification 70: Switch - two syntaxes (old-style vs new-style)
+Description: Old-style uses colon : after labels; new-style uses arrow ->.
+Example: case 1: vs case 1 ->
+Additional Notes: New-style required for switch expressions.

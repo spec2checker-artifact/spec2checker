@@ -1,0 +1,18 @@
+rules:
+- id: java-switch-exhaustiveness
+  message: '[DISABLED] Google Style requires every switch statement to be exhaustive,
+    even where the language does not require it. A default label is required even
+    if it contains no code. Enum switches covering all known values are considered
+    exhaustive without a default.'
+  languages:
+  - java
+  severity: ERROR
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Google Style requires every switch statement to be exhaustive,
+      even where the language does not require it. A default label is required even
+      if it contains no code. Enum switches covering all known values are considered
+      exhaustive without a default.

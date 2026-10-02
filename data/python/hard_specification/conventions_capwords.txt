@@ -1,0 +1,4 @@
+**Specification 98: Naming conventions - classes CapWords, modules lower_with_under**
+Description: Use `CapWords` for class names, `lower_with_under.py` for module names.
+Example: `class MyClass:`, file `my_module.py`
+Additional Notes: Old `CapWords.py` module names discouraged.

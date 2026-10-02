@@ -1,0 +1,4 @@
+Specification 83: Field annotations - may be on same line
+Description: Annotations on field appear after documentation block, multiple annotations (possibly parameterized) may be listed on same line.
+Example: @Partial @Mock DataLoader loader;
+Additional Notes: None.

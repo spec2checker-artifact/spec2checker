@@ -1,0 +1,39 @@
+rules:
+- id: javascript-special-escape-sequences
+  message: 'For characters with special escape sequences (\'', \", \\, \b, \f, \n,
+    \r, \t, \v), use that sequence rather than numeric escape. Example: \n not \x0a.
+    Legacy octal escapes never used.'
+  languages:
+  - javascript
+  severity: WARNING
+  patterns:
+  - pattern: '"$STR"'
+  - metavariable-type:
+      metavariable: $STR
+      type: expr
+  metadata:
+    syntax_$STR: contains_numeric_escape
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom metavariable-regex to detect numeric escapes
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support JavaScript analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect numeric escapes in string literals
+    original_description: 'For characters with special escape sequences (\'', \",
+      \\, \b, \f, \n, \r, \t, \v), use that sequence rather than numeric escape. Example:
+      \n not \x0a. Legacy octal escapes never used.'

@@ -1,0 +1,46 @@
+rules:
+- id: cpp-prefer-non-member-binary-operator
+  message: Prefer to define non-modifying binary operators as non-member functions
+    to allow implicit conversions on both sides.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: bool operator$OP(const $CLASS& $LHS, const $CLASS& $RHS) { ... }
+  - metavariable-type:
+      metavariable: $OP
+      type: expr
+  - metavariable-type:
+      metavariable: $CLASS
+      type: type
+  - metavariable-type:
+      metavariable: $LHS
+      type: expr
+  - metavariable-type:
+      metavariable: $RHS
+      type: expr
+  metadata:
+    syntax_function: is_friend_declaration
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to distinguish member vs non-member operators
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: true
+        full_support: false
+        limitations: requires type resolution to confirm operator modifies state
+    original_description: Prefer to define non-modifying binary operators as non-member
+      functions to allow implicit conversions on both sides.

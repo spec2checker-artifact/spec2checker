@@ -1,0 +1,42 @@
+rules:
+- id: shell-check-return-value
+  message: Always check return values and give informative return values. Use $? or
+    if statement.
+  languages:
+  - bash
+  severity: WARNING
+  paths:
+    include:
+    - '*.sh'
+    - '*.bash'
+  patterns:
+  - pattern: $CMD
+  - metavariable-type:
+      metavariable: $CMD
+      type: expr
+  metadata:
+    syntax_$CMD: not_followed_by_if_or_chain_or_status_check
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to detect missing error handling after command
+          calls
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: Always check return values and give informative return values.
+      Use $? or if statement.

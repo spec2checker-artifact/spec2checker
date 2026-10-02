@@ -1,0 +1,4 @@
+**Specification 33: True/False - for sequences, use emptiness**
+Description: For sequences, use `if seq:` and `if not seq:` rather than `if len(seq):`.
+Example: `if not users:` over `if len(users) == 0:`
+Additional Notes: None.

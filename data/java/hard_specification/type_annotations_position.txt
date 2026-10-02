@@ -1,0 +1,4 @@
+Specification 79: Type-use annotations - position
+Description: Type-use annotations appear immediately before the annotated type.
+Example: final @Nullable String name;
+Additional Notes: Annotation must be meta-annotated with @Target(ElementType.TYPE_USE).

@@ -1,0 +1,4 @@
+Specification 50: Horizontal whitespace - between type and identifier
+Description: Space between type and identifier in declaration.
+Example: List<String> list
+Additional Notes: None.

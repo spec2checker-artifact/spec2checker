@@ -1,0 +1,4 @@
+**Specification 11: For existing files, stay faithful to existing indentation**
+Description: For existing files, stay faithful to the existing indentation.
+Example: If file uses 4 spaces, continue using 4 spaces.
+Additional Notes: None.

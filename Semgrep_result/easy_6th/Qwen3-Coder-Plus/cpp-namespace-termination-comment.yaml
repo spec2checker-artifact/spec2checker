@@ -1,0 +1,38 @@
+rules:
+- id: cpp-namespace-termination-comment
+  message: Multi-line namespace definitions must be terminated with a comment indicating
+    the namespace name.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "namespace $NS {\n  ...\n}"
+  - metavariable-type:
+      metavariable: $NS
+      type: expr
+  metadata:
+    syntax_closing_brace: not_followed_by('// namespace $NS')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Pattern may match single-line namespaces; comment detection is
+          syntactic only.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to check for trailing comment content.
+    original_description: Multi-line namespace definitions must be terminated with
+      a comment indicating the namespace name.

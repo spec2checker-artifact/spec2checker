@@ -1,0 +1,44 @@
+rules:
+- id: cpp-fallthrough-annotation
+  message: Fall-through from one case label to another must be annotated using `[[fallthrough]];`.
+    Consecutive case labels without code need no annotation.
+  languages:
+  - cpp
+  severity: WARNING
+  patterns:
+  - pattern: "case $CASE1:\n    ...\n    $STMT\n    ...\n    case $CASE2:"
+  - metavariable-type:
+      metavariable: $CASE1
+      type: expr
+  - metavariable-type:
+      metavariable: $CASE2
+      type: expr
+  - metavariable-type:
+      metavariable: $STMT
+      type: expr
+  metadata:
+    syntax_$STMT: not_empty
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires precise detection of non-empty statements between case
+          labels
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires custom query to detect missing fallthrough annotation
+    original_description: Fall-through from one case label to another must be annotated
+      using `[[fallthrough]];`. Consecutive case labels without code need no annotation.

@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+         name="CustomRules">
+  <description>Custom PMD rules generated from natural language specifications</description>
+  <rule name="JavaHorizontalWhitespaceBeforeOpenCurlyBrace" class="com.rule.pmd.JavaHorizontalWhitespaceBeforeOpenCurlyBrace" language="java">
+    <priority>3</priority>
+  </rule>
+  <rule name="JavaModuleDirectivesOrdering" class="com.rule.pmd.JavaModuleDirectivesOrdering" language="java">
+    <priority>3</priority>
+  </rule>
+</ruleset>

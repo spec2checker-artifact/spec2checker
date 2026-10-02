@@ -1,0 +1,37 @@
+rules:
+- id: cpp-no-exceptions
+  message: Do not use C++ exceptions (except Windows code). Use error codes or assertions
+    instead.
+  languages:
+  - cpp
+  severity: ERROR
+  patterns:
+  - pattern: throw $EXPR;
+  - metavariable-type:
+      metavariable: $EXPR
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Cannot detect Windows-specific exceptions without additional
+          context.
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support C/C++ analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: Requires custom query to exclude Windows-specific code.
+    original_description: Do not use C++ exceptions (except Windows code). Use error
+      codes or assertions instead.

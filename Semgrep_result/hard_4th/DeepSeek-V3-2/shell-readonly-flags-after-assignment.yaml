@@ -1,0 +1,36 @@
+rules:
+- id: shell-readonly-flags-after-assignment
+  message: After assigning an array variable named FLAGS, it should be declared as
+    readonly to make it constant.
+  languages:
+  - bash
+  severity: WARNING
+  pattern: 'FLAGS=(...);
+
+    ...'
+  metadata:
+    syntax_FLAGS: not_followed_by('readonly FLAGS')
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern to check for missing 'readonly' statement after
+          assignment
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support shell script analysis
+      codeql:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL does not support shell script analysis
+    original_description: After assigning an array variable named FLAGS, it should
+      be declared as readonly to make it constant.

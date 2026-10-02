@@ -1,0 +1,4 @@
+**Specification 9: Indentation - 2 spaces, no tabs**
+Description: Indent 2 spaces. No tabs.
+Example: Use two spaces per level.
+Additional Notes: Exception: body of `<<-` here-document may use tabs.

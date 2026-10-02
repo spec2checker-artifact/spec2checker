@@ -1,0 +1,4 @@
+**Specification 80: Avoid `let` because unquoted assignments subject to globbing**
+Description: Avoid `let`; use `(( ... ))` instead.
+Example: Not `let i="2 + 2"`.
+Additional Notes: `let` isn’t declarative keyword.

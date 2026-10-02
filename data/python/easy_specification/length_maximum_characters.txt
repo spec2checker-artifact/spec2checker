@@ -1,0 +1,4 @@
+**Specification 45: Line length - maximum 80 characters**
+Description: Maximum line length is 80 characters.
+Example: Lines longer than 80 must be wrapped.
+Additional Notes: Exceptions: long imports, URLs, pathnames, pylint disable comments.

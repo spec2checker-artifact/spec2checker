@@ -1,0 +1,4 @@
+**Specification 93: Use `readonly` or `declare -xr` for constants**
+Description: For clarity, `readonly` or `declare -xr` is recommended vs. equivalent commands.
+Example: `readonly PATH_TO_FILES='/some/path'` or `declare -xr ORACLE_SID='PROD'`
+Additional Notes: Can do `readonly` then `export`.

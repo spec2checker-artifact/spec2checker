@@ -1,0 +1,4 @@
+name: easy-6th-glm5-1-queries
+version: 0.0.1
+dependencies:
+  codeql/python-all: "7.0.1"

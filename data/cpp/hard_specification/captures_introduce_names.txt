@@ -1,0 +1,4 @@
+**Specification 16: Do not use init captures to introduce new names**  
+Description: Use captures only to actually capture variables from enclosing scope. Do not use init captures to introduce new names.  
+Example: Not `[foo = std::vector<int>({1,2,3})](){...}` for new variable.  
+Additional Notes: Declare variable conventionally and capture it.

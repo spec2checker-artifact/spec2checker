@@ -1,0 +1,4 @@
+**Specification 13: Exceptions - use `finally` for cleanup**
+Description: Use the `finally` clause to execute code whether or not an exception is raised, useful for cleanup.
+Example: `try: f = open(...); ... finally: f.close()`
+Additional Notes: None.

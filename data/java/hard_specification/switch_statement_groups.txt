@@ -1,0 +1,4 @@
+Specification 71: Switch block - switch rules vs statement groups
+Description: New-style switch contains switch rules (label -> expression/block/throw). Old-style contains statement groups (label: then statements).
+Example: case 1 -> handle(); vs case 1: handle(); break;
+Additional Notes: Definitions match JLS §14.11.

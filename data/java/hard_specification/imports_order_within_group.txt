@@ -1,0 +1,4 @@
+Specification 13: Imports - ASCII sort order within group
+Description: Within each group, imported names appear in ASCII sort order. (Note: '.' sorts before ';'.)
+Example: import com.google.common... then import java.util...
+Additional Notes: Not the same as sorting the lines as strings.

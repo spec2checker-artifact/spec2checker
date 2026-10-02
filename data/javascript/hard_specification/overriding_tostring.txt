@@ -1,0 +1,4 @@
+**Specification 89: Overriding `toString` - must succeed, no side effects**
+Description: `toString` may be overridden but must always succeed and never have visible side effects.
+Example: Avoid calling other methods that may throw.
+Additional Notes: None.

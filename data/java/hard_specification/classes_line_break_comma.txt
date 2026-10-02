@@ -1,0 +1,8 @@
+Specification 54: Enum classes - line break after comma
+Description: After comma following enum constant, line break is optional. Additional blank lines (usually one) allowed.
+Example:
+
+java
+YES,   // optional break
+NO,
+Additional Notes: None.

@@ -1,0 +1,570 @@
+[
+  {
+    "rule_id": "java-ignored-exception-must-comment",
+    "language": "java",
+    "description": "When an exception is caught and ignored, a comment explaining the reason must be present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($EXCEPTION_TYPE $EXCEPTION_VAR) {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION_TYPE": {
+          "type_hint": "class"
+        },
+        "$EXCEPTION_VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "catch_block",
+        "constraint_type": "syntactic",
+        "condition": "contains_no_statements_except_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match empty catch block and check for comment presence"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's EmptyCatchBlock rule can be configured to require comments"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect empty catch blocks without explanatory comments"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\ignoring_exception_comment.txt",
+      "section": "ignoring_exception_comment"
+    }
+  },
+  {
+    "rule_id": "java-switch-expression-new-style",
+    "language": "java",
+    "description": "Switch expressions must use new-style (arrow ->) syntax.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "switch ($EXPR) {\n    case $CASE: $BODY; break;\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$CASE": {
+          "type_hint": "expr"
+        },
+        "$BODY": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "is_expression",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires Java 14+ pattern matching"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for switch expression syntax"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires Java 14+ language support"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\switch_expressions_style.txt",
+      "section": "switch_expressions_style"
+    }
+  },
+  {
+    "rule_id": "java-local-variable-declaration-timing",
+    "language": "java",
+    "description": "Local variables should be declared close to their first use, not habitually at the start of a block, to minimize their scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "declaration_not_near_first_use",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom logic to determine distance between declaration and first use"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's 'LocalVariableCouldBeFinal' and 'AvoidReassigningLoopVariables' are related but not identical"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect declaration distance from first use"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\variables_declared_needed.txt",
+      "section": "variables_declared_needed"
+    }
+  },
+  {
+    "rule_id": "java-overloads-never-split",
+    "language": "java",
+    "description": "Methods with the same name must appear in a single contiguous group with no other members in between. Same for constructors. Applies even when modifiers differ.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep patterns cannot enforce ordering/grouping of class members across a file."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule implementation to check member ordering."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires a custom query to analyze method ordering within a class."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\overloads_never_split.txt",
+      "section": "overloads_never_split"
+    }
+  },
+  {
+    "rule_id": "java-switch-exhaustiveness",
+    "language": "java",
+    "description": "Every switch statement must be exhaustive, requiring a default case even if empty, unless all enum values are explicitly covered.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "switch ($EXPR) {\n    $CASES\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        },
+        "$CASES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "switch",
+        "constraint_type": "syntactic",
+        "condition": "missing_default_case",
+        "required": "true"
+      },
+      {
+        "target": "$EXPR",
+        "constraint_type": "type",
+        "condition": "is_enum_type",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution to determine if switch expression is an enum and if all values are covered"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "PMD's MissingSwitchDefault rule exists but does not handle enum exhaustiveness without default"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Can detect missing default but requires custom query for enum exhaustiveness check"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\exhaustiveness_required.txt",
+      "section": "exhaustiveness_required"
+    }
+  },
+  {
+    "rule_id": "java-method-annotation-exception-single-parameterless",
+    "language": "java",
+    "description": "A single parameterless annotation may appear together with the first line of the method signature.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@$ANNOTATION $MODIFIERS? $RETURN $METHOD($PARAMS) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ANNOTATION": {
+          "type_hint": "expr"
+        },
+        "$METHOD": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "parameter_count == 0",
+        "required": "false"
+      },
+      {
+        "target": "annotation",
+        "constraint_type": "syntactic",
+        "condition": "annotation_count == 1",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise matching of modifiers and return type"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check annotation and signature line"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for annotation and signature line"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\annotation_parameterless.txt",
+      "section": "annotation_parameterless"
+    }
+  },
+  {
+    "rule_id": "java-caught-exception-not-ignored",
+    "language": "java",
+    "description": "Detect catch blocks that do nothing in response to a caught exception, which is rarely correct. Typical responses include logging or rethrowing.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($EXCEPTION_TYPE $VAR) { ... }",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION_TYPE": {
+          "type_hint": "class"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "catch_block_body",
+        "constraint_type": "syntactic",
+        "condition": "is_empty_block",
+        "required": "true"
+      },
+      {
+        "target": "$EXCEPTION_TYPE",
+        "constraint_type": "inheritance",
+        "condition": "is_subclass_of('java.lang.Throwable')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match empty block; may have false positives with comments or whitespace only"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has a similar rule 'EmptyCatchBlock' but may need configuration for specific exception types"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires type resolution for exception hierarchy; can be expressed as a query for empty catch blocks"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\caught_exceptions_ignored.txt",
+      "section": "caught_exceptions_ignored"
+    }
+  },
+  {
+    "rule_id": "java-enum-line-break-after-comma",
+    "language": "java",
+    "description": "After a comma following an enum constant, a line break is optional. Additional blank lines (usually one) are allowed.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "enum $ENUM {\n    $CONST1,\n    $CONST2\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ENUM": {
+          "type_hint": "class"
+        },
+        "$CONST1": {
+          "type_hint": "expr"
+        },
+        "$CONST2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches structure but cannot enforce optional line break style."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for formatting check."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\classes_line_break_comma.txt",
+      "section": "classes_line_break_comma"
+    }
+  },
+  {
+    "rule_id": "java-empty-block-multi-statement",
+    "language": "java",
+    "description": "Empty blocks are not allowed in multi-block statements like if/else or try/catch/finally.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "try {\n  ...\n} catch ($EXCEPTION $VAR) {}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "block",
+        "constraint_type": "syntactic",
+        "condition": "is_empty",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern for each multi-block statement type (try/catch, if/else)"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD's EmptyCatchBlock rule exists but may need configuration for all multi-block contexts"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect empty blocks in multi-block statements"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\blocks_allowed_statements.txt",
+      "section": "blocks_allowed_statements"
+    }
+  },
+  {
+    "rule_id": "java-class-logical-order",
+    "language": "java",
+    "description": "Class members and initializers should follow a logical order that the maintainer could explain, not chronological by date added. Do not habitually add new methods to the end.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep cannot enforce logical ordering of class members without a specific pattern."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for logical class member ordering; requires custom rule."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to define and check logical ordering heuristics."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\hard_specification\\contents_logical_order.txt",
+      "section": "contents_logical_order"
+    }
+  }
+]

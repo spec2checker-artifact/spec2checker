@@ -1,0 +1,4 @@
+**Specification 16: ES module import paths - must include `.js` extension**
+Description: File extension `.js` is not optional in import paths and must always be included.
+Example: `import '../directory/file.js';` not `import '../directory/file';`
+Additional Notes: None.

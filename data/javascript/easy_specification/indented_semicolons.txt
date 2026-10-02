@@ -1,0 +1,11 @@
+**Specification 34: Class literals - indented as blocks, no semicolons after methods**
+Description: Class literals indented as blocks. Do not add semicolons after methods or after closing brace of class declaration.
+Example:
+```javascript
+class MyClass {
+  method() {
+    // ...
+  }
+}
+```
+Additional Notes: Class expressions still terminated with semicolon.

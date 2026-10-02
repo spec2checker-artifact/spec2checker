@@ -1,0 +1,14 @@
+rules:
+- id: python-explicit-close-files-sockets
+  message: '[DISABLED] Detect file or socket objects that are not closed explicitly
+    or used within a context manager.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Detect file or socket objects that are not closed explicitly
+      or used within a context manager.

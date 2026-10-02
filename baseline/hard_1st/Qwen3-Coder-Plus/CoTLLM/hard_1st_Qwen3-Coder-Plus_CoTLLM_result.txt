@@ -1,0 +1,106 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: CoTLLM
+  描述: 在DirectLLM基础上增加Chain-of-Thought提示，引导模型先分析规范语义，再逐步生成规则
+  批次: hard_1st
+  模型: Qwen3-Coder-Plus
+  输入: UIR/hard/hard_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_C (规则正确数): 12/50 = 24.0%
+  Rule_V (规则验证数): 8/50 = 16.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 12条
+  语法错误规则: 8条
+  语义偏差规则: 30条
+
+  成功规则列表 (Successful Rules):
+     1. javascript-one-variable-per-declaration       OK [V]  "Every local variable declaration declares only one variable;..."
+     2. shell-constant-readonly                       OK  "Use `readonly` or `declare -xr` for constants instead of equ..."
+     3. java-old-style-switch                         OK [V]  "Detect old-style switch statement formatting where a colon i..."
+     4. javascript-no-wrapper-new                     OK [V]  "Never use `new Boolean`, `new Number`, `new String`, `new Sy..."
+     5. python-multiline-string-dedent                OK [V]  "Multi-line strings should use `textwrap.dedent` to remove le..."
+     6. python-avoid-string-concat-in-loop            OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+     7. python-comments-never-describe-code           OK  "Detect comments that merely describe the code, assuming the ..."
+     8. cpp-comment-class-data-members                OK [V]  "Class data members must have a comment explaining their purp..."
+     9. javascript-tostring-override-side-effects     OK  "toString may be overridden but must always succeed and never..."
+    10. cpp-dynamic-cast-usage                        OK  "Use `dynamic_cast` only when you must query the dynamic type..."
+    11. java-switch-fallthrough-comment               OK [V]  "Each statement group in a switch case must either terminate ..."
+    12. shell-no-let-builtin                          OK [V]  "Never use the `let` builtin. Use `(( ... ))` for arithmetic ..."
+
+  失败规则列表 (Failed Rules):
+     1. python-explicit-none-type                     FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Use explicit `X | None` or `Optional[X]` for type annotation..."
+     2. java-finalize-override                        FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Do not override Object.finalize. Finalization support is sch..."
+     3. javascript-no-nested-namespace                FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Do not define a nested type (class, typedef, enum, interface..."
+     4. java-camel-case-step1                         FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Convert phrase to plain ASCII and remove apostrophes as a pr..."
+     5. javascript-generics-template-declaration      FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Generic functions and methods must be declared with a `@temp..."
+     6. java-switch-indentation                       FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Contents of switch block must be indented +2 relative to the..."
+     7. cpp-avoid-failing-constructor                 FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid initialization that can fail in constructors if you ca..."
+     8. shell-regex-rhs-no-quotes                     FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "When using the regex matching operator `=~` inside `[[ ... ]..."
+     9. python-docstring-triple-double-quote          FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Always use the three-double-quote format `"""` for docstring..."
+    10. shell-no-expr-command                         FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Never use the `expr` command as it is an external program an..."
+    11. java-camel-case-split-conventional            FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Detects conventionally camel-cased words (e.g., 'AdWords') a..."
+    12. cpp-default-capture-by-value                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by value (`[=]`) sparingly. It should on..."
+    13. python-naming-internal-underscore             FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Detect names that should be internal (private/protected) but..."
+    14. javascript-static-method-to-function          FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Prefer module-local (package-private) functions over private..."
+    15. cpp-inclusive-language-avoid-offensive-terms  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+    16. java-arrow-no-adjacent-break                  FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Line never broken adjacent to arrow ->, except break may com..."
+    17. shell-arithmetic-expansion-expr               FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Always use `$(( ... ))` for arithmetic expansion instead of ..."
+    18. java-camel-case-lowercase-all                 FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "All words in a camel case identifier must be entirely lowerc..."
+    19. shell-avoid-unquoted-array-expansion          FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Avoid unquoted expansion in array assignments; won't work co..."
+    20. cpp-no-implicit-conversion                    FAIL  (语义偏差：推理链遗漏了部分约束条件) "Do not define implicit conversions. Use the `explicit` keywo..."
+    21. python-logging-string-literal                 FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "For logging functions that expect a pattern-string, always c..."
+    22. python-error-message-precise                  FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Error messages should precisely match error condition, inter..."
+    23. cpp-coroutine-unauthorized-library            FAIL  (语义偏差：推理链遗漏了部分约束条件) "Only use C++20 coroutines via libraries approved by project ..."
+    24. javascript-jsdoc-mixed-annotation             FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Detects mixing of inline JSDoc type annotations and block JS..."
+    25. shell-loop-local-declaration                  FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Inside a function, declare loop variable as `local` to avoid..."
+    26. python-override-docstring-optional            FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "A method that overrides a base class method does not need a ..."
+    27. shell-no-main-for-short-scripts               FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "For short scripts where it's just a linear flow, a main func..."
+    28. cpp-copy-move-meaningful                      FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect user-defined types that define copy or move operation..."
+    29. javascript-enum-static-initialization         FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "For string enums, all values must be statically initialized,..."
+    30. cpp-nonmember-functions-in-namespace          FAIL  (语义偏差：推理链遗漏了部分约束条件) "Prefer placing nonmember functions in a namespace; use compl..."
+    31. python-naming-conventions-class-module        FAIL  (语义偏差：推理链理解了意图但生成规则仍不精确) "Use CapWords for class names and lower_with_under for module..."
+    32. java-text-block-opening-newline               FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Opening triple quotes of a text block must be on a new line,..."
+    33. javascript-number-literal-prefix-case         FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never ..."
+    34. cpp-explicit-single-argument-constructor      FAIL  (语义偏差：推理链遗漏了部分约束条件) "Type conversion operators and constructors callable with a s..."
+    35. java-line-wrapping-discretionary              FAIL  (语义偏差：推理分析正确但最终规则实现有偏差) "Even code that fits within column limit may be line-wrapped ..."
+    36. shell-avoid-colon-in-function-name            FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Functions intended for interactive use may choose to avoid c..."
+    37. javascript-nested-function-const              FAIL  (逻辑偏差：推理步骤不完整导致规则不精确) "Nested function definitions should be assigned to a local co..."
+    38. shell-read-without-r                          FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Use `read -r` to prevent backslash interpretation."
+
+  按工具分布 (By Tool):
+    Semgrep    12/49 (24.5%)
+    Pmd        3/11 (27.3%)
+    Codeql     9/38 (23.7%)
+
+  按语言分布 (By Language):
+    Python       Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+    Java         Rule_C: 2/10 (20.0%)  Rule_V: 2/10 (20.0%)
+    C++          Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+    JavaScript   Rule_C: 3/10 (30.0%)  Rule_V: 2/10 (20.0%)
+    Shell        Rule_C: 2/10 (20.0%)  Rule_V: 1/10 (10.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 40
+  真正违规 (TP): 8
+  误报 (FP): 32
+  精准度: 20.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. 推理链有助于理解规范语义，Rule_C相比DirectLLM有所提升
+  2. 但逐步推理仍缺乏对工具语法的精确把握
+  3. 复杂规则（涉及数据流/继承）推理链仍无法正确生成
+  4. Shell/JavaScript的CoT推理质量不稳定
+  5. 缺少迭代优化，推理链无法自我修正生成错误
+
+============================================================

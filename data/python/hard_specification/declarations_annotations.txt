@@ -1,0 +1,4 @@
+**Specification 108: Forward declarations - use `from __future__ import annotations`**
+Description: If you need to use a class name not yet defined, use `from __future__ import annotations` or use string for class name.
+Example: `stack: Sequence['MyClass']`
+Additional Notes: None.

@@ -1,0 +1,4 @@
+**Specification 104: Function length - prefer small and focused functions**
+Description: Prefer small and focused functions. No hard limit, but if exceeds about 40 lines, consider breaking up.
+Example: Refactor long functions.
+Additional Notes: Short functions are easier to read and modify.

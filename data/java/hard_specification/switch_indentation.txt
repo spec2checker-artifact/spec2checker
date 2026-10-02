@@ -1,0 +1,10 @@
+Specification 72: Switch indentation
+Description: Contents of switch block indented +2. Each switch label starts with that indentation.
+Example:
+
+java
+switch (x) {
+  case 1:
+    ...
+}
+Additional Notes: None.

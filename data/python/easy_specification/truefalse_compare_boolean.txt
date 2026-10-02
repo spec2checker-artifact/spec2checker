@@ -1,0 +1,4 @@
+**Specification 32: True/False - do not compare boolean to `False`**
+Description: Never compare a boolean variable to `False` using `==`. Use `if not x` instead.
+Example: `if not x:` not `if x == False:`
+Additional Notes: To distinguish `False` from `None`, chain: `if not x and x is not None`.

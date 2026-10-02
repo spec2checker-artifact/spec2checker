@@ -1,0 +1,14 @@
+rules:
+- id: python-lexical-scoping-ok
+  message: '[DISABLED] Lexical scoping (nested functions referring to enclosing variables)
+    is okay to use. This rule is informational and does not flag violations.'
+  languages:
+  - python
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: Lexical scoping (nested functions referring to enclosing
+      variables) is okay to use. This rule is informational and does not flag violations.

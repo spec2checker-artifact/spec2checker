@@ -1,0 +1,4 @@
+**Specification 3: Unused argument suppression - delete variables**
+Description: Unused argument warnings can be suppressed by deleting the variables at the beginning of the function with a comment.
+Example: `del beans, eggs  # Unused by vikings.`
+Additional Notes: Other forms (e.g., prefix `_`) are allowed but no longer encouraged.

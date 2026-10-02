@@ -1,0 +1,15 @@
+rules:
+- id: cpp-auto-type-deduction
+  message: '[DISABLED] For local variables, use `auto` when type information is obvious
+    or irrelevant, such as when initializing with a constructor call or factory function.'
+  languages:
+  - cpp
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: For local variables, use `auto` when type information is
+      obvious or irrelevant, such as when initializing with a constructor call or
+      factory function.

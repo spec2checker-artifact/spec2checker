@@ -1,0 +1,4 @@
+**Specification 34: Quoting - always quote strings containing variables, command substitutions, spaces or shell meta characters**
+Description: Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required or it’s a shell-internal integer.
+Example: `"${flag}"`, `"$(command)"`.
+Additional Notes: None.

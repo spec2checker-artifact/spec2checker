@@ -1,0 +1,14 @@
+rules:
+- id: javascript-tostring-override-side-effects
+  message: '[DISABLED] toString may be overridden but must always succeed and never
+    have visible side effects. Avoid calling other methods that may throw.'
+  languages:
+  - javascript
+  severity: WARNING
+  pattern: __DISABLED_NO_PATTERN__
+  metadata:
+    disabled: true
+    reason: Rule requires capabilities beyond Semgrep (type resolution, scope analysis,
+      complex syntax, or unreliable import organization)
+    original_description: toString may be overridden but must always succeed and never
+      have visible side effects. Avoid calling other methods that may throw.

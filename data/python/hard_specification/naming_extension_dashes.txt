@@ -1,0 +1,4 @@
+**Specification 100: File naming - `.py` extension, no dashes**
+Description: Python filenames must have `.py` extension and must not contain dashes (`-`).
+Example: `my_file.py` not `my-file.py`
+Additional Notes: Allows importing and unittested.

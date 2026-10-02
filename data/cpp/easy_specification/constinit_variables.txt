@@ -1,0 +1,4 @@
+**Specification 53: Use `thread_local` with `constinit` for non-function variables**  
+Description: `thread_local` variables at class or namespace scope must be initialized with a true compile-time constant and annotated with `constinit`.  
+Example: `constinit thread_local Foo foo = ...;`  
+Additional Notes: Function-local `thread_local` variables have no initialization concerns.

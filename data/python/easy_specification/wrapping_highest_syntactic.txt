@@ -1,0 +1,4 @@
+**Specification 47: Line wrapping - break at highest syntactic level**
+Description: Prefer to break lines at the highest possible syntactic level.
+Example: Break after `(` rather than inside a function name.
+Additional Notes: None.

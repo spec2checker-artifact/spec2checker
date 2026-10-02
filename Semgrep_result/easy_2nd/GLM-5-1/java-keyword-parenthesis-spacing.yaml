@@ -1,0 +1,36 @@
+rules:
+- id: java-keyword-parenthesis-spacing
+  message: Space separating keyword (if, for, catch) from open parenthesis ( that
+    follows.
+  languages:
+  - java
+  severity: WARNING
+  patterns:
+  - pattern: if ( $COND )
+  - metavariable-type:
+      metavariable: $COND
+      type: expr
+  metadata:
+    capabilities_required:
+      cross_file: false
+      inheritance_analysis: false
+      dataflow: false
+      type_resolution: false
+    backend_hints:
+      semgrep:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: requires pattern for each keyword (if, for, catch, while, switch)
+      pmd:
+        partial_support: false
+        needs_type_solver: false
+        full_support: false
+        limitations: PMD does not support Java analysis.
+      codeql:
+        partial_support: true
+        needs_type_solver: false
+        full_support: false
+        limitations: CodeQL is not designed for formatting rule analysis
+    original_description: Space separating keyword (if, for, catch) from open parenthesis
+      ( that follows.

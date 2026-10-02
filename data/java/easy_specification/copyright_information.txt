@@ -1,0 +1,4 @@
+Specification 6: License or copyright information
+Description: If license or copyright information belongs in a file, it belongs at the top.
+Example: // Copyright 2024 Google Inc.
+Additional Notes: None.

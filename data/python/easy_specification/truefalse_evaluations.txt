@@ -1,0 +1,4 @@
+**Specification 30: True/False evaluations - use implicit false**
+Description: Use the “implicit” false if possible, e.g., `if foo:` rather than `if foo != []:`.
+Example: `if not users:` instead of `if len(users) == 0:`
+Additional Notes: Note that `'0'` (string) evaluates to true.
