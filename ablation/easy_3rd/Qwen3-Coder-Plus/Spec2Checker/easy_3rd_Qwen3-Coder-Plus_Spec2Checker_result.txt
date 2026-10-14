@@ -1,0 +1,2010 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_3rd
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_3rd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 4条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-single-line-nested-namespace                 OK [V]  "Single-line nested namespace declarations are preferred in n..."
+     2. cpp-prefer-nullptr                               OK [V]  "Use `nullptr` for pointers, not `NULL` or `0`, for type safe..."
+     3. cpp-auto-type-deduction                          OK [V]  "For local variables, use `auto` when type information is obv..."
+     4. cpp-use-int64-for-big-integers                   OK [V]  "For integers known to be 'big', use int64_t."
+     5. cpp-type-names-pascalcase                        OK [V]  "Type names (classes, structs, type aliases, enums, type temp..."
+     6. cpp-struct-member-no-trailing-underscore         OK [V]  "Data members of structs (both static and non-static) are nam..."
+     7. cpp-prefer-struct-over-pair-tuple                OK [V]  "Use a `struct` instead of `pair` or `tuple` whenever element..."
+     8. cpp-no-namespace-alias-in-header                 OK [V]  "Do not use namespace aliases at namespace scope in header fi..."
+     9. java-numeric-literal-long-suffix-uppercase       OK [V]  "long-valued integer literals must use uppercase L suffix, ne..."
+    10. java-module-directives-ordering                  OK [V]  "Module directives must be ordered: all requires in one block..."
+    11. java-javadoc-summary-fragment                    OK [V]  "Each Javadoc block must begin with a brief summary fragment ..."
+    12. java-horizontal-whitespace-keyword-parenthesis   OK [V]  "Detect missing space between a keyword (if, for, catch, etc...."
+    13. java-import-group-spacing                        OK [V]  "If both static and non-static imports exist, a single blank ..."
+    14. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    15. java-generic-one-statement-per-line              OK [V]  "Each statement must be followed by a line break; multiple st..."
+    16. java-double-colon-break                          OK [V]  "Detect a line break before the double colon (::) operator us..."
+    17. java-catch-pipe-spacing                          OK [V]  "Detect missing horizontal whitespace around the pipe charact..."
+    18. java-no-static-import-for-classes                OK [V]  "Static import is not used for static nested classes; they ar..."
+    19. javascript-named-imports-no-alias                OK [V]  "Prefer keeping the same name for named imports; avoid aliasi..."
+    20. javascript-generic-one-statement-per-line        OK [V]  "Each statement must be followed by a line break; multiple st..."
+    21. javascript-csharp-horizontal-whitespace-reserved-word-brace OK [V]  "Space separating reserved word (else, catch) from closing cu..."
+    22. javascript-es-module-default-import-naming       OK [V]  "Default import names derived from file name must follow iden..."
+    23. javascript-linewrap-method-name-parenthesis      OK [V]  "A method or constructor name must stay attached to the open ..."
+    24. javascript-horizontal-whitespace-reserved-word-parenthesis OK [V]  "Space separating reserved word (if, for, catch) from open pa..."
+    25. javascript-horizontal-whitespace-after-colon     OK [V]  "Require a space after the colon in an object literal key-val..."
+    26. javascript-import-no-line-wrap                   OK [V]  "ES module import statements must not be line wrapped; they a..."
+    27. python-avoid-staticmethod                        OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+    28. python-integer-explicit-zero-compare             OK [V]  "For integers, implicit false may be risky; compare explicitl..."
+    29. python-lambda-length-check                       OK [V]  "Lambda functions should be one-liners and under 80 character..."
+    30. python-suppress-pylint-warning-line-comment      OK [V]  "Detect suppression of pylint warnings using a line-level com..."
+    31. python-type-annotations-public-apis              OK [V]  "Public API functions and methods must have type annotations ..."
+    32. python-indentation-4-spaces-no-tabs              OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    33. python-whitespace-no-vertical-alignment          OK [V]  "Don’t use spaces to vertically align tokens on consecutive l..."
+    34. python-except-catch-all                          OK [V]  "Never use catch-all `except:` statements, or catch `Exceptio..."
+    35. python-no-blank-line-after-class                 OK [V]  "No blank line following a `class` line. The line after the c..."
+    36. shell-quote-integer-variables                    OK [V]  "Optionally quote shell-internal, readonly special variables ..."
+    37. shell-avoid-eval                                 OK [V]  "The `eval` command should be avoided as it munges input and ..."
+    38. shell-for-loop-in-array                          OK [V]  "Recommend including `in "$@"` in for loops for clarity, even..."
+    39. shell-generic-indentation-consistency            OK [V]  "For existing files, stay faithful to the existing indentatio..."
+    40. shell-function-header-comment                    OK [V]  "Function header comments should describe: Description, Globa..."
+    41. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    42. shell-case-indent-alternatives                   OK [V]  "Indent alternatives in a case statement by 2 spaces."
+    43. shell-unnecessary-dollar-in-arithmetic           OK [V]  "Inside $(( ... )), the $ prefix for variable names is not re..."
+    44. shell-formatting-follow-existing-style           OK [V]  "New or modified code must follow the existing style (e.g., i..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-long-double                            FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid using the `long double` type because it gives non-port..."
+     2. cpp-const-placement-consistency                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect inconsistent placement of the `const` qualifier in po..."
+     3. javascript-knr-brace-style                       FAIL  (语法错误：源验证报告标记为不可用) "Enforce K&R (Egyptian) brace style: no line break before ope..."
+     4. javascript-switch-indentation                    FAIL  (语法错误：源验证报告标记为不可用) "Switch block contents must be indented +2 relative to the sw..."
+     5. python-run-pylint                                FAIL  (语法错误：源验证报告标记为不可用) "Ensure pylint is run on the codebase, typically via a script..."
+     6. shell-avoid-single-string-args                   FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Using a single string for multiple command arguments should ..."
+
+  按工具分布 (By Tool):
+    Semgrep    26/30 (86.7%)
+    Pmd        10/10 (100.0%)
+    Codeql     8/10 (80.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 155
+  真正违规 (TP): 155
+  误报 (FP): 0
+  精准度: 100.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. Qwen3-Coder-Plus 在 Easy 3rd 生成了 46 条可编译规则。
+  2. 本轮有 44 条规则语义正确，规则可用率为 88.0%。
+  3. 规则中有 4 条语法错误和 2 条语义偏差。
+  4. 检测到 155 条结果，其中 155 条正确，0 条误报。
+  5. 本轮检测精准度为 100.0%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: python-except-catch-all
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.py
+      描述: 捕获 Exception 范围过宽
+      置信度: 5.0
+      代码片段:
+        # Copyright 2022 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            """Script to generate release notes."""
+            
+            import re
+            import subprocess
+            import sys
+            import requests
+
+  [2] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\bazel-dev.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            #
+            # Copyright 2018 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            #
+            
+            set -eu
+            
+            USAGE="$0 [<bazel arguments>...]"
+
+  [3] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\ci\build_status_command.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # A build status command to provide the package info generator with
+            # the information about the commit being built
+
+  [4] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\packages\template_bin.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -e
+            
+            # Bazel self-extractable installer
+
+  [5] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\release.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release branches and handle the release tags.
+
+  [6] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release notes from the git history.
+
+  [7] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\test\tools\bzlmod\update_default_lock_file.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -euo pipefail
+            # --- begin runfiles.bash initialization v3 ---
+            # Copy-pasted from the Bazel Bash runfiles library v3.
+            set -uo pipefail; set +e; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+
+  [8] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\upload_java_tools.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2019 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # A script to upload a given java_tools zip on GCS. Used by the java_tools_binaries
+            # Buildkite pipeline. It is not recommended to run this script manually.
+            #
+            # Mandatory flags:
+
+  [9] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\build_defs\hash\sha256_test.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2017 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # --- begin runfiles.bash initialization v2 ---
+            # Copy-pasted from the Bazel Bash runfiles library v2.
+            set -uo pipefail; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+            source "${RUNFILES_DIR:-/dev/null}/$f" 2>/dev/null || \
+
+  [10] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:109
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Small JavaScript module for the documentation.
+             */
+        >>> var Documentation = {
+            
+              init : function() {
+
+  [11] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:151
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        */
+              addContextElements : function() {
+        >>>     $('div[id] > :header:first').each(function() {
+                  $('<a class="headerlink">\u00B6</a>').
+                  attr('href', '#' + this.id).
+
+  [12] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:188
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+                  }, 10);
+        >>>       $('<p class="highlight-link"><a href="javascript:Documentation.' +
+                    'hideSearchWords()">' + _('Hide Search Matches') + '</a></p>')
+                      .appendTo($('#searchbox'));
+
+  [13] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:19
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * @param {{github: !object, context: !object}} args - The GitHub API and context objects.
+             */
+        >>> module.exports = async ({github, context}) => {
+              const fs = require('fs');
+              const output = fs.readFileSync('ssl_output.txt', 'utf8');
+
+  [14] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Find existing open issues created by this workflow
+        >>>   const issues = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+
+  [15] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:36
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        '### SSL Certificate Warning', '',
+                'The automated monitor has detected SSL issues.', '',
+        >>>     '#### Details:', '```', output, '```', '', '**Action Required:**',
+                '1. Check `.github/config/ssl_domains.yaml` to verify the domain list.',
+                '2. Renew the certificates.', '',
+
+  [16] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (existingIssue) {
+        >>>     await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [17] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:49
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        repo: context.repo.repo,
+                  issue_number: existingIssue.number,
+        >>>       body: 'SSL check failed again. Latest status:\n\n' + body
+                });
+              } else {
+
+  [18] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:52
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+              } else {
+        >>>     await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [19] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:226
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Search Module
+             */
+        >>> var Search = {
+            
+              _index : null,
+
+  [20] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:242
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        loadIndex : function(url) {
+        >>>     $.ajax({type: "GET", url: url, data: null, success: null,
+                        dataType: "script", cache: true});
+              },
+
+  [21] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:435
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (results.length) {
+                    var item = results.pop();
+        >>>         var listItem = $('<li style="display:none"></li>');
+                    if (DOCUMENTATION_OPTIONS.FILE_SUFFIX == '') {
+                      // dirhtml builder
+
+  [22] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Stemmer = function() {
+            
+        >>>   var step2list = {
+                ational: 'ate',
+                tional: 'tion',
+
+  [23] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:69
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        };
+            
+        >>>   var step3list = {
+                icate: 'ic',
+                ative: '',
+
+  [24] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:31
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        /* Displays the details about how to use this script. */
+        >>> function usage() {
+            	var txt;
+
+  [25] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:34
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var txt;
+            
+        >>> 	txt = "Usage:\n";
+            	txt += "  cscript " + WScript.ScriptName + " <options>\n";
+            	txt += "  cscript " + WScript.ScriptName + " help\n\n";
+
+  [26] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:39
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "Options can be specified in the form <option>=<value>, where the value is\n";
+            	txt += "either 'yes' or 'no', if not stated otherwise.\n\n";
+        >>> 	txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+            	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+
+  [27] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:41
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+        >>> 	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+            	txt += "  compiler: Compiler to be used [msvc|mingw] (" + compiler + ")\n";
+            	WScript.Echo(txt);
+
+  [28] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:210
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Parser
+            
+        >>>   var atomicTypes = {"atom": true, "number": true, "variable": true, "string": true, "regexp": true, "this": true, "jsonld-keyword": true};
+            
+              function JSLexical(indented, column, type, align, prev, info) {
+
+  [29] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var keywords = function(){
+        >>>     function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+                var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+
+  [30] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:253
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Combinator utils
+            
+        >>>   var cx = {state: null, column: null, marked: null, cc: null};
+              function pass() {
+                for (var i = arguments.length - 1; i >= 0; i--) cx.cc.push(arguments[i]);
+
+  [31] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:27
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+        >>>     var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+                return {
+
+  [32] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:29
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+        >>>     return {
+                  "if": kw("if"), "while": A, "with": A, "else": B, "do": B, "try": B, "finally": B,
+                  "return": D, "break": D, "continue": D, "new": kw("new"), "delete": C, "void": C, "throw": C,
+
+  [33] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:802
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Interface
+            
+        >>>   return {
+                startState: function(basecolumn) {
+                  var state = {
+
+  [34] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:804
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        return {
+                startState: function(basecolumn) {
+        >>>       var state = {
+                    tokenize: tokenBase,
+                    lastType: "sof",
+
+  [35] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:862
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        },
+            
+        >>>     electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
+                blockCommentStart: jsonMode ? null : "/*",
+                blockCommentEnd: jsonMode ? null : "*/",
+
+  [36] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:890
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-javascript", "javascript");
+            CodeMirror.defineMIME("application/ecmascript", "javascript");
+        >>> CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+
+  [37] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:891
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ecmascript", "javascript");
+            CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+
+  [38] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:892
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [39] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:893
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+        >>> CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [40] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:894
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+        >>> CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+            
+            });
+
+  [41] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:134
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (oldConfig || typeof config == "boolean") {
+                  if (!oldConfig) {
+        >>>         config = config ? {strict: true} : null
+                  } else {
+                    oldConfig.strict = config
+
+  [42] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:17
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Pos = CodeMirror.Pos;
+            
+        >>>   var matching = {"(": ")>", ")": "(<", "[": "]>", "]": "[<", "{": "}>", "}": "{<"};
+            
+              function findMatchingBracket(cm, where, config) {
+
+  [43] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:38
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var found = scanForBracket(cm, Pos(where.line, pos + (dir > 0 ? 1 : 0)), dir, style || null, config);
+                if (found == null) return null;
+        >>>     return {from: Pos(where.line, pos), to: found && found.pos,
+                        match: found && found.ch == match.charAt(0), forward: dir > 0};
+              }
+
+  [44] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:68
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var match = matching[ch];
+                      if ((match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
+        >>>           else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
+                      else stack.pop();
+                    }
+
+  [45] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:84
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
+                    var style = match.match ? "CodeMirror-matchingbracket" : "CodeMirror-nonmatchingbracket";
+        >>>         marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+                      marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+
+  [46] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:86
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+        >>>           marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+                  }
+                }
+
+  [47] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:604
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return tool_call_name, tool_args, continue_stepping
+            
+        >>>     @staticmethod
+                def _prepare_tools_per_agent(agent_state: AgentState, tool_rules_solver: ToolRulesSolver) -> List[dict]:
+                    tools = [t for t in agent_state.tools if t.tool_type in {ToolType.CUSTOM, ToolType.LETTA_CORE, ToolType.LETTA_MEMORY_CORE}]
+
+  [48] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:54
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        AZURE_AD = 3
+            
+        >>>     @staticmethod
+                def from_str(label):
+                    if label.lower() == "azure":
+
+  [49] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:235
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return v
+            
+        >>>     @staticmethod
+                def _matches_key(function_output: str, key: Any) -> bool:
+                    """Helper function to determine if function output matches a mapping key."""
+
+  [50] 项目: Bazel
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:122
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        return unittest.expectedFailure
+              else:
+        >>>     return lambda f: f
+
+  [51] 项目: Bazel
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2137
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        # side effects of parsing flags, we temporarily stub out the `parse` method
+                stored_parse_methods = {}
+        >>>     noop_parse = lambda _: None
+                for name in FLAGS:
+                  # Avoid any side effects of parsing flags.
+
+  [52] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1027
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=[passage for passage, _ in vector_results],
+                                fts_results=[passage for passage, _ in fts_results],
+        >>>                     get_id_func=lambda p: p.id,
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [53] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1208
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda msg_dict: msg_dict["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [54] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1374
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda msg_dict: msg_dict["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [55] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1556
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        # sort by RRF score and return with metadata
+                    sorted_results = sorted(
+        >>>             [(all_items[iid], score, score_metadata[iid]) for iid, score in rrf_scores.items()], key=lambda x: x[1], reverse=True
+                    )
+
+  [56] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1890
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=[passage for passage, _ in vector_results],
+                                fts_results=[passage for passage, _ in fts_results],
+        >>>                     get_id_func=lambda p: p.id,
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [57] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:2114
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda d: d["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [58] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:30
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @functools.total_ordering
+            class Flag(object):
+              """Information about a command-line flag.
+
+  [59] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:309
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BooleanFlag(Flag):
+              """Basic boolean flag.
+
+  [60] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:328
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class EnumFlag(Flag):
+              """Basic enum flag; its value can be any string from list of enum_values."""
+
+  [61] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:347
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class EnumClassFlag(Flag):
+              """Basic enum flag; its value is an enum class's member."""
+
+  [62] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:374
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MultiFlag(Flag):
+              """A flag that can appear multiple time on the command-line.
+
+  [63] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:450
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MultiEnumClassFlag(MultiFlag):
+              """A multi_enum_class flag.
+
+  [64] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:125
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TempFileCleanup(enum.Enum):
+              # Always cleanup temp files when the test completes.
+              ALWAYS = 'always'
+
+  [65] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1321
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        regexes)))
+            
+        >>>   class _AssertRaisesContext(object):
+            
+                def __init__(self, expected_exception, test_case, test_func, msg=None):
+
+  [66] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2253
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestLoader(unittest.TestLoader):
+              """A test loader which supports common test features.
+
+  [67] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:301
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TempDir(object):
+              """Represents a temporary directory for tests.
+
+  [68] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:382
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TempFile(object):
+              """Represents a tempfile for tests.
+
+  [69] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:543
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _method(object):
+              """A decorator that supports both instance and classmethod invocations.
+
+  [70] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:576
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestCase(unittest.TestCase):
+              """Extension of unittest.TestCase providing more power."""
+
+  [71] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:111
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpshortFlag(HelpFlag):
+              """--helpshort is an alias for --help."""
+              NAME = 'helpshort'
+
+  [72] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:117
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpfullFlag(flags.BooleanFlag):
+              """Display help for flags in the main module and all dependent modules."""
+
+  [73] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:130
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpXMLFlag(flags.BooleanFlag):
+              """Similar to HelpfullFlag, but generates output in XML format."""
+
+  [74] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:438
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ExceptionHandler(object):
+              """Base exception handler from which other may inherit."""
+
+  [75] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:73
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Error(Exception):
+              pass
+
+  [76] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:77
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UsageError(Error):
+              """Exception raised when the arguments supplied by the user are invalid.
+
+  [77] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:92
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpFlag(flags.BooleanFlag):
+              """Special boolean flag that displays usage and raises SystemExit."""
+              NAME = 'help'
+
+  [78] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bazel_yanked_versions_test.py:25
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BazelYankedVersionsTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [79] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BzlmodCredentialsTest(test_base.TestBase):
+              """Test class for using credentials to connect to the bzlmod registry."""
+
+  [80] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:52
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class LauncherTest(test_base.TestBase):
+            
+              def _buildJavaTargets(self, bazel_bin, binary_suffix):
+
+  [81] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:27
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ModCommandTest(test_base.TestBase):
+              """Test class for the mod command."""
+
+  [82] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:230
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class NoTestsError(Exception):
+              """Raised when parameterized decorators do not generate any tests."""
+
+  [83] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:234
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class DuplicateTestNameError(Exception):
+              """Raised when a parameterized test has the same test name multiple times."""
+
+  [84] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:272
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _ParameterizedTestIter(object):
+              """Callable and iterable class for producing new test cases."""
+
+  [85] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:551
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestGeneratorMetaclass(type):
+              """Metaclass for adding tests generated by parameterized decorators."""
+
+  [86] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:641
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestCase(absltest.TestCase, metaclass=TestGeneratorMetaclass):
+              """Base class for test cases using the parameters decorator."""
+
+  [87] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RemoteRepoContentsCacheTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [88] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:29
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RepoContentsCacheTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [89] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:21
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RunfilesSandboxedTest(test_base.TestBase):
+            
+              def _FailWithContents(self, msg, contents):
+
+  [90] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:439
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StaticHTTPServer:
+              """An HTTP server serving static files, optionally with authentication."""
+
+  [91] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:464
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _Handler(http.server.SimpleHTTPRequestHandler):
+              """A SimpleHTTPRequestHandler with authentication."""
+
+  [92] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:59
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Module:
+              """A class to represent information of a Bazel module."""
+
+  [93] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:96
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BazelRegistry:
+              """A class to help create a Bazel module project from scatch and add it into the registry."""
+
+  [94] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UnittestTest(unittest.TestCase):
+            
+              def setUp(self):
+
+  [95] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:57
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestResult(object):
+              """Save test results for easy checking."""
+
+  [96] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TestCaseResult(object):
+              """Private helper for _TextAndXMLTestResult that represents a test result.
+
+  [97] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:223
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TestSuiteResult(object):
+              """Private helper for _TextAndXMLTestResult."""
+
+  [98] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:327
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TextAndXMLTestResult(_pretty_print_reporter.TextTestResult):
+              """Private TestResult class that produces both formatted text results and XML.
+
+  [99] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:506
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TextAndXMLTestRunner(unittest.TextTestRunner):
+              """A test runner that produces both formatted text results and XML.
+
+  [100] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:56
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # TODO: These modes aren't used right now - but can be useful we do multiple sequential tool calling within one Claude message
+        >>> class EventMode(Enum):
+                TEXT = "TEXT"
+                TOOL_USE = "TOOL_USE"
+
+  [101] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:622
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class SimpleAnthropicStreamingInterface:
+                """
+                A simpler version of AnthropicStreamingInterface that doesn't handle send_message parsing on inner_thoughts_in_kwargs
+
+  [102] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:63
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class AnthropicStreamingInterface:
+                """
+                Encapsulates the logic for streaming responses from Anthropic.
+
+  [103] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:106
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChatGPTOAuthProvider(Provider):
+                """
+                ChatGPT OAuth Provider for accessing ChatGPT's backend-api with OAuth tokens.
+
+  [104] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:68
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChatGPTOAuthCredentials(BaseModel):
+                """OAuth credentials for ChatGPT backend API access.
+
+  [105] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class LettaCoreToolExecutor(ToolExecutor):
+                """Executor for LETTA core tools with direct implementation of functions."""
+
+  [106] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:16
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class PydanticDataType(Enum):
+                """
+                Defines the data types supported by the grammar_generator.
+
+  [107] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:101
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # TODO: Limitations ->
+            # TODO: Only works with anthropic for now
+        >>> class LettaAgentBatch(BaseAgent):
+                def __init__(
+                    self,
+
+  [108] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @dataclass
+            class ToolExecutionParams:
+                agent_id: str
+
+  [109] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:58
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @dataclass
+            class _ResumeContext:
+                batch_items: List[LLMBatchItem]
+
+  [110] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:101
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateSSEMCPServer(LettaBase):
+                """Update schema for SSE MCP server - all fields optional"""
+
+  [111] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateStreamableHTTPMCPServer(LettaBase):
+                """Update schema for Streamable HTTP MCP server - all fields optional"""
+
+  [112] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:141
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # OAuth-related schemas
+        >>> class BaseMCPOAuth(LettaBase):
+                __id_prefix__ = PrimitiveType.MCP_OAUTH.value
+
+  [113] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:145
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSession(BaseMCPOAuth):
+                """OAuth session for MCP server authentication."""
+
+  [114] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:17
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BaseMCPServer(LettaBase):
+                __id_prefix__ = PrimitiveType.MCP_SERVER.value
+
+  [115] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:22
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Create Schemas (for POST requests)
+        >>> class CreateStdioMCPServer(LettaBase):
+                """Create a new Stdio MCP server"""
+
+  [116] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:224
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSessionCreate(BaseMCPOAuth):
+                """Create a new OAuth session."""
+
+  [117] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:234
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSessionUpdate(BaseMCPOAuth):
+                """Update an existing OAuth session."""
+
+  [118] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:250
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPServerResyncResult(LettaBase):
+                """Result of resyncing MCP server tools."""
+
+  [119] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:258
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ToolExecuteRequest(LettaBase):
+                """Request to execute a tool."""
+
+  [120] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:265
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Wrapper models for API requests with discriminated unions
+        >>> class CreateMCPServerRequest(LettaBase):
+                """Request to create a new MCP server with configuration."""
+
+  [121] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:275
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateMCPServerRequest(LettaBase):
+                """Request to update an existing MCP server configuration."""
+
+  [122] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:31
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CreateSSEMCPServer(LettaBase):
+                """Create a new SSE MCP server"""
+
+  [123] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CreateStreamableHTTPMCPServer(LettaBase):
+                """Create a new Streamable HTTP MCP server"""
+
+  [124] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:66
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StdioMCPServer(CreateStdioMCPServer):
+                """A Stdio MCP server"""
+
+  [125] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:73
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class SSEMCPServer(CreateSSEMCPServer):
+                """An SSE MCP server"""
+
+  [126] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:80
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StreamableHTTPMCPServer(CreateStreamableHTTPMCPServer):
+                """A Streamable HTTP MCP server"""
+
+  [127] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:92
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Update Schemas (for PATCH requests) - same shape as Create/Config, but all fields optional.
+            # We exclude fields that aren't persisted on the server model to avoid invalid ORM assignments.
+        >>> class UpdateStdioMCPServer(LettaBase):
+                """Update schema for Stdio MCP server - all fields optional"""
+
+  [128] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:30
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class OpenAIResponse:
+                def __init__(self, data, headers):
+                    self._headers = headers
+
+  [129] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:49
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ApiType(Enum):
+                AZURE = 1
+                OPEN_AI = 2
+
+  [130] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:69
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class OpenAIObject(dict):
+                api_base_override = None
+
+  [131] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:17
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class WebSocketServer:
+                def __init__(self, host="localhost", port=WS_DEFAULT_PORT):
+                    self.host = host
+
+  [132] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:232
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StreamingResponseWithStatusCode(StreamingResponse):
+                """
+                Variation of StreamingResponse that can dynamically decide the HTTP status code,
+
+  [133] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:43
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RunCancelledException(Exception):
+                """Exception raised when a run is explicitly cancelled (not due to client timeout)"""
+
+  [134] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:120
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestModalVersionManager:
+                """Test the Modal Version Manager."""
+
+  [135] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:15
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestModalFunctionExecutor:
+                """Test the ModalFunctionExecutor class."""
+
+  [136] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:328
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestAsyncToolSandboxModalV2:
+                """Test the AsyncToolSandboxModalV2 class."""
+
+  [137] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:13
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BaseToolRule(LettaBase):
+                __id_prefix__ = PrimitiveType.TOOL_RULE.value
+                tool_name: str = Field(..., description="The name of the tool. Must exist in the database for the user's organization.")
+
+  [138] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:131
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ParentToolRule(BaseToolRule):
+                """
+                A ToolRule that only allows a child tool to be called if the parent has been called.
+
+  [139] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:164
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ConditionalToolRule(BaseToolRule):
+                """
+                A ToolRule that conditionally maps to different child tools based on the output.
+
+  [140] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:254
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class InitToolRule(BaseToolRule):
+                """
+                Represents the initial tool rule configuration.
+
+  [141] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:275
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TerminalToolRule(BaseToolRule):
+                """
+                Represents a terminal tool rule configuration where if this tool gets called, it must end the agent loop.
+
+  [142] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:287
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ContinueToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration where if this tool gets called, it must continue the agent loop.
+
+  [143] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:299
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RequiredBeforeExitToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration where this tool must be called before the agent loop can exit.
+
+  [144] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:315
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MaxCountPerStepToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration which constrains the total number of times this tool can be invoked in a single step.
+
+  [145] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:348
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RequiresApprovalToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration which requires approval before the tool can be invoked.
+
+  [146] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ToolCallNode(BaseModel):
+                """Typed child override for prefilled arguments.
+
+  [147] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:64
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChildToolRule(BaseToolRule):
+                """
+                A ToolRule represents a tool that can be invoked by the agent.
+
+  [148] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:223
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TurbopufferClient:
+                """Client for managing archival memory with Turbopuffer vector database."""
+
+  [149] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:77
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Config:
+                SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"]
+                JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
+
+  [150] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:82
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        PEPPER = os.environ["PEPPER"]
+            
+        >>> class DevConfig(Config):
+                SQLALCHEMY_TRACK_MODIFICATIONS = False  # keep performance parity with prod
+                DEBUG = True
+
+  [151] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:86
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        DEBUG = True
+            
+        >>> class ProdConfig(Config):
+                SQLALCHEMY_TRACK_MODIFICATIONS = False
+                DEBUG = False
+
+  [152] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\credentials.py:113
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CertGen:
+                """Generates a self-signed TLS certificate and private key using OpenSSL CLI."""
+
+  [153] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\monitoring.py:5
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        from pymodbus.client.sync import ModbusTcpClient
+            
+        >>> class debug_var():
+                name = ''
+                location = ''
+
+  [154] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:31
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        return ', '.join(result[:granularity])
+            
+        >>> class NonBlockingStreamReader:
+            
+                end_of_stream = False
+
+  [155] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:71
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        return None
+            
+        >>> class UnexpectedEndOfStream(Exception): pass
+            
+            class runtime:
+  ------------------------------------------------------------
+============================================================
