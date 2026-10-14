@@ -13,6 +13,7 @@ institution information is intentionally omitted for double-blind review.
 | `XML_rules/` | Generated XML rule artifacts |
 | `data/` | The currently released evaluation data subset |
 | `baseline/` | Baseline rule artifacts |
+| [`ablation/`](ablation/) | Experimental reports for Spec2Checker, Spec2Checker-WoUIR, and Spec2Checker-WoIter |
 | `CodeQL_result/` | CodeQL generation outputs |
 | `PMD_result/` | PMD generation outputs |
 | `Semgrep_result/` | Semgrep generation outputs |
@@ -34,6 +35,20 @@ will be included in the final public release upon acceptance.
 - Some scripts depend on pipeline components that are not part of this partial
   preview and therefore are not yet runnable as a complete end-to-end system.
 
+## Ablation experiment reports
+
+The [`ablation/`](ablation/) directory contains 144 text reports: 12 batches
+(`easy_1st`–`easy_6th` and `hard_1st`–`hard_6th`), four model directories
+(`DeepSeek-V3-2`, `DeepSeek-V4`, `GLM-5-1`, and `Qwen3-Coder-Plus`),
+and three method variants (`Spec2Checker`, `Spec2Checker-WoUIR`, and
+`Spec2Checker-WoIter`).
+
+Reports follow the layout
+`ablation/<batch>/<model>/<method>/<batch>_<model>_<method>_result.txt`.
+They include `Rule_comp` and `Rule_sem` counts, rule-generation details, and
+detection statistics. Compare reports for the same batch and model when
+examining the method variants.
+
 ## Interpretation of `validate_tool_result/`
 
 The [`validate_tool_result/`](validate_tool_result/) directory contains
@@ -50,8 +65,9 @@ reflect this further screening.
 and evaluation metrics.** In particular, the syntax-validation success counts
 and `validated_count` values in this directory do not by themselves establish
 semantic correctness and should not be treated as the final `Rule_sem` counts
-or final rule-usability results. Consult the corresponding experimental run records for the setting, batch,
-model, and method being evaluated.
+or final rule-usability results. Consult the corresponding experimental reports,
+including those in [`ablation/`](ablation/), for the setting, batch, model,
+and method being evaluated.
 
 [`data_summary.md`](data_summary.md) provides a summary of the reported
 experimental values. If a summary differs from the underlying run records,
