@@ -1,0 +1,2351 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_4th
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 4条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-override-annotation-required                 OK [V]  "Annotate overrides of virtual functions with `override` or `..."
+     2. cpp-avoid-long-double                            OK [V]  "Use `float` and `double`; assume they represent IEEE-754 bin..."
+     3. cpp-no-inline-namespace                          OK [V]  "Do not use inline namespaces."
+     4. cpp-function-names-pascalcase                    OK [V]  "Function names should follow PascalCase convention, starting..."
+     5. cpp-missing-const                                OK [V]  "Use `const` in APIs (function parameters, methods, non-local..."
+     6. cpp-avoid-system-header-filename                 OK [V]  "Do not use filenames that already exist in /usr/include, suc..."
+     7. cpp-no-nonstandard-extensions                    OK [V]  "Do not use nonstandard extensions like __attribute__, #pragm..."
+     8. cpp-prefer-using-over-typedef                    OK [V]  "In new code, prefer `using` over `typedef` for type aliases,..."
+     9. java-empty-block-multiblock                      OK [V]  "Empty block may be {} with no characters or line break in be..."
+    10. java-test-class-naming                           OK [V]  "Test class name must end with 'Test'. If it covers a single ..."
+    11. java-imports-ordering-non-static-group           OK [V]  "All non-static imports must be in a single group, separated ..."
+    12. java-one-var-per-declaration                     OK [V]  "Every variable declaration (field or local) declares only on..."
+    13. java-no-cstyle-array-declaration                 OK [V]  "Square brackets form part of type, not variable. Use String[..."
+    14. java-static-imports-single-group                 OK [V]  "All static imports must be in a single group, and this group..."
+    15. java-module-directives-ordering                  OK [V]  "Module directives must be ordered in the sequence: requires ..."
+    16. java-horizontal-whitespace-type-identifier       OK [V]  "Space between type and identifier in declaration."
+    17. java-continuation-indent                         OK [V]  "Each continuation line must be indented at least +4 spaces f..."
+    18. java-break-before-non-assignment-operator        OK [V]  "When a line is broken at a non-assignment operator, the line..."
+    19. javascript-no-jsdoc-for-implementation           OK [V]  "Do not use JSDoc-style comments (`/** ... */`) for implement..."
+    20. javascript-import-missing-js-extension           OK [V]  "ES module import paths must include the `.js` file extension..."
+    21. javascript-line-wrapping-comma-preceding-token   OK [V]  "A comma must stay attached to the token that precedes it whe..."
+    22. javascript-block-comment-style                   OK [V]  "Block comments must be indented at the same level as surroun..."
+    23. javascript-horizontal-whitespace-reserved-word-brace OK [V]  "Space separating reserved word (else, catch) from closing cu..."
+    24. javascript-goog-require-alias-match              OK [V]  "When `goog.require` is assigned to a single constant alias, ..."
+    25. python-whitespace-no-trailing-whitespace         OK [V]  "Detect lines that end with whitespace characters (spaces or ..."
+    26. python-default-iterator                          OK [V]  "Use default iterators and operators for types that support t..."
+    27. python-no-bool-false-comparison                  OK [V]  "Never compare a boolean variable to `False` using `==`. Use ..."
+    28. python-none-check-is                             OK [V]  "Always use `if x is None` (or `is not None`) to check for `N..."
+    29. python-property-allowed-when-necessary           OK [V]  "Properties may be used to control getting/setting attributes..."
+    30. python-default-arg-immutable                     OK [V]  "Detect function definitions with default argument values, fo..."
+    31. python-whitespace-no-space-before-punctuation    OK [V]  "No whitespace before a comma, semicolon, or colon. Use space..."
+    32. python-generator-docstring-yields                OK [V]  "Detect generator functions that use 'Returns:' in their docs..."
+    33. python-no-spaces-around-equals                   OK [V]  "Never use spaces around `=` when passing keyword arguments o..."
+    34. python-property-decorator-required               OK [V]  "Properties should be created with the `@property` decorator...."
+    35. shell-avoid-eval                                 OK [V]  "The `eval` command should be avoided as it munges input and ..."
+    36. shell-todo-format-allcaps-identifier             OK [V]  "TODO comment should be in all caps, followed by a colon and ..."
+    37. shell-bash-use-arrays-for-lists                  OK [V]  "Bash arrays should be used to store lists of elements to avo..."
+    38. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    39. shell-single-string-command-args                 OK [V]  "Using a single string for multiple command arguments should ..."
+    40. shell-no-quote-match-expr                        OK [V]  "In general, there is no need to quote match expressions in s..."
+    41. shell-readarray-usage                            OK [V]  "Use `readarray` builtin (bash4+) to read file into array, th..."
+    42. shell-case-indent-alternatives                   OK [V]  "Indent alternatives by 2 spaces in a case statement."
+    43. shell-unnecessary-dollar-in-arithmetic           OK [V]  "Inside $(( ... )) arithmetic expansion, the $ prefix for var..."
+    44. shell-braces-same-line-no-space                  OK [V]  "Braces must be on the same line as the function name and no ..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-constexpr-floating-constant                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use `constexpr` to define constants with floating-point expr..."
+     2. cpp-class-data-member-trailing-underscore        FAIL  (语义偏差：推理链遗漏了部分约束条件) "Data members of classes (both static and non-static) must be..."
+     3. javascript-line-wrap-after-operator              FAIL  (语法错误：源验证报告标记为不可用) "When a line is broken at an operator, the break must come af..."
+     4. javascript-vertical-whitespace-methods           FAIL  (语法错误：源验证报告标记为不可用) "A single blank line appears between consecutive methods in a..."
+     5. javascript-horizontal-whitespace-before-curly-brace FAIL  (语法错误：源验证报告标记为不可用) "Require a space before an opening curly brace `{`, except wh..."
+     6. javascript-horizontal-whitespace-binary-ternary  FAIL  (语法错误：源验证报告标记为不可用) "Space on both sides of any binary or ternary operator."
+
+  按工具分布 (By Tool):
+    Semgrep    26/30 (86.7%)
+    Pmd        10/10 (100.0%)
+    Codeql     8/10 (80.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 6/10 (60.0%)  Rule_sem: 6/10 (60.0%)
+    Shell        Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 174
+  真正违规 (TP): 165
+  误报 (FP): 9
+  精准度: 94.8%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. Qwen3-Coder-Plus 在 Easy 4th 生成了 46 条可编译规则。
+  2. 本轮有 44 条规则语义正确，规则可用率为 88.0%。
+  3. 规则中有 4 条语法错误和 2 条语义偏差。
+  4. 检测到 174 条结果，其中 165 条正确，9 条误报。
+  5. 本轮检测精准度为 94.8%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\docs\docs2mdx.py
+      描述: 字典键迭代使用冗余 .keys()
+      置信度: 5.0
+      代码片段:
+        # Lint as: python3
+            # pylint: disable=g-direct-third-party-import
+            # Copyright 2026 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            """A tool for converting .html/.md(x) docs to valid .mdx files."""
+            
+            import os
+            import re
+            import sys
+
+  [2] 项目: Bazel
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\test\py\bazel\bzlmod\bazel_lockfile_test.py
+      描述: 字典键迭代使用冗余 .keys()
+      置信度: 5.0
+      代码片段:
+        # pylint: disable=g-backslash-continuation
+            # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            # pylint: disable=g-long-ternary
+            
+            import json
+            import os
+            import pathlib
+            import tempfile
+
+  [3] 项目: Bazel
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\compliance\write_sbom.py
+      描述: 字典键迭代使用冗余 .keys()
+      置信度: 5.0
+      代码片段:
+        # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            # https://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            """SBOM generator.
+            
+            This tool takes input from several sources and weaves together an SBOM.
+            
+            Inputs:
+              - the output of packages_used. This is a JSON block of license, package_info
+                and other declarations, plus a list of all remote packages referenced.
+
+  [4] 项目: Bazel
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:368
+      描述: Use default iterators and operators for types that support them (lists, dicts, files). Do not mutate container while iterating.
+      置信度: 3.50
+      代码片段:
+        def _extra_xml_dom_elements(self, doc):
+                elements = []
+        >>>     for enum_value in self.parser.enum_class.__members__.keys():
+                  elements.append(_helpers.create_xml_dom_element(
+                      doc, 'enum_value', enum_value))
+
+  [5] 项目: Bazel
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:477
+      描述: Use default iterators and operators for types that support them (lists, dicts, files). Do not mutate container while iterating.
+      置信度: 3.50
+      代码片段:
+        def _extra_xml_dom_elements(self, doc):
+                elements = []
+        >>>     for enum_value in self.parser.enum_class.__members__.keys():
+                  elements.append(_helpers.create_xml_dom_element(
+                      doc, 'enum_value', enum_value))
+
+  [6] 项目: Letta
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:682
+      描述: Use default iterators and operators for types that support them (lists, dicts, files). Do not mutate container while iterating.
+      置信度: 3.50
+      代码片段:
+        documentation = ""
+                pyd_models = [(model, True) for model in pydantic_models]
+        >>>     for model, add_prefix in pyd_models:
+                    if add_prefix:
+                        documentation += f"{model_prefix}: {model.__name__}\n"
+
+  [7] 项目: Letta
+      规则: python-default-iterator
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:840
+      描述: Use default iterators and operators for types that support them (lists, dicts, files). Do not mutate container while iterating.
+      置信度: 3.50
+      代码片段:
+        documentation = ""
+                pyd_models = [(model, True) for model in pydantic_models]
+        >>>     for model, add_prefix in pyd_models:
+                    if add_prefix:
+                        documentation += f"{model_prefix}: {model.__name__}\n"
+
+  [8] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\bazel-dev.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            #
+            # Copyright 2018 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            #
+            
+            set -eu
+            
+            USAGE="$0 [<bazel arguments>...]"
+
+  [9] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\ci\build_status_command.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # A build status command to provide the package info generator with
+            # the information about the commit being built
+
+  [10] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\packages\template_bin.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -e
+            
+            # Bazel self-extractable installer
+
+  [11] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\release.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release branches and handle the release tags.
+
+  [12] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release notes from the git history.
+
+  [13] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\test\tools\bzlmod\update_default_lock_file.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -euo pipefail
+            # --- begin runfiles.bash initialization v3 ---
+            # Copy-pasted from the Bazel Bash runfiles library v3.
+            set -uo pipefail; set +e; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+
+  [14] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\upload_java_tools.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2019 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # A script to upload a given java_tools zip on GCS. Used by the java_tools_binaries
+            # Buildkite pipeline. It is not recommended to run this script manually.
+            #
+            # Mandatory flags:
+
+  [15] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\build_defs\hash\sha256_test.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2017 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # --- begin runfiles.bash initialization v2 ---
+            # Copy-pasted from the Bazel Bash runfiles library v2.
+            set -uo pipefail; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+            source "${RUNFILES_DIR:-/dev/null}/$f" 2>/dev/null || \
+
+  [16] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:119
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     abstract Throwable createThrowable();
+              }
+
+  [17] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:308
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void markProcessed() {}
+              }
+            }
+
+  [18] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:56
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     abstract Root root();
+            
+                abstract IgnoredSubdirectories ignoredPaths();
+
+  [19] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:58
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        abstract Root root();
+            
+        >>>     abstract IgnoredSubdirectories ignoredPaths();
+              }
+
+  [20] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:58
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>   public abstract File getIoFile(PathFragment path);
+            
+              @Override
+
+  [21] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:61
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>   public abstract java.nio.file.Path getNioPath(PathFragment path);
+            
+              @Override
+
+  [22] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\HeaderDiscovery.java:221
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        resolvedArtifacts = Collections2.filter(resolvedArtifacts, a -> !a.equals(sourceFile));
+                    switch (resolvedArtifacts.size()) {
+        >>>           case 0 -> {}
+                      case 1 -> inputs.add(Iterables.getOnlyElement(resolvedArtifacts));
+                      default -> {
+
+  [23] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\HeaderDiscovery.java:56
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        final class HeaderDiscovery {
+            
+        >>>   private HeaderDiscovery() {}
+            
+              /**
+
+  [24] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\LtoBackendArtifacts.java:39
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        /** Remaining code that is needed because {@link LtoBackendActionTemplate} is still native. */
+            public final class LtoBackendArtifacts {
+        >>>   private LtoBackendArtifacts() {}
+            
+              // LINT.IfChange(lto_backends)
+
+  [25] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ObjectCodecTester.java:122
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        /** Runs junk-data recognition tests. */
+              void testDeserializeJunkData() {
+        >>>     try {
+                  underTest.deserialize(
+                      readContext, CodedInputStream.newInstance("junk".getBytes(StandardCharsets.UTF_8)));
+
+  [26] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ObjectCodecTester.java:126
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        readContext, CodedInputStream.newInstance("junk".getBytes(StandardCharsets.UTF_8)));
+                  fail("Expected exception");
+        >>>     } catch (SerializationException | IOException e) {
+                  // Expected.
+                }
+
+  [27] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\PrepareDepsOfPatternValue.java:52
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        public static final PrepareDepsOfPatternValue INSTANCE = new PrepareDepsOfPatternValue();
+            
+        >>>   private PrepareDepsOfPatternValue() {}
+            
+              @Override
+
+  [28] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:154
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>         public void recordFailure() {}
+            
+                    @Override
+
+  [29] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:157
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>         public void recordSuccess() {}
+                  };
+
+  [30] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\SingleStringArgFormatter.java:24
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        public final class SingleStringArgFormatter {
+            
+        >>>   private SingleStringArgFormatter() {}
+            
+              /**
+
+  [31] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\TransitiveDataDependencyTest.java:44
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        * source file.)
+               */
+        >>>   protected abstract int numJobs();
+            
+              @Before
+
+  [32] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\VariableRemapper.java:168
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        // Implementations for TargetInfoVisitor.
+            
+        >>>     public void visitAnyTargetInfo(Clazz clazz, TypeAnnotation typeAnnotation, TargetInfo targetInfo) {}
+
+  [33] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\VariableRemapper.java:188
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        // Implementations for InstructionVisitor.
+            
+        >>>     public void visitAnyInstruction(Clazz clazz, Method method, CodeAttribute codeAttribute, int offset, Instruction instruction) {}
+
+  [34] 项目: Bazel
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\VariableRemapper.java:74
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        // Implementations for AttributeVisitor.
+            
+        >>>     public void visitAnyAttribute(Clazz clazz, Attribute attribute) {}
+
+  [35] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ConstantCommandHandler.java:36
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void start() {}
+            
+                @Override
+
+  [36] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ConstantCommandHandler.java:39
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void end() {}
+                
+                public CommandStatus selectCROB(ControlRelayOutputBlock command, int index)
+
+  [37] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DNP3ManagerFactory.java:75
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private DNP3ManagerFactory()
+        >>>     {}
+            
+            }
+
+  [38] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:36
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     private DefaultMasterApplication() {}
+            
+                @Override
+
+  [39] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:46
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public void onReceiveIIN(IINField iin)
+        >>>     {}
+            
+                @Override
+
+  [40] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:50
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public void onTaskStart(MasterTaskType type, TaskId userId)
+        >>>     {}
+            
+                @Override
+
+  [41] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:54
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public void onTaskComplete(TaskInfo info)
+        >>>     {}
+            
+                @Override
+
+  [42] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:57
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onOpen(){}
+            
+                @Override
+
+  [43] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:60
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onClose(){}
+            
+                @Override
+
+  [44] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:75
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onStateChange(LinkStatus value){}
+            
+                @Override
+
+  [45] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:78
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onKeepAliveInitiated(){}
+            
+                @Override
+
+  [46] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:81
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onKeepAliveFailure(){}
+            
+                @Override
+
+  [47] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\DefaultMasterApplication.java:84
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void onKeepAliveSuccess(){}
+            
+            }
+
+  [48] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:146
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     private native long create_native_manager(int concurrency, LogHandler handler);
+                private native void shutdown_native_manager(long nativePointer);
+
+  [49] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:147
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native long create_native_manager(int concurrency, LogHandler handler);
+        >>>     private native void shutdown_native_manager(long nativePointer);
+            
+                private native long get_native_channel_tcp_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, ChannelListener listener);
+
+  [50] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:149
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native void shutdown_native_manager(long nativePointer);
+            
+        >>>     private native long get_native_channel_tcp_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, ChannelListener listener);
+                private native long get_native_channel_tcp_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, ChannelListener listener);
+                private native long get_native_channel_tls_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, TLSConfig config, ChannelListener listener);
+
+  [51] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:150
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native long get_native_channel_tcp_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, ChannelListener listener);
+        >>>     private native long get_native_channel_tcp_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, ChannelListener listener);
+                private native long get_native_channel_tls_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, TLSConfig config, ChannelListener listener);
+                private native long get_native_channel_tls_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, TLSConfig config, ChannelListener listener);
+
+  [52] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:151
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native long get_native_channel_tcp_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, ChannelListener listener);
+                private native long get_native_channel_tcp_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, ChannelListener listener);
+        >>>     private native long get_native_channel_tls_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, TLSConfig config, ChannelListener listener);
+                private native long get_native_channel_tls_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, TLSConfig config, ChannelListener listener);
+                private native long get_native_channel_serial(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String port, int baudRate, int dataBits, int parity, int stopBits, int flowControl, ChannelListener listener);
+
+  [53] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:152
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native long get_native_channel_tcp_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, ChannelListener listener);
+                private native long get_native_channel_tls_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, TLSConfig config, ChannelListener listener);
+        >>>     private native long get_native_channel_tls_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, TLSConfig config, ChannelListener listener);
+                private native long get_native_channel_serial(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String port, int baudRate, int dataBits, int parity, int stopBits, int flowControl, ChannelListener listener);
+
+  [54] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\ManagerImpl.java:153
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        private native long get_native_channel_tls_client(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String address, String adapter, int port, TLSConfig config, ChannelListener listener);
+                private native long get_native_channel_tls_server(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String endpoint, int port, TLSConfig config, ChannelListener listener);
+        >>>     private native long get_native_channel_serial(long nativePointer, String id, int level, long minRetryMs, long maxRetryMs, String port, int baudRate, int dataBits, int parity, int stopBits, int flowControl, ChannelListener listener);
+
+  [55] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\MasterConfig.java:35
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        */
+                public MasterConfig()
+        >>>     {
+            
+                }
+
+  [56] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\PrintingLogHandler.java:43
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     private PrintingLogHandler() {
+                }
+
+  [57] 项目: OpenPLC
+      规则: java-empty-block-multiblock
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\java\QueuedSOEHandler.java:110
+      描述: Empty block may be {} with no characters or line break in between, unless part of multi-block statement (if/else, try/catch/finally). In multi-block statement, concise empty block not allowed.
+      置信度: 3.50
+      代码片段:
+        @Override
+        >>>     public void processDNPTime(HeaderInfo info, Iterable<DNPTime> values) {}
+            }
+
+  [58] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:223
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        try:
+                        if (self.compilation_object != None):
+        >>>                 if (self.compilation_object.end_of_stream == False):
+                                return "Compiling"
+                    except Exception as e:
+
+  [59] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1064
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/upload-program-action', methods=['GET', 'POST'])
+            def upload_program_action():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [60] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1110
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def compile_program():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [61] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1142
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/compilation-logs', methods=['GET', 'POST'])
+            def compilation_logs():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [62] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1150
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/modbus', methods=['GET', 'POST'])
+            def modbus():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [63] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1258
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/add-modbus-device', methods=['GET', 'POST'])
+            def add_modbus_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [64] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1377
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/modbus-edit-device', methods=['GET', 'POST'])
+            def modbus_edit_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [65] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1552
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/delete-device', methods=['GET', 'POST'])
+            def delete_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [66] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1577
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/monitoring', methods=['GET', 'POST'])
+            def monitoring():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [67] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1708
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/monitor-update', methods=['GET', 'POST'])
+            def monitor_update():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [68] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1757
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-write', methods=['GET', 'POST'])
+            def point_write():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [69] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1767
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-info', methods=['GET', 'POST'])
+            def point_info():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [70] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1844
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-update', methods=['GET', 'POST'])
+            def point_update():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [71] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1881
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/hardware', methods=['GET', 'POST'])
+            def hardware():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [72] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1967
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/restore_custom_hardware')
+            def restore_custom_hardware():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [73] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1980
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/users')
+            def users():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [74] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2048
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/add-user', methods=['GET', 'POST'])
+            def add_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [75] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2118
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/edit-user', methods=['GET', 'POST'])
+            def edit_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [76] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2252
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/delete-user', methods=['GET', 'POST'])
+            def delete_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [77] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2284
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/settings', methods=['GET', 'POST'])
+            def settings():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [78] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2584
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/logout')
+            def logout():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [79] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:645
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def start_plc():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [80] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:660
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def stop_plc():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [81] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:672
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def runtime_logs():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [82] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:681
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def dashboard():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [83] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:727
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/programs', methods=['GET', 'POST'])
+            def programs():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [84] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:810
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/reload-program', methods=['GET', 'POST'])
+            def reload_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [85] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:871
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/update-program', methods=['GET', 'POST'])
+            def update_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [86] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:922
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/update-program-action', methods=['GET', 'POST'])
+            def update_program_action():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [87] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:958
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/remove-program', methods=['GET', 'POST'])
+            def remove_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [88] 项目: OpenPLC
+      规则: python-no-bool-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:983
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/upload-program', methods=['GET', 'POST'])
+            def upload_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [89] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:207
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return '--no%s' % self.name
+                else:
+        >>>       if not self.serializer:
+                    raise _exceptions.Error(
+                        'Serializer not present for flag %s' % self.name)
+
+  [90] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:415
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        arguments = list(arguments)
+            
+        >>>     if not isinstance(arguments, list):
+                  # Default value may be a list of values.  Most other arguments
+                  # will not be, so convert them into a single-item list to make
+
+  [91] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:425
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _serialize(self, value):
+                """See base class."""
+        >>>     if not self.serializer:
+                  raise _exceptions.Error(
+                      'Serializer not present for flag %s' % self.name)
+
+  [92] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:85
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.name = name
+            
+        >>>     if not help_string:
+                  help_string = '(no help available)'
+
+  [93] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1048
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Checks whether actual iterable is a superset of expected iterable."""
+                missing = set(expected_subset) - set(actual_set)
+        >>>     if not missing:
+                  return
+
+  [94] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1057
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Checks whether actual iterable and expected iterable are disjoint."""
+                common = set(expected_seq) & set(actual_seq)
+        >>>     if not common:
+                  return
+
+  [95] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1151
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        for line in difflib.ndiff(first.splitlines(True), second.splitlines(True)):
+                  failure_message.append(line)
+        >>>       if not line.endswith('\n'):
+                    failure_message.append('\n')
+                if line_limit and len(failure_message) > line_limit:
+
+  [96] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1206
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.fail('regexes is string or bytes; use assertRegex instead.',
+                            message)
+        >>>     if not regexes:
+                  self.fail('No regexes specified.', message)
+
+  [97] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1229
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        message)
+            
+        >>>     if not re.search(regex, actual_str, re.MULTILINE):
+                  self.fail('"%s" does not contain any of these regexes: %s.' %
+                            (actual_str, regexes), message)
+
+  [98] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1336
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.test_case.fail(self.expected_exception.__name__ + ' not raised',
+                                        self.msg)
+        >>>       if not issubclass(exc_type, self.expected_exception):
+                    return False
+                  self.test_func(exc_value)
+
+  [99] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:163
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Returns default test temp dir."""
+              tmpdir = os.environ.get('TEST_TMPDIR', '')
+        >>>   if not tmpdir:
+                tmpdir = os.path.join(tempfile.gettempdir(), 'absl_testing')
+
+  [100] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:203
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        else:
+                randomize = ''
+        >>>   if not randomize:
+                return 0
+              if randomize == 'random':
+
+  [101] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2222
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _skip_class(test_case_class):
+        >>>     if not issubclass(test_case_class, unittest.TestCase):
+                  raise TypeError(
+                      'Decorating {!r}, expected TestCase subclass'.format(test_case_class))
+
+  [102] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2450
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # --xml_output_file flag, XML_OUTPUT_FILE variable,
+              # TEST_XMLOUTPUTDIR variable or RUNNING_UNDER_TEST_DAEMON variable.
+        >>>   if not FLAGS.xml_output_file:
+                FLAGS.xml_output_file = get_default_xml_output_filename()
+              xml_output_file = FLAGS.xml_output_file
+
+  [103] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2511
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Make sure tmpdir exists.
+        >>>   if not os.path.isdir(TEST_TMPDIR.value):
+                try:
+                  os.makedirs(TEST_TMPDIR.value)
+
+  [104] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:752
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        manager: The context manager to enter.
+                """
+        >>>     if not self._exit_stack:
+                  raise AssertionError(
+                      'self._exit_stack is not set: enter_context is Py3-only; also make '
+
+  [105] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:761
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def enter_context(cls, manager):  # pylint: disable=no-self-argument
+                # type: (ContextManager[_T]) -> _T
+        >>>     if not cls._cls_exit_stack:
+                  raise AssertionError(
+                      'cls._cls_exit_stack is not set: cls.enter_context requires '
+
+  [106] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:809
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        )
+                def _call_cleaner_on_success(*args, **kwargs):
+        >>>       if not self._internal_ran_and_passed_when_called_during_cleanup(
+                      previous_failure_count):
+                    return
+
+  [107] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:874
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not actual.startswith(expected_start):
+                  self.fail('%r does not start with %r' % (actual, expected_start), msg)
+
+  [108] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:896
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not actual.endswith(expected_end):
+                  self.fail('%r does not end with %r' % (actual, expected_end), msg)
+
+  [109] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:959
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [110] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:975
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [111] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:981
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # explicitly check the length since some Sized objects (e.g. numpy.ndarray)
+                # have strange __nonzero__/__bool__ behavior.
+        >>>     if not len(container):  # pylint: disable=g-explicit-length-test
+                  self.fail('{!r} has length of 0.'.format(container), msg)
+
+  [112] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:992
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [113] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:177
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        global _define_help_flags_called
+            
+        >>>   if not _define_help_flags_called:
+                flags.DEFINE_flag(HelpFlag())
+                flags.DEFINE_flag(HelpshortFlag())  # alias for --help
+
+  [114] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:217
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        original_argv = sys.argv if argv is None else argv
+              args_to_main = flags_parser(original_argv)
+        >>>   if not FLAGS.is_parsed():
+                raise Error('FLAGS must be parsed after flags_parser is called.')
+
+  [115] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:406
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        doc = sys.modules['__main__'].__doc__
+        >>>   if not doc:
+                doc = '\nUSAGE: %s [flags]\n' % sys.argv[0]
+                doc = flags.text_wrap(doc, indent='       ', firstline_indent='')
+
+  [116] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:477
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        FlagsError or UsageError.
+              """
+        >>>   if not isinstance(handler, ExceptionHandler):
+                raise TypeError('handler of type %s does not inherit from ExceptionHandler'
+                                % type(handler))
+
+  [117] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:248
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        found_difference = True
+            
+        >>>   if not found_difference:
+                print("No difference")
+
+  [118] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:79
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _colorize(line):
+              """Add color to the input string."""
+        >>>   if not sys.stdout.isatty():
+                return line
+
+  [119] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:495
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsJavaExeLauncher(self):
+                # Skip this test on non-Windows platforms
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [120] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:622
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInNonEnglishPath(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [121] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:678
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInLongPath(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [122] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:780
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInvalidArgv0(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [123] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:855
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # https://github.com/bazelbuild/bazel/pull/24703#issuecomment-2665963637
+              def testBuildLaunchersWithClangClOnWindows(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('platforms')
+
+  [124] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:340
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        }
+                    elif _non_string_or_bytes_iterable(testcase_params):
+        >>>           if not isinstance(testcase_params[0], str):
+                        raise RuntimeError(
+                            'The first element of named test parameters is the test name '
+
+  [125] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:434
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        testcases = testcases[0]
+            
+        >>>   if not isinstance(testcases, abc.Sequence):
+                testcases = list(testcases)
+              if not testcases:
+
+  [126] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:436
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not isinstance(testcases, abc.Sequence):
+                testcases = list(testcases)
+        >>>   if not testcases:
+                raise NoTestsError(
+                    'parameterized test decorators did not generate any tests. '
+
+  [127] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:620
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        assert callable(func), 'Test generators must yield callables, got %r' % (
+                    func,)
+        >>>     if not (getattr(func, '__x_use_name__', None) or
+                        getattr(func, '__x_params_repr__', None)):
+                  raise RuntimeError(
+
+  [128] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:1042
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self,
+              ):
+        >>>     if not self.IsWindows():
+                  self.skipTest('This test is only relevant on Windows')
+                self.doTestMaterializationWithInternalAndExternalSymlinks(
+
+  [129] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:56
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def sleepUntilCacheEmpty(self):
+                for _ in range(10):
+        >>>       if not self.hasCacheEntry():
+                    return
+                  time.sleep(0.5)
+
+  [130] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:753
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testCachedRepoWithSymlinks_symlinksEnabledOnWindows(self):
+        >>>     if not self.IsWindows():
+                  self.skipTest('This test is only relevant on Windows')
+                self.ScratchFile(
+
+  [131] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:105
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if stdout_lines[i * 2] != "Hello %s Bar!" % lang[1]:
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+        >>>       if not stdout_lines[i * 2 + 1].startswith("rloc="):
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+                  if not stdout_lines[i * 2 + 1].endswith(
+
+  [132] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:107
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not stdout_lines[i * 2 + 1].startswith("rloc="):
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+        >>>       if not stdout_lines[i * 2 + 1].endswith(
+                      "_main/bar/bar-%s-data.txt" % lang[0]
+                  ):
+
+  [133] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:164
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        src_dir = self.projects.joinpath(name, version)
+                src_dir.mkdir(parents=True, exist_ok=True)
+        >>>     if not deps:
+                  deps = {}
+                if not repo_names:
+
+  [134] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:166
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not deps:
+                  deps = {}
+        >>>     if not repo_names:
+                  repo_names = {}
+                for dep in deps:
+
+  [135] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:171
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if dep not in repo_names:
+                    repo_names[dep] = dep
+        >>>     if not extra_module_file_contents:
+                  extra_module_file_contents = []
+
+  [136] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:358
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        super(_TextAndXMLTestResult, self).stopTest(test)
+                  result = self.get_pending_test_case_result(test)
+        >>>       if not result:
+                    test_name = test.id() or str(test)
+                    sys.stderr.write('No pending test case: %s\n' % test_name)
+
+  [137] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:1032
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Check if any content was produced during the stream
+                        # Empty responses (no text and no tool calls) should raise an error
+        >>>             if not self.has_content:
+                            raise LLMEmptyResponseError(
+                                message=f"LLM provider returned empty content in streaming response (model: {self.model}, message_id: {self.message_id})"
+
+  [138] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:119
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def get_tool_call_object(self) -> ToolCall:
+                    """Useful for agent loop"""
+        >>>         if not self.tool_call_name:
+                        raise ValueError("No tool call returned")
+                    # hack for tool rules
+
+  [139] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:166
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    try:
+        >>>             if not self.put_inner_thoughts_in_kwarg:
+                            # None of the things should have inner thoughts in kwargs
+                            return True
+
+  [140] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:315
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.inner_thoughts_complete = False
+            
+        >>>                 if not self.use_assistant_message:
+                                # Only buffer the initial tool call message if it doesn't require approval
+                                # For approval-required tools, we'll create the ApprovalRequestMessage later
+
+  [141] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:356
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if isinstance(delta, BetaTextDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.TEXT:
+                                raise RuntimeError(f"Streaming integrity failed - received BetaTextDelta object while not in TEXT EventMode: {delta}")
+
+  [142] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:363
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # In these cases, we should pipe text out to null / ignore it
+                            # TODO this will have to be redone to support non-tool calling message sending
+        >>>                 if not self.put_inner_thoughts_in_kwarg:
+                                return
+
+  [143] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:399
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaInputJSONDelta):
+        >>>                 if not self.anthropic_mode == EventMode.TOOL_USE:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaInputJSONDelta object while not in TOOL_USE EventMode: {delta}"
+
+  [144] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:548
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaThinkingDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaThinkingBlock object while not in THINKING EventMode: {delta}"
+
+  [145] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:569
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaSignatureDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaSignatureDelta object while not in THINKING EventMode: {delta}"
+
+  [146] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:601
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Check if any content was produced during the stream
+                        # Empty responses (no text and no tool calls) should raise an error
+        >>>             if not self.has_content:
+                            raise LLMEmptyResponseError(
+                                message=f"LLM provider returned empty content in streaming response (model: {self.model}, message_id: {self.message_id})"
+
+  [147] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:611
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if self.anthropic_mode == EventMode.TOOL_USE and self.tool_call_buffer:
+                            for buffered_msg in self.tool_call_buffer:
+        >>>                     if not buffered_msg.otid:
+                                    if prev_message_type and prev_message_type != buffered_msg.message_type:
+                                        message_index += 1
+
+  [148] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:670
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def get_tool_call_object(self) -> Optional[ToolCall]:
+                    """Useful for agent loop"""
+        >>>         if not self.tool_call_name:
+                        return None
+
+  [149] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:917
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if isinstance(delta, BetaTextDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.TEXT:
+                                raise RuntimeError(f"Streaming integrity failed - received BetaTextDelta object while not in TEXT EventMode: {delta}")
+
+  [150] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:937
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaInputJSONDelta):
+        >>>                 if not self.anthropic_mode == EventMode.TOOL_USE:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaInputJSONDelta object while not in TOOL_USE EventMode: {delta}"
+
+  [151] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:975
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaThinkingDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaThinkingBlock object while not in THINKING EventMode: {delta}"
+
+  [152] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:997
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaSignatureDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaSignatureDelta object while not in THINKING EventMode: {delta}"
+
+  [153] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:144
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        ChatGPTOAuthCredentials if valid credentials exist, None otherwise.
+                    """
+        >>>         if not self.api_key_enc:
+                        return None
+
+  [154] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:148
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        json_str = await self.api_key_enc.get_plaintext_async()
+        >>>         if not json_str:
+                        return None
+
+  [155] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:173
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        return None
+
+  [156] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:190
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        logger.error(f"Failed to refresh ChatGPT OAuth token: {e}")
+                        # If refresh fails but original access_token is still valid, use it
+        >>>             if not creds.is_expired():
+                            logger.warning("Token refresh failed, but original access_token is still valid - using existing token")
+                            return creds
+
+  [157] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:299
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        raise ValueError("No ChatGPT OAuth credentials configured")
+
+  [158] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:304
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Try to refresh if needed
+                    creds = await self.refresh_token_if_needed()
+        >>>         if not creds:
+                        raise LLMAuthenticationError(
+                            message="Failed to obtain valid ChatGPT OAuth credentials",
+
+  [159] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:343
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        logger.warning("Cannot list models: no valid ChatGPT OAuth credentials")
+                        return []
+
+  [160] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:461
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        hunks.append(h)
+            
+        >>>             if not hunks:
+                            raise ValueError("No applicable hunks found in patch. Ensure lines start with ' ', '-', or '+'.")
+
+  [161] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:524
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Legacy mode: patch targets the provided `label`
+        >>>         if not is_extended_patch(patch):
+                        try:
+                            memory_block = agent_state.memory.get_block(label)
+
+  [162] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:558
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Add Block: must specify a non-empty label")
+                            current_action = {"kind": "add", "label": target_label, "description": "", "content_lines": []}
+
+  [163] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:572
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Delete Block: must specify a non-empty label")
+                            actions.append({"kind": "delete", "label": target_label})
+
+  [164] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:582
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Update Block: must specify a non-empty label")
+                            current_action = {"kind": "update", "label": target_label, "patch_lines": []}
+
+  [165] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:591
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if ln.startswith("*** Move to:"):
+                            new_label = ln.split(":", 1)[1].strip()
+        >>>                 if not new_label:
+                                raise ValueError("*** Move to: must specify a non-empty new label")
+                            if last_action_label is None:
+  ------------------------------------------------------------
+============================================================
