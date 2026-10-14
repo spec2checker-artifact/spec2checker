@@ -1,0 +1,3773 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_3rd
+  模型: GLM-5-1
+  输入: UIR/easy/easy_3rd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 46/50 = 92.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 46条
+  语法错误规则: 4条
+  语义偏差规则: 0条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-avoid-long-double                            OK [V]  "Avoid using the `long double` type because it gives non-port..."
+     2. cpp-single-line-nested-namespace                 OK [V]  "Single-line nested namespace declarations are preferred in n..."
+     3. cpp-const-placement-consistency                  OK [V]  "Detect inconsistent placement of the `const` qualifier in po..."
+     4. cpp-prefer-nullptr                               OK [V]  "Use `nullptr` for pointers, not `NULL` or `0`, for type safe..."
+     5. cpp-auto-type-deduction                          OK [V]  "For local variables, use `auto` when type information is obv..."
+     6. cpp-use-int64-for-big-integers                   OK [V]  "For integers known to be 'big', use int64_t."
+     7. cpp-type-names-pascalcase                        OK [V]  "Type names (classes, structs, type aliases, enums, type temp..."
+     8. cpp-struct-member-no-trailing-underscore         OK [V]  "Data members of structs (both static and non-static) are nam..."
+     9. cpp-prefer-struct-over-pair-tuple                OK [V]  "Use a `struct` instead of `pair` or `tuple` whenever element..."
+    10. cpp-no-namespace-alias-in-header                 OK [V]  "Do not use namespace aliases at namespace scope in header fi..."
+    11. java-numeric-literal-long-suffix-uppercase       OK [V]  "long-valued integer literals must use uppercase L suffix, ne..."
+    12. java-module-directives-ordering                  OK [V]  "Module directives must be ordered: all requires in one block..."
+    13. java-javadoc-summary-fragment                    OK [V]  "Each Javadoc block must begin with a brief summary fragment ..."
+    14. java-horizontal-whitespace-keyword-parenthesis   OK [V]  "Detect missing space between a keyword (if, for, catch, etc...."
+    15. java-import-group-spacing                        OK [V]  "If both static and non-static imports exist, a single blank ..."
+    16. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    17. java-generic-one-statement-per-line              OK [V]  "Each statement must be followed by a line break; multiple st..."
+    18. java-double-colon-break                          OK [V]  "Detect a line break before the double colon (::) operator us..."
+    19. java-catch-pipe-spacing                          OK [V]  "Detect missing horizontal whitespace around the pipe charact..."
+    20. java-no-static-import-for-classes                OK [V]  "Static import is not used for static nested classes; they ar..."
+    21. javascript-named-imports-no-alias                OK [V]  "Prefer keeping the same name for named imports; avoid aliasi..."
+    22. javascript-generic-one-statement-per-line        OK [V]  "Each statement must be followed by a line break; multiple st..."
+    23. javascript-csharp-horizontal-whitespace-reserved-word-brace OK [V]  "Space separating reserved word (else, catch) from closing cu..."
+    24. javascript-es-module-default-import-naming       OK [V]  "Default import names derived from file name must follow iden..."
+    25. javascript-linewrap-method-name-parenthesis      OK [V]  "A method or constructor name must stay attached to the open ..."
+    26. javascript-horizontal-whitespace-reserved-word-parenthesis OK [V]  "Space separating reserved word (if, for, catch) from open pa..."
+    27. javascript-horizontal-whitespace-after-colon     OK [V]  "Require a space after the colon in an object literal key-val..."
+    28. javascript-import-no-line-wrap                   OK [V]  "ES module import statements must not be line wrapped; they a..."
+    29. python-avoid-staticmethod                        OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+    30. python-integer-explicit-zero-compare             OK [V]  "For integers, implicit false may be risky; compare explicitl..."
+    31. python-lambda-length-check                       OK [V]  "Lambda functions should be one-liners and under 80 character..."
+    32. python-suppress-pylint-warning-line-comment      OK [V]  "Detect suppression of pylint warnings using a line-level com..."
+    33. python-type-annotations-public-apis              OK [V]  "Public API functions and methods must have type annotations ..."
+    34. python-indentation-4-spaces-no-tabs              OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    35. python-whitespace-no-vertical-alignment          OK [V]  "Don’t use spaces to vertically align tokens on consecutive l..."
+    36. python-except-catch-all                          OK [V]  "Never use catch-all `except:` statements, or catch `Exceptio..."
+    37. python-no-blank-line-after-class                 OK [V]  "No blank line following a `class` line. The line after the c..."
+    38. shell-avoid-single-string-args                   OK [V]  "Using a single string for multiple command arguments should ..."
+    39. shell-avoid-eval                                 OK [V]  "The `eval` command should be avoided as it munges input and ..."
+    40. shell-for-loop-in-array                          OK [V]  "Recommend including `in "$@"` in for loops for clarity, even..."
+    41. shell-generic-indentation-consistency            OK [V]  "For existing files, stay faithful to the existing indentatio..."
+    42. shell-function-header-comment                    OK [V]  "Function header comments should describe: Description, Globa..."
+    43. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    44. shell-case-indent-alternatives                   OK [V]  "Indent alternatives in a case statement by 2 spaces."
+    45. shell-unnecessary-dollar-in-arithmetic           OK [V]  "Inside $(( ... )), the $ prefix for variable names is not re..."
+    46. shell-formatting-follow-existing-style           OK [V]  "New or modified code must follow the existing style (e.g., i..."
+
+  失败规则列表 (Failed Rules):
+     1. javascript-knr-brace-style                       FAIL  (语法错误：源验证报告标记为不可用) "Enforce K&R (Egyptian) brace style: no line break before ope..."
+     2. javascript-switch-indentation                    FAIL  (语法错误：源验证报告标记为不可用) "Switch block contents must be indented +2 relative to the sw..."
+     3. python-run-pylint                                FAIL  (语法错误：源验证报告标记为不可用) "Ensure pylint is run on the codebase, typically via a script..."
+     4. shell-quote-integer-variables                    FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Optionally quote shell-internal, readonly special variables ..."
+
+  按工具分布 (By Tool):
+    Semgrep    26/30 (86.7%)
+    Pmd        10/10 (100.0%)
+    Codeql     10/10 (100.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    JavaScript   Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 368
+  真正违规 (TP): 293
+  误报 (FP): 75
+  精准度: 79.6%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Easy 3rd 生成了 46 条可编译规则。
+  2. 本轮有 46 条规则语义正确，规则可用率为 92.0%。
+  3. 规则中有 4 条语法错误和 0 条语义偏差。
+  4. 检测到 368 条结果，其中 293 条正确，75 条误报。
+  5. 本轮检测精准度为 79.6%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: python-except-catch-all
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.py
+      描述: 捕获 Exception 范围过宽
+      置信度: 5.0
+      代码片段:
+        # Copyright 2022 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            """Script to generate release notes."""
+            
+            import re
+            import subprocess
+            import sys
+            import requests
+
+  [2] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\bazel-dev.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            #
+            # Copyright 2018 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            #
+            
+            set -eu
+            
+            USAGE="$0 [<bazel arguments>...]"
+
+  [3] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\ci\build_status_command.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # A build status command to provide the package info generator with
+            # the information about the commit being built
+
+  [4] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\packages\template_bin.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -e
+            
+            # Bazel self-extractable installer
+
+  [5] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\release.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release branches and handle the release tags.
+
+  [6] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release notes from the git history.
+
+  [7] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\test\tools\bzlmod\update_default_lock_file.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -euo pipefail
+            # --- begin runfiles.bash initialization v3 ---
+            # Copy-pasted from the Bazel Bash runfiles library v3.
+            set -uo pipefail; set +e; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+
+  [8] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\upload_java_tools.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2019 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # A script to upload a given java_tools zip on GCS. Used by the java_tools_binaries
+            # Buildkite pipeline. It is not recommended to run this script manually.
+            #
+            # Mandatory flags:
+
+  [9] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\build_defs\hash\sha256_test.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2017 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # --- begin runfiles.bash initialization v2 ---
+            # Copy-pasted from the Bazel Bash runfiles library v2.
+            set -uo pipefail; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+            source "${RUNFILES_DIR:-/dev/null}/$f" 2>/dev/null || \
+
+  [10] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:109
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Small JavaScript module for the documentation.
+             */
+        >>> var Documentation = {
+            
+              init : function() {
+
+  [11] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:151
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        */
+              addContextElements : function() {
+        >>>     $('div[id] > :header:first').each(function() {
+                  $('<a class="headerlink">\u00B6</a>').
+                  attr('href', '#' + this.id).
+
+  [12] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:188
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+                  }, 10);
+        >>>       $('<p class="highlight-link"><a href="javascript:Documentation.' +
+                    'hideSearchWords()">' + _('Hide Search Matches') + '</a></p>')
+                      .appendTo($('#searchbox'));
+
+  [13] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:19
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * @param {{github: !object, context: !object}} args - The GitHub API and context objects.
+             */
+        >>> module.exports = async ({github, context}) => {
+              const fs = require('fs');
+              const output = fs.readFileSync('ssl_output.txt', 'utf8');
+
+  [14] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Find existing open issues created by this workflow
+        >>>   const issues = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+
+  [15] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:36
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        '### SSL Certificate Warning', '',
+                'The automated monitor has detected SSL issues.', '',
+        >>>     '#### Details:', '```', output, '```', '', '**Action Required:**',
+                '1. Check `.github/config/ssl_domains.yaml` to verify the domain list.',
+                '2. Renew the certificates.', '',
+
+  [16] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (existingIssue) {
+        >>>     await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [17] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:49
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        repo: context.repo.repo,
+                  issue_number: existingIssue.number,
+        >>>       body: 'SSL check failed again. Latest status:\n\n' + body
+                });
+              } else {
+
+  [18] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:52
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+              } else {
+        >>>     await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [19] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:226
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Search Module
+             */
+        >>> var Search = {
+            
+              _index : null,
+
+  [20] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:242
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        loadIndex : function(url) {
+        >>>     $.ajax({type: "GET", url: url, data: null, success: null,
+                        dataType: "script", cache: true});
+              },
+
+  [21] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:435
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (results.length) {
+                    var item = results.pop();
+        >>>         var listItem = $('<li style="display:none"></li>');
+                    if (DOCUMENTATION_OPTIONS.FILE_SUFFIX == '') {
+                      // dirhtml builder
+
+  [22] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Stemmer = function() {
+            
+        >>>   var step2list = {
+                ational: 'ate',
+                tional: 'tion',
+
+  [23] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:69
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        };
+            
+        >>>   var step3list = {
+                icate: 'ic',
+                ative: '',
+
+  [24] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:31
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        /* Displays the details about how to use this script. */
+        >>> function usage() {
+            	var txt;
+
+  [25] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:34
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var txt;
+            
+        >>> 	txt = "Usage:\n";
+            	txt += "  cscript " + WScript.ScriptName + " <options>\n";
+            	txt += "  cscript " + WScript.ScriptName + " help\n\n";
+
+  [26] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:39
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "Options can be specified in the form <option>=<value>, where the value is\n";
+            	txt += "either 'yes' or 'no', if not stated otherwise.\n\n";
+        >>> 	txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+            	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+
+  [27] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:41
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+        >>> 	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+            	txt += "  compiler: Compiler to be used [msvc|mingw] (" + compiler + ")\n";
+            	WScript.Echo(txt);
+
+  [28] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:210
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Parser
+            
+        >>>   var atomicTypes = {"atom": true, "number": true, "variable": true, "string": true, "regexp": true, "this": true, "jsonld-keyword": true};
+            
+              function JSLexical(indented, column, type, align, prev, info) {
+
+  [29] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var keywords = function(){
+        >>>     function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+                var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+
+  [30] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:253
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Combinator utils
+            
+        >>>   var cx = {state: null, column: null, marked: null, cc: null};
+              function pass() {
+                for (var i = arguments.length - 1; i >= 0; i--) cx.cc.push(arguments[i]);
+
+  [31] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:27
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+        >>>     var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+                return {
+
+  [32] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:29
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+        >>>     return {
+                  "if": kw("if"), "while": A, "with": A, "else": B, "do": B, "try": B, "finally": B,
+                  "return": D, "break": D, "continue": D, "new": kw("new"), "delete": C, "void": C, "throw": C,
+
+  [33] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:802
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Interface
+            
+        >>>   return {
+                startState: function(basecolumn) {
+                  var state = {
+
+  [34] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:804
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        return {
+                startState: function(basecolumn) {
+        >>>       var state = {
+                    tokenize: tokenBase,
+                    lastType: "sof",
+
+  [35] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:862
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        },
+            
+        >>>     electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
+                blockCommentStart: jsonMode ? null : "/*",
+                blockCommentEnd: jsonMode ? null : "*/",
+
+  [36] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:890
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-javascript", "javascript");
+            CodeMirror.defineMIME("application/ecmascript", "javascript");
+        >>> CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+
+  [37] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:891
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ecmascript", "javascript");
+            CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+
+  [38] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:892
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [39] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:893
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+        >>> CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [40] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:894
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+        >>> CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+            
+            });
+
+  [41] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:134
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (oldConfig || typeof config == "boolean") {
+                  if (!oldConfig) {
+        >>>         config = config ? {strict: true} : null
+                  } else {
+                    oldConfig.strict = config
+
+  [42] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:17
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Pos = CodeMirror.Pos;
+            
+        >>>   var matching = {"(": ")>", ")": "(<", "[": "]>", "]": "[<", "{": "}>", "}": "{<"};
+            
+              function findMatchingBracket(cm, where, config) {
+
+  [43] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:38
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var found = scanForBracket(cm, Pos(where.line, pos + (dir > 0 ? 1 : 0)), dir, style || null, config);
+                if (found == null) return null;
+        >>>     return {from: Pos(where.line, pos), to: found && found.pos,
+                        match: found && found.ch == match.charAt(0), forward: dir > 0};
+              }
+
+  [44] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:68
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var match = matching[ch];
+                      if ((match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
+        >>>           else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
+                      else stack.pop();
+                    }
+
+  [45] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:84
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
+                    var style = match.match ? "CodeMirror-matchingbracket" : "CodeMirror-nonmatchingbracket";
+        >>>         marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+                      marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+
+  [46] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:86
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+        >>>           marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+                  }
+                }
+
+  [47] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:604
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return tool_call_name, tool_args, continue_stepping
+            
+        >>>     @staticmethod
+                def _prepare_tools_per_agent(agent_state: AgentState, tool_rules_solver: ToolRulesSolver) -> List[dict]:
+                    tools = [t for t in agent_state.tools if t.tool_type in {ToolType.CUSTOM, ToolType.LETTA_CORE, ToolType.LETTA_MEMORY_CORE}]
+
+  [48] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:54
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        AZURE_AD = 3
+            
+        >>>     @staticmethod
+                def from_str(label):
+                    if label.lower() == "azure":
+
+  [49] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:235
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return v
+            
+        >>>     @staticmethod
+                def _matches_key(function_output: str, key: Any) -> bool:
+                    """Helper function to determine if function output matches a mapping key."""
+
+  [50] 项目: Bazel
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:122
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        return unittest.expectedFailure
+              else:
+        >>>     return lambda f: f
+
+  [51] 项目: Bazel
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2137
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        # side effects of parsing flags, we temporarily stub out the `parse` method
+                stored_parse_methods = {}
+        >>>     noop_parse = lambda _: None
+                for name in FLAGS:
+                  # Avoid any side effects of parsing flags.
+
+  [52] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1027
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=[passage for passage, _ in vector_results],
+                                fts_results=[passage for passage, _ in fts_results],
+        >>>                     get_id_func=lambda p: p.id,
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [53] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1208
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda msg_dict: msg_dict["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [54] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1374
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda msg_dict: msg_dict["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [55] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1556
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        # sort by RRF score and return with metadata
+                    sorted_results = sorted(
+        >>>             [(all_items[iid], score, score_metadata[iid]) for iid, score in rrf_scores.items()], key=lambda x: x[1], reverse=True
+                    )
+
+  [56] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1890
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=[passage for passage, _ in vector_results],
+                                fts_results=[passage for passage, _ in fts_results],
+        >>>                     get_id_func=lambda p: p.id,
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [57] 项目: Letta
+      规则: python-lambda-length-check
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:2114
+      描述: Lambda functions should be one-liners and under 80 characters. Prefer generator expressions over map/filter with lambda. Use a regular nested function for multi-line or long lambdas.
+      置信度: 3.50
+      代码片段:
+        vector_results=vector_results,
+                                fts_results=fts_results,
+        >>>                     get_id_func=lambda d: d["id"],
+                                vector_weight=vector_weight,
+                                fts_weight=fts_weight,
+
+  [58] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:30
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @functools.total_ordering
+            class Flag(object):
+              """Information about a command-line flag.
+
+  [59] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:309
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BooleanFlag(Flag):
+              """Basic boolean flag.
+
+  [60] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:328
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class EnumFlag(Flag):
+              """Basic enum flag; its value can be any string from list of enum_values."""
+
+  [61] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:347
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class EnumClassFlag(Flag):
+              """Basic enum flag; its value is an enum class's member."""
+
+  [62] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:374
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MultiFlag(Flag):
+              """A flag that can appear multiple time on the command-line.
+
+  [63] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:450
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MultiEnumClassFlag(MultiFlag):
+              """A multi_enum_class flag.
+
+  [64] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:125
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TempFileCleanup(enum.Enum):
+              # Always cleanup temp files when the test completes.
+              ALWAYS = 'always'
+
+  [65] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1321
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        regexes)))
+            
+        >>>   class _AssertRaisesContext(object):
+            
+                def __init__(self, expected_exception, test_case, test_func, msg=None):
+
+  [66] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2253
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestLoader(unittest.TestLoader):
+              """A test loader which supports common test features.
+
+  [67] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:301
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TempDir(object):
+              """Represents a temporary directory for tests.
+
+  [68] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:382
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TempFile(object):
+              """Represents a tempfile for tests.
+
+  [69] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:543
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _method(object):
+              """A decorator that supports both instance and classmethod invocations.
+
+  [70] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:576
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestCase(unittest.TestCase):
+              """Extension of unittest.TestCase providing more power."""
+
+  [71] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:111
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpshortFlag(HelpFlag):
+              """--helpshort is an alias for --help."""
+              NAME = 'helpshort'
+
+  [72] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:117
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpfullFlag(flags.BooleanFlag):
+              """Display help for flags in the main module and all dependent modules."""
+
+  [73] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:130
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpXMLFlag(flags.BooleanFlag):
+              """Similar to HelpfullFlag, but generates output in XML format."""
+
+  [74] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:438
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ExceptionHandler(object):
+              """Base exception handler from which other may inherit."""
+
+  [75] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:73
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Error(Exception):
+              pass
+
+  [76] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:77
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UsageError(Error):
+              """Exception raised when the arguments supplied by the user are invalid.
+
+  [77] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:92
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class HelpFlag(flags.BooleanFlag):
+              """Special boolean flag that displays usage and raises SystemExit."""
+              NAME = 'help'
+
+  [78] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bazel_yanked_versions_test.py:25
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BazelYankedVersionsTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [79] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BzlmodCredentialsTest(test_base.TestBase):
+              """Test class for using credentials to connect to the bzlmod registry."""
+
+  [80] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:52
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class LauncherTest(test_base.TestBase):
+            
+              def _buildJavaTargets(self, bazel_bin, binary_suffix):
+
+  [81] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:27
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ModCommandTest(test_base.TestBase):
+              """Test class for the mod command."""
+
+  [82] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:230
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class NoTestsError(Exception):
+              """Raised when parameterized decorators do not generate any tests."""
+
+  [83] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:234
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class DuplicateTestNameError(Exception):
+              """Raised when a parameterized test has the same test name multiple times."""
+
+  [84] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:272
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _ParameterizedTestIter(object):
+              """Callable and iterable class for producing new test cases."""
+
+  [85] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:551
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestGeneratorMetaclass(type):
+              """Metaclass for adding tests generated by parameterized decorators."""
+
+  [86] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:641
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestCase(absltest.TestCase, metaclass=TestGeneratorMetaclass):
+              """Base class for test cases using the parameters decorator."""
+
+  [87] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RemoteRepoContentsCacheTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [88] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:29
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RepoContentsCacheTest(test_base.TestBase):
+            
+              def setUp(self):
+
+  [89] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:21
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RunfilesSandboxedTest(test_base.TestBase):
+            
+              def _FailWithContents(self, msg, contents):
+
+  [90] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:439
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StaticHTTPServer:
+              """An HTTP server serving static files, optionally with authentication."""
+
+  [91] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:464
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _Handler(http.server.SimpleHTTPRequestHandler):
+              """A SimpleHTTPRequestHandler with authentication."""
+
+  [92] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:59
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Module:
+              """A class to represent information of a Bazel module."""
+
+  [93] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:96
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BazelRegistry:
+              """A class to help create a Bazel module project from scatch and add it into the registry."""
+
+  [94] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UnittestTest(unittest.TestCase):
+            
+              def setUp(self):
+
+  [95] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:57
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestResult(object):
+              """Save test results for easy checking."""
+
+  [96] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TestCaseResult(object):
+              """Private helper for _TextAndXMLTestResult that represents a test result.
+
+  [97] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:223
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TestSuiteResult(object):
+              """Private helper for _TextAndXMLTestResult."""
+
+  [98] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:327
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class _TextAndXMLTestResult(_pretty_print_reporter.TextTestResult):
+              """Private TestResult class that produces both formatted text results and XML.
+
+  [99] 项目: Bazel
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:506
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TextAndXMLTestRunner(unittest.TextTestRunner):
+              """A test runner that produces both formatted text results and XML.
+
+  [100] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:56
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # TODO: These modes aren't used right now - but can be useful we do multiple sequential tool calling within one Claude message
+        >>> class EventMode(Enum):
+                TEXT = "TEXT"
+                TOOL_USE = "TOOL_USE"
+
+  [101] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:622
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class SimpleAnthropicStreamingInterface:
+                """
+                A simpler version of AnthropicStreamingInterface that doesn't handle send_message parsing on inner_thoughts_in_kwargs
+
+  [102] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:63
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class AnthropicStreamingInterface:
+                """
+                Encapsulates the logic for streaming responses from Anthropic.
+
+  [103] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:106
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChatGPTOAuthProvider(Provider):
+                """
+                ChatGPT OAuth Provider for accessing ChatGPT's backend-api with OAuth tokens.
+
+  [104] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:68
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChatGPTOAuthCredentials(BaseModel):
+                """OAuth credentials for ChatGPT backend API access.
+
+  [105] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:26
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class LettaCoreToolExecutor(ToolExecutor):
+                """Executor for LETTA core tools with direct implementation of functions."""
+
+  [106] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:16
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class PydanticDataType(Enum):
+                """
+                Defines the data types supported by the grammar_generator.
+
+  [107] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:101
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # TODO: Limitations ->
+            # TODO: Only works with anthropic for now
+        >>> class LettaAgentBatch(BaseAgent):
+                def __init__(
+                    self,
+
+  [108] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @dataclass
+            class ToolExecutionParams:
+                agent_id: str
+
+  [109] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:58
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> @dataclass
+            class _ResumeContext:
+                batch_items: List[LLMBatchItem]
+
+  [110] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:101
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateSSEMCPServer(LettaBase):
+                """Update schema for SSE MCP server - all fields optional"""
+
+  [111] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:119
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateStreamableHTTPMCPServer(LettaBase):
+                """Update schema for Streamable HTTP MCP server - all fields optional"""
+
+  [112] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:141
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # OAuth-related schemas
+        >>> class BaseMCPOAuth(LettaBase):
+                __id_prefix__ = PrimitiveType.MCP_OAUTH.value
+
+  [113] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:145
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSession(BaseMCPOAuth):
+                """OAuth session for MCP server authentication."""
+
+  [114] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:17
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BaseMCPServer(LettaBase):
+                __id_prefix__ = PrimitiveType.MCP_SERVER.value
+
+  [115] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:22
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Create Schemas (for POST requests)
+        >>> class CreateStdioMCPServer(LettaBase):
+                """Create a new Stdio MCP server"""
+
+  [116] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:224
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSessionCreate(BaseMCPOAuth):
+                """Create a new OAuth session."""
+
+  [117] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:234
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPOAuthSessionUpdate(BaseMCPOAuth):
+                """Update an existing OAuth session."""
+
+  [118] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:250
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MCPServerResyncResult(LettaBase):
+                """Result of resyncing MCP server tools."""
+
+  [119] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:258
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ToolExecuteRequest(LettaBase):
+                """Request to execute a tool."""
+
+  [120] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:265
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Wrapper models for API requests with discriminated unions
+        >>> class CreateMCPServerRequest(LettaBase):
+                """Request to create a new MCP server with configuration."""
+
+  [121] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:275
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class UpdateMCPServerRequest(LettaBase):
+                """Request to update an existing MCP server configuration."""
+
+  [122] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:31
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CreateSSEMCPServer(LettaBase):
+                """Create a new SSE MCP server"""
+
+  [123] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CreateStreamableHTTPMCPServer(LettaBase):
+                """Create a new Streamable HTTP MCP server"""
+
+  [124] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:66
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StdioMCPServer(CreateStdioMCPServer):
+                """A Stdio MCP server"""
+
+  [125] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:73
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class SSEMCPServer(CreateSSEMCPServer):
+                """An SSE MCP server"""
+
+  [126] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:80
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StreamableHTTPMCPServer(CreateStreamableHTTPMCPServer):
+                """A Streamable HTTP MCP server"""
+
+  [127] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:92
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        # Update Schemas (for PATCH requests) - same shape as Create/Config, but all fields optional.
+            # We exclude fields that aren't persisted on the server model to avoid invalid ORM assignments.
+        >>> class UpdateStdioMCPServer(LettaBase):
+                """Update schema for Stdio MCP server - all fields optional"""
+
+  [128] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:30
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class OpenAIResponse:
+                def __init__(self, data, headers):
+                    self._headers = headers
+
+  [129] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:49
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ApiType(Enum):
+                AZURE = 1
+                OPEN_AI = 2
+
+  [130] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:69
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class OpenAIObject(dict):
+                api_base_override = None
+
+  [131] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:17
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class WebSocketServer:
+                def __init__(self, host="localhost", port=WS_DEFAULT_PORT):
+                    self.host = host
+
+  [132] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:232
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class StreamingResponseWithStatusCode(StreamingResponse):
+                """
+                Variation of StreamingResponse that can dynamically decide the HTTP status code,
+
+  [133] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:43
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RunCancelledException(Exception):
+                """Exception raised when a run is explicitly cancelled (not due to client timeout)"""
+
+  [134] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:120
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestModalVersionManager:
+                """Test the Modal Version Manager."""
+
+  [135] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:15
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestModalFunctionExecutor:
+                """Test the ModalFunctionExecutor class."""
+
+  [136] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:328
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TestAsyncToolSandboxModalV2:
+                """Test the AsyncToolSandboxModalV2 class."""
+
+  [137] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:13
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class BaseToolRule(LettaBase):
+                __id_prefix__ = PrimitiveType.TOOL_RULE.value
+                tool_name: str = Field(..., description="The name of the tool. Must exist in the database for the user's organization.")
+
+  [138] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:131
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ParentToolRule(BaseToolRule):
+                """
+                A ToolRule that only allows a child tool to be called if the parent has been called.
+
+  [139] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:164
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ConditionalToolRule(BaseToolRule):
+                """
+                A ToolRule that conditionally maps to different child tools based on the output.
+
+  [140] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:254
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class InitToolRule(BaseToolRule):
+                """
+                Represents the initial tool rule configuration.
+
+  [141] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:275
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TerminalToolRule(BaseToolRule):
+                """
+                Represents a terminal tool rule configuration where if this tool gets called, it must end the agent loop.
+
+  [142] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:287
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ContinueToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration where if this tool gets called, it must continue the agent loop.
+
+  [143] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:299
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RequiredBeforeExitToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration where this tool must be called before the agent loop can exit.
+
+  [144] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:315
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class MaxCountPerStepToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration which constrains the total number of times this tool can be invoked in a single step.
+
+  [145] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:348
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class RequiresApprovalToolRule(BaseToolRule):
+                """
+                Represents a tool rule configuration which requires approval before the tool can be invoked.
+
+  [146] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:47
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ToolCallNode(BaseModel):
+                """Typed child override for prefilled arguments.
+
+  [147] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:64
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class ChildToolRule(BaseToolRule):
+                """
+                A ToolRule represents a tool that can be invoked by the agent.
+
+  [148] 项目: Letta
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:223
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class TurbopufferClient:
+                """Client for managing archival memory with Turbopuffer vector database."""
+
+  [149] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:77
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class Config:
+                SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"]
+                JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
+
+  [150] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:82
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        PEPPER = os.environ["PEPPER"]
+            
+        >>> class DevConfig(Config):
+                SQLALCHEMY_TRACK_MODIFICATIONS = False  # keep performance parity with prod
+                DEBUG = True
+
+  [151] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:86
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        DEBUG = True
+            
+        >>> class ProdConfig(Config):
+                SQLALCHEMY_TRACK_MODIFICATIONS = False
+                DEBUG = False
+
+  [152] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\credentials.py:113
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class CertGen:
+                """Generates a self-signed TLS certificate and private key using OpenSSL CLI."""
+
+  [153] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\monitoring.py:5
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        from pymodbus.client.sync import ModbusTcpClient
+            
+        >>> class debug_var():
+                name = ''
+                location = ''
+
+  [154] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:31
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        return ', '.join(result[:granularity])
+            
+        >>> class NonBlockingStreamReader:
+            
+                end_of_stream = False
+
+  [155] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:71
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        return None
+            
+        >>> class UnexpectedEndOfStream(Exception): pass
+            
+            class runtime:
+
+  [156] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:73
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        class UnexpectedEndOfStream(Exception): pass
+            
+        >>> class runtime:
+                def __init__(self):
+                    self.project_file = ""
+
+  [157] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\psm.py:7
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        from enum import Enum
+            
+        >>> class var_type(Enum):
+                NONE    = 0
+                DIG_INP = 1
+
+  [158] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:51
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class User(db.Model):
+                id: int = db.Column(db.Integer, primary_key=True)
+                username: str = db.Column(db.Text, nullable=False, unique=True)
+
+  [159] 项目: OpenPLC
+      规则: python-no-blank-line-after-class
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:166
+      描述: No blank line following a `class` line. The line after the class definition must be a docstring or code.
+      置信度: 3.50
+      代码片段:
+        >>> class User(flask_login.UserMixin):
+                pass
+
+  [160] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:272
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        add_rules_java "MODULE.bazel"
+        >>>   assert_build "-- //examples/java-native/... -${java_native_main}:hello-error-prone"
+              assert_build_fails "${java_native_main}:hello-error-prone" \
+                  "Did you mean 'result = b == -1;'?"
+
+  [161] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:196
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        bazel run --script_path=$(pwd)/fubar/output.sh //fubar \
+        >>>      || fail "${PRODUCT_NAME} run failed (--script_path)."
+              grep "fubar \"\$\@\"" ./fubar/output.sh \
+                 || fail "${PRODUCT_NAME} run --script_path output was incorrect."
+
+  [162] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:198
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        || fail "${PRODUCT_NAME} run failed (--script_path)."
+              grep "fubar \"\$\@\"" ./fubar/output.sh \
+        >>>      || fail "${PRODUCT_NAME} run --script_path output was incorrect."
+            
+              $(pwd)/fubar/output.sh a "b c" d > ./fubar/fubar.output \
+
+  [163] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:232
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        bazel --batch run //foo -- "$arg" > $TEST_log 2>&1 \
+        >>>     || fail "${PRODUCT_NAME} run failed (--batch)."
+            
+              bazel --batch test //foo:foo_test --test_arg="$arg" --test_output=errors \
+
+  [164] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:235
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        bazel --batch test //foo:foo_test --test_arg="$arg" --test_output=errors \
+        >>>     || fail "${PRODUCT_NAME} test failed (--batch)"
+            }
+
+  [165] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:278
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        env INHERITED_KEY="inherited_value_$env" \
+                bazel --batch test //foo:foo_test --test_output=errors \
+        >>>     || fail "${PRODUCT_NAME} test failed (--batch)"
+            }
+
+  [166] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\run_test-1.sh:308
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        bazel --batch run //foo \
+        >>>     || fail "${PRODUCT_NAME} run failed (--batch)."
+            }
+
+  [167] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\unittest.bash:142
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        (
+                IFS=':'
+        >>>     echo "WARNING: Passing test names in arguments (--test_arg) is deprecated, please use --test_filter='$*' instead." >&2
+              )
+
+  [168] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\unittest.bash:872
+      描述: Using a single string for multiple command arguments should be avoided; leads to eval or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        for TEST_name in ${TESTS[@]}; do
+                  if [[ "${TESTBRIDGE_TEST_RUNNER_FAIL_FAST:-0}" == "1" && "$TEST_passed" == "false" ]]; then
+        >>>         echo "Skipping test '$TEST_name' due to previous failure and --test_runner_fail_fast set." >&2
+                    continue
+                  fi
+
+  [169] 项目: Bazel
+      规则: shell-avoid-single-string-args
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\unittest.bash:915
+      描述: Using a single string for multiple command arguments should be avoided; leads to `eval` or quoting nightmares.
+      置信度: 3.50
+      代码片段:
+        testenv_set_up
+                      set_up
+        >>>           eval "$TEST_name"
+                      __in_tear_down=1
+                      tear_down
+
+  [170] 项目: Bazel
+      规则: shell-unnecessary-dollar-in-arithmetic
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\unittest.bash:651
+      描述: Inside $(( ... )), the $ prefix for variable names is not required; omitting it leads to cleaner code.
+      置信度: 3.50
+      代码片段:
+        local test_count=0
+              local unshardable_tests=""
+        >>>   local available_shards=$((${TEST_TOTAL_SHARDS} - ${_manual_test_shard_count}))
+              local shard_idx=_manual_test_shard_count
+              while (( shard_idx < TEST_TOTAL_SHARDS )); do
+
+  [171] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:123
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private enum ExceptionType {
+        >>>     FATAL(
+                    new RuntimeException("fatal exception"),
+                    /* isFatal= */ true,
+
+  [172] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:128
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        Level.SEVERE,
+                    "myProductName crashed with args: arg foo"),
+        >>>     NONFATAL(
+                    new IllegalStateException("bug report"),
+                    /* isFatal= */ false,
+
+  [173] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:98
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private enum CrashType {
+        >>>     CRASH(ExitCode.BLAZE_INTERNAL_ERROR, Code.CRASH_UNKNOWN) {
+                  @Override
+                  Throwable createThrowable() {
+
+  [174] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:105
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * based on execution-environment requirements.
+               */
+        >>>   TOOLCHAIN,
+            
+              /** This option relates to query output and semantics. */
+
+  [175] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:108
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option relates to query output and semantics. */
+        >>>   QUERY,
+            
+              /** This option relates to the `mod` subcommand. */
+
+  [176] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:111
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option relates to the `mod` subcommand. */
+        >>>   MOD_COMMAND,
+            
+              /** This option relates to Bzlmod (external dependencies) output and semantics. */
+
+  [177] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:114
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option relates to Bzlmod (external dependencies) output and semantics. */
+        >>>   BZLMOD,
+            
+              /**
+
+  [178] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:121
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * specific inputs.
+               */
+        >>>   GENERIC_INPUTS,
+            
+              /** A category of options to configure Bazel's remote caching and execution capabilities. */
+
+  [179] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:43
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * Do NOT add this to new flags!
+               */
+        >>>   UNCATEGORIZED,
+            
+              /**
+
+  [180] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:49
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * does not make sense.
+               */
+        >>>   UNDOCUMENTED,
+            
+              /**
+
+  [181] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:55
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * a server restart, see OptionEffectTag.LOSES_INCREMENTAL_STATE.
+               */
+        >>>   BAZEL_CLIENT_OPTIONS,
+            
+              /** This option's primary purpose is to affect the verbosity, format or location of logging. */
+
+  [182] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:58
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option's primary purpose is to affect the verbosity, format or location of logging. */
+        >>>   LOGGING,
+            
+              /**
+
+  [183] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:64
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * combinations, etc).
+               */
+        >>>   INPUT_STRICTNESS,
+            
+              /** This option deals with how to go about executing the build. */
+
+  [184] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:67
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option deals with how to go about executing the build. */
+        >>>   EXECUTION_STRATEGY,
+            
+              /** This option deals with build time optimizations. */
+
+  [185] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:70
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option deals with build time optimizations. */
+        >>>   BUILD_TIME_OPTIMIZATION,
+            
+              /**
+
+  [186] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:76
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * selective filter on the outputs, or a blanket on/off switch.
+               */
+        >>>   OUTPUT_SELECTION,
+            
+              /**
+
+  [187] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:82
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * or not an output is built, this specifies qualities of the output.
+               */
+        >>>   OUTPUT_PARAMETERS,
+            
+              /**
+
+  [188] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:88
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * iOS application with a certificate.)
+               */
+        >>>   SIGNING,
+            
+              /**
+
+  [189] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:94
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * files, .bzl files, or WORKSPACE files.
+               */
+        >>>   STARLARK_SEMANTICS,
+            
+              /** This option dictates information about the test environment or test runner. */
+
+  [190] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\OptionDocumentationCategory.java:97
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** This option dictates information about the test environment or test runner. */
+        >>>   TESTING,
+            
+              /**
+
+  [191] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:124
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        enum Result {
+                  /** A call is executed successfully. */
+        >>>       SUCCESS,
+            
+                  /** A call execution is failed with retriable error. */
+
+  [192] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:127
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        /** A call execution is failed with retriable error. */
+        >>>       TRANSIENT_FAILURE,
+            
+                  /** A call execution is failed with permanent error. */
+
+  [193] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:83
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * <p>The circuit breaker can transition into state {@link State#REJECT_CALLS}.
+                   */
+        >>>       ACCEPT_CALLS,
+            
+                  /**
+
+  [194] 项目: Bazel
+      规则: JavaEnumLineBreakAfterComma
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\Retrier.java:90
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        * <p>The circuit breaker can transition into any state.
+                   */
+        >>>       TRIAL_CALL,
+            
+                  /**
+
+  [195] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:106
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        NestedSet<PackageGroupContents> visibility,
+                  ImmutableClassToInstanceMap<TransitiveInfoProvider> overrides) {
+        >>>     ImmutableClassToInstanceMap.Builder<TransitiveInfoProvider> allOverrides =
+                    ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+
+  [196] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:117
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .getRule()
+                                    .isCreatedInSymbolicMacro()));
+        >>>     if (ruleContext.getRequiredConfigFragments() != null) {
+                  // This causes "blaze cquery --show_config_fragments=direct" to only show the
+                  // fragments/options the alias directly uses, not those of its actual target. Since alias
+
+  [197] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:124
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        RequiredConfigFragmentsProvider.class, ruleContext.getRequiredConfigFragments());
+                }
+        >>>     return new AliasConfiguredTarget(
+                    ruleContext.getOwner(), actual, allOverrides.build(), ruleContext.getConfigConditions());
+              }
+
+  [198] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:206
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Override
+              public Object getValue(String name) {
+        >>>     if (name.equals(LABEL_FIELD)) {
+                  return getLabel();
+                } else if (name.equals(FILES_FIELD)) {
+
+  [199] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:247
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Override
+              public void repr(Printer printer, StarlarkSemantics semantics) {
+        >>>     printer.append(
+                    "<alias target " + actionLookupKey.getLabel() + " of " + actual.getLabel() + ">");
+              }
+
+  [200] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:253
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Override
+              public String toString() {
+        >>>     return MoreObjects.toStringHelper(this)
+                    .add("label", actionLookupKey.getLabel())
+                    .add("configurationKey", getConfigurationKey())
+
+  [201] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:82
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        ConfiguredTarget actual,
+                  NestedSet<PackageGroupContents> visibility) {
+        >>>     return createWithOverrides(
+                    ruleContext, actual, visibility, /*overrides=*/ ImmutableClassToInstanceMap.of());
+              }
+
+  [202] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:197
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+            
+        >>>     BugReport.logException(
+                    exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+
+  [203] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:200
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+        >>>     if (oomDetectorOverride) {
+                  assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessageWhileOoming());
+                } else {
+
+  [204] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:212
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+                SecurityException exitException =
+
+  [205] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:214
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+        >>>     SecurityException exitException =
+                    assertThrows(
+                        SecurityException.class,
+
+  [206] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:222
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [207] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:227
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+        >>>     verifyExitCodeWritten(
+                    oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+
+  [208] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:237
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [209] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:240
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+        >>>     SecurityException exitException =
+                    assertThrows(
+                        SecurityException.class,
+
+  [210] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:248
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [211] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:253
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+        >>>     verifyExitCodeWritten(
+                    oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+
+  [212] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:263
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [213] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:269
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [214] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:286
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        CountDownLatch cleanupBegunLatch = new CountDownLatch(1);
+                CountDownLatch cleanupMayFinishLatch = new CountDownLatch(1);
+        >>>     doAnswer(
+                        (inv) -> {
+                          cleanupBegunLatch.countDown();
+
+  [215] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:296
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        Throwable firstThrown = new IllegalStateException("second crash in background thread");
+        >>>     ThrowingRunnable doFirstCrash =
+                    () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+
+  [216] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:299
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+        >>>     TestThread firstCrashThread =
+                    new TestThread(
+                        () -> firstCrashThrownRef.set(assertThrows(SecurityException.class, doFirstCrash)));
+
+  [217] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:310
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        Throwable secondThrown = crashType.createThrowable();
+                CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+        >>>     ThrowingRunnable doSecondCrash =
+                    () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+                doSecondCrash.run();
+
+  [218] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:322
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        SecurityException firstException = firstCrashThrownRef.get();
+                int firstCode = haltCode(firstException);
+        >>>     ExitCode expectedExitCode =
+                    oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+                assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+
+  [219] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:337
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+            
+        >>>     BugReport.handleCrash(
+                    Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+
+  [220] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:345
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [221] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:358
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+        >>>     doAnswer(
+                        inv ->
+                            inv.getArgument(0, CrashContext.class)
+
+  [222] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:373
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+            
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [223] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:390
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private void verifyFailureDetailWritten(FailureDetail expected) throws Exception {
+        >>>     assertThat(
+                        FailureDetail.parseFrom(
+                            Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+
+  [224] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:398
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private static FailureDetail createExpectedFailureDetail(
+                  Throwable t, CrashType crashType, boolean oomDetectorOverride) {
+        >>>     FailureDetails.Crash.Builder crash =
+                    FailureDetails.Crash.newBuilder()
+                        .setCode(
+
+  [225] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:411
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        Lists.transform(
+                                        Arrays.asList(t.getStackTrace()), StackTraceElement::toString)));
+        >>>     if (oomDetectorOverride && crashType == CrashType.CRASH) {
+                  crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+                } else if (crashType == CrashType.OOM) {
+
+  [226] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:416
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        crash.setOomCauseCategory(OomCauseCategory.ORGANIC);
+                }
+        >>>     return FailureDetail.newBuilder()
+                    .setMessage(String.format("Crashed: (%s) %s", t.getClass().getName(), t.getMessage()))
+                    .setCrash(crash)
+
+  [227] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:85
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Before
+              public void maybeSetOomDetector() {
+        >>>     if (oomDetectorOverride) {
+                  CrashFailureDetails.setOomDetector(() -> true);
+                }
+
+  [228] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:92
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @After
+              public void restoreDefaultOomDetector() {
+        >>>     if (oomDetectorOverride) {
+                  CrashFailureDetails.setOomDetector(() -> false);
+                }
+
+  [229] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:119
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private static String formatError(Label label) {
+        >>>       return String.format(
+                      "Target %s was referenced as a constraint_value, "
+                          + "but does not provide ConstraintValueInfo",
+
+  [230] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:44
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        boolean valuesMissing = env.valuesMissing();
+                List<ConstraintValueInfo> constraintValues = valuesMissing ? null : new ArrayList<>();
+        >>>     for (ConfiguredTargetKey key : constraintValueKeys) {
+                  ConstraintValueInfo constraintValueInfo = findConstraintValueInfo(key, values);
+                  if (!valuesMissing && constraintValueInfo != null) {
+
+  [231] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:50
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        }
+                }
+        >>>     if (valuesMissing) {
+                  return null;
+                }
+
+  [232] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:65
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private static ConstraintValueInfo findConstraintValueInfo(
+                  ConfiguredTargetKey key, SkyframeLookupResult values) throws InvalidConstraintValueException {
+        >>>     try {
+                  ConfiguredTargetValue ctv =
+                      (ConfiguredTargetValue)
+
+  [233] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1008
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void environmentFulfillsExpectedDefault() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo")
+                    .setEnvironments("a", "b")
+                    .setFulfills("a", "b")
+
+  [234] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1013
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .setDefaults("b")
+                    .make();
+        >>>     scratch.file("hello/BUILD",
+                    getDependencyRule(constrainedTo("//buildenv/foo:a")),
+                    getDependingRule());
+
+  [235] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1022
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void constraintExemptRulesDontHaveConstraintAttributes() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo")
+                    .setEnvironments("a", "b")
+                    .setDefaults("a")
+
+  [236] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1026
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .setDefaults("a")
+                    .make();
+        >>>     scratch.file(
+                    "ihave/BUILD",
+                    """
+
+  [237] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1042
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void buildingEnvironmentGroupDirectlyDoesntCrash() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo")
+                    .setEnvironments("a", "b")
+                    .setDefaults("a")
+
+  [238] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1050
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private void writeDepsForSelectTests() throws Exception {
+        >>>     scratch.file(
+                    "deps/BUILD",
+                    """
+
+  [239] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1069
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [240] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1090
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [241] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1114
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [242] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1143
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [243] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1164
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [244] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1181
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    "dependency //deps:dep_a doesn't support expected environment: //buildenv/foo:b");
+              }
+
+  [245] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1189
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [246] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1203
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    "dependency //deps:dep_a doesn't support expected environment: //buildenv/foo:b");
+              }
+
+  [247] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1211
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [248] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1233
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [249] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1250
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        // Invalid because "--define mode=a" refines :lib to "compatible_with = []" (empty).
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    ""
+                        + "//hello:lib: the current command line flags disqualify all supported environments "
+
+  [250] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1265
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [251] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1292
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [252] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1314
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        // Invalid because "--define mode=a" refines :lib to "compatible_with = ['//buildenv/foo:a']".
+                assertThat(getConfiguredTarget("//hello:depender")).isNull();
+        >>>     assertContainsEvent(
+                    "//hello:depender: the current command line flags disqualify all supported environments"
+                        + " because of incompatible select() paths:\n"
+
+  [253] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1328
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [254] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1358
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        // Invalid because "--define mode=a" refines :lib to "compatible_with = ['//buildenv/foo:a']".
+                assertThat(getConfiguredTarget("//hello:depender")).isNull();
+        >>>     assertContainsEvent(
+                    "//hello:depender: the current command line flags disqualify all supported environments"
+                        + " because of incompatible select() paths:\n"
+
+  [255] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1372
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("b").make();
+                writeDepsForSelectTests();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [256] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1389
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        // refines it to "compatible_with = []" (empty).
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    ""
+                        + "//hello:lib: the current command line flags disqualify all supported environments "
+
+  [257] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1404
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                new EnvironmentGroupMaker("buildenv/bar").setEnvironments("c", "d").setDefaults().make();
+        >>>     scratch.file(
+                    "deps/BUILD",
+                    """
+
+  [258] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1417
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        restricted_to = ['//buildenv/foo:b', '//buildenv/bar:c'])
+                    """);
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [259] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1435
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        // ['//buildenv/foo:a'], the bar refinement refines it to [].
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    ""
+                        + "//hello:lib: the current command line flags disqualify all supported environments "
+
+  [260] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1454
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+                new EnvironmentGroupMaker("buildenv/bar").setEnvironments("c", "d").setDefaults().make();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    """
+
+  [261] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1478
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent(
+                    ""
+                        + "//hello:lib: the current command line flags disqualify all supported environments "
+
+  [262] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1490
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        + "    which lacks: //buildenv/foo:a\n");
+            
+        >>>     assertContainsEvent(
+                    "environment group: //buildenv/bar:bar:\n"
+                        + " \n"
+
+  [263] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1500
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        private void writeRulesForRefiningSubsetTests(String topLevelRestrictedTo) throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo")
+                    .setEnvironments("a", "b", "all")
+                    .setFulfills("all", "a")
+
+  [264] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1506
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .setDefaults()
+                    .make();
+        >>>     scratch.file(
+                    "hello/BUILD",
+                    "load('@rules_cc//cc:cc_library.bzl', 'cc_library')",
+
+  [265] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1542
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello:lib")).isNull();
+        >>>     assertContainsEvent("//hello:lib: the current command line flags disqualify all supported "
+                    + "environments because of incompatible select() paths");
+              }
+
+  [266] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1548
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void invalidSelectKeyError() throws Exception {
+        >>>     scratch.file(
+                    "hello/a/BUILD",
+                    """
+
+  [267] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1557
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        )
+                    """);
+        >>>     scratch.file(
+                    "hello/b/BUILD",
+                    """
+
+  [268] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1568
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello/a")).isNull();
+        >>>     assertContainsEvent(
+                    "no such package 'hello/c': BUILD file not found in any of the following directories. Add"
+                        + " a BUILD file to a directory to mark it as a package");
+
+  [269] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:168
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        */
+              private void writeRuleClassDefaultEnvironments() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/rule_class_compat").setEnvironments("a", "b")
+                    .setDefaults("a").make();
+                new EnvironmentGroupMaker("buildenv/rule_class_restrict").setEnvironments("c", "d")
+
+  [270] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:170
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/rule_class_compat").setEnvironments("a", "b")
+                    .setDefaults("a").make();
+        >>>     new EnvironmentGroupMaker("buildenv/rule_class_restrict").setEnvironments("c", "d")
+                    .setDefaults("c").make();
+              }
+
+  [271] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:176
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void packageErrorOnEnvironmentGroupWithMissingEnvironments() throws Exception {
+        >>>     scratch.file(
+                    "buildenv/envs/BUILD",
+                    """
+
+  [272] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:187
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        """);
+                reporter.removeHandler(failFastHandler);
+        >>>     assertThat(scratchConfiguredTarget("foo", "g",
+                    "genrule("
+                        + "    name = 'g',"
+
+  [273] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:214
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void constrainedSupportedEnvironments() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+                    .make();
+                String ruleDef = getDependencyRule(constrainedTo("//buildenv/foo:c"));
+
+  [274] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:217
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .make();
+                String ruleDef = getDependencyRule(constrainedTo("//buildenv/foo:c"));
+        >>>     assertThat(supportedEnvironments("dep", ruleDef))
+                    .containsExactlyElementsIn(asLabelSet("//buildenv/foo:c"));
+              }
+
+  [275] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:226
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void compatibleSupportedEnvironments() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+                    .make();
+                String ruleDef = getDependencyRule(compatibleWith("//buildenv/foo:c"));
+
+  [276] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:229
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        .make();
+                String ruleDef = getDependencyRule(compatibleWith("//buildenv/foo:c"));
+        >>>     assertThat(supportedEnvironments("dep", ruleDef))
+                    .containsExactlyElementsIn(asLabelSet("//buildenv/foo:a", "//buildenv/foo:c"));
+              }
+
+  [277] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:252
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+                new EnvironmentGroupMaker("buildenv/bar").setEnvironments("c", "d").setDefaults("c").make();
+        >>>     String ruleDef = getDependencyRule(
+                    constrainedTo("//buildenv/foo:b"), compatibleWith("//buildenv/bar:d"));
+                assertThat(supportedEnvironments("dep", ruleDef))
+
+  [278] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:254
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        String ruleDef = getDependencyRule(
+                    constrainedTo("//buildenv/foo:b"), compatibleWith("//buildenv/bar:d"));
+        >>>     assertThat(supportedEnvironments("dep", ruleDef))
+                    .containsExactlyElementsIn(
+                        asLabelSet("//buildenv/foo:b", "//buildenv/bar:c", "//buildenv/bar:d"));
+
+  [279] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:266
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+                reporter.removeHandler(failFastHandler);
+        >>>     String ruleDef = getDependencyRule(
+                    constrainedTo("//buildenv/foo:b"), compatibleWith("//buildenv/foo:b"));
+                assertThat(scratchConfiguredTarget("hello", "dep", ruleDef)).isNull();
+
+  [280] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:279
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+                reporter.removeHandler(failFastHandler);
+        >>>     String ruleDef = getDependencyRule(
+                    constrainedTo("//buildenv/foo:a"), compatibleWith("//buildenv/foo:b"));
+                assertThat(scratchConfiguredTarget("hello", "dep", ruleDef)).isNull();
+
+  [281] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:282
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        constrainedTo("//buildenv/foo:a"), compatibleWith("//buildenv/foo:b"));
+                assertThat(scratchConfiguredTarget("hello", "dep", ruleDef)).isNull();
+        >>>     assertContainsEvent(
+                    "//buildenv/foo:b and //buildenv/foo:a belong to the same environment group");
+              }
+
+  [282] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:293
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        writeRuleClassDefaultEnvironments();
+                String ruleDef = "rule_class_default(name = 'a')";
+        >>>     Set<Label> expectedEnvironments = asLabelSet("//buildenv/rule_class_compat:a",
+                    "//buildenv/rule_class_compat:b", "//buildenv/rule_class_restrict:d");
+                assertThat(supportedEnvironments("a", ruleDef)).containsExactlyElementsIn(expectedEnvironments);
+
+  [283] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:304
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void explicitAttributesOverrideRuleClassDefaults() throws Exception {
+                writeRuleClassDefaultEnvironments();
+        >>>     String ruleDef = "rule_class_default("
+                    + "    name = 'a',"
+                    + "    compatible_with = ['//buildenv/rule_class_restrict:c'],"
+
+  [284] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:309
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        + "    restricted_to = ['//buildenv/rule_class_compat:a'],"
+                    + ")";
+        >>>     Set<Label> expectedEnvironments = asLabelSet("//buildenv/rule_class_compat:a",
+                    "//buildenv/rule_class_restrict:c", "//buildenv/rule_class_restrict:d");
+                assertThat(supportedEnvironments("a", ruleDef)).containsExactlyElementsIn(expectedEnvironments);
+
+  [285] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:322
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        writeRuleClassDefaultEnvironments();
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+        >>>     String ruleDef = "rule_class_default("
+                    + "    name = 'a',"
+                    + "    restricted_to = ['//buildenv/foo:b'],"
+
+  [286] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:326
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        + "    restricted_to = ['//buildenv/foo:b'],"
+                    + ")";
+        >>>     Set<Label> expectedEnvironments = asLabelSet("//buildenv/rule_class_compat:a",
+                    "//buildenv/rule_class_compat:b", "//buildenv/rule_class_restrict:d",
+                    "//buildenv/foo:b");
+
+  [287] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:342
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        String ruleDef = "bad_rule_class_default(name = 'a')";
+                assertThat(scratchConfiguredTarget("hello", "a", ruleDef)).isNull();
+        >>>     assertContainsEvent("//buildenv/rule_class_compat:a and //buildenv/rule_class_compat:b "
+                    + "belong to the same environment group");
+              }
+
+  [288] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:352
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void allDefaults() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+        >>>     scratch.file("hello/BUILD",
+                    getDependencyRule(),
+                    getDependingRule());
+
+  [289] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:365
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void sameConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+        >>>     scratch.file("hello/BUILD",
+                    getDependencyRule(constrainedTo("//buildenv/foo:b")),
+                    getDependingRule(constrainedTo("//buildenv/foo:b")));
+
+  [290] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:379
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void validConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+        >>>     scratch.file("hello/BUILD",
+                    getDependencyRule(constrainedTo("//buildenv/foo:a", "//buildenv/foo:b")),
+                    getDependingRule(constrainedTo("//buildenv/foo:b")));
+
+  [291] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:393
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        public void invalidConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+        >>>     scratch.file("hello/BUILD",
+                    getDependencyRule(constrainedTo("//buildenv/foo:b")),
+                    getDependingRule(constrainedTo("//buildenv/foo:a", "//buildenv/foo:b")));
+
+  [292] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:398
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        reporter.removeHandler(failFastHandler);
+                assertThat(getConfiguredTarget("//hello:main")).isNull();
+        >>>     assertContainsEvent(
+                    "dependency //hello:dep doesn't support expected environment: //buildenv/foo:a");
+              }
+
+  [293] 项目: Bazel
+      规则: JavaLineWrappingDiscretionary
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:408
+      描述: PMD violation
+      置信度: 5.50
+      代码片段:
+        @Test
+              public void sameCompatibilityConstraints() throws Exception {
+        >>>     new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+                    .make();
+                scratch.file("hello/BUILD",
+  ------------------------------------------------------------
+============================================================
