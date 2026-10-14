@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: easy_3rd
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_3rd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 4条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-single-line-nested-namespace                 OK [V]  "Single-line nested namespace declarations are preferred in n..."
+     2. cpp-prefer-nullptr                               OK [V]  "Use `nullptr` for pointers, not `NULL` or `0`, for type safe..."
+     3. cpp-auto-type-deduction                          OK [V]  "For local variables, use `auto` when type information is obv..."
+     4. cpp-use-int64-for-big-integers                   OK [V]  "For integers known to be 'big', use int64_t."
+     5. cpp-type-names-pascalcase                        OK [V]  "Type names (classes, structs, type aliases, enums, type temp..."
+     6. cpp-struct-member-no-trailing-underscore         OK [V]  "Data members of structs (both static and non-static) are nam..."
+     7. cpp-prefer-struct-over-pair-tuple                OK [V]  "Use a `struct` instead of `pair` or `tuple` whenever element..."
+     8. cpp-no-namespace-alias-in-header                 OK [V]  "Do not use namespace aliases at namespace scope in header fi..."
+     9. java-numeric-literal-long-suffix-uppercase       OK [V]  "long-valued integer literals must use uppercase L suffix, ne..."
+    10. java-module-directives-ordering                  OK [V]  "Module directives must be ordered: all requires in one block..."
+    11. java-javadoc-summary-fragment                    OK [V]  "Each Javadoc block must begin with a brief summary fragment ..."
+    12. java-horizontal-whitespace-keyword-parenthesis   OK [V]  "Detect missing space between a keyword (if, for, catch, etc...."
+    13. java-import-group-spacing                        OK [V]  "If both static and non-static imports exist, a single blank ..."
+    14. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    15. java-generic-one-statement-per-line              OK [V]  "Each statement must be followed by a line break; multiple st..."
+    16. java-double-colon-break                          OK [V]  "Detect a line break before the double colon (::) operator us..."
+    17. java-catch-pipe-spacing                          OK [V]  "Detect missing horizontal whitespace around the pipe charact..."
+    18. java-no-static-import-for-classes                OK [V]  "Static import is not used for static nested classes; they ar..."
+    19. javascript-named-imports-no-alias                OK [V]  "Prefer keeping the same name for named imports; avoid aliasi..."
+    20. javascript-generic-one-statement-per-line        OK [V]  "Each statement must be followed by a line break; multiple st..."
+    21. javascript-csharp-horizontal-whitespace-reserved-word-brace OK [V]  "Space separating reserved word (else, catch) from closing cu..."
+    22. javascript-es-module-default-import-naming       OK [V]  "Default import names derived from file name must follow iden..."
+    23. javascript-linewrap-method-name-parenthesis      OK [V]  "A method or constructor name must stay attached to the open ..."
+    24. javascript-horizontal-whitespace-reserved-word-parenthesis OK [V]  "Space separating reserved word (if, for, catch) from open pa..."
+    25. javascript-horizontal-whitespace-after-colon     OK [V]  "Require a space after the colon in an object literal key-val..."
+    26. javascript-import-no-line-wrap                   OK [V]  "ES module import statements must not be line wrapped; they a..."
+    27. python-avoid-staticmethod                        OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+    28. python-integer-explicit-zero-compare             OK [V]  "For integers, implicit false may be risky; compare explicitl..."
+    29. python-lambda-length-check                       OK [V]  "Lambda functions should be one-liners and under 80 character..."
+    30. python-suppress-pylint-warning-line-comment      OK [V]  "Detect suppression of pylint warnings using a line-level com..."
+    31. python-type-annotations-public-apis              OK [V]  "Public API functions and methods must have type annotations ..."
+    32. python-indentation-4-spaces-no-tabs              OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    33. python-whitespace-no-vertical-alignment          OK [V]  "Don’t use spaces to vertically align tokens on consecutive l..."
+    34. python-except-catch-all                          OK [V]  "Never use catch-all `except:` statements, or catch `Exceptio..."
+    35. python-no-blank-line-after-class                 OK [V]  "No blank line following a `class` line. The line after the c..."
+    36. shell-quote-integer-variables                    OK [V]  "Optionally quote shell-internal, readonly special variables ..."
+    37. shell-avoid-eval                                 OK [V]  "The `eval` command should be avoided as it munges input and ..."
+    38. shell-for-loop-in-array                          OK [V]  "Recommend including `in "$@"` in for loops for clarity, even..."
+    39. shell-generic-indentation-consistency            OK [V]  "For existing files, stay faithful to the existing indentatio..."
+    40. shell-function-header-comment                    OK [V]  "Function header comments should describe: Description, Globa..."
+    41. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    42. shell-case-indent-alternatives                   OK [V]  "Indent alternatives in a case statement by 2 spaces."
+    43. shell-unnecessary-dollar-in-arithmetic           OK [V]  "Inside $(( ... )), the $ prefix for variable names is not re..."
+    44. shell-formatting-follow-existing-style           OK [V]  "New or modified code must follow the existing style (e.g., i..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-long-double                            FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid using the `long double` type because it gives non-port..."
+     2. cpp-const-placement-consistency                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect inconsistent placement of the `const` qualifier in po..."
+     3. javascript-knr-brace-style                       FAIL  (语法错误：源验证报告标记为不可用) "Enforce K&R (Egyptian) brace style: no line break before ope..."
+     4. javascript-switch-indentation                    FAIL  (语法错误：源验证报告标记为不可用) "Switch block contents must be indented +2 relative to the sw..."
+     5. python-run-pylint                                FAIL  (语法错误：源验证报告标记为不可用) "Ensure pylint is run on the codebase, typically via a script..."
+     6. shell-avoid-single-string-args                   FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Using a single string for multiple command arguments should ..."
+
+  按工具分布 (By Tool):
+    Semgrep    17/49 (34.7%)
+    Pmd        5/13 (38.5%)
+    Codeql     12/35 (34.3%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 17
+  真正违规 (TP): 4
+  误报 (FP): 13
+  精准度: 23.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. Qwen3-Coder-Plus 在 Easy 3rd 中生成了 46 条可编译规则。
+  2. 其中 44 条规则语义正确，规则可用率为 88.0%。
+  3. 本轮有 4 条语法错误规则和 2 条语义偏差规则。
+  4. 本轮检测到 17 条结果，其中 4 条正确，另有 13 条误报。
+  5. 本轮检测精准度为 23.5%，规则生成与检测结果保持一致。
+============================================================
