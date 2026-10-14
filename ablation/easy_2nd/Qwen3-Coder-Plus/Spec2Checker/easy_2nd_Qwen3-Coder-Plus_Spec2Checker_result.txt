@@ -1,0 +1,2024 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_2nd
+  模型: Qwen3-Coder-Plus
+  输入: UIR/easy/easy_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 4条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-auto-usage-clarity                           OK [V]  "Use `auto` only when it makes code clearer or safer. Do not ..."
+     2. cpp-filename-lowercase-underscore-dash           OK [V]  "Filenames should be all lowercase and can include underscore..."
+     3. cpp-avoid-macros-in-headers                      OK [V]  "Avoid defining macros, especially in header files. Prefer in..."
+     4. cpp-braced-initialization-64bit                  OK [V]  "Use braced-initialization to create 64-bit constants."
+     5. cpp-avoid-decltype-auto                          OK [V]  "Avoid using `decltype(auto)` unless it is necessary, as it c..."
+     6. cpp-no-using-namespace-std                       OK [V]  "Do not declare anything in namespace std, including forward ..."
+     7. cpp-auto-type-deduction                          OK [V]  "For local variables, use `auto` when type information is obv..."
+     8. cpp-macro-naming-prefix                          OK [V]  "Macros should be named using all capital letters with unders..."
+     9. java-assignment-break-after-symbol               OK [V]  "Detect when an assignment operator or colon in an enhanced f..."
+    10. java-single-variable-declaration                 OK [V]  "Every variable declaration (field or local) declares only on..."
+    11. java-break-before-non-assignment-operator        OK [V]  "When a line is broken at a non-assignment operator, the line..."
+    12. java-type-variable-naming                        OK [V]  "Type variable names must be in UpperCamelCase followed by a ..."
+    13. java-parameter-naming-lowercamelcase             OK [V]  "Parameter names should be written in lowerCamelCase."
+    14. java-parameter-single-char-avoid-public          OK [V]  "One-character parameter names should be avoided in public me..."
+    15. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    16. java-imports-no-line-wrapping                    OK [V]  "Imports are not line-wrapped. The column limit does not appl..."
+    17. java-keyword-parenthesis-spacing                 OK [V]  "Space separating keyword (if, for, catch) from open parenthe..."
+    18. java-classname-uppercamelcase                    OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+    19. javascript-horizontal-whitespace-around-comment  OK [V]  "Space on both sides of `//` that begins end-of-line comment...."
+    20. javascript-vertical-whitespace-function          OK [V]  "Blank lines at start or end of function body are not allowed..."
+    21. javascript-import-extension-required             OK [V]  "ES module import paths must include the `.js` file extension..."
+    22. javascript-horizontal-whitespace-before-brace    OK [V]  "Require a space before an open curly brace `{`, except when ..."
+    23. javascript-non-ascii-readability                 OK [V]  "Detect use of Unicode escape sequences for non-ASCII charact..."
+    24. javascript-horizontal-whitespace-after-comma-semicolon OK [V]  "Space after comma (`,`) and semicolon (`;`); never before."
+    25. javascript-grouping-parentheses-recommended      OK [V]  "Omit optional grouping parentheses only when author and revi..."
+    26. javascript-no-jsdoc-for-implementation           OK [V]  "Do not use `/** … */` for implementation comments; use `/* …..."
+    27. javascript-generic-comma-line-wrapping           OK [V]  "A comma must stay attached to the token that precedes it whe..."
+    28. javascript-no-default-export                     OK [V]  "Use named exports in all code. Do not use default exports."
+    29. python-limit-classmethod                         OK [V]  "Use `classmethod` only when writing a named constructor or c..."
+    30. python-avoid-staticmethod                        OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+    31. python-future-import-encouraged                  OK [V]  "Use of `from __future__ import` statements is encouraged to ..."
+    32. python-import-style                              OK [V]  "Enforce use of 'from x import y' syntax where x is the packa..."
+    33. python-whitespace-no-vertical-alignment          OK [V]  "Don’t use spaces to vertically align tokens on consecutive l..."
+    34. python-whitespace-no-space-before-punctuation    OK [V]  "No whitespace before a comma, semicolon, or colon. Use space..."
+    35. python-integer-compare-zero                      OK [V]  "For integers, implicit false may be risky; compare explicitl..."
+    36. python-no-assert-precondition                    OK [V]  "Do not use `assert` statements in place of conditionals or v..."
+    37. python-whitespace-inside-parens                  OK [V]  "No whitespace inside parentheses, brackets, or braces."
+    38. python-comprehension-simple-only                 OK [V]  "Comprehensions are allowed only for simple cases with a sing..."
+    39. shell-quoted-array-expansion                     OK [V]  "Use quoted expansion "${array[@]}" to access arrays."
+    40. shell-variable-expansion-consistency             OK [V]  "Variable expansion style (e.g., $VAR vs ${VAR}) must be cons..."
+    41. shell-function-naming-lowercase-underscore       OK [V]  "Function names should be lower-case, with underscores to sep..."
+    42. shell-for-loop-in-array                          OK [V]  "Recommend including `in "$@"` in for loops for clarity, even..."
+    43. shell-single-string-args                         OK [V]  "Using a single string for multiple command arguments should ..."
+    44. shell-use-readarray                              OK [V]  "Use `readarray` builtin (bash4+) to read file into array, th..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-thread-local-constinit                       FAIL  (语义偏差：推理链遗漏了部分约束条件) "thread_local variables at class or namespace scope must be i..."
+     2. cpp-const-placement-consistency                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect inconsistent placement of `const` qualifier in pointe..."
+     3. shell-long-literal-string                        FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "If you have literal strings longer than 80 characters, use a..."
+     4. shell-case-indent-alternatives                   FAIL  (语法错误：源验证报告标记为不可用) "Indent alternatives by 2 spaces in a case statement."
+     5. shell-control-flow-same-line                     FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+     6. shell-generic-max-line-length                    FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Maximum line length is 80 characters."
+
+  按工具分布 (By Tool):
+    Semgrep    26/30 (86.7%)
+    Pmd        10/10 (100.0%)
+    Codeql     8/10 (80.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 6/10 (60.0%)  Rule_sem: 6/10 (60.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 153
+  真正违规 (TP): 153
+  误报 (FP): 0
+  精准度: 100.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. Qwen3-Coder-Plus 在 Easy 2nd 生成了 46 条可编译规则。
+  2. 本轮有 44 条规则语义正确，规则可用率为 88.0%。
+  3. 规则中有 4 条语法错误和 2 条语义偏差。
+  4. 检测到 153 条结果，其中 153 条正确，0 条误报。
+  5. 本轮检测精准度为 100.0%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\buffered_write_stream.cpp:145
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void test_sync_operations()
+            {
+        >>>   using namespace std; // For memcmp.
+            
+              asio::io_service io_service;
+
+  [2] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\buffered_write_stream.cpp:255
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void test_async_operations()
+            {
+        >>>   using namespace std; // For memcmp.
+            
+            #if defined(ASIO_HAS_BOOST_BIND)
+
+  [3] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\modbus_master.cpp:46
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        #define MAX_MB_IO            400
+            
+        >>> using namespace std;
+            
+            uint8_t bool_input_buf[MAX_MB_IO];
+
+  [4] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\pccc.cpp:76
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        thread_local int Pccc_MessageLength;
+            
+        >>> using namespace std;
+            //-----------------------------------------------------------Structure Defines--------------------------------------------------//
+            struct pccc_header //Structure for the Header Information for EthernetIP
+
+  [5] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\read_until.cpp:51
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void reset(const void* data, size_t length)
+              {
+        >>>     using namespace std; // For memcpy.
+            
+                ASIO_CHECK(length <= max_length);
+
+  [6] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2231
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        shadowed_setupclass = test_case_class.__dict__.get('setUpClass', None)
+            
+        >>>     @classmethod
+                def replacement_setupclass(cls, *args, **kwargs):
+                  # Skip this class if it is the one that was decorated with @skipThisClass
+
+  [7] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:398
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        # pylint: disable=line-too-long
+        >>>   @classmethod
+              def _create(cls, base_path, file_path, content, mode, encoding, errors):
+                # type: (Text, Optional[Text], AnyStr, Text, Text, Text) -> Tuple[_TempFile, Text]
+
+  [8] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:608
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        self.addCleanup(self._exit_stack.close)
+            
+        >>>   @classmethod
+              def setUpClass(cls):
+                super(TestCase, cls).setUpClass()
+
+  [9] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:767
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        return cls._cls_exit_stack.enter_context(manager)
+            
+        >>>   @classmethod
+              def _get_tempdir_path_cls(cls):
+                # type: () -> Text
+
+  [10] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:535
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        # to the class attribute's value.
+            
+        >>>   @classmethod
+              def set_default_xml_stream(cls, xml_stream):
+                """Sets the default XML stream for the class.
+
+  [11] 项目: Bazel
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:556
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        testsuites_properties=self._testsuites_properties)
+            
+        >>>   @classmethod
+              def set_testsuites_property(cls, key, value):
+                cls._testsuites_properties[key] = value
+
+  [12] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:99
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        return self.model_dump_json()
+            
+        >>>     @classmethod
+                def from_json(cls, json_str: str) -> "ChatGPTOAuthCredentials":
+                    """Deserialize from JSON string stored in api_key_enc."""
+
+  [13] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:110
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: Optional[str]) -> Optional[str]:
+
+  [14] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:128
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: Optional[str]) -> Optional[str]:
+
+  [15] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:40
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: str) -> str:
+
+  [16] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:56
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: str) -> str:
+
+  [17] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:162
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        return reduce_value
+            
+        >>>     @classmethod
+                def construct_from(
+                    cls,
+
+  [18] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:211
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        self._previous = values
+            
+        >>>     @classmethod
+                def api_base(cls):
+                    return None
+
+  [19] 项目: Letta
+      规则: python-limit-classmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:228
+      描述: Use @classmethod only when writing a named constructor or class-specific routine that modifies global state.
+      置信度: 3.50
+      代码片段:
+        return f"<tool_rule>\n{self.tool_name} will determine which tool to use next based on its output\n</tool_rule>"
+            
+        >>>     @field_validator("child_output_mapping")
+                @classmethod
+                def validate_child_output_mapping(cls, v):
+
+  [20] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:604
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return tool_call_name, tool_args, continue_stepping
+            
+        >>>     @staticmethod
+                def _prepare_tools_per_agent(agent_state: AgentState, tool_rules_solver: ToolRulesSolver) -> List[dict]:
+                    tools = [t for t in agent_state.tools if t.tool_type in {ToolType.CUSTOM, ToolType.LETTA_CORE, ToolType.LETTA_MEMORY_CORE}]
+
+  [21] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:54
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        AZURE_AD = 3
+            
+        >>>     @staticmethod
+                def from_str(label):
+                    if label.lower() == "azure":
+
+  [22] 项目: Letta
+      规则: python-avoid-staticmethod
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:235
+      描述: Never use `staticmethod` unless forced. Write a module-level function instead.
+      置信度: 3.50
+      代码片段:
+        return v
+            
+        >>>     @staticmethod
+                def _matches_key(function_output: str, key: Any) -> bool:
+                    """Helper function to determine if function output matches a mapping key."""
+
+  [23] 项目: Bazel
+      规则: python-future-import-encouraged
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:17
+      描述: Use of `from __future__ import` statements is encouraged to use modern Python features.
+      置信度: 3.50
+      代码片段:
+        """Tests for unittest.bash."""
+            
+        >>> from __future__ import absolute_import
+            from __future__ import division
+            from __future__ import print_function
+
+  [24] 项目: Bazel
+      规则: python-future-import-encouraged
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:18
+      描述: Use of `from __future__ import` statements is encouraged to use modern Python features.
+      置信度: 3.50
+      代码片段:
+        from __future__ import absolute_import
+        >>> from __future__ import division
+            from __future__ import print_function
+
+  [25] 项目: Bazel
+      规则: python-future-import-encouraged
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:19
+      描述: Use of `from __future__ import` statements is encouraged to use modern Python features.
+      置信度: 3.50
+      代码片段:
+        from __future__ import absolute_import
+            from __future__ import division
+        >>> from __future__ import print_function
+            
+            import os
+
+  [26] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>> from collections import abc
+            import copy
+            import functools
+
+  [27] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:25
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import functools
+            
+        >>> from absl.flags import _argument_parser
+            from absl.flags import _exceptions
+            from absl.flags import _helpers
+
+  [28] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:26
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.flags import _argument_parser
+        >>> from absl.flags import _exceptions
+            from absl.flags import _helpers
+
+  [29] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:27
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.flags import _argument_parser
+            from absl.flags import _exceptions
+        >>> from absl.flags import _helpers
+
+  [30] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>> from collections import abc
+            import contextlib
+            import difflib
+
+  [31] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:43
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import textwrap
+            import unittest
+        >>> from unittest import mock  # pylint: disable=unused-import Allow absltest.mock.
+            from urllib import parse
+
+  [32] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:44
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import unittest
+            from unittest import mock  # pylint: disable=unused-import Allow absltest.mock.
+        >>> from urllib import parse
+            
+            try:
+
+  [33] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:56
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        faulthandler = None
+            
+        >>> from absl import app
+            from absl import flags
+            from absl import logging
+
+  [34] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:57
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import app
+        >>> from absl import flags
+            from absl import logging
+            from absl.testing import _pretty_print_reporter
+
+  [35] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:58
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import app
+            from absl import flags
+        >>> from absl import logging
+            from absl.testing import _pretty_print_reporter
+            from absl.testing import xml_reporter
+
+  [36] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:59
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import flags
+            from absl import logging
+        >>> from absl.testing import _pretty_print_reporter
+            from absl.testing import xml_reporter
+
+  [37] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:60
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import logging
+            from absl.testing import _pretty_print_reporter
+        >>> from absl.testing import xml_reporter
+            
+            # Make typing an optional import to avoid it being a required dependency
+
+  [38] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:67
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        # pylint: disable=unused-import
+              import typing
+        >>>   from typing import Any, AnyStr, BinaryIO, Callable, ContextManager, IO, Iterator, List, Mapping, MutableMapping, MutableSequence, Optional, Sequence, Text, TextIO, Tuple, Type, Union
+              # pylint: enable=unused-import
+            except ImportError:
+
+  [39] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:78
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        _T = typing.TypeVar('_T')
+            
+        >>>     import unittest.case
+                _OutcomeType = unittest.case._Outcome  # pytype: disable=module-attr
+
+  [40] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:36
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import traceback
+            
+        >>> from absl import command_name
+            from absl import flags
+            from absl import logging
+
+  [41] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:37
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import command_name
+        >>> from absl import flags
+            from absl import logging
+
+  [42] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:38
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import command_name
+            from absl import flags
+        >>> from absl import logging
+            
+            try:
+
+  [43] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:41
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import sys
+            
+        >>> from absl import app
+            from absl import flags
+            from google.protobuf import proto
+
+  [44] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:42
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import app
+        >>> from absl import flags
+            from google.protobuf import proto
+            from google.protobuf import text_format
+
+  [45] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:43
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import app
+            from absl import flags
+        >>> from google.protobuf import proto
+            from google.protobuf import text_format
+            from src.main.protobuf import analysis_v2_pb2
+
+  [46] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:44
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl import flags
+            from google.protobuf import proto
+        >>> from google.protobuf import text_format
+            from src.main.protobuf import analysis_v2_pb2
+            from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+
+  [47] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:45
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from google.protobuf import proto
+            from google.protobuf import text_format
+        >>> from src.main.protobuf import analysis_v2_pb2
+            from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+            from tools.aquery_differ.resolvers.path_fragment_resolver import PathFragmentResolver
+
+  [48] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:46
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from google.protobuf import text_format
+            from src.main.protobuf import analysis_v2_pb2
+        >>> from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+            from tools.aquery_differ.resolvers.path_fragment_resolver import PathFragmentResolver
+            # pylint: disable=g-import-not-at-top
+
+  [49] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:47
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from src.main.protobuf import analysis_v2_pb2
+            from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+        >>> from tools.aquery_differ.resolvers.path_fragment_resolver import PathFragmentResolver
+            # pylint: disable=g-import-not-at-top
+            # resource lib isn't available on Windows.
+
+  [50] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bazel_yanked_versions_test.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import tempfile
+            
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+
+  [51] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bazel_yanked_versions_test.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+
+  [52] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bazel_yanked_versions_test.py:22
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.testing import absltest
+            from src.test.py.bazel import test_base
+        >>> from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+
+  [53] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import os
+            import tempfile
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+
+  [54] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import tempfile
+            from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+            from src.test.py.bazel.bzlmod.test_utils import StaticHTTPServer
+
+  [55] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:22
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.testing import absltest
+            from src.test.py.bazel import test_base
+        >>> from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+            from src.test.py.bazel.bzlmod.test_utils import StaticHTTPServer
+
+  [56] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\bzlmod_credentials_test.py:23
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+        >>> from src.test.py.bazel.bzlmod.test_utils import StaticHTTPServer
+
+  [57] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:19
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import stat
+            import string
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+
+  [58] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import string
+            from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+            
+            # pylint: disable=g-import-not-at-top
+
+  [59] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:25
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        if os.name == 'nt':
+              import ctypes
+        >>>   from ctypes import wintypes
+            
+              kernel32 = ctypes.WinDLL('kernel32')
+
+  [60] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import os
+            import tempfile
+        >>> from typing import Dict, List, Optional, Union
+            from absl.testing import absltest
+            from src.test.py.bazel import test_base
+
+  [61] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import tempfile
+            from typing import Dict, List, Optional, Union
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+
+  [62] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:22
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from typing import Dict, List, Optional, Union
+            from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+            from src.test.py.bazel.bzlmod.test_utils import scratchFile
+
+  [63] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:23
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.testing import absltest
+            from src.test.py.bazel import test_base
+        >>> from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+            from src.test.py.bazel.bzlmod.test_utils import scratchFile
+
+  [64] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\mod_command_test.py:24
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from src.test.py.bazel import test_base
+            from src.test.py.bazel.bzlmod.test_utils import BazelRegistry
+        >>> from src.test.py.bazel.bzlmod.test_utils import scratchFile
+
+  [65] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:213
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>> from collections import abc
+            import functools
+            import inspect
+
+  [66] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:221
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import unittest
+            
+        >>> from absl.testing import absltest
+
+  [67] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:22
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import re
+            import tempfile
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+
+  [68] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:23
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import tempfile
+            from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+
+  [69] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:25
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import time
+            
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+
+  [70] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:26
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+
+  [71] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:17
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import os
+        >>> from absl.testing import absltest
+            from src.test.py.bazel import test_base
+
+  [72] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:18
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import os
+            from absl.testing import absltest
+        >>> from src.test.py.bazel import test_base
+
+  [73] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import functools
+            import hashlib
+        >>> import http.server
+            import json
+            import os
+
+  [74] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:27
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import shutil
+            import threading
+        >>> import urllib.request
+            import zipfile
+
+  [75] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:17
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        """Tests for unittest.bash."""
+            
+        >>> from __future__ import absolute_import
+            from __future__ import division
+            from __future__ import print_function
+
+  [76] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:18
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from __future__ import absolute_import
+        >>> from __future__ import division
+            from __future__ import print_function
+
+  [77] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\unittest_test.py:19
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from __future__ import absolute_import
+            from __future__ import division
+        >>> from __future__ import print_function
+            
+            import os
+
+  [78] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:24
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import traceback
+            import unittest
+        >>> from xml.sax import saxutils
+            from absl.testing import _pretty_print_reporter
+
+  [79] 项目: Bazel
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:25
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import unittest
+            from xml.sax import saxutils
+        >>> from absl.testing import _pretty_print_reporter
+
+  [80] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:11
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from opentelemetry.trace import Span
+            
+        >>>     from letta.schemas.usage import LettaUsageStatistics
+            
+            from anthropic import AsyncStream
+
+  [81] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:13
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.usage import LettaUsageStatistics
+            
+        >>> from anthropic import AsyncStream
+            from anthropic.types.beta import (
+                BetaInputJSONDelta,
+
+  [82] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:14
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from anthropic import AsyncStream
+        >>> from anthropic.types.beta import (
+                BetaInputJSONDelta,
+                BetaRawContentBlockDeltaEvent,
+
+  [83] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:147
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        LettaUsageStatistics with token counts from the stream.
+                    """
+        >>>         from letta.schemas.usage import LettaUsageStatistics
+            
+                    # Anthropic: input_tokens is NON-cached only in streaming
+
+  [84] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:278
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        # Transform Anthropic errors into our custom error types for consistent handling
+        >>>             from letta.llm_api.anthropic_client import AnthropicClient
+            
+                        client = AnthropicClient()
+
+  [85] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:3
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import asyncio
+            import json
+        >>> from collections.abc import AsyncGenerator
+            from datetime import datetime, timezone
+            from enum import Enum
+
+  [86] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:32
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>> from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+            from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+
+  [87] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:33
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+        >>> from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+
+  [88] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:34
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+            from letta.errors import LLMEmptyResponseError
+        >>> from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+            from letta.schemas.letta_message import (
+
+  [89] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:35
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+        >>> from letta.log import get_logger
+            from letta.schemas.letta_message import (
+                ApprovalRequestMessage,
+
+  [90] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:36
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+        >>> from letta.schemas.letta_message import (
+                ApprovalRequestMessage,
+                AssistantMessage,
+
+  [91] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:4
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import json
+            from collections.abc import AsyncGenerator
+        >>> from datetime import datetime, timezone
+            from enum import Enum
+            from typing import TYPE_CHECKING, Optional
+
+  [92] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:45
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        ToolCallMessage,
+            )
+        >>> from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+
+  [93] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:46
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        )
+            from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+        >>> from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+
+  [94] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:47
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+        >>> from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+
+  [95] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:48
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+        >>> from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+            from letta.server.rest_api.streaming_response import RunCancelledException
+
+  [96] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:49
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+        >>> from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+            from letta.server.rest_api.streaming_response import RunCancelledException
+
+  [97] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:5
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from collections.abc import AsyncGenerator
+            from datetime import datetime, timezone
+        >>> from enum import Enum
+            from typing import TYPE_CHECKING, Optional
+
+  [98] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:50
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+        >>> from letta.server.rest_api.streaming_response import RunCancelledException
+            
+            logger = get_logger(__name__)
+
+  [99] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:6
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from datetime import datetime, timezone
+            from enum import Enum
+        >>> from typing import TYPE_CHECKING, Optional
+            
+            if TYPE_CHECKING:
+
+  [100] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:699
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        LettaUsageStatistics with token counts from the stream.
+                    """
+        >>>         from letta.schemas.usage import LettaUsageStatistics
+            
+                    # Anthropic: input_tokens is NON-cached only in streaming
+
+  [101] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:9
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        if TYPE_CHECKING:
+        >>>     from opentelemetry.trace import Span
+            
+                from letta.schemas.usage import LettaUsageStatistics
+
+  [102] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:10
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from pydantic import BaseModel, Field
+            
+        >>> from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+            from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+
+  [103] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:11
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+        >>> from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+
+  [104] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:12
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+            from letta.log import get_logger
+        >>> from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+
+  [105] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:13
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+        >>> from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+            from letta.schemas.secret import Secret
+
+  [106] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:14
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+        >>> from letta.schemas.providers.base import Provider
+            from letta.schemas.secret import Secret
+
+  [107] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:15
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+        >>> from letta.schemas.secret import Secret
+            
+            if TYPE_CHECKING:
+
+  [108] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:18
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        if TYPE_CHECKING:
+        >>>     from letta.orm import User
+            
+            logger = get_logger(__name__)
+
+  [109] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:278
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        if actor and self.id:
+                        try:
+        >>>                 from letta.schemas.providers.base import ProviderUpdate
+                            from letta.services.provider_manager import ProviderManager
+
+  [110] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:279
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        try:
+                            from letta.schemas.providers.base import ProviderUpdate
+        >>>                 from letta.services.provider_manager import ProviderManager
+            
+                            provider_manager = ProviderManager()
+
+  [111] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:4
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import json
+        >>> from datetime import datetime, timezone
+            from typing import TYPE_CHECKING, Literal, Optional
+
+  [112] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:5
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import json
+            from datetime import datetime, timezone
+        >>> from typing import TYPE_CHECKING, Literal, Optional
+            
+            import httpx
+
+  [113] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:8
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import httpx
+        >>> from pydantic import BaseModel, Field
+            
+            from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+
+  [114] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:1
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        >>> from datetime import datetime
+            from typing import Any, Dict, List, Literal, Optional
+            from zoneinfo import ZoneInfo
+
+  [115] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:11
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        RETRIEVAL_QUERY_DEFAULT_PAGE_SIZE,
+            )
+        >>> from letta.log import get_logger
+            from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+
+  [116] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:12
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        )
+            from letta.log import get_logger
+        >>> from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+
+  [117] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:13
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.orm.errors import NoResultFound
+        >>> from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+
+  [118] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:14
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+        >>> from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+
+  [119] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:15
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+        >>> from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+
+  [120] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:152
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        # Filter out tool messages to prevent recursive results and exponential escaping
+        >>>             from letta.constants import CONVERSATION_SEARCH_TOOL_NAME
+            
+                        filtered_results = []
+
+  [121] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:16
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+        >>> from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+
+  [122] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:17
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+        >>> from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+
+  [123] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:174
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        results_formatted = []
+                            # get current time in UTC, then convert to agent timezone for consistent comparison
+        >>>                 from datetime import timezone
+            
+                            now_utc = datetime.now(timezone.utc)
+
+  [124] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:18
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+        >>> from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+
+  [125] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:19
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+        >>> from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+            from letta.utils import get_friendly_error_msg
+
+  [126] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:2
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from datetime import datetime
+        >>> from typing import Any, Dict, List, Literal, Optional
+            from zoneinfo import ZoneInfo
+
+  [127] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+        >>> from letta.services.tool_executor.tool_executor_base import ToolExecutor
+            from letta.utils import get_friendly_error_msg
+
+  [128] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+        >>> from letta.utils import get_friendly_error_msg
+            
+            logger = get_logger(__name__)
+
+  [129] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:3
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from datetime import datetime
+            from typing import Any, Dict, List, Literal, Optional
+        >>> from zoneinfo import ZoneInfo
+            
+            from letta.constants import (
+
+  [130] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:5
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from zoneinfo import ZoneInfo
+            
+        >>> from letta.constants import (
+                CORE_MEMORY_LINE_NUMBER_WARNING,
+                MEMORY_TOOLS_LINE_NUMBER_PREFIX_REGEX,
+
+  [131] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:764
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        except KeyError:
+                        # Block doesn't exist, create it
+        >>>             from letta.schemas.block import Block
+            
+                        new_block = Block(label=label, value=new_memory)
+
+  [132] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:864
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        ) -> str:
+                    """Create a memory block by setting its value to an empty string."""
+        >>>         from letta.schemas.block import Block
+            
+                    label = path.removeprefix("/memories/").removeprefix("/")
+
+  [133] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:10
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+            
+        >>> from docstring_parser import parse
+            from pydantic import BaseModel, create_model
+
+  [134] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:11
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from docstring_parser import parse
+        >>> from pydantic import BaseModel, create_model
+            
+            from letta.helpers.json_helpers import json_dumps
+
+  [135] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:1234
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        >>> from enum import Enum
+
+  [136] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:13
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from pydantic import BaseModel, create_model
+            
+        >>> from letta.helpers.json_helpers import json_dumps
+
+  [137] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:4
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import json
+            import re
+        >>> from copy import copy
+            from enum import Enum
+            from inspect import getdoc, isclass
+
+  [138] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:5
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        import re
+            from copy import copy
+        >>> from enum import Enum
+            from inspect import getdoc, isclass
+            from types import NoneType
+
+  [139] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:6
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from copy import copy
+            from enum import Enum
+        >>> from inspect import getdoc, isclass
+            from types import NoneType
+            from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+
+  [140] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:7
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from enum import Enum
+            from inspect import getdoc, isclass
+        >>> from types import NoneType
+            from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+
+  [141] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:8
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from inspect import getdoc, isclass
+            from types import NoneType
+        >>> from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+            
+            from docstring_parser import parse
+
+  [142] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:10
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.base_agent import BaseAgent
+        >>> from letta.agents.helpers import _prepare_in_context_messages_async
+            from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+
+  [143] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:11
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.base_agent import BaseAgent
+            from letta.agents.helpers import _prepare_in_context_messages_async
+        >>> from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+
+  [144] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:12
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.helpers import _prepare_in_context_messages_async
+            from letta.constants import DEFAULT_MAX_STEPS
+        >>> from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+
+  [145] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:13
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+        >>> from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+
+  [146] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:14
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+        >>> from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+
+  [147] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:15
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+        >>> from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+
+  [148] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:16
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+        >>> from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+
+  [149] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:17
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+        >>> from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+
+  [150] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:18
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+        >>> from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+
+  [151] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:19
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+        >>> from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+            from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+
+  [152] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:20
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+        >>> from letta.schemas.agent import AgentState
+            from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+            from letta.schemas.job import JobUpdate
+
+  [153] 项目: Letta
+      规则: python-import-style
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:21
+      描述: Enforce use of 'from x import y' syntax where x is the package prefix and y is the module name with no prefix. Relative names are prohibited; full package name must be used.
+      置信度: 3.50
+      代码片段:
+        from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+        >>> from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+            from letta.schemas.job import JobUpdate
+            from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+  ------------------------------------------------------------
+============================================================
