@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: easy_1st
+  模型: DeepSeek-V4
+  输入: UIR/easy/easy_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 45/50 = 90.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 45条
+  语法错误规则: 4条
+  语义偏差规则: 1条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-const-method-missing                         OK [V]  "Declare methods const unless they alter the logical state of..."
+     2. cpp-prefer-sizeof-varname                        OK [V]  "Use sizeof(varname) when taking size of a particular variabl..."
+     3. cpp-override-annotation-required                 OK [V]  "Annotate overrides of virtual functions with `override` or `..."
+     4. cpp-lambda-appropriate-use                       OK [V]  "Use lambda expressions where appropriate; prefer explicit ca..."
+     5. cpp-avoid-usr-include-filename                   OK [V]  "Do not use filenames that already exist in the system direct..."
+     6. cpp-use-struct-for-data                          OK [V]  "Use `struct` for passive objects that carry data, with all f..."
+     7. cpp-no-using-namespace-std                       OK [V]  "Do not declare anything in namespace std, including forward ..."
+     8. cpp-use-int64-for-big-integers                   OK [V]  "For integers known to be 'big', use int64_t."
+     9. cpp-auto-usage-clarity                           OK [V]  "Use `auto` only when it makes code clearer or safer, not mer..."
+    10. java-horizontal-whitespace-before-open-curly-brace OK [V]  "Require a space before any open curly brace {, except in @So..."
+    11. java-local-variable-lower-camel-case             OK [V]  "Local variable names must be written in lowerCamelCase, even..."
+    12. java-imports-ordering-non-static-group           OK [V]  "All non-static imports must be in a single group, separated ..."
+    13. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    14. java-horizontal-whitespace-catch-pipe            OK [V]  "Space around | in catch (FooException | BarException e) is r..."
+    15. java-horizontal-whitespace-ampersand-type-bounds OK [V]  "Space around & in type bounds (e.g., <T extends Foo & Bar>) ..."
+    16. java-package-no-line-wrap                        OK [V]  "The package declaration is not line-wrapped. The column limi..."
+    17. java-module-directives-ordering                  OK [V]  "Module directives must be ordered as: all requires in one bl..."
+    18. java-class-name-uppercamelcase                   OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+    19. java-imports-no-line-wrapping                    OK [V]  "Imports are not line-wrapped. The column limit does not appl..."
+    20. javascript-avoid-goog-module-declarelegacynamespace OK [V]  "Avoid `goog.module.declareLegacyNamespace()` when possible; ..."
+    21. javascript-non-ascii-characters                  OK [V]  "Use actual Unicode characters or hex/Unicode escapes for non..."
+    22. javascript-block-comment-indentation             OK [V]  "Block comments must be indented at the same level as the sur..."
+    23. javascript-goog-require-contiguous-block         OK [V]  "`goog.require` and `goog.requireType` statements must form a..."
+    24. javascript-column-limit-80                       OK [V]  "JavaScript code has a column limit of 80 characters. Exceedi..."
+    25. javascript-export-from-no-line-wrap              OK [V]  "`export from` statements must not be line wrapped; they are ..."
+    26. javascript-horizontal-whitespace-around-comment  OK [V]  "Space on both sides of `//` that begins end-of-line comment...."
+    27. javascript-one-statement-per-line                OK [V]  "Detect multiple statements on a single line separated by sem..."
+    28. javascript-generic-trailing-whitespace           OK [V]  "Trailing whitespace at the end of a line is forbidden."
+    29. javascript-import-extension-required             OK [V]  "ES module import paths must include the `.js` file extension..."
+    30. python-mutable-global-state                      OK [V]  "Detect mutable global state (module-level variables that are..."
+    31. python-none-check-is                             OK [V]  "Always use `if x is None` (or `is not None`) to check for `N..."
+    32. python-import-rename-as                          OK [V]  "Enforce use of 'as' for renaming imports when: imported name..."
+    33. python-whitespace-inside-parens                  OK [V]  "No whitespace inside parentheses, brackets, or braces."
+    34. python-whitespace-binary-operator                OK [V]  "Surround binary operators for assignment, comparisons, and B..."
+    35. python-mutable-global-state-internal             OK [V]  "Mutable global state (module-level or class attribute) must ..."
+    36. python-imports-only-packages-modules             OK [V]  "Use import statements for packages and modules only, not for..."
+    37. python-lambda-length-check                       OK [V]  "Lambda functions should be one-liners and under 80 character..."
+    38. python-avoid-power-features                      OK [V]  "Avoid power features like custom metaclasses, bytecode acces..."
+    39. python-limit-classmethod                         OK [V]  "Use @classmethod only when writing a named constructor or cl..."
+    40. shell-control-flow-same-line                     OK [V]  "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+    41. shell-use-dollar-paren-instead-of-backticks      OK [V]  "Use $(command) instead of backticks for command substitution..."
+    42. shell-avoid-single-string-args                   OK [V]  "Using a single string for multiple command arguments should ..."
+    43. shell-use-arrays-for-quoting                     OK [V]  "Use arrays for safe quoting of lists of elements, especially..."
+    44. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    45. shell-braces-same-line-no-space                  OK [V]  "Braces must be on the same line as the function name and no ..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-include-guard-format                         FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ ba..."
+     2. shell-indentation-2-spaces-no-tabs               FAIL  (语法错误：源验证报告标记为不可用) "Indent using 2 spaces per level. Tabs are not allowed. Excep..."
+     3. shell-pipe-newline-indent                        FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "When splitting a pipeline across multiple lines, the pipe op..."
+     4. shell-no-quote-match-expr                        FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "In general, there is no need to quote match expressions in a..."
+     5. shell-file-must-have-top-level-comment           FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Every file must have a top-level comment including a brief o..."
+
+  按工具分布 (By Tool):
+    Semgrep    30/48 (62.5%)
+    Pmd        7/12 (58.3%)
+    Codeql     23/36 (63.9%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 9/10 (90.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 6/10 (60.0%)  Rule_sem: 6/10 (60.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 16
+  真正违规 (TP): 6
+  误报 (FP): 10
+  精准度: 37.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. DeepSeek-V4 在 Easy 1st 中生成了 46 条可编译规则。
+  2. 其中 45 条规则语义正确，规则可用率为 90.0%。
+  3. 本轮有 4 条语法错误规则和 1 条语义偏差规则。
+  4. 本轮检测到 16 条结果，其中 6 条正确，另有 10 条误报。
+  5. 本轮检测精准度为 37.5%，规则生成与检测结果保持一致。
+============================================================
