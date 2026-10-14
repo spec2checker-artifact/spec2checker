@@ -16,7 +16,7 @@ institution information is intentionally omitted for double-blind review.
 | `CodeQL_result/` | CodeQL generation outputs |
 | `PMD_result/` | PMD generation outputs |
 | `Semgrep_result/` | Semgrep generation outputs |
-| `validate_tool_result/` | Syntax-validation outputs |
+| `validate_tool_result/` | Tool-validation reports and preliminary `Rule_sem` candidate lists; see the evaluation note below |
 | `cost_analysis/` | Cost-analysis data and figures |
 | `data_summary.md` | Summary of the released data and results |
 
@@ -33,6 +33,30 @@ will be included in the final public release upon acceptance.
   environment variables; see `.env.example`.
 - Some scripts depend on pipeline components that are not part of this partial
   preview and therefore are not yet runnable as a complete end-to-end system.
+
+## Interpretation of `validate_tool_result/`
+
+The [`validate_tool_result/`](validate_tool_result/) directory contains
+tool-validation reports and validated rule lists used as preliminary candidates
+for `Rule_sem` (rules that correctly express the semantics of their coding
+specifications). These files capture an intermediate stage of the evaluation.
+
+To improve rule accuracy, we subsequently performed additional manual screening
+to check whether the candidate rules correctly represented the intended
+specification semantics. The final rule sets and `Rule_sem` counts therefore
+reflect this further screening.
+
+**The actual experimental run data are authoritative for the final rule counts
+and evaluation metrics.** In particular, the syntax-validation success counts
+and `validated_count` values in this directory do not by themselves establish
+semantic correctness and should not be treated as the final `Rule_sem` counts
+or final rule-usability results. Consult the corresponding experimental run records for the setting, batch,
+model, and method being evaluated.
+
+[`data_summary.md`](data_summary.md) provides a summary of the reported
+experimental values. If a summary differs from the underlying run records,
+check the corresponding experimental batch and version against the actual run
+data.
 
 ## Python dependencies
 
