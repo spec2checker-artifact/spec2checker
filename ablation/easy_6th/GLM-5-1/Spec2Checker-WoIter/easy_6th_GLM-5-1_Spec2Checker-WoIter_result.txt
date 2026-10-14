@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: easy_6th
+  模型: GLM-5-1
+  输入: UIR/easy/easy_6th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 46/50 = 92.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 46条
+  语法错误规则: 4条
+  语义偏差规则: 0条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-no-namespace-alias-in-header                 OK [V]  "Do not use namespace aliases at namespace scope in header fi..."
+     2. cpp-const-value-parameter                        OK [V]  "For a function parameter passed by value, `const` has no eff..."
+     3. cpp-namespace-termination-comment                OK [V]  "Multi-line namespace definitions must be terminated with a c..."
+     4. cpp-include-guard-format                         OK [V]  "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ ba..."
+     5. cpp-prefix-increment-decrement                   OK [V]  "Use prefix form (++i, --i) for increment/decrement operators..."
+     6. cpp-struct-member-no-trailing-underscore         OK [V]  "Data members of structs (both static and non-static) are nam..."
+     7. cpp-filename-lowercase-underscore-dash           OK [V]  "Filenames should be all lowercase and can include underscore..."
+     8. cpp-const-placement-consistency                  OK [V]  "Detect inconsistent placement of the `const` qualifier in po..."
+     9. cpp-class-final-recommendation                   OK [V]  "Detect classes that are not declared final but could be, as ..."
+    10. cpp-constexpr-floating-constant                  OK [V]  "Use `constexpr` to define constants with floating-point expr..."
+    11. java-package-no-line-wrap                        OK [V]  "The package declaration must not be line-wrapped. The column..."
+    12. java-classname-uppercamelcase                    OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+    13. java-dot-separator-break                         OK [V]  "Detect dot separator (.) with a line break before it, as in ..."
+    14. java-block-indentation-2-spaces                  OK [V]  "Each new block increases indent by 2 spaces. When block ends..."
+    15. java-test-class-name                             OK [V]  "Test class name must end with 'Test'. If it covers a single ..."
+    16. java-no-static-import-for-classes                OK [V]  "Static import is not used for static nested classes; they ar..."
+    17. java-single-top-level-class                      OK [V]  "Each source file must contain exactly one top-level class de..."
+    18. java-empty-block-multiblock                      OK [V]  "Empty block may be {} with no characters or line break in be..."
+    19. java-constant-naming-uppercase-snake             OK [V]  "Constant names must use UPPER_SNAKE_CASE (all uppercase, wor..."
+    20. java-no-wildcard-import                          OK [V]  "Wildcard ('on-demand') imports, static or otherwise, are not..."
+    21. javascript-es-module-import-naming               OK [V]  "Module import names (`import * as name`) should be in lowerC..."
+    22. javascript-source-file-structure-sections-order  OK [V]  "Files must consist of sections in the following order: licen..."
+    23. javascript-special-escape-sequences              OK [V]  "For characters with special escape sequences (\', \", \\, \b..."
+    24. javascript-named-import-no-alias                 OK [V]  "Prefer keeping the same name for named imports; avoid aliasi..."
+    25. javascript-unnecessary-parentheses               OK [V]  "Do not use unnecessary parentheses around the entire express..."
+    26. javascript-goog-require-side-effects             OK [V]  "If a module is imported only for its side effects, the call ..."
+    27. javascript-class-literal-format                  OK [V]  "Class literals must be indented as blocks. Do not add semico..."
+    28. javascript-goog-module-exports                   OK [V]  "Classes, enums, functions, constants exported using `exports..."
+    29. python-no-blank-line-after-class                 OK [V]  "No blank line following a `class` line. The line after the c..."
+    30. python-lambda-prefer-operator                    OK [V]  "For common operations like multiplication, use functions fro..."
+    31. python-indentation-4-spaces-no-tabs              OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    32. python-whitespace-inside-parens                  OK [V]  "No whitespace inside parentheses, brackets, or braces."
+    33. python-avoid-staticmethod                        OK [V]  "Never use `staticmethod` unless forced. Write a module-level..."
+    34. python-property-no-simple-getset                 OK [V]  "Using a property to simply get and set an internal attribute..."
+    35. python-property-allowed-when-necessary           OK [V]  "Properties may be used to control getting/setting attributes..."
+    36. python-avoid-power-features                      OK [V]  "Avoid power features like custom metaclasses, bytecode acces..."
+    37. python-blank-lines-between-definitions           OK [V]  "Require exactly two blank lines between top-level function o..."
+    38. python-type-annotation-encouraged                OK [V]  "Detect functions that are missing type annotations for argum..."
+    39. shell-for-loop-clarity                           OK [V]  "Recommend including `in "$@"` in for loops for clarity, rath..."
+    40. shell-long-literal-string                        OK [V]  "If you have literal strings longer than 80 characters, use a..."
+    41. shell-case-pattern-no-parenthesis                OK [V]  "Pattern expressions in a case statement should not be preced..."
+    42. shell-case-indent-alternatives                   OK [V]  "Indent alternatives by 2 spaces in a case statement."
+    43. shell-avoid-for-command-substitution             OK [V]  "Avoid using `for var in $(...)` as it splits output by white..."
+    44. shell-quote-integer-vars                         OK [V]  "Optionally quote shell-internal, readonly special variables ..."
+    45. shell-prefer-double-brackets                     OK [V]  "Prefer `[[ ... ]]` over `[ ... ]`, `test`, and `/usr/bin/[` ..."
+    46. shell-use-readarray                              OK [V]  "Use `readarray` builtin (bash4+) to read file into array, th..."
+
+  失败规则列表 (Failed Rules):
+     1. javascript-generic-license-at-top                FAIL  (语法错误：源验证报告标记为不可用) "License or copyright information must be placed at the top o..."
+     2. javascript-horizontal-whitespace-before-brace    FAIL  (语法错误：源验证报告标记为不可用) "Require a space before an open curly brace `{`, except when ..."
+     3. shell-closing-statement-alignment                FAIL  (语法错误：源验证报告标记为不可用) "Closing statements (`fi`, `done`) must be on their own line ..."
+     4. shell-control-flow-same-line                     FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+
+  按工具分布 (By Tool):
+    Semgrep    27/50 (54.0%)
+    Pmd        3/9 (33.3%)
+    Codeql     20/37 (54.1%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    JavaScript   Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+    Shell        Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 17
+  真正违规 (TP): 5
+  误报 (FP): 12
+  精准度: 29.4%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Easy 6th 中生成了 46 条可编译规则。
+  2. 其中 46 条规则语义正确，规则可用率为 92.0%。
+  3. 本轮有 4 条语法错误规则和 0 条语义偏差规则。
+  4. 本轮检测到 17 条结果，其中 5 条正确，另有 12 条误报。
+  5. 本轮检测精准度为 29.4%，规则生成与检测结果保持一致。
+============================================================
