@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: hard_3rd
+  模型: DeepSeek-V4
+  输入: UIR/hard/hard_3rd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 48/50 = 96.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 2条
+  语义偏差规则: 4条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-avoid-failing-constructor                    OK [V]  "Avoid initialization that can fail in constructors if you ca..."
+     2. cpp-local-variable-declaration                   OK [V]  "Local variables should be declared in the narrowest scope po..."
+     3. cpp-explicit-single-argument-constructor         OK [V]  "Type conversion operators and constructors callable with a s..."
+     4. cpp-default-capture-by-reference-lifetime        OK [V]  "Use default capture by reference ([&]) only when the lifetim..."
+     5. cpp-header-file-collection-comment               OK [V]  "If a header file declares multiple user-facing abstractions,..."
+     6. cpp-no-implicit-conversions                      OK [V]  "Do not define implicit conversions. Use the `explicit` keywo..."
+     7. java-ignored-exception-must-comment              OK [V]  "When an exception is caught and ignored, a comment explainin..."
+     8. java-switch-expression-new-style                 OK [V]  "Switch expressions must use new-style (arrow ->) syntax."
+     9. java-local-variable-declaration-timing           OK [V]  "Local variables should be declared close to their first use,..."
+    10. java-overloads-never-split                       OK [V]  "Methods with the same name must appear in a single contiguou..."
+    11. java-switch-exhaustiveness                       OK [V]  "Every switch statement must be exhaustive, requiring a defau..."
+    12. java-method-annotation-exception-single-parameterless OK [V]  "A single parameterless annotation may appear together with t..."
+    13. java-caught-exception-not-ignored                OK [V]  "Detect catch blocks that do nothing in response to a caught ..."
+    14. java-enum-line-break-after-comma                 OK [V]  "After a comma following an enum constant, a line break is op..."
+    15. java-empty-block-multi-statement                 OK [V]  "Empty blocks are not allowed in multi-block statements like ..."
+    16. java-class-logical-order                         OK [V]  "Class members and initializers should follow a logical order..."
+    17. javascript-no-array-constructor                  OK [V]  "Do not use variadic Array constructor; error-prone. Use lite..."
+    18. javascript-string-single-quotes                  OK [V]  "Ordinary string literals must be delimited with single quote..."
+    19. javascript-prefer-template-literals              OK [V]  "Use template literals `` `...` `` over complex string concat..."
+    20. javascript-no-nested-namespaces                  OK [V]  "Do not define a nested type (class, typedef, enum, interface..."
+    21. javascript-enum-static-string-initialization     OK [V]  "For string enums, all values must be statically initialized,..."
+    22. javascript-subclass-missing-super                OK [V]  "Subclass constructors must call `super()` before setting fie..."
+    23. javascript-static-method-to-function             OK [V]  "Prefer module-local functions over private static methods wh..."
+    24. javascript-no-object-constructor                 OK [V]  "Do not use `Object` constructor; use literal `{}` or `{a:0, ..."
+    25. javascript-no-getter-setter                      OK [V]  "Do not use JavaScript getter/setter properties. Provide ordi..."
+    26. javascript-generics-template-declaration         OK [V]  "Generic functions and methods must be declared with a `@temp..."
+    27. python-naming-descriptive-avoid-abbreviations    OK [V]  "Names should be descriptive. Avoid abbreviations that are am..."
+    28. python-string-quote-consistency                  OK [V]  "Be consistent with string quote character within a file. Pic..."
+    29. python-statements-one-per-line                   OK [V]  "Generally only one statement per line. Exception allowed onl..."
+    30. python-conditional-import-discouraged            OK [V]  "Use conditional imports only in exceptional cases where impo..."
+    31. python-offensive-terms                           OK [V]  "Detect the use of offensive or non-inclusive terms in identi..."
+    32. python-main-in-main                              OK [V]  "If file is meant as executable, its main functionality shoul..."
+    33. python-type-alias-naming                         OK [V]  "Type aliases must be named using CapWords. If the alias is p..."
+    34. python-modules-license-boilerplate               OK [V]  "Every file should contain license boilerplate appropriate fo..."
+    35. python-explicit-close-files-sockets              OK [V]  "Detect file or socket objects that are not closed explicitly..."
+    36. python-docstring-sections                        OK [V]  "Function docstring must contain sections: Args, Returns (or ..."
+    37. shell-avoid-alias-use-function                   OK [V]  "Detect usage of alias in scripts; functions should be used i..."
+    38. shell-avoid-let                                  OK [V]  "Avoid using `let` for arithmetic assignments as it is subjec..."
+    39. shell-prefer-double-bracket                      OK [V]  "Prefer builtin `[[ ... ]]` over external `[` for regex and p..."
+    40. shell-check-return-value                         OK [V]  "Always check return values and give informative return value..."
+    41. shell-arithmetic-increment                       OK [V]  "Use `(( var += 3 ))` for incrementing variables. No `$` insi..."
+    42. shell-recommend-shellcheck                       OK [V]  "Recommend using ShellCheck to identify common bugs and warni..."
+    43. shell-array-expansion-quoting                    OK [V]  "Use "${array[@]}" expansion to preserve individual elements ..."
+    44. shell-arithmetic-comparison-no-dollar            OK [V]  "Inside arithmetic comparison `(( ... ))`, variables should b..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-missing-noexcept                             FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect missing `noexcept` specifier on move constructors and..."
+     2. cpp-class-comment-use-not-implementation         FAIL  (语义偏差：推理链遗漏了部分约束条件) "Every non-obvious class should have a comment describing wha..."
+     3. cpp-comment-class-data-members                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Class data members must have a comment explaining their purp..."
+     4. cpp-include-alphabetical-order                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Within each include section, includes should be ordered alph..."
+     5. shell-prefer-builtin-over-process                FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Given the choice between invoking a shell builtin and a sepa..."
+     6. shell-main-bottom-most                           FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "The main program should be in a function called `main` defin..."
+
+  按工具分布 (By Tool):
+    Semgrep    13/45 (28.9%)
+    Pmd        2/10 (20.0%)
+    Codeql     14/40 (35.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 6/10 (60.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 17
+  真正违规 (TP): 2
+  误报 (FP): 15
+  精准度: 11.8%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. DeepSeek-V4 在 Hard 3rd 中生成了 48 条可编译规则。
+  2. 其中 44 条规则语义正确，规则可用率为 88.0%。
+  3. 本轮有 2 条语法错误规则和 4 条语义偏差规则。
+  4. 本轮检测到 17 条结果，其中 2 条正确，另有 15 条误报。
+  5. 本轮检测精准度为 11.8%，规则生成与检测结果保持一致。
+============================================================
