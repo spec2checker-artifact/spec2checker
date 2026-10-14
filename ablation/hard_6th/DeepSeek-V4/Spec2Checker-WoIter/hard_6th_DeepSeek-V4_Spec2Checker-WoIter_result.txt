@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: hard_6th
+  模型: DeepSeek-V4
+  输入: UIR/hard/hard_6th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 49/50 = 98.0%
+  Rule_sem (规则验证数): 45/50 = 90.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 45条
+  语法错误规则: 1条
+  语义偏差规则: 4条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-local-variable-scope                         OK [V]  "Local variables should be declared in the narrowest scope po..."
+     2. cpp-generic-todo-comment-format                  OK [V]  "TODO comments must be in all caps, followed by a bug ID, nam..."
+     3. cpp-inclusive-language-avoid-offensive-terms     OK [V]  "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+     4. cpp-copyable-movable-clear                       OK [V]  "A class's public API must make clear whether it is copyable,..."
+     5. cpp-no-cstyle-cast                               OK [V]  "Use C++-style casts (static_cast, const_cast, reinterpret_ca..."
+     6. cpp-unnamed-namespace-internal-linkage           OK [V]  "Use unnamed namespaces for definitions that do not need to b..."
+     7. java-parallel-continuation-indent                OK [V]  "Two continuation lines must use the same indentation level i..."
+     8. java-non-ascii-unicode-escape                    OK [V]  "Non-ASCII characters should use the actual Unicode character..."
+     9. java-old-style-switch                            OK [V]  "Switch label colon must be followed by a line break, and sta..."
+    10. java-identifiers-allowed-characters              OK [V]  "Identifiers must use only ASCII letters, digits, and undersc..."
+    11. java-todo-comment-format                         OK [V]  "TODO comments must begin with TODO in all caps, followed by ..."
+    12. java-switch-exhaustiveness                       OK [V]  "Google Style requires every switch statement to be exhaustiv..."
+    13. java-switch-single-line                          OK [V]  "Switch rule can be written on single line if it follows Goog..."
+    14. java-multiple-consecutive-blank-lines            OK [V]  "Detect multiple consecutive blank lines. Permitted but never..."
+    15. java-enum-line-break-after-comma                 OK [V]  "After a comma following an enum constant, a line break is op..."
+    16. javascript-number-literal-prefix-case            OK [V]  "Number literals must use lowercase letters in hex (0x), octa..."
+    17. javascript-top-level-function-export             OK [V]  "Top-level functions may be defined directly on `exports` obj..."
+    18. javascript-spread-operator-preferred             OK [V]  "Function calls should use the spread operator `...` instead ..."
+    19. javascript-string-single-quotes                  OK [V]  "Ordinary string literals must be delimited with single quote..."
+    20. javascript-array-trailing-comma                  OK [V]  "Array literals must include a trailing comma when there is a..."
+    21. javascript-interface-record-declaration          OK [V]  "Interfaces declared with `@interface` or `@record` must have..."
+    22. javascript-template-literals-over-concatenation  OK [V]  "Use template literals `` `...` `` over complex string concat..."
+    23. javascript-one-var-per-declaration               OK [V]  "Every local variable declaration declares only one variable;..."
+    24. javascript-object-literal-trailing-comma         OK [V]  "Include a trailing comma after the final property in an obje..."
+    25. javascript-destructuring-parameter-simple        OK [V]  "Object destructuring patterns allowed. For function paramete..."
+    26. python-avoid-todo-individual-context             OK [V]  "Avoid adding TODO comments that refer to an individual or te..."
+    27. python-statements-one-per-line                   OK [V]  "Generally only one statement per line. Compound statements l..."
+    28. python-function-length-excessive                 OK [V]  "Prefer small and focused functions. Functions exceeding appr..."
+    29. python-generics-specify-type-parameters          OK [V]  "Prefer to specify type parameters for generic types in type ..."
+    30. python-multiline-string-docstring                OK [V]  "Prefer `"""` for multi-line strings. Docstrings must use `""..."
+    31. python-naming-guidelines                         OK [V]  "Enforce naming conventions for Python identifiers: packages ..."
+    32. python-imports-sort-lexicographically            OK [V]  "Within each grouping, imports should be sorted lexicographic..."
+    33. python-string-type-usage                         OK [V]  "Use `str` for string/text data, `bytes` for binary data. Do ..."
+    34. python-avoid-string-concat-in-loops              OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+    35. python-names-avoid-single-char                   OK [V]  "Avoid single character names except for counters/iterators (..."
+    36. shell-array-declaration                          OK [V]  "Declare array with `declare -a` for clarity."
+    37. shell-require-main-function                      OK [V]  "A function called `main` is required for scripts that contai..."
+    38. shell-arithmetic-comparison-no-dollar            OK [V]  "Inside arithmetic evaluation `(( ... ))`, variables should b..."
+    39. shell-avoid-arithmetic-zero-exit                 OK [V]  "Avoid using `(( ... ))` as a standalone statement when `set ..."
+    40. shell-function-keyword-consistency               OK [V]  "The `function` keyword is optional, but must be used consist..."
+    41. shell-loop-variable-naming                       OK [V]  "Loop variable names should be similarly named for the collec..."
+    42. shell-avoid-dash-filename                        OK [V]  "Using `./*` prevents filenames beginning with `-` being inte..."
+    43. shell-no-expr-command                            OK [V]  "Never use the `expr` command as it is an external program an..."
+    44. shell-read-without-r                             OK [V]  "Use `read -r` to prevent backslash interpretation in shell s..."
+    45. shell-arithmetic-if-parentheses                  OK [V]  "Use `(( ... ))` for arithmetic in `if` statements."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-comment-style-consistency                    FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use either `//` or `/* */` comment syntax consistently withi..."
+     2. cpp-default-capture-by-value                     FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by value (`[=]`) sparingly. It should on..."
+     3. cpp-static-internal-linkage                      FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect use of 'static' for internal linkage in .cc files. Pr..."
+     4. cpp-explicit-single-arg-constructor              FAIL  (语义偏差：推理链遗漏了部分约束条件) "Type conversion operators and constructors callable with a s..."
+     5. java-line-wrapping-higher-level                  FAIL  (语法错误：源验证报告标记为不可用) "Prefer to break lines at a higher syntactic level (e.g., aft..."
+
+  按工具分布 (By Tool):
+    Semgrep    17/48 (35.4%)
+    Pmd        2/5 (40.0%)
+    Codeql     15/39 (38.5%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 6/10 (60.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 17
+  真正违规 (TP): 1
+  误报 (FP): 16
+  精准度: 5.9%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. DeepSeek-V4 在 Hard 6th 中生成了 49 条可编译规则。
+  2. 其中 45 条规则语义正确，规则可用率为 90.0%。
+  3. 本轮有 1 条语法错误规则和 4 条语义偏差规则。
+  4. 本轮检测到 17 条结果，其中 1 条正确，另有 16 条误报。
+  5. 本轮检测精准度为 5.9%，规则生成与检测结果保持一致。
+============================================================
