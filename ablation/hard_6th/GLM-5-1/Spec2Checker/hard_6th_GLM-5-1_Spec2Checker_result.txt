@@ -1,0 +1,3394 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: hard_6th
+  模型: GLM-5-1
+  输入: UIR/hard/hard_6th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 49/50 = 98.0%
+  Rule_sem (规则验证数): 47/50 = 94.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 47条
+  语法错误规则: 1条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-static-internal-linkage                      OK [V]  "Detect use of 'static' for internal linkage in .cc files. Pr..."
+     2. cpp-explicit-single-arg-constructor              OK [V]  "Type conversion operators and constructors callable with a s..."
+     3. cpp-local-variable-scope                         OK [V]  "Local variables should be declared in the narrowest scope po..."
+     4. cpp-generic-todo-comment-format                  OK [V]  "TODO comments must be in all caps, followed by a bug ID, nam..."
+     5. cpp-inclusive-language-avoid-offensive-terms     OK [V]  "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+     6. cpp-copyable-movable-clear                       OK [V]  "A class's public API must make clear whether it is copyable,..."
+     7. cpp-no-cstyle-cast                               OK [V]  "Use C++-style casts (static_cast, const_cast, reinterpret_ca..."
+     8. cpp-unnamed-namespace-internal-linkage           OK [V]  "Use unnamed namespaces for definitions that do not need to b..."
+     9. java-parallel-continuation-indent                OK [V]  "Two continuation lines must use the same indentation level i..."
+    10. java-non-ascii-unicode-escape                    OK [V]  "Non-ASCII characters should use the actual Unicode character..."
+    11. java-old-style-switch                            OK [V]  "Switch label colon must be followed by a line break, and sta..."
+    12. java-identifiers-allowed-characters              OK [V]  "Identifiers must use only ASCII letters, digits, and undersc..."
+    13. java-todo-comment-format                         OK [V]  "TODO comments must begin with TODO in all caps, followed by ..."
+    14. java-switch-exhaustiveness                       OK [V]  "Google Style requires every switch statement to be exhaustiv..."
+    15. java-switch-single-line                          OK [V]  "Switch rule can be written on single line if it follows Goog..."
+    16. java-multiple-consecutive-blank-lines            OK [V]  "Detect multiple consecutive blank lines. Permitted but never..."
+    17. java-enum-line-break-after-comma                 OK [V]  "After a comma following an enum constant, a line break is op..."
+    18. javascript-number-literal-prefix-case            OK [V]  "Number literals must use lowercase letters in hex (0x), octa..."
+    19. javascript-top-level-function-export             OK [V]  "Top-level functions may be defined directly on `exports` obj..."
+    20. javascript-spread-operator-preferred             OK [V]  "Function calls should use the spread operator `...` instead ..."
+    21. javascript-string-single-quotes                  OK [V]  "Ordinary string literals must be delimited with single quote..."
+    22. javascript-array-trailing-comma                  OK [V]  "Array literals must include a trailing comma when there is a..."
+    23. javascript-interface-record-declaration          OK [V]  "Interfaces declared with `@interface` or `@record` must have..."
+    24. javascript-template-literals-over-concatenation  OK [V]  "Use template literals `` `...` `` over complex string concat..."
+    25. javascript-one-var-per-declaration               OK [V]  "Every local variable declaration declares only one variable;..."
+    26. javascript-object-literal-trailing-comma         OK [V]  "Include a trailing comma after the final property in an obje..."
+    27. javascript-destructuring-parameter-simple        OK [V]  "Object destructuring patterns allowed. For function paramete..."
+    28. python-avoid-todo-individual-context             OK [V]  "Avoid adding TODO comments that refer to an individual or te..."
+    29. python-statements-one-per-line                   OK [V]  "Generally only one statement per line. Compound statements l..."
+    30. python-function-length-excessive                 OK [V]  "Prefer small and focused functions. Functions exceeding appr..."
+    31. python-generics-specify-type-parameters          OK [V]  "Prefer to specify type parameters for generic types in type ..."
+    32. python-multiline-string-docstring                OK [V]  "Prefer `"""` for multi-line strings. Docstrings must use `""..."
+    33. python-naming-guidelines                         OK [V]  "Enforce naming conventions for Python identifiers: packages ..."
+    34. python-imports-sort-lexicographically            OK [V]  "Within each grouping, imports should be sorted lexicographic..."
+    35. python-string-type-usage                         OK [V]  "Use `str` for string/text data, `bytes` for binary data. Do ..."
+    36. python-avoid-string-concat-in-loops              OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+    37. python-names-avoid-single-char                   OK [V]  "Avoid single character names except for counters/iterators (..."
+    38. shell-array-declaration                          OK [V]  "Declare array with `declare -a` for clarity."
+    39. shell-require-main-function                      OK [V]  "A function called `main` is required for scripts that contai..."
+    40. shell-arithmetic-comparison-no-dollar            OK [V]  "Inside arithmetic evaluation `(( ... ))`, variables should b..."
+    41. shell-avoid-arithmetic-zero-exit                 OK [V]  "Avoid using `(( ... ))` as a standalone statement when `set ..."
+    42. shell-function-keyword-consistency               OK [V]  "The `function` keyword is optional, but must be used consist..."
+    43. shell-loop-variable-naming                       OK [V]  "Loop variable names should be similarly named for the collec..."
+    44. shell-avoid-dash-filename                        OK [V]  "Using `./*` prevents filenames beginning with `-` being inte..."
+    45. shell-no-expr-command                            OK [V]  "Never use the `expr` command as it is an external program an..."
+    46. shell-read-without-r                             OK [V]  "Use `read -r` to prevent backslash interpretation in shell s..."
+    47. shell-arithmetic-if-parentheses                  OK [V]  "Use `(( ... ))` for arithmetic in `if` statements."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-comment-style-consistency                    FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use either `//` or `/* */` comment syntax consistently withi..."
+     2. cpp-default-capture-by-value                     FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by value (`[=]`) sparingly. It should on..."
+     3. java-line-wrapping-higher-level                  FAIL  (语法错误：源验证报告标记为不可用) "Prefer to break lines at a higher syntactic level (e.g., aft..."
+
+  按工具分布 (By Tool):
+    Semgrep    30/30 (100.0%)
+    Pmd        9/10 (90.0%)
+    Codeql     8/10 (80.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 318
+  真正违规 (TP): 259
+  误报 (FP): 59
+  精准度: 81.4%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Hard 6th 生成了 49 条可编译规则。
+  2. 本轮有 47 条规则语义正确，规则可用率为 94.0%。
+  3. 规则中有 1 条语法错误和 2 条语义偏差。
+  4. 检测到 318 条结果，其中 259 条正确，59 条误报。
+  5. 本轮检测精准度为 81.4%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:15
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // limitations under the License.
+            #ifndef BAZEL_SRC_MAIN_CPP_BLAZE_H_
+        >>> #define BAZEL_SRC_MAIN_CPP_BLAZE_H_
+            
+            #include <string>
+
+  [2] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:17
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #define BAZEL_SRC_MAIN_CPP_BLAZE_H_
+            
+        >>> #include <string>
+            
+            #include "src/main/cpp/command_extension_adder.h"
+
+  [3] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:19
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include <string>
+            
+        >>> #include "src/main/cpp/command_extension_adder.h"
+            #include "src/main/cpp/option_processor.h"
+            #include "src/main/cpp/startup_interceptor.h"
+
+  [4] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:20
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include "src/main/cpp/command_extension_adder.h"
+        >>> #include "src/main/cpp/option_processor.h"
+            #include "src/main/cpp/startup_interceptor.h"
+            #include "src/main/cpp/util/logging.h"
+
+  [5] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:21
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include "src/main/cpp/command_extension_adder.h"
+            #include "src/main/cpp/option_processor.h"
+        >>> #include "src/main/cpp/startup_interceptor.h"
+            #include "src/main/cpp/util/logging.h"
+            #include "src/main/cpp/workspace_layout.h"
+
+  [6] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:22
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include "src/main/cpp/option_processor.h"
+            #include "src/main/cpp/startup_interceptor.h"
+        >>> #include "src/main/cpp/util/logging.h"
+            #include "src/main/cpp/workspace_layout.h"
+
+  [7] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:23
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include "src/main/cpp/startup_interceptor.h"
+            #include "src/main/cpp/util/logging.h"
+        >>> #include "src/main/cpp/workspace_layout.h"
+            
+            namespace blaze {
+
+  [8] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:25
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        #include "src/main/cpp/workspace_layout.h"
+            
+        >>> namespace blaze {
+            
+            // Prints client version information to standard output, e.g. when invoking the
+
+  [9] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:29
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // Prints client version information to standard output, e.g. when invoking the
+            // client with "--version".
+        >>> void PrintVersionInfo(const std::string& build_label,
+                                  const std::string& product_name);
+
+  [10] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:32
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        const std::string& product_name);
+            
+        >>> int Main(int argc, const char* const* argv, WorkspaceLayout* workspace_layout,
+                     OptionProcessor* option_processor, StartupInterceptor* interceptor,
+                     CommandExtensionAdder* command_extension_adder,
+
+  [11] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:37
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        uint64_t start_time);
+            
+        >>> }  // namespace blaze
+            
+            #endif  // BAZEL_SRC_MAIN_CPP_BLAZE_H_
+
+  [12] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1003
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, default_value_->length_);
+                default_value_->Write(p);
+              }
+
+  [13] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1004
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, default_value_->length_);
+        >>>     default_value_->Write(p);
+              }
+
+  [14] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1008
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+        >>>     default_value_->ExtractClassNames();
+              }
+
+  [15] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1017
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // We preserve ConstantValue attributes because they are required for
+            // compile-time constant propagation.
+        >>> struct ConstantValueAttribute : Attribute {
+            
+              static ConstantValueAttribute* Read(const u1 *&p, Constant *attribute_name) {
+
+  [16] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1019
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct ConstantValueAttribute : Attribute {
+            
+        >>>   static ConstantValueAttribute* Read(const u1 *&p, Constant *attribute_name) {
+                ConstantValueAttribute *attr = new ConstantValueAttribute;
+                attr->attribute_name_ = attribute_name;
+
+  [17] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1020
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static ConstantValueAttribute* Read(const u1 *&p, Constant *attribute_name) {
+        >>>     ConstantValueAttribute *attr = new ConstantValueAttribute;
+                attr->attribute_name_ = attribute_name;
+                attr->constantvalue_ = constant(get_u2be(p));
+
+  [18] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1021
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static ConstantValueAttribute* Read(const u1 *&p, Constant *attribute_name) {
+                ConstantValueAttribute *attr = new ConstantValueAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                attr->constantvalue_ = constant(get_u2be(p));
+                return attr;
+
+  [19] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1022
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        ConstantValueAttribute *attr = new ConstantValueAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     attr->constantvalue_ = constant(get_u2be(p));
+                return attr;
+              }
+
+  [20] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1023
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                attr->constantvalue_ = constant(get_u2be(p));
+        >>>     return attr;
+              }
+
+  [21] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1027
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, 2);
+                put_u2be(p, constantvalue_->slot());
+              }
+
+  [22] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1028
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, 2);
+        >>>     put_u2be(p, constantvalue_->slot());
+              }
+
+  [23] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1037
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // We preserve Signature attributes because they are required by the
+            // compiler for type-checking of generics.
+        >>> struct SignatureAttribute : Attribute {
+            
+              static SignatureAttribute* Read(const u1 *&p, Constant *attribute_name) {
+
+  [24] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1039
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct SignatureAttribute : Attribute {
+            
+        >>>   static SignatureAttribute* Read(const u1 *&p, Constant *attribute_name) {
+                SignatureAttribute *attr = new SignatureAttribute;
+                attr->attribute_name_ = attribute_name;
+
+  [25] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1040
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static SignatureAttribute* Read(const u1 *&p, Constant *attribute_name) {
+        >>>     SignatureAttribute *attr = new SignatureAttribute;
+                attr->attribute_name_ = attribute_name;
+                attr->signature_  = constant(get_u2be(p));
+
+  [26] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1041
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static SignatureAttribute* Read(const u1 *&p, Constant *attribute_name) {
+                SignatureAttribute *attr = new SignatureAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                attr->signature_  = constant(get_u2be(p));
+                return attr;
+
+  [27] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1042
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        SignatureAttribute *attr = new SignatureAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     attr->signature_  = constant(get_u2be(p));
+                return attr;
+              }
+
+  [28] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1043
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                attr->signature_  = constant(get_u2be(p));
+        >>>     return attr;
+              }
+
+  [29] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1047
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, 2);
+                put_u2be(p, signature_->slot());
+              }
+
+  [30] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1048
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, 2);
+        >>>     put_u2be(p, signature_->slot());
+              }
+
+  [31] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1052
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+        >>>     size_t signature_idx = 0;
+                devtools_ijar::ExtractClassNames(signature_->Display(), &signature_idx);
+              }
+
+  [32] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1053
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+                size_t signature_idx = 0;
+        >>>     devtools_ijar::ExtractClassNames(signature_->Display(), &signature_idx);
+              }
+
+  [33] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1062
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // We preserve Deprecated attributes because they are required by the
+            // compiler to generate warning messages.
+        >>> struct DeprecatedAttribute : Attribute {
+              static DeprecatedAttribute *Read(const u1 *& /*p*/,
+                                               Constant *attribute_name) {
+
+  [34] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1063
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // compiler to generate warning messages.
+            struct DeprecatedAttribute : Attribute {
+        >>>   static DeprecatedAttribute *Read(const u1 *& /*p*/,
+                                               Constant *attribute_name) {
+                DeprecatedAttribute *attr = new DeprecatedAttribute;
+
+  [35] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1065
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static DeprecatedAttribute *Read(const u1 *& /*p*/,
+                                               Constant *attribute_name) {
+        >>>     DeprecatedAttribute *attr = new DeprecatedAttribute;
+                attr->attribute_name_ = attribute_name;
+                return attr;
+
+  [36] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1066
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Constant *attribute_name) {
+                DeprecatedAttribute *attr = new DeprecatedAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                return attr;
+              }
+
+  [37] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1067
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        DeprecatedAttribute *attr = new DeprecatedAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     return attr;
+              }
+
+  [38] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1071
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, 0);
+              }
+            };
+
+  [39] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1079
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        //
+            // We preserve all annotations.
+        >>> struct AnnotationsAttribute : Attribute {
+              virtual ~AnnotationsAttribute() {
+                for (size_t i = 0; i < annotations_.size(); i++) {
+
+  [40] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1080
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // We preserve all annotations.
+            struct AnnotationsAttribute : Attribute {
+        >>>   virtual ~AnnotationsAttribute() {
+                for (size_t i = 0; i < annotations_.size(); i++) {
+                  delete annotations_[i];
+
+  [41] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1081
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct AnnotationsAttribute : Attribute {
+              virtual ~AnnotationsAttribute() {
+        >>>     for (size_t i = 0; i < annotations_.size(); i++) {
+                  delete annotations_[i];
+                }
+
+  [42] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1082
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual ~AnnotationsAttribute() {
+                for (size_t i = 0; i < annotations_.size(); i++) {
+        >>>       delete annotations_[i];
+                }
+              }
+
+  [43] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1087
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static AnnotationsAttribute* Read(const u1 *&p, Constant *attribute_name) {
+        >>>     AnnotationsAttribute *attr = new AnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+
+  [44] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1088
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static AnnotationsAttribute* Read(const u1 *&p, Constant *attribute_name) {
+                AnnotationsAttribute *attr = new AnnotationsAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+
+  [45] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1089
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        AnnotationsAttribute *attr = new AnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+                  Annotation *annotation = Annotation::Read(p);
+
+  [46] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1090
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+        >>>     for (int ii = 0; ii < num_annotations; ++ii) {
+                  Annotation *annotation = Annotation::Read(p);
+                  attr->annotations_.push_back(annotation);
+
+  [47] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1091
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+        >>>       Annotation *annotation = Annotation::Read(p);
+                  attr->annotations_.push_back(annotation);
+                }
+
+  [48] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1092
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (int ii = 0; ii < num_annotations; ++ii) {
+                  Annotation *annotation = Annotation::Read(p);
+        >>>       attr->annotations_.push_back(annotation);
+                }
+                return attr;
+
+  [49] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1094
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->annotations_.push_back(annotation);
+                }
+        >>>     return attr;
+              }
+
+  [50] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1098
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+        >>>     for (auto *annotation : annotations_) {
+                  annotation->ExtractClassNames();
+                }
+
+  [51] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1099
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+                for (auto *annotation : annotations_) {
+        >>>       annotation->ExtractClassNames();
+                }
+              }
+
+  [52] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1104
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual bool KeepForCompile() const {
+        >>>     for (auto *annotation : annotations_) {
+                  if (annotation->type_->Display() == "Lkotlin/Metadata;") {
+                    return true;
+
+  [53] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1105
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual bool KeepForCompile() const {
+                for (auto *annotation : annotations_) {
+        >>>       if (annotation->type_->Display() == "Lkotlin/Metadata;") {
+                    return true;
+                  }
+
+  [54] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1106
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (auto *annotation : annotations_) {
+                  if (annotation->type_->Display() == "Lkotlin/Metadata;") {
+        >>>         return true;
+                  }
+                }
+
+  [55] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1109
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                }
+        >>>     return false;
+              }
+
+  [56] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1113
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+                put_u2be(p, annotations_.size());
+
+  [57] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1114
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, -1);
+        >>>     u1 *payload_start = p - 4;
+                put_u2be(p, annotations_.size());
+                for (auto *annotation : annotations_) {
+
+  [58] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1115
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+        >>>     put_u2be(p, annotations_.size());
+                for (auto *annotation : annotations_) {
+                  annotation->Write(p);
+
+  [59] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1116
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *payload_start = p - 4;
+                put_u2be(p, annotations_.size());
+        >>>     for (auto *annotation : annotations_) {
+                  annotation->Write(p);
+                }
+
+  [60] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1117
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, annotations_.size());
+                for (auto *annotation : annotations_) {
+        >>>       annotation->Write(p);
+                }
+                put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+
+  [61] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1119
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        annotation->Write(p);
+                }
+        >>>     put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+              }
+
+  [62] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1129
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        //
+            // We preserve all annotations.
+        >>> struct ParameterAnnotationsAttribute : Attribute {
+            
+              static ParameterAnnotationsAttribute* Read(const u1 *&p,
+
+  [63] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1131
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct ParameterAnnotationsAttribute : Attribute {
+            
+        >>>   static ParameterAnnotationsAttribute* Read(const u1 *&p,
+                                                         Constant *attribute_name) {
+                ParameterAnnotationsAttribute *attr = new ParameterAnnotationsAttribute;
+
+  [64] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1133
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static ParameterAnnotationsAttribute* Read(const u1 *&p,
+                                                         Constant *attribute_name) {
+        >>>     ParameterAnnotationsAttribute *attr = new ParameterAnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+                u1 num_parameters = get_u1(p);
+
+  [65] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1134
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Constant *attribute_name) {
+                ParameterAnnotationsAttribute *attr = new ParameterAnnotationsAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u1 num_parameters = get_u1(p);
+                for (int ii = 0; ii < num_parameters; ++ii) {
+
+  [66] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1135
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        ParameterAnnotationsAttribute *attr = new ParameterAnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u1 num_parameters = get_u1(p);
+                for (int ii = 0; ii < num_parameters; ++ii) {
+                  std::vector<Annotation*> annotations;
+
+  [67] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1136
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u1 num_parameters = get_u1(p);
+        >>>     for (int ii = 0; ii < num_parameters; ++ii) {
+                  std::vector<Annotation*> annotations;
+                  u2 num_annotations = get_u2be(p);
+
+  [68] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1137
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 num_parameters = get_u1(p);
+                for (int ii = 0; ii < num_parameters; ++ii) {
+        >>>       std::vector<Annotation*> annotations;
+                  u2 num_annotations = get_u2be(p);
+                  for (int ii = 0; ii < num_annotations; ++ii) {
+
+  [69] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1138
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (int ii = 0; ii < num_parameters; ++ii) {
+                  std::vector<Annotation*> annotations;
+        >>>       u2 num_annotations = get_u2be(p);
+                  for (int ii = 0; ii < num_annotations; ++ii) {
+                    Annotation *annotation = Annotation::Read(p);
+
+  [70] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1139
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        std::vector<Annotation*> annotations;
+                  u2 num_annotations = get_u2be(p);
+        >>>       for (int ii = 0; ii < num_annotations; ++ii) {
+                    Annotation *annotation = Annotation::Read(p);
+                    annotations.push_back(annotation);
+
+  [71] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1140
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 num_annotations = get_u2be(p);
+                  for (int ii = 0; ii < num_annotations; ++ii) {
+        >>>         Annotation *annotation = Annotation::Read(p);
+                    annotations.push_back(annotation);
+                  }
+
+  [72] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1141
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (int ii = 0; ii < num_annotations; ++ii) {
+                    Annotation *annotation = Annotation::Read(p);
+        >>>         annotations.push_back(annotation);
+                  }
+                  attr->parameter_annotations_.push_back(annotations);
+
+  [73] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1143
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        annotations.push_back(annotation);
+                  }
+        >>>       attr->parameter_annotations_.push_back(annotations);
+                }
+                return attr;
+
+  [74] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1145
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->parameter_annotations_.push_back(annotations);
+                }
+        >>>     return attr;
+              }
+
+  [75] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1149
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+        >>>     for (size_t i = 0; i < parameter_annotations_.size(); i++) {
+                  const std::vector<Annotation*>& annotations = parameter_annotations_[i];
+                  for (size_t j = 0; j < annotations.size(); j++) {
+
+  [76] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:115
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct Constant;
+            
+        >>> // TODO(adonovan) these globals are unfortunate
+            static std::vector<Constant *> const_pool_in;   // input constant pool
+            static std::vector<Constant *> const_pool_out;  // output constant_pool
+
+  [77] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1150
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+                for (size_t i = 0; i < parameter_annotations_.size(); i++) {
+        >>>       const std::vector<Annotation*>& annotations = parameter_annotations_[i];
+                  for (size_t j = 0; j < annotations.size(); j++) {
+                    annotations[j]->ExtractClassNames();
+
+  [78] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1151
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t i = 0; i < parameter_annotations_.size(); i++) {
+                  const std::vector<Annotation*>& annotations = parameter_annotations_[i];
+        >>>       for (size_t j = 0; j < annotations.size(); j++) {
+                    annotations[j]->ExtractClassNames();
+                  }
+
+  [79] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1152
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        const std::vector<Annotation*>& annotations = parameter_annotations_[i];
+                  for (size_t j = 0; j < annotations.size(); j++) {
+        >>>         annotations[j]->ExtractClassNames();
+                  }
+                }
+
+  [80] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1158
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+                put_u1(p, parameter_annotations_.size());
+
+  [81] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1159
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, -1);
+        >>>     u1 *payload_start = p - 4;
+                put_u1(p, parameter_annotations_.size());
+                for (size_t ii = 0; ii < parameter_annotations_.size(); ++ii) {
+
+  [82] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:116
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // TODO(adonovan) these globals are unfortunate
+        >>> static std::vector<Constant *> const_pool_in;   // input constant pool
+            static std::vector<Constant *> const_pool_out;  // output constant_pool
+            static std::set<std::string> used_class_names;
+
+  [83] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1160
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+        >>>     put_u1(p, parameter_annotations_.size());
+                for (size_t ii = 0; ii < parameter_annotations_.size(); ++ii) {
+                  std::vector<Annotation *> &annotations = parameter_annotations_[ii];
+
+  [84] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1161
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *payload_start = p - 4;
+                put_u1(p, parameter_annotations_.size());
+        >>>     for (size_t ii = 0; ii < parameter_annotations_.size(); ++ii) {
+                  std::vector<Annotation *> &annotations = parameter_annotations_[ii];
+                  put_u2be(p, annotations.size());
+
+  [85] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1162
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u1(p, parameter_annotations_.size());
+                for (size_t ii = 0; ii < parameter_annotations_.size(); ++ii) {
+        >>>       std::vector<Annotation *> &annotations = parameter_annotations_[ii];
+                  put_u2be(p, annotations.size());
+                  for (size_t jj = 0; jj < annotations.size(); ++jj) {
+
+  [86] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1163
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t ii = 0; ii < parameter_annotations_.size(); ++ii) {
+                  std::vector<Annotation *> &annotations = parameter_annotations_[ii];
+        >>>       put_u2be(p, annotations.size());
+                  for (size_t jj = 0; jj < annotations.size(); ++jj) {
+                    annotations[jj]->Write(p);
+
+  [87] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1164
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        std::vector<Annotation *> &annotations = parameter_annotations_[ii];
+                  put_u2be(p, annotations.size());
+        >>>       for (size_t jj = 0; jj < annotations.size(); ++jj) {
+                    annotations[jj]->Write(p);
+                  }
+
+  [88] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1165
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, annotations.size());
+                  for (size_t jj = 0; jj < annotations.size(); ++jj) {
+        >>>         annotations[jj]->Write(p);
+                  }
+                }
+
+  [89] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1168
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                }
+        >>>     put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+              }
+
+  [90] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:117
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // TODO(adonovan) these globals are unfortunate
+            static std::vector<Constant *> const_pool_in;   // input constant pool
+        >>> static std::vector<Constant *> const_pool_out;  // output constant_pool
+            static std::set<std::string> used_class_names;
+            static Constant *class_name;
+
+  [91] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1176
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See sec.4.7.20 of Java 8 JVM spec. Includes RuntimeVisibleTypeAnnotations
+            // and RuntimeInvisibleTypeAnnotations.
+        >>> struct TypeAnnotationsAttribute : Attribute {
+              static TypeAnnotationsAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                    u4 /*attribute_length*/) {
+
+  [92] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1177
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // and RuntimeInvisibleTypeAnnotations.
+            struct TypeAnnotationsAttribute : Attribute {
+        >>>   static TypeAnnotationsAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                    u4 /*attribute_length*/) {
+                auto attr = new TypeAnnotationsAttribute;
+
+  [93] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1179
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static TypeAnnotationsAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                    u4 /*attribute_length*/) {
+        >>>     auto attr = new TypeAnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+
+  [94] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:118
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static std::vector<Constant *> const_pool_in;   // input constant pool
+            static std::vector<Constant *> const_pool_out;  // output constant_pool
+        >>> static std::set<std::string> used_class_names;
+            static Constant *class_name;
+            static std::unordered_set<std::string> unknown_attributes;
+
+  [95] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1180
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 /*attribute_length*/) {
+                auto attr = new TypeAnnotationsAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+
+  [96] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1181
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new TypeAnnotationsAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+                  TypeAnnotation *annotation = TypeAnnotation::Read(p);
+
+  [97] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1182
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u2 num_annotations = get_u2be(p);
+        >>>     for (int ii = 0; ii < num_annotations; ++ii) {
+                  TypeAnnotation *annotation = TypeAnnotation::Read(p);
+                  attr->type_annotations_.push_back(annotation);
+
+  [98] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1183
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 num_annotations = get_u2be(p);
+                for (int ii = 0; ii < num_annotations; ++ii) {
+        >>>       TypeAnnotation *annotation = TypeAnnotation::Read(p);
+                  attr->type_annotations_.push_back(annotation);
+                }
+
+  [99] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1184
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (int ii = 0; ii < num_annotations; ++ii) {
+                  TypeAnnotation *annotation = TypeAnnotation::Read(p);
+        >>>       attr->type_annotations_.push_back(annotation);
+                }
+                return attr;
+
+  [100] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1186
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->type_annotations_.push_back(annotation);
+                }
+        >>>     return attr;
+              }
+
+  [101] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:119
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static std::vector<Constant *> const_pool_out;  // output constant_pool
+            static std::set<std::string> used_class_names;
+        >>> static Constant *class_name;
+            static std::unordered_set<std::string> unknown_attributes;
+
+  [102] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1190
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+        >>>     for (auto *type_annotation : type_annotations_) {
+                  type_annotation->ExtractClassNames();
+                }
+
+  [103] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1191
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual void ExtractClassNames() {
+                for (auto *type_annotation : type_annotations_) {
+        >>>       type_annotation->ExtractClassNames();
+                }
+              }
+
+  [104] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1196
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+                put_u2be(p, type_annotations_.size());
+
+  [105] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1197
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, -1);
+        >>>     u1 *payload_start = p - 4;
+                put_u2be(p, type_annotations_.size());
+                for (TypeAnnotation *annotation : type_annotations_) {
+
+  [106] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1198
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+        >>>     put_u2be(p, type_annotations_.size());
+                for (TypeAnnotation *annotation : type_annotations_) {
+                  annotation->Write(p);
+
+  [107] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1199
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *payload_start = p - 4;
+                put_u2be(p, type_annotations_.size());
+        >>>     for (TypeAnnotation *annotation : type_annotations_) {
+                  annotation->Write(p);
+                }
+
+  [108] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:120
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static std::set<std::string> used_class_names;
+            static Constant *class_name;
+        >>> static std::unordered_set<std::string> unknown_attributes;
+            
+            // Returns the Constant object, given an index into the input constant pool.
+
+  [109] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1200
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, type_annotations_.size());
+                for (TypeAnnotation *annotation : type_annotations_) {
+        >>>       annotation->Write(p);
+                }
+                put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+
+  [110] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1202
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        annotation->Write(p);
+                }
+        >>>     put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+              }
+
+  [111] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1209
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.24
+        >>> struct MethodParametersAttribute : Attribute {
+              static MethodParametersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                     u4 /*attribute_length*/) {
+
+  [112] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1210
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.24
+            struct MethodParametersAttribute : Attribute {
+        >>>   static MethodParametersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                     u4 /*attribute_length*/) {
+                auto attr = new MethodParametersAttribute;
+
+  [113] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1212
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static MethodParametersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                     u4 /*attribute_length*/) {
+        >>>     auto attr = new MethodParametersAttribute;
+                attr->attribute_name_ = attribute_name;
+                u1 parameters_count = get_u1(p);
+
+  [114] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1213
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 /*attribute_length*/) {
+                auto attr = new MethodParametersAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u1 parameters_count = get_u1(p);
+                for (int ii = 0; ii < parameters_count; ++ii) {
+
+  [115] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1214
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new MethodParametersAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u1 parameters_count = get_u1(p);
+                for (int ii = 0; ii < parameters_count; ++ii) {
+                  MethodParameter* parameter = new MethodParameter;
+
+  [116] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1215
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u1 parameters_count = get_u1(p);
+        >>>     for (int ii = 0; ii < parameters_count; ++ii) {
+                  MethodParameter* parameter = new MethodParameter;
+                  int name_id = get_u2be(p);
+
+  [117] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1216
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 parameters_count = get_u1(p);
+                for (int ii = 0; ii < parameters_count; ++ii) {
+        >>>       MethodParameter* parameter = new MethodParameter;
+                  int name_id = get_u2be(p);
+                  parameter->name_ = name_id == 0 ? NULL : constant(name_id);
+
+  [118] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1217
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (int ii = 0; ii < parameters_count; ++ii) {
+                  MethodParameter* parameter = new MethodParameter;
+        >>>       int name_id = get_u2be(p);
+                  parameter->name_ = name_id == 0 ? NULL : constant(name_id);
+                  parameter->access_flags_ = get_u2be(p);
+
+  [119] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1218
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        MethodParameter* parameter = new MethodParameter;
+                  int name_id = get_u2be(p);
+        >>>       parameter->name_ = name_id == 0 ? NULL : constant(name_id);
+                  parameter->access_flags_ = get_u2be(p);
+                  attr->parameters_.push_back(parameter);
+
+  [120] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1219
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        int name_id = get_u2be(p);
+                  parameter->name_ = name_id == 0 ? NULL : constant(name_id);
+        >>>       parameter->access_flags_ = get_u2be(p);
+                  attr->parameters_.push_back(parameter);
+                }
+
+  [121] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1220
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        parameter->name_ = name_id == 0 ? NULL : constant(name_id);
+                  parameter->access_flags_ = get_u2be(p);
+        >>>       attr->parameters_.push_back(parameter);
+                }
+                return attr;
+
+  [122] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1222
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->parameters_.push_back(parameter);
+                }
+        >>>     return attr;
+              }
+
+  [123] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1226
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+                put_u1(p, parameters_.size());
+
+  [124] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1227
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, -1);
+        >>>     u1 *payload_start = p - 4;
+                put_u1(p, parameters_.size());
+                for (MethodParameter* parameter : parameters_) {
+
+  [125] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1228
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, -1);
+                u1 *payload_start = p - 4;
+        >>>     put_u1(p, parameters_.size());
+                for (MethodParameter* parameter : parameters_) {
+                  put_u2be(p, parameter->name_ == NULL ? 0 : parameter->name_->slot());
+
+  [126] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1229
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *payload_start = p - 4;
+                put_u1(p, parameters_.size());
+        >>>     for (MethodParameter* parameter : parameters_) {
+                  put_u2be(p, parameter->name_ == NULL ? 0 : parameter->name_->slot());
+                  put_u2be(p, parameter->access_flags_);
+
+  [127] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1230
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u1(p, parameters_.size());
+                for (MethodParameter* parameter : parameters_) {
+        >>>       put_u2be(p, parameter->name_ == NULL ? 0 : parameter->name_->slot());
+                  put_u2be(p, parameter->access_flags_);
+                }
+
+  [128] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1231
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (MethodParameter* parameter : parameters_) {
+                  put_u2be(p, parameter->name_ == NULL ? 0 : parameter->name_->slot());
+        >>>       put_u2be(p, parameter->access_flags_);
+                }
+                put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+
+  [129] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1233
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, parameter->access_flags_);
+                }
+        >>>     put_u4be(payload_start, p - 4 - payload_start);  // backpatch length
+              }
+
+  [130] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1245
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.28
+        >>> struct NestHostAttribute : Attribute {
+              static NestHostAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                             u4 /*attribute_length*/) {
+
+  [131] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1246
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.28
+            struct NestHostAttribute : Attribute {
+        >>>   static NestHostAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                             u4 /*attribute_length*/) {
+                auto attr = new NestHostAttribute;
+
+  [132] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1248
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static NestHostAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                             u4 /*attribute_length*/) {
+        >>>     auto attr = new NestHostAttribute;
+                attr->attribute_name_ = attribute_name;
+                attr->host_class_index_ = constant(get_u2be(p));
+
+  [133] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1249
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 /*attribute_length*/) {
+                auto attr = new NestHostAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                attr->host_class_index_ = constant(get_u2be(p));
+                return attr;
+
+  [134] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:125
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // Note: constant(0) == NULL; this invariant is exploited by the
+            // InnerClassesAttribute, inter alia.
+        >>> inline Constant *constant(int idx) {
+              if (idx < 0 || (unsigned)idx >= const_pool_in.size()) {
+                fprintf(stderr, "Illegal constant pool index: %d\n", idx);
+
+  [135] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1250
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new NestHostAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     attr->host_class_index_ = constant(get_u2be(p));
+                return attr;
+              }
+
+  [136] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1251
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                attr->host_class_index_ = constant(get_u2be(p));
+        >>>     return attr;
+              }
+
+  [137] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1255
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, 2);
+                put_u2be(p, host_class_index_->slot());
+              }
+
+  [138] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1256
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, 2);
+        >>>     put_u2be(p, host_class_index_->slot());
+              }
+
+  [139] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:126
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // InnerClassesAttribute, inter alia.
+            inline Constant *constant(int idx) {
+        >>>   if (idx < 0 || (unsigned)idx >= const_pool_in.size()) {
+                fprintf(stderr, "Illegal constant pool index: %d\n", idx);
+                abort();
+
+  [140] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1263
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.29
+        >>> struct NestMembersAttribute : Attribute {
+              static NestMembersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 /*attribute_length*/) {
+
+  [141] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1264
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.29
+            struct NestMembersAttribute : Attribute {
+        >>>   static NestMembersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 /*attribute_length*/) {
+                auto attr = new NestMembersAttribute;
+
+  [142] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1266
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static NestMembersAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 /*attribute_length*/) {
+        >>>     auto attr = new NestMembersAttribute;
+                attr->attribute_name_ = attribute_name;
+                u2 number_of_classes = get_u2be(p);
+
+  [143] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1267
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 /*attribute_length*/) {
+                auto attr = new NestMembersAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u2 number_of_classes = get_u2be(p);
+                for (int ii = 0; ii < number_of_classes; ++ii) {
+
+  [144] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1268
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new NestMembersAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u2 number_of_classes = get_u2be(p);
+                for (int ii = 0; ii < number_of_classes; ++ii) {
+                  attr->classes_.push_back(constant(get_u2be(p)));
+
+  [145] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1269
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u2 number_of_classes = get_u2be(p);
+        >>>     for (int ii = 0; ii < number_of_classes; ++ii) {
+                  attr->classes_.push_back(constant(get_u2be(p)));
+                }
+
+  [146] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:127
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        inline Constant *constant(int idx) {
+              if (idx < 0 || (unsigned)idx >= const_pool_in.size()) {
+        >>>     fprintf(stderr, "Illegal constant pool index: %d\n", idx);
+                abort();
+              }
+
+  [147] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1270
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 number_of_classes = get_u2be(p);
+                for (int ii = 0; ii < number_of_classes; ++ii) {
+        >>>       attr->classes_.push_back(constant(get_u2be(p)));
+                }
+                return attr;
+
+  [148] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1272
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->classes_.push_back(constant(get_u2be(p)));
+                }
+        >>>     return attr;
+              }
+
+  [149] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1276
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     std::set<int> kept_entries;
+                for (size_t ii = 0; ii < classes_.size(); ++ii) {
+                  Constant *class_ = classes_[ii];
+
+  [150] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1277
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                std::set<int> kept_entries;
+        >>>     for (size_t ii = 0; ii < classes_.size(); ++ii) {
+                  Constant *class_ = classes_[ii];
+                  if (class_->Kept() || (used_class_names.find(class_->Display()) !=
+
+  [151] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1278
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        std::set<int> kept_entries;
+                for (size_t ii = 0; ii < classes_.size(); ++ii) {
+        >>>       Constant *class_ = classes_[ii];
+                  if (class_->Kept() || (used_class_names.find(class_->Display()) !=
+                                         used_class_names.end())) {
+
+  [152] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1279
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t ii = 0; ii < classes_.size(); ++ii) {
+                  Constant *class_ = classes_[ii];
+        >>>       if (class_->Kept() || (used_class_names.find(class_->Display()) !=
+                                         used_class_names.end())) {
+                    kept_entries.insert(ii);
+
+  [153] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:128
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (idx < 0 || (unsigned)idx >= const_pool_in.size()) {
+                fprintf(stderr, "Illegal constant pool index: %d\n", idx);
+        >>>     abort();
+              }
+              return const_pool_in[idx];
+
+  [154] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1281
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (class_->Kept() || (used_class_names.find(class_->Display()) !=
+                                         used_class_names.end())) {
+        >>>         kept_entries.insert(ii);
+                  }
+                }
+
+  [155] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1284
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                }
+        >>>     if (kept_entries.empty()) {
+                  return;
+                }
+
+  [156] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1285
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                if (kept_entries.empty()) {
+        >>>       return;
+                }
+                WriteProlog(p, kept_entries.size() * 2 + 2);
+
+  [157] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1287
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        return;
+                }
+        >>>     WriteProlog(p, kept_entries.size() * 2 + 2);
+                put_u2be(p, kept_entries.size());
+                for (std::set<int>::iterator it = kept_entries.begin();
+
+  [158] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1288
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                WriteProlog(p, kept_entries.size() * 2 + 2);
+        >>>     put_u2be(p, kept_entries.size());
+                for (std::set<int>::iterator it = kept_entries.begin();
+                     it != kept_entries.end(); ++it) {
+
+  [159] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1289
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, kept_entries.size() * 2 + 2);
+                put_u2be(p, kept_entries.size());
+        >>>     for (std::set<int>::iterator it = kept_entries.begin();
+                     it != kept_entries.end(); ++it) {
+                  put_u2be(p, classes_[*it]->slot());
+
+  [160] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1291
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (std::set<int>::iterator it = kept_entries.begin();
+                     it != kept_entries.end(); ++it) {
+        >>>       put_u2be(p, classes_[*it]->slot());
+                }
+              }
+
+  [161] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1299
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.30
+        >>> struct RecordAttribute : Attribute {
+              static RecordAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 attribute_length) {
+
+  [162] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:130
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        abort();
+              }
+        >>>   return const_pool_in[idx];
+            }
+
+  [163] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1300
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.30
+            struct RecordAttribute : Attribute {
+        >>>   static RecordAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 attribute_length) {
+                auto attr = new RecordAttribute;
+
+  [164] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1302
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static RecordAttribute *Read(const u1 *&p, Constant *attribute_name,
+                                                u4 attribute_length) {
+        >>>     auto attr = new RecordAttribute;
+                attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+
+  [165] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1303
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 attribute_length) {
+                auto attr = new RecordAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+                u2 components_length = get_u2be(p);
+
+  [166] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1304
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new RecordAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     attr->attribute_length_ = attribute_length;
+                u2 components_length = get_u2be(p);
+                for (int i = 0; i < components_length; ++i) {
+
+  [167] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1305
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+        >>>     u2 components_length = get_u2be(p);
+                for (int i = 0; i < components_length; ++i) {
+                  attr->components_.push_back(RecordComponentInfo::Read(p));
+
+  [168] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1306
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_length_ = attribute_length;
+                u2 components_length = get_u2be(p);
+        >>>     for (int i = 0; i < components_length; ++i) {
+                  attr->components_.push_back(RecordComponentInfo::Read(p));
+                }
+
+  [169] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1307
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 components_length = get_u2be(p);
+                for (int i = 0; i < components_length; ++i) {
+        >>>       attr->components_.push_back(RecordComponentInfo::Read(p));
+                }
+                return attr;
+
+  [170] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1309
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->components_.push_back(RecordComponentInfo::Read(p));
+                }
+        >>>     return attr;
+              }
+
+  [171] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1313
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     u1 *tmp = new u1[attribute_length_];
+                u1 *start = tmp;
+                put_u2be(tmp, components_.size());
+
+  [172] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1314
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                u1 *tmp = new u1[attribute_length_];
+        >>>     u1 *start = tmp;
+                put_u2be(tmp, components_.size());
+                for (size_t i = 0; i < components_.size(); ++i) {
+
+  [173] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1315
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *tmp = new u1[attribute_length_];
+                u1 *start = tmp;
+        >>>     put_u2be(tmp, components_.size());
+                for (size_t i = 0; i < components_.size(); ++i) {
+                  components_[i]->Write(tmp);
+
+  [174] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1316
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u1 *start = tmp;
+                put_u2be(tmp, components_.size());
+        >>>     for (size_t i = 0; i < components_.size(); ++i) {
+                  components_[i]->Write(tmp);
+                }
+
+  [175] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1317
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(tmp, components_.size());
+                for (size_t i = 0; i < components_.size(); ++i) {
+        >>>       components_[i]->Write(tmp);
+                }
+                u2 length = tmp - start;
+
+  [176] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1319
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        components_[i]->Write(tmp);
+                }
+        >>>     u2 length = tmp - start;
+                WriteProlog(p, length);
+                memcpy(p, start, length);
+
+  [177] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1320
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                u2 length = tmp - start;
+        >>>     WriteProlog(p, length);
+                memcpy(p, start, length);
+                p += length;
+
+  [178] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1321
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 length = tmp - start;
+                WriteProlog(p, length);
+        >>>     memcpy(p, start, length);
+                p += length;
+              }
+
+  [179] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1322
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, length);
+                memcpy(p, start, length);
+        >>>     p += length;
+              }
+
+  [180] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1348
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.31
+        >>> struct PermittedSubclassesAttribute : Attribute {
+              static PermittedSubclassesAttribute *Read(const u1 *&p,
+                                                        Constant *attribute_name) {
+
+  [181] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1349
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See JVMS §4.7.31
+            struct PermittedSubclassesAttribute : Attribute {
+        >>>   static PermittedSubclassesAttribute *Read(const u1 *&p,
+                                                        Constant *attribute_name) {
+                PermittedSubclassesAttribute *attr = new PermittedSubclassesAttribute;
+
+  [182] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1351
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static PermittedSubclassesAttribute *Read(const u1 *&p,
+                                                        Constant *attribute_name) {
+        >>>     PermittedSubclassesAttribute *attr = new PermittedSubclassesAttribute;
+                attr->attribute_name_ = attribute_name;
+                u2 number_of_exceptions = get_u2be(p);
+
+  [183] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1352
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Constant *attribute_name) {
+                PermittedSubclassesAttribute *attr = new PermittedSubclassesAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                u2 number_of_exceptions = get_u2be(p);
+                for (int ii = 0; ii < number_of_exceptions; ++ii) {
+
+  [184] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1353
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        PermittedSubclassesAttribute *attr = new PermittedSubclassesAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     u2 number_of_exceptions = get_u2be(p);
+                for (int ii = 0; ii < number_of_exceptions; ++ii) {
+                  attr->permitted_subclasses_.push_back(constant(get_u2be(p)));
+
+  [185] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1354
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                u2 number_of_exceptions = get_u2be(p);
+        >>>     for (int ii = 0; ii < number_of_exceptions; ++ii) {
+                  attr->permitted_subclasses_.push_back(constant(get_u2be(p)));
+                }
+
+  [186] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1355
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u2 number_of_exceptions = get_u2be(p);
+                for (int ii = 0; ii < number_of_exceptions; ++ii) {
+        >>>       attr->permitted_subclasses_.push_back(constant(get_u2be(p)));
+                }
+                return attr;
+
+  [187] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1357
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->permitted_subclasses_.push_back(constant(get_u2be(p)));
+                }
+        >>>     return attr;
+              }
+
+  [188] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1361
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, permitted_subclasses_.size() * 2 + 2);
+                put_u2be(p, permitted_subclasses_.size());
+                for (size_t ii = 0; ii < permitted_subclasses_.size(); ++ii) {
+
+  [189] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1362
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, permitted_subclasses_.size() * 2 + 2);
+        >>>     put_u2be(p, permitted_subclasses_.size());
+                for (size_t ii = 0; ii < permitted_subclasses_.size(); ++ii) {
+                  put_u2be(p, permitted_subclasses_[ii]->slot());
+
+  [190] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1363
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        WriteProlog(p, permitted_subclasses_.size() * 2 + 2);
+                put_u2be(p, permitted_subclasses_.size());
+        >>>     for (size_t ii = 0; ii < permitted_subclasses_.size(); ++ii) {
+                  put_u2be(p, permitted_subclasses_[ii]->slot());
+                }
+
+  [191] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1364
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, permitted_subclasses_.size());
+                for (size_t ii = 0; ii < permitted_subclasses_.size(); ++ii) {
+        >>>       put_u2be(p, permitted_subclasses_[ii]->slot());
+                }
+              }
+
+  [192] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1371
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        };
+            
+        >>> struct GeneralAttribute : Attribute {
+              static GeneralAttribute* Read(const u1 *&p, Constant *attribute_name,
+                                            u4 attribute_length) {
+
+  [193] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1372
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct GeneralAttribute : Attribute {
+        >>>   static GeneralAttribute* Read(const u1 *&p, Constant *attribute_name,
+                                            u4 attribute_length) {
+                auto attr = new GeneralAttribute;
+
+  [194] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1374
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static GeneralAttribute* Read(const u1 *&p, Constant *attribute_name,
+                                            u4 attribute_length) {
+        >>>     auto attr = new GeneralAttribute;
+                attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+
+  [195] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1375
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        u4 attribute_length) {
+                auto attr = new GeneralAttribute;
+        >>>     attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+                attr->attribute_content_ = p;
+
+  [196] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1376
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        auto attr = new GeneralAttribute;
+                attr->attribute_name_ = attribute_name;
+        >>>     attr->attribute_length_ = attribute_length;
+                attr->attribute_content_ = p;
+                p += attribute_length;
+
+  [197] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1377
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_name_ = attribute_name;
+                attr->attribute_length_ = attribute_length;
+        >>>     attr->attribute_content_ = p;
+                p += attribute_length;
+                return attr;
+
+  [198] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1378
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_length_ = attribute_length;
+                attr->attribute_content_ = p;
+        >>>     p += attribute_length;
+                return attr;
+              }
+
+  [199] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1379
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        attr->attribute_content_ = p;
+                p += attribute_length;
+        >>>     return attr;
+              }
+
+  [200] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1383
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     WriteProlog(p, attribute_length_);
+                put_n(p, attribute_content_, attribute_length_);
+              }
+
+  [201] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1384
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                WriteProlog(p, attribute_length_);
+        >>>     put_n(p, attribute_content_, attribute_length_);
+              }
+
+  [202] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1399
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // A field or method.
+            // See sec.4.5 and 4.6 of JVM spec.
+        >>> struct Member : HasAttrs {
+              u2 access_flags;
+              Constant *name;
+
+  [203] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:140
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See sec.4.4 of JVM spec.
+        >>> struct Constant {
+            
+              Constant(u1 tag) :
+
+  [204] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1400
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See sec.4.5 and 4.6 of JVM spec.
+            struct Member : HasAttrs {
+        >>>   u2 access_flags;
+              Constant *name;
+              Constant *descriptor;
+
+  [205] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1405
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static Member* Read(const u1 *&p) {
+        >>>     Member *m = new Member;
+                m->access_flags = get_u2be(p);
+                m->name = constant(get_u2be(p));
+
+  [206] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1406
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        static Member* Read(const u1 *&p) {
+                Member *m = new Member;
+        >>>     m->access_flags = get_u2be(p);
+                m->name = constant(get_u2be(p));
+                m->descriptor = constant(get_u2be(p));
+
+  [207] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1407
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Member *m = new Member;
+                m->access_flags = get_u2be(p);
+        >>>     m->name = constant(get_u2be(p));
+                m->descriptor = constant(get_u2be(p));
+                m->ReadAttrs(p);
+
+  [208] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1408
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        m->access_flags = get_u2be(p);
+                m->name = constant(get_u2be(p));
+        >>>     m->descriptor = constant(get_u2be(p));
+                m->ReadAttrs(p);
+                return m;
+
+  [209] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1409
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        m->name = constant(get_u2be(p));
+                m->descriptor = constant(get_u2be(p));
+        >>>     m->ReadAttrs(p);
+                return m;
+              }
+
+  [210] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1410
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        m->descriptor = constant(get_u2be(p));
+                m->ReadAttrs(p);
+        >>>     return m;
+              }
+
+  [211] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1414
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+        >>>     put_u2be(p, access_flags);
+                put_u2be(p, name->slot());
+                put_u2be(p, descriptor->slot());
+
+  [212] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1415
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void Write(u1 *&p) {
+                put_u2be(p, access_flags);
+        >>>     put_u2be(p, name->slot());
+                put_u2be(p, descriptor->slot());
+                WriteAttrs(p);
+
+  [213] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1416
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, access_flags);
+                put_u2be(p, name->slot());
+        >>>     put_u2be(p, descriptor->slot());
+                WriteAttrs(p);
+              }
+
+  [214] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1417
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, name->slot());
+                put_u2be(p, descriptor->slot());
+        >>>     WriteAttrs(p);
+              }
+            };
+
+  [215] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:142
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct Constant {
+            
+        >>>   Constant(u1 tag) :
+                  slot_(0),
+                  tag_(tag) {}
+
+  [216] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1422
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // See sec.4.1 of JVM spec.
+        >>> struct ClassFile : HasAttrs {
+            
+              size_t length;
+
+  [217] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1424
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        struct ClassFile : HasAttrs {
+            
+        >>>   size_t length;
+            
+              // Header:
+
+  [218] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:143
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Constant(u1 tag) :
+        >>>       slot_(0),
+                  tag_(tag) {}
+
+  [219] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1440
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual ~ClassFile() {
+        >>>     for (size_t i = 0; i < fields.size(); i++) {
+                  delete fields[i];
+                }
+
+  [220] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1441
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        virtual ~ClassFile() {
+                for (size_t i = 0; i < fields.size(); i++) {
+        >>>       delete fields[i];
+                }
+
+  [221] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1444
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     for (size_t i = 0; i < methods.size(); i++) {
+                  delete methods[i];
+                }
+
+  [222] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1445
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t i = 0; i < methods.size(); i++) {
+        >>>       delete methods[i];
+                }
+
+  [223] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1460
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void WriteHeader(u1 *&p) {
+        >>>     put_u4be(p, magic);
+                put_u2be(p, major);
+                put_u2be(p, minor);
+
+  [224] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1461
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void WriteHeader(u1 *&p) {
+                put_u4be(p, magic);
+        >>>     put_u2be(p, major);
+                put_u2be(p, minor);
+
+  [225] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1462
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u4be(p, magic);
+                put_u2be(p, major);
+        >>>     put_u2be(p, minor);
+            
+                put_u2be(p, const_pool_out.size());
+
+  [226] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1464
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, minor);
+            
+        >>>     put_u2be(p, const_pool_out.size());
+                for (u2 ii = 1; ii < const_pool_out.size(); ++ii) {
+                  if (const_pool_out[ii] != NULL) { // NB: NULLs appear after long/double.
+
+  [227] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1465
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, const_pool_out.size());
+        >>>     for (u2 ii = 1; ii < const_pool_out.size(); ++ii) {
+                  if (const_pool_out[ii] != NULL) { // NB: NULLs appear after long/double.
+                    const_pool_out[ii]->Write(p);
+
+  [228] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1466
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, const_pool_out.size());
+                for (u2 ii = 1; ii < const_pool_out.size(); ++ii) {
+        >>>       if (const_pool_out[ii] != NULL) { // NB: NULLs appear after long/double.
+                    const_pool_out[ii]->Write(p);
+                  }
+
+  [229] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1467
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (u2 ii = 1; ii < const_pool_out.size(); ++ii) {
+                  if (const_pool_out[ii] != NULL) { // NB: NULLs appear after long/double.
+        >>>         const_pool_out[ii]->Write(p);
+                  }
+                }
+
+  [230] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1473
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void WriteBody(u1 *&p) {
+        >>>     put_u2be(p, access_flags);
+                put_u2be(p, this_class->slot());
+                put_u2be(p, super_class == NULL ? 0 : super_class->slot());
+
+  [231] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1474
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        void WriteBody(u1 *&p) {
+                put_u2be(p, access_flags);
+        >>>     put_u2be(p, this_class->slot());
+                put_u2be(p, super_class == NULL ? 0 : super_class->slot());
+                put_u2be(p, interfaces.size());
+
+  [232] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1475
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, access_flags);
+                put_u2be(p, this_class->slot());
+        >>>     put_u2be(p, super_class == NULL ? 0 : super_class->slot());
+                put_u2be(p, interfaces.size());
+                for (size_t ii = 0; ii < interfaces.size(); ++ii) {
+
+  [233] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1476
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, this_class->slot());
+                put_u2be(p, super_class == NULL ? 0 : super_class->slot());
+        >>>     put_u2be(p, interfaces.size());
+                for (size_t ii = 0; ii < interfaces.size(); ++ii) {
+                  put_u2be(p, interfaces[ii]->slot());
+
+  [234] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1477
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, super_class == NULL ? 0 : super_class->slot());
+                put_u2be(p, interfaces.size());
+        >>>     for (size_t ii = 0; ii < interfaces.size(); ++ii) {
+                  put_u2be(p, interfaces[ii]->slot());
+                }
+
+  [235] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1478
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, interfaces.size());
+                for (size_t ii = 0; ii < interfaces.size(); ++ii) {
+        >>>       put_u2be(p, interfaces[ii]->slot());
+                }
+                put_u2be(p, fields.size());
+
+  [236] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1480
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, interfaces[ii]->slot());
+                }
+        >>>     put_u2be(p, fields.size());
+                for (size_t ii = 0; ii < fields.size(); ++ii) {
+                  fields[ii]->Write(p);
+
+  [237] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1481
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                put_u2be(p, fields.size());
+        >>>     for (size_t ii = 0; ii < fields.size(); ++ii) {
+                  fields[ii]->Write(p);
+                }
+
+  [238] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1482
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, fields.size());
+                for (size_t ii = 0; ii < fields.size(); ++ii) {
+        >>>       fields[ii]->Write(p);
+                }
+                put_u2be(p, methods.size());
+
+  [239] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1484
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        fields[ii]->Write(p);
+                }
+        >>>     put_u2be(p, methods.size());
+                for (size_t ii = 0; ii < methods.size(); ++ii) {
+                  methods[ii]->Write(p);
+
+  [240] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1485
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+                put_u2be(p, methods.size());
+        >>>     for (size_t ii = 0; ii < methods.size(); ++ii) {
+                  methods[ii]->Write(p);
+                }
+
+  [241] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1486
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        put_u2be(p, methods.size());
+                for (size_t ii = 0; ii < methods.size(); ++ii) {
+        >>>       methods[ii]->Write(p);
+                }
+
+  [242] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1489
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     Attribute* inner_classes = NULL;
+            
+                // Make the inner classes attribute the last, so that it can know which
+
+  [243] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1493
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // Make the inner classes attribute the last, so that it can know which
+                // constants were needed
+        >>>     for (size_t ii = 0; ii < attributes.size(); ii++) {
+                  if (attributes[ii]->attribute_name_->Display() == "InnerClasses") {
+                    inner_classes = attributes[ii];
+
+  [244] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1494
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        // constants were needed
+                for (size_t ii = 0; ii < attributes.size(); ii++) {
+        >>>       if (attributes[ii]->attribute_name_->Display() == "InnerClasses") {
+                    inner_classes = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+
+  [245] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1495
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t ii = 0; ii < attributes.size(); ii++) {
+                  if (attributes[ii]->attribute_name_->Display() == "InnerClasses") {
+        >>>         inner_classes = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+                    break;
+
+  [246] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1496
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (attributes[ii]->attribute_name_->Display() == "InnerClasses") {
+                    inner_classes = attributes[ii];
+        >>>         attributes.erase(attributes.begin() + ii);
+                    break;
+                  }
+
+  [247] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1497
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        inner_classes = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+        >>>         break;
+                  }
+                }
+
+  [248] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1501
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     if (inner_classes != NULL) {
+                  attributes.push_back(inner_classes);
+                }
+
+  [249] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1502
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (inner_classes != NULL) {
+        >>>       attributes.push_back(inner_classes);
+                }
+
+  [250] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1505
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     Attribute* nest_members = NULL;
+            
+                for (size_t ii = 0; ii < attributes.size(); ii++) {
+
+  [251] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1507
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        Attribute* nest_members = NULL;
+            
+        >>>     for (size_t ii = 0; ii < attributes.size(); ii++) {
+                  if (attributes[ii]->attribute_name_->Display() == "NestMembers") {
+                    nest_members = attributes[ii];
+
+  [252] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1508
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t ii = 0; ii < attributes.size(); ii++) {
+        >>>       if (attributes[ii]->attribute_name_->Display() == "NestMembers") {
+                    nest_members = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+
+  [253] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1509
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        for (size_t ii = 0; ii < attributes.size(); ii++) {
+                  if (attributes[ii]->attribute_name_->Display() == "NestMembers") {
+        >>>         nest_members = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+                    break;
+
+  [254] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1510
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (attributes[ii]->attribute_name_->Display() == "NestMembers") {
+                    nest_members = attributes[ii];
+        >>>         attributes.erase(attributes.begin() + ii);
+                    break;
+                  }
+
+  [255] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1511
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        nest_members = attributes[ii];
+                    attributes.erase(attributes.begin() + ii);
+        >>>         break;
+                  }
+                }
+
+  [256] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1515
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     if (nest_members != NULL) {
+                  attributes.push_back(nest_members);
+                }
+
+  [257] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1516
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        if (nest_members != NULL) {
+        >>>       attributes.push_back(nest_members);
+                }
+
+  [258] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1519
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     WriteAttrs(p);
+              }
+
+  [259] 项目: Bazel
+      规则: cpp-generic-todo-comment-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\classfile.cc:1524
+      描述: TODO comments must include 'TODO' in all caps, followed by a bug ID, name, email, or other identifier, and include a specific date or event.
+      置信度: 3.50
+      代码片段:
+        };
+            
+        >>> void HasAttrs::ReadAttrs(const u1 *&p) {
+              u2 attributes_count = get_u2be(p);
+              for (int ii = 0; ii < attributes_count; ii++) {
+  ------------------------------------------------------------
+============================================================
