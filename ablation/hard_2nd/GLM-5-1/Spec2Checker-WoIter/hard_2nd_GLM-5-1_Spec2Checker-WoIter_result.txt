@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: hard_2nd
+  模型: GLM-5-1
+  输入: UIR/hard/hard_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 48/50 = 96.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 2条
+  语义偏差规则: 4条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-prefer-composition                           OK [V]  "Composition is often more appropriate than inheritance. Use ..."
+     2. cpp-inclusive-language                           OK [V]  "Detect use of non-inclusive or offensive terms (e.g., master..."
+     3. cpp-comment-style-consistency                    OK [V]  "Use either `//` or `/* */` comment syntax consistently withi..."
+     4. cpp-avoid-default-capture-by-value               OK [V]  "Use default capture by value ([=]) sparingly. Prefer explici..."
+     5. cpp-include-alphabetical-order                   OK [V]  "Within each include section, includes should be ordered alph..."
+     6. cpp-no-exceptions                                OK [V]  "Do not use C++ exceptions (except Windows code). Use error c..."
+     7. java-type-use-annotation-position                OK [V]  "Type-use annotations must appear immediately before the anno..."
+     8. java-grouping-parentheses-recommended            OK [V]  "Optional grouping parentheses omitted only when author and r..."
+     9. java-enum-line-break-after-comma                 OK [V]  "After a comma following an enum constant, a line break is op..."
+    10. java-camel-case-underscores-adjacent-numbers     OK [V]  "In rare circumstances (e.g., multipart version numbers), use..."
+    11. java-module-requires-order                       OK [V]  "In a module-info.java file, the 'transitive' modifier must a..."
+    12. java-vertical-whitespace-between-members         OK [V]  "A single blank line should appear between consecutive member..."
+    13. java-todo-comment-format                         OK [V]  "TODO comments must begin with TODO in all caps, followed by ..."
+    14. java-annotation-one-per-line                     OK [V]  "Annotations applying to class, package, or module must appea..."
+    15. java-camel-case-split-conventional               OK [V]  "If a word already has conventional camel-case appearance (e...."
+    16. java-ignoring-exception-must-comment             OK [V]  "When an exception is caught and no action is taken, a commen..."
+    17. javascript-empty-catch-no-comment                OK [V]  "Empty catch blocks must contain a comment explaining why the..."
+    18. javascript-enum-annotation                       OK [V]  "Enumerations defined by adding `@enum` annotation to an obje..."
+    19. javascript-array-trailing-comma                  OK [V]  "Array literals must include a trailing comma when there is a..."
+    20. javascript-arrow-function-body                   OK [V]  "Arrow function body should be a block or a single expression..."
+    21. javascript-computed-property-symbol-only         OK [V]  "Computed properties in classes should only be used when the ..."
+    22. javascript-local-variable-declaration-timing     OK [V]  "Local variables should be declared close to their first use,..."
+    23. javascript-spread-operator-preferred             OK [V]  "Function calls should use the spread operator `...` instead ..."
+    24. javascript-abstract-class-usage                  OK [V]  "Abstract classes and methods should be annotated with `@abst..."
+    25. javascript-prefer-template-literals              OK [V]  "Use template literals `...` over complex string concatenatio..."
+    26. javascript-throw-error-only                      OK [V]  "Always throw `Error` or subclasses; never throw string liter..."
+    27. python-type-alias-naming                         OK [V]  "Type aliases must be named using CapWords. If the alias is p..."
+    28. python-docstring-omit-return-none                OK [V]  "The Returns section is not required if the function only ret..."
+    29. python-modules-license-boilerplate               OK [V]  "Every Python file should contain a license boilerplate and a..."
+    30. python-logging-string-literal                    OK [V]  "For logging functions that expect a pattern-string, always c..."
+    31. python-multiline-string-dedent                   OK [V]  "Detect multi-line string literals that could benefit from us..."
+    32. python-none-type-explicit                        OK [V]  "Use explicit `X | None` (or `Optional[X]`) rather than impli..."
+    33. python-names-to-avoid-type-inclusion             OK [V]  "Avoid names that needlessly include the type of the variable..."
+    34. python-getter-setter-unnecessary                 OK [V]  "Getter and setter functions should only be used when getting..."
+    35. python-comment-spacing                           OK [V]  "Block and inline comments should be used for tricky, non-obv..."
+    36. shell-avoid-unquoted-array-expansion             OK [V]  "Avoid unquoted command expansion in array assignments; won't..."
+    37. shell-loop-local-declaration                     OK [V]  "Inside a function, declare loop variable as `local` to avoid..."
+    38. shell-package-function-names                     OK [V]  "Function names in packages should use '::' as a separator be..."
+    39. shell-read-no-backslash                          OK [V]  "Use `read -r` to prevent backslash interpretation."
+    40. shell-filename-lowercase-underscore              OK [V]  "Source filenames should be lowercase, with underscores to se..."
+    41. shell-arithmetic-expansion-in-string             OK [V]  "Use `$(( ... ))` inside strings for arithmetic expansion."
+    42. shell-constant-naming                            OK [V]  "Constants and environment variables should be uppercase with..."
+    43. shell-pipestatus-check                           OK [V]  "Bash has `PIPESTATUS` array to check return code from all pa..."
+    44. shell-local-command-substitution-exit-code       OK [V]  "Always separate `local` declaration and assignment when assi..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-default-capture-by-reference-lifetime        FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by reference ([&]) only when the lifetim..."
+     2. cpp-operator-overload-judicious                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Overload operators only if their meaning is obvious, unsurpr..."
+     3. cpp-license-boilerplate-required                 FAIL  (语义偏差：推理链遗漏了部分约束条件) "Every file should contain license boilerplate appropriate fo..."
+     4. cpp-fallthrough-annotation                       FAIL  (语义偏差：推理链遗漏了部分约束条件) "Fall-through from one case label to another must be annotate..."
+     5. python-comment-style                             FAIL  (语法错误：源验证报告标记为不可用) "Check that comments use proper punctuation, spelling, and gr..."
+     6. shell-set-constant-readonly                      FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Detect when a variable is set (potentially at runtime or con..."
+
+  按工具分布 (By Tool):
+    Semgrep    16/47 (34.0%)
+    Pmd        3/10 (30.0%)
+    Codeql     15/38 (39.5%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 6/10 (60.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 16
+  真正违规 (TP): 2
+  误报 (FP): 14
+  精准度: 12.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Hard 2nd 中生成了 48 条可编译规则。
+  2. 其中 44 条规则语义正确，规则可用率为 88.0%。
+  3. 本轮有 2 条语法错误规则和 4 条语义偏差规则。
+  4. 本轮检测到 16 条结果，其中 2 条正确，另有 14 条误报。
+  5. 本轮检测精准度为 12.5%，规则生成与检测结果保持一致。
+============================================================
