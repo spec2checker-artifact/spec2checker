@@ -1,0 +1,4039 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_1st
+  模型: GLM-5-1
+  输入: UIR/easy/easy_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 46/50 = 92.0%
+  Rule_sem (规则验证数): 46/50 = 92.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 46条
+  语法错误规则: 4条
+  语义偏差规则: 0条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-const-method-missing                         OK [V]  "Declare methods const unless they alter the logical state of..."
+     2. cpp-include-guard-format                         OK [V]  "Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ ba..."
+     3. cpp-prefer-sizeof-varname                        OK [V]  "Use sizeof(varname) when taking size of a particular variabl..."
+     4. cpp-override-annotation-required                 OK [V]  "Annotate overrides of virtual functions with `override` or `..."
+     5. cpp-lambda-appropriate-use                       OK [V]  "Use lambda expressions where appropriate; prefer explicit ca..."
+     6. cpp-avoid-usr-include-filename                   OK [V]  "Do not use filenames that already exist in the system direct..."
+     7. cpp-use-struct-for-data                          OK [V]  "Use `struct` for passive objects that carry data, with all f..."
+     8. cpp-no-using-namespace-std                       OK [V]  "Do not declare anything in namespace std, including forward ..."
+     9. cpp-use-int64-for-big-integers                   OK [V]  "For integers known to be 'big', use int64_t."
+    10. cpp-auto-usage-clarity                           OK [V]  "Use `auto` only when it makes code clearer or safer, not mer..."
+    11. java-horizontal-whitespace-before-open-curly-brace OK [V]  "Require a space before any open curly brace {, except in @So..."
+    12. java-local-variable-lower-camel-case             OK [V]  "Local variable names must be written in lowerCamelCase, even..."
+    13. java-imports-ordering-non-static-group           OK [V]  "All non-static imports must be in a single group, separated ..."
+    14. java-method-name-attached-parenthesis            OK [V]  "Method, constructor, or record-class name must stay attached..."
+    15. java-horizontal-whitespace-catch-pipe            OK [V]  "Space around | in catch (FooException | BarException e) is r..."
+    16. java-horizontal-whitespace-ampersand-type-bounds OK [V]  "Space around & in type bounds (e.g., <T extends Foo & Bar>) ..."
+    17. java-package-no-line-wrap                        OK [V]  "The package declaration is not line-wrapped. The column limi..."
+    18. java-module-directives-ordering                  OK [V]  "Module directives must be ordered as: all requires in one bl..."
+    19. java-class-name-uppercamelcase                   OK [V]  "Class names must be written in UpperCamelCase, typically nou..."
+    20. java-imports-no-line-wrapping                    OK [V]  "Imports are not line-wrapped. The column limit does not appl..."
+    21. javascript-avoid-goog-module-declarelegacynamespace OK [V]  "Avoid `goog.module.declareLegacyNamespace()` when possible; ..."
+    22. javascript-non-ascii-characters                  OK [V]  "Use actual Unicode characters or hex/Unicode escapes for non..."
+    23. javascript-block-comment-indentation             OK [V]  "Block comments must be indented at the same level as the sur..."
+    24. javascript-goog-require-contiguous-block         OK [V]  "`goog.require` and `goog.requireType` statements must form a..."
+    25. javascript-column-limit-80                       OK [V]  "JavaScript code has a column limit of 80 characters. Exceedi..."
+    26. javascript-export-from-no-line-wrap              OK [V]  "`export from` statements must not be line wrapped; they are ..."
+    27. javascript-horizontal-whitespace-around-comment  OK [V]  "Space on both sides of `//` that begins end-of-line comment...."
+    28. javascript-one-statement-per-line                OK [V]  "Detect multiple statements on a single line separated by sem..."
+    29. javascript-generic-trailing-whitespace           OK [V]  "Trailing whitespace at the end of a line is forbidden."
+    30. javascript-import-extension-required             OK [V]  "ES module import paths must include the `.js` file extension..."
+    31. python-mutable-global-state                      OK [V]  "Detect mutable global state (module-level variables that are..."
+    32. python-none-check-is                             OK [V]  "Always use `if x is None` (or `is not None`) to check for `N..."
+    33. python-import-rename-as                          OK [V]  "Enforce use of 'as' for renaming imports when: imported name..."
+    34. python-whitespace-inside-parens                  OK [V]  "No whitespace inside parentheses, brackets, or braces."
+    35. python-whitespace-binary-operator                OK [V]  "Surround binary operators for assignment, comparisons, and B..."
+    36. python-mutable-global-state-internal             OK [V]  "Mutable global state (module-level or class attribute) must ..."
+    37. python-imports-only-packages-modules             OK [V]  "Use import statements for packages and modules only, not for..."
+    38. python-lambda-length-check                       OK [V]  "Lambda functions should be one-liners and under 80 character..."
+    39. python-avoid-power-features                      OK [V]  "Avoid power features like custom metaclasses, bytecode acces..."
+    40. python-limit-classmethod                         OK [V]  "Use @classmethod only when writing a named constructor or cl..."
+    41. shell-control-flow-same-line                     OK [V]  "Put `; then` and `; do` on the same line as `if`, `for`, `wh..."
+    42. shell-use-dollar-paren-instead-of-backticks      OK [V]  "Use $(command) instead of backticks for command substitution..."
+    43. shell-avoid-single-string-args                   OK [V]  "Using a single string for multiple command arguments should ..."
+    44. shell-use-arrays-for-quoting                     OK [V]  "Use arrays for safe quoting of lists of elements, especially..."
+    45. shell-variable-expansion-quote                   OK [V]  "Variable expansions should be quoted to prevent word splitti..."
+    46. shell-braces-same-line-no-space                  OK [V]  "Braces must be on the same line as the function name and no ..."
+
+  失败规则列表 (Failed Rules):
+     1. shell-indentation-2-spaces-no-tabs               FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Indent using 2 spaces per level. Tabs are not allowed. Excep..."
+     2. shell-pipe-newline-indent                        FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "When splitting a pipeline across multiple lines, the pipe op..."
+     3. shell-no-quote-match-expr                        FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "In general, there is no need to quote match expressions in a..."
+     4. shell-file-must-have-top-level-comment           FAIL  (语法错误：源验证报告标记为不可用) "Every file must have a top-level comment including a brief o..."
+
+  按工具分布 (By Tool):
+    Semgrep    26/30 (86.7%)
+    Pmd        10/10 (100.0%)
+    Codeql     10/10 (100.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 6/10 (60.0%)  Rule_sem: 6/10 (60.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 342
+  真正违规 (TP): 296
+  误报 (FP): 46
+  精准度: 86.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Easy 1st 生成了 46 条可编译规则。
+  2. 本轮有 46 条规则语义正确，规则可用率为 92.0%。
+  3. 规则中有 4 条语法错误和 0 条语义偏差。
+  4. 检测到 342 条结果，其中 296 条正确，46 条误报。
+  5. 本轮检测精准度为 86.5%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\combine_distfiles_to_tar.sh
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        #!/bin/sh
+            
+            # Copyright 2016 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Combine the archives passed to a single archive.
+            # NOTE: This assumes that the individual archives are already packed
+
+  [2] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\bazel-complete-template.bash
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        # -*- sh -*- (Bash only)
+            #
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # The template is expanded at build time using tables of commands/options
+            # derived from the bazel executable built in the same client; the expansion is
+            # written to bazel-complete.bash.
+            #
+
+  [3] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\ci\build.sh
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Main deploy functions for the continuous build system
+            # Just source this file and use the various method:
+
+  [4] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\combine_derived_java_srcs.sh
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        #!/bin/sh
+            
+            # Copyright 2016 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Combine src jars to a single archive containing all the source files.
+
+  [5] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\package-bazel.sh
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            #
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -euo pipefail
+            
+            # This script creates the Bazel archive that Bazel client unpacks and then
+            # starts the server from.
+
+  [6] 项目: Bazel
+      规则: shell-use-arrays-for-quoting
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\test\collect_cc_coverage.sh
+      描述: 多参数列表使用字符串拆分，损坏参数边界
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+             # Copyright 2016 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # This script collects code coverage data for C++ sources, after the tests
+            # were executed.
+            #
+            # Bazel C++ code coverage collection support is poor and limited. There is
+            # an ongoing effort to improve this (tracking issue #1118).
+
+  [7] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\bazel-dev.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            #
+            # Copyright 2018 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            #
+            
+            set -eu
+            
+            USAGE="$0 [<bazel arguments>...]"
+
+  [8] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\ci\build_status_command.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # A build status command to provide the package info generator with
+            # the information about the commit being built
+
+  [9] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\packages\template_bin.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -e
+            
+            # Bazel self-extractable installer
+
+  [10] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\release.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release branches and handle the release tags.
+
+  [11] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\scripts\release\relnotes.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2015 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -eu
+            
+            # Generate the release notes from the git history.
+
+  [12] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\test\tools\bzlmod\update_default_lock_file.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2023 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            set -euo pipefail
+            # --- begin runfiles.bash initialization v3 ---
+            # Copy-pasted from the Bazel Bash runfiles library v3.
+            set -uo pipefail; set +e; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+
+  [13] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\src\upload_java_tools.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2019 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # A script to upload a given java_tools zip on GCS. Used by the java_tools_binaries
+            # Buildkite pipeline. It is not recommended to run this script manually.
+            #
+            # Mandatory flags:
+
+  [14] 项目: Bazel
+      规则: shell-variable-expansion-quote
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\tools\build_defs\hash\sha256_test.sh
+      描述: Shell 变量展开缺少必要引号
+      置信度: 5.0
+      代码片段:
+        #!/usr/bin/env bash
+            
+            # Copyright 2017 The Bazel Authors. All rights reserved.
+            #
+            # Licensed under the Apache License, Version 2.0 (the "License");
+            # you may not use this file except in compliance with the License.
+            # You may obtain a copy of the License at
+            #
+            #    http://www.apache.org/licenses/LICENSE-2.0
+            #
+            # Unless required by applicable law or agreed to in writing, software
+            # distributed under the License is distributed on an "AS IS" BASIS,
+            # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            # See the License for the specific language governing permissions and
+            # limitations under the License.
+            
+            # --- begin runfiles.bash initialization v2 ---
+            # Copy-pasted from the Bazel Bash runfiles library v2.
+            set -uo pipefail; f=bazel_tools/tools/bash/runfiles/runfiles.bash
+            source "${RUNFILES_DIR:-/dev/null}/$f" 2>/dev/null || \
+
+  [15] 项目: Bazel
+      规则: cpp-include-guard-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\blaze.h:15
+      描述: Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.
+      置信度: 3.50
+      代码片段:
+        // limitations under the License.
+            #ifndef BAZEL_SRC_MAIN_CPP_BLAZE_H_
+        >>> #define BAZEL_SRC_MAIN_CPP_BLAZE_H_
+            
+            #include <string>
+
+  [16] 项目: Bazel
+      规则: cpp-include-guard-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\option_processor.h:16
+      描述: Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.
+      置信度: 3.50
+      代码片段:
+        #ifndef BAZEL_SRC_MAIN_CPP_OPTION_PROCESSOR_H_
+        >>> #define BAZEL_SRC_MAIN_CPP_OPTION_PROCESSOR_H_
+            
+            #include <memory>
+
+  [17] 项目: Bazel
+      规则: cpp-include-guard-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\startup_options.h:15
+      描述: Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.
+      置信度: 3.50
+      代码片段:
+        // limitations under the License.
+            #ifndef BAZEL_SRC_MAIN_CPP_STARTUP_OPTIONS_H_
+        >>> #define BAZEL_SRC_MAIN_CPP_STARTUP_OPTIONS_H_
+            
+            #if defined(__APPLE__)
+
+  [18] 项目: Bazel
+      规则: cpp-include-guard-format
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\transient_bytes.h:15
+      描述: Use #define guards with format <PROJECT>_<PATH>_<FILE>_H_ based on full path in source tree.
+      置信度: 3.50
+      代码片段:
+        // limitations under the License.
+            #ifndef SRC_TOOLS_SINGLEJAR_TRANSIENT_BYTES_H_
+        >>> #define SRC_TOOLS_SINGLEJAR_TRANSIENT_BYTES_H_
+            
+            #ifndef __STDC_FORMAT_MACROS
+
+  [19] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\buffered_write_stream.cpp:145
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void test_sync_operations()
+            {
+        >>>   using namespace std; // For memcmp.
+            
+              asio::io_service io_service;
+
+  [20] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\buffered_write_stream.cpp:255
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void test_async_operations()
+            {
+        >>>   using namespace std; // For memcmp.
+            
+            #if defined(ASIO_HAS_BOOST_BIND)
+
+  [21] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\modbus_master.cpp:46
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        #define MAX_MB_IO            400
+            
+        >>> using namespace std;
+            
+            uint8_t bool_input_buf[MAX_MB_IO];
+
+  [22] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\pccc.cpp:76
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        thread_local int Pccc_MessageLength;
+            
+        >>> using namespace std;
+            //-----------------------------------------------------------Structure Defines--------------------------------------------------//
+            struct pccc_header //Structure for the Header Information for EthernetIP
+
+  [23] 项目: OpenPLC
+      规则: cpp-no-using-namespace-std
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\c\read_until.cpp:51
+      描述: Do not declare anything in namespace std, including forward declarations. Use standard headers instead.
+      置信度: 5.00
+      代码片段:
+        void reset(const void* data, size_t length)
+              {
+        >>>     using namespace std; // For memcpy.
+            
+                ASIO_CHECK(length <= max_length);
+
+  [24] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:207
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return '--no%s' % self.name
+                else:
+        >>>       if not self.serializer:
+                    raise _exceptions.Error(
+                        'Serializer not present for flag %s' % self.name)
+
+  [25] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:415
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        arguments = list(arguments)
+            
+        >>>     if not isinstance(arguments, list):
+                  # Default value may be a list of values.  Most other arguments
+                  # will not be, so convert them into a single-item list to make
+
+  [26] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:425
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _serialize(self, value):
+                """See base class."""
+        >>>     if not self.serializer:
+                  raise _exceptions.Error(
+                      'Serializer not present for flag %s' % self.name)
+
+  [27] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:85
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.name = name
+            
+        >>>     if not help_string:
+                  help_string = '(no help available)'
+
+  [28] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1048
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Checks whether actual iterable is a superset of expected iterable."""
+                missing = set(expected_subset) - set(actual_set)
+        >>>     if not missing:
+                  return
+
+  [29] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1057
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Checks whether actual iterable and expected iterable are disjoint."""
+                common = set(expected_seq) & set(actual_seq)
+        >>>     if not common:
+                  return
+
+  [30] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1151
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        for line in difflib.ndiff(first.splitlines(True), second.splitlines(True)):
+                  failure_message.append(line)
+        >>>       if not line.endswith('\n'):
+                    failure_message.append('\n')
+                if line_limit and len(failure_message) > line_limit:
+
+  [31] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1206
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.fail('regexes is string or bytes; use assertRegex instead.',
+                            message)
+        >>>     if not regexes:
+                  self.fail('No regexes specified.', message)
+
+  [32] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1229
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        message)
+            
+        >>>     if not re.search(regex, actual_str, re.MULTILINE):
+                  self.fail('"%s" does not contain any of these regexes: %s.' %
+                            (actual_str, regexes), message)
+
+  [33] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1336
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.test_case.fail(self.expected_exception.__name__ + ' not raised',
+                                        self.msg)
+        >>>       if not issubclass(exc_type, self.expected_exception):
+                    return False
+                  self.test_func(exc_value)
+
+  [34] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:163
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Returns default test temp dir."""
+              tmpdir = os.environ.get('TEST_TMPDIR', '')
+        >>>   if not tmpdir:
+                tmpdir = os.path.join(tempfile.gettempdir(), 'absl_testing')
+
+  [35] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:203
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        else:
+                randomize = ''
+        >>>   if not randomize:
+                return 0
+              if randomize == 'random':
+
+  [36] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2222
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _skip_class(test_case_class):
+        >>>     if not issubclass(test_case_class, unittest.TestCase):
+                  raise TypeError(
+                      'Decorating {!r}, expected TestCase subclass'.format(test_case_class))
+
+  [37] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2450
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # --xml_output_file flag, XML_OUTPUT_FILE variable,
+              # TEST_XMLOUTPUTDIR variable or RUNNING_UNDER_TEST_DAEMON variable.
+        >>>   if not FLAGS.xml_output_file:
+                FLAGS.xml_output_file = get_default_xml_output_filename()
+              xml_output_file = FLAGS.xml_output_file
+
+  [38] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2511
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Make sure tmpdir exists.
+        >>>   if not os.path.isdir(TEST_TMPDIR.value):
+                try:
+                  os.makedirs(TEST_TMPDIR.value)
+
+  [39] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:752
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        manager: The context manager to enter.
+                """
+        >>>     if not self._exit_stack:
+                  raise AssertionError(
+                      'self._exit_stack is not set: enter_context is Py3-only; also make '
+
+  [40] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:761
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def enter_context(cls, manager):  # pylint: disable=no-self-argument
+                # type: (ContextManager[_T]) -> _T
+        >>>     if not cls._cls_exit_stack:
+                  raise AssertionError(
+                      'cls._cls_exit_stack is not set: cls.enter_context requires '
+
+  [41] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:809
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        )
+                def _call_cleaner_on_success(*args, **kwargs):
+        >>>       if not self._internal_ran_and_passed_when_called_during_cleanup(
+                      previous_failure_count):
+                    return
+
+  [42] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:874
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not actual.startswith(expected_start):
+                  self.fail('%r does not start with %r' % (actual, expected_start), msg)
+
+  [43] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:896
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not actual.endswith(expected_end):
+                  self.fail('%r does not end with %r' % (actual, expected_end), msg)
+
+  [44] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:959
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [45] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:975
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [46] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:981
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # explicitly check the length since some Sized objects (e.g. numpy.ndarray)
+                # have strange __nonzero__/__bool__ behavior.
+        >>>     if not len(container):  # pylint: disable=g-explicit-length-test
+                  self.fail('{!r} has length of 0.'.format(container), msg)
+
+  [47] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:992
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        msg: Optional message to report on failure.
+                """
+        >>>     if not isinstance(container, abc.Sized):
+                  self.fail('Expected a Sized object, got: '
+                            '{!r}'.format(type(container).__name__), msg)
+
+  [48] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:177
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        global _define_help_flags_called
+            
+        >>>   if not _define_help_flags_called:
+                flags.DEFINE_flag(HelpFlag())
+                flags.DEFINE_flag(HelpshortFlag())  # alias for --help
+
+  [49] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:217
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        original_argv = sys.argv if argv is None else argv
+              args_to_main = flags_parser(original_argv)
+        >>>   if not FLAGS.is_parsed():
+                raise Error('FLAGS must be parsed after flags_parser is called.')
+
+  [50] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:406
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        doc = sys.modules['__main__'].__doc__
+        >>>   if not doc:
+                doc = '\nUSAGE: %s [flags]\n' % sys.argv[0]
+                doc = flags.text_wrap(doc, indent='       ', firstline_indent='')
+
+  [51] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\app.py:477
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        FlagsError or UsageError.
+              """
+        >>>   if not isinstance(handler, ExceptionHandler):
+                raise TypeError('handler of type %s does not inherit from ExceptionHandler'
+                                % type(handler))
+
+  [52] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:248
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        found_difference = True
+            
+        >>>   if not found_difference:
+                print("No difference")
+
+  [53] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:79
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _colorize(line):
+              """Add color to the input string."""
+        >>>   if not sys.stdout.isatty():
+                return line
+
+  [54] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:495
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsJavaExeLauncher(self):
+                # Skip this test on non-Windows platforms
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [55] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:622
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInNonEnglishPath(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [56] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:678
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInLongPath(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [57] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:780
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testWindowsNativeLauncherInvalidArgv0(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('rules_java')
+
+  [58] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:855
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # https://github.com/bazelbuild/bazel/pull/24703#issuecomment-2665963637
+              def testBuildLaunchersWithClangClOnWindows(self):
+        >>>     if not self.IsWindows():
+                  return
+                self.AddBazelDep('platforms')
+
+  [59] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:340
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        }
+                    elif _non_string_or_bytes_iterable(testcase_params):
+        >>>           if not isinstance(testcase_params[0], str):
+                        raise RuntimeError(
+                            'The first element of named test parameters is the test name '
+
+  [60] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:434
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        testcases = testcases[0]
+            
+        >>>   if not isinstance(testcases, abc.Sequence):
+                testcases = list(testcases)
+              if not testcases:
+
+  [61] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:436
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not isinstance(testcases, abc.Sequence):
+                testcases = list(testcases)
+        >>>   if not testcases:
+                raise NoTestsError(
+                    'parameterized test decorators did not generate any tests. '
+
+  [62] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\parameterized.py:620
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        assert callable(func), 'Test generators must yield callables, got %r' % (
+                    func,)
+        >>>     if not (getattr(func, '__x_use_name__', None) or
+                        getattr(func, '__x_params_repr__', None)):
+                  raise RuntimeError(
+
+  [63] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\remote_repo_contents_cache_test.py:1042
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self,
+              ):
+        >>>     if not self.IsWindows():
+                  self.skipTest('This test is only relevant on Windows')
+                self.doTestMaterializationWithInternalAndExternalSymlinks(
+
+  [64] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:56
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def sleepUntilCacheEmpty(self):
+                for _ in range(10):
+        >>>       if not self.hasCacheEntry():
+                    return
+                  time.sleep(0.5)
+
+  [65] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\repo_contents_cache_test.py:753
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def testCachedRepoWithSymlinks_symlinksEnabledOnWindows(self):
+        >>>     if not self.IsWindows():
+                  self.skipTest('This test is only relevant on Windows')
+                self.ScratchFile(
+
+  [66] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:105
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if stdout_lines[i * 2] != "Hello %s Bar!" % lang[1]:
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+        >>>       if not stdout_lines[i * 2 + 1].startswith("rloc="):
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+                  if not stdout_lines[i * 2 + 1].endswith(
+
+  [67] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\runfiles_sandboxed_test.py:107
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not stdout_lines[i * 2 + 1].startswith("rloc="):
+                    self._FailWithContents("wrong line for " + lang[1], stdout_lines)
+        >>>       if not stdout_lines[i * 2 + 1].endswith(
+                      "_main/bar/bar-%s-data.txt" % lang[0]
+                  ):
+
+  [68] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:164
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        src_dir = self.projects.joinpath(name, version)
+                src_dir.mkdir(parents=True, exist_ok=True)
+        >>>     if not deps:
+                  deps = {}
+                if not repo_names:
+
+  [69] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:166
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if not deps:
+                  deps = {}
+        >>>     if not repo_names:
+                  repo_names = {}
+                for dep in deps:
+
+  [70] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\test_utils.py:171
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if dep not in repo_names:
+                    repo_names[dep] = dep
+        >>>     if not extra_module_file_contents:
+                  extra_module_file_contents = []
+
+  [71] 项目: Bazel
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:358
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        super(_TextAndXMLTestResult, self).stopTest(test)
+                  result = self.get_pending_test_case_result(test)
+        >>>       if not result:
+                    test_name = test.id() or str(test)
+                    sys.stderr.write('No pending test case: %s\n' % test_name)
+
+  [72] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:1032
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Check if any content was produced during the stream
+                        # Empty responses (no text and no tool calls) should raise an error
+        >>>             if not self.has_content:
+                            raise LLMEmptyResponseError(
+                                message=f"LLM provider returned empty content in streaming response (model: {self.model}, message_id: {self.message_id})"
+
+  [73] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:119
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def get_tool_call_object(self) -> ToolCall:
+                    """Useful for agent loop"""
+        >>>         if not self.tool_call_name:
+                        raise ValueError("No tool call returned")
+                    # hack for tool rules
+
+  [74] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:166
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    try:
+        >>>             if not self.put_inner_thoughts_in_kwarg:
+                            # None of the things should have inner thoughts in kwargs
+                            return True
+
+  [75] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:315
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.inner_thoughts_complete = False
+            
+        >>>                 if not self.use_assistant_message:
+                                # Only buffer the initial tool call message if it doesn't require approval
+                                # For approval-required tools, we'll create the ApprovalRequestMessage later
+
+  [76] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:356
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if isinstance(delta, BetaTextDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.TEXT:
+                                raise RuntimeError(f"Streaming integrity failed - received BetaTextDelta object while not in TEXT EventMode: {delta}")
+
+  [77] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:363
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # In these cases, we should pipe text out to null / ignore it
+                            # TODO this will have to be redone to support non-tool calling message sending
+        >>>                 if not self.put_inner_thoughts_in_kwarg:
+                                return
+
+  [78] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:399
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaInputJSONDelta):
+        >>>                 if not self.anthropic_mode == EventMode.TOOL_USE:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaInputJSONDelta object while not in TOOL_USE EventMode: {delta}"
+
+  [79] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:548
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaThinkingDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaThinkingBlock object while not in THINKING EventMode: {delta}"
+
+  [80] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:569
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaSignatureDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaSignatureDelta object while not in THINKING EventMode: {delta}"
+
+  [81] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:601
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Check if any content was produced during the stream
+                        # Empty responses (no text and no tool calls) should raise an error
+        >>>             if not self.has_content:
+                            raise LLMEmptyResponseError(
+                                message=f"LLM provider returned empty content in streaming response (model: {self.model}, message_id: {self.message_id})"
+
+  [82] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:611
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if self.anthropic_mode == EventMode.TOOL_USE and self.tool_call_buffer:
+                            for buffered_msg in self.tool_call_buffer:
+        >>>                     if not buffered_msg.otid:
+                                    if prev_message_type and prev_message_type != buffered_msg.message_type:
+                                        message_index += 1
+
+  [83] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:670
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def get_tool_call_object(self) -> Optional[ToolCall]:
+                    """Useful for agent loop"""
+        >>>         if not self.tool_call_name:
+                        return None
+
+  [84] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:917
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if isinstance(delta, BetaTextDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.TEXT:
+                                raise RuntimeError(f"Streaming integrity failed - received BetaTextDelta object while not in TEXT EventMode: {delta}")
+
+  [85] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:937
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaInputJSONDelta):
+        >>>                 if not self.anthropic_mode == EventMode.TOOL_USE:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaInputJSONDelta object while not in TOOL_USE EventMode: {delta}"
+
+  [86] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:975
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaThinkingDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaThinkingBlock object while not in THINKING EventMode: {delta}"
+
+  [87] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:997
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        elif isinstance(delta, BetaSignatureDelta):
+                            # Safety check
+        >>>                 if not self.anthropic_mode == EventMode.THINKING:
+                                raise RuntimeError(
+                                    f"Streaming integrity failed - received BetaSignatureDelta object while not in THINKING EventMode: {delta}"
+
+  [88] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:144
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        ChatGPTOAuthCredentials if valid credentials exist, None otherwise.
+                    """
+        >>>         if not self.api_key_enc:
+                        return None
+
+  [89] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:148
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        json_str = await self.api_key_enc.get_plaintext_async()
+        >>>         if not json_str:
+                        return None
+
+  [90] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:173
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        return None
+
+  [91] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:190
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        logger.error(f"Failed to refresh ChatGPT OAuth token: {e}")
+                        # If refresh fails but original access_token is still valid, use it
+        >>>             if not creds.is_expired():
+                            logger.warning("Token refresh failed, but original access_token is still valid - using existing token")
+                            return creds
+
+  [92] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:299
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        raise ValueError("No ChatGPT OAuth credentials configured")
+
+  [93] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:304
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Try to refresh if needed
+                    creds = await self.refresh_token_if_needed()
+        >>>         if not creds:
+                        raise LLMAuthenticationError(
+                            message="Failed to obtain valid ChatGPT OAuth credentials",
+
+  [94] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:343
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+                    creds = await self.get_oauth_credentials()
+        >>>         if not creds:
+                        logger.warning("Cannot list models: no valid ChatGPT OAuth credentials")
+                        return []
+
+  [95] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:461
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        hunks.append(h)
+            
+        >>>             if not hunks:
+                            raise ValueError("No applicable hunks found in patch. Ensure lines start with ' ', '-', or '+'.")
+
+  [96] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:524
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Legacy mode: patch targets the provided `label`
+        >>>         if not is_extended_patch(patch):
+                        try:
+                            memory_block = agent_state.memory.get_block(label)
+
+  [97] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:558
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Add Block: must specify a non-empty label")
+                            current_action = {"kind": "add", "label": target_label, "description": "", "content_lines": []}
+
+  [98] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:572
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Delete Block: must specify a non-empty label")
+                            actions.append({"kind": "delete", "label": target_label})
+
+  [99] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:582
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+                            target_label = ln.split(":", 1)[1].strip()
+        >>>                 if not target_label:
+                                raise ValueError("*** Update Block: must specify a non-empty label")
+                            current_action = {"kind": "update", "label": target_label, "patch_lines": []}
+
+  [100] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:591
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if ln.startswith("*** Move to:"):
+                            new_label = ln.split(":", 1)[1].strip()
+        >>>                 if not new_label:
+                                raise ValueError("*** Move to: must specify a non-empty new label")
+                            if last_action_label is None:
+
+  [101] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:620
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        flush_action()
+            
+        >>>         if not actions:
+                        raise ValueError("No operations found. Provide at least one of: *** Add Block, *** Delete Block, *** Update Block.")
+
+  [102] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:350
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        rules.extend(union_rules_list)
+            
+        >>>             elif not issubclass(union_type, NoneType):
+                            union_gbnf_type, union_rules_list = generate_gbnf_rule_for_type(
+                                model_name, field_name, union_type, False, processed_models, created_rules
+
+  [103] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:453
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        model_name = format_model_and_field_name(model.__name__)
+            
+        >>>     if not issubclass(model, BaseModel):
+                    # For non-Pydantic classes, generate model_fields from __annotations__ or __init__
+                    if hasattr(model, "__annotations__") and model.__annotations__:
+
+  [104] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:471
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        for field_name, field_info in model_fields.items():
+        >>>         if not issubclass(model, BaseModel):
+                        field_type, default_value = field_info
+                        # Check if the field is optional (not required)
+
+  [105] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:589
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        model_rules, has_special_string = generate_gbnf_grammar(model, processed_models, created_rules)
+            
+        >>>             if not has_special_string:
+                            model_rules[0] += r'"\n" ws "}"'
+
+  [106] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:782
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        field_text += "\n"
+            
+        >>>     if not documentation_with_field_description:
+                    return field_text
+
+  [107] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:85
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def format_model_and_field_name(model_name: str) -> str:
+                parts = re.findall("[A-Z][^A-Z]*", model_name)
+        >>>     if not parts:  # Check if the list is empty
+                    return model_name.lower().replace("_", "-")
+                return "-".join(part.lower().replace("_", "-") for part in parts)
+
+  [108] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:932
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        field_text += "\n"
+            
+        >>>     if not documentation_with_field_description:
+                    return field_text
+
+  [109] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:134
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Carry out agent steps until the LLM request is sent."""
+                    log_event(name="validate_inputs")
+        >>>         if not batch_requests:
+                        raise ValueError("Empty list of batch_requests passed in!")
+                    if agent_step_state_mapping is None:
+
+  [110] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:287
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Exit early if no items to process
+        >>>         if not batch_items:
+                        return _ResumeContext(
+                            batch_items=[],
+
+  [111] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:376
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # If result isn't a successful type, we can't extract a tool call
+        >>>         if not isinstance(result, BetaMessageBatchSucceededResult):
+                        return None, None, False
+
+  [112] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:514
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        for agent_id, new_msgs in msg_map.items():
+                        ast = ctx.agent_state_map[agent_id]
+        >>>             if not ast.message_buffer_autoclear:
+                            await self.agent_manager.update_message_ids_async(
+                                agent_id=agent_id,
+
+  [113] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:79
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # locate the tool on the agent
+                target_tool = next((t for t in params.agent_state.tools if t.name == params.tool_call_name), None)
+        >>>     if not target_tool:
+                    return params.agent_id, ToolExecutionResult(func_return=f"Tool not found: {params.tool_call_name}", status="error")
+
+  [114] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:301
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.mcp import MCPServer as GenericMCPServer
+            
+        >>>     if not isinstance(server, GenericMCPServer):
+                    raise TypeError(f"Expected GenericMCPServer, got {type(server)}")
+
+  [115] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:124
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        ) -> Message:
+                """Converts a MessageCreate object into a Message object, applying wrapping if needed."""
+        >>>     if not isinstance(message_create, MessageCreate):
+                    raise ValueError(f"Expected MessageCreate, got {type(message_create).__name__}")
+
+  [116] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:161
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        image_bytes, image_media_type = await _fetch_image_from_url(url)
+        >>>                 if not image_media_type:
+                                image_media_type, _ = mimetypes.guess_type(url)
+
+  [117] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:118
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        except asyncio.TimeoutError:
+                            # No data received within keepalive interval
+        >>>                 if not stream_exhausted:
+                                silence = time.monotonic() - last_data_time
+                                if silence > max_stream_silence:
+
+  [118] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:303
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if status_code // 100 != 2:
+                                    # An error occurred mid-stream
+        >>>                         if not isinstance(content, bytes):
+                                        content = content.encode(self.charset)
+                                    more_body = False
+
+  [119] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:335
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        cancellation_resp = {"message": "Run was cancelled"}
+                        cancellation_event = f"event: cancelled\ndata: {json.dumps(cancellation_resp)}\n\n".encode(self.charset)
+        >>>             if not self.response_started:
+                            await send(
+                                {
+
+  [120] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:372
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        error_event = f"event: error\ndata: {json.dumps(error_resp)}\n\n".encode(self.charset)
+                        logger.debug("response_started:", self.response_started)
+        >>>             if not self.response_started:
+                            await send(
+                                {
+
+  [121] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:151
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def __eq__(self, other):
+                    """Equality including children list."""
+        >>>         if not isinstance(other, ParentToolRule):
+                        return False
+                    return self.tool_name == other.tool_name and self.type == other.type and sorted(self.children) == sorted(other.children)
+
+  [122] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:188
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def __eq__(self, other):
+                    """Equality including all configuration fields."""
+        >>>         if not isinstance(other, ConditionalToolRule):
+                        return False
+                    return (
+
+  [123] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:203
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return available_tools  # No constraints if this rule doesn't apply
+            
+        >>>         if not last_function_response:
+                        raise ValueError("Conditional tool rule requires an LLM response to determine which child tool to use")
+
+  [124] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:28
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def __eq__(self, other):
+                    """Base equality using tool_name and type."""
+        >>>         if not isinstance(other, BaseToolRule):
+                        return False
+                    return self.tool_name == other.tool_name and self.type == other.type
+
+  [125] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:330
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def __eq__(self, other):
+                    """Equality including max_count_limit."""
+        >>>         if not isinstance(other, MaxCountPerStepToolRule):
+                        return False
+                    return self.tool_name == other.tool_name and self.type == other.type and self.max_count_limit == other.max_count_limit
+
+  [126] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:94
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def __eq__(self, other):
+                    """Equality including children list."""
+        >>>         if not isinstance(other, ChildToolRule):
+                        return False
+                    self_names = sorted(self.children)
+
+  [127] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:108
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        except Exception as e:
+                                # Check if this is a retryable error
+        >>>                     if not is_transient_error(e):
+                                    # Not a transient error, re-raise immediately
+                                    raise
+
+  [128] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1588
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Delete multiple passages from Turbopuffer."""
+            
+        >>>         if not passage_ids:
+                        return True
+
+  [129] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1632
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """Delete multiple messages from Turbopuffer."""
+            
+        >>>         if not message_ids:
+                        return True
+
+  [130] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1719
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>>         if not text_chunks:
+                        return []
+
+  [131] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1725
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        filtered_chunks = [text for text in text_chunks if text.strip()]
+            
+        >>>         if not filtered_chunks:
+                        logger.warning("All text chunks were empty, skipping file passage insertion")
+                        return []
+
+  [132] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:2015
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>>         if not tool_ids:
+                        return True
+
+  [133] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:245
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.agent_manager = AgentManager()
+            
+        >>>         if not self.api_key:
+                        raise ValueError("Turbopuffer API key not provided")
+
+  [134] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:301
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # skip embedding if no valid texts
+        >>>         if not filtered_texts:
+                        return []
+
+  [135] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:417
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        """
+            
+        >>>         if not tools:
+                        return True
+
+  [136] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:429
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        valid_tools.append(tool)
+            
+        >>>         if not valid_tools:
+                        logger.warning("All tools had empty text content, skipping insertion")
+                        return True
+
+  [137] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:521
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        filtered_chunks = [(i, text) for i, text in enumerate(text_chunks) if text.strip()]
+            
+        >>>         if not filtered_chunks:
+                        logger.warning("All text chunks were empty, skipping insertion")
+                        return []
+
+  [138] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:547
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>         if not use_provided_embeddings:
+                        filtered_embeddings = await self._generate_embeddings(filtered_texts, actor)
+
+  [139] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:565
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # passage_ids must be provided for dual-write consistency
+        >>>         if not passage_ids:
+                        raise ValueError("passage_ids must be provided for Turbopuffer insertion")
+                    if len(passage_ids) != len(text_chunks):
+
+  [140] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:676
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        filtered_messages = [(i, text) for i, text in enumerate(message_texts) if text.strip()]
+            
+        >>>         if not filtered_messages:
+                        logger.warning("All message texts were empty, skipping insertion")
+                        return True
+
+  [141] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:687
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # validation checks
+        >>>         if not message_ids:
+                        raise ValueError("message_ids must be provided for Turbopuffer insertion")
+                    if len(message_ids) != len(message_texts):
+
+  [142] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\utils-2.py:246
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        has_system_message = any(msg.role == MessageRole.system for msg in overview.messages)
+                # This is a soft assertion - log warning instead of failing
+        >>>     if not has_system_message:
+                    print("Warning: No system message found in messages list")
+
+  [143] 项目: Letta
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\utils-2.py:328
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        raise RuntimeError(f"File processing failed: {file_metadata.error_message}")
+            
+        >>>     if not isinstance(file_metadata, dict):
+                    file_metadata = file_metadata.model_dump()
+                return file_metadata
+
+  [144] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\check_openplc_db.py:135
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def create_connection():
+                """ create a database connection to a SQLite database """
+        >>>     if not os.path.exists(builddir):
+                    os.mkdir(builddir)
+
+  [145] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\config.py:52
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Load .env file
+        >>> if not os.path.isfile(ENV_PATH):
+                logger.warning(".env file not found, creating one...")
+                generate_env_file()
+
+  [146] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\credentials.py:133
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        self.ip_addresses = []
+                    if ip_addresses:
+        >>>             if not isinstance(ip_addresses, (list, tuple)):
+                            raise ValueError("ip_addresses must be a list or tuple")
+
+  [147] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\credentials.py:227
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return False
+            
+        >>>         if not os.path.exists(cert_path):
+                        print(f"Certificate file not found: {cert_path}")
+                        return False
+
+  [148] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\credentials.py:39
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     if not hostname_pattern.match(hostname):
+                    raise ValueError(
+                        f"Invalid hostname format: '{hostname}'. "
+
+  [149] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:209
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        while self.compilation_object != None:
+                        line = self.compilation_object.readline()
+        >>>             if not line: break
+                        self.compilation_status_str += line
+                    return self.compilation_status_str
+
+  [150] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:216
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        while self.compilation_error != None:
+                        line = self.compilation_error.readline()
+        >>>             if not line: break
+                        self.compilation_error_str += line
+                    return self.compilation_error_str
+
+  [151] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:228
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        print(f"Error checking compilation status: {e}")
+            
+        >>>         if not self._rpc('exec_time()', 10000):
+                        self.runtime_status = "Stopped"
+
+  [152] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:91
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        def _rpc(self, msg, timeout=1000):
+                    data = ""
+        >>>         if not self.runtime_status == "Running":
+                        return data
+                    try:
+
+  [153] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:141
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return jsonify({"msg": "User retrieval error"}), 500
+                
+        >>>     if not user:
+                    return jsonify({"msg": "User not found"}), 404
+
+  [154] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:159
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return jsonify({"msg": "User retrieval error"}), 500
+            
+        >>>         if not users_exist:
+                        return jsonify({"msg": "No users found"}), 404
+                    return jsonify({"msg": "Users found"}), 200
+
+  [155] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:189
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return jsonify({"msg": "User retrieval error"}), 500
+                
+        >>>     if not user:
+                    return jsonify({"msg": "User not found"}), 404
+
+  [156] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:192
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return jsonify({"msg": "User not found"}), 404
+            
+        >>>     if not user.check_password(old_password):
+                    return jsonify({"msg": "Old password is incorrect"}), 403
+
+  [157] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:210
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        return jsonify({"msg": "User retrieval error"}), 500
+            
+        >>>     if not user:
+                    return jsonify({"msg": "User not found"}), 404
+
+  [158] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2093
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if (pict_file.filename != ''):
+                                        # Ensure the file is allowed
+        >>>                             if not is_allowed_file(pict_file):
+                                            return 'Invalid file format. Only JPEG, PNG, and GIF images are allowed.', 400
+
+  [159] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2231
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        if (pict_file.filename != ''):
+                                        # Ensure the file is allowed
+        >>>                             if not is_allowed_file(pict_file):
+                                            return 'Invalid file format. Only JPEG, PNG, and GIF images are allowed.', 400
+
+  [160] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2665
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        is_linux = platform.system() == 'Linux'
+        >>>     if not is_linux:
+                    # Patch Python SSL recv socket as it doesn't work on MSYS2/Cygwin
+                    print(f"Non-Linux platform detected ({platform.system()}). Patching recv socket...")
+
+  [161] 项目: OpenPLC
+      规则: python-none-check-is
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2690
+      描述: Always use `if x is None` (or `is not None`) to check for `None`. Using `if not x:` is incorrect when `x` could be `0` or an empty string.
+      置信度: 3.50
+      代码片段:
+        # Check if the certificate is valid
+        >>>         if not cert_gen.is_certificate_valid(CERT_FILE):
+                        print("Invalid certificate. Cannot start https application")
+                        sys.exit(1)
+
+  [162] 项目: Bazel
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:46
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from google.protobuf import text_format
+            from src.main.protobuf import analysis_v2_pb2
+        >>> from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+            from tools.aquery_differ.resolvers.path_fragment_resolver import PathFragmentResolver
+            # pylint: disable=g-import-not-at-top
+
+  [163] 项目: Bazel
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\aquery_differ.py:47
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from src.main.protobuf import analysis_v2_pb2
+            from tools.aquery_differ.resolvers.dep_set_resolver import DepSetResolver
+        >>> from tools.aquery_differ.resolvers.path_fragment_resolver import PathFragmentResolver
+            # pylint: disable=g-import-not-at-top
+            # resource lib isn't available on Windows.
+
+  [164] 项目: Bazel
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\launcher_test.py:25
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        if os.name == 'nt':
+              import ctypes
+        >>>   from ctypes import wintypes
+            
+              kernel32 = ctypes.WinDLL('kernel32')
+
+  [165] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from opentelemetry.trace import Span
+            
+        >>>     from letta.schemas.usage import LettaUsageStatistics
+            
+            from anthropic import AsyncStream
+
+  [166] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.usage import LettaUsageStatistics
+            
+        >>> from anthropic import AsyncStream
+            from anthropic.types.beta import (
+                BetaInputJSONDelta,
+
+  [167] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:14
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from anthropic import AsyncStream
+        >>> from anthropic.types.beta import (
+                BetaInputJSONDelta,
+                BetaRawContentBlockDeltaEvent,
+
+  [168] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:147
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        LettaUsageStatistics with token counts from the stream.
+                    """
+        >>>         from letta.schemas.usage import LettaUsageStatistics
+            
+                    # Anthropic: input_tokens is NON-cached only in streaming
+
+  [169] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:278
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        # Transform Anthropic errors into our custom error types for consistent handling
+        >>>             from letta.llm_api.anthropic_client import AnthropicClient
+            
+                        client = AnthropicClient()
+
+  [170] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:32
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>> from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+            from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+
+  [171] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:33
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+        >>> from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+
+  [172] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:34
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MESSAGE_TOOL, DEFAULT_MESSAGE_TOOL_KWARG
+            from letta.errors import LLMEmptyResponseError
+        >>> from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+            from letta.schemas.letta_message import (
+
+  [173] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:35
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import LLMEmptyResponseError
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+        >>> from letta.log import get_logger
+            from letta.schemas.letta_message import (
+                ApprovalRequestMessage,
+
+  [174] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:36
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+        >>> from letta.schemas.letta_message import (
+                ApprovalRequestMessage,
+                AssistantMessage,
+
+  [175] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import json
+            from collections.abc import AsyncGenerator
+        >>> from datetime import datetime, timezone
+            from enum import Enum
+            from typing import TYPE_CHECKING, Optional
+
+  [176] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:45
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        ToolCallMessage,
+            )
+        >>> from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+
+  [177] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:46
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        )
+            from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+        >>> from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+
+  [178] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:47
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_message_content import ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+        >>> from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+
+  [179] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:48
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_stop_reason import LettaStopReason, StopReasonType
+            from letta.schemas.message import Message
+        >>> from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+            from letta.server.rest_api.streaming_response import RunCancelledException
+
+  [180] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:49
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.message import Message
+            from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+        >>> from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+            from letta.server.rest_api.streaming_response import RunCancelledException
+
+  [181] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:5
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from collections.abc import AsyncGenerator
+            from datetime import datetime, timezone
+        >>> from enum import Enum
+            from typing import TYPE_CHECKING, Optional
+
+  [182] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:50
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.openai.chat_completion_response import FunctionCall, ToolCall
+            from letta.server.rest_api.json_parser import JSONParser, PydanticJSONParser
+        >>> from letta.server.rest_api.streaming_response import RunCancelledException
+            
+            logger = get_logger(__name__)
+
+  [183] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:699
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        LettaUsageStatistics with token counts from the stream.
+                    """
+        >>>         from letta.schemas.usage import LettaUsageStatistics
+            
+                    # Anthropic: input_tokens is NON-cached only in streaming
+
+  [184] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\anthropic_streaming_interface.py:9
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        if TYPE_CHECKING:
+        >>>     from opentelemetry.trace import Span
+            
+                from letta.schemas.usage import LettaUsageStatistics
+
+  [185] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from pydantic import BaseModel, Field
+            
+        >>> from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+            from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+
+  [186] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+        >>> from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+
+  [187] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+            from letta.log import get_logger
+        >>> from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+
+  [188] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.schemas.enums import ProviderCategory, ProviderType
+        >>> from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+            from letta.schemas.secret import Secret
+
+  [189] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:14
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.llm_config import LLMConfig
+        >>> from letta.schemas.providers.base import Provider
+            from letta.schemas.secret import Secret
+
+  [190] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:15
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.llm_config import LLMConfig
+            from letta.schemas.providers.base import Provider
+        >>> from letta.schemas.secret import Secret
+            
+            if TYPE_CHECKING:
+
+  [191] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:18
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        if TYPE_CHECKING:
+        >>>     from letta.orm import User
+            
+            logger = get_logger(__name__)
+
+  [192] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:278
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        if actor and self.id:
+                        try:
+        >>>                 from letta.schemas.providers.base import ProviderUpdate
+                            from letta.services.provider_manager import ProviderManager
+
+  [193] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:279
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        try:
+                            from letta.schemas.providers.base import ProviderUpdate
+        >>>                 from letta.services.provider_manager import ProviderManager
+            
+                            provider_manager = ProviderManager()
+
+  [194] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import json
+        >>> from datetime import datetime, timezone
+            from typing import TYPE_CHECKING, Literal, Optional
+
+  [195] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:8
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import httpx
+        >>> from pydantic import BaseModel, Field
+            
+            from letta.errors import ErrorCode, LLMAuthenticationError, LLMError
+
+  [196] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:1
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        >>> from datetime import datetime
+            from typing import Any, Dict, List, Literal, Optional
+            from zoneinfo import ZoneInfo
+
+  [197] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        RETRIEVAL_QUERY_DEFAULT_PAGE_SIZE,
+            )
+        >>> from letta.log import get_logger
+            from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+
+  [198] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        )
+            from letta.log import get_logger
+        >>> from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+
+  [199] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.orm.errors import NoResultFound
+        >>> from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+
+  [200] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:14
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.orm.errors import NoResultFound
+            from letta.schemas.agent import AgentState
+        >>> from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+
+  [201] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:15
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.agent import AgentState
+            from letta.schemas.block import BlockUpdate
+        >>> from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+
+  [202] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:152
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        # Filter out tool messages to prevent recursive results and exponential escaping
+        >>>             from letta.constants import CONVERSATION_SEARCH_TOOL_NAME
+            
+                        filtered_results = []
+
+  [203] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:16
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.block import BlockUpdate
+            from letta.schemas.enums import MessageRole
+        >>> from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+
+  [204] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:17
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import MessageRole
+            from letta.schemas.sandbox_config import SandboxConfig
+        >>> from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+
+  [205] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:174
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        results_formatted = []
+                            # get current time in UTC, then convert to agent timezone for consistent comparison
+        >>>                 from datetime import timezone
+            
+                            now_utc = datetime.now(timezone.utc)
+
+  [206] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:18
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool import Tool
+        >>> from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+
+  [207] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:19
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.tool import Tool
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+        >>> from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+            from letta.utils import get_friendly_error_msg
+
+  [208] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:20
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+        >>> from letta.services.tool_executor.tool_executor_base import ToolExecutor
+            from letta.utils import get_friendly_error_msg
+
+  [209] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:21
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.user import User
+            from letta.services.tool_executor.tool_executor_base import ToolExecutor
+        >>> from letta.utils import get_friendly_error_msg
+            
+            logger = get_logger(__name__)
+
+  [210] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:3
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from datetime import datetime
+            from typing import Any, Dict, List, Literal, Optional
+        >>> from zoneinfo import ZoneInfo
+            
+            from letta.constants import (
+
+  [211] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:5
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from zoneinfo import ZoneInfo
+            
+        >>> from letta.constants import (
+                CORE_MEMORY_LINE_NUMBER_WARNING,
+                MEMORY_TOOLS_LINE_NUMBER_PREFIX_REGEX,
+
+  [212] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:764
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        except KeyError:
+                        # Block doesn't exist, create it
+        >>>             from letta.schemas.block import Block
+            
+                        new_block = Block(label=label, value=new_memory)
+
+  [213] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\core_tool_executor.py:864
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        ) -> str:
+                    """Create a memory block by setting its value to an empty string."""
+        >>>         from letta.schemas.block import Block
+            
+                    label = path.removeprefix("/memories/").removeprefix("/")
+
+  [214] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+            
+        >>> from docstring_parser import parse
+            from pydantic import BaseModel, create_model
+
+  [215] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from docstring_parser import parse
+        >>> from pydantic import BaseModel, create_model
+            
+            from letta.helpers.json_helpers import json_dumps
+
+  [216] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:1234
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        >>> from enum import Enum
+
+  [217] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from pydantic import BaseModel, create_model
+            
+        >>> from letta.helpers.json_helpers import json_dumps
+
+  [218] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import json
+            import re
+        >>> from copy import copy
+            from enum import Enum
+            from inspect import getdoc, isclass
+
+  [219] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:5
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import re
+            from copy import copy
+        >>> from enum import Enum
+            from inspect import getdoc, isclass
+            from types import NoneType
+
+  [220] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:6
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from copy import copy
+            from enum import Enum
+        >>> from inspect import getdoc, isclass
+            from types import NoneType
+            from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+
+  [221] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\gbnf_grammar_generator.py:7
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from enum import Enum
+            from inspect import getdoc, isclass
+        >>> from types import NoneType
+            from typing import Any, Callable, List, Optional, Tuple, Type, Union, _GenericAlias, get_args, get_origin  # type: ignore[attr-defined]
+
+  [222] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.base_agent import BaseAgent
+        >>> from letta.agents.helpers import _prepare_in_context_messages_async
+            from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+
+  [223] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.base_agent import BaseAgent
+            from letta.agents.helpers import _prepare_in_context_messages_async
+        >>> from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+
+  [224] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.agents.helpers import _prepare_in_context_messages_async
+            from letta.constants import DEFAULT_MAX_STEPS
+        >>> from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+
+  [225] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.constants import DEFAULT_MAX_STEPS
+            from letta.helpers import ToolRulesSolver
+        >>> from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+
+  [226] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:14
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers import ToolRulesSolver
+            from letta.helpers.datetime_helpers import get_utc_time
+        >>> from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+
+  [227] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:15
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.datetime_helpers import get_utc_time
+            from letta.helpers.tool_execution_helper import enable_strict_mode
+        >>> from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+
+  [228] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:16
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.tool_execution_helper import enable_strict_mode
+            from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+        >>> from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+
+  [229] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:17
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.jobs.types import RequestStatusUpdateInfo, StepStatusUpdateInfo
+            from letta.llm_api.llm_client import LLMClient
+        >>> from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+
+  [230] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:18
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.llm_api.llm_client import LLMClient
+            from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+        >>> from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+
+  [231] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:19
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.local_llm.constants import INNER_THOUGHTS_KWARG
+            from letta.log import get_logger
+        >>> from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+            from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+
+  [232] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:20
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.otel.tracing import log_event, trace_method
+        >>> from letta.schemas.agent import AgentState
+            from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+            from letta.schemas.job import JobUpdate
+
+  [233] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:21
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.otel.tracing import log_event, trace_method
+            from letta.schemas.agent import AgentState
+        >>> from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+            from letta.schemas.job import JobUpdate
+            from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+
+  [234] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:22
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.agent import AgentState
+            from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+        >>> from letta.schemas.job import JobUpdate
+            from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+            from letta.schemas.letta_message_content import OmittedReasoningContent, ReasoningContent, RedactedReasoningContent, TextContent
+
+  [235] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:23
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import AgentStepStatus, JobStatus, MessageStreamStatus, ProviderType, SandboxType, ToolType
+            from letta.schemas.job import JobUpdate
+        >>> from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+            from letta.schemas.letta_message_content import OmittedReasoningContent, ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_request import LettaBatchRequest
+
+  [236] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:24
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.job import JobUpdate
+            from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+        >>> from letta.schemas.letta_message_content import OmittedReasoningContent, ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_request import LettaBatchRequest
+            from letta.schemas.letta_response import LettaBatchResponse, LettaResponse
+
+  [237] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:25
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_message import LegacyLettaMessage, LettaMessage
+            from letta.schemas.letta_message_content import OmittedReasoningContent, ReasoningContent, RedactedReasoningContent, TextContent
+        >>> from letta.schemas.letta_request import LettaBatchRequest
+            from letta.schemas.letta_response import LettaBatchResponse, LettaResponse
+            from letta.schemas.llm_batch_job import AgentStepState, LLMBatchItem
+
+  [238] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:26
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_message_content import OmittedReasoningContent, ReasoningContent, RedactedReasoningContent, TextContent
+            from letta.schemas.letta_request import LettaBatchRequest
+        >>> from letta.schemas.letta_response import LettaBatchResponse, LettaResponse
+            from letta.schemas.llm_batch_job import AgentStepState, LLMBatchItem
+            from letta.schemas.message import Message, MessageCreate
+
+  [239] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:27
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_request import LettaBatchRequest
+            from letta.schemas.letta_response import LettaBatchResponse, LettaResponse
+        >>> from letta.schemas.llm_batch_job import AgentStepState, LLMBatchItem
+            from letta.schemas.message import Message, MessageCreate
+            from letta.schemas.openai.chat_completion_response import ToolCall as OpenAIToolCall
+
+  [240] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:28
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.letta_response import LettaBatchResponse, LettaResponse
+            from letta.schemas.llm_batch_job import AgentStepState, LLMBatchItem
+        >>> from letta.schemas.message import Message, MessageCreate
+            from letta.schemas.openai.chat_completion_response import ToolCall as OpenAIToolCall
+            from letta.schemas.sandbox_config import SandboxConfig
+
+  [241] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:29
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.llm_batch_job import AgentStepState, LLMBatchItem
+            from letta.schemas.message import Message, MessageCreate
+        >>> from letta.schemas.openai.chat_completion_response import ToolCall as OpenAIToolCall
+            from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+
+  [242] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:3
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import json
+            import uuid
+        >>> from dataclasses import dataclass
+            from typing import Any, AsyncGenerator, Dict, List, Optional, Sequence, Tuple, Union
+
+  [243] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:30
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.message import Message, MessageCreate
+            from letta.schemas.openai.chat_completion_response import ToolCall as OpenAIToolCall
+        >>> from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+
+  [244] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:31
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.openai.chat_completion_response import ToolCall as OpenAIToolCall
+            from letta.schemas.sandbox_config import SandboxConfig
+        >>> from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+            from letta.server.rest_api.utils import create_heartbeat_system_message, create_letta_messages_from_llm_response
+
+  [245] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:32
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.sandbox_config import SandboxConfig
+            from letta.schemas.tool_execution_result import ToolExecutionResult
+        >>> from letta.schemas.user import User
+            from letta.server.rest_api.utils import create_heartbeat_system_message, create_letta_messages_from_llm_response
+            from letta.services.agent_manager import AgentManager
+
+  [246] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:33
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.tool_execution_result import ToolExecutionResult
+            from letta.schemas.user import User
+        >>> from letta.server.rest_api.utils import create_heartbeat_system_message, create_letta_messages_from_llm_response
+            from letta.services.agent_manager import AgentManager
+            from letta.services.block_manager import BlockManager
+
+  [247] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:34
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.user import User
+            from letta.server.rest_api.utils import create_heartbeat_system_message, create_letta_messages_from_llm_response
+        >>> from letta.services.agent_manager import AgentManager
+            from letta.services.block_manager import BlockManager
+            from letta.services.job_manager import JobManager
+
+  [248] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:35
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.server.rest_api.utils import create_heartbeat_system_message, create_letta_messages_from_llm_response
+            from letta.services.agent_manager import AgentManager
+        >>> from letta.services.block_manager import BlockManager
+            from letta.services.job_manager import JobManager
+            from letta.services.llm_batch_manager import LLMBatchManager
+
+  [249] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:36
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.agent_manager import AgentManager
+            from letta.services.block_manager import BlockManager
+        >>> from letta.services.job_manager import JobManager
+            from letta.services.llm_batch_manager import LLMBatchManager
+            from letta.services.message_manager import MessageManager
+
+  [250] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:37
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.block_manager import BlockManager
+            from letta.services.job_manager import JobManager
+        >>> from letta.services.llm_batch_manager import LLMBatchManager
+            from letta.services.message_manager import MessageManager
+            from letta.services.passage_manager import PassageManager
+
+  [251] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:38
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.job_manager import JobManager
+            from letta.services.llm_batch_manager import LLMBatchManager
+        >>> from letta.services.message_manager import MessageManager
+            from letta.services.passage_manager import PassageManager
+            from letta.services.sandbox_config_manager import SandboxConfigManager
+
+  [252] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:39
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.llm_batch_manager import LLMBatchManager
+            from letta.services.message_manager import MessageManager
+        >>> from letta.services.passage_manager import PassageManager
+            from letta.services.sandbox_config_manager import SandboxConfigManager
+            from letta.services.tool_executor.tool_execution_manager import ToolExecutionManager
+
+  [253] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:40
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.message_manager import MessageManager
+            from letta.services.passage_manager import PassageManager
+        >>> from letta.services.sandbox_config_manager import SandboxConfigManager
+            from letta.services.tool_executor.tool_execution_manager import ToolExecutionManager
+            from letta.settings import tool_settings
+
+  [254] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:41
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.passage_manager import PassageManager
+            from letta.services.sandbox_config_manager import SandboxConfigManager
+        >>> from letta.services.tool_executor.tool_execution_manager import ToolExecutionManager
+            from letta.settings import tool_settings
+
+  [255] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:42
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.services.sandbox_config_manager import SandboxConfigManager
+            from letta.services.tool_executor.tool_execution_manager import ToolExecutionManager
+        >>> from letta.settings import tool_settings
+            
+            logger = get_logger(__name__)
+
+  [256] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:6
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from typing import Any, AsyncGenerator, Dict, List, Optional, Sequence, Tuple, Union
+            
+        >>> from aiomultiprocess import Pool
+            from anthropic.types.beta.messages import BetaMessageBatchCanceledResult, BetaMessageBatchErroredResult, BetaMessageBatchSucceededResult
+
+  [257] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:7
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from aiomultiprocess import Pool
+        >>> from anthropic.types.beta.messages import BetaMessageBatchCanceledResult, BetaMessageBatchErroredResult, BetaMessageBatchSucceededResult
+            
+            from letta.agents.base_agent import BaseAgent
+
+  [258] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:75
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        (agent_id, (tool_result:str, success_flag:bool))
+                """
+        >>>     from letta.schemas.tool_execution_result import ToolExecutionResult
+            
+                # locate the tool on the agent
+
+  [259] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:9
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from anthropic.types.beta.messages import BetaMessageBatchCanceledResult, BetaMessageBatchErroredResult, BetaMessageBatchSucceededResult
+            
+        >>> from letta.agents.base_agent import BaseAgent
+            from letta.agents.helpers import _prepare_in_context_messages_async
+            from letta.constants import DEFAULT_MAX_STEPS
+
+  [260] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:1
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        >>> from datetime import datetime
+            from typing import Annotated, Any, Dict, List, Literal, Optional, Union
+
+  [261] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        MCPServerType,
+            )
+        >>> from letta.helpers.url_validation import validate_mcp_server_url
+            from letta.orm.mcp_oauth import OAuthSessionStatus
+            from letta.schemas.enums import PrimitiveType
+
+  [262] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        )
+            from letta.helpers.url_validation import validate_mcp_server_url
+        >>> from letta.orm.mcp_oauth import OAuthSessionStatus
+            from letta.schemas.enums import PrimitiveType
+            from letta.schemas.letta_base import LettaBase
+
+  [263] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.url_validation import validate_mcp_server_url
+            from letta.orm.mcp_oauth import OAuthSessionStatus
+        >>> from letta.schemas.enums import PrimitiveType
+            from letta.schemas.letta_base import LettaBase
+            from letta.schemas.secret import Secret
+
+  [264] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:13
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.orm.mcp_oauth import OAuthSessionStatus
+            from letta.schemas.enums import PrimitiveType
+        >>> from letta.schemas.letta_base import LettaBase
+            from letta.schemas.secret import Secret
+
+  [265] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:14
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import PrimitiveType
+            from letta.schemas.letta_base import LettaBase
+        >>> from letta.schemas.secret import Secret
+
+  [266] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:299
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        """
+                # Import here to avoid circular dependency
+        >>>     from letta.schemas.mcp import MCPServer as GenericMCPServer
+            
+                if not isinstance(server, GenericMCPServer):
+
+  [267] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:366
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        """
+                # Local import to avoid circulars
+        >>>     from letta.functions.mcp_client.types import MCPServerType as MCPType, StdioServerConfig as StdioCfg
+                from letta.schemas.mcp import (
+                    UpdateSSEMCPServer as InternalUpdateSSE,
+
+  [268] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:367
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        # Local import to avoid circulars
+                from letta.functions.mcp_client.types import MCPServerType as MCPType, StdioServerConfig as StdioCfg
+        >>>     from letta.schemas.mcp import (
+                    UpdateSSEMCPServer as InternalUpdateSSE,
+                    UpdateStdioMCPServer as InternalUpdateStdio,
+
+  [269] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from typing import Annotated, Any, Dict, List, Literal, Optional, Union
+            
+        >>> from pydantic import Field, field_validator
+            
+            from letta.functions.mcp_client.types import (
+
+  [270] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:6
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from pydantic import Field, field_validator
+            
+        >>> from letta.functions.mcp_client.types import (
+                MCP_AUTH_TOKEN_BEARER_PREFIX,
+                MCPServerType,
+
+  [271] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta import __version__, system
+            from letta.errors import LettaImageFetchError, LettaInvalidArgumentError
+        >>> from letta.schemas.enums import MessageRole
+            from letta.schemas.letta_message_content import Base64Image, ImageContent, ImageSourceType, TextContent
+            from letta.schemas.message import Message, MessageCreate
+
+  [272] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.errors import LettaImageFetchError, LettaInvalidArgumentError
+            from letta.schemas.enums import MessageRole
+        >>> from letta.schemas.letta_message_content import Base64Image, ImageContent, ImageSourceType, TextContent
+            from letta.schemas.message import Message, MessageCreate
+
+  [273] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import MessageRole
+            from letta.schemas.letta_message_content import Base64Image, ImageContent, ImageSourceType, TextContent
+        >>> from letta.schemas.message import Message, MessageCreate
+
+  [274] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:8
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import httpx
+            
+        >>> from letta import __version__, system
+            from letta.errors import LettaImageFetchError, LettaInvalidArgumentError
+            from letta.schemas.enums import MessageRole
+
+  [275] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\message_helper.py:9
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta import __version__, system
+        >>> from letta.errors import LettaImageFetchError, LettaInvalidArgumentError
+            from letta.schemas.enums import MessageRole
+            from letta.schemas.letta_message_content import Base64Image, ImageContent, ImageSourceType, TextContent
+
+  [276] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:3
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        # https://github.com/openai/openai-python/blob/v0.27.4/openai/openai_object.py
+            
+        >>> from copy import deepcopy
+            from enum import Enum
+            from typing import Optional, Tuple, Union
+
+  [277] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from copy import deepcopy
+        >>> from enum import Enum
+            from typing import Optional, Tuple, Union
+
+  [278] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:7
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from typing import Optional, Tuple, Union
+            
+        >>> from letta.helpers.json_helpers import json_dumps
+            
+            api_requestor = None
+
+  [279] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        if TYPE_CHECKING:
+        >>>     from letta.server.server import SyncServer
+            
+            router = APIRouter(prefix="/providers", tags=["providers"])
+
+  [280] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:3
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from typing import TYPE_CHECKING, List, Literal, Optional
+            
+        >>> from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
+            from fastapi.responses import JSONResponse
+
+  [281] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:4
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from fastapi import APIRouter, Body, Depends, HTTPException, Query, status
+        >>> from fastapi.responses import JSONResponse
+            
+            from letta.schemas.enums import ProviderCategory, ProviderType
+
+  [282] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:6
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from fastapi.responses import JSONResponse
+            
+        >>> from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.providers import Provider, ProviderCheck, ProviderCreate, ProviderUpdate
+            from letta.server.rest_api.dependencies import HeaderParams, get_headers, get_letta_server
+
+  [283] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:7
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import ProviderCategory, ProviderType
+        >>> from letta.schemas.providers import Provider, ProviderCheck, ProviderCreate, ProviderUpdate
+            from letta.server.rest_api.dependencies import HeaderParams, get_headers, get_letta_server
+            from letta.validators import ProviderId
+
+  [284] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:8
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.enums import ProviderCategory, ProviderType
+            from letta.schemas.providers import Provider, ProviderCheck, ProviderCreate, ProviderUpdate
+        >>> from letta.server.rest_api.dependencies import HeaderParams, get_headers, get_letta_server
+            from letta.validators import ProviderId
+
+  [285] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\providers-1.py:9
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.schemas.providers import Provider, ProviderCheck, ProviderCreate, ProviderUpdate
+            from letta.server.rest_api.dependencies import HeaderParams, get_headers, get_letta_server
+        >>> from letta.validators import ProviderId
+            
+            if TYPE_CHECKING:
+
+  [286] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.helpers.json_helpers import json_loads
+            from letta.log import get_logger
+        >>> from letta.server.constants import WS_DEFAULT_PORT
+            from letta.server.server import SyncServer
+            from letta.server.ws_api.interface import SyncWebSocketInterface
+
+  [287] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:11
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.log import get_logger
+            from letta.server.constants import WS_DEFAULT_PORT
+        >>> from letta.server.server import SyncServer
+            from letta.server.ws_api.interface import SyncWebSocketInterface
+
+  [288] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from letta.server.constants import WS_DEFAULT_PORT
+            from letta.server.server import SyncServer
+        >>> from letta.server.ws_api.interface import SyncWebSocketInterface
+            
+            logger = get_logger(__name__)
+
+  [289] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:7
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import websockets
+            
+        >>> import letta.server.ws_api.protocol as protocol
+            from letta.helpers.json_helpers import json_loads
+            from letta.log import get_logger
+
+  [290] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:8
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import letta.server.ws_api.protocol as protocol
+        >>> from letta.helpers.json_helpers import json_loads
+            from letta.log import get_logger
+            from letta.server.constants import WS_DEFAULT_PORT
+
+  [291] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\server-1.py:9
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import letta.server.ws_api.protocol as protocol
+            from letta.helpers.json_helpers import json_loads
+        >>> from letta.log import get_logger
+            from letta.server.constants import WS_DEFAULT_PORT
+            from letta.server.server import SyncServer
+
+  [292] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:10
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import time
+            from collections.abc import AsyncIterator
+        >>> from datetime import datetime, timezone
+            from typing import Dict, Optional
+            from uuid import uuid4
+
+  [293] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:12
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from datetime import datetime, timezone
+            from typing import Dict, Optional
+        >>> from uuid import uuid4
+            
+            import anyio
+
+  [294] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:15
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import anyio
+        >>> from fastapi import HTTPException
+            from fastapi.responses import StreamingResponse
+            from starlette.types import Send
+
+  [295] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:16
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        import anyio
+            from fastapi import HTTPException
+        >>> from fastapi.responses import StreamingResponse
+            from starlette.types import Send
+
+  [296] 项目: Letta
+      规则: python-imports-only-packages-modules
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\streaming_response.py:17
+      描述: Use import statements for packages and modules only, not for individual types, classes, or functions. Exemptions for typing, collections.abc, typing_extensions, six.moves.
+      置信度: 3.50
+      代码片段:
+        from fastapi import HTTPException
+            from fastapi.responses import StreamingResponse
+        >>> from starlette.types import Send
+            
+            from letta.errors import LettaUnexpectedStreamCancellationError, PendingApprovalError
+  ------------------------------------------------------------
+============================================================
