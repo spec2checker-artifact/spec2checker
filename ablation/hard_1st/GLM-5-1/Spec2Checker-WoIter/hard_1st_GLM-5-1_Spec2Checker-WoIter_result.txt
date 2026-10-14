@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: hard_1st
+  模型: GLM-5-1
+  输入: UIR/hard/hard_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 48/50 = 96.0%
+  Rule_sem (规则验证数): 44/50 = 88.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 44条
+  语法错误规则: 2条
+  语义偏差规则: 4条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-avoid-failing-constructor                    OK [V]  "Avoid initialization that can fail in constructors if you ca..."
+     2. cpp-comment-class-data-members                   OK [V]  "Class data members must have a comment explaining their purp..."
+     3. cpp-coroutine-unauthorized-library               OK [V]  "Only use C++20 coroutines via libraries approved by project ..."
+     4. cpp-no-implicit-conversion                       OK [V]  "Do not define implicit conversions. Use the `explicit` keywo..."
+     5. cpp-dynamic-cast-usage                           OK [V]  "Use `dynamic_cast` only when you must query the dynamic type..."
+     6. cpp-default-capture-by-value                     OK [V]  "Use default capture by value (`[=]`) sparingly. It should on..."
+     7. java-finalize-override                           OK [V]  "Do not override Object.finalize. Finalization support is sch..."
+     8. java-old-style-switch                            OK [V]  "Detect old-style switch statement formatting where a colon i..."
+     9. java-switch-indentation                          OK [V]  "Contents of switch block must be indented +2 relative to the..."
+    10. java-camel-case-lowercase-all                    OK [V]  "All words in a camel case identifier must be entirely lowerc..."
+    11. java-camel-case-split-conventional               OK [V]  "Detects conventionally camel-cased words (e.g., 'AdWords') a..."
+    12. java-text-block-opening-newline                  OK [V]  "Opening triple quotes of a text block must be on a new line,..."
+    13. java-line-wrapping-discretionary                 OK [V]  "Even code that fits within column limit may be line-wrapped ..."
+    14. java-arrow-no-adjacent-break                     OK [V]  "Line never broken adjacent to arrow ->, except break may com..."
+    15. java-switch-fallthrough-comment                  OK [V]  "Each statement group in a switch case must either terminate ..."
+    16. javascript-no-nested-namespace                   OK [V]  "Do not define a nested type (class, typedef, enum, interface..."
+    17. javascript-enum-static-initialization            OK [V]  "For string enums, all values must be statically initialized,..."
+    18. javascript-tostring-override-side-effects        OK [V]  "toString may be overridden but must always succeed and never..."
+    19. javascript-number-literal-prefix-case            OK [V]  "Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never ..."
+    20. javascript-generics-template-declaration         OK [V]  "Generic functions and methods must be declared with a `@temp..."
+    21. javascript-one-variable-per-declaration          OK [V]  "Every local variable declaration declares only one variable;..."
+    22. javascript-nested-function-const                 OK [V]  "Nested function definitions should be assigned to a local co..."
+    23. javascript-jsdoc-mixed-annotation                OK [V]  "Detects mixing of inline JSDoc type annotations and block JS..."
+    24. javascript-static-method-to-function             OK [V]  "Prefer module-local (package-private) functions over private..."
+    25. javascript-no-wrapper-new                        OK [V]  "Never use `new Boolean`, `new Number`, `new String`, `new Sy..."
+    26. python-naming-internal-underscore                OK [V]  "Detect names that should be internal (private/protected) but..."
+    27. python-multiline-string-dedent                   OK [V]  "Multi-line strings should use `textwrap.dedent` to remove le..."
+    28. python-logging-string-literal                    OK [V]  "For logging functions that expect a pattern-string, always c..."
+    29. python-docstring-triple-double-quote             OK [V]  "Always use the three-double-quote format `"""` for docstring..."
+    30. python-explicit-none-type                        OK [V]  "Use explicit `X | None` or `Optional[X]` for type annotation..."
+    31. python-error-message-precise                     OK [V]  "Error messages should precisely match error condition, inter..."
+    32. python-comments-never-describe-code              OK [V]  "Detect comments that merely describe the code, assuming the ..."
+    33. python-avoid-string-concat-in-loop               OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+    34. python-naming-conventions-class-module           OK [V]  "Use CapWords for class names and lower_with_under for module..."
+    35. python-override-docstring-optional               OK [V]  "A method that overrides a base class method does not need a ..."
+    36. shell-loop-local-declaration                     OK [V]  "Inside a function, declare loop variable as `local` to avoid..."
+    37. shell-constant-readonly                          OK [V]  "Use `readonly` or `declare -xr` for constants instead of equ..."
+    38. shell-no-let-builtin                             OK [V]  "Never use the `let` builtin. Use `(( ... ))` for arithmetic ..."
+    39. shell-no-expr-command                            OK [V]  "Never use the `expr` command as it is an external program an..."
+    40. shell-avoid-unquoted-array-expansion             OK [V]  "Avoid unquoted expansion in array assignments; won't work co..."
+    41. shell-avoid-colon-in-function-name               OK [V]  "Functions intended for interactive use may choose to avoid c..."
+    42. shell-regex-rhs-no-quotes                        OK [V]  "When using the regex matching operator `=~` inside `[[ ... ]..."
+    43. shell-arithmetic-expansion-expr                  OK [V]  "Always use `$(( ... ))` for arithmetic expansion instead of ..."
+    44. shell-no-main-for-short-scripts                  OK [V]  "For short scripts where it's just a linear flow, a main func..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-nonmember-functions-in-namespace             FAIL  (语义偏差：推理链遗漏了部分约束条件) "Prefer placing nonmember functions in a namespace; use compl..."
+     2. cpp-copy-move-meaningful                         FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect user-defined types that define copy or move operation..."
+     3. cpp-inclusive-language-avoid-offensive-terms     FAIL  (语义偏差：推理链遗漏了部分约束条件) "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+     4. cpp-explicit-single-argument-constructor         FAIL  (语义偏差：推理链遗漏了部分约束条件) "Type conversion operators and constructors callable with a s..."
+     5. java-camel-case-step1                            FAIL  (语法错误：源验证报告标记为不可用) "Convert phrase to plain ASCII and remove apostrophes as a pr..."
+     6. shell-read-without-r                             FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Use `read -r` to prevent backslash interpretation."
+
+  按工具分布 (By Tool):
+    Semgrep    16/49 (32.7%)
+    Pmd        3/11 (27.3%)
+    Codeql     13/38 (34.2%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 6/10 (60.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 16
+  真正违规 (TP): 2
+  误报 (FP): 14
+  精准度: 12.5%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Hard 1st 中生成了 48 条可编译规则。
+  2. 其中 44 条规则语义正确，规则可用率为 88.0%。
+  3. 本轮有 2 条语法错误规则和 4 条语义偏差规则。
+  4. 本轮检测到 16 条结果，其中 2 条正确，另有 14 条误报。
+  5. 本轮检测精准度为 12.5%，规则生成与检测结果保持一致。
+============================================================
