@@ -1,0 +1,105 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker-WoIter
+  描述: 保留 UIR，仅执行单次生成，不进行 validation-driven refinement
+  批次: hard_4th
+  模型: Qwen3-Coder-Plus
+  输入: UIR/hard/hard_4th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 47/50 = 94.0%
+  Rule_sem (规则验证数): 43/50 = 86.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 43条
+  语法错误规则: 3条
+  语义偏差规则: 4条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-avoid-stateful-stream-manipulators           OK [V]  "Use streams for ad-hoc, local, human-readable output. Avoid ..."
+     2. cpp-coroutine-unauthorized-library               OK [V]  "Only use C++20 coroutines via libraries approved by project ..."
+     3. cpp-public-alias-documentation                   OK [V]  "Public type aliases (using/typedef) must be documented with ..."
+     4. cpp-todo-comment-format                          OK [V]  "TODO comments should include TODO in all caps, followed by b..."
+     5. cpp-no-cstyle-cast                               OK [V]  "Use C++-style casts (static_cast, const_cast, reinterpret_ca..."
+     6. cpp-discourage-multiple-implementation-inheritance OK [V]  "Multiple inheritance is allowed, but multiple implementation..."
+     7. java-switch-exhaustiveness                       OK [V]  "Every switch statement must be exhaustive, requiring a defau..."
+     8. java-enum-no-methods-array-initializer           OK [V]  "Enum class with no methods and no documentation on constants..."
+     9. java-text-block-opening-newline                  OK [V]  "Opening triple quotes of a text block must be on a new line,..."
+    10. java-annotation-one-per-line                     OK [V]  "Annotations applying to class, package, or module must appea..."
+    11. java-finalize-override                           OK [V]  "Do not override Object.finalize. Finalization support is sch..."
+    12. java-method-annotation-multiline                 OK [V]  "Method and constructor annotations should each be on their o..."
+    13. java-camel-case-naming                           OK [V]  "Class names must use UpperCamelCase and method/variable name..."
+    14. java-local-variable-declaration-timing           OK [V]  "Local variables should be declared close to their first use,..."
+    15. java-camel-case-underscores-adjacent-numbers     OK [V]  "In rare circumstances (e.g., multipart version numbers), use..."
+    16. javascript-local-variable-declaration-timing     OK [V]  "Local variables should be declared close to their first use,..."
+    17. javascript-string-single-quotes                  OK [V]  "Ordinary string literals must be delimited with single quote..."
+    18. javascript-array-destructuring-rest              OK [V]  "Array literals on left-hand side for destructuring are allow..."
+    19. javascript-no-builtin-modification               OK [V]  "Detects modifications to built-in object prototypes or const..."
+    20. javascript-no-mixed-object-keys                  OK [V]  "Object literals should not mix quoted and unquoted keys, as ..."
+    21. javascript-no-non-numeric-array-properties       OK [V]  "Do not define or use non-numeric properties on arrays (other..."
+    22. javascript-tostring-override-constraints         OK [V]  "toString method overrides must always succeed and never have..."
+    23. javascript-array-trailing-comma                  OK [V]  "Array literals must include a trailing comma when there is a..."
+    24. javascript-prefer-arrow-nested                   OK [V]  "Prefer arrow functions over `function` keyword for nested fu..."
+    25. javascript-spread-operator-preferred             OK [V]  "Function calls should use the spread operator `...` instead ..."
+    26. python-comment-indentation                       OK [V]  "Block and inline comments should be used for tricky, non-obv..."
+    27. python-avoid-double-underscore                   OK [V]  "Discourage use of double underscore (dunder) for name mangli..."
+    28. python-getter-setter-complexity                  OK [V]  "Getter and setter functions should only be used when getting..."
+    29. python-function-length                           OK [V]  "Prefer small and focused functions. Functions exceeding appr..."
+    30. python-import-typing-directly                    OK [V]  "Always import symbols from `typing` or `collections.abc` the..."
+    31. python-docstring-style                           OK [V]  "Module, function, and method docstrings must use triple doub..."
+    32. python-logging-string-literal-placeholders       OK [V]  "For logging functions that expect a pattern-string, always c..."
+    33. python-imports-sort-lexicographically            OK [V]  "Within each grouping, imports should be sorted lexicographic..."
+    34. python-type-alias-naming                         OK [V]  "Type aliases must be named using CapWords convention. If the..."
+    35. shell-arithmetic-increment                       OK [V]  "Use `(( var += 3 ))` for incrementing variables. Do not use ..."
+    36. shell-local-command-substitution-exit-code       OK [V]  "Always separate `local` declaration and assignment when assi..."
+    37. shell-constant-readonly                          OK [V]  "For clarity, `readonly` or `declare -xr` is recommended for ..."
+    38. shell-explicit-string-test                       OK [V]  "To avoid confusion about what you're testing for, explicitly..."
+    39. shell-readarray-without-t                        OK [V]  "Detect usage of readarray without -t option, which leaves tr..."
+    40. shell-arithmetic-expansion-in-string             OK [V]  "Use `$(( ... ))` inside strings for arithmetic expansion."
+    41. shell-bash-pipestatus-check                      OK [V]  "Bash has `PIPESTATUS` array to check return code from all pa..."
+    42. shell-integer-declaration                        OK [V]  "Detect variable assignments that could be declared as intege..."
+    43. shell-readonly-flags-after-assignment            OK [V]  "After assigning an array variable named FLAGS, it should be ..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-rtti                                   FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid using run-time type information (RTTI) such as typeid ..."
+     2. cpp-operator-stream-overload-value-only          FAIL  (语义偏差：推理链遗漏了部分约束条件) "Overload operator<< for streaming only for types representin..."
+     3. cpp-default-capture-reference-lifetime           FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by reference ([&]) only when the lifetim..."
+     4. cpp-prefer-non-member-binary-operator            FAIL  (语义偏差：推理链遗漏了部分约束条件) "Prefer to define non-modifying binary operators as non-membe..."
+     5. java-horizontal-alignment-not-required           FAIL  (语法错误：源验证报告标记为不可用) "Horizontal alignment of tokens using variable spaces is perm..."
+     6. python-comment-style-consistency                 FAIL  (语法错误：源验证报告标记为不可用) "Check for consistent punctuation, spelling, and grammar in c..."
+     7. shell-avoid-unquoted-array-expansion             FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Avoid unquoted command expansion in array assignments; won't..."
+
+  按工具分布 (By Tool):
+    Semgrep    13/48 (27.1%)
+    Pmd        3/10 (30.0%)
+    Codeql     9/35 (25.7%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 6/10 (60.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 17
+  真正违规 (TP): 1
+  误报 (FP): 16
+  精准度: 5.9%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. Qwen3-Coder-Plus 在 Hard 4th 中生成了 47 条可编译规则。
+  2. 其中 43 条规则语义正确，规则可用率为 86.0%。
+  3. 本轮有 3 条语法错误规则和 4 条语义偏差规则。
+  4. 本轮检测到 17 条结果，其中 1 条正确，另有 16 条误报。
+  5. 本轮检测精准度为 5.9%，规则生成与检测结果保持一致。
+============================================================
