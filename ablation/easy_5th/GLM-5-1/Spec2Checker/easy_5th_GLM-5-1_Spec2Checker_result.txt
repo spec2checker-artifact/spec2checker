@@ -1,0 +1,3797 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: easy_5th
+  模型: GLM-5-1
+  输入: UIR/easy/easy_5th.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 47/50 = 94.0%
+  Rule_sem (规则验证数): 47/50 = 94.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 47条
+  语法错误规则: 3条
+  语义偏差规则: 0条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-struct-member-naming                         OK [V]  "Data members of structs (both static and non-static) are nam..."
+     2. cpp-const-placement-consistency                  OK [V]  "Check for consistency in the placement of the `const` qualif..."
+     3. cpp-delete-forbidden-operations                  OK [V]  "Use `= delete` to explicitly delete copy/move operations."
+     4. cpp-avoid-long-double                            OK [V]  "Use `float` and `double`; assume they represent IEEE-754 bin..."
+     5. cpp-no-modules                                   OK [V]  "Do not use C++20 Modules (import, module, export). Not well-..."
+     6. cpp-missing-const-method                         OK [V]  "Declare methods const unless they alter the logical state of..."
+     7. cpp-avoid-macros-in-headers                      OK [V]  "Avoid defining macros, especially in header files. Prefer in..."
+     8. cpp-class-data-member-trailing-underscore        OK [V]  "Data members of classes (both static and non-static) must be..."
+     9. cpp-prefer-struct-over-pair                      OK [V]  "Use a `struct` instead of `std::pair` or `std::tuple` when t..."
+    10. cpp-class-data-member-trailing-underscore#2      OK [V]  "Data members of classes (both static and non-static) must be..."
+    11. java-non-constant-field-names                    OK [V]  "Non-constant field names (static or otherwise) should be wri..."
+    12. java-package-no-line-wrap                        OK [V]  "The package declaration must not be line-wrapped. The column..."
+    13. java-no-multiple-declarations-outside-for        OK [V]  "Every variable declaration (field or local) declares only on..."
+    14. java-type-variable-naming                        OK [V]  "Type variable names must be a single capital letter optional..."
+    15. java-no-wildcard-import                          OK [V]  "Wildcard (on-demand) imports, static or otherwise, are not u..."
+    16. java-catch-pipe-linebreak                        OK [V]  "Detect line break before the pipe operator '|' in a multi-ca..."
+    17. java-module-directives-ordering                  OK [V]  "Module directives must be ordered as: all requires in one bl..."
+    18. java-local-variable-lower-camel-case             OK [V]  "Local variable names must be written in lowerCamelCase, even..."
+    19. java-assignment-break-after-symbol               OK [V]  "Detect when a line break occurs before an assignment operato..."
+    20. java-horizontal-whitespace-keyword-brace         OK [V]  "Detect missing space between a closing curly brace } and the..."
+    21. javascript-goog-require-contiguous-block         OK [V]  "goog.require and goog.requireType statements must form a con..."
+    22. javascript-duplicate-import                      OK [V]  "Do not import the same file multiple times; hard to determin..."
+    23. javascript-line-wrap-after-operator              OK [V]  "When a line is broken at an operator, the break must come af..."
+    24. javascript-non-ascii-characters                  OK [V]  "Use actual Unicode character or hex/Unicode escape; choose f..."
+    25. javascript-horizontal-whitespace-after-colon     OK [V]  "Require a space after the colon in an object literal propert..."
+    26. javascript-import-no-line-wrap                   OK [V]  "ES module import statements must not be line wrapped; they a..."
+    27. javascript-goog-require-side-effects             OK [V]  "If a module is imported only for its side effects, the call ..."
+    28. javascript-no-const-exports                      OK [V]  "Do not annotate `exports` object as `@const`; it is already ..."
+    29. javascript-no-circular-dependencies              OK [V]  "Do not create cycles between ES modules, even though specifi..."
+    30. python-decorator-judicious-use                   OK [V]  "Detect decorator usage that may indicate non-judicious appli..."
+    31. python-no-boolean-false-comparison               OK [V]  "Never compare a boolean variable to `False` using `==`. Use ..."
+    32. python-lexical-scoping-ok                        OK [V]  "Lexical scoping (nested functions referring to enclosing var..."
+    33. python-whitespace-binary-operator                OK [V]  "Surround binary operators with a single space on either side..."
+    34. python-implicit-false                            OK [V]  "Use implicit false evaluation for sequences, collections, an..."
+    35. python-indentation-4-spaces-no-tabs              OK [V]  "Indent code blocks with 4 spaces. Never use tabs. Implied li..."
+    36. python-no-spaces-around-equals                   OK [V]  "Never use spaces around `=` when passing keyword arguments o..."
+    37. python-nested-function-without-closure           OK [V]  "Detects nested local functions or classes that do not close ..."
+    38. shell-case-pattern-no-parenthesis                OK [V]  "Pattern expressions in a case statement should not be preced..."
+    39. shell-avoid-eval                                 OK [V]  "The `eval` builtin should be avoided as it munges input and ..."
+    40. shell-function-header-comment                    OK [V]  "Function header comments should describe: Description, Globa..."
+    41. shell-wildcard-expansion-path                    OK [V]  "Use an explicit path when doing wildcard expansion of filena..."
+    42. shell-parentheses-required                       OK [V]  "Parentheses are required after the function name."
+    43. shell-use-arrays-for-lists                       OK [V]  "Bash arrays should be used to store lists of elements to avo..."
+    44. shell-prefer-quote-words                         OK [V]  "Prefer quoting strings that are words (as opposed to command..."
+    45. shell-case-one-line-space                        OK [V]  "A one-line alternative in a case statement needs a space aft..."
+    46. shell-prefer-brace-expansion                     OK [V]  "Prefer using ${var} over $var for variable expansion to avoi..."
+    47. shell-case-simple-commands-same-line             OK [V]  "Simple commands may be put on the same line as the pattern a..."
+
+  失败规则列表 (Failed Rules):
+     1. javascript-linewrap-method-name-parenthesis      FAIL  (语法错误：源验证报告标记为不可用) "A method or constructor name must stay attached to the open ..."
+     2. python-whitespace-no-trailing-whitespace         FAIL  (语法错误：源验证报告标记为不可用) "No trailing whitespace. Lines should not end with spaces."
+     3. python-run-pylint                                FAIL  (语法错误：源验证报告标记为不可用) "Ensure pylint is run on the codebase, typically via a script..."
+
+  按工具分布 (By Tool):
+    Semgrep    27/30 (90.0%)
+    Pmd        10/10 (100.0%)
+    Codeql     10/10 (100.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    JavaScript   Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Shell        Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 350
+  真正违规 (TP): 287
+  误报 (FP): 63
+  精准度: 82.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. GLM-5-1 在 Easy 5th 生成了 47 条可编译规则。
+  2. 本轮有 47 条规则语义正确，规则可用率为 94.0%。
+  3. 规则中有 3 条语法错误和 0 条语义偏差。
+  4. 检测到 350 条结果，其中 287 条正确，63 条误报。
+  5. 本轮检测精准度为 82.0%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:109
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Small JavaScript module for the documentation.
+             */
+        >>> var Documentation = {
+            
+              init : function() {
+
+  [2] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:151
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        */
+              addContextElements : function() {
+        >>>     $('div[id] > :header:first').each(function() {
+                  $('<a class="headerlink">\u00B6</a>').
+                  attr('href', '#' + this.id).
+
+  [3] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\doctools.js:188
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+                  }, 10);
+        >>>       $('<p class="highlight-link"><a href="javascript:Documentation.' +
+                    'hideSearchWords()">' + _('Hide Search Matches') + '</a></p>')
+                      .appendTo($('#searchbox'));
+
+  [4] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:19
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * @param {{github: !object, context: !object}} args - The GitHub API and context objects.
+             */
+        >>> module.exports = async ({github, context}) => {
+              const fs = require('fs');
+              const output = fs.readFileSync('ssl_output.txt', 'utf8');
+
+  [5] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Find existing open issues created by this workflow
+        >>>   const issues = await github.rest.issues.listForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+
+  [6] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:36
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        '### SSL Certificate Warning', '',
+                'The automated monitor has detected SSL issues.', '',
+        >>>     '#### Details:', '```', output, '```', '', '**Action Required:**',
+                '1. Check `.github/config/ssl_domains.yaml` to verify the domain list.',
+                '2. Renew the certificates.', '',
+
+  [7] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (existingIssue) {
+        >>>     await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [8] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:49
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        repo: context.repo.repo,
+                  issue_number: existingIssue.number,
+        >>>       body: 'SSL check failed again. Latest status:\n\n' + body
+                });
+              } else {
+
+  [9] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\manage_ssl_issue.js:52
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        });
+              } else {
+        >>>     await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+
+  [10] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:226
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        * Search Module
+             */
+        >>> var Search = {
+            
+              _index : null,
+
+  [11] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:242
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        loadIndex : function(url) {
+        >>>     $.ajax({type: "GET", url: url, data: null, success: null,
+                        dataType: "script", cache: true});
+              },
+
+  [12] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:435
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (results.length) {
+                    var item = results.pop();
+        >>>         var listItem = $('<li style="display:none"></li>');
+                    if (DOCUMENTATION_OPTIONS.FILE_SUFFIX == '') {
+                      // dirhtml builder
+
+  [13] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:45
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Stemmer = function() {
+            
+        >>>   var step2list = {
+                ational: 'ate',
+                tional: 'tion',
+
+  [14] 项目: Bazel
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\Bazel\js\searchtools.js:69
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        };
+            
+        >>>   var step3list = {
+                icate: 'ic',
+                ative: '',
+
+  [15] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:31
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        /* Displays the details about how to use this script. */
+        >>> function usage() {
+            	var txt;
+
+  [16] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:34
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var txt;
+            
+        >>> 	txt = "Usage:\n";
+            	txt += "  cscript " + WScript.ScriptName + " <options>\n";
+            	txt += "  cscript " + WScript.ScriptName + " help\n\n";
+
+  [17] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:39
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "Options can be specified in the form <option>=<value>, where the value is\n";
+            	txt += "either 'yes' or 'no', if not stated otherwise.\n\n";
+        >>> 	txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+            	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+
+  [18] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\configure.js:41
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        txt += "\nModbus library configure options, default value given in parentheses:\n\n";
+            	txt += "  dry-run:  Run configure without creating files (" + (dryRun ? "yes" : "no")  + ")\n";
+        >>> 	txt += "\nWin32 build options, default value given in parentheses:\n\n";
+            	txt += "  compiler: Compiler to be used [msvc|mingw] (" + compiler + ")\n";
+            	WScript.Echo(txt);
+
+  [19] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:210
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Parser
+            
+        >>>   var atomicTypes = {"atom": true, "number": true, "variable": true, "string": true, "regexp": true, "this": true, "jsonld-keyword": true};
+            
+              function JSLexical(indented, column, type, align, prev, info) {
+
+  [20] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:25
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var keywords = function(){
+        >>>     function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+                var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+
+  [21] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:253
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Combinator utils
+            
+        >>>   var cx = {state: null, column: null, marked: null, cc: null};
+              function pass() {
+                for (var i = arguments.length - 1; i >= 0; i--) cx.cc.push(arguments[i]);
+
+  [22] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:27
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        function kw(type) {return {type: type, style: "keyword"};}
+                var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
+        >>>     var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+                return {
+
+  [23] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:29
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var operator = kw("operator"), atom = {type: "atom", style: "atom"};
+            
+        >>>     return {
+                  "if": kw("if"), "while": A, "with": A, "else": B, "do": B, "try": B, "finally": B,
+                  "return": D, "break": D, "continue": D, "new": kw("new"), "delete": C, "void": C, "throw": C,
+
+  [24] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:802
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        // Interface
+            
+        >>>   return {
+                startState: function(basecolumn) {
+                  var state = {
+
+  [25] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:804
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        return {
+                startState: function(basecolumn) {
+        >>>       var state = {
+                    tokenize: tokenBase,
+                    lastType: "sof",
+
+  [26] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:862
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        },
+            
+        >>>     electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
+                blockCommentStart: jsonMode ? null : "/*",
+                blockCommentEnd: jsonMode ? null : "*/",
+
+  [27] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:890
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-javascript", "javascript");
+            CodeMirror.defineMIME("application/ecmascript", "javascript");
+        >>> CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+
+  [28] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:891
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ecmascript", "javascript");
+            CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+
+  [29] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:892
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+        >>> CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [30] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:893
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
+            CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+        >>> CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+            CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+
+  [31] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\javascript.js:894
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        CodeMirror.defineMIME("application/ld+json", {name: "javascript", jsonld: true});
+            CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+        >>> CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });
+            
+            });
+
+  [32] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:134
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (oldConfig || typeof config == "boolean") {
+                  if (!oldConfig) {
+        >>>         config = config ? {strict: true} : null
+                  } else {
+                    oldConfig.strict = config
+
+  [33] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:17
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var Pos = CodeMirror.Pos;
+            
+        >>>   var matching = {"(": ")>", ")": "(<", "[": "]>", "]": "[<", "{": "}>", "}": "{<"};
+            
+              function findMatchingBracket(cm, where, config) {
+
+  [34] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:38
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var found = scanForBracket(cm, Pos(where.line, pos + (dir > 0 ? 1 : 0)), dir, style || null, config);
+                if (found == null) return null;
+        >>>     return {from: Pos(where.line, pos), to: found && found.pos,
+                        match: found && found.ch == match.charAt(0), forward: dir > 0};
+              }
+
+  [35] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:68
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        var match = matching[ch];
+                      if ((match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
+        >>>           else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
+                      else stack.pop();
+                    }
+
+  [36] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:84
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
+                    var style = match.match ? "CodeMirror-matchingbracket" : "CodeMirror-nonmatchingbracket";
+        >>>         marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+                      marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+
+  [37] 项目: OpenPLC
+      规则: javascript-horizontal-whitespace-after-colon
+      语言: javascript
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\js\matchbrackets.js:86
+      描述: Require a space after the colon in an object literal key-value pair.
+      置信度: 3.50
+      代码片段:
+        marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
+                    if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
+        >>>           marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+                  }
+                }
+
+  [38] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:110
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self._set_default(default)
+            
+        >>>   @property
+              def value(self):
+                return self._value
+
+  [39] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\_flag.py:114
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._value
+            
+        >>>   @value.setter
+              def value(self, value):
+                self._value = value
+
+  [40] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1343
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return True
+            
+        >>>   @typing.overload
+              def assertRaisesWithPredicateMatch(
+                  self, expected_exception, predicate) -> _AssertRaisesContext:
+
+  [41] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1350
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._AssertRaisesContext(None, None, None)
+            
+        >>>   @typing.overload
+              def assertRaisesWithPredicateMatch(
+                  self, expected_exception, predicate, callable_obj: Callable[..., Any],
+
+  [42] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1386
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        callable_obj(*args, **kwargs)
+            
+        >>>   @typing.overload
+              def assertRaisesWithLiteralMatch(
+                  self, expected_exception, expected_exception_message
+
+  [43] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:1394
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._AssertRaisesContext(None, None, None)
+            
+        >>>   @typing.overload
+              def assertRaisesWithLiteralMatch(
+                  self, expected_exception, expected_exception_message,
+
+  [44] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:2231
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        shadowed_setupclass = test_case_class.__dict__.get('setUpClass', None)
+            
+        >>>     @classmethod
+                def replacement_setupclass(cls, *args, **kwargs):
+                  # Skip this class if it is the one that was decorated with @skipThisClass
+
+  [45] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:316
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self._path = path
+            
+        >>>   @property
+              def full_path(self):
+                # type: () -> Text
+
+  [46] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:398
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # pylint: disable=line-too-long
+        >>>   @classmethod
+              def _create(cls, base_path, file_path, content, mode, encoding, errors):
+                # type: (Text, Optional[Text], AnyStr, Text, Text, Text) -> Tuple[_TempFile, Text]
+
+  [47] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:431
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return tf, cleanup_path
+            
+        >>>   @property
+              def full_path(self):
+                # type: () -> Text
+
+  [48] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:534
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # Literal to express more precise return types. The contained type is
+              # currently `Any` to avoid [bad-return-type] errors in the open_* methods.
+        >>>   @contextlib.contextmanager
+              def _open(
+                  self, mode: str, encoding: str = 'utf8', errors: str = 'strict'
+
+  [49] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:608
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self.addCleanup(self._exit_stack.close)
+            
+        >>>   @classmethod
+              def setUpClass(cls):
+                super(TestCase, cls).setUpClass()
+
+  [50] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:727
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return tf
+            
+        >>>   @_method
+              def enter_context(self, manager):
+                # type: (ContextManager[_T]) -> _T
+
+  [51] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:758
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._exit_stack.enter_context(manager)
+            
+        >>>   @enter_context.classmethod
+              def enter_context(cls, manager):  # pylint: disable=no-self-argument
+                # type: (ContextManager[_T]) -> _T
+
+  [52] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\absltest.py:767
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return cls._cls_exit_stack.enter_context(manager)
+            
+        >>>   @classmethod
+              def _get_tempdir_path_cls(cls):
+                # type: () -> Text
+
+  [53] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:535
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # to the class attribute's value.
+            
+        >>>   @classmethod
+              def set_default_xml_stream(cls, xml_stream):
+                """Sets the default XML stream for the class.
+
+  [54] 项目: Bazel
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Bazel\python\xml_reporter.py:556
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        testsuites_properties=self._testsuites_properties)
+            
+        >>>   @classmethod
+              def set_testsuites_property(cls, key, value):
+                cls._testsuites_properties[key] = value
+
+  [55] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\chatgpt_oauth.py:99
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self.model_dump_json()
+            
+        >>>     @classmethod
+                def from_json(cls, json_str: str) -> "ChatGPTOAuthCredentials":
+                    """Deserialize from JSON string stored in api_key_enc."""
+
+  [56] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:125
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self.client_skills: list = []
+            
+        >>>     @trace_method
+                async def step_until_request(
+                    self,
+
+  [57] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:233
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @trace_method
+                async def resume_step_after_request(self, letta_batch_id: str, llm_batch_id: str) -> LettaBatchResponse:
+                    log_event(name="load_context")
+
+  [58] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:272
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @trace_method
+                async def _collect_resume_context(self, llm_batch_id: str) -> _ResumeContext:
+                    """
+
+  [59] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:396
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return cfg, env
+            
+        >>>     @trace_method
+                async def _execute_tools(self, ctx: _ResumeContext) -> Sequence[tuple[str, ToolExecutionResult]]:
+                    sbx_cfg, sbx_env = await self._build_sandbox()
+
+  [60] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\letta_agent_batch.py:427
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return await pool.map(execute_tool_wrapper, tool_params)
+            
+        >>>     @trace_method
+                async def _bulk_rethink_memory_async(self, params: List[ToolExecutionParams]) -> Sequence[tuple[str, ToolExecutionResult]]:
+                    updates = {}
+
+  [61] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:110
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: Optional[str]) -> Optional[str]:
+
+  [62] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:128
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: Optional[str]) -> Optional[str]:
+
+  [63] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:40
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: str) -> str:
+
+  [64] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\mcp_server-1.py:56
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        custom_headers: Optional[dict[str, str]] = Field(None, description="Custom HTTP headers to include with requests")
+            
+        >>>     @field_validator("server_url")
+                @classmethod
+                def validate_server_url(cls, v: str) -> str:
+
+  [65] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:102
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self["id"] = id
+            
+        >>>     @property
+                def response_ms(self) -> Optional[int]:
+                    return self._response_ms
+
+  [66] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:162
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return reduce_value
+            
+        >>>     @classmethod
+                def construct_from(
+                    cls,
+
+  [67] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:211
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self._previous = values
+            
+        >>>     @classmethod
+                def api_base(cls):
+                    return None
+
+  [68] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:35
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        self.data = data
+            
+        >>>     @property
+                def request_id(self) -> Optional[str]:
+                    return self._headers.get("request-id")
+
+  [69] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:351
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return d
+            
+        >>>     @property
+                def openai_id(self):
+                    return self.id
+
+  [70] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:355
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self.id
+            
+        >>>     @property
+                def typed_api_type(self):
+                    # return ApiType.from_str(self.api_type) if self.api_type else ApiType.from_str(openai.api_type)
+
+  [71] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:39
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._headers.get("request-id")
+            
+        >>>     @property
+                def organization(self) -> Optional[str]:
+                    return self._headers.get("OpenAI-Organization")
+
+  [72] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\openai_object.py:43
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return self._headers.get("OpenAI-Organization")
+            
+        >>>     @property
+                def response_ms(self) -> Optional[int]:
+                    h = self._headers.get("Openai-Processing-Ms")
+
+  [73] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:123
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        """Test the Modal Version Manager."""
+            
+        >>>     @pytest.mark.asyncio
+                async def test_register_and_get_deployment(self):
+                    """Test registering and retrieving deployments."""
+
+  [74] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:165
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        assert retrieved.version_hash == info.version_hash
+            
+        >>>     @pytest.mark.asyncio
+                async def test_needs_redeployment(self):
+                    """Test checking if redeployment is needed."""
+
+  [75] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:217
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        assert await manager.needs_redeployment("tool-def45678", "v2", "config-123", actor=mock_actor) is True
+            
+        >>>     @pytest.mark.skip(reason="get_deployment_stats method not implemented in ModalVersionManager")
+                @pytest.mark.asyncio
+                async def test_deployment_stats(self):
+
+  [76] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:265
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        assert "deployments" in stats
+            
+        >>>     @pytest.mark.skip(reason="export_state and import_state methods not implemented in ModalVersionManager")
+                @pytest.mark.asyncio
+                async def test_export_import_state(self):
+
+  [77] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:331
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        """Test the AsyncToolSandboxModalV2 class."""
+            
+        >>>     @pytest.fixture
+                def mock_tool(self):
+                    """Create a mock tool for testing."""
+
+  [78] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:353
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @pytest.fixture
+                def mock_user(self):
+                    """Create a mock user for testing."""
+
+  [79] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:360
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return user
+            
+        >>>     @pytest.fixture
+                def mock_sandbox_config(self):
+                    """Create a mock sandbox configuration."""
+
+  [80] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\test_modal_sandbox_v2.py:449
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        assert app_name == mock_tool.id[:40]
+            
+        >>>     @pytest.mark.asyncio
+                async def test_run_with_mocked_modal(self, mock_tool, mock_user, mock_sandbox_config):
+                    """Test the run method with mocked Modal components."""
+
+  [81] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:140
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        prompt_template: Optional[str] = Field(default=None, description="Optional template string (ignored).")
+            
+        >>>     @property
+                def requires_force_tool_call(self) -> bool:
+                    """Parent tool rules require forcing tool calls."""
+
+  [82] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:175
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        prompt_template: Optional[str] = Field(default=None, description="Optional template string (ignored).")
+            
+        >>>     @property
+                def requires_force_tool_call(self) -> bool:
+                    """Conditional tool rules require forcing tool calls."""
+
+  [83] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:228
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return f"<tool_rule>\n{self.tool_name} will determine which tool to use next based on its output\n</tool_rule>"
+            
+        >>>     @field_validator("child_output_mapping")
+                @classmethod
+                def validate_child_output_mapping(cls, v):
+
+  [84] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:269
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @property
+                def requires_force_tool_call(self) -> bool:
+                    """Initial tool rules require forcing tool calls."""
+
+  [85] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:39
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return None
+            
+        >>>     @property
+                def requires_force_tool_call(self) -> bool:
+                    """Whether this tool rule requires forcing a tool call in the LLM request when active.
+
+  [86] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tool_rule.py:81
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @property
+                def requires_force_tool_call(self) -> bool:
+                    """Child tool rules require forcing tool calls."""
+
+  [87] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1052
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                # TODO: Once existing TPUF namespaces are backfilled with is_deleted attribute,
+                # add is_deleted=False filter to query_messages_by_agent_id and query_messages_by_org_id.
+
+  [88] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1561
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return sorted_results[:top_k]
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_passage(self, archive_id: str, passage_id: str) -> bool:
+
+  [89] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1583
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_passages(self, archive_id: str, passage_ids: List[str]) -> bool:
+
+  [90] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1608
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_all_passages(self, archive_id: str) -> bool:
+
+  [91] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1627
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_messages(self, agent_id: str, organization_id: str, message_ids: List[str]) -> bool:
+
+  [92] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1652
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_all_messages(self, agent_id: str, organization_id: str) -> bool:
+
+  [93] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1676
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # file/source passage methods
+            
+        >>>     @trace_method
+                async def _get_file_passages_namespace_name(self, organization_id: str) -> str:
+                    """Get namespace name for file passages (org-scoped).
+
+  [94] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1694
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return namespace_name
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def insert_file_passages(
+
+  [95] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1810
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                async def query_file_passages(
+                    self,
+
+  [96] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1950
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return passages_with_scores
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_file_passages(self, source_id: str, file_id: str, organization_id: str) -> bool:
+
+  [97] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:1978
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_source_passages(self, source_id: str, organization_id: str) -> bool:
+
+  [98] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:2002
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # tool methods
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def delete_tools(self, organization_id: str, tool_ids: List[str]) -> bool:
+
+  [99] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:2035
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                async def query_tools(
+                    self,
+
+  [100] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:284
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        )
+            
+        >>>     @trace_method
+                async def _generate_embeddings(self, texts: List[str], actor: "PydanticUser") -> List[List[float]]:
+                    """Generate embeddings using the default embedding configuration.
+
+  [101] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:311
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return embeddings
+            
+        >>>     @trace_method
+                async def _get_archive_namespace_name(self, archive_id: str) -> str:
+                    """Get namespace name for a specific archive."""
+
+  [102] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:316
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return await self.archive_manager.get_or_set_vector_db_namespace_async(archive_id)
+            
+        >>>     @trace_method
+                async def _get_message_namespace_name(self, organization_id: str) -> str:
+                    """Get namespace name for messages (org-scoped).
+
+  [103] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:334
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return namespace_name
+            
+        >>>     @trace_method
+                async def _get_tool_namespace_name(self, organization_id: str) -> str:
+                    """Get namespace name for tools (org-scoped).
+
+  [104] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:398
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return json.dumps(parts)
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def insert_tools(
+
+  [105] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:489
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def insert_archival_memories(
+
+  [106] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:640
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def insert_messages(
+
+  [107] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:789
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                @async_retry_with_backoff()
+                async def _execute_query(
+
+  [108] 项目: Letta
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\Letta\python\tpuf_client.py:908
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        raise
+            
+        >>>     @trace_method
+                async def query_passages(
+                    self,
+
+  [109] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:132
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # verify existing users individually
+        >>> @restapi_bp.route("/get-user-info/<int:user_id>", methods=["GET"])
+            @jwt_required()
+            def get_user_info(user_id):
+
+  [110] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:173
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # password change for specific user by any authenticated user
+        >>> @restapi_bp.route("/password-change/<int:user_id>", methods=["PUT"])
+            @jwt_required()
+            def change_password(user_id):
+
+  [111] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:201
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # delete a user by ID
+        >>> @restapi_bp.route("/delete-user/<int:user_id>", methods=["DELETE"])
+            @jwt_required()
+            def delete_user(user_id):
+
+  [112] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:239
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        # logout endpoint
+        >>> @restapi_bp.route("/logout", methods=["POST"])
+            @jwt_required()
+            def logout():
+
+  [113] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:254
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @restapi_bp.route("/<command>", methods=["GET"])
+            @jwt_required()
+            def restapi_plc_get(command):
+
+  [114] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:270
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @restapi_bp.route("/<command>", methods=["POST"])
+            @jwt_required()
+            def restapi_plc_post(command):
+
+  [115] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:33
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @restapi_bp.after_request
+            def add_runtime_version_header(response):
+                """Add runtime version header to all API responses for version detection."""
+
+  [116] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:45
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        jwt_blacklist = set()
+            
+        >>> @jwt.token_in_blocklist_loader
+            def check_if_token_revoked(jwt_header, jwt_payload):
+                jti = jwt_payload["jti"]
+
+  [117] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:79
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @jwt.user_identity_loader
+            def user_identity_lookup(user):
+                return str(user.id)
+
+  [118] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\restapi.py:83
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        return str(user.id)
+            
+        >>> @jwt.user_lookup_loader
+            def user_lookup_callback(_jwt_header, jwt_data):
+                identity = jwt_data["sub"]
+
+  [119] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2592
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @login_manager.unauthorized_handler
+            def unauthorized_handler():
+                return 'Unauthorized'
+
+  [120] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:528
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @login_manager.user_loader
+            def user_loader(username):
+                database = "openplc.db"
+
+  [121] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:556
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @login_manager.request_loader
+            def request_loader(request):
+                username = request.form.get('username')
+
+  [122] 项目: OpenPLC
+      规则: python-decorator-judicious-use
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:587
+      描述: Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.
+      置信度: 3.50
+      代码片段:
+        >>> @app.before_request
+            def before_request():
+                flask.session.permanent = True
+
+  [123] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\openplc.py:223
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        try:
+                        if (self.compilation_object != None):
+        >>>                 if (self.compilation_object.end_of_stream == False):
+                                return "Compiling"
+                    except Exception as e:
+
+  [124] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1064
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/upload-program-action', methods=['GET', 'POST'])
+            def upload_program_action():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [125] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1110
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def compile_program():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [126] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1142
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/compilation-logs', methods=['GET', 'POST'])
+            def compilation_logs():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [127] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1150
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/modbus', methods=['GET', 'POST'])
+            def modbus():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [128] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1258
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/add-modbus-device', methods=['GET', 'POST'])
+            def add_modbus_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [129] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1377
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/modbus-edit-device', methods=['GET', 'POST'])
+            def modbus_edit_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [130] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1552
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/delete-device', methods=['GET', 'POST'])
+            def delete_device():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [131] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1577
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/monitoring', methods=['GET', 'POST'])
+            def monitoring():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [132] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1708
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/monitor-update', methods=['GET', 'POST'])
+            def monitor_update():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [133] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1757
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-write', methods=['GET', 'POST'])
+            def point_write():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [134] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1767
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-info', methods=['GET', 'POST'])
+            def point_info():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [135] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1844
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/point-update', methods=['GET', 'POST'])
+            def point_update():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [136] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1881
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/hardware', methods=['GET', 'POST'])
+            def hardware():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [137] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1967
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/restore_custom_hardware')
+            def restore_custom_hardware():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [138] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:1980
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/users')
+            def users():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [139] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2048
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/add-user', methods=['GET', 'POST'])
+            def add_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [140] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2118
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/edit-user', methods=['GET', 'POST'])
+            def edit_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [141] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2252
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/delete-user', methods=['GET', 'POST'])
+            def delete_user():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [142] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2284
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/settings', methods=['GET', 'POST'])
+            def settings():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [143] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:2584
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/logout')
+            def logout():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [144] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:645
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def start_plc():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [145] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:660
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def stop_plc():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [146] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:672
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def runtime_logs():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [147] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:681
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        def dashboard():
+                global openplc_runtime
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [148] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:727
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/programs', methods=['GET', 'POST'])
+            def programs():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [149] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:810
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/reload-program', methods=['GET', 'POST'])
+            def reload_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [150] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:871
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/update-program', methods=['GET', 'POST'])
+            def update_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [151] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:922
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/update-program-action', methods=['GET', 'POST'])
+            def update_program_action():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [152] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:958
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/remove-program', methods=['GET', 'POST'])
+            def remove_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [153] 项目: OpenPLC
+      规则: python-no-boolean-false-comparison
+      语言: python
+      位置: D:\Sepc2Checker\test_cases\OpenPLC\python\webserver.py:983
+      描述: Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.
+      置信度: 3.50
+      代码片段:
+        @app.route('/upload-program', methods=['GET', 'POST'])
+            def upload_program():
+        >>>     if (flask_login.current_user.is_authenticated == False):
+                    return flask.redirect(flask.url_for('login'))
+                else:
+
+  [154] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1043
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Regression test for b/191070494.
+        >>> function test_aquery_include_param_files_tree_artifact_writes_unexpanded_dir() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [155] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1083
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_include_param_file_not_enabled_by_default() {
+              add_rules_cc MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [156] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1108
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_cpp_action_template_treeartifact_output() {
+              add_rules_cc MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [157] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1175
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_single_aspect() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [158] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1261
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        >>> function test_aquery_aspect_on_aspect() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [159] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:136
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_basic_aquery_commands() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [160] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1386
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_skyframe_state_no_filter_no_previous_build_empty() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [161] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1399
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_skyframe_state_wrong_syntax() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [162] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1413
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_skyframe_state_no_filter_with_previous_build() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [163] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1443
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_skyframe_state_with_filter_with_previous_build() {
+              cat > MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [164] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1476
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        assert_only_action_foo_textproto output
+            }
+        >>> function test_aquery_textproto_skyframe_state() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [165] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1509
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_json_skyframe_state() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [166] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1539
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_json_skyframe_state_invalid_format() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [167] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:155
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_basic_aquery_proto() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [168] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1558
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_dump_skyframe_state_after_build_default_output() {
+                local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [169] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1582
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_dump_skyframe_state_after_build_to_specified_file() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [170] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1606
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_dump_skyframe_state_after_build_invalid_format() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [171] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1626
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_summary_output() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [172] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1647
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_include_template_substitution_for_template_expand_of_py_binary() {
+              add_rules_python "MODULE.bazel"
+              local pkg="${FUNCNAME[0]}"
+
+  [173] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1677
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_include_template_substitution_for_template_expand_action() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [174] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1733
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Cre: @keith https://github.com/bazelbuild/bazel/pull/17682
+        >>> function test_aquery_multiple_expand_templates() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [175] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1803
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # vehicle for testing lower-level logic.
+            # TODO(b/205978333): Find a better home for this test case.
+        >>> function test_starlark_action_with_reqs_has_deterministic_action_key() {
+              local -r pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [176] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1832
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_execution_info() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [177] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1865
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_unicode_text() {
+              # Bazel relies on the JVM for filename encoding, and can only support
+              # UTF-8 if either a UTF-8 or ISO-8859-1 locale is available.
+
+  [178] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1899
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_file_write() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [179] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:191
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_basic_aquery_jsonproto() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [180] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1936
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_file_write_is_executable() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [181] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:1977
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_source_symlink_manifest() {
+              add_rules_shell "MODULE.bazel"
+              local pkg="${FUNCNAME[0]}"
+
+  [182] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:2006
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_does_not_fail_horribly_with_file() {
+              rm -rf peach
+              mkdir -p peach
+
+  [183] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:2025
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_cpp_compile_action_env() {
+              add_rules_cc MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [184] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:2051
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # TODO(bazel-team): The non-text aquery output formats don't correctly handle
+            # non-ASCII fields (input/output paths, environment variables, etc).
+        >>> function DISABLED_test_unicode_textproto() {
+              # Bazel relies on the JVM for filename encoding, and can only support
+              # UTF-8 if either a UTF-8 or ISO-8859-1 locale is available.
+
+  [185] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:2087
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Usage: assert_matches expected_pattern actual
+        >>> function assert_matches() {
+              [[ "$2" =~ $1 ]] || fail "Expected to match '$1', was: $2"
+            }
+
+  [186] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:221
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_include_artifacts() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [187] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:249
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_prunable_headers() {
+              add_rules_cc MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [188] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:33
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        add_to_bazelrc "build --package_path=%workspace%"
+            
+        >>> function set_up() {
+              add_rules_java MODULE.bazel
+            }
+
+  [189] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:37
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function has_iso_8859_1_locale() {
+              charmap="$(LC_ALL=en_US.ISO-8859-1 locale charmap 2>/dev/null)"
+              [[ "${charmap}" == "ISO-8859-1" ]]
+
+  [190] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:377
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # stored in the action cache (not in memory), so aquery cannot know which inputs
+            # are used.
+        >>> function test_unused_inputs() {
+              add_rules_shell "MODULE.bazel"
+
+  [191] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:42
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function has_utf8_locale() {
+              charmap="$(LC_ALL=en_US.UTF-8 locale charmap 2>/dev/null)"
+              [[ "${charmap}" == "UTF-8" ]]
+
+  [192] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:468
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_starlark_env() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [193] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:47
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function assert_only_action_foo() {
+              expect_log_n "^action '" 1 "Expected exactly one action."
+              assert_contains "action.*foo" $1
+
+  [194] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:509
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_aspect() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [195] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:61
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function assert_only_action_foo_textproto() {
+              expect_log_once "actions {"
+              assert_contains "input_dep_set_ids: 1" $1
+
+  [196] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:613
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_all_filters_only_match_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [197] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:658
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_inputs_filter_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [198] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:689
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_outputs_filter_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [199] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:69
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_basic_aquery() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [200] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:720
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_mnemonic_filter_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [201] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:750
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_inputs_filter_exact_filename_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [202] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:781
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_outputs_filter_exact_filename_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [203] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:812
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_mnemonic_filter_exact_mnemonic_only_mach_foo() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [204] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:842
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_filters_non_aquery_enclosing_function_query_error() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [205] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:863
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_filters_chain_inputs_only_match_one() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [206] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:900
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_filters_chain_outputs_only_match_one() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [207] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:938
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_filters_chain_mnemonic_only_match_one() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [208] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:969
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_noinclude_artifacts() {
+              add_rules_cc MODULE.bazel
+              local pkg="${FUNCNAME[0]}"
+
+  [209] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:99
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_basic_aquery_text() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [210] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aquery_test.sh:992
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aquery_include_param_file_starlark_rule() {
+              local pkg="${FUNCNAME[0]}"
+              mkdir -p "$pkg" || fail "mkdir -p $pkg"
+
+  [211] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1001
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # with value p_v2 to its parameter p. So aspect_a should run twice on dependency
+            # dep_target, once with each parameter value.
+        >>> function test_top_level_aspects_parameters_with_same_aspect_propagated_from_rule() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [212] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:103
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_required_providers_with_toplevel_aspects() {
+              local package="a"
+              mkdir -p "${package}"
+
+  [213] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1047
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_top_level_aspects_parameters_invalid_multiple_param_values() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [214] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1100
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_int_top_level_aspects_parameters_invalid_value() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [215] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1152
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_runs_once_with_diff_order_in_base_aspects() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [216] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1235
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_on_target_with_exec_gp() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [217] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1294
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_on_aspect_with_exec_gp() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [218] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1367
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_on_aspect_with_missing_exec_gp() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [219] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1439
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_with_missing_attr() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [220] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1466
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_on_aspect_propagate_to_underlying_aspect_dep() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [221] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1573
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_reruns_on_target_with_changed_dep() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [222] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1651
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_merge_of_aspects_and_rule_conflicting_attributes() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [223] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:172
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_required_providers_default_no_required_providers() {
+              local package="a"
+              mkdir -p "${package}"
+
+  [224] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1787
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_propagation_to_target_toolchain_deps() {
+              local toolchains_package="test_toolchains"
+              mkdir -p "${toolchains_package}"
+
+  [225] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1901
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_default_info_files_generated() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [226] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1950
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Regression test for https://github.com/bazelbuild/bazel/issues/22691.
+        >>> function test_aspect_in_non_existent_overridden_repo() {
+              if [[ "$PRODUCT_NAME" != "bazel" ]]; then
+                return 0
+
+  [227] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:1983
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_exec_aspect() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [228] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:2047
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_failing_exec_aspect_plus_allow_list() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [229] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:237
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_required_providers_flat_set_of_required_providers() {
+              local package="a"
+              mkdir -p "${package}"
+
+  [230] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:326
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_required_providers_with_list_of_required_providers_lists() {
+              local package="a"
+              mkdir -p "${package}"
+
+  [231] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:428
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspects_propagating_other_aspects() {
+              local package="a"
+              mkdir -p "${package}"
+
+  [232] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:48
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Does not crash deterministically, because if the configured target's cycle is
+            # reported first, the aspect loading key's cycle is suppressed.
+        >>> function test_cycle_under_command_line_aspect() {
+              mkdir -p test
+              cat > test/aspect.bzl << 'EOF' || fail "Couldn't write aspect.bzl"
+
+  [233] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:507
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspects_propagating_other_aspects_stack_of_required_aspects() {
+              add_rules_cc MODULE.bazel
+              local package="pkg"
+
+  [234] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:588
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_has_access_to_aspect_hints_attribute_in_native_rules() {
+              local package="aspect_hints"
+              mkdir -p "${package}"
+
+  [235] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:625
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_has_access_to_aspect_hints_attribute_in_starlark_rules() {
+              local package="aspect_hints"
+              mkdir -p "${package}"
+
+  [236] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:636
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function setup_aspect_hints() {
+              local package="$1"
+              mkdir -p "${package}"
+
+  [237] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:645
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function create_aspect_hints_BUILD_file() {
+              local package="$1"
+              mkdir -p "${package}"
+
+  [238] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:671
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function create_aspect_hints_rule_and_aspect() {
+              local package="$1"
+              mkdir -p "${package}"
+
+  [239] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:733
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function create_aspect_hints_custom_rule() {
+              local package="$1"
+              mkdir -p "${package}"
+
+  [240] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:752
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function create_aspect_hints_cc_files() {
+              local package="$1"
+              mkdir -p "${package}"
+
+  [241] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:775
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_requires_aspect_no_providers_duplicates() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [242] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:79
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # preferred.
+            # TODO: b/380281737 - Re-enable when not flaky
+        >>> function disabled_test_aspect_on_target_with_analysis_failure() {
+              mkdir -p test
+              cat > test/aspect.bzl << 'EOF' || fail "Couldn't write aspect.bzl"
+
+  [243] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:850
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # test that although a required aspect runs once on a target, it can still keep
+            # propagating while inheriting its main aspect attr_aspects
+        >>> function test_aspect_requires_aspect_no_providers_duplicates_2() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [244] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\aspect_test.sh:933
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_top_level_aspects_parameters() {
+              local package="test"
+              mkdir -p "${package}"
+
+  [245] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:101
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Native rules
+            #
+        >>> function test_cpp() {
+              local cpp_pkg=examples/cpp
+              assert_build_output \
+
+  [246] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:120
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_cpp_with_msys_gcc() {
+              local cpp_pkg=examples/cpp
+              assert_build_output \
+
+  [247] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:140
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_cpp_with_mingw_gcc() {
+              local cpp_pkg=examples/cpp
+              ( # /mingw64/bin should be in PATH because during runtime the built binary
+
+  [248] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:173
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_cpp_alwayslink() {
+              mkdir -p cpp/main
+              cat >cpp/main/BUILD <<EOF
+
+  [249] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:217
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_java() {
+              add_rules_java "MODULE.bazel"
+              local java_pkg=examples/java-native/src/main/java/com/example/myproject
+
+  [250] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:228
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function create_tmp_drive() {
+              mkdir "$TEST_TMPDIR/tmp_drive"
+
+  [251] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:248
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function delete_tmp_drive() {
+              if [ -n "${TMP_DRIVE}" ]; then
+                subst ${TMP_DRIVE}: /D
+
+  [252] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:254
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_java_with_jar_under_different_drive() {
+              create_tmp_drive
+
+  [253] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:266
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_java_test() {
+              setup_javatest_support
+              local java_native_tests=//examples/java-native/src/test/java/com/example/myproject
+
+  [254] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:281
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_native_python() {
+              add_rules_python "MODULE.bazel"
+              # On windows, we build a python executable zip as the python binary
+
+  [255] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:304
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # default on your system. See this pull request for an example:
+            # https://github.com/bazelbuild/continuous-integration/pull/1216
+        >>> function test_native_python_with_runfiles() {
+              add_rules_python "MODULE.bazel"
+              BUILD_FLAGS="--enable_runfiles --build_python_zip=0"
+
+  [256] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:330
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_native_python_with_python3() {
+              PYTHON3_PATH=${PYTHON3_PATH:-/c/Program Files/Anaconda3}
+              if [ ! -x "${PYTHON3_PATH}/python.exe" ]; then
+
+  [257] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:342
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_python_test_with_data() {
+              add_rules_python "MODULE.bazel"
+              touch BUILD
+
+  [258] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:53
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        setup_javabase
+            
+        >>> function set_up() {
+              copy_examples
+              setup_bazelrc
+
+  [259] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\bazel_windows_example_test.sh:85
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # An assertion that execute a binary from a sub directory (to test runfiles)
+        >>> function assert_binary_run_from_subdir() {
+                ( # Needed to make execution from a different path work.
+                export PATH=${bazel_javabase}/bin:"$PATH" &&
+
+  [260] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:182
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_legacy_make_variable() {
+              write_crosstool \
+                "" \
+
+  [261] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:193
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_sysroot() {
+              write_crosstool \
+                "" \
+
+  [262] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:204
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_feature_config() {
+              write_crosstool \
+                "
+
+  [263] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:22
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        || { echo "integration_test_setup.sh not found!" >&2; exit 1; }
+            
+        >>> function set_up() {
+              create_new_workspace
+              add_rules_cc "MODULE.bazel"
+
+  [264] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:224
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_all_sources() {
+              write_crosstool \
+                "
+
+  [265] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:27
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function write_test_target() {
+              cat > BUILD <<EOF
+            load("@bazel_tools//tools/cpp:cc_flags_supplier.bzl", "cc_flags_supplier")
+
+  [266] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\cc_flags_supplier_test.sh:50
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function write_crosstool() {
+              action_configs="$1"
+              make_variables="$2"
+
+  [267] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:142
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_target_exec_properties_cc() {
+              add_rules_cc MODULE.bazel
+              local -r pkg=${FUNCNAME[0]}
+
+  [268] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:183
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_target_exec_properties_cc_test() {
+              add_rules_cc MODULE.bazel
+              local -r pkg=${FUNCNAME[0]}
+
+  [269] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:220
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_target_test_properties_sh_test() {
+              add_rules_shell "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [270] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:256
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_execgroup_properties_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [271] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:293
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_starlark_test_has_test_execgroup_by_default() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [272] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:342
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_starlark_test_can_define_test_execgroup_manually() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [273] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:395
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_execgroup_properties_nongroup_override_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [274] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:449
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_execgroup_properties_group_override_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [275] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:48
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # all use the pkg=${FUNCNAME[0]} variable.
+            
+        >>> function test_target_exec_properties_starlark() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [276] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:488
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_execgroup_properties_override_group_and_default_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [277] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:544
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_execgroup_properties_test_inherits_default() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [278] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:593
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_platform_properties_only_applied_for_relevant_execgroups_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [279] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:625
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_cannot_set_properties_for_irrelevant_execgroup_on_target_cc_test() {
+              add_rules_cc "MODULE.bazel"
+              local -r pkg=${FUNCNAME[0]}
+
+  [280] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:647
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function write_toolchains_for_exec_group_tests() {
+              mkdir -p ${pkg}/platform
+              cat >> ${pkg}/platform/toolchain.bzl <<EOF
+
+  [281] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:720
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_exec_groups_inherit_toolchains() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [282] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:780
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_aspect_exec_groups_different_toolchains() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [283] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:866
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Test basic inheritance of constraints and toolchains on a single rule.
+        >>> function test_exec_group_rule_constraint_inheritance() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [284] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:926
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        # Test basic inheritance of constraints and toolchains with a target.
+        >>> function test_exec_group_target_constraint_inheritance() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [285] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:93
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        >>> function test_target_exec_properties_starlark_test() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [286] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\exec_group_test.sh:982
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_override_exec_group_of_test() {
+              local -r pkg=${FUNCNAME[0]}
+              mkdir $pkg || fail "mkdir $pkg"
+
+  [287] 项目: Bazel
+      规则: shell-parentheses-required
+      语言: shell
+      位置: D:\Sepc2Checker\test_cases\Bazel\sh\flagset_test.sh:106
+      描述: Parentheses are required after the function name.
+      置信度: 5.00
+      代码片段:
+        }
+            
+        >>> function test_scl_config_plus_expanded_command_line_flag_fails(){
+              set_up_project_file
+              bazel build --nobuild //test:test --enforce_project_configs --scl_config=test_config --experimental_enable_scl_dialect -c opt &> "$TEST_log" && \
+  ------------------------------------------------------------
+============================================================
