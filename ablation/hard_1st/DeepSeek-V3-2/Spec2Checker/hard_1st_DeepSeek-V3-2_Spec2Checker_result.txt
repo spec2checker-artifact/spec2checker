@@ -1,0 +1,4669 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: hard_1st
+  模型: DeepSeek-V3-2
+  输入: UIR/hard/hard_1st.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 47/50 = 94.0%
+  Rule_sem (规则验证数): 45/50 = 90.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 45条
+  语法错误规则: 3条
+  语义偏差规则: 2条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-comment-class-data-members                   OK [V]  "Class data members must have a comment explaining their purp..."
+     2. cpp-coroutine-unauthorized-library               OK [V]  "Only use C++20 coroutines via libraries approved by project ..."
+     3. cpp-copy-move-meaningful                         OK [V]  "Detect user-defined types that define copy or move operation..."
+     4. cpp-inclusive-language-avoid-offensive-terms     OK [V]  "Detect use of non-inclusive or offensive terms (e.g., 'maste..."
+     5. cpp-explicit-single-argument-constructor         OK [V]  "Type conversion operators and constructors callable with a s..."
+     6. cpp-no-implicit-conversion                       OK [V]  "Do not define implicit conversions. Use the `explicit` keywo..."
+     7. cpp-dynamic-cast-usage                           OK [V]  "Use `dynamic_cast` only when you must query the dynamic type..."
+     8. cpp-default-capture-by-value                     OK [V]  "Use default capture by value (`[=]`) sparingly. It should on..."
+     9. java-finalize-override                           OK [V]  "Do not override Object.finalize. Finalization support is sch..."
+    10. java-old-style-switch                            OK [V]  "Detect old-style switch statement formatting where a colon i..."
+    11. java-switch-indentation                          OK [V]  "Contents of switch block must be indented +2 relative to the..."
+    12. java-camel-case-lowercase-all                    OK [V]  "All words in a camel case identifier must be entirely lowerc..."
+    13. java-camel-case-split-conventional               OK [V]  "Detects conventionally camel-cased words (e.g., 'AdWords') a..."
+    14. java-text-block-opening-newline                  OK [V]  "Opening triple quotes of a text block must be on a new line,..."
+    15. java-line-wrapping-discretionary                 OK [V]  "Even code that fits within column limit may be line-wrapped ..."
+    16. java-arrow-no-adjacent-break                     OK [V]  "Line never broken adjacent to arrow ->, except break may com..."
+    17. java-switch-fallthrough-comment                  OK [V]  "Each statement group in a switch case must either terminate ..."
+    18. javascript-no-nested-namespace                   OK [V]  "Do not define a nested type (class, typedef, enum, interface..."
+    19. javascript-enum-static-initialization            OK [V]  "For string enums, all values must be statically initialized,..."
+    20. javascript-tostring-override-side-effects        OK [V]  "toString may be overridden but must always succeed and never..."
+    21. javascript-number-literal-prefix-case            OK [V]  "Use `0x`, `0o`, `0b` prefixes with lowercase letters. Never ..."
+    22. javascript-generics-template-declaration         OK [V]  "Generic functions and methods must be declared with a `@temp..."
+    23. javascript-one-variable-per-declaration          OK [V]  "Every local variable declaration declares only one variable;..."
+    24. javascript-nested-function-const                 OK [V]  "Nested function definitions should be assigned to a local co..."
+    25. javascript-jsdoc-mixed-annotation                OK [V]  "Detects mixing of inline JSDoc type annotations and block JS..."
+    26. javascript-static-method-to-function             OK [V]  "Prefer module-local (package-private) functions over private..."
+    27. javascript-no-wrapper-new                        OK [V]  "Never use `new Boolean`, `new Number`, `new String`, `new Sy..."
+    28. python-naming-internal-underscore                OK [V]  "Detect names that should be internal (private/protected) but..."
+    29. python-multiline-string-dedent                   OK [V]  "Multi-line strings should use `textwrap.dedent` to remove le..."
+    30. python-logging-string-literal                    OK [V]  "For logging functions that expect a pattern-string, always c..."
+    31. python-docstring-triple-double-quote             OK [V]  "Always use the three-double-quote format `"""` for docstring..."
+    32. python-explicit-none-type                        OK [V]  "Use explicit `X | None` or `Optional[X]` for type annotation..."
+    33. python-error-message-precise                     OK [V]  "Error messages should precisely match error condition, inter..."
+    34. python-comments-never-describe-code              OK [V]  "Detect comments that merely describe the code, assuming the ..."
+    35. python-avoid-string-concat-in-loop               OK [V]  "Avoid using '+' and '+=' to accumulate a string in a loop; u..."
+    36. python-naming-conventions-class-module           OK [V]  "Use CapWords for class names and lower_with_under for module..."
+    37. python-override-docstring-optional               OK [V]  "A method that overrides a base class method does not need a ..."
+    38. shell-loop-local-declaration                     OK [V]  "Inside a function, declare loop variable as `local` to avoid..."
+    39. shell-no-let-builtin                             OK [V]  "Never use the `let` builtin. Use `(( ... ))` for arithmetic ..."
+    40. shell-no-expr-command                            OK [V]  "Never use the `expr` command as it is an external program an..."
+    41. shell-avoid-unquoted-array-expansion             OK [V]  "Avoid unquoted expansion in array assignments; won't work co..."
+    42. shell-avoid-colon-in-function-name               OK [V]  "Functions intended for interactive use may choose to avoid c..."
+    43. shell-regex-rhs-no-quotes                        OK [V]  "When using the regex matching operator `=~` inside `[[ ... ]..."
+    44. shell-arithmetic-expansion-expr                  OK [V]  "Always use `$(( ... ))` for arithmetic expansion instead of ..."
+    45. shell-no-main-for-short-scripts                  OK [V]  "For short scripts where it's just a linear flow, a main func..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-avoid-failing-constructor                    FAIL  (语义偏差：推理链遗漏了部分约束条件) "Avoid initialization that can fail in constructors if you ca..."
+     2. cpp-nonmember-functions-in-namespace             FAIL  (语义偏差：推理链遗漏了部分约束条件) "Prefer placing nonmember functions in a namespace; use compl..."
+     3. java-camel-case-step1                            FAIL  (语法错误：源验证报告标记为不可用) "Convert phrase to plain ASCII and remove apostrophes as a pr..."
+     4. shell-read-without-r                             FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Use `read -r` to prevent backslash interpretation."
+     5. shell-constant-readonly                          FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Use `readonly` or `declare -xr` for constants instead of equ..."
+
+  按工具分布 (By Tool):
+    Semgrep    28/30 (93.3%)
+    Pmd        9/10 (90.0%)
+    Codeql     8/10 (80.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Java         Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 8/10 (80.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 8/10 (80.0%)  Rule_sem: 8/10 (80.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 384
+  真正违规 (TP): 357
+  误报 (FP): 27
+  精准度: 93.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. DeepSeek-V3-2 在 Hard 1st 生成了 47 条可编译规则。
+  2. 本轮有 45 条规则语义正确，规则可用率为 90.0%。
+  3. 规则中有 3 条语法错误和 2 条语义偏差。
+  4. 检测到 384 条结果，其中 357 条正确，27 条误报。
+  5. 本轮检测精准度为 93.0%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: cpp-default-capture-by-value
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\tw_test.cc:90
+      描述: Use default capture by value (`[=]`) sparingly. It should only be used to bind a few variables for a short lambda and must not capture `this` implicitly. Prefer explicit captures.
+      置信度: 3.50
+      代码片段:
+        << __FILE__ << "(" << line << "): assertion failed here";
+              std::sort(actual.begin(), actual.end(),
+        >>>             [](const FileInfo& a, const FileInfo& b) {
+                          return a.RelativePath() > b.RelativePath();
+                        });
+
+  [2] 项目: Bazel
+      规则: cpp-default-capture-by-value
+      语言: cpp
+      位置: D:\Sepc2Checker\test_cases\Bazel\c\tw_test.cc:94
+      描述: Use default capture by value (`[=]`) sparingly. It should only be used to bind a few variables for a short lambda and must not capture `this` implicitly. Prefer explicit captures.
+      置信度: 3.50
+      代码片段:
+        });
+              std::sort(expected.begin(), expected.end(),
+        >>>             [](const FileInfo& a, const FileInfo& b) {
+                          return a.RelativePath() > b.RelativePath();
+                        });
+
+  [3] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:107
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap<TransitiveInfoProvider> overrides) {
+                ImmutableClassToInstanceMap.Builder<TransitiveInfoProvider> allOverrides =
+        >>>         ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+                        .put(AliasProvider.class, AliasProvider.fromAliasRule(ruleContext.getRule(), actual))
+
+  [4] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:109
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+        >>>             .put(AliasProvider.class, AliasProvider.fromAliasRule(ruleContext.getRule(), actual))
+                        .put(
+                            VisibilityProvider.class,
+
+  [5] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:133
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private final ImmutableMap<Label, ConfigMatchingProvider> configConditions;
+            
+        >>>   @VisibleForSerialization
+              AliasConfiguredTarget(
+                  ActionLookupKey actionLookupKey,
+
+  [6] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:145
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ConfiguredTarget getActualNoFollow() {
+                return actual;
+
+  [7] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:150
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ActionLookupKey getLookupKey() {
+                return this.actionLookupKey;
+
+  [8] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:155
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean isImmutable() {
+                return true; // immutable and Starlark-hashable
+
+  [9] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:160
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ImmutableMap<Label, ConfigMatchingProvider> getConfigConditions() {
+                return configConditions;
+
+  [10] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:165
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public <P extends TransitiveInfoProvider> P getProvider(Class<P> provider) {
+                P p = overrides.getInstance(provider);
+
+  [11] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:176
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // our own label and making a separate method to get the actual's label? (If so, update this
+              // comment.)
+        >>>   @Override
+              public Label getLabel() {
+                return actual.getLabel();
+
+  [12] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:181
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Object get(String providerKey) {
+                return actual.get(providerKey);
+
+  [13] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:186
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Nullable
+              @Override
+              public Info get(Provider.Key providerKey) {
+
+  [14] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:187
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>   @Override
+              public Info get(Provider.Key providerKey) {
+                return actual.get(providerKey);
+
+  [15] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:192
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Object getIndex(StarlarkSemantics semantics, Object key) throws EvalException {
+                return actual.getIndex(semantics, key);
+
+  [16] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:197
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean containsKey(StarlarkSemantics semantics, Object key) throws EvalException {
+                return actual.containsKey(semantics, key);
+
+  [17] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:204
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /* Structure methods */
+            
+        >>>   @Override
+              public Object getValue(String name) {
+                if (name.equals(LABEL_FIELD)) {
+
+  [18] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:212
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // always has FileProvider and Error- and PackageGroupConfiguredTarget-s shouldn't be
+                  // accessible in Starlark.
+        >>>       return Depset.of(Artifact.class, getProvider(FileProvider.class).getFilesToBuild());
+                }
+                return actual.getValue(name);
+
+  [19] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:217
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ImmutableCollection<String> getFieldNames() {
+                return actual.getFieldNames();
+
+  [20] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:222
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Nullable
+              @Override
+              public String getErrorMessageForUnknownField(String name) {
+
+  [21] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:223
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>   @Override
+              public String getErrorMessageForUnknownField(String name) {
+                // Use the default error message.
+
+  [22] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:229
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ConfiguredTarget getActual() {
+                // This will either dereference an alias chain, or return the final ConfiguredTarget.
+
+  [23] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:235
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Label getOriginalLabel() {
+                return actionLookupKey.getLabel();
+
+  [24] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:240
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Dict<String, Object> getProvidersDictForQuery() {
+                return actual.getProvidersDictForQuery();
+
+  [25] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:245
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public void repr(Printer printer, StarlarkSemantics semantics) {
+                printer.append(
+
+  [26] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:251
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public String toString() {
+                return MoreObjects.toStringHelper(this)
+
+  [27] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:253
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public String toString() {
+        >>>     return MoreObjects.toStringHelper(this)
+                    .add("label", actionLookupKey.getLabel())
+                    .add("configurationKey", getConfigurationKey())
+
+  [28] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:70
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * visibility} declaration or a {@code package_group}'s {@code includes} attribute.
+             */
+        >>> @Immutable
+            @AutoCodec
+            public final class AliasConfiguredTarget implements ConfiguredTarget, Structure {
+
+  [29] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:71
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        */
+            @Immutable
+        >>> @AutoCodec
+            public final class AliasConfiguredTarget implements ConfiguredTarget, Structure {
+
+  [30] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:83
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        NestedSet<PackageGroupContents> visibility) {
+                return createWithOverrides(
+        >>>         ruleContext, actual, visibility, /*overrides=*/ ImmutableClassToInstanceMap.of());
+              }
+
+  [31] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:100
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "XcodeVersionConfig",
+                  doc = "The constructor/key for the <code>XcodeVersionConfig</code> provider.",
+
+  [32] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:108
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "apple_host_system_env",
+                  doc =
+
+  [33] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:116
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        + "  are their corresponding values.",
+                  parameters = {
+        >>>         @Param(
+                        name = "xcode_config",
+                        positional = true,
+
+  [34] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:126
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "target_apple_env",
+                  doc =
+
+  [35] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:134
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        + "build. The keys are variable names and the values are their corresponding values.",
+                  parameters = {
+        >>>         @Param(
+                        name = "xcode_config",
+                        positional = true,
+
+  [36] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:139
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+        >>>         @Param(name = "platform", positional = true, named = false, doc = "The apple platform."),
+                  })
+              default ImmutableMap<String, String> getTargetAppleEnvironment(
+
+  [37] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:146
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "dotted_version",
+                  doc = "Creates a new <a href=\"../builtins/DottedVersion.html\">DottedVersion</a> instance.",
+
+  [38] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:150
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        doc = "Creates a new <a href=\"../builtins/DottedVersion.html\">DottedVersion</a> instance.",
+                  parameters = {
+        >>>         @Param(name = "version", doc = "The string representation of the DottedVersion.")
+                  })
+              DottedVersionApi<?> dottedVersion(String version) throws EvalException;
+
+  [39] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:31
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Interface for a module with useful functions for creating apple-related rule implementations. */
+        >>> @StarlarkBuiltin(
+                name = "apple_common",
+                category = DocCategory.TOP_LEVEL_MODULE,
+
+  [40] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:33
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @StarlarkBuiltin(
+                name = "apple_common",
+        >>>     category = DocCategory.TOP_LEVEL_MODULE,
+                doc = "Functions for Starlark to access internals of the apple rule implementations.")
+            public interface AppleCommonApi<
+
+  [41] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:40
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        extends StarlarkValue {
+            
+        >>>   @StarlarkMethod(
+                  name = "apple_toolchain",
+                  doc = "Utilities for resolving items from the apple toolchain.")
+
+  [42] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:47
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "platform_type",
+                  doc =
+
+  [43] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:64
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "platform",
+                  doc =
+
+  [44] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:85
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        StructApi getPlatformStruct();
+            
+        >>>   @StarlarkMethod(
+                  name = "XcodeProperties",
+                  doc =
+
+  [45] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:104
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * <p>No write is performed when the resulting value is null.
+               */
+        >>>   @SuppressWarnings("AvoidObjectArrays") // explicit, low-level array handling
+              void deserializeArrayElement(CodedInputStream codedIn, Object[] arr, int index)
+                  throws IOException, SerializationException;
+
+  [46] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:133
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        <T> void getSharedValue(
+                  CodedInputStream codedIn,
+        >>>       @Nullable Object distinguisher,
+                  DeferredObjectCodec<?> codec,
+                  T obj,
+
+  [47] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:80
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * not at all if its value was null.
+               */
+        >>>   @Deprecated // TODO: b/331765692 - delete this method
+              void deserialize(CodedInputStream codedIn, Object obj, long offset)
+                  throws IOException, SerializationException;
+
+  [48] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:92
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * even if the deserialized value is null.
+               */
+        >>>   @Deprecated // TODO: b/331765692 - delete this method
+              void deserialize(CodedInputStream codedIn, Object obj, long offset, Runnable done)
+                  throws IOException, SerializationException;
+
+  [49] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:104
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+                },
+        >>>     OOM(ExitCode.OOM_ERROR, Code.CRASH_OOM) {
+                  @Override
+                  Throwable createThrowable() {
+
+  [50] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:105
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        },
+                OOM(ExitCode.OOM_ERROR, Code.CRASH_OOM) {
+        >>>       @Override
+                  Throwable createThrowable() {
+                    return new OutOfMemoryError("Java heap space");
+
+  [51] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:126
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        new RuntimeException("fatal exception"),
+                    /* isFatal= */ true,
+        >>>         Level.SEVERE,
+                    "myProductName crashed with args: arg foo"),
+                NONFATAL(
+
+  [52] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:131
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        new IllegalStateException("bug report"),
+                    /* isFatal= */ false,
+        >>>         Level.WARNING,
+                    "myProductName had a non fatal error with args: arg foo"),
+                OOM(
+
+  [53] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:136
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        new OutOfMemoryError("Java heap space"),
+                    /* isFatal= */ true,
+        >>>         Level.SEVERE,
+                    "myProductName OOMError: arg foo");
+
+  [54] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:139
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        "myProductName OOMError: arg foo");
+            
+        >>>     @SuppressWarnings("ImmutableEnumChecker") // I'm pretty sure no one will mutate this Throwable.
+                private final Throwable throwable;
+
+  [55] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:142
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private final Throwable throwable;
+            
+        >>>     @SuppressWarnings("ImmutableEnumChecker") // Same here.
+                private final Level level;
+
+  [56] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:165
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Rule public final TemporaryFolder tmp = new TemporaryFolder();
+            
+              private final BlazeRuntimeInterface mockRuntime = mock(BlazeRuntimeInterface.class);
+
+  [57] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:172
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private Path failureDetailFile;
+            
+        >>>   @Before
+              public void setup() throws Exception {
+                when(mockRuntime.getProductName()).thenReturn("myProductName");
+
+  [58] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:175
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void setup() throws Exception {
+                when(mockRuntime.getProductName()).thenReturn("myProductName");
+        >>>     BugReport.setRuntime(mockRuntime);
+            
+                exitCodeFile = tmp.newFolder().toPath().resolve("exit_code_to_use_on_abrupt_exit");
+
+  [59] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:180
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        failureDetailFile = tmp.newFolder().toPath().resolve("failure_detail");
+            
+        >>>     CustomExitCodePublisher.setAbruptExitStatusFileDir(exitCodeFile.getParent().toString());
+                CustomFailureDetailPublisher.setFailureDetailFilePath(failureDetailFile.toString());
+              }
+
+  [60] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:181
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        CustomExitCodePublisher.setAbruptExitStatusFileDir(exitCodeFile.getParent().toString());
+        >>>     CustomFailureDetailPublisher.setFailureDetailFilePath(failureDetailFile.toString());
+              }
+
+  [61] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:184
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @After
+              public void resetPublishers() {
+                CustomExitCodePublisher.resetAbruptExitStatusFile();
+
+  [62] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:186
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @After
+              public void resetPublishers() {
+        >>>     CustomExitCodePublisher.resetAbruptExitStatusFile();
+                CustomFailureDetailPublisher.resetFailureDetailFilePath();
+              }
+
+  [63] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:187
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void resetPublishers() {
+                CustomExitCodePublisher.resetAbruptExitStatusFile();
+        >>>     CustomFailureDetailPublisher.resetFailureDetailFilePath();
+              }
+
+  [64] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:190
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+
+  [65] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:191
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+                Logger logger = Logger.getLogger("build.lib.bugreport");
+
+  [66] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:193
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+        >>>     Logger logger = Logger.getLogger("build.lib.bugreport");
+                logger.addHandler(handler);
+                LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+
+  [67] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:195
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Logger logger = Logger.getLogger("build.lib.bugreport");
+                logger.addHandler(handler);
+        >>>     LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+            
+                BugReport.logException(
+
+  [68] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:197
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+            
+        >>>     BugReport.logException(
+                    exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+
+  [69] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:198
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        BugReport.logException(
+        >>>         exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+                if (oomDetectorOverride) {
+
+  [70] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:209
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [71] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:210
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [72] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:217
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        assertThrows(
+                        SecurityException.class,
+        >>>             () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+                assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+
+  [73] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:220
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        int code = haltCode(exitException);
+                assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(mockRuntime)
+
+  [74] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:224
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [75] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:234
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [76] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:235
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [77] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:243
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        assertThrows(
+                        SecurityException.class,
+        >>>             () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+                ExitCode expectedExitCode = expectedExitCode(crashType);
+
+  [78] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:247
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ExitCode expectedExitCode = expectedExitCode(crashType);
+                assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+                verify(mockRuntime)
+                    .cleanUpForCrash(
+
+  [79] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:250
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [80] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:260
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [81] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:261
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [82] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:266
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+        >>>     BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [83] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:267
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(mockRuntime)
+
+  [84] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:271
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [85] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:278
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void haltOrReturnIfCrashInProgress_otherCrashInProgress_returnsEagerly(
+                  @TestParameter CrashType crashType) throws Throwable {
+
+  [86] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:280
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void haltOrReturnIfCrashInProgress_otherCrashInProgress_returnsEagerly(
+        >>>       @TestParameter CrashType crashType) throws Throwable {
+                // Arrange:
+                // A first thread will crash with CrashContext.halt(). We mock out the BlazeRuntimeInterface to
+
+  [87] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:297
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Throwable firstThrown = new IllegalStateException("second crash in background thread");
+                ThrowingRunnable doFirstCrash =
+        >>>         () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+                TestThread firstCrashThread =
+
+  [88] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:309
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // should return without throwing because the BugReport global lock is held.
+                Throwable secondThrown = crashType.createThrowable();
+        >>>     CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+                ThrowingRunnable doSecondCrash =
+                    () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+
+  [89] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:311
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+                ThrowingRunnable doSecondCrash =
+        >>>         () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+                doSecondCrash.run();
+
+  [90] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:318
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // `CrashContext.haltOrReturnIfCrashInProgress()` will halt when BugReport's lock is free.
+                cleanupMayFinishLatch.countDown();
+        >>>     firstCrashThread.joinAndAssertState(TestUtils.WAIT_TIMEOUT_MILLISECONDS);
+            
+                SecurityException firstException = firstCrashThrownRef.get();
+
+  [91] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:323
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        int firstCode = haltCode(firstException);
+                ExitCode expectedExitCode =
+        >>>         oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+                assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+
+  [92] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:331
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void customContext_setUpFront(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+
+  [93] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:332
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void customContext_setUpFront(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+
+  [94] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:335
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+        >>>     ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+            
+                BugReport.handleCrash(
+
+  [95] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:337
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+            
+        >>>     BugReport.handleCrash(
+                    Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+
+  [96] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:338
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(
+        >>>         Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [97] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:339
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(
+                    Crash.from(t),
+        >>>         CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [98] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:340
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(handler).handle(event.capture());
+
+  [99] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:343
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+        >>>     assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+
+  [100] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:344
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+        >>>     assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+
+  [101] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:345
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [102] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:353
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+
+  [103] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:354
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+
+  [104] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:357
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+        >>>     ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+                doAnswer(
+                        inv ->
+
+  [105] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:366
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .fillInCrashContext(any());
+            
+        >>>     BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [106] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:367
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(handler).handle(event.capture());
+
+  [107] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:370
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+        >>>     assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+
+  [108] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:371
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+        >>>     assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+            
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+
+  [109] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:373
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+            
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [110] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:382
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private void verifyExitCodeWritten(int exitCode) throws Exception {
+        >>>     assertThat(Files.readAllLines(exitCodeFile)).containsExactly(String.valueOf(exitCode));
+              }
+
+  [111] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:391
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private void verifyFailureDetailWritten(FailureDetail expected) throws Exception {
+                assertThat(
+        >>>             FailureDetail.parseFrom(
+                            Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+                    .isEqualTo(expected);
+
+  [112] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:392
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        assertThat(
+                        FailureDetail.parseFrom(
+        >>>                 Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+                    .isEqualTo(expected);
+              }
+
+  [113] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:399
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Throwable t, CrashType crashType, boolean oomDetectorOverride) {
+                FailureDetails.Crash.Builder crash =
+        >>>         FailureDetails.Crash.newBuilder()
+                        .setCode(
+                            oomDetectorOverride
+
+  [114] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:405
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        : crashType.expectedFailureDetailCode)
+                        .addCauses(
+        >>>                 FailureDetails.Throwable.newBuilder()
+                                .setThrowableClass(t.getClass().getName())
+                                .setMessage(t.getMessage())
+
+  [115] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:409
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .setMessage(t.getMessage())
+                                .addAllStackTrace(
+        >>>                         Lists.transform(
+                                        Arrays.asList(t.getStackTrace()), StackTraceElement::toString)));
+                if (oomDetectorOverride && crashType == CrashType.CRASH) {
+
+  [116] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:410
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .addAllStackTrace(
+                                    Lists.transform(
+        >>>                             Arrays.asList(t.getStackTrace()), StackTraceElement::toString)));
+                if (oomDetectorOverride && crashType == CrashType.CRASH) {
+                  crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+
+  [117] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:411
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Lists.transform(
+                                        Arrays.asList(t.getStackTrace()), StackTraceElement::toString)));
+        >>>     if (oomDetectorOverride && crashType == CrashType.CRASH) {
+                  crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+                } else if (crashType == CrashType.OOM) {
+
+  [118] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:412
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Arrays.asList(t.getStackTrace()), StackTraceElement::toString)));
+                if (oomDetectorOverride && crashType == CrashType.CRASH) {
+        >>>       crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+                } else if (crashType == CrashType.OOM) {
+                  crash.setOomCauseCategory(OomCauseCategory.ORGANIC);
+
+  [119] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:413
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        if (oomDetectorOverride && crashType == CrashType.CRASH) {
+                  crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+        >>>     } else if (crashType == CrashType.OOM) {
+                  crash.setOomCauseCategory(OomCauseCategory.ORGANIC);
+                }
+
+  [120] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:414
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        crash.setOomCauseCategory(OomCauseCategory.OOM_DETECTOR_OVERRIDE);
+                } else if (crashType == CrashType.OOM) {
+        >>>       crash.setOomCauseCategory(OomCauseCategory.ORGANIC);
+                }
+                return FailureDetail.newBuilder()
+
+  [121] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:416
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        crash.setOomCauseCategory(OomCauseCategory.ORGANIC);
+                }
+        >>>     return FailureDetail.newBuilder()
+                    .setMessage(String.format("Crashed: (%s) %s", t.getClass().getName(), t.getMessage()))
+                    .setCrash(crash)
+
+  [122] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:417
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+                return FailureDetail.newBuilder()
+        >>>         .setMessage(String.format("Crashed: (%s) %s", t.getClass().getName(), t.getMessage()))
+                    .setCrash(crash)
+                    .build();
+
+  [123] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:427
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final Pattern SECURITY_EXCEPTION_MESSAGE_PATTERN =
+        >>>       Pattern.compile("Intercepted call to Runtime\\.halt with status (\\d+)");
+            
+              private static int haltCode(SecurityException exitException) {
+
+  [124] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:434
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Matcher matcher = SECURITY_EXCEPTION_MESSAGE_PATTERN.matcher(message);
+                assertThat(matcher.matches()).isTrue();
+        >>>     return Integer.parseInt(matcher.group(1));
+              }
+            }
+
+  [125] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:75
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        */
+            // TODO(b/222158599): Remove handling for GoogleTestSecurityManager.
+        >>> @RunWith(TestParameterInjector.class)
+            public final class BugReportTest {
+
+  [126] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:78
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public final class BugReportTest {
+            
+        >>>   private static final ExitCode EXIT_CODE_BLAZE_OOMING = ExitCode.OOM_ERROR;
+              private static final Code FAILURE_DETAIL_CODE_BLAZE_OOMING = Code.CRASH_OOM;
+
+  [127] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:79
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final ExitCode EXIT_CODE_BLAZE_OOMING = ExitCode.OOM_ERROR;
+        >>>   private static final Code FAILURE_DETAIL_CODE_BLAZE_OOMING = Code.CRASH_OOM;
+            
+              @TestParameter private boolean oomDetectorOverride;
+
+  [128] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:81
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final Code FAILURE_DETAIL_CODE_BLAZE_OOMING = Code.CRASH_OOM;
+            
+        >>>   @TestParameter private boolean oomDetectorOverride;
+            
+              @Before
+
+  [129] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:83
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @TestParameter private boolean oomDetectorOverride;
+            
+        >>>   @Before
+              public void maybeSetOomDetector() {
+                if (oomDetectorOverride) {
+
+  [130] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:86
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void maybeSetOomDetector() {
+                if (oomDetectorOverride) {
+        >>>       CrashFailureDetails.setOomDetector(() -> true);
+                }
+              }
+
+  [131] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:90
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @After
+              public void restoreDefaultOomDetector() {
+                if (oomDetectorOverride) {
+
+  [132] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:93
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void restoreDefaultOomDetector() {
+                if (oomDetectorOverride) {
+        >>>       CrashFailureDetails.setOomDetector(() -> false);
+                }
+              }
+
+  [133] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:98
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private enum CrashType {
+        >>>     CRASH(ExitCode.BLAZE_INTERNAL_ERROR, Code.CRASH_UNKNOWN) {
+                  @Override
+                  Throwable createThrowable() {
+
+  [134] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:99
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private enum CrashType {
+                CRASH(ExitCode.BLAZE_INTERNAL_ERROR, Code.CRASH_UNKNOWN) {
+        >>>       @Override
+                  Throwable createThrowable() {
+                    return new IllegalStateException("Crashed");
+
+  [135] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:113
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                protected Code getDetailedCode() {
+                  return Code.INVALID_CONSTRAINT_VALUE;
+
+  [136] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:115
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+                protected Code getDetailedCode() {
+        >>>       return Code.INVALID_CONSTRAINT_VALUE;
+                }
+
+  [137] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:119
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static String formatError(Label label) {
+        >>>       return String.format(
+                      "Target %s was referenced as a constraint_value, "
+                          + "but does not provide ConstraintValueInfo",
+
+  [138] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:36
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public class ConstraintValueLookupUtil {
+            
+        >>>   @Nullable
+              public static List<ConstraintValueInfo> getConstraintValueInfo(
+                  Iterable<ConfiguredTargetKey> constraintValueKeys, Environment env)
+
+  [139] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:62
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * InvalidConstraintValueException} is thrown.
+               */
+        >>>   @Nullable
+              private static ConstraintValueInfo findConstraintValueInfo(
+                  ConfiguredTargetKey key, SkyframeLookupResult values) throws InvalidConstraintValueException {
+
+  [140] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintValueLookupUtil.java:79
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ConfiguredTarget configuredTarget = ctv.getConfiguredTarget();
+                  ConstraintValueInfo constraintValueInfo =
+        >>>           PlatformProviderUtils.constraintValue(configuredTarget);
+                  if (constraintValueInfo == null) {
+                    throw new InvalidConstraintValueException(configuredTarget.getLabel());
+
+  [141] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1006
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void environmentFulfillsExpectedDefault() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [142] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:102
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final MockRule RULE_WITH_IMPLICIT_AND_LATEBOUND_DEFAULTS =
+                  () ->
+        >>>           MockRule.define(
+                          "rule_with_implicit_and_latebound_deps",
+                          (builder, env) ->
+
+  [143] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1020
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void constraintExemptRulesDontHaveConstraintAttributes() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [144] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1040
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void buildingEnvironmentGroupDirectlyDoesntCrash() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [145] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1065
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void selectableDepsCanMissEnvironments() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [146] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:108
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .setUndocumented()
+                                  .add(
+        >>>                           Attribute.attr("$implicit", BuildType.LABEL)
+                                          .value(Label.parseCanonicalUnchecked("//helpers:implicit")))
+                                  .add(
+
+  [147] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1086
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void selectableAliasDepsTreatedLikeOtherDeps() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [148] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:109
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .add(
+                                      Attribute.attr("$implicit", BuildType.LABEL)
+        >>>                               .value(Label.parseCanonicalUnchecked("//helpers:implicit")))
+                                  .add(
+                                      Attribute.attr(":latebound", BuildType.LABEL)
+
+  [149] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:111
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .value(Label.parseCanonicalUnchecked("//helpers:implicit")))
+                                  .add(
+        >>>                           Attribute.attr(":latebound", BuildType.LABEL)
+                                          .value(
+                                              Attribute.LateBoundDefault.fromConstantForTesting(
+
+  [150] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1110
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void selectableOutputFileDepsTreatedLikeOtherDeps() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [151] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:113
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Attribute.attr(":latebound", BuildType.LABEL)
+                                          .value(
+        >>>                                   Attribute.LateBoundDefault.fromConstantForTesting(
+                                                  Label.parseCanonicalUnchecked("//helpers:latebound"))))
+                                  .add(
+
+  [152] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1135
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void staticCheckingOnSelectsTemporarilyDisabled() throws Exception {
+                // TODO(bazel-team): update this test once static checking on selects is implemented. When
+
+  [153] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:114
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .value(
+                                              Attribute.LateBoundDefault.fromConstantForTesting(
+        >>>                                       Label.parseCanonicalUnchecked("//helpers:latebound"))))
+                                  .add(
+                                      Attribute.attr("normal", BuildType.LABEL)
+
+  [154] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:116
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Label.parseCanonicalUnchecked("//helpers:latebound"))))
+                                  .add(
+        >>>                           Attribute.attr("normal", BuildType.LABEL)
+                                          .allowedFileTypes(FileTypeSet.NO_FILE)
+                                          .value(Label.parseCanonicalUnchecked("//helpers:default"))));
+
+  [155] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1160
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void depInBothSelectAndUnconditionalListIsAlwaysChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [156] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:117
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .add(
+                                      Attribute.attr("normal", BuildType.LABEL)
+        >>>                               .allowedFileTypes(FileTypeSet.NO_FILE)
+                                          .value(Label.parseCanonicalUnchecked("//helpers:default"))));
+
+  [157] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:118
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Attribute.attr("normal", BuildType.LABEL)
+                                          .allowedFileTypes(FileTypeSet.NO_FILE)
+        >>>                               .value(Label.parseCanonicalUnchecked("//helpers:default"))));
+            
+              private static final MockRule RULE_WITH_ENFORCED_IMPLICIT_ATTRIBUTE =
+
+  [158] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1185
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void unconditionalSelectsAlwaysChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [159] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1207
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refinedEnvironmentCheckingValidCaseDirect() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [160] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:122
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final MockRule RULE_WITH_ENFORCED_IMPLICIT_ATTRIBUTE =
+                  () ->
+        >>>           MockRule.define(
+                          "rule_with_enforced_implicit_deps",
+                          (builder, env) ->
+
+  [161] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1229
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refinedEnvironmentCheckingBadCaseDirect() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [162] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1261
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refinedEnvironmentCheckingValidCaseTransitive() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [163] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:128
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .setUndocumented()
+                                  .add(
+        >>>                           Attribute.attr("$implicit", BuildType.LABEL)
+                                          .value(Label.parseCanonicalUnchecked("//helpers:implicit"))
+                                          .checkConstraints()));
+
+  [164] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1288
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refinedEnvironmentCheckingBadCaseTransitive() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [165] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:129
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .add(
+                                      Attribute.attr("$implicit", BuildType.LABEL)
+        >>>                               .value(Label.parseCanonicalUnchecked("//helpers:implicit"))
+                                          .checkConstraints()));
+
+  [166] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:132
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .checkConstraints()));
+            
+        >>>   private static final MockRule RULE_WITH_SKIPPED_ATTRIBUTE = () -> MockRule.define(
+                  "rule_with_skipped_attr",
+                  (builder, env) ->
+
+  [167] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1324
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refinedEnvironmentCheckingBadCaseChooseLowestLevelCulprit() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [168] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1368
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void environmentRefiningAccountsForImplicitDefaults() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("b").make();
+
+  [169] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:137
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        builder
+                          .setUndocumented()
+        >>>               .add(Attribute.attr("some_attr", BuildType.LABEL)
+                              .allowedFileTypes(FileTypeSet.NO_FILE)
+                              .dontCheckConstraints()));
+
+  [170] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:138
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .setUndocumented()
+                          .add(Attribute.attr("some_attr", BuildType.LABEL)
+        >>>                   .allowedFileTypes(FileTypeSet.NO_FILE)
+                              .dontCheckConstraints()));
+
+  [171] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1400
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void environmentRefiningChecksAllEnvironmentGroups() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [172] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:142
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        >>>   private static final MockRule CONSTRAINT_EXEMPT_RULE_CLASS = () -> MockRule.define(
+                  "totally_free_rule",
+                  (builder, env) ->
+
+  [173] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1450
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * by group membership.
+               */
+        >>>   @Test
+              public void refinedEnvironmentCheckingPartitionsErrorsbyEnvironmentGroup() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [174] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:151
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Injects the rule class default rules into the default test rule class provider. */
+        >>>   @Override
+              protected ConfiguredRuleClassProvider createRuleClassProvider() {
+                ConfiguredRuleClassProvider.Builder builder = new ConfiguredRuleClassProvider.Builder();
+
+  [175] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1531
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refiningReplacesRemovedEnvironmentWithValidFulfillingSubset() throws Exception {
+                writeRulesForRefiningSubsetTests("a");
+
+  [176] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1537
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void refiningReplacesRemovedEnvironmentWithInvalidFulfillingSubset() throws Exception {
+                writeRulesForRefiningSubsetTests("b");
+
+  [177] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:154
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        protected ConfiguredRuleClassProvider createRuleClassProvider() {
+                ConfiguredRuleClassProvider.Builder builder = new ConfiguredRuleClassProvider.Builder();
+        >>>     TestRuleClassProvider.addStandardRules(builder);
+                builder.addRuleDefinition(new RuleClassDefaultRule());
+                builder.addRuleDefinition(BAD_RULE_CLASS_DEFAULT_RULE);
+
+  [178] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:1546
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void invalidSelectKeyError() throws Exception {
+                scratch.file(
+
+  [179] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:174
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void packageErrorOnEnvironmentGroupWithMissingEnvironments() throws Exception {
+                scratch.file(
+
+  [180] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:202
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * environment set is empty.
+               */
+        >>>   @Test
+              public void defaultSupportedEnvironments() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [181] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:212
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * "Constraining" a rule's environments explicitly sets them.
+               */
+        >>>   @Test
+              public void constrainedSupportedEnvironments() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [182] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:224
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Specifying compatibility adds the specified environments to the defaults.
+               */
+        >>>   @Test
+              public void compatibleSupportedEnvironments() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [183] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:236
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * A rule can't support *no* environments.
+               */
+        >>>   @Test
+              public void supportedEnvironmentsConstrainedtoNothing() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [184] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:248
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Restrict the environments within one group, declare compatibility for another.
+               */
+        >>>   @Test
+              public void supportedEnvironmentsInMultipleGroups() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [185] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:262
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * The same label can't appear in both a constraint and a compatibility declaration.
+               */
+        >>>   @Test
+              public void sameEnvironmentCompatibleAndRestricted() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [186] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:275
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Two labels from the same group can't appear in different attributes.
+               */
+        >>>   @Test
+              public void sameGroupCompatibleAndRestricted() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [187] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:289
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that rule class defaults change a rule's default set of environments.
+               */
+        >>>   @Test
+              public void supportedEnvironmentsRuleClassDefaults() throws Exception {
+                writeRuleClassDefaultEnvironments();
+
+  [188] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:301
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that explicit declarations override rule class defaults.
+               */
+        >>>   @Test
+              public void explicitAttributesOverrideRuleClassDefaults() throws Exception {
+                writeRuleClassDefaultEnvironments();
+
+  [189] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:318
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * in rule class defaults but not in explicit rule attributes.
+               */
+        >>>   @Test
+              public void knownEnvironmentsIncludesThoseFromRuleClassDefaults() throws Exception {
+                writeRuleClassDefaultEnvironments();
+
+  [190] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:336
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * compatibility rule class defaults.
+               */
+        >>>   @Test
+              public void sameEnvironmentRuleClassCompatibleAndRestricted() throws Exception {
+                writeRuleClassDefaultEnvironments();
+
+  [191] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:349
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that a dependency is valid if both rules implicitly inherit all default environments.
+               */
+        >>>   @Test
+              public void allDefaults() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [192] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:362
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that a dependency is valid when both rules explicitly declare the same constraints.
+               */
+        >>>   @Test
+              public void sameConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [193] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:37
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Tests for the constraint enforcement system. */
+        >>> @RunWith(JUnit4.class)
+            public class ConstraintsTest extends AbstractConstraintsTest {
+
+  [194] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:376
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * their constraints and the depender supports a subset of the dependency's environments
+               */
+        >>>   @Test
+              public void validConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [195] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:390
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * their constraints and the depender supports an environment the dependency doesn't.
+               */
+        >>>   @Test
+              public void invalidConstraintsDeclaredExplicitly() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [196] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:40
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public class ConstraintsTest extends AbstractConstraintsTest {
+            
+        >>>   @Before
+              public final void createBuildFile() throws Exception {
+                // Support files for RuleClassWithImplicitAndLateBoundDefaults:
+
+  [197] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:406
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * defaults.
+               */
+        >>>   @Test
+              public void sameCompatibilityConstraints() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [198] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:421
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * the depender only adds environments also added by the dependency.
+               */
+        >>>   @Test
+              public void validCompatibilityConstraints() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [199] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:436
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * the depender adds environments not added by the dependency.
+               */
+        >>>   @Test
+              public void invalidCompatibilityConstraints() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [200] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:452
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests the error message when the dependency is missing multiple expected environments.
+               */
+        >>>   @Test
+              public void multipleMissingEnvironments() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [201] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:468
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests a valid dependency including environments from different groups.
+               */
+        >>>   @Test
+              public void validMultigroupConstraints() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [202] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:485
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests an invalid dependency including environments from different groups.
+               */
+        >>>   @Test
+              public void invalidMultigroupConstraints() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [203] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:505
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * group, but implicitly supports it because that environment is a default.
+               */
+        >>>   @Test
+              public void validConstraintsUnknownEnvironmentToDependency() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a", "b")
+
+  [204] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:520
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * environment's group and doesn't support it because it isn't a default.
+               */
+        >>>   @Test
+              public void invalidConstraintsUnknownEnvironmentToDependency() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a", "b")
+
+  [205] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:538
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * are accounted for in the dependency.
+               */
+        >>>   @Test
+              public void validConstraintsUnknownEnvironmentToDependender() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [206] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:554
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * isn't accounted for in the dependency.
+               */
+        >>>   @Test
+              public void invalidConstraintsUnknownEnvironmentToDependender() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b", "c").setDefaults("a")
+
+  [207] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:570
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests the case where one dependency is valid and another one isn't.
+               */
+        >>>   @Test
+              public void oneDependencyIsInvalid() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [208] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:588
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void constraintEnforcementDisabled() throws Exception {
+                useConfiguration("--enforce_constraints=0");
+
+  [209] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:600
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void constraintEnforcementDisabledExecConfig() throws Exception {
+                useConfiguration("--enforce_constraints=0");
+
+  [210] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:622
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * be invalid.
+               */
+        >>>   @Test
+              public void compatibilityPackageDefaults() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [211] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:63
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        */
+              private static final class RuleClassDefaultRule implements RuleDefinition {
+        >>>     @Override
+                public RuleClass build(RuleClass.Builder builder, RuleDefinitionEnvironment env) {
+                  return builder
+
+  [212] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:636
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that a rule's compatibility declaration overrides its package defaults compatibility.
+               */
+        >>>   @Test
+              public void packageDefaultsCompatibilityOverride() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [213] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:656
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * invalid.
+               */
+        >>>   @Test
+              public void restrictionPackageDefaults() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a", "b")
+
+  [214] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:67
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        return builder
+                      .setUndocumented()
+        >>>           .compatibleWith(Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:b"))
+                      .restrictedTo(Label.parseCanonicalUnchecked("//buildenv/rule_class_restrict:d"))
+                      .build();
+
+  [215] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:671
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * Tests that a rule's restriction declaration overrides its package defaults restriction.
+               */
+        >>>   @Test
+              public void packageDefaultsRestrictionOverride() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [216] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:68
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        .setUndocumented()
+                      .compatibleWith(Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:b"))
+        >>>           .restrictedTo(Label.parseCanonicalUnchecked("//buildenv/rule_class_restrict:d"))
+                      .build();
+                }
+
+  [217] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:693
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * before being supplied to the rule. See comments in DependencyResolver for more discussion.
+               */
+        >>>   @Test
+              public void packageDefaultsDirectlyFillRuleAttributes() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [218] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:705
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void hostDependenciesAreNotChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [219] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:72
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public Metadata getMetadata() {
+                  return RuleDefinition.Metadata.builder()
+
+  [220] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:727
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void hostDependenciesAreNotChecked_customRule() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [221] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:74
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public Metadata getMetadata() {
+        >>>       return RuleDefinition.Metadata.builder()
+                      .name("rule_class_default")
+                      .ancestors(BaseRuleClasses.NativeActionCreatingRule.class)
+
+  [222] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:759
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void execDependenciesAreNotChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [223] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:781
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void execDependenciesAreNotChecked_customRule() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [224] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:813
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void implicitAndLateBoundDependenciesAreNotChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [225] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:831
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void implicitDepsWithWhiteListedAttributeAreChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [226] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:847
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void explicitDepWithEnforcementSkipOverride() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [227] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:862
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void javaDataAndResourcesAttributesSkipped() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [228] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:879
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void filegroupDataAttributesSkipped() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults("a").make();
+
+  [229] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:88
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final MockRule BAD_RULE_CLASS_DEFAULT_RULE =
+                  () ->
+        >>>           MockRule.define(
+                          "bad_rule_class_default",
+                          (builder, env) ->
+
+  [230] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:894
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void outputFilesAreChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [231] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:914
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void configSettingRulesAreNotChecked() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo").setEnvironments("a", "b").setDefaults().make();
+
+  [232] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:932
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void fulfills() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [233] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:946
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void fulfillsIsNotSymmetric() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [234] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:96
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // environments from the same group.
+                                  .compatibleWith(
+        >>>                           Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:a"))
+                                  .restrictedTo(
+                                      Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:b")));
+
+  [235] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:962
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void fulfillsIsTransitive() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [236] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:977
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void defaultEnvironmentDirectlyFulfills() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [237] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:98
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:a"))
+                                  .restrictedTo(
+        >>>                           Label.parseCanonicalUnchecked("//buildenv/rule_class_compat:b")));
+            
+              private static final MockRule RULE_WITH_IMPLICIT_AND_LATEBOUND_DEFAULTS =
+
+  [238] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\ConstraintsTest.java:991
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void defaultEnvironmentIndirectlyFulfills() throws Exception {
+                new EnvironmentGroupMaker("buildenv/foo")
+
+  [239] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:100
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ModifiedFileSet getModifiedFileSet();
+            
+        >>>     @Nullable
+                WorkspaceInfoFromDiff getWorkspaceInfo();
+
+  [240] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:134
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        Root pathEntry, OptionsProvider options) {
+                DiffAwarenessState diffAwarenessState =
+        >>>         maybeGetDiffAwarenessState(pathEntry, IgnoredSubdirectories.EMPTY, options);
+                if (diffAwarenessState == null || diffAwarenessState.baselineView == null) {
+                  return Optional.empty();
+
+  [241] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:136
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        maybeGetDiffAwarenessState(pathEntry, IgnoredSubdirectories.EMPTY, options);
+                if (diffAwarenessState == null || diffAwarenessState.baselineView == null) {
+        >>>       return Optional.empty();
+                }
+
+  [242] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:142
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        diffAwarenessState.baselineView.getWorkspaceInfo();
+                if (baselineWorkspaceInfo == null) {
+        >>>       return Optional.empty();
+                }
+
+  [243] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:146
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        View newView;
+        >>>     try (SilentCloseable c = Profiler.instance().profile("diffAwareness.getCurrentView")) {
+                  newView = diffAwarenessState.diffAwareness.getCurrentView(options);
+                  diffAwarenessState.cachedNewView = newView;
+
+  [244] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:150
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        diffAwarenessState.cachedNewView = newView;
+                } catch (BrokenDiffAwarenessException e) {
+        >>>       return Optional.empty();
+                }
+
+  [245] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:155
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        WorkspaceInfoFromDiff newWorkspaceInfo = newView.getWorkspaceInfo();
+                if (newWorkspaceInfo == null) {
+        >>>       return Optional.empty();
+                }
+
+  [246] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:158
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     return Optional.of(
+                    new EvaluatingVersionDiff(
+                        baselineWorkspaceInfo.getEvaluatingVersion(), newWorkspaceInfo.getEvaluatingVersion()));
+
+  [247] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:176
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        maybeGetDiffAwarenessState(pathEntry, ignoredPaths, options);
+                if (diffAwarenessState == null) {
+        >>>       return BrokenProcessableModifiedFileSet.INSTANCE;
+                }
+                DiffAwareness diffAwareness = diffAwarenessState.diffAwareness;
+
+  [248] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:182
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        View newView = diffAwarenessState.cachedNewView;
+                if (newView == null) {
+        >>>       try (SilentCloseable c = Profiler.instance().profile("diffAwareness.getCurrentView")) {
+                    newView = diffAwarenessState.diffAwareness.getCurrentView(options);
+                  } catch (BrokenDiffAwarenessException e) {
+
+  [249] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:186
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        } catch (BrokenDiffAwarenessException e) {
+                    handleBrokenDiffAwareness(eventHandler, pathEntry, ignoredPaths, e);
+        >>>         return BrokenProcessableModifiedFileSet.INSTANCE;
+                  }
+                } else {
+
+  [250] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:196
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        logger.atInfo().log(
+                    "About to compute diff between %s and %s for %s", baselineView, newView, pathEntry);
+        >>>     try (SilentCloseable c = Profiler.instance().profile("diffAwareness.getDiff")) {
+                  diff = diffAwareness.getDiff(baselineView, newView);
+                } catch (BrokenDiffAwarenessException e) {
+
+  [251] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:200
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        } catch (BrokenDiffAwarenessException e) {
+                  handleBrokenDiffAwareness(eventHandler, pathEntry, ignoredPaths, e);
+        >>>       return BrokenProcessableModifiedFileSet.INSTANCE;
+                } catch (IncompatibleViewException e) {
+                  throw new IllegalStateException(pathEntry + " " + baselineView + " " + newView, e);
+
+  [252] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:213
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        IgnoredSubdirectories ignoredPaths,
+                  BrokenDiffAwarenessException e) {
+        >>>     StateKey stateKey = StateKey.create(pathEntry, ignoredPaths);
+                currentDiffAwarenessStates.remove(stateKey);
+                logger.atInfo().withCause(e).log("Broken diff awareness for %s", pathEntry);
+
+  [253] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:216
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        currentDiffAwarenessStates.remove(stateKey);
+                logger.atInfo().withCause(e).log("Broken diff awareness for %s", pathEntry);
+        >>>     eventHandler.handle(Event.warn(e.getMessage() + "... temporarily falling back to manually "
+                    + "checking files for changes"));
+              }
+
+  [254] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:224
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * current one, or otherwise {@code null} if no factory could make a fresh one.
+               */
+        >>>   @Nullable
+              private DiffAwarenessState maybeGetDiffAwarenessState(
+                  Root pathEntry, IgnoredSubdirectories ignoredPaths, OptionsProvider options) {
+
+  [255] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:227
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private DiffAwarenessState maybeGetDiffAwarenessState(
+                  Root pathEntry, IgnoredSubdirectories ignoredPaths, OptionsProvider options) {
+        >>>     StateKey stateKey = StateKey.create(pathEntry, ignoredPaths);
+                DiffAwarenessState diffAwarenessState = currentDiffAwarenessStates.get(stateKey);
+                if (diffAwarenessState != null) {
+
+  [256] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:269
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public ModifiedFileSet getModifiedFileSet() {
+                  return modifiedFileSet;
+
+  [257] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:274
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Nullable
+                @Override
+                public WorkspaceInfoFromDiff getWorkspaceInfo() {
+
+  [258] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:275
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>     @Override
+                public WorkspaceInfoFromDiff getWorkspaceInfo() {
+                  return nextView.getWorkspaceInfo();
+
+  [259] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:280
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public void markProcessed() {
+                  StateKey stateKey = StateKey.create(pathEntry, ignoredPaths);
+
+  [260] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:282
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public void markProcessed() {
+        >>>       StateKey stateKey = StateKey.create(pathEntry, ignoredPaths);
+                  DiffAwarenessState diffAwarenessState = currentDiffAwarenessStates.get(stateKey);
+                  if (diffAwarenessState != null) {
+
+  [261] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:293
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static class BrokenProcessableModifiedFileSet implements ProcessableModifiedFileSet {
+            
+        >>>     private static final BrokenProcessableModifiedFileSet INSTANCE =
+                    new BrokenProcessableModifiedFileSet();
+
+  [262] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:296
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        new BrokenProcessableModifiedFileSet();
+            
+        >>>     @Override
+                public ModifiedFileSet getModifiedFileSet() {
+                  return ModifiedFileSet.EVERYTHING_MODIFIED;
+
+  [263] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:298
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+                public ModifiedFileSet getModifiedFileSet() {
+        >>>       return ModifiedFileSet.EVERYTHING_MODIFIED;
+                }
+
+  [264] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:301
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Nullable
+                @Override
+                public WorkspaceInfoFromDiff getWorkspaceInfo() {
+
+  [265] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:302
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>     @Override
+                public WorkspaceInfoFromDiff getWorkspaceInfo() {
+                  return null;
+
+  [266] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:307
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public void markProcessed() {}
+              }
+
+  [267] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:43
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public final class DiffAwarenessManager {
+            
+        >>>   private static final GoogleLogger logger = GoogleLogger.forEnclosingClass();
+            
+              // The manager attempts to instantiate these in the order in which they are passed to the
+
+  [268] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:50
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** The unique key to retrieve a DiffAwarenessState. */
+        >>>   @AutoValue
+              abstract static class StateKey {
+                private static StateKey create(Root root, IgnoredSubdirectories ignoredPaths) {
+
+  [269] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:61
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   private final Map<StateKey, DiffAwarenessState> currentDiffAwarenessStates = Maps.newHashMap();
+            
+              public DiffAwarenessManager(Iterable<? extends DiffAwareness.Factory> diffAwarenessFactories) {
+
+  [270] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:64
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public DiffAwarenessManager(Iterable<? extends DiffAwareness.Factory> diffAwarenessFactories) {
+        >>>     this.diffAwarenessFactories = ImmutableList.copyOf(diffAwarenessFactories);
+              }
+
+  [271] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:74
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * null} if the next {@link #getDiff} will be the first incremental one.
+                 */
+        >>>     @Nullable private View baselineView;
+            
+                /**
+
+  [272] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:80
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * #getDiff} call.
+                 */
+        >>>     @Nullable private View cachedNewView;
+            
+                private DiffAwarenessState(DiffAwareness diffAwareness, @Nullable View baselineView) {
+
+  [273] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiffAwarenessManager.java:82
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Nullable private View cachedNewView;
+            
+        >>>     private DiffAwarenessState(DiffAwareness diffAwareness, @Nullable View baselineView) {
+                  this.diffAwareness = diffAwareness;
+                  this.baselineView = baselineView;
+
+  [274] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:113
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        } finally {
+                  if (profileOpen) {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_OPEN, path.getPathString());
+                  }
+                }
+
+  [275] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:118
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public SeekableByteChannel createReadWriteByteChannel(PathFragment path) throws IOException {
+                java.nio.file.Path nioPath = checkNotNull(getNioPath(path), "getNioPath() must not be null");
+
+  [276] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:122
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        java.nio.file.Path nioPath = checkNotNull(getNioPath(path), "getNioPath() must not be null");
+            
+        >>>     boolean profileOpen = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+            
+                long startTime = Profiler.instance().nanoTimeMaybe();
+
+  [277] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:124
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        boolean profileOpen = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+            
+        >>>     long startTime = Profiler.instance().nanoTimeMaybe();
+                try {
+                  // TODO: add profiling for read/write operations.
+
+  [278] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:127
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        try {
+                  // TODO: add profiling for read/write operations.
+        >>>       return Files.newByteChannel(nioPath, READ_WRITE_BYTE_CHANNEL_OPEN_OPTIONS);
+                } finally {
+                  if (profileOpen) {
+
+  [279] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:130
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        } finally {
+                  if (profileOpen) {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_OPEN, path.toString());
+                  }
+                }
+
+  [280] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:187
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public FileChannel getChannel() {
+                  FileChannel channel = super.getChannel();
+
+  [281] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:192
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // Benign data race: at worst we call setUninterruptible more than once.
+                  if (!patched) {
+        >>>         FileChannels.setUninterruptible(channel);
+                    patched = true;
+                  }
+
+  [282] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:214
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public int read() throws IOException {
+                  long startTime = profiler.nanoTimeMaybe();
+
+  [283] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:220
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        return super.read();
+                  } finally {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_READ, name);
+                  }
+                }
+
+  [284] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:224
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public int read(byte[] b) throws IOException {
+                  return read(b, 0, b.length);
+
+  [285] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:229
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public int read(byte[] b, int off, int len) throws IOException {
+                  long startTime = profiler.nanoTimeMaybe();
+
+  [286] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:235
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        return super.read(b, off, len);
+                  } finally {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_READ, name);
+                  }
+                }
+
+  [287] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:253
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public FileChannel getChannel() {
+                  FileChannel channel = super.getChannel();
+
+  [288] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:258
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // Benign data race: at worst we call setUninterruptible more than once.
+                  if (!patched) {
+        >>>         FileChannels.setUninterruptible(channel);
+                    patched = true;
+                  }
+
+  [289] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:281
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public void write(int b) throws IOException {
+                  long startTime = profiler.nanoTimeMaybe();
+
+  [290] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:287
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        super.write(b);
+                  } finally {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_WRITE, name);
+                  }
+                }
+
+  [291] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:291
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public void write(byte[] b) throws IOException {
+                  write(b, 0, b.length);
+
+  [292] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:296
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>     @Override
+                public void write(byte[] b, int off, int len) throws IOException {
+                  long startTime = profiler.nanoTimeMaybe();
+
+  [293] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:302
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        super.write(b, off, len);
+                  } finally {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_WRITE, name);
+                  }
+                }
+
+  [294] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:40
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        * disk through standard library APIs.
+             */
+        >>> @ThreadSafe
+            public abstract class DiskBackedFileSystem extends FileSystem {
+              private static final Profiler profiler = Profiler.instance();
+
+  [295] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:42
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @ThreadSafe
+            public abstract class DiskBackedFileSystem extends FileSystem {
+        >>>   private static final Profiler profiler = Profiler.instance();
+            
+              private static final ImmutableSet<StandardOpenOption> READ_WRITE_BYTE_CHANNEL_OPEN_OPTIONS =
+
+  [296] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:45
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final ImmutableSet<StandardOpenOption> READ_WRITE_BYTE_CHANNEL_OPEN_OPTIONS =
+        >>>       ImmutableSet.of(
+                      StandardOpenOption.READ,
+                      StandardOpenOption.WRITE,
+
+  [297] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:46
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private static final ImmutableSet<StandardOpenOption> READ_WRITE_BYTE_CHANNEL_OPEN_OPTIONS =
+                  ImmutableSet.of(
+        >>>           StandardOpenOption.READ,
+                      StandardOpenOption.WRITE,
+                      StandardOpenOption.CREATE,
+
+  [298] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:47
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ImmutableSet.of(
+                      StandardOpenOption.READ,
+        >>>           StandardOpenOption.WRITE,
+                      StandardOpenOption.CREATE,
+                      StandardOpenOption.TRUNCATE_EXISTING);
+
+  [299] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:48
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        StandardOpenOption.READ,
+                      StandardOpenOption.WRITE,
+        >>>           StandardOpenOption.CREATE,
+                      StandardOpenOption.TRUNCATE_EXISTING);
+
+  [300] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:49
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        StandardOpenOption.WRITE,
+                      StandardOpenOption.CREATE,
+        >>>           StandardOpenOption.TRUNCATE_EXISTING);
+            
+              protected DiskBackedFileSystem(DigestHashFunction hashFunction) {
+
+  [301] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:57
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // Force subclasses to override getIoFile and getNioPath, as the methods below require them.
+            
+        >>>   @Override
+              public abstract File getIoFile(PathFragment path);
+
+  [302] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:60
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public abstract File getIoFile(PathFragment path);
+            
+        >>>   @Override
+              public abstract java.nio.file.Path getNioPath(PathFragment path);
+
+  [303] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:63
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public abstract java.nio.file.Path getNioPath(PathFragment path);
+            
+        >>>   @Override
+              public InputStream getInputStream(PathFragment path) throws IOException {
+                File file = checkNotNull(getIoFile(path), "getIoFile() must not be null");
+
+  [304] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:67
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        File file = checkNotNull(getIoFile(path), "getIoFile() must not be null");
+            
+        >>>     boolean profileOpen = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+                boolean profileRead = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_READ);
+
+  [305] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:68
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        boolean profileOpen = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+        >>>     boolean profileRead = profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_READ);
+            
+                long startTime = profiler.nanoTimeMaybe();
+
+  [306] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:84
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        } finally {
+                  if (profileOpen) {
+        >>>         profiler.logSimpleTask(startTime, ProfilerTask.VFS_OPEN, path.getPathString());
+                  }
+                }
+
+  [307] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:89
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public OutputStream getOutputStream(PathFragment path, boolean append, boolean internal)
+                  throws IOException {
+
+  [308] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:95
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        boolean profileOpen =
+        >>>         !internal && profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+                boolean profileWrite =
+                    !internal && profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_WRITE);
+
+  [309] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\DiskBackedFileSystem.java:97
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        !internal && profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_OPEN);
+                boolean profileWrite =
+        >>>         !internal && profiler.isActive() && profiler.isProfiling(ProfilerTask.VFS_WRITE);
+            
+                long startTime = profiler.nanoTimeMaybe();
+
+  [310] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:102
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public int hashCode() {
+                return 31 * map.hashCode() + map.keySet().asList().hashCode(); // Consider order of keys.
+
+  [311] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:107
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean equals(Object o) {
+                if (this == o) {
+
+  [312] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:120
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public String toString() {
+                return MoreObjects.toStringHelper(this)
+
+  [313] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:122
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public String toString() {
+        >>>     return MoreObjects.toStringHelper(this)
+                    .add("size", map.size())
+                    .add("hashCode", map.hashCode())
+
+  [314] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:134
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        private final Set<Label> addedLabels = new HashSet<>();
+                private final ImmutableListMultimap.Builder<EnvironmentLabels, Label> mapBuilder =
+        >>>         ImmutableListMultimap.builder();
+            
+                /** Inserts the given environment / owning group pair. */
+
+  [315] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:137
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Inserts the given environment / owning group pair. */
+        >>>     @CanIgnoreReturnValue
+                public Builder put(EnvironmentLabels group, Label environment) {
+                  if (addedLabels.add(environment)) {
+
+  [316] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:146
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Inserts the given set of environments, all belonging to the specified group. */
+        >>>     @CanIgnoreReturnValue
+                public Builder putAll(EnvironmentLabels group, Iterable<Label> environments) {
+                  for (Label env : environments) {
+
+  [317] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:157
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Inserts the contents of another {@link EnvironmentCollection} into this one. */
+        >>>     @CanIgnoreReturnValue
+                public Builder putAll(EnvironmentCollection other) {
+                  for (Map.Entry<EnvironmentLabels, Label> entry : other.map.entries()) {
+
+  [318] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:169
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public EnvironmentCollection build() {
+                  var map = mapBuilder.build();
+        >>>       return map.isEmpty() ? EMPTY : interner.intern(new EnvironmentCollection(map));
+                }
+              }
+
+  [319] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:36
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** Contains a set of {@link Environment} labels and their associated groups. */
+        >>> @Immutable
+            public final class EnvironmentCollection {
+
+  [320] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:40
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** An empty {@link EnvironmentCollection}. */
+        >>>   @SerializationConstant
+              static final EnvironmentCollection EMPTY = new EnvironmentCollection(ImmutableListMultimap.of());
+
+  [321] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:41
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        /** An empty {@link EnvironmentCollection}. */
+              @SerializationConstant
+        >>>   static final EnvironmentCollection EMPTY = new EnvironmentCollection(ImmutableListMultimap.of());
+            
+              private static final Interner<EnvironmentCollection> interner = BlazeInterners.newWeakInterner();
+
+  [322] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:43
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        static final EnvironmentCollection EMPTY = new EnvironmentCollection(ImmutableListMultimap.of());
+            
+        >>>   private static final Interner<EnvironmentCollection> interner = BlazeInterners.newWeakInterner();
+            
+              private final ImmutableListMultimap<EnvironmentLabels, Label> map;
+
+  [323] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:93
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        */
+              ImmutableSet<EnvironmentWithGroup> getGroupedEnvironments() {
+        >>>     var builder = ImmutableSet.<EnvironmentWithGroup>builderWithExpectedSize(map.asMap().size());
+                map.forEach((group, env) -> builder.add(EnvironmentWithGroup.create(env, group)));
+                return builder.build();
+
+  [324] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\EnvironmentCollection.java:94
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        ImmutableSet<EnvironmentWithGroup> getGroupedEnvironments() {
+                var builder = ImmutableSet.<EnvironmentWithGroup>builderWithExpectedSize(map.asMap().size());
+        >>>     map.forEach((group, env) -> builder.add(EnvironmentWithGroup.create(env, group)));
+                return builder.build();
+              }
+
+  [325] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:103
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public String toString() {
+                return label.toString();
+
+  [326] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:108
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public int hashCode() {
+                return Objects.hash(label, pkg);
+
+  [327] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:110
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public int hashCode() {
+        >>>     return Objects.hash(label, pkg);
+              }
+
+  [328] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:113
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean equals(Object obj) {
+                if (!(obj instanceof FakeLoadTarget other)) {
+
+  [329] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:126
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public TargetData reduceForSerialization() {
+                throw new UnsupportedOperationException();
+
+  [330] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:43
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        */
+              public FakeLoadTarget(Label label, Packageoid packageoidOfBuildFile) {
+        >>>     this.label = Preconditions.checkNotNull(label);
+                Preconditions.checkNotNull(packageoidOfBuildFile);
+                Preconditions.checkArgument(
+
+  [331] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:44
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public FakeLoadTarget(Label label, Packageoid packageoidOfBuildFile) {
+                this.label = Preconditions.checkNotNull(label);
+        >>>     Preconditions.checkNotNull(packageoidOfBuildFile);
+                Preconditions.checkArgument(
+                    (packageoidOfBuildFile instanceof Package pkg && pkg.getBuildFile().getPackageoid() == pkg)
+
+  [332] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:45
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        this.label = Preconditions.checkNotNull(label);
+                Preconditions.checkNotNull(packageoidOfBuildFile);
+        >>>     Preconditions.checkArgument(
+                    (packageoidOfBuildFile instanceof Package pkg && pkg.getBuildFile().getPackageoid() == pkg)
+                        || packageoidOfBuildFile instanceof PackagePiece.ForBuildFile,
+
+  [333] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:53
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Label getLabel() {
+                return label;
+
+  [334] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:58
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Packageoid getPackageoid() {
+                return pkg;
+
+  [335] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:63
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Package.Metadata getPackageMetadata() {
+                return pkg.getMetadata();
+
+  [336] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:68
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Package.Declarations getPackageDeclarations() {
+                return pkg.getDeclarations();
+
+  [337] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:73
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public String getTargetKind() {
+                return targetKind();
+
+  [338] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:78
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Rule getAssociatedRule() {
+                return null;
+
+  [339] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:83
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public License getLicense() {
+                throw new UnsupportedOperationException();
+
+  [340] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:88
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Location getLocation() {
+                return getPackageMetadata().getBuildFileLocation();
+
+  [341] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:93
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public RuleVisibility getRawVisibility() {
+                return RuleVisibility.PUBLIC;
+
+  [342] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:95
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public RuleVisibility getRawVisibility() {
+        >>>     return RuleVisibility.PUBLIC;
+              }
+
+  [343] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FakeLoadTarget.java:98
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean isConfigurable() {
+                return true;
+
+  [344] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:109
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // A get of `fingerprint` now returns `value` immediately.
+        >>>     SettableFuture<Object> getOp = SettableFuture.create();
+                Object getResult = service.getOrClaimGetOperation(fingerprint, distinguisher.value(), getOp);
+                assertThat(getResult).isSameInstanceAs(value);
+
+  [345] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:114
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // A second "put" of `value' sees the original, wrapped `putOp1`.
+        >>>     SettableFuture<PutOperation> putOp2 = SettableFuture.create();
+                putResult = service.getOrClaimPutOperation(value, distinguisher.value(), putOp2);
+                assertThat(putResult).isSameInstanceAs(putOp1);
+
+  [346] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:124
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void getOperation_isUnwrapped(@TestParameter Distinguisher distinguisher) {
+                FingerprintValueService service =
+
+  [347] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:125
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void getOperation_isUnwrapped(@TestParameter Distinguisher distinguisher) {
+                FingerprintValueService service =
+                    FingerprintValueService.createForTesting(FingerprintValueCache.SyncMode.LINKED);
+
+  [348] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:127
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        public void getOperation_isUnwrapped(@TestParameter Distinguisher distinguisher) {
+                FingerprintValueService service =
+        >>>         FingerprintValueService.createForTesting(FingerprintValueCache.SyncMode.LINKED);
+            
+                PackedFingerprint fingerprint = getFingerprintForTesting("foo");
+
+  [349] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:131
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        PackedFingerprint fingerprint = getFingerprintForTesting("foo");
+            
+        >>>     SettableFuture<Object> getOp = SettableFuture.create();
+                Object result = service.getOrClaimGetOperation(fingerprint, distinguisher.value(), getOp);
+                assertThat(result).isNull();
+
+  [350] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:137
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // The first put operation is owned by the caller.
+                Object value = new Object();
+        >>>     SettableFuture<PutOperation> putOp = SettableFuture.create();
+                Object putResult = service.getOrClaimPutOperation(value, distinguisher.value(), putOp);
+                assertThat(putResult).isNull();
+
+  [351] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:145
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // The next put operation gets the unwrapped fingerprint.
+        >>>     SettableFuture<PutOperation> putOp2 = SettableFuture.create();
+                putResult = service.getOrClaimPutOperation(value, distinguisher.value(), putOp2);
+                assertThat(putResult).isSameInstanceAs(fingerprint);
+
+  [352] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:154
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        putOp.set(new PutOperation(fingerprint2, immediateWriteStatus()));
+            
+        >>>     SettableFuture<PutOperation> putOp3 = SettableFuture.create();
+                putResult = service.getOrClaimPutOperation(value, distinguisher.value(), putOp3);
+                assertThat(putResult).isSameInstanceAs(fingerprint2);
+
+  [353] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:159
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void distinguisher_distinguishesSameFingerprint() {
+                // Puts two values with the same fingerprint, but different distinguishers, then verifies that
+
+  [354] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:164
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // they are distinguishable on retrieval.
+                FingerprintValueService service =
+        >>>         FingerprintValueService.createForTesting(FingerprintValueCache.SyncMode.LINKED);
+            
+                PackedFingerprint fingerprint = getFingerprintForTesting("foo");
+
+  [355] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:183
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        // The correct values are returned for the distinguisher values.
+        >>>     SettableFuture<Object> unusedGetOperation = SettableFuture.create();
+                result = service.getOrClaimGetOperation(fingerprint, distinguisher1, unusedGetOperation);
+                assertThat(result).isSameInstanceAs(value1);
+
+  [356] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:190
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void notLinkedPut_doesNotAddGetEntry(
+                  @TestParameter Distinguisher distinguisher,
+
+  [357] 项目: Bazel
+      规则: java-camel-case-lowercase-all
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\FingerprintValueCacheTest.java:192
+      描述: All words in a camel case identifier must be entirely lowercase, including acronyms.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void notLinkedPut_doesNotAddGetEntry(
+        >>>       @TestParameter Distinguisher distinguisher,
+                  @TestParameter FingerprintValueCache.SyncMode mode) {
+                FingerprintValueService service = FingerprintValueService.createForTesting(mode);
+  ------------------------------------------------------------
+============================================================
