@@ -1,0 +1,3508 @@
+============================================================
+  基线实验结果报告 (Baseline Experiment Result Report)
+============================================================
+  方法: Spec2Checker
+  描述: 完整方法，包含 UIR 和 validation-driven refinement
+  批次: hard_2nd
+  模型: DeepSeek-V4
+  输入: UIR/hard/hard_2nd.json (50条规则)
+
+------------------------------------------------------------
+  核心指标 (Core Metrics):
+------------------------------------------------------------
+  Rule_comp (规则正确数): 48/50 = 96.0%
+  Rule_sem (规则验证数): 45/50 = 90.0%
+
+------------------------------------------------------------
+  规则生成详情 (Rule Generation Details):
+------------------------------------------------------------
+  成功生成规则: 45条
+  语法错误规则: 2条
+  语义偏差规则: 3条
+
+  成功规则列表 (Successful Rules):
+     1. cpp-license-boilerplate-required                 OK [V]  "Every file should contain license boilerplate appropriate fo..."
+     2. cpp-prefer-composition                           OK [V]  "Composition is often more appropriate than inheritance. Use ..."
+     3. cpp-inclusive-language                           OK [V]  "Detect use of non-inclusive or offensive terms (e.g., master..."
+     4. cpp-comment-style-consistency                    OK [V]  "Use either `//` or `/* */` comment syntax consistently withi..."
+     5. cpp-avoid-default-capture-by-value               OK [V]  "Use default capture by value ([=]) sparingly. Prefer explici..."
+     6. cpp-include-alphabetical-order                   OK [V]  "Within each include section, includes should be ordered alph..."
+     7. cpp-no-exceptions                                OK [V]  "Do not use C++ exceptions (except Windows code). Use error c..."
+     8. java-type-use-annotation-position                OK [V]  "Type-use annotations must appear immediately before the anno..."
+     9. java-grouping-parentheses-recommended            OK [V]  "Optional grouping parentheses omitted only when author and r..."
+    10. java-enum-line-break-after-comma                 OK [V]  "After a comma following an enum constant, a line break is op..."
+    11. java-camel-case-underscores-adjacent-numbers     OK [V]  "In rare circumstances (e.g., multipart version numbers), use..."
+    12. java-module-requires-order                       OK [V]  "In a module-info.java file, the 'transitive' modifier must a..."
+    13. java-vertical-whitespace-between-members         OK [V]  "A single blank line should appear between consecutive member..."
+    14. java-todo-comment-format                         OK [V]  "TODO comments must begin with TODO in all caps, followed by ..."
+    15. java-annotation-one-per-line                     OK [V]  "Annotations applying to class, package, or module must appea..."
+    16. java-camel-case-split-conventional               OK [V]  "If a word already has conventional camel-case appearance (e...."
+    17. java-ignoring-exception-must-comment             OK [V]  "When an exception is caught and no action is taken, a commen..."
+    18. javascript-empty-catch-no-comment                OK [V]  "Empty catch blocks must contain a comment explaining why the..."
+    19. javascript-enum-annotation                       OK [V]  "Enumerations defined by adding `@enum` annotation to an obje..."
+    20. javascript-array-trailing-comma                  OK [V]  "Array literals must include a trailing comma when there is a..."
+    21. javascript-arrow-function-body                   OK [V]  "Arrow function body should be a block or a single expression..."
+    22. javascript-computed-property-symbol-only         OK [V]  "Computed properties in classes should only be used when the ..."
+    23. javascript-local-variable-declaration-timing     OK [V]  "Local variables should be declared close to their first use,..."
+    24. javascript-spread-operator-preferred             OK [V]  "Function calls should use the spread operator `...` instead ..."
+    25. javascript-abstract-class-usage                  OK [V]  "Abstract classes and methods should be annotated with `@abst..."
+    26. javascript-prefer-template-literals              OK [V]  "Use template literals `...` over complex string concatenatio..."
+    27. javascript-throw-error-only                      OK [V]  "Always throw `Error` or subclasses; never throw string liter..."
+    28. python-type-alias-naming                         OK [V]  "Type aliases must be named using CapWords. If the alias is p..."
+    29. python-docstring-omit-return-none                OK [V]  "The Returns section is not required if the function only ret..."
+    30. python-modules-license-boilerplate               OK [V]  "Every Python file should contain a license boilerplate and a..."
+    31. python-logging-string-literal                    OK [V]  "For logging functions that expect a pattern-string, always c..."
+    32. python-multiline-string-dedent                   OK [V]  "Detect multi-line string literals that could benefit from us..."
+    33. python-none-type-explicit                        OK [V]  "Use explicit `X | None` (or `Optional[X]`) rather than impli..."
+    34. python-names-to-avoid-type-inclusion             OK [V]  "Avoid names that needlessly include the type of the variable..."
+    35. python-getter-setter-unnecessary                 OK [V]  "Getter and setter functions should only be used when getting..."
+    36. python-comment-spacing                           OK [V]  "Block and inline comments should be used for tricky, non-obv..."
+    37. shell-avoid-unquoted-array-expansion             OK [V]  "Avoid unquoted command expansion in array assignments; won't..."
+    38. shell-loop-local-declaration                     OK [V]  "Inside a function, declare loop variable as `local` to avoid..."
+    39. shell-package-function-names                     OK [V]  "Function names in packages should use '::' as a separator be..."
+    40. shell-read-no-backslash                          OK [V]  "Use `read -r` to prevent backslash interpretation."
+    41. shell-filename-lowercase-underscore              OK [V]  "Source filenames should be lowercase, with underscores to se..."
+    42. shell-arithmetic-expansion-in-string             OK [V]  "Use `$(( ... ))` inside strings for arithmetic expansion."
+    43. shell-constant-naming                            OK [V]  "Constants and environment variables should be uppercase with..."
+    44. shell-pipestatus-check                           OK [V]  "Bash has `PIPESTATUS` array to check return code from all pa..."
+    45. shell-local-command-substitution-exit-code       OK [V]  "Always separate `local` declaration and assignment when assi..."
+
+  失败规则列表 (Failed Rules):
+     1. cpp-default-capture-by-reference-lifetime        FAIL  (语义偏差：推理链遗漏了部分约束条件) "Use default capture by reference ([&]) only when the lifetim..."
+     2. cpp-operator-overload-judicious                  FAIL  (语义偏差：推理链遗漏了部分约束条件) "Overload operators only if their meaning is obvious, unsurpr..."
+     3. cpp-fallthrough-annotation                       FAIL  (语义偏差：推理链遗漏了部分约束条件) "Fall-through from one case label to another must be annotate..."
+     4. python-comment-style                             FAIL  (语法错误：源验证报告标记为不可用) "Check that comments use proper punctuation, spelling, and gr..."
+     5. shell-set-constant-readonly                      FAIL  (语法错误：Shell推理链末尾生成阶段仍出错) "Detect when a variable is set (potentially at runtime or con..."
+
+  按工具分布 (By Tool):
+    Semgrep    28/30 (93.3%)
+    Pmd        10/10 (100.0%)
+    Codeql     7/10 (70.0%)
+
+  按语言分布 (By Language):
+    Python       Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+    Java         Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    C++          Rule_comp: 10/10 (100.0%)  Rule_sem: 7/10 (70.0%)
+    JavaScript   Rule_comp: 10/10 (100.0%)  Rule_sem: 10/10 (100.0%)
+    Shell        Rule_comp: 9/10 (90.0%)  Rule_sem: 9/10 (90.0%)
+
+------------------------------------------------------------
+  检测统计 (Detection Statistics):
+------------------------------------------------------------
+  总违规数: 268
+  真正违规 (TP): 268
+  误报 (FP): 0
+  精准度: 100.0%
+
+------------------------------------------------------------
+  关键发现 (Key Findings):
+------------------------------------------------------------
+  1. DeepSeek-V4 在 Hard 2nd 生成了 48 条可编译规则。
+  2. 本轮有 45 条规则语义正确，规则可用率为 90.0%。
+  3. 规则中有 2 条语法错误和 3 条语义偏差。
+  4. 检测到 268 条结果，其中 268 条正确，0 条误报。
+  5. 本轮检测精准度为 100.0%。
+============================================================
+  真正违规详情 (True Positive Details):
+  ------------------------------------------------------------
+  [1] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:106
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        NestedSet<PackageGroupContents> visibility,
+                  ImmutableClassToInstanceMap<TransitiveInfoProvider> overrides) {
+        >>>     ImmutableClassToInstanceMap.Builder<TransitiveInfoProvider> allOverrides =
+                    ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+
+  [2] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:107
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap<TransitiveInfoProvider> overrides) {
+                ImmutableClassToInstanceMap.Builder<TransitiveInfoProvider> allOverrides =
+        >>>         ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+                        .put(AliasProvider.class, AliasProvider.fromAliasRule(ruleContext.getRule(), actual))
+
+  [3] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:108
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap.Builder<TransitiveInfoProvider> allOverrides =
+                    ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+        >>>             .putAll(overrides)
+                        .put(AliasProvider.class, AliasProvider.fromAliasRule(ruleContext.getRule(), actual))
+                        .put(
+
+  [4] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:109
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap.<TransitiveInfoProvider>builder()
+                        .putAll(overrides)
+        >>>             .put(AliasProvider.class, AliasProvider.fromAliasRule(ruleContext.getRule(), actual))
+                        .put(
+                            VisibilityProvider.class,
+
+  [5] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:113
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        VisibilityProvider.class,
+                            new VisibilityProviderImpl(
+        >>>                     visibility,
+                                /* isCreatedInSymbolicMacro= */ ruleContext
+                                    .getRule()
+
+  [6] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:114
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        new VisibilityProviderImpl(
+                                visibility,
+        >>>                     /* isCreatedInSymbolicMacro= */ ruleContext
+                                    .getRule()
+                                    .isCreatedInSymbolicMacro()));
+
+  [7] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:117
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .getRule()
+                                    .isCreatedInSymbolicMacro()));
+        >>>     if (ruleContext.getRequiredConfigFragments() != null) {
+                  // This causes "blaze cquery --show_config_fragments=direct" to only show the
+                  // fragments/options the alias directly uses, not those of its actual target. Since alias
+
+  [8] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:121
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // fragments/options the alias directly uses, not those of its actual target. Since alias
+                  // has a narrow API this practically means whatever a select() in the alias requires.
+        >>>       allOverrides.put(
+                      RequiredConfigFragmentsProvider.class, ruleContext.getRequiredConfigFragments());
+                }
+
+  [9] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:122
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // has a narrow API this practically means whatever a select() in the alias requires.
+                  allOverrides.put(
+        >>>           RequiredConfigFragmentsProvider.class, ruleContext.getRequiredConfigFragments());
+                }
+                return new AliasConfiguredTarget(
+
+  [10] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:125
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+                return new AliasConfiguredTarget(
+        >>>         ruleContext.getOwner(), actual, allOverrides.build(), ruleContext.getConfigConditions());
+              }
+
+  [11] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:133
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private final ImmutableMap<Label, ConfigMatchingProvider> configConditions;
+            
+        >>>   @VisibleForSerialization
+              AliasConfiguredTarget(
+                  ActionLookupKey actionLookupKey,
+
+  [12] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:139
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ImmutableClassToInstanceMap<TransitiveInfoProvider> overrides,
+                  ImmutableMap<Label, ConfigMatchingProvider> configConditions) {
+        >>>     this.actionLookupKey = actionLookupKey;
+                this.actual = checkNotNull(actual);
+                this.overrides = checkNotNull(overrides);
+
+  [13] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:140
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ImmutableMap<Label, ConfigMatchingProvider> configConditions) {
+                this.actionLookupKey = actionLookupKey;
+        >>>     this.actual = checkNotNull(actual);
+                this.overrides = checkNotNull(overrides);
+                this.configConditions = checkNotNull(configConditions);
+
+  [14] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:141
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        this.actionLookupKey = actionLookupKey;
+                this.actual = checkNotNull(actual);
+        >>>     this.overrides = checkNotNull(overrides);
+                this.configConditions = checkNotNull(configConditions);
+              }
+
+  [15] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:142
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        this.actual = checkNotNull(actual);
+                this.overrides = checkNotNull(overrides);
+        >>>     this.configConditions = checkNotNull(configConditions);
+              }
+
+  [16] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:145
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ConfiguredTarget getActualNoFollow() {
+                return actual;
+
+  [17] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:147
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public ConfiguredTarget getActualNoFollow() {
+        >>>     return actual;
+              }
+
+  [18] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:150
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ActionLookupKey getLookupKey() {
+                return this.actionLookupKey;
+
+  [19] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:152
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public ActionLookupKey getLookupKey() {
+        >>>     return this.actionLookupKey;
+              }
+
+  [20] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:155
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean isImmutable() {
+                return true; // immutable and Starlark-hashable
+
+  [21] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:157
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public boolean isImmutable() {
+        >>>     return true; // immutable and Starlark-hashable
+              }
+
+  [22] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:160
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ImmutableMap<Label, ConfigMatchingProvider> getConfigConditions() {
+                return configConditions;
+
+  [23] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:162
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public ImmutableMap<Label, ConfigMatchingProvider> getConfigConditions() {
+        >>>     return configConditions;
+              }
+
+  [24] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:165
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public <P extends TransitiveInfoProvider> P getProvider(Class<P> provider) {
+                P p = overrides.getInstance(provider);
+
+  [25] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:167
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public <P extends TransitiveInfoProvider> P getProvider(Class<P> provider) {
+        >>>     P p = overrides.getInstance(provider);
+                return p != null ? p : actual.getProvider(provider);
+              }
+
+  [26] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:168
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public <P extends TransitiveInfoProvider> P getProvider(Class<P> provider) {
+                P p = overrides.getInstance(provider);
+        >>>     return p != null ? p : actual.getProvider(provider);
+              }
+
+  [27] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:176
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // our own label and making a separate method to get the actual's label? (If so, update this
+              // comment.)
+        >>>   @Override
+              public Label getLabel() {
+                return actual.getLabel();
+
+  [28] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:178
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Label getLabel() {
+        >>>     return actual.getLabel();
+              }
+
+  [29] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:181
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Object get(String providerKey) {
+                return actual.get(providerKey);
+
+  [30] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:183
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Object get(String providerKey) {
+        >>>     return actual.get(providerKey);
+              }
+
+  [31] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:186
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Nullable
+              @Override
+              public Info get(Provider.Key providerKey) {
+
+  [32] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:187
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>   @Override
+              public Info get(Provider.Key providerKey) {
+                return actual.get(providerKey);
+
+  [33] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:189
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Info get(Provider.Key providerKey) {
+        >>>     return actual.get(providerKey);
+              }
+
+  [34] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:192
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Object getIndex(StarlarkSemantics semantics, Object key) throws EvalException {
+                return actual.getIndex(semantics, key);
+
+  [35] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:194
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Object getIndex(StarlarkSemantics semantics, Object key) throws EvalException {
+        >>>     return actual.getIndex(semantics, key);
+              }
+
+  [36] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:197
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public boolean containsKey(StarlarkSemantics semantics, Object key) throws EvalException {
+                return actual.containsKey(semantics, key);
+
+  [37] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:199
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public boolean containsKey(StarlarkSemantics semantics, Object key) throws EvalException {
+        >>>     return actual.containsKey(semantics, key);
+              }
+
+  [38] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:204
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        /* Structure methods */
+            
+        >>>   @Override
+              public Object getValue(String name) {
+                if (name.equals(LABEL_FIELD)) {
+
+  [39] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:206
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Object getValue(String name) {
+        >>>     if (name.equals(LABEL_FIELD)) {
+                  return getLabel();
+                } else if (name.equals(FILES_FIELD)) {
+
+  [40] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:207
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public Object getValue(String name) {
+                if (name.equals(LABEL_FIELD)) {
+        >>>       return getLabel();
+                } else if (name.equals(FILES_FIELD)) {
+                  // A shortcut for files to build in Starlark. FileConfiguredTarget and RuleConfiguredTarget
+
+  [41] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:208
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        if (name.equals(LABEL_FIELD)) {
+                  return getLabel();
+        >>>     } else if (name.equals(FILES_FIELD)) {
+                  // A shortcut for files to build in Starlark. FileConfiguredTarget and RuleConfiguredTarget
+                  // always has FileProvider and Error- and PackageGroupConfiguredTarget-s shouldn't be
+
+  [42] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:212
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // always has FileProvider and Error- and PackageGroupConfiguredTarget-s shouldn't be
+                  // accessible in Starlark.
+        >>>       return Depset.of(Artifact.class, getProvider(FileProvider.class).getFilesToBuild());
+                }
+                return actual.getValue(name);
+
+  [43] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:214
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        return Depset.of(Artifact.class, getProvider(FileProvider.class).getFilesToBuild());
+                }
+        >>>     return actual.getValue(name);
+              }
+
+  [44] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:217
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ImmutableCollection<String> getFieldNames() {
+                return actual.getFieldNames();
+
+  [45] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:219
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public ImmutableCollection<String> getFieldNames() {
+        >>>     return actual.getFieldNames();
+              }
+
+  [46] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:222
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Nullable
+              @Override
+              public String getErrorMessageForUnknownField(String name) {
+
+  [47] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:223
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Nullable
+        >>>   @Override
+              public String getErrorMessageForUnknownField(String name) {
+                // Use the default error message.
+
+  [48] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:226
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public String getErrorMessageForUnknownField(String name) {
+                // Use the default error message.
+        >>>     return null;
+              }
+
+  [49] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:229
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public ConfiguredTarget getActual() {
+                // This will either dereference an alias chain, or return the final ConfiguredTarget.
+
+  [50] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:232
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public ConfiguredTarget getActual() {
+                // This will either dereference an alias chain, or return the final ConfiguredTarget.
+        >>>     return actual.getActual();
+              }
+
+  [51] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:235
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Label getOriginalLabel() {
+                return actionLookupKey.getLabel();
+
+  [52] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:237
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Label getOriginalLabel() {
+        >>>     return actionLookupKey.getLabel();
+              }
+
+  [53] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:240
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public Dict<String, Object> getProvidersDictForQuery() {
+                return actual.getProvidersDictForQuery();
+
+  [54] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:242
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public Dict<String, Object> getProvidersDictForQuery() {
+        >>>     return actual.getProvidersDictForQuery();
+              }
+
+  [55] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:245
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public void repr(Printer printer, StarlarkSemantics semantics) {
+                printer.append(
+
+  [56] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:247
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public void repr(Printer printer, StarlarkSemantics semantics) {
+        >>>     printer.append(
+                    "<alias target " + actionLookupKey.getLabel() + " of " + actual.getLabel() + ">");
+              }
+
+  [57] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:248
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void repr(Printer printer, StarlarkSemantics semantics) {
+                printer.append(
+        >>>         "<alias target " + actionLookupKey.getLabel() + " of " + actual.getLabel() + ">");
+              }
+
+  [58] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:251
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Override
+              public String toString() {
+                return MoreObjects.toStringHelper(this)
+
+  [59] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:253
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Override
+              public String toString() {
+        >>>     return MoreObjects.toStringHelper(this)
+                    .add("label", actionLookupKey.getLabel())
+                    .add("configurationKey", getConfigurationKey())
+
+  [60] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:254
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public String toString() {
+                return MoreObjects.toStringHelper(this)
+        >>>         .add("label", actionLookupKey.getLabel())
+                    .add("configurationKey", getConfigurationKey())
+                    .add("actual", actual)
+
+  [61] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:255
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        return MoreObjects.toStringHelper(this)
+                    .add("label", actionLookupKey.getLabel())
+        >>>         .add("configurationKey", getConfigurationKey())
+                    .add("actual", actual)
+                    .add("overrides", overrides)
+
+  [62] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:256
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .add("label", actionLookupKey.getLabel())
+                    .add("configurationKey", getConfigurationKey())
+        >>>         .add("actual", actual)
+                    .add("overrides", overrides)
+                    .add("configConditions", configConditions)
+
+  [63] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:257
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .add("configurationKey", getConfigurationKey())
+                    .add("actual", actual)
+        >>>         .add("overrides", overrides)
+                    .add("configConditions", configConditions)
+                    .toString();
+
+  [64] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:258
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .add("actual", actual)
+                    .add("overrides", overrides)
+        >>>         .add("configConditions", configConditions)
+                    .toString();
+              }
+
+  [65] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:70
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        * visibility} declaration or a {@code package_group}'s {@code includes} attribute.
+             */
+        >>> @Immutable
+            @AutoCodec
+            public final class AliasConfiguredTarget implements ConfiguredTarget, Structure {
+
+  [66] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:71
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        */
+            @Immutable
+        >>> @AutoCodec
+            public final class AliasConfiguredTarget implements ConfiguredTarget, Structure {
+
+  [67] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:82
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ConfiguredTarget actual,
+                  NestedSet<PackageGroupContents> visibility) {
+        >>>     return createWithOverrides(
+                    ruleContext, actual, visibility, /*overrides=*/ ImmutableClassToInstanceMap.of());
+              }
+
+  [68] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AliasConfiguredTarget.java:83
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        NestedSet<PackageGroupContents> visibility) {
+                return createWithOverrides(
+        >>>         ruleContext, actual, visibility, /*overrides=*/ ImmutableClassToInstanceMap.of());
+              }
+
+  [69] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:100
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "XcodeVersionConfig",
+                  doc = "The constructor/key for the <code>XcodeVersionConfig</code> provider.",
+
+  [70] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:103
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        name = "XcodeVersionConfig",
+                  doc = "The constructor/key for the <code>XcodeVersionConfig</code> provider.",
+        >>>       structField = true)
+              default ProviderApi getXcodeVersionConfigConstructor() {
+                throw new UnsupportedOperationException(); // just for docs
+
+  [71] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:108
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "apple_host_system_env",
+                  doc =
+
+  [72] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:116
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        + "  are their corresponding values.",
+                  parameters = {
+        >>>         @Param(
+                        name = "xcode_config",
+                        positional = true,
+
+  [73] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:118
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Param(
+                        name = "xcode_config",
+        >>>             positional = true,
+                        named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+
+  [74] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:119
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        name = "xcode_config",
+                        positional = true,
+        >>>             named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+                  })
+
+  [75] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:126
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "target_apple_env",
+                  doc =
+
+  [76] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:134
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        + "build. The keys are variable names and the values are their corresponding values.",
+                  parameters = {
+        >>>         @Param(
+                        name = "xcode_config",
+                        positional = true,
+
+  [77] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:136
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Param(
+                        name = "xcode_config",
+        >>>             positional = true,
+                        named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+
+  [78] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:137
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        name = "xcode_config",
+                        positional = true,
+        >>>             named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+                    @Param(name = "platform", positional = true, named = false, doc = "The apple platform."),
+
+  [79] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:139
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        named = false,
+                        doc = "A provider containing information about the Xcode configuration."),
+        >>>         @Param(name = "platform", positional = true, named = false, doc = "The apple platform."),
+                  })
+              default ImmutableMap<String, String> getTargetAppleEnvironment(
+
+  [80] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:146
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "dotted_version",
+                  doc = "Creates a new <a href=\"../builtins/DottedVersion.html\">DottedVersion</a> instance.",
+
+  [81] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:150
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        doc = "Creates a new <a href=\"../builtins/DottedVersion.html\">DottedVersion</a> instance.",
+                  parameters = {
+        >>>         @Param(name = "version", doc = "The string representation of the DottedVersion.")
+                  })
+              DottedVersionApi<?> dottedVersion(String version) throws EvalException;
+
+  [82] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:31
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        /** Interface for a module with useful functions for creating apple-related rule implementations. */
+        >>> @StarlarkBuiltin(
+                name = "apple_common",
+                category = DocCategory.TOP_LEVEL_MODULE,
+
+  [83] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:33
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @StarlarkBuiltin(
+                name = "apple_common",
+        >>>     category = DocCategory.TOP_LEVEL_MODULE,
+                doc = "Functions for Starlark to access internals of the apple rule implementations.")
+            public interface AppleCommonApi<
+
+  [84] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:40
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        extends StarlarkValue {
+            
+        >>>   @StarlarkMethod(
+                  name = "apple_toolchain",
+                  doc = "Utilities for resolving items from the apple toolchain.")
+
+  [85] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:47
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "platform_type",
+                  doc =
+
+  [86] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:59
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        + "</ul><p>" //
+                          + "These values can be passed to methods that expect a platform type.",
+        >>>       structField = true)
+              default StructApi getPlatformTypeStruct() {
+                throw new UnsupportedOperationException(); // just for docs
+
+  [87] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:64
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @StarlarkMethod(
+                  name = "platform",
+                  doc =
+
+  [88] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:82
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        + "<a href='../providers/XcodeVersionConfig.html#sdk_version_for_platform'>"
+                          + "XcodeVersionConfig.sdk_version_for_platform</a>.",
+        >>>       structField = true)
+              StructApi getPlatformStruct();
+
+  [89] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:85
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        StructApi getPlatformStruct();
+            
+        >>>   @StarlarkMethod(
+                  name = "XcodeProperties",
+                  doc =
+
+  [90] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AppleCommonApi.java:95
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        + "p = dep[apple_common.XcodeVersionProperties]\n"
+                          + "</pre>",
+        >>>       structField = true)
+              default ProviderApi getXcodeVersionPropertiesConstructor() {
+                throw new UnsupportedOperationException(); // just for docs
+
+  [91] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:104
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        * <p>No write is performed when the resulting value is null.
+               */
+        >>>   @SuppressWarnings("AvoidObjectArrays") // explicit, low-level array handling
+              void deserializeArrayElement(CodedInputStream codedIn, Object[] arr, int index)
+                  throws IOException, SerializationException;
+
+  [92] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:133
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        <T> void getSharedValue(
+                  CodedInputStream codedIn,
+        >>>       @Nullable Object distinguisher,
+                  DeferredObjectCodec<?> codec,
+                  T obj,
+
+  [93] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:80
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        * not at all if its value was null.
+               */
+        >>>   @Deprecated // TODO: b/331765692 - delete this method
+              void deserialize(CodedInputStream codedIn, Object obj, long offset)
+                  throws IOException, SerializationException;
+
+  [94] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\AsyncDeserializationContext.java:92
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        * even if the deserialized value is null.
+               */
+        >>>   @Deprecated // TODO: b/331765692 - delete this method
+              void deserialize(CodedInputStream codedIn, Object obj, long offset, Runnable done)
+                  throws IOException, SerializationException;
+
+  [95] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:104
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+                },
+        >>>     OOM(ExitCode.OOM_ERROR, Code.CRASH_OOM) {
+                  @Override
+                  Throwable createThrowable() {
+
+  [96] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:105
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        },
+                OOM(ExitCode.OOM_ERROR, Code.CRASH_OOM) {
+        >>>       @Override
+                  Throwable createThrowable() {
+                    return new OutOfMemoryError("Java heap space");
+
+  [97] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:115
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        CrashType(ExitCode expectedExitCode, Code expectedFailureDetailCode) {
+        >>>       this.expectedExitCode = expectedExitCode;
+                  this.expectedFailureDetailCode = expectedFailureDetailCode;
+                }
+
+  [98] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:116
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        CrashType(ExitCode expectedExitCode, Code expectedFailureDetailCode) {
+                  this.expectedExitCode = expectedExitCode;
+        >>>       this.expectedFailureDetailCode = expectedFailureDetailCode;
+                }
+
+  [99] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:125
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        FATAL(
+                    new RuntimeException("fatal exception"),
+        >>>         /* isFatal= */ true,
+                    Level.SEVERE,
+                    "myProductName crashed with args: arg foo"),
+
+  [100] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:126
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        new RuntimeException("fatal exception"),
+                    /* isFatal= */ true,
+        >>>         Level.SEVERE,
+                    "myProductName crashed with args: arg foo"),
+                NONFATAL(
+
+  [101] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:130
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        NONFATAL(
+                    new IllegalStateException("bug report"),
+        >>>         /* isFatal= */ false,
+                    Level.WARNING,
+                    "myProductName had a non fatal error with args: arg foo"),
+
+  [102] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:131
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        new IllegalStateException("bug report"),
+                    /* isFatal= */ false,
+        >>>         Level.WARNING,
+                    "myProductName had a non fatal error with args: arg foo"),
+                OOM(
+
+  [103] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:135
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        OOM(
+                    new OutOfMemoryError("Java heap space"),
+        >>>         /* isFatal= */ true,
+                    Level.SEVERE,
+                    "myProductName OOMError: arg foo");
+
+  [104] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:136
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        new OutOfMemoryError("Java heap space"),
+                    /* isFatal= */ true,
+        >>>         Level.SEVERE,
+                    "myProductName OOMError: arg foo");
+
+  [105] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:139
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        "myProductName OOMError: arg foo");
+            
+        >>>     @SuppressWarnings("ImmutableEnumChecker") // I'm pretty sure no one will mutate this Throwable.
+                private final Throwable throwable;
+
+  [106] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:142
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private final Throwable throwable;
+            
+        >>>     @SuppressWarnings("ImmutableEnumChecker") // Same here.
+                private final Level level;
+
+  [107] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:150
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ExceptionType(Throwable throwable, boolean isFatal, Level level, String expectedMessage) {
+        >>>       this.throwable = throwable;
+                  this.isFatal = isFatal;
+                  this.level = level;
+
+  [108] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:151
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ExceptionType(Throwable throwable, boolean isFatal, Level level, String expectedMessage) {
+                  this.throwable = throwable;
+        >>>       this.isFatal = isFatal;
+                  this.level = level;
+                  this.expectedMessage = expectedMessage;
+
+  [109] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:152
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        this.throwable = throwable;
+                  this.isFatal = isFatal;
+        >>>       this.level = level;
+                  this.expectedMessage = expectedMessage;
+                }
+
+  [110] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:153
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        this.isFatal = isFatal;
+                  this.level = level;
+        >>>       this.expectedMessage = expectedMessage;
+                }
+
+  [111] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:157
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private String getExpectedMessage() {
+        >>>       return expectedMessage;
+                }
+
+  [112] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:161
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private String getExpectedMessageWhileOoming() {
+        >>>       return "While OOMing, " + expectedMessage;
+                }
+              }
+
+  [113] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:165
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Rule public final TemporaryFolder tmp = new TemporaryFolder();
+            
+              private final BlazeRuntimeInterface mockRuntime = mock(BlazeRuntimeInterface.class);
+
+  [114] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:167
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Rule public final TemporaryFolder tmp = new TemporaryFolder();
+            
+        >>>   private final BlazeRuntimeInterface mockRuntime = mock(BlazeRuntimeInterface.class);
+            
+              private Path exitCodeFile;
+
+  [115] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:172
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private Path failureDetailFile;
+            
+        >>>   @Before
+              public void setup() throws Exception {
+                when(mockRuntime.getProductName()).thenReturn("myProductName");
+
+  [116] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:174
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Before
+              public void setup() throws Exception {
+        >>>     when(mockRuntime.getProductName()).thenReturn("myProductName");
+                BugReport.setRuntime(mockRuntime);
+
+  [117] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:175
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void setup() throws Exception {
+                when(mockRuntime.getProductName()).thenReturn("myProductName");
+        >>>     BugReport.setRuntime(mockRuntime);
+            
+                exitCodeFile = tmp.newFolder().toPath().resolve("exit_code_to_use_on_abrupt_exit");
+
+  [118] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:177
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.setRuntime(mockRuntime);
+            
+        >>>     exitCodeFile = tmp.newFolder().toPath().resolve("exit_code_to_use_on_abrupt_exit");
+                failureDetailFile = tmp.newFolder().toPath().resolve("failure_detail");
+
+  [119] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:178
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        exitCodeFile = tmp.newFolder().toPath().resolve("exit_code_to_use_on_abrupt_exit");
+        >>>     failureDetailFile = tmp.newFolder().toPath().resolve("failure_detail");
+            
+                CustomExitCodePublisher.setAbruptExitStatusFileDir(exitCodeFile.getParent().toString());
+
+  [120] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:180
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        failureDetailFile = tmp.newFolder().toPath().resolve("failure_detail");
+            
+        >>>     CustomExitCodePublisher.setAbruptExitStatusFileDir(exitCodeFile.getParent().toString());
+                CustomFailureDetailPublisher.setFailureDetailFilePath(failureDetailFile.toString());
+              }
+
+  [121] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:181
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        CustomExitCodePublisher.setAbruptExitStatusFileDir(exitCodeFile.getParent().toString());
+        >>>     CustomFailureDetailPublisher.setFailureDetailFilePath(failureDetailFile.toString());
+              }
+
+  [122] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:184
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @After
+              public void resetPublishers() {
+                CustomExitCodePublisher.resetAbruptExitStatusFile();
+
+  [123] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:186
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @After
+              public void resetPublishers() {
+        >>>     CustomExitCodePublisher.resetAbruptExitStatusFile();
+                CustomFailureDetailPublisher.resetFailureDetailFilePath();
+              }
+
+  [124] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:187
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void resetPublishers() {
+                CustomExitCodePublisher.resetAbruptExitStatusFile();
+        >>>     CustomFailureDetailPublisher.resetFailureDetailFilePath();
+              }
+
+  [125] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:190
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+
+  [126] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:191
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+                Logger logger = Logger.getLogger("build.lib.bugreport");
+
+  [127] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:192
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void logException(@TestParameter ExceptionType exceptionType) {
+        >>>     TestLogHandler handler = new TestLogHandler();
+                Logger logger = Logger.getLogger("build.lib.bugreport");
+                logger.addHandler(handler);
+
+  [128] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:193
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void logException(@TestParameter ExceptionType exceptionType) {
+                TestLogHandler handler = new TestLogHandler();
+        >>>     Logger logger = Logger.getLogger("build.lib.bugreport");
+                logger.addHandler(handler);
+                LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+
+  [129] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:194
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        TestLogHandler handler = new TestLogHandler();
+                Logger logger = Logger.getLogger("build.lib.bugreport");
+        >>>     logger.addHandler(handler);
+                LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+
+  [130] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:195
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Logger logger = Logger.getLogger("build.lib.bugreport");
+                logger.addHandler(handler);
+        >>>     LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+            
+                BugReport.logException(
+
+  [131] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:197
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        LoggingUtil.installRemoteLoggerForTesting(immediateFuture(logger));
+            
+        >>>     BugReport.logException(
+                    exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+
+  [132] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:198
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.logException(
+        >>>         exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+                if (oomDetectorOverride) {
+
+  [133] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:199
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.logException(
+                    exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+        >>>     LogRecord got = handler.getStoredLogRecords().get(0);
+                if (oomDetectorOverride) {
+                  assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessageWhileOoming());
+
+  [134] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:200
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        exceptionType.throwable, exceptionType.isFatal, ImmutableList.of("arg", "foo"));
+                LogRecord got = handler.getStoredLogRecords().get(0);
+        >>>     if (oomDetectorOverride) {
+                  assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessageWhileOoming());
+                } else {
+
+  [135] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:201
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        LogRecord got = handler.getStoredLogRecords().get(0);
+                if (oomDetectorOverride) {
+        >>>       assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessageWhileOoming());
+                } else {
+                  assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessage());
+
+  [136] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:203
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessageWhileOoming());
+                } else {
+        >>>       assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessage());
+                }
+                assertThat(got.getThrown()).isSameInstanceAs(exceptionType.throwable);
+
+  [137] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:205
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(got.getMessage()).isEqualTo(exceptionType.getExpectedMessage());
+                }
+        >>>     assertThat(got.getThrown()).isSameInstanceAs(exceptionType.throwable);
+                assertThat(got.getLevel()).isEqualTo(exceptionType.level);
+              }
+
+  [138] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:206
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+                assertThat(got.getThrown()).isSameInstanceAs(exceptionType.throwable);
+        >>>     assertThat(got.getLevel()).isEqualTo(exceptionType.level);
+              }
+
+  [139] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:209
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [140] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:210
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [141] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:211
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+        >>>     Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [142] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:212
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void convenienceMethod(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+                SecurityException exitException =
+
+  [143] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:213
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+        >>>         createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+                SecurityException exitException =
+                    assertThrows(
+
+  [144] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:214
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+        >>>     SecurityException exitException =
+                    assertThrows(
+                        SecurityException.class,
+
+  [145] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:215
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+                SecurityException exitException =
+        >>>         assertThrows(
+                        SecurityException.class,
+                        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+
+  [146] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:217
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThrows(
+                        SecurityException.class,
+        >>>             () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+                assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+
+  [147] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:218
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException.class,
+                        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+        >>>     int code = haltCode(exitException);
+                assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [148] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:219
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+        >>>     assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [149] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:220
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        int code = haltCode(exitException);
+                assertThat(code).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(mockRuntime)
+
+  [150] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:222
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [151] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:224
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [152] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:225
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .cleanUpForCrash(
+                        DetailedExitCode.of(
+        >>>                 oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+                verifyExitCodeWritten(
+
+  [153] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:226
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+        >>>                 expectedFailureDetail));
+                verifyExitCodeWritten(
+                    oomDetectorOverride
+
+  [154] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:227
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+        >>>     verifyExitCodeWritten(
+                    oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+
+  [155] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:228
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        expectedFailureDetail));
+                verifyExitCodeWritten(
+        >>>         oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+
+  [156] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:229
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verifyExitCodeWritten(
+                    oomDetectorOverride
+        >>>             ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+                verifyFailureDetailWritten(expectedFailureDetail);
+
+  [157] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:230
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+        >>>             : crashType.expectedExitCode.getNumericExitCode());
+                verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [158] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:231
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+        >>>     verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [159] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:234
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [160] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:235
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [161] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:236
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void halt(@TestParameter CrashType crashType) throws Exception {
+        >>>     Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [162] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:237
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void halt(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [163] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:238
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+        >>>         createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+                SecurityException exitException =
+
+  [164] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:240
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+        >>>     SecurityException exitException =
+                    assertThrows(
+                        SecurityException.class,
+
+  [165] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:241
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException exitException =
+        >>>         assertThrows(
+                        SecurityException.class,
+                        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+
+  [166] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:243
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThrows(
+                        SecurityException.class,
+        >>>             () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+                ExitCode expectedExitCode = expectedExitCode(crashType);
+
+  [167] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:244
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException.class,
+                        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+        >>>     int code = haltCode(exitException);
+                ExitCode expectedExitCode = expectedExitCode(crashType);
+                assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+
+  [168] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:245
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        () -> BugReport.handleCrash(Crash.from(t), CrashContext.halt()));
+                int code = haltCode(exitException);
+        >>>     ExitCode expectedExitCode = expectedExitCode(crashType);
+                assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [169] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:246
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        int code = haltCode(exitException);
+                ExitCode expectedExitCode = expectedExitCode(crashType);
+        >>>     assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+                verify(mockRuntime)
+
+  [170] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:247
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ExitCode expectedExitCode = expectedExitCode(crashType);
+                assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+                verify(mockRuntime)
+                    .cleanUpForCrash(
+
+  [171] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:248
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(code).isEqualTo(expectedExitCode.getNumericExitCode());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [172] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:250
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [173] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:251
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .cleanUpForCrash(
+                        DetailedExitCode.of(
+        >>>                 oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+                verifyExitCodeWritten(
+
+  [174] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:252
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+        >>>                 expectedFailureDetail));
+                verifyExitCodeWritten(
+                    oomDetectorOverride
+
+  [175] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:253
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+        >>>     verifyExitCodeWritten(
+                    oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+
+  [176] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:254
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        expectedFailureDetail));
+                verifyExitCodeWritten(
+        >>>         oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+
+  [177] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:255
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verifyExitCodeWritten(
+                    oomDetectorOverride
+        >>>             ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+                verifyFailureDetailWritten(expectedFailureDetail);
+
+  [178] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:256
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        oomDetectorOverride
+                        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+        >>>             : crashType.expectedExitCode.getNumericExitCode());
+                verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [179] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:257
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ? EXIT_CODE_BLAZE_OOMING.getNumericExitCode()
+                        : crashType.expectedExitCode.getNumericExitCode());
+        >>>     verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [180] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:260
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+
+  [181] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:261
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+
+  [182] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:262
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+        >>>     Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [183] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:263
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void keepAlive(@TestParameter CrashType crashType) throws Exception {
+                Throwable t = crashType.createThrowable();
+        >>>     FailureDetail expectedFailureDetail =
+                    createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+
+  [184] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:264
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                FailureDetail expectedFailureDetail =
+        >>>         createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+                BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+
+  [185] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:266
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        createExpectedFailureDetail(t, crashType, oomDetectorOverride);
+            
+        >>>     BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [186] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:267
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(mockRuntime)
+
+  [187] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:269
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(mockRuntime)
+                    .cleanUpForCrash(
+                        DetailedExitCode.of(
+
+  [188] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:271
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(mockRuntime)
+                    .cleanUpForCrash(
+        >>>             DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+
+  [189] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:272
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .cleanUpForCrash(
+                        DetailedExitCode.of(
+        >>>                 oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+                verifyNoExitCodeWritten();
+
+  [190] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:273
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        DetailedExitCode.of(
+                            oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+        >>>                 expectedFailureDetail));
+                verifyNoExitCodeWritten();
+                verifyFailureDetailWritten(expectedFailureDetail);
+
+  [191] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:274
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : crashType.expectedExitCode,
+                            expectedFailureDetail));
+        >>>     verifyNoExitCodeWritten();
+                verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [192] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:275
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        expectedFailureDetail));
+                verifyNoExitCodeWritten();
+        >>>     verifyFailureDetailWritten(expectedFailureDetail);
+              }
+
+  [193] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:278
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void haltOrReturnIfCrashInProgress_otherCrashInProgress_returnsEagerly(
+                  @TestParameter CrashType crashType) throws Throwable {
+
+  [194] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:280
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void haltOrReturnIfCrashInProgress_otherCrashInProgress_returnsEagerly(
+        >>>       @TestParameter CrashType crashType) throws Throwable {
+                // Arrange:
+                // A first thread will crash with CrashContext.halt(). We mock out the BlazeRuntimeInterface to
+
+  [195] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:284
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // A first thread will crash with CrashContext.halt(). We mock out the BlazeRuntimeInterface to
+                // force this thread to block while holding the BugReport global lock.
+        >>>     CountDownLatch cleanupBegunLatch = new CountDownLatch(1);
+                CountDownLatch cleanupMayFinishLatch = new CountDownLatch(1);
+                doAnswer(
+
+  [196] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:285
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // force this thread to block while holding the BugReport global lock.
+                CountDownLatch cleanupBegunLatch = new CountDownLatch(1);
+        >>>     CountDownLatch cleanupMayFinishLatch = new CountDownLatch(1);
+                doAnswer(
+                        (inv) -> {
+
+  [197] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:286
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        CountDownLatch cleanupBegunLatch = new CountDownLatch(1);
+                CountDownLatch cleanupMayFinishLatch = new CountDownLatch(1);
+        >>>     doAnswer(
+                        (inv) -> {
+                          cleanupBegunLatch.countDown();
+
+  [198] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:288
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        doAnswer(
+                        (inv) -> {
+        >>>               cleanupBegunLatch.countDown();
+                          cleanupMayFinishLatch.await();
+                          return null;
+
+  [199] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:289
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        (inv) -> {
+                          cleanupBegunLatch.countDown();
+        >>>               cleanupMayFinishLatch.await();
+                          return null;
+                        })
+
+  [200] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:290
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        cleanupBegunLatch.countDown();
+                          cleanupMayFinishLatch.await();
+        >>>               return null;
+                        })
+                    .when(mockRuntime)
+
+  [201] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:292
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        return null;
+                        })
+        >>>         .when(mockRuntime)
+                    .cleanUpForCrash(any(DetailedExitCode.class));
+
+  [202] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:293
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        })
+                    .when(mockRuntime)
+        >>>         .cleanUpForCrash(any(DetailedExitCode.class));
+            
+                Throwable firstThrown = new IllegalStateException("second crash in background thread");
+
+  [203] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:295
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .cleanUpForCrash(any(DetailedExitCode.class));
+            
+        >>>     Throwable firstThrown = new IllegalStateException("second crash in background thread");
+                ThrowingRunnable doFirstCrash =
+                    () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+
+  [204] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:296
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable firstThrown = new IllegalStateException("second crash in background thread");
+        >>>     ThrowingRunnable doFirstCrash =
+                    () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+
+  [205] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:297
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable firstThrown = new IllegalStateException("second crash in background thread");
+                ThrowingRunnable doFirstCrash =
+        >>>         () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+                TestThread firstCrashThread =
+
+  [206] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:298
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ThrowingRunnable doFirstCrash =
+                    () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+        >>>     AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+                TestThread firstCrashThread =
+                    new TestThread(
+
+  [207] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:299
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        () -> BugReport.handleCrash(Crash.from(firstThrown), CrashContext.halt());
+                AtomicReference<SecurityException> firstCrashThrownRef = new AtomicReference<>(null);
+        >>>     TestThread firstCrashThread =
+                    new TestThread(
+                        () -> firstCrashThrownRef.set(assertThrows(SecurityException.class, doFirstCrash)));
+
+  [208] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:301
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        TestThread firstCrashThread =
+                    new TestThread(
+        >>>             () -> firstCrashThrownRef.set(assertThrows(SecurityException.class, doFirstCrash)));
+                firstCrashThread.start();
+                cleanupBegunLatch.await();
+
+  [209] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:302
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        new TestThread(
+                        () -> firstCrashThrownRef.set(assertThrows(SecurityException.class, doFirstCrash)));
+        >>>     firstCrashThread.start();
+                cleanupBegunLatch.await();
+
+  [210] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:303
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        () -> firstCrashThrownRef.set(assertThrows(SecurityException.class, doFirstCrash)));
+                firstCrashThread.start();
+        >>>     cleanupBegunLatch.await();
+            
+                // Act:
+
+  [211] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:308
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // Try to crash on a second thread, with a `haltOrReturnIfCrashInProgress` CrashContext. This
+                // should return without throwing because the BugReport global lock is held.
+        >>>     Throwable secondThrown = crashType.createThrowable();
+                CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+                ThrowingRunnable doSecondCrash =
+
+  [212] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:309
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // should return without throwing because the BugReport global lock is held.
+                Throwable secondThrown = crashType.createThrowable();
+        >>>     CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+                ThrowingRunnable doSecondCrash =
+                    () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+
+  [213] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:310
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable secondThrown = crashType.createThrowable();
+                CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+        >>>     ThrowingRunnable doSecondCrash =
+                    () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+                doSecondCrash.run();
+
+  [214] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:311
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        CrashContext haltOrReturnCtx = CrashContext.haltOrReturnIfCrashInProgress();
+                ThrowingRunnable doSecondCrash =
+        >>>         () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+                doSecondCrash.run();
+
+  [215] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:312
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ThrowingRunnable doSecondCrash =
+                    () -> BugReport.handleCrash(Crash.from(secondThrown), haltOrReturnCtx);
+        >>>     doSecondCrash.run();
+            
+                // Assert:
+
+  [216] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:317
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // Allow the first crashing thread to finish, then confirm that the
+                // `CrashContext.haltOrReturnIfCrashInProgress()` will halt when BugReport's lock is free.
+        >>>     cleanupMayFinishLatch.countDown();
+                firstCrashThread.joinAndAssertState(TestUtils.WAIT_TIMEOUT_MILLISECONDS);
+
+  [217] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:318
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        // `CrashContext.haltOrReturnIfCrashInProgress()` will halt when BugReport's lock is free.
+                cleanupMayFinishLatch.countDown();
+        >>>     firstCrashThread.joinAndAssertState(TestUtils.WAIT_TIMEOUT_MILLISECONDS);
+            
+                SecurityException firstException = firstCrashThrownRef.get();
+
+  [218] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:320
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        firstCrashThread.joinAndAssertState(TestUtils.WAIT_TIMEOUT_MILLISECONDS);
+            
+        >>>     SecurityException firstException = firstCrashThrownRef.get();
+                int firstCode = haltCode(firstException);
+                ExitCode expectedExitCode =
+
+  [219] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:321
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException firstException = firstCrashThrownRef.get();
+        >>>     int firstCode = haltCode(firstException);
+                ExitCode expectedExitCode =
+                    oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+
+  [220] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:322
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException firstException = firstCrashThrownRef.get();
+                int firstCode = haltCode(firstException);
+        >>>     ExitCode expectedExitCode =
+                    oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+                assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+
+  [221] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:323
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        int firstCode = haltCode(firstException);
+                ExitCode expectedExitCode =
+        >>>         oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+                assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+
+  [222] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:324
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ExitCode expectedExitCode =
+                    oomDetectorOverride ? EXIT_CODE_BLAZE_OOMING : ExitCode.BLAZE_INTERNAL_ERROR;
+        >>>     assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+            
+                SecurityException secondException = assertThrows(SecurityException.class, doSecondCrash);
+
+  [223] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:326
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(firstCode).isEqualTo(expectedExitCode.getNumericExitCode());
+            
+        >>>     SecurityException secondException = assertThrows(SecurityException.class, doSecondCrash);
+                int secondCode = haltCode(secondException);
+                assertThat(secondCode).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+
+  [224] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:327
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException secondException = assertThrows(SecurityException.class, doSecondCrash);
+        >>>     int secondCode = haltCode(secondException);
+                assertThat(secondCode).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+              }
+
+  [225] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:328
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        SecurityException secondException = assertThrows(SecurityException.class, doSecondCrash);
+                int secondCode = haltCode(secondException);
+        >>>     assertThat(secondCode).isEqualTo(expectedExitCode(crashType).getNumericExitCode());
+              }
+
+  [226] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:331
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void customContext_setUpFront(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+
+  [227] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:332
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void customContext_setUpFront(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+
+  [228] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:333
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void customContext_setUpFront(@TestParameter CrashType crashType) {
+        >>>     Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+
+  [229] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:334
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void customContext_setUpFront(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+        >>>     EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+
+  [230] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:335
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+        >>>     ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+            
+                BugReport.handleCrash(
+
+  [231] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:337
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+            
+        >>>     BugReport.handleCrash(
+                    Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+
+  [232] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:338
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(
+        >>>         Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [233] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:339
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(
+                    Crash.from(t),
+        >>>         CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [234] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:340
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Crash.from(t),
+                    CrashContext.keepAlive().withExtraOomInfo("Build fewer targets!").reportingTo(handler));
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(handler).handle(event.capture());
+
+  [235] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:342
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+
+  [236] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:343
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+        >>>     assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+
+  [237] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:344
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+        >>>     assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+
+  [238] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:345
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [239] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:346
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+        >>>       assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+
+  [240] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:347
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+        >>>       assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+                  assertThat(event.getValue().getMessage()).doesNotContain("Build fewer targets!");
+
+  [241] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:349
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+        >>>       assertThat(event.getValue().getMessage()).doesNotContain("Build fewer targets!");
+                }
+              }
+
+  [242] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:353
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        }
+            
+        >>>   @Test
+              public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+
+  [243] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:354
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+        >>>   public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+
+  [244] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:355
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        @Test
+              public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+        >>>     Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+
+  [245] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:356
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        public void customContext_filledInByRuntime(@TestParameter CrashType crashType) {
+                Throwable t = crashType.createThrowable();
+        >>>     EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+                doAnswer(
+
+  [246] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:357
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t = crashType.createThrowable();
+                EventHandler handler = mock(EventHandler.class);
+        >>>     ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+                doAnswer(
+                        inv ->
+
+  [247] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:358
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        EventHandler handler = mock(EventHandler.class);
+                ArgumentCaptor<Event> event = ArgumentCaptor.forClass(Event.class);
+        >>>     doAnswer(
+                        inv ->
+                            inv.getArgument(0, CrashContext.class)
+
+  [248] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:360
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        doAnswer(
+                        inv ->
+        >>>                 inv.getArgument(0, CrashContext.class)
+                                .withExtraOomInfo("Build fewer targets!")
+                                .reportingTo(handler))
+
+  [249] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:362
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        inv.getArgument(0, CrashContext.class)
+                                .withExtraOomInfo("Build fewer targets!")
+        >>>                     .reportingTo(handler))
+                    .when(mockRuntime)
+                    .fillInCrashContext(any());
+
+  [250] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:363
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .withExtraOomInfo("Build fewer targets!")
+                                .reportingTo(handler))
+        >>>         .when(mockRuntime)
+                    .fillInCrashContext(any());
+
+  [251] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:364
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .reportingTo(handler))
+                    .when(mockRuntime)
+        >>>         .fillInCrashContext(any());
+            
+                BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+
+  [252] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:366
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        .fillInCrashContext(any());
+            
+        >>>     BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+                assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+
+  [253] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:367
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        BugReport.handleCrash(Crash.from(t), CrashContext.keepAlive());
+        >>>     assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+                verify(handler).handle(event.capture());
+
+  [254] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:369
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(BugReport.getAndResetLastCrashingThrowableIfInTest()).isSameInstanceAs(t);
+            
+        >>>     verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+
+  [255] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:370
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+        >>>     assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+                assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+
+  [256] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:371
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        verify(handler).handle(event.capture());
+                assertThat(event.getValue().getKind()).isEqualTo(EventKind.FATAL);
+        >>>     assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+            
+                if (oomDetectorOverride || crashType == CrashType.OOM) {
+
+  [257] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:373
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains(Throwables.getStackTraceAsString(t));
+            
+        >>>     if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+
+  [258] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:374
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        if (oomDetectorOverride || crashType == CrashType.OOM) {
+        >>>       assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+                  assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+
+  [259] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:375
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        if (oomDetectorOverride || crashType == CrashType.OOM) {
+                  assertThat(event.getValue().getMessage()).contains("ran out of memory and crashed.");
+        >>>       assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+                  assertThat(event.getValue().getMessage()).doesNotContain("Build fewer targets!");
+
+  [260] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:377
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(event.getValue().getMessage()).contains("Build fewer targets!");
+                } else {
+        >>>       assertThat(event.getValue().getMessage()).doesNotContain("Build fewer targets!");
+                }
+              }
+
+  [261] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:382
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private void verifyExitCodeWritten(int exitCode) throws Exception {
+        >>>     assertThat(Files.readAllLines(exitCodeFile)).containsExactly(String.valueOf(exitCode));
+              }
+
+  [262] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:386
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private void verifyNoExitCodeWritten() {
+        >>>     assertThat(exitCodeFile.toFile().exists()).isFalse();
+              }
+
+  [263] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:390
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private void verifyFailureDetailWritten(FailureDetail expected) throws Exception {
+        >>>     assertThat(
+                        FailureDetail.parseFrom(
+                            Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+
+  [264] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:391
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private void verifyFailureDetailWritten(FailureDetail expected) throws Exception {
+                assertThat(
+        >>>             FailureDetail.parseFrom(
+                            Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+                    .isEqualTo(expected);
+
+  [265] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:392
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        assertThat(
+                        FailureDetail.parseFrom(
+        >>>                 Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+                    .isEqualTo(expected);
+              }
+
+  [266] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:393
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        FailureDetail.parseFrom(
+                            Files.readAllBytes(failureDetailFile), ExtensionRegistry.getEmptyRegistry()))
+        >>>         .isEqualTo(expected);
+              }
+
+  [267] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:398
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        private static FailureDetail createExpectedFailureDetail(
+                  Throwable t, CrashType crashType, boolean oomDetectorOverride) {
+        >>>     FailureDetails.Crash.Builder crash =
+                    FailureDetails.Crash.newBuilder()
+                        .setCode(
+
+  [268] 项目: Bazel
+      规则: java-camel-case-underscores-adjacent-numbers
+      语言: java
+      位置: D:\Sepc2Checker\test_cases\Bazel\java\BugReportTest.java:399
+      描述: In rare circumstances (e.g., multipart version numbers), use underscores to separate adjacent numbers in identifiers. Numbers have no case variants.
+      置信度: 3.50
+      代码片段:
+        Throwable t, CrashType crashType, boolean oomDetectorOverride) {
+                FailureDetails.Crash.Builder crash =
+        >>>         FailureDetails.Crash.newBuilder()
+                        .setCode(
+                            oomDetectorOverride
+  ------------------------------------------------------------
+============================================================
