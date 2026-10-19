@@ -1,0 +1,2731 @@
+[
+  {
+    "rule_id": "cpp-struct-member-naming",
+    "language": "cpp",
+    "description": "Data members of structs (both static and non-static) are named like ordinary nonmember variables, without trailing underscore.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "struct $STRUCT {\n  ... $TYPE $MEMBER;\n  ...\n};",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$STRUCT": {
+          "type_hint": "class"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$MEMBER": {
+          "type_hint": "expr",
+          "regex": "^.*_$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('_')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match struct definitions only, not classes"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires distinguishing structs from classes via type resolution"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\no_trailing_underscore.txt",
+      "section": "no_trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "cpp-const-placement-consistency",
+    "language": "cpp",
+    "description": "Check for consistency in the placement of the `const` qualifier in pointer declarations. While `const int*` is preferred, `int const*` is allowed, but the chosen style must be consistent within the analyzed scope.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE const* $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect the pattern but requires custom logic for consistency checking across a file or project."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Can query for const qualifier placement but consistency analysis requires custom query logic."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\put_const_consistent.txt",
+      "section": "put_const_consistent"
+    }
+  },
+  {
+    "rule_id": "cpp-delete-forbidden-operations",
+    "language": "cpp",
+    "description": "Use `= delete` to explicitly delete copy/move operations.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CLASS($PARAMS) = $OP;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_not('delete')",
+        "required": "true"
+      },
+      {
+        "target": "$PARAMS",
+        "constraint_type": "syntactic",
+        "condition": "matches_pattern('const $CLASS&')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for copy/move constructors and assignment operators"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to detect missing `= delete`"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\forbidden_operations.txt",
+      "section": "forbidden_operations"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-long-double",
+    "language": "cpp",
+    "description": "Use `float` and `double`; assume they represent IEEE-754 binary32 and binary64. Avoid `long double` as it is non-portable.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "long double $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\float_double_avoid_double.txt",
+      "section": "float_double_avoid_double"
+    }
+  },
+  {
+    "rule_id": "cpp-no-modules",
+    "language": "cpp",
+    "description": "Do not use C++20 Modules (import, module, export). Not well-supported in Google's ecosystem.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $MODULE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep supports C++ but may not fully parse all module syntax variations."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL supports C++ but detection of module usage may require specific query adaptations."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\do_not_use_c20_modules.txt",
+      "section": "do_not_use_c20_modules"
+    }
+  },
+  {
+    "rule_id": "cpp-missing-const-method",
+    "language": "cpp",
+    "description": "Declare methods const unless they alter the logical state of the object or cannot be invoked concurrently.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $RET $METHOD($PARAMS) { ... }\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$METHOD": {
+          "type_hint": "function"
+        },
+        "$RET": {
+          "type_hint": "expr"
+        },
+        "$PARAMS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_member_function",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_constructor",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_destructor",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_static",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "is_not_mutable",
+        "required": "true"
+      },
+      {
+        "target": "method",
+        "constraint_type": "syntactic",
+        "condition": "does_not_modify_member",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "cannot fully analyze logical state modification; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires complex dataflow analysis to determine logical state changes"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\const_methods.txt",
+      "section": "const_methods"
+    }
+  },
+  {
+    "rule_id": "cpp-avoid-macros-in-headers",
+    "language": "cpp",
+    "description": "Avoid defining macros, especially in header files. Prefer inline functions, enums, and const/constexpr variables.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "#define $MACRO ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MACRO": {
+          "type_hint": "expr",
+          "regex": "^[A-Z_][A-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "file",
+        "constraint_type": "syntactic",
+        "condition": "file_extension_matches('h|hpp|hxx|hh')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect macro definitions but cannot enforce project-specific prefix or undef patterns."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect macro definitions but requires custom query for header file context."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\macros_especially_headers.txt",
+      "section": "macros_especially_headers"
+    }
+  },
+  {
+    "rule_id": "cpp-class-data-member-trailing-underscore",
+    "language": "cpp",
+    "description": "Data members of classes (both static and non-static) must be named like ordinary nonmember variables but with a trailing underscore. Static constant class members follow constant naming rules and are excluded.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $TYPE $MEMBER;\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CLASS": {
+          "type_hint": "class"
+        },
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$MEMBER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "is_class_member",
+        "required": "true"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_does_not_end_with('_')",
+        "required": "true"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "is_not_static_constant",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Static constant detection may be limited; requires pattern to match member declarations inside class body."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "Requires custom query to identify non-static data members and check naming convention."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\trailing_underscore.txt",
+      "section": "trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "cpp-prefer-struct-over-pair",
+    "language": "cpp",
+    "description": "Use a `struct` instead of `std::pair` or `std::tuple` when the elements can have meaningful names, to improve code clarity.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "std::pair<$T1, $T2> $VAR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$T1": {
+          "type_hint": "expr"
+        },
+        "$T2": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches declaration only; cannot infer if names would be meaningful."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to assess meaningfulness of names."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\struct_elements_meaningful.txt",
+      "section": "struct_elements_meaningful"
+    }
+  },
+  {
+    "rule_id": "cpp-class-data-member-trailing-underscore",
+    "language": "cpp",
+    "description": "Data members of classes (both static and non-static) must be named like ordinary nonmember variables but with a trailing underscore. Static constant class members follow constant naming rules and are exempt.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "class $CLASS {\n    ...\n    $TYPE $MEMBER;\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MEMBER": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$MEMBER",
+        "constraint_type": "scope",
+        "condition": "is_class_member",
+        "required": "true"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "name_ends_with('_')",
+        "required": "false"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "annotation",
+        "condition": "const",
+        "required": "false"
+      },
+      {
+        "target": "$MEMBER",
+        "constraint_type": "syntactic",
+        "condition": "is_static",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to exclude static const members and may have false positives with complex member declarations"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support C/C++ analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false,
+        "limitations": "requires custom query to identify static const members and enforce naming rule"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\cpp\\easy_specification\\trailing_underscore.txt",
+      "section": "trailing_underscore"
+    }
+  },
+  {
+    "rule_id": "java-non-constant-field-names",
+    "language": "java",
+    "description": "Non-constant field names (static or otherwise) should be written in lowerCamelCase, typically nouns or noun phrases.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $FIELD;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FIELD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FIELD",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      },
+      {
+        "target": "$FIELD",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[A-Z_][A-Z0-9_]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match field declarations and exclude constants"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has a rule 'FieldNamingConventions' that can be configured for this"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to enforce lowerCamelCase and exclude constants"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\constant_lowercamelcase.txt",
+      "section": "constant_lowercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-package-no-line-wrap",
+    "language": "java",
+    "description": "The package declaration must not be line-wrapped. The column limit does not apply.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "package $PKG;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PKG": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "package",
+        "constraint_type": "syntactic",
+        "condition": "multi_line",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires checking that the package statement is on a single line"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to detect line-wrapping in package declarations"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires querying for package declarations and checking line breaks"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\package_declaration_wrap.txt",
+      "section": "package_declaration_wrap"
+    }
+  },
+  {
+    "rule_id": "java-no-multiple-declarations-outside-for",
+    "language": "java",
+    "description": "Every variable declaration (field or local) declares only one variable, except in the header of a for loop.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR1, $VAR2;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR1": {
+          "type_hint": "expr"
+        },
+        "$VAR2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "declaration",
+        "constraint_type": "syntactic",
+        "condition": "not_in_for_loop_header",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific check; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\variable_declarations.txt",
+      "section": "variable_declarations"
+    }
+  },
+  {
+    "rule_id": "java-type-variable-naming",
+    "language": "java",
+    "description": "Type variable names must be a single capital letter optionally followed by a single numeral.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "<$TVAR extends $BOUND>",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TVAR": {
+          "type_hint": "expr",
+          "regex": "^[A-Z][0-9]?$"
+        },
+        "$BOUND": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "regex matching on type variable name only"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for type variable naming; requires custom rule"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for type parameter naming"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\variable_optional_numeral.txt",
+      "section": "variable_optional_numeral"
+    }
+  },
+  {
+    "rule_id": "java-no-wildcard-import",
+    "language": "java",
+    "description": "Wildcard (on-demand) imports, static or otherwise, are not used.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $PACKAGE.*;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PACKAGE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\no_wildcard_imports.txt",
+      "section": "no_wildcard_imports"
+    }
+  },
+  {
+    "rule_id": "java-catch-pipe-linebreak",
+    "language": "java",
+    "description": "Detect line break before the pipe operator '|' in a multi-catch clause.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "catch ($EXCEPTION_TYPE\n        | $OTHER_EXCEPTION $VAR)",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXCEPTION_TYPE": {
+          "type_hint": "expr"
+        },
+        "$OTHER_EXCEPTION": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "catch",
+        "constraint_type": "syntactic",
+        "condition": "is_multi_catch",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match other uses of '|' operator"
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule for specific formatting"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires AST query for specific token positions"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\assignment_operator_block.txt",
+      "section": "assignment_operator_block"
+    }
+  },
+  {
+    "rule_id": "java-module-directives-ordering",
+    "language": "java",
+    "description": "Module directives must be ordered as: all requires in one block, then exports, opens, uses, provides. Each block must be separated by a single blank line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for layout/formatting, which is not Semgrep's primary strength."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD can check for ordering but may not enforce single blank line separation precisely."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting and layout rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\module_directives_ordering.txt",
+      "section": "module_directives_ordering"
+    }
+  },
+  {
+    "rule_id": "java-local-variable-lower-camel-case",
+    "language": "java",
+    "description": "Local variable names must be written in lowerCamelCase, even when final and immutable.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR = $INIT;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_local_variable",
+        "required": "true"
+      },
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "name_matches_regex('^[a-z][a-zA-Z0-9]*$')",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom rule to check naming pattern and local variable scope"
+      },
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match non-local declarations; scope constraint is approximate"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for local variable naming convention"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\variable_lowercamelcase.txt",
+      "section": "variable_lowercamelcase"
+    }
+  },
+  {
+    "rule_id": "java-assignment-break-after-symbol",
+    "language": "java",
+    "description": "Detect when a line break occurs before an assignment operator (=) or colon (:) in an enhanced for loop, where the break should typically be after the symbol.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$TYPE $VAR\n    = $EXPR;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$TYPE": {
+          "type_hint": "expr"
+        },
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "assignment",
+        "constraint_type": "syntactic",
+        "condition": "operator_location('before_newline')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match other constructs; requires precise line break detection."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD has rules for formatting/whitespace but may not target this specific break pattern."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for formatting/style rule detection."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\assignment_operator_symbol.txt",
+      "section": "assignment_operator_symbol"
+    }
+  },
+  {
+    "rule_id": "java-horizontal-whitespace-keyword-brace",
+    "language": "java",
+    "description": "Detect missing space between a closing curly brace } and the keyword that follows (else, catch).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "}$KW {",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KW": {
+          "type_hint": "expr",
+          "regex": "^(else|catch)$"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep can match the pattern, but may not distinguish between valid and invalid spacing in all contexts."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have a built-in rule for this specific spacing pattern; requires custom XPath"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires a custom query to detect missing whitespace between } and keyword."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\java\\easy_specification\\whitespace_separating.txt",
+      "section": "whitespace_separating"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-require-contiguous-block",
+    "language": "javascript",
+    "description": "goog.require and goog.requireType statements must form a contiguous block with no empty lines, following goog.module and separated by a single empty line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.module('$MODULE');\n\n$REQUIRES",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        },
+        "$REQUIRES": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$REQUIRES",
+        "constraint_type": "syntactic",
+        "condition": "is_contiguous_block_without_empty_lines",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern to enforce no empty lines within the block"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for formatting rules"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\requiregoog_requiretype.txt",
+      "section": "requiregoog_requiretype"
+    }
+  },
+  {
+    "rule_id": "javascript-duplicate-import",
+    "language": "javascript",
+    "description": "Do not import the same file multiple times; hard to determine aggregate imports.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORTS1 from $PATH1;\n...\nimport $IMPORTS2 from $PATH2;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$PATH1": {
+          "type_hint": "expr"
+        },
+        "$PATH2": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$PATH1",
+        "constraint_type": "syntactic",
+        "condition": "equals($PATH2)",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for duplicate string literals; may not detect dynamic imports or aliased paths"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect duplicate import source strings"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not have built-in support for JavaScript ES module analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\modules_import_multiple.txt",
+      "section": "modules_import_multiple"
+    }
+  },
+  {
+    "rule_id": "javascript-linewrap-method-name-parenthesis",
+    "language": "javascript",
+    "description": "A method or constructor name must stay attached to the open parenthesis '(' and not be broken onto a separate line.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom formatting rule; not a standard code pattern."
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/line-wrapping detection."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL focuses on semantic bugs, not formatting rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_method_name_stays.txt",
+      "section": "wrapping_method_name_stays"
+    }
+  },
+  {
+    "rule_id": "javascript-line-wrap-after-operator",
+    "language": "javascript",
+    "description": "When a line is broken at an operator, the break must come after the operator symbol. The dot (.) is not considered an operator for this rule.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace/line break detection, which is not a core strength of pattern matching."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for formatting rules, which is possible but not a primary use case."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\wrapping_break_operator.txt",
+      "section": "wrapping_break_operator"
+    }
+  },
+  {
+    "rule_id": "javascript-non-ascii-characters",
+    "language": "javascript",
+    "description": "Use actual Unicode character or hex/Unicode escape; choose for readability. Unicode escapes outside string literals/comments discouraged.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$EXPR",
+        "constraint_type": "syntactic",
+        "condition": "contains_non_ascii_escape()",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for Unicode escape detection"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for escape sequence analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\characters_unicode_escape.txt",
+      "section": "characters_unicode_escape"
+    }
+  },
+  {
+    "rule_id": "javascript-horizontal-whitespace-after-colon",
+    "language": "javascript",
+    "description": "Require a space after the colon in an object literal property definition.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "{$KEY:$VALUE}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$KEY": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern matches missing space but may require custom message/autofix for formatting."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL is not designed for pure formatting/style rules."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\horizontal_whitespace.txt",
+      "section": "horizontal_whitespace"
+    }
+  },
+  {
+    "rule_id": "javascript-import-no-line-wrap",
+    "language": "javascript",
+    "description": "ES module import statements must not be line wrapped; they are an exception to the 80-column limit.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORTS from $SOURCE;\n...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "line_count > 1",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match multi-line import statements"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect multi-line import statements"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\modules_import_statements.txt",
+      "section": "modules_import_statements"
+    }
+  },
+  {
+    "rule_id": "javascript-goog-require-side-effects",
+    "language": "javascript",
+    "description": "If a module is imported only for its side effects, the call must be `goog.require` (not `goog.requireType`) and the assignment must be omitted. A comment is required to explain the side-effect import.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "goog.require($MODULE);",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$MODULE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "is_assignment_target",
+        "required": "false"
+      },
+      {
+        "target": "statement",
+        "constraint_type": "syntactic",
+        "condition": "has_preceding_comment",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Comment detection may be limited to adjacent comments only."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to enforce comment requirement."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\require_comment_required.txt",
+      "section": "require_comment_required"
+    }
+  },
+  {
+    "rule_id": "javascript-no-const-exports",
+    "language": "javascript",
+    "description": "Do not annotate `exports` object as `@const`; it is already treated as constant.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "/** @const */ exports = $EXPR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$EXPR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires JSDoc comment parsing"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for JSDoc comment detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\exports_annotate_exports.txt",
+      "section": "exports_annotate_exports"
+    }
+  },
+  {
+    "rule_id": "javascript-no-circular-dependencies",
+    "language": "javascript",
+    "description": "Do not create cycles between ES modules, even though specification allows. Includes cycles via `import` and `export from`.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "import $IMPORT from $SOURCE;",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$SOURCE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": true,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires cross-file analysis and dependency graph construction, which is not natively supported in pattern matching."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support JavaScript analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires building a custom query to detect cycles in the import graph."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\javascript\\easy_specification\\circular_dependencies.txt",
+      "section": "circular_dependencies"
+    }
+  },
+  {
+    "rule_id": "python-decorator-judicious-use",
+    "language": "python",
+    "description": "Detect decorator usage that may indicate non-judicious application, such as decorators with external dependencies or complex logic.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "@$DECORATOR\ndef $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$DECORATOR": {
+          "type_hint": "expr"
+        },
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$DECORATOR",
+        "constraint_type": "syntactic",
+        "condition": "contains_import_call",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Cannot fully analyze decorator body for external dependencies; relies on pattern matching for import calls within the decorator expression."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to detect decorators with import calls; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\decorators_judiciously.txt",
+      "section": "decorators_judiciously"
+    }
+  },
+  {
+    "rule_id": "python-no-boolean-false-comparison",
+    "language": "python",
+    "description": "Never compare a boolean variable to `False` using `==`. Use `if not x` instead. To distinguish `False` from `None`, chain: `if not x and x is not None`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $X == False:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$X": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query for precise detection"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_compare_boolean.txt",
+      "section": "truefalse_compare_boolean"
+    }
+  },
+  {
+    "rule_id": "python-lexical-scoping-ok",
+    "language": "python",
+    "description": "Lexical scoping (nested functions referring to enclosing variables) is okay to use. This rule is informational and does not flag violations.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $OUTER($ARGS):\n    ...\n    def $INNER($ARGS2):\n        ... $VAR ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "scope",
+        "condition": "is_bound_in_outer_scope",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can detect nested functions and variable references, but cannot fully validate correct lexical scoping semantics."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Can model lexical scoping, but this is a permissive rule, not a detection rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lexical_scoping_okay.txt",
+      "section": "lexical_scoping_okay"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-binary-operator",
+    "language": "python",
+    "description": "Surround binary operators with a single space on either side for assignment, comparisons, and Booleans. Use judgment for arithmetic operators.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$LEFT $OP $RIGHT",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$LEFT": {
+          "type_hint": "expr"
+        },
+        "$OP": {
+          "type_hint": "expr"
+        },
+        "$RIGHT": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$OP",
+        "constraint_type": "syntactic",
+        "condition": "is_binary_operator",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom pattern for each operator type; may not handle all edge cases like arithmetic operators where spacing is optional."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query; not a built-in rule."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_operators.txt",
+      "section": "whitespace_operators"
+    }
+  },
+  {
+    "rule_id": "python-implicit-false",
+    "language": "python",
+    "description": "Use implicit false evaluation for sequences, collections, and numeric zero instead of explicit comparisons to empty literals or len() checks.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "if $VAR != []:\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires multiple patterns to cover all explicit false comparisons (e.g., != [], == 0, len() == 0)"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect all patterns"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\truefalse_evaluations.txt",
+      "section": "truefalse_evaluations"
+    }
+  },
+  {
+    "rule_id": "python-whitespace-no-trailing-whitespace",
+    "language": "python",
+    "description": "No trailing whitespace. Lines should not end with spaces.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule using `pattern-regex` to match whitespace at line end, may have issues with multiline strings."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support Python analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_whitespace.txt",
+      "section": "whitespace_whitespace"
+    }
+  },
+  {
+    "rule_id": "python-indentation-4-spaces-no-tabs",
+    "language": "python",
+    "description": "Indent code blocks with 4 spaces. Never use tabs. Implied line continuation should align wrapped elements vertically or use hanging 4-space indent.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom rule for whitespace detection; may not handle all edge cases."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query for whitespace analysis; not a standard query."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\indentation_4_spaces_tabs.txt",
+      "section": "indentation_4_spaces_tabs"
+    }
+  },
+  {
+    "rule_id": "python-no-spaces-around-equals",
+    "language": "python",
+    "description": "Never use spaces around `=` when passing keyword arguments or defining default parameter values, unless a type annotation is present.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$ARG = $VAL",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$ARG": {
+          "type_hint": "expr"
+        },
+        "$VAL": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARG",
+        "constraint_type": "syntactic",
+        "condition": "is_keyword_argument_or_default_param",
+        "required": "true"
+      },
+      {
+        "target": "$ARG",
+        "constraint_type": "annotation",
+        "condition": "has_no_type_annotation",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to match `=` with surrounding spaces and exclude cases with type annotations"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires custom query to detect whitespace in keyword/default arguments"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\whitespace_arguments.txt",
+      "section": "whitespace_arguments"
+    }
+  },
+  {
+    "rule_id": "python-nested-function-without-closure",
+    "language": "python",
+    "description": "Detects nested local functions or classes that do not close over a local variable from the outer scope, suggesting they should be defined at module level or prefixed with '_' instead.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $OUTER(...):\n    ...\n    def $INNER(...):\n        ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$OUTER": {
+          "type_hint": "function"
+        },
+        "$INNER": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$INNER",
+        "constraint_type": "scope",
+        "condition": "uses_variable_from_outer_scope",
+        "required": "false"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": true,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Dataflow analysis for variable usage is limited; may have false positives/negatives."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Requires custom query to check variable capture."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\functionsclasse_variable.txt",
+      "section": "functionsclasse_variable"
+    }
+  },
+  {
+    "rule_id": "python-run-pylint",
+    "language": "python",
+    "description": "Ensure pylint is run on the codebase, typically via a script or command.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "",
+      "pattern_type": "file_property",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep analyzes code syntax, not build/script execution."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support Python analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL analyzes code, not build/script execution."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\python\\easy_specification\\lint_tool_run_pylint.txt",
+      "section": "lint_tool_run_pylint"
+    }
+  },
+  {
+    "rule_id": "shell-case-pattern-no-parenthesis",
+    "language": "shell",
+    "description": "Pattern expressions in a case statement should not be preceded by an open parenthesis.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    ($PATTERN)\n        ...\n    ;;\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Semgrep's shell parsing may not correctly flag all parenthesized pattern cases."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\expressions_parenthesis.txt",
+      "section": "expressions_parenthesis"
+    }
+  },
+  {
+    "rule_id": "shell-avoid-eval",
+    "language": "shell",
+    "description": "The `eval` builtin should be avoided as it munges input and can set variables unpredictably.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "eval $...",
+      "pattern_type": "code_pattern",
+      "metavariables": {}
+    },
+    "context_constraints": null,
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "Pattern may match safe uses of eval with static arguments."
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis."
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis."
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\avoid_eval.txt",
+      "section": "avoid_eval"
+    }
+  },
+  {
+    "rule_id": "shell-function-header-comment",
+    "language": "shell",
+    "description": "Function header comments should describe: Description, Globals, Arguments, Outputs, Returns.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "def $FUNC(...):\n    ...",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "function",
+        "constraint_type": "syntactic",
+        "condition": "missing_docstring",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "can detect missing docstring but cannot validate content structure"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "can detect missing docstring but content validation requires custom query"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\intended_behaviour.txt",
+      "section": "intended_behaviour"
+    }
+  },
+  {
+    "rule_id": "shell-wildcard-expansion-path",
+    "language": "shell",
+    "description": "Use an explicit path when doing wildcard expansion of filenames (e.g., `./*` instead of `*`) to prevent issues with filenames starting with `-`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$CMD *",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_command_name",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match false positives in non-shell contexts or complex command substitutions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\expansion_explicit.txt",
+      "section": "expansion_explicit"
+    }
+  },
+  {
+    "rule_id": "shell-parentheses-required",
+    "language": "shell",
+    "description": "Parentheses are required after the function name.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "function $FUNC {\n    ...\n}",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FUNC",
+        "constraint_type": "syntactic",
+        "condition": "missing_parentheses",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern matching for shell function definitions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\parentheses_function.txt",
+      "section": "parentheses_function"
+    }
+  },
+  {
+    "rule_id": "shell-use-arrays-for-lists",
+    "language": "shell",
+    "description": "Bash arrays should be used to store lists of elements to avoid quoting complications.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=($ELEMENTS); $CMD $ARGS",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$ELEMENTS": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        },
+        "$ARGS": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$ARGS",
+        "constraint_type": "syntactic",
+        "condition": "not_matches_pattern('\\$\\{\\w+\\[@\\]\\}')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "pattern may match false positives; requires careful tuning of context constraints"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell/bash analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell/bash analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\arrays_lists_elements.txt",
+      "section": "arrays_lists_elements"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-quote-words",
+    "language": "shell",
+    "description": "Prefer quoting strings that are words (as opposed to command options or path names).",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR=$VALUE",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$VALUE": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_string_literal",
+        "required": "true"
+      },
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "is_unquoted",
+        "required": "true"
+      },
+      {
+        "target": "$VALUE",
+        "constraint_type": "syntactic",
+        "condition": "matches_regex('^[a-zA-Z_][a-zA-Z0-9_]*$')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires pattern to distinguish words from options/paths; may have false positives/negatives"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\command_options.txt",
+      "section": "command_options"
+    }
+  },
+  {
+    "rule_id": "shell-case-one-line-space",
+    "language": "shell",
+    "description": "A one-line alternative in a case statement needs a space after the close parenthesis of the pattern and before the `;;`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    $PATTERN) $CMD;;\n    ...\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_on_same_line_as('$PATTERN)')",
+        "required": "true"
+      },
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_immediately_followed_by(';;')",
+        "required": "true"
+      },
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_not_preceded_by(' ')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires precise whitespace matching which may be fragile"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\alternative_needs_space.txt",
+      "section": "alternative_needs_space"
+    }
+  },
+  {
+    "rule_id": "shell-prefer-brace-expansion",
+    "language": "shell",
+    "description": "Prefer using ${var} over $var for variable expansion to avoid ambiguity.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$VAR",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr",
+          "regex": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$VAR",
+        "constraint_type": "syntactic",
+        "condition": "not_preceded_by('{')",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires careful pattern to avoid false positives in complex expansions"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\variable_expansion_${var}.txt",
+      "section": "variable_expansion_${var}"
+    }
+  },
+  {
+    "rule_id": "shell-case-simple-commands-same-line",
+    "language": "shell",
+    "description": "Simple commands may be put on the same line as the pattern and `;;` as long as readable. Use space after `)` and before `;;`.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "case $VAR in\n    $PATTERN) $CMD ;;\n    ...\nesac",
+      "pattern_type": "code_pattern",
+      "metavariables": {
+        "$VAR": {
+          "type_hint": "expr"
+        },
+        "$PATTERN": {
+          "type_hint": "expr"
+        },
+        "$CMD": {
+          "type_hint": "expr"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$CMD",
+        "constraint_type": "syntactic",
+        "condition": "is_simple_command",
+        "required": "true"
+      }
+    ],
+    "dataflow_spec": null,
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "requires correct parsing of shell case statement structure"
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "PMD does not support shell script analysis"
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false,
+        "limitations": "CodeQL does not support shell script analysis"
+      }
+    },
+    "metadata": {
+      "source_file": "D:\\Sepc2Checker\\data\\shell\\easy_specification\\simple_commands_pattern.txt",
+      "section": "simple_commands_pattern"
+    }
+  }
+]
