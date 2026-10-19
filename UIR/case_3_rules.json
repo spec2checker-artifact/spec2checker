@@ -1,0 +1,117 @@
+[
+  {
+    "rule_id": "python-invalid-override",
+    "language": "python",
+    "description": "Detect cases where the @typing.override decorator is used on a method that does not override a method with the same name in a parent class.",
+    "severity": "error",
+    "surface_pattern": {
+      "code_snippet": "@override\ndef $FUNC(...):\n    ...",
+      "metavariables": {
+        "$FUNC": {
+          "type_hint": "function"
+        }
+      }
+    },
+    "context_constraints": [
+      {
+        "target": "$FUNC",
+        "constraint_type": "inheritance",
+        "condition": "parent_class_method_not_found"
+      }
+    ],
+    "capabilities_required": {
+      "cross_file": true,
+      "inheritance_analysis": true,
+      "dataflow": false,
+      "type_resolution": true
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": true,
+        "full_support": false
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": true,
+        "full_support": true
+      }
+    }
+  },
+  {
+    "rule_id": "shell-insecure-curl",
+    "language": "shell",
+    "description": "Detect the use of curl -k or --insecure in shell scripts, which disables TLS certificate verification and introduces the risk of man-in-the-middle attacks.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "curl ... ( -k | --insecure ) ...",
+      "metavariables": {}
+    },
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false
+      },
+      "codeql": {
+        "partial_support": false,
+        "needs_type_solver": false,
+        "full_support": false
+      }
+    }
+  },
+  {
+    "rule_id": "java-negative-string-repeat",
+    "language": "java",
+    "description": "Detect calls to String.repeat(int) where a literal negative integer argument is passed, which will throw an IllegalArgumentException.",
+    "severity": "warning",
+    "surface_pattern": {
+      "code_snippet": "$STR.repeat($ARG)",
+      "metavariables": {
+        "$ARG": {
+          "type_hint": "expr",
+          "regex": "-\\d+"
+        }
+      }
+    },
+    "capabilities_required": {
+      "cross_file": false,
+      "inheritance_analysis": false,
+      "dataflow": false,
+      "type_resolution": false
+    },
+    "backend_hints": {
+      "semgrep": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      },
+      "pmd": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": false
+      },
+      "codeql": {
+        "partial_support": true,
+        "needs_type_solver": false,
+        "full_support": true
+      }
+    }
+  }
+]
