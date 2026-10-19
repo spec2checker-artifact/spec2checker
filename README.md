@@ -8,6 +8,7 @@ This repository contains a subset of the source code and experimental data for S
 | --- | --- |
 | `Adapter/` | Adapters for CodeQL, PMD, and Semgrep |
 | `LLM_to_cases/` | Test-case generation scripts |
+| [`UIR/`](UIR/) | Unified intermediate representations of coding specifications |
 | `XML_rules/` | Generated XML rules |
 | `data/` | Evaluation data |
 | `baseline/` | Baseline rule artifacts |
